@@ -1,0 +1,19 @@
+{
+  "name": "com.baronbrew.tilthydrometerf7",
+  "version": "1.0.0",
+  "displayName": "Tilt Hydrometer Framework7",
+  "cordova": {
+    "platforms": [
+      "ios"
+    ],
+    "plugins": {
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-statusbar": {}
+    }
+  },
+  "dependencies": {
+    "cordova-ios": "^4.5.4",
+    "cordova-plugin-statusbar": "~1.0.1",
+    "cordova-plugin-whitelist": "~1.2.0"
+  }
+}
