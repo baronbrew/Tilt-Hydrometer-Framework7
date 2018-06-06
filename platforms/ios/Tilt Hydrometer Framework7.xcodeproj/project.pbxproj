@@ -7,18 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		006F157D46FD4F4389268F84 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D557036942240D9B5C9B3D5 /* CoreLocation.framework */; };
 		0207DA581B56EA530066E2B4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0207DA571B56EA530066E2B4 /* Images.xcassets */; };
+		08C4A969286C44EA8DB26DCF /* AppDelegate+CDVLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F2AE91413B054E2A822A30BE /* AppDelegate+CDVLocationManager.m */; };
 		1D3623260D0F684500981E51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		301BF552109A68D80062928A /* libCordova.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 301BF535109A57CC0062928A /* libCordova.a */; };
 		302D95F114D2391D003F00A1 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 302D95EF14D2391D003F00A1 /* MainViewController.m */; };
 		302D95F214D2391D003F00A1 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 302D95F014D2391D003F00A1 /* MainViewController.xib */; };
-		55DE88A842784D799070E84E /* CDVStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E689280D1846DFB1F7FB76 /* CDVStatusBar.m */; };
+		339A12DE71954602B07A7689 /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = C294BE823D854072A7EA7021 /* CDVDevice.m */; };
+		3CE526B7574A4E92850C7B67 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 479F7400D2274D41B0C7CA22 /* CoreBluetooth.framework */; };
 		6AFF5BF91D6E424B00AB3073 /* CDVLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AFF5BF81D6E424B00AB3073 /* CDVLaunchScreen.storyboard */; };
+		6C10884FE86B4D4281589342 /* CDVLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 750A0A5801634A24B079D91C /* CDVLocationManager.m */; };
+		90AB6D35014C4F159A1FA7B1 /* CDVStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 02617B3ABBD2468F8069CA3B /* CDVStatusBar.m */; };
+		C1E3A71D26964253A43AEBFE /* LMLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C14ACF2312447B2A21596D6 /* LMLogger.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		010A5FD2205C48F70036807D /* PBXContainerItemProxy */ = {
+		013379D220C7234200DE9348 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 301BF52D109A57CC0062928A /* CordovaLib/CordovaLib.xcodeproj */;
 			proxyType = 2;
@@ -43,10 +49,11 @@
 
 /* Begin PBXFileReference section */
 		0207DA571B56EA530066E2B4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Tilt Hydrometer Framework7/Images.xcassets"; sourceTree = SOURCE_ROOT; };
+		02617B3ABBD2468F8069CA3B /* CDVStatusBar.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVStatusBar.m; path = "cordova-plugin-statusbar/CDVStatusBar.m"; sourceTree = "<group>"; };
+		0C14ACF2312447B2A21596D6 /* LMLogger.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = LMLogger.m; path = com.unarin.cordova.beacon/LMLogger.m; sourceTree = "<group>"; };
 		1D3623240D0F684500981E51 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* Tilt Hydrometer Framework7.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tilt Hydrometer Framework7.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		21E689280D1846DFB1F7FB76 /* CDVStatusBar.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVStatusBar.m; path = "cordova-plugin-statusbar/CDVStatusBar.m"; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		301BF52D109A57CC0062928A /* CordovaLib/CordovaLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = CordovaLib/CordovaLib.xcodeproj; sourceTree = "<group>"; };
 		301BF56E109A69640062928A /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = SOURCE_ROOT; };
@@ -56,13 +63,22 @@
 		3047A50F1AB8059700498E2A /* build-debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "build-debug.xcconfig"; path = "cordova/build-debug.xcconfig"; sourceTree = SOURCE_ROOT; };
 		3047A5101AB8059700498E2A /* build-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "build-release.xcconfig"; path = "cordova/build-release.xcconfig"; sourceTree = SOURCE_ROOT; };
 		3047A5111AB8059700498E2A /* build.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = build.xcconfig; path = cordova/build.xcconfig; sourceTree = SOURCE_ROOT; };
+		31CF585D30DD47108AE873A7 /* CDVLocationManager.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVLocationManager.h; path = com.unarin.cordova.beacon/CDVLocationManager.h; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Tilt Hydrometer Framework7-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Tilt Hydrometer Framework7-Prefix.pch"; sourceTree = "<group>"; };
-		4D301EC6D41C4184A5FAEFFE /* CDVStatusBar.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVStatusBar.h; path = "cordova-plugin-statusbar/CDVStatusBar.h"; sourceTree = "<group>"; };
+		479F7400D2274D41B0C7CA22 /* CoreBluetooth.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		6AFF5BF81D6E424B00AB3073 /* CDVLaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = CDVLaunchScreen.storyboard; path = "Tilt Hydrometer Framework7/CDVLaunchScreen.storyboard"; sourceTree = SOURCE_ROOT; };
+		750A0A5801634A24B079D91C /* CDVLocationManager.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVLocationManager.m; path = com.unarin.cordova.beacon/CDVLocationManager.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Tilt Hydrometer Framework7-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Tilt Hydrometer Framework7-Info.plist"; path = "Tilt Hydrometer Framework7/Tilt Hydrometer Framework7-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = SOURCE_ROOT; };
+		8D557036942240D9B5C9B3D5 /* CoreLocation.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		9FF19322BAAC48C0A946D4C6 /* AppDelegate+CDVLocationManager.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = "AppDelegate+CDVLocationManager.h"; path = "com.unarin.cordova.beacon/AppDelegate+CDVLocationManager.h"; sourceTree = "<group>"; };
+		BD1E8B75D3EB47CD90DF523F /* LMLogger.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = LMLogger.h; path = com.unarin.cordova.beacon/LMLogger.h; sourceTree = "<group>"; };
+		C294BE823D854072A7EA7021 /* CDVDevice.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVDevice.m; path = "cordova-plugin-device/CDVDevice.m"; sourceTree = "<group>"; };
+		DBD269202F0C4C40920ECD81 /* CDVStatusBar.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVStatusBar.h; path = "cordova-plugin-statusbar/CDVStatusBar.h"; sourceTree = "<group>"; };
 		EB87FDF31871DA8E0020F90C /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../../www; sourceTree = "<group>"; };
 		EB87FDF41871DAF40020F90C /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ../../config.xml; sourceTree = "<group>"; };
 		ED33DF2A687741AEAF9F8254 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		EDD5067AA00B4B989A9E0A42 /* CDVDevice.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVDevice.h; path = "cordova-plugin-device/CDVDevice.h"; sourceTree = "<group>"; };
+		F2AE91413B054E2A822A30BE /* AppDelegate+CDVLocationManager.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = "AppDelegate+CDVLocationManager.m"; path = "com.unarin.cordova.beacon/AppDelegate+CDVLocationManager.m"; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = "Tilt Hydrometer Framework7/config.xml"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,6 +88,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				301BF552109A68D80062928A /* libCordova.a in Frameworks */,
+				3CE526B7574A4E92850C7B67 /* CoreBluetooth.framework in Frameworks */,
+				006F157D46FD4F4389268F84 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,6 +160,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				479F7400D2274D41B0C7CA22 /* CoreBluetooth.framework */,
+				8D557036942240D9B5C9B3D5 /* CoreLocation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -150,7 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				301BF535109A57CC0062928A /* libCordova.a */,
-				010A5FD3205C48F70036807D /* Cordova.framework */,
+				013379D320C7234200DE9348 /* Cordova.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -168,8 +188,16 @@
 		307C750510C5A3420062BCA9 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
-				21E689280D1846DFB1F7FB76 /* CDVStatusBar.m */,
-				4D301EC6D41C4184A5FAEFFE /* CDVStatusBar.h */,
+				C294BE823D854072A7EA7021 /* CDVDevice.m */,
+				EDD5067AA00B4B989A9E0A42 /* CDVDevice.h */,
+				750A0A5801634A24B079D91C /* CDVLocationManager.m */,
+				F2AE91413B054E2A822A30BE /* AppDelegate+CDVLocationManager.m */,
+				0C14ACF2312447B2A21596D6 /* LMLogger.m */,
+				31CF585D30DD47108AE873A7 /* CDVLocationManager.h */,
+				9FF19322BAAC48C0A946D4C6 /* AppDelegate+CDVLocationManager.h */,
+				BD1E8B75D3EB47CD90DF523F /* LMLogger.h */,
+				02617B3ABBD2468F8069CA3B /* CDVStatusBar.m */,
+				DBD269202F0C4C40920ECD81 /* CDVStatusBar.h */,
 			);
 			name = Plugins;
 			path = "Tilt Hydrometer Framework7/Plugins";
@@ -242,11 +270,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		010A5FD3205C48F70036807D /* Cordova.framework */ = {
+		013379D320C7234200DE9348 /* Cordova.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Cordova.framework;
-			remoteRef = 010A5FD2205C48F70036807D /* PBXContainerItemProxy */;
+			remoteRef = 013379D220C7234200DE9348 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		301BF535109A57CC0062928A /* libCordova.a */ = {
@@ -297,7 +325,11 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
-				55DE88A842784D799070E84E /* CDVStatusBar.m in Sources */,
+				339A12DE71954602B07A7689 /* CDVDevice.m in Sources */,
+				6C10884FE86B4D4281589342 /* CDVLocationManager.m in Sources */,
+				08C4A969286C44EA8DB26DCF /* AppDelegate+CDVLocationManager.m in Sources */,
+				C1E3A71D26964253A43AEBFE /* LMLogger.m in Sources */,
+				90AB6D35014C4F159A1FA7B1 /* CDVStatusBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

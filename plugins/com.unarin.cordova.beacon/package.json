@@ -1,0 +1,103 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "cordova-plugin-ibeacon@^3.6.1",
+        "scope": null,
+        "escapedName": "cordova-plugin-ibeacon",
+        "name": "cordova-plugin-ibeacon",
+        "rawSpec": "^3.6.1",
+        "spec": ">=3.6.1 <4.0.0",
+        "type": "range"
+      },
+      "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7"
+    ]
+  ],
+  "_from": "cordova-plugin-ibeacon@>=3.6.1 <4.0.0",
+  "_id": "cordova-plugin-ibeacon@3.6.1",
+  "_inCache": true,
+  "_location": "/cordova-plugin-ibeacon",
+  "_nodeVersion": "8.9.0",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/cordova-plugin-ibeacon_3.6.1_1524455380078_0.3140167957034399"
+  },
+  "_npmUser": {
+    "name": "petermetz",
+    "email": "npm@unarin.com"
+  },
+  "_npmVersion": "5.5.1",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "cordova-plugin-ibeacon@^3.6.1",
+    "scope": null,
+    "escapedName": "cordova-plugin-ibeacon",
+    "name": "cordova-plugin-ibeacon",
+    "rawSpec": "^3.6.1",
+    "spec": ">=3.6.1 <4.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-ibeacon/-/cordova-plugin-ibeacon-3.6.1.tgz",
+  "_shasum": "1dcd9d967ae43d54e057753719e63dc33ac2a1fe",
+  "_shrinkwrap": null,
+  "_spec": "cordova-plugin-ibeacon@^3.6.1",
+  "_where": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7",
+  "author": {
+    "name": "Peter Metz",
+    "email": "peter.metz@unarin.com",
+    "url": "Somogyvari"
+  },
+  "bugs": {
+    "url": "https://github.com/petermetz/cordova-plugin-ibeacon/issues"
+  },
+  "cordova": {
+    "id": "cordova-plugin-ibeacon",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "dependencies": {},
+  "description": "Proximity Beacon Monitoring and Transmission Plugin (supporting iBeacons)",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "integrity": "sha512-3Cxs5jQ3vqwaKTmrIi9+ofrJRuQi945twOedNzuFHUOFLbWB2XO+NIpgVNHMFGOvH3mr9bE4sMiBofCcpjpU/Q==",
+    "shasum": "1dcd9d967ae43d54e057753719e63dc33ac2a1fe",
+    "tarball": "https://registry.npmjs.org/cordova-plugin-ibeacon/-/cordova-plugin-ibeacon-3.6.1.tgz",
+    "fileCount": 43,
+    "unpackedSize": 583320,
+    "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJa3VfUCRA9TVsSAnZWagAAKEoP/3QSBMSgAlDaqJRLEsz1\nj7Q/zMoZV9cqPWxpE93Efs61XZvtGHK+nbh8z/BB6hknSXsbls70enQY1TBx\nd29pTvQ7mx/0vJe5AW98HfHve/eUvb0Np8KshMOqp758rufb2miXx/juWW9K\nbogRNzumIp2rWDC+EM2O7c4gYFFvUF5mHpPHbBcFU/7hl8FEv4PUgnZjnUgd\nz9vKo2CRr7OIuRVbFIF7TqLNimRYExt74mDUbCqQbfyEj84gN4eFtQSDuZJQ\nxaYahkL2QiN+JR7NxgevZNwbi2OBCnllkImB345zygikt8MCIvcV81O9oWbh\nJQxtM5wWKPiC+P8aDhnclgiZKZSCUpKBkwgKVYzIA7JOU9jxO1XDPYrtmj8e\n3U8D15jr/Bim4PS+1mkhEqTuQ4jz4Nz1XbkIev+WFzNEFI+uFRjCO3pP44UO\n8xwbQr7da9VVZd/+XoCpdJWwK51Q3G8b9kjTEKpiei5T3FAnWKkfhu0Rit/6\nlRALJ9hBqdwMuJrzvJOJrwpyrH4tVwvVZdAaY4WjJTzaPileoTS3UGKKzee/\nJ75bNJZJ8bjGiNXy/9LU0iYw6cHuZhP1uGjv4ABeY3WKgcQ1IZ/6/Hyu+LJS\nQKyJnEENeXgpjYsBj0wKtPdraqczu5qbnJK1Fbi7yFrfZjh/vFEL98tVU3AG\n+95D\r\n=u8IO\r\n-----END PGP SIGNATURE-----\r\n"
+  },
+  "gitHead": "5f088cb77bdecd08722d8b8c5d5f04b693feebd8",
+  "homepage": "https://github.com/petermetz/cordova-plugin-ibeacon",
+  "keywords": [
+    "cordova",
+    "ibeacon",
+    "beacon",
+    "bluetooth",
+    "le",
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-android"
+  ],
+  "license": "Apache 2.0",
+  "maintainers": [
+    {
+      "name": "petermetz",
+      "email": "npm-cordova-plugin-ibeacon@unarin.com"
+    }
+  ],
+  "name": "cordova-plugin-ibeacon",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/petermetz/cordova-plugin-ibeacon.git"
+  },
+  "version": "3.6.1"
+}

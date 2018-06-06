@@ -7,6 +7,11 @@ var app  = new Framework7({
   id: 'com.baronbrew.tilthydrometer', // App bundle ID
   name: 'Tilt Hydrometer', // App name
   theme: 'auto', // Automatic theme detection
+  statusbar: {
+      iosOverlaysWebView: true,
+      enabled: true,
+
+  },
   // App root data
   data: function () {
     return {
@@ -32,7 +37,6 @@ var mainView = app.views.create('.view-main', {
 });
 
 var displayTemplate = $$('#displaytemplate').html();
-console.log(displayTemplate);
 var compileddisplayTemplate = Template7.compile(displayTemplate);
 
 //Permissions
@@ -48,7 +52,7 @@ $$(document).on('deviceready', function() {
           initScan();
   
           // Display refresh timer.
-          updateTimer = setInterval(updateBeacons, 500);
+          updateTimer = setInterval(updateBeacons, 300);
   
           console.log(device);
   
@@ -143,6 +147,22 @@ $$(document).on('deviceready', function() {
 
   }
 
+  function addtoScan(beacon){
+    //add time since last update
+    beacon.lastUpdate = localStorage.getItem('lastUpdate-' + beacon.Color)||beacon.timeStamp;
+    var date = new Date(beacon.timeStamp);
+    beacon.displaytimeStamp = date.toLocaleString();
+    //handle bad RSSI values from iOS
+    if (beacon.rssi == 0){
+        beacon.displayRSSI = localStorage.getItem('prevRSSI-' + beacon.Color)||""
+    }else{
+        beacon.displayRSSI = beacon.rssi + " dBm";
+        localStorage.setItem('prevRSSI-' + beacon.Color,beacon.displayRSSI);
+        console.log(beacon.rssi);
+    }
+    
+}
+
   function initScan() {
       // The delegate object holds the iBeacon callback functions
       // specified below.
@@ -164,25 +184,41 @@ $$(document).on('deviceready', function() {
                   //assign color by UUID
                   switch (beacon.uuid[6]) {
                          case "1" : beacon.Color = "RED";
-                        //add time since last update
-                         beacon.lastUpdate = ((Date.now() - beacon.timeStamp) / 1000).toFixed(1);
+                         addtoScan(beacon);
                          break;
                          case "2" : beacon.Color = "GREEN";
+                         addtoScan(beacon);
                          break;
                          case "3" : beacon.Color = "BLACK";
+                         addtoScan(beacon);
                          break;
                          case "4" : beacon.Color = "PURPLE";
+                         addtoScan(beacon);
                          break;
                          case "5" : beacon.Color = "ORANGE";
+                         addtoScan(beacon);
                          break;
                          case "6" : beacon.Color = "BLUE";
+                         addtoScan(beacon);
                          break;
                          case "7" : beacon.Color = "YELLOW";
+                         addtoScan(beacon);
                          break;
                          case "8" : beacon.Color = "PINK";
+                         addtoScan(beacon);
                          break;
                   }
-                  //set key by UUID to enumerate in list
+                if (beacon.minor > 2000){
+                    beacon.uncalTemp = beacon.major / 10;
+                    beacon.uncalSG = (beacon.minor / 10000).toFixed(4);;
+                    beacon.hd = true;
+                } else {
+                  beacon.uncalTemp = beacon.major;
+                  beacon.uncalSG = (beacon.minor / 1000).toFixed(3);
+                  beacon.hd = false;
+                }
+                  beacon.uncalPlato = 1111.14 * beacon.uncalSG - 630.272 * beacon.uncalSG * beacon.uncalSG + 135.997 * beacon.uncalSG * beacon.uncalSG * beacon.uncalSG - 616.868;
+                  //set key by UUID
                   var key = beacon.uuid;
                   beacons[key] = beacon;
                   //console.log(beacons);
@@ -199,28 +235,29 @@ $$(document).on('deviceready', function() {
 
       startScan();
   }
+    
+    localStorage.setItem('foundbeacons','');
+    
     function updateBeacons() {
-        var displayhtml = compileddisplayTemplate(beacons);
-        //console.log(displayhtml);
-        console.log(beacons);
-        var tiltCard  = $$('#tiltCard').html(displayhtml);
     for (var key in beacons) {
     var beacon = beacons[key];
-    //global stuff
-    if (beacon.minor > 2000){
-        beacon.minor /= 10;
-        beacon.major /= 10;
-        beacon.hd = true;
+    var currentTime = Date.now();
+    var foundBeacons = localStorage.getItem('foundbeacons')||'';
+    foundBeacons = foundBeacons.split(",");
+    if (foundBeacons.indexOf(beacon.Color) < 0){
+        foundBeacons.push(beacon.Color);
+        localStorage.setItem('foundbeacons',foundBeacons);
+        var displayhtml = compileddisplayTemplate(beacons);
+        var tiltCard  = $$('#tiltCard').html(displayhtml);
     }
-    beacon.uncalSG = beacon.minor / 1000;
-    beacon.uncalPlato = 1111.14 * beacon.uncalSG - 630.272 * beacon.uncalSG * beacon.uncalSG + 135.997 * beacon.uncalSG * beacon.uncalSG * beacon.uncalSG - 616.868;
-    //color specific
-    var purpleSettings = app.form.convertToData('#purple-form');
-
-
-    var purpleSG = $$('#purpleUncalSG').text("SG/Concentration (uncal.): " + beacon.uncalSG.toFixed(3));
-    var purpleTemp = $$('#purpleTemp').text("Temperature: " + beacon.major + " F");
-    var timeUpdated = ((Date.now() - beacon.timeStamp) / 1000).toFixed(1);
-    var purpleUpdated = $$('#purpleUpdated').text("Updated " + timeUpdated + " seconds ago");
-    };
+    //update timer for last scan recieved
+    beacon.numberSecondsAgo = ((currentTime - beacon.lastUpdate) / 1000).toFixed(1);
+    localStorage.setItem('lastUpdate-' + beacon.Color,beacon.timeStamp);
+    //update data fields in Tilt card template
+    $$('#uncalSG' + beacon.Color).html(beacon.uncalSG);
+    $$('#uncalTemp' + beacon.Color).html(beacon.uncalTemp);
+    $$('#numberSecondsAgo' + beacon.Color).html(beacon.numberSecondsAgo);
+    $$('#displayRSSI' + beacon.Color).html(beacon.displayRSSI);
+    $$('#displaytimeStamp' + beacon.Color).html(beacon.displaytimeStamp);
+    };  
 }

@@ -8,11 +8,15 @@
     ],
     "plugins": {
       "cordova-plugin-whitelist": {},
-      "cordova-plugin-statusbar": {}
+      "cordova-plugin-statusbar": {},
+      "com.unarin.cordova.beacon": {}
     }
   },
   "dependencies": {
+    "com.unarin.cordova.beacon": "git+https://github.com/petermetz/cordova-plugin-ibeacon.git",
     "cordova-ios": "^4.5.4",
+    "cordova-plugin-device": "^2.0.2",
+    "cordova-plugin-ibeacon": "^3.6.1",
     "cordova-plugin-statusbar": "~1.0.1",
     "cordova-plugin-whitelist": "~1.2.0"
   }

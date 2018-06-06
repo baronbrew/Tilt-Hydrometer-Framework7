@@ -27,5 +27,6 @@
     <preference name="DisallowOverscroll" value="true" />
     <plugin name="cordova-plugin-whitelist" spec="~1.2.0" />
     <plugin name="cordova-plugin-statusbar" spec="~1.0.1" />
-    <engine name="ios" spec="~4.5.4" />
+    <plugin name="com.unarin.cordova.beacon" spec="git+https://github.com/petermetz/cordova-plugin-ibeacon.git" />
+    <engine name="ios" spec="^4.5.4" />
 </widget>

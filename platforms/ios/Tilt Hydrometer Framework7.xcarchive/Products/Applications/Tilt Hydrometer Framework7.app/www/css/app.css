@@ -1,0 +1,18 @@
+/* Your app styles here */
+.color-custom-red { color: red;
+}
+.color-custom-green { color: green;
+}
+.color-custom-gray { color: gray;
+}
+.color-custom-purple { color: purple;
+}
+.color-custom-black { color: black;
+}
+
+div.sg-temp {
+    font-size: 500%;
+    margin-left: 5%;
+    font-weight:bold;
+    line-height: .8;
+}

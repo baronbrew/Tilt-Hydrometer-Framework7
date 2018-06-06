@@ -39,21 +39,25 @@
           </div>
           <div class="page-content">
               <div class="block-title">Select Tilt Color</div>
-              <div class="list accordion-list">
+              <div class="list">
                   <ul>
-                    <li class="accordion-item"><a href="#" class="item-content item-link">
-                        <div class="item-inner">
-                          <div class="item-title">PURPLE</div><i class="f7-icons color-custom-purple">circle_fill</i>
-                        </div></a>
+                    <li class="accordion-item" id="accordion">
+                        <div class="accordion-item-toggle">
+                          <div class="item-title margin-horizontal padding"><i class="f7-icons color-custom-green">chevron_down</i> GREEN</div>
+                        </div>
                       <div class="accordion-item-content">
-                        <form id="purple-form">
-                        <div class="block-title">Set Beer Name</div>
+                        <form class="form-store-data" id="green-tilt-settings-form">
+                        <div class="block-title">Beer Name and Logging ID</div>
                         <div class="block block-strong">
                             <div class="content-block">
                             <div class="content-block-inner">
-                            <div class="item-title floating-label">Beer Name:</div>
-                            <div class="item-input">
-                            <input type="text" name="beername" placeholder="Racer 5 IPA">
+                            <div class="item-title floating-label">Enter Beer Name:</div>
+                            <div class="item-input-wrap">
+                            <input type="text" name="beername" placeholder="Mosaic NE IPA">
+                            </div>
+                            <div class="item-title floating-label">Enter Beer ID: <i class="f7-icons color-custom-gray">info</i></div>
+                            <div class="item-input-wrap">
+                            <input type="text" name="beerid" placeholder="9976">
                             </div>
                             </div>
                         </div>
@@ -62,7 +66,7 @@
                       <div class="block block-strong">
                         <div class="content-block">
                         <div class="content-block-inner">
-                        <div class="item-title floating-label">Enter Cloud Logging URL: <i class="f7-icons color-custom-gray">info</i></div>
+                        <div class="item-title floating-label">Enter Custom Cloud URL: <i class="f7-icons color-custom-gray">info</i></div>
                         <div class="item-input">
                         <input type="text" placeholder="https://...">
                         </div>
@@ -90,17 +94,6 @@
                             </div>
                         
                     </li>
-                    <li class="accordion-item"><a href="#" class="item-content item-link">
-                        <div class="item-inner">
-                          <div class="item-title">GREEN</div><i class="f7-icons color-custom-green">circle_fill</i>
-                        </div></a>
-                      <div class="accordion-item-content">
-                        <div class="block">
-                          <p>Item 2 content. Lorem ipsum dolor sit amet...</p>
-                        </div>
-                      </div>
-                    </li>
-                    ...
                   </ul>
                 </div>
           </div>
@@ -124,23 +117,21 @@
     </div>
 
     <!-- Your main view, should have "view-main" class -->
-    <div class="view view-main ios-edges">
+    <div class="view view-main ios-edges theme-dark">
       <!-- Page, data-name contains page name which can be used in callbacks -->
-      <div class="page" data-name="home">
+      <div class="page  color-theme-gray" data-name="home">
         <!-- Top Navbar -->
         <div class="navbar">
-          <div class="navbar-inner">
+          <div class="navbar-inner bg-color-black">
             <div class="left">
               <a href="#" class="link icon-only panel-open" data-panel="left">
-                <i class="icon f7-icons ios-only">settings</i>
-                <i class="icon material-icons md-only">settings</i>
+                <i class="icon f7-icons color-gray">gear_fill</i>
               </a>
             </div>
             <div class="title sliding">Tilt Hydrometer</div>
             <div class="right">
               <a href="#" class="link icon-only panel-open" data-panel="right">
-                <i class="icon f7-icons ios-only">folder</i>
-                <i class="icon material-icons md-only">folder</i>
+                <i class="icon f7-icons color-gray">folder</i>
               </a>
             </div>
           </div>
@@ -278,13 +269,27 @@
   <!-- template7 templates -->
   <script id="displaytemplate" type="text/template7">
     {{#each this}}
-    <div id="tiltCard" class="card">
-        <div id="tiltHeader" class="card-header"><strong>TILT | {{Color}}</strong></div>
-        <div style="background:{{Color}};height:40px;width:100%;" opacity="0.5"></div>
-        <div id ="tiltUncalSG" class="card-content card-content-padding"></div>
-        <h1 id ="tiltSG"></h1>
-        <div id ="tiltTemp" class="card-content card-content-padding"></div>
-        <div id ="tiltUpdated" class="card-footer"></div>
+    <div class="card">
+        <div class="card-content card-content-padding no-padding-bottom"><p class="no-margin-bottom">{{Beername}}</p><strong>TILT | {{Color}}</strong></div>
+        <div id="quicksettings" class="accordion-item">
+        <div class="accordion-item-toggle">
+        <div <button class="margin-horizontal button button-round" style="background:{{Color}};height:30px;"></button></div>
+        </div>
+        <div class="accordion-item-content">
+        <div class="margin-top segmented margin-horizontal">
+            <button class="button col button-round"><i class="material-icons">adjust</i>CAL</button>
+            <button class="button col button-round"><i class="material-icons">show_chart</i>LOG</button>
+            <button class="button col button-round"><i class="material-icons">straighten</i>UNITS</button>
+          </div>
+        </div>
+        </div>
+        <div class="card-content card-content-padding">SG/Concentration: {{uncalSG}} (uncal.)</div>
+        <div id="uncalSG{{Color}}" class="card-content card-content-padding no-padding-top sg-temp"></div>
+        <div class="margin-horizontal button button-round" style="background:{{Color}};height:10px;width:20%;"></div>
+        <div class="card-content card-content-padding">Temperature: {{uncalTemp}} (uncal.)</div>
+        <div id="uncalTemp{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{uncalTemp}}</div>
+        <div class="margin-horizontal button button-round" style="background:{{Color}};height:10px;"></div>
+        <div class="card-content card-content-padding lastrec">Received <span id=numberSecondsAgo{{Color}}></span> seconds ago <span id=displayRSSI{{Color}}></span><br><span id=displaytimeStamp{{Color}}></span></div>
       </div>
     {{/each}}
       

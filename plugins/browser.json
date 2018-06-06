@@ -7,6 +7,9 @@
         "files": {}
     },
     "installed_plugins": {
+        "com.unarin.cordova.beacon": {
+            "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
+        },
         "cordova-plugin-statusbar": {
             "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
         },
@@ -14,5 +17,9 @@
             "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
+        }
+    }
 }
