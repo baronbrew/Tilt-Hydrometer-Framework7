@@ -269,7 +269,7 @@
   <!-- template7 templates -->
   <script id="displaytemplate" type="text/template7">
     {{#each this}}
-    <div class="card">
+    <div id="tiltcard-{{Color}}" class="card">
         <div class="card-content card-content-padding no-padding-bottom"><p class="no-margin-bottom">{{Beername}}</p><strong>TILT | {{Color}}</strong></div>
         <div id="quicksettings" class="accordion-item">
         <div class="accordion-item-toggle">
@@ -279,15 +279,15 @@
         <div class="margin-top segmented margin-horizontal">
             <button class="button col button-round"><i class="material-icons">adjust</i>CAL</button>
             <button class="button col button-round"><i class="material-icons">show_chart</i>LOG</button>
-            <button class="button col button-round"><i class="material-icons">straighten</i>UNITS</button>
+            <button id="unitstoggle{{Color}}" class="button col button-round"><i class="material-icons">straighten</i>UNITS</button>
           </div>
         </div>
         </div>
         <div class="card-content card-content-padding">SG/Concentration: {{uncalSG}} (uncal.)</div>
-        <div id="uncalSG{{Color}}" class="card-content card-content-padding no-padding-top sg-temp"></div>
+        <div id="uncalSG{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{uncalSG}}</div>
         <div class="margin-horizontal button button-round" style="background:{{Color}};height:10px;width:20%;"></div>
         <div class="card-content card-content-padding">Temperature: {{uncalTemp}} (uncal.)</div>
-        <div id="uncalTemp{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{uncalTemp}}</div>
+        <div id="displayTemp+displayTempunits{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{uncalTemp}}</div>
         <div class="margin-horizontal button button-round" style="background:{{Color}};height:10px;"></div>
         <div class="card-content card-content-padding lastrec">Received <span id=numberSecondsAgo{{Color}}></span> seconds ago <span id=displayRSSI{{Color}}></span><br><span id=displaytimeStamp{{Color}}></span></div>
       </div>

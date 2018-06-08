@@ -52,7 +52,7 @@ $$(document).on('deviceready', function() {
           initScan();
   
           // Display refresh timer.
-          updateTimer = setInterval(updateBeacons, 300);
+          updateTimer = setInterval(updateBeacons, 500);
   
           console.log(device);
   
@@ -147,20 +147,31 @@ $$(document).on('deviceready', function() {
 
   }
 
+  function toggleUnits(beacon) {
+    var displaytempunits = localStorage.getItem('displayTempunits-' + beacon.Color)||"°F";
+    if (displaytempunits == "°F") {
+        localStorage.setItem('displayTempunits-' + beacon.Color,"°C");
+    }
+    if (displaytempunits == "°C") {
+        localStorage.setItem('displayTempunits-' + beacon.Color,"°F");
+    }
+  }
+    
+//adds color specific attributes
   function addtoScan(beacon){
     //add time since last update
     beacon.lastUpdate = localStorage.getItem('lastUpdate-' + beacon.Color)||beacon.timeStamp;
+    //make sure tilt card is visible
+    $$('#tiltcard-' + beacon.Color).show();
     var date = new Date(beacon.timeStamp);
     beacon.displaytimeStamp = date.toLocaleString();
-    //handle bad RSSI values from iOS
+    //handle bad RSSI values from iOS by using previous value if value is "0"
     if (beacon.rssi == 0){
         beacon.displayRSSI = localStorage.getItem('prevRSSI-' + beacon.Color)||""
     }else{
         beacon.displayRSSI = beacon.rssi + " dBm";
         localStorage.setItem('prevRSSI-' + beacon.Color,beacon.displayRSSI);
-        console.log(beacon.rssi);
-    }
-    
+    }    
 }
 
   function initScan() {
@@ -217,6 +228,9 @@ $$(document).on('deviceready', function() {
                   beacon.uncalSG = (beacon.minor / 1000).toFixed(3);
                   beacon.hd = false;
                 }
+                  //add display units
+                  beacon.displayTempunits = localStorage.getItem('displayTempunits-' + beacon.Color)||"°F";
+                  beacon.displayTemp = localStorage.getItem('displayTemp-' + beacon.Color)||beacon.uncalTemp;
                   beacon.uncalPlato = 1111.14 * beacon.uncalSG - 630.272 * beacon.uncalSG * beacon.uncalSG + 135.997 * beacon.uncalSG * beacon.uncalSG * beacon.uncalSG - 616.868;
                   //set key by UUID
                   var key = beacon.uuid;
@@ -236,28 +250,46 @@ $$(document).on('deviceready', function() {
       startScan();
   }
     
-    localStorage.setItem('foundbeacons','');
-    
+    //reset list of found beacons
+    localStorage.setItem('foundbeacons','NONE');
+
     function updateBeacons() {
     for (var key in beacons) {
     var beacon = beacons[key];
     var currentTime = Date.now();
-    var foundBeacons = localStorage.getItem('foundbeacons')||'';
-    foundBeacons = foundBeacons.split(",");
-    if (foundBeacons.indexOf(beacon.Color) < 0){
-        foundBeacons.push(beacon.Color);
-        localStorage.setItem('foundbeacons',foundBeacons);
+    //setup tilt cards (generate new card once for each Tilt found)
+    var foundBeacons = localStorage.getItem('foundbeacons');
+    var foundBeaconsArray = foundBeacons.split(",");
+    if (foundBeaconsArray.indexOf(beacon.Color) < 0){
+        foundBeaconsArray.push(beacon.Color);
+        localStorage.setItem('foundbeacons',foundBeaconsArray);
         var displayhtml = compileddisplayTemplate(beacons);
         var tiltCard  = $$('#tiltCard').html(displayhtml);
+        var foundBeaconsArraylength = foundBeaconsArray.length;
+        for (var i = 0; i < foundBeaconsArraylength; i++) {
+        //set up buttons
+        $$('#unitstoggle' + foundBeaconsArray[i]).on('click', function (e) {
+            console.log('clicked ');
+            toggleUnits(foundBeaconsArray[i]);
+          });
+        }
     }
+    
     //update timer for last scan recieved
     beacon.numberSecondsAgo = ((currentTime - beacon.lastUpdate) / 1000).toFixed(1);
     localStorage.setItem('lastUpdate-' + beacon.Color,beacon.timeStamp);
+    //disconnect if no scans within 2 minutes
+    if (Number(beacon.numberSecondsAgo) > 120){
+        $$('#tiltcard-' + beacon.Color).hide();
+    }
+    //initialize display units
     //update data fields in Tilt card template
     $$('#uncalSG' + beacon.Color).html(beacon.uncalSG);
     $$('#uncalTemp' + beacon.Color).html(beacon.uncalTemp);
+    $$('#displayTemp+displayTempunits' + beacon.Color).html(String(beacon.displayTemp) + beacon.displayTempunits);
     $$('#numberSecondsAgo' + beacon.Color).html(beacon.numberSecondsAgo);
     $$('#displayRSSI' + beacon.Color).html(beacon.displayRSSI);
     $$('#displaytimeStamp' + beacon.Color).html(beacon.displaytimeStamp);
-    };  
+    };
 }
+
