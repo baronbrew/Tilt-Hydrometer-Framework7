@@ -46,8 +46,7 @@
                           <div class="item-title margin-horizontal padding"><i class="f7-icons color-custom-green">chevron_down</i> GREEN</div>
                         </div>
                       <div class="accordion-item-content">
-                        <form class="form-store-data" id="green-tilt-settings-form">
-                        <div class="block-title">Beer Name and Logging ID</div>
+                        <div class="block-title no-margin-top">Beer Name</div>
                         <div class="block block-strong">
                             <div class="content-block">
                             <div class="content-block-inner">
@@ -55,32 +54,29 @@
                             <div class="item-input-wrap">
                             <input type="text" name="beername" placeholder="Mosaic NE IPA">
                             </div>
-                            <div class="item-title floating-label">Enter Beer ID: <i class="f7-icons color-custom-gray">info</i></div>
+                            <div class="item-title floating-label">Cloud Name,ID: <i class="f7-icons color-custom-gray">info</i></div>
                             <div class="item-input-wrap">
-                            <input type="text" name="beerid" placeholder="9976">
+                            <input type="text" name="beerid" placeholder="Mosaic NE IPA,9976">
                             </div>
                             </div>
                         </div>
                         </div>
-                        <div class="block-title">Cloud Settings</div>
+                        <div class="block-title">Cloud Logging</div>
                       <div class="block block-strong">
                         <div class="content-block">
                         <div class="content-block-inner">
+                            <p><label class="toggle toggle-init">
+                                <input type="checkbox" checked>
+                                <span class="toggle-icon"></span>
+                                </label> Use Default Cloud URL</p>
+                            <p><label class="toggle toggle-init">
+                                <input type="checkbox" unchecked>
+                                <span class="toggle-icon"></span>
+                                </label> Use Custom Cloud URL</p>
                         <div class="item-title floating-label">Enter Custom Cloud URL: <i class="f7-icons color-custom-gray">info</i></div>
                         <div class="item-input">
                         <input type="text" placeholder="https://...">
                         </div>
-                        <div class="list simple-list">
-                        <ul>
-                          <li>
-                        <span>Use default URL</span>
-                        <label class="toggle toggle-init">
-                        <input type="checkbox" checked>
-                        <span class="toggle-icon"></span>
-                        </label>
-                      </li>
-                      </ul>
-                    </div>
                         <div class="item-title floating-label">Enter Email Address: <i class="f7-icons color-custom-gray">info</i></div>
                         <div class="item-input">
                         <input type="text" placeholder="example@gmail.com">
@@ -90,12 +86,74 @@
                                 <button class="button button-round">Start Log</button>
                                 <button class="button button-round button-active">Stop Log</button>
                               </p>
-                            </form>
                             </div>
-                        
-                    </li>
-                  </ul>
-                </div>
+                            </div>
+                            <div class="block-title">Calibration</div>
+                            <div class="block block-strong">
+                              <div class="content-block">
+                              <div class="content-block-inner">
+                                  <p>Calibrate SG/Concentration:</p>
+                                  <p class="round">
+                                      <button class="button button-round">Tare in Water</button>
+                                  </p>
+                                  <p style="text-align : center">Or</p>
+                            <div class="item-title floating-label">Enter uncalibrated point:</div>
+                            <div class="item-input-wrap">
+                            <input type="text" name="uncalSG" placeholder="1.045" value="">
+                            </div>
+                            <p class="round">
+                                <button class="button button-round">Get Uncalibrated Point</button>
+                            </p>
+                            <div class="item-title floating-label">Enter actual point:</div>
+                            <div class="item-input-wrap">
+                            <input type="text" name="SG" placeholder="1.047" value="">
+                            </div>
+                            <p class="round">
+                                <button class="button button-round">Add Points</button>
+                              </p>
+                              <div class="data-table data-table-init card">
+                                <div class="card-header">
+                                <div class="data-table-header">
+                                  <div class="data-table-title">Calibration Points</div>
+                                  </div>
+                                    <div class="data-table-header-selected">
+                                      <!-- Selected table title -->
+                                      <div class="data-table-title-selected"><span class="data-table-selected-count"></span> items selected</div>
+                                      <!-- Selected table actions -->
+                                      <div class="data-table-actions">
+                                        <a class="link icon-only">
+                                          <i class="icon f7-icons ios-only">trash</i>
+                                          <i class="icon material-icons md-only">delete</i>
+                                        </a>
+                                      </div>
+                                     </div>
+                                    </div>
+                                    <div class="card-content">
+                              <table>
+                                  <thead>
+                                    <tr>
+                                      <th class="checkbox-cell"> <label class="checkbox"> <input type="checkbox"><i class="icon-checkbox"></i></label></th>
+                                      <th class="numeric-cell">Uncal.</th>
+                                      <th class="numeric-cell">Actual</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                      <tr>
+                                          <td class="checkbox-cell">
+                                            <label class="checkbox">
+                                              <input type="checkbox">
+                                              <i class="icon-checkbox"></i>
+                                            </label>
+                                          </td>
+                                          <td class="numeric-cell">1.045</td>
+                                          <td class="numeric-cell">1.047</td>
+                                        </tr>
+                                  </tbody>
+                              </table>
+                            </div>
+                 </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -273,22 +331,22 @@
         <div class="card-content card-content-padding no-padding-bottom"><p class="no-margin-bottom">{{Beername}}</p><strong>TILT | {{Color}}</strong></div>
         <div id="quicksettings" class="accordion-item">
         <div class="accordion-item-toggle">
-        <div <button class="margin-horizontal button button-round" style="background:{{Color}};height:30px;"></button></div>
+        <div <button class="margin-horizontal button button-round" style="background:{{Color}};height:30px;color:{{Color}}">Show options for {{Color}} Tilt.</button></div>
         </div>
         <div class="accordion-item-content">
         <div class="margin-top segmented margin-horizontal">
-            <button class="button col button-round"><i class="material-icons">adjust</i>CAL</button>
+            <button id="calprompt-{{Color}}" class="button col button-round"><i class="material-icons">adjust</i>CAL</button>
             <button class="button col button-round"><i class="material-icons">show_chart</i>LOG</button>
             <button id="unitstoggle-{{Color}}" class="button col button-round"><i class="material-icons">straighten</i>UNITS</button>
           </div>
         </div>
         </div>
         <div class="card-content card-content-padding">SG/Concentration: {{uncalSG}} (uncal.)</div>
-        <div id="uncalSG{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{uncalSG}}</div>
-        <div class="margin-horizontal button button-round" style="background:{{Color}};height:10px;width:20%;"></div>
+        <div id="uncaldisplayFerm+displayFermunits{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{uncalSG}}</div>
+        <div id="percentScaleSG{{Color}}" class="margin-horizontal button button-round" style="background:{{Color}};height:10px;max-width:95%;"></div>
         <div class="card-content card-content-padding">Temperature: {{uncalTemp}} (uncal.)</div>
-        <div id="displayTemp+displayTempunits{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{uncalTemp}}</div>
-        <div class="margin-horizontal button button-round" style="background:{{Color}};height:10px;"></div>
+        <div id="uncaldisplayTemp+displayTempunits{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{uncalTemp}}{{displayTempunits}}</div>
+        <div id="percentScaleTemp{{Color}}" class="margin-horizontal button button-round" style="background:{{Color}};height:10px;max-width:95%;"></div>
         <div class="card-content card-content-padding lastrec">Received <span id=numberSecondsAgo{{Color}}></span> seconds ago <span id=displayRSSI{{Color}}></span><br><span id=displaytimeStamp{{Color}}></span></div>
       </div>
     {{/each}}
