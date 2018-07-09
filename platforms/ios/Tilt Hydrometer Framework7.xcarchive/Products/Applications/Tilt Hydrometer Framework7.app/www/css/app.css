@@ -16,3 +16,9 @@ div.sg-temp {
     font-weight:bold;
     line-height: .8;
 }
+
+div.lastrec {
+    font-family: "Courier New", Courier, monospace;
+    text-align: center;
+    font-size: smaller;
+}

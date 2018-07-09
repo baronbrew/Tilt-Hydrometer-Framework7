@@ -35,8 +35,12 @@ var mainView = app.views.create('.view-main', {
   url: '/'
 });
 
+//templates
 var displayTemplate = $$('#displaytemplate').html();
 var compileddisplayTemplate = Template7.compile(displayTemplate);
+
+var sgcallistTemplate = $$('#sgcallisttemplate').html();
+var compiledsgcallistTemplate = Template7.compile(sgcallistTemplate);
 
 //Permissions
 var permissions;
@@ -370,7 +374,7 @@ $$(document).on('deviceready', function() {
     }
     
     //update timer for last scan recieved
-    beacon.numberSecondsAgo = ((currentTime - beacon.lastUpdate) / 1000).toFixed(1);
+    beacon.numberSecondsAgo = ((currentTime - beacon.timeStamp) / 1000).toFixed(1);
     localStorage.setItem('lastUpdate-' + beacon.Color,beacon.timeStamp);
     //disconnect if no scans within 2 minutes
     if (Number(beacon.numberSecondsAgo) > 120){
@@ -387,6 +391,38 @@ $$(document).on('deviceready', function() {
     $$('#displaytimeStamp' + beacon.Color).html(beacon.displaytimeStamp);
     $$('#percentScaleSG' + beacon.Color).css('width', String((beacon.uncalSG - 0.980) / (1.150 - 0.980) * 100) + "%");
     $$('#percentScaleTemp' + beacon.Color).css('width', String((beacon.uncalTemp - 0) / (185 - 0) * 100) + "%");
+    //update Tilt objects
+    localStorage.setItem('tiltObject-' + beacon.Color,JSON.stringify(beacon));
+    updateSGcallist(beacon.Color);
     };
+
+
 }
 
+function updateSGcallist(color) {
+var uncalSGpoints = localStorage.getItem('uncalSGpoints-' + color)||'-0.001,1.000,10.000';
+var uncalSGpointsArray = uncalSGpoints.split(',');
+var actualSGpoints = localStorage.getItem('actualSGpoints-' + color)||'-0.001,1.000,10.000';
+var actualSGpointsArray = actualSGpoints.split(',');
+var displaySGcallistArray = [];
+for (var i = 1; i < actualSGpointsArray.length - 1; i++){
+    var actualdisplayFermcalpoint = convertSGtoPreferredUnits (color, Number(actualSGpointsArray[i]));
+    var uncaldisplayFermcalpoint = convertSGtoPreferredUnits (color, Number(uncalSGpointsArray[i]));
+    var points = JSON.parse('{ "uncalpoint" : "' + uncaldisplayFermcalpoint + '", "actualpoint" : "' + actualdisplayFermcalpoint + '" }');
+    displaySGcallistArray.push(points);
+};
+var displaySGcallistObject = {};
+displaySGcallistObject.SGcalpoints = displaySGcallistArray;
+$$('#sgcallisttemplate-' + color).html(compiledsgcallistTemplate(displaySGcallistObject));
+};
+
+function convertSGtoPreferredUnits (color, SG) {
+var displayFermunits = localStorage.getItem('displayFermunits-' + color)||'';
+    switch (displayFermunits){
+        case '' : return ( SG * 1 ).toFixed(3);
+        break;
+        case '°P'  : return ( -616.868 + 1111.14 * SG - 630.272 * SG * SG + 135.997 * SG * SG * SG ).toFixed(1);
+        break;
+        case '°Bx'  : return ( -584.6957 + 1083.2666 * SG -577.9848 * SG * SG + 124.5209 * SG * SG * SG ).toFixed(1);
+    }
+}

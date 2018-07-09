@@ -1,153 +1,153 @@
 {
-    "prepare_queue": {
-        "installed": [],
-        "uninstalled": []
-    },
-    "config_munge": {
-        "files": {
-            "config.xml": {
-                "parents": {
-                    "/*": [
-                        {
-                            "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"LocationManager\"><param name=\"ios-package\" value=\"CDVLocationManager\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"StatusBar\"><param name=\"ios-package\" value=\"CDVStatusBar\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<preference name=\"StatusBarOverlaysWebView\" value=\"true\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<preference name=\"StatusBarStyle\" value=\"lightcontent\" />",
-                            "count": 1
-                        }
-                    ]
-                }
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {
+      "config.xml": {
+        "parents": {
+          "/*": [
+            {
+              "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
+              "count": 1
             },
-            "*-Info.plist": {
-                "parents": {
-                    "NSLocationAlwaysUsageDescription": [
-                        {
-                            "xml": "<string>This app would like to scan for iBeacons even when in the background.</string>",
-                            "count": 1
-                        }
-                    ],
-                    "NSLocationWhenInUseUsageDescription": [
-                        {
-                            "xml": "<string>This app would like to scan for iBeacons while it is in use.</string>",
-                            "count": 1
-                        }
-                    ],
-                    "NSBluetoothPeripheralUsageDescription": [
-                        {
-                            "xml": "<string>This app would like to scan for iBeacons.</string>",
-                            "count": 1
-                        }
-                    ],
-                    "NSLocationAlwaysAndWhenInUseUsageDescription": [
-                        {
-                            "xml": "<string>This app would like to scan for iBeacons both while in use and while in the background.</string>",
-                            "count": 1
-                        }
-                    ]
-                }
+            {
+              "xml": "<feature name=\"LocationManager\"><param name=\"ios-package\" value=\"CDVLocationManager\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"StatusBar\"><param name=\"ios-package\" value=\"CDVStatusBar\" /><param name=\"onload\" value=\"true\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<preference name=\"StatusBarOverlaysWebView\" value=\"true\" />",
+              "count": 1
+            },
+            {
+              "xml": "<preference name=\"StatusBarStyle\" value=\"lightcontent\" />",
+              "count": 1
             }
+          ]
         }
-    },
-    "installed_plugins": {
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
-        },
-        "com.unarin.cordova.beacon": {
-            "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
-        },
-        "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
+      },
+      "*-Info.plist": {
+        "parents": {
+          "NSLocationAlwaysUsageDescription": [
+            {
+              "xml": "<string>This app would like to scan for iBeacons even when in the background.</string>",
+              "count": 1
+            }
+          ],
+          "NSLocationWhenInUseUsageDescription": [
+            {
+              "xml": "<string>This app would like to scan for iBeacons while it is in use.</string>",
+              "count": 1
+            }
+          ],
+          "NSBluetoothPeripheralUsageDescription": [
+            {
+              "xml": "<string>This app would like to scan for iBeacons.</string>",
+              "count": 1
+            }
+          ],
+          "NSLocationAlwaysAndWhenInUseUsageDescription": [
+            {
+              "xml": "<string>This app would like to scan for iBeacons both while in use and while in the background.</string>",
+              "count": 1
+            }
+          ]
         }
-    },
-    "dependent_plugins": {},
-    "modules": [
-        {
-            "id": "cordova-plugin-device.device",
-            "file": "plugins/cordova-plugin-device/www/device.js",
-            "pluginId": "cordova-plugin-device",
-            "clobbers": [
-                "device"
-            ]
-        },
-        {
-            "id": "com.unarin.cordova.beacon.underscorejs",
-            "file": "plugins/com.unarin.cordova.beacon/www/lib/underscore-min-1.6.js",
-            "pluginId": "com.unarin.cordova.beacon",
-            "runs": true
-        },
-        {
-            "id": "com.unarin.cordova.beacon.Q",
-            "file": "plugins/com.unarin.cordova.beacon/www/lib/q.min.js",
-            "pluginId": "com.unarin.cordova.beacon",
-            "runs": true
-        },
-        {
-            "id": "com.unarin.cordova.beacon.LocationManager",
-            "file": "plugins/com.unarin.cordova.beacon/www/LocationManager.js",
-            "pluginId": "com.unarin.cordova.beacon",
-            "merges": [
-                "cordova.plugins"
-            ]
-        },
-        {
-            "id": "com.unarin.cordova.beacon.Delegate",
-            "file": "plugins/com.unarin.cordova.beacon/www/Delegate.js",
-            "pluginId": "com.unarin.cordova.beacon",
-            "runs": true
-        },
-        {
-            "id": "com.unarin.cordova.beacon.Region",
-            "file": "plugins/com.unarin.cordova.beacon/www/model/Region.js",
-            "pluginId": "com.unarin.cordova.beacon",
-            "runs": true
-        },
-        {
-            "id": "com.unarin.cordova.beacon.Regions",
-            "file": "plugins/com.unarin.cordova.beacon/www/Regions.js",
-            "pluginId": "com.unarin.cordova.beacon",
-            "runs": true
-        },
-        {
-            "id": "com.unarin.cordova.beacon.CircularRegion",
-            "file": "plugins/com.unarin.cordova.beacon/www/model/CircularRegion.js",
-            "pluginId": "com.unarin.cordova.beacon",
-            "runs": true
-        },
-        {
-            "id": "com.unarin.cordova.beacon.BeaconRegion",
-            "file": "plugins/com.unarin.cordova.beacon/www/model/BeaconRegion.js",
-            "pluginId": "com.unarin.cordova.beacon",
-            "runs": true
-        },
-        {
-            "id": "cordova-plugin-statusbar.statusbar",
-            "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
-            "pluginId": "cordova-plugin-statusbar",
-            "clobbers": [
-                "window.StatusBar"
-            ]
-        }
-    ],
-    "plugin_metadata": {
-        "cordova-plugin-device": "2.0.2",
-        "com.unarin.cordova.beacon": "3.6.1",
-        "cordova-plugin-statusbar": "1.0.1",
-        "cordova-plugin-whitelist": "1.2.2"
+      }
     }
+  },
+  "installed_plugins": {
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
+    },
+    "com.unarin.cordova.beacon": {
+      "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
+    }
+  },
+  "dependent_plugins": {},
+  "modules": [
+    {
+      "id": "cordova-plugin-device.device",
+      "file": "plugins/cordova-plugin-device/www/device.js",
+      "pluginId": "cordova-plugin-device",
+      "clobbers": [
+        "device"
+      ]
+    },
+    {
+      "id": "com.unarin.cordova.beacon.underscorejs",
+      "file": "plugins/com.unarin.cordova.beacon/www/lib/underscore-min-1.6.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "runs": true
+    },
+    {
+      "id": "com.unarin.cordova.beacon.Q",
+      "file": "plugins/com.unarin.cordova.beacon/www/lib/q.min.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "runs": true
+    },
+    {
+      "id": "com.unarin.cordova.beacon.LocationManager",
+      "file": "plugins/com.unarin.cordova.beacon/www/LocationManager.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "merges": [
+        "cordova.plugins"
+      ]
+    },
+    {
+      "id": "com.unarin.cordova.beacon.Delegate",
+      "file": "plugins/com.unarin.cordova.beacon/www/Delegate.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "runs": true
+    },
+    {
+      "id": "com.unarin.cordova.beacon.Region",
+      "file": "plugins/com.unarin.cordova.beacon/www/model/Region.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "runs": true
+    },
+    {
+      "id": "com.unarin.cordova.beacon.Regions",
+      "file": "plugins/com.unarin.cordova.beacon/www/Regions.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "runs": true
+    },
+    {
+      "id": "com.unarin.cordova.beacon.CircularRegion",
+      "file": "plugins/com.unarin.cordova.beacon/www/model/CircularRegion.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "runs": true
+    },
+    {
+      "id": "com.unarin.cordova.beacon.BeaconRegion",
+      "file": "plugins/com.unarin.cordova.beacon/www/model/BeaconRegion.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "runs": true
+    },
+    {
+      "id": "cordova-plugin-statusbar.statusbar",
+      "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
+      "pluginId": "cordova-plugin-statusbar",
+      "clobbers": [
+        "window.StatusBar"
+      ]
+    }
+  ],
+  "plugin_metadata": {
+    "cordova-plugin-device": "2.0.2",
+    "com.unarin.cordova.beacon": "3.6.1",
+    "cordova-plugin-statusbar": "1.0.1",
+    "cordova-plugin-whitelist": "1.2.2"
+  }
 }
