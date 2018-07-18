@@ -43,7 +43,7 @@
                   <ul>
                     <li class="accordion-item" id="accordion">
                         <div class="accordion-item-toggle">
-                          <div class="item-title margin-horizontal padding"><i class="f7-icons color-custom-green">chevron_down</i> GREEN</div>
+                          <div class="item-title margin-horizontal padding"><i class="f7-icons color-custom-pink">chevron_down</i> PINK</div>
                         </div>
                       <div class="accordion-item-content">
                         <div class="block-title no-margin-top">Beer Name</div>
@@ -94,33 +94,33 @@
                               <div class="content-block-inner">
                                 <p class="no-margin-top">Quick Calibration</p>
                                   <p class="round no-margin-top">
-                                      <button class="button button-round">Tare in Water</button>
+                                      <button class="button button-round" id="tareinwater-PINK-1.000" onclick="addSGPoints(this)">Tare in Water</button>
                                   </p>
                                   <p>Standard Calibration</p>
                             <div class="item-title floating-label">Enter uncalibrated point:</div>
                             <div class="item-input-wrap">
-                            <input type="text" name="uncalSG" placeholder="1.045" value="">
+                            <input type="number" id="uncalSG-PINK" placeholder="1.002">
                             </div>
                             <p class="round">
-                                <button class="button button-round">Get Uncalibrated Point</button>
+                                <button class="button button-round" id="getuncalibratedSGpoint-PINK" onclick="getUncalibratedSGPoint(this)">Get Uncalibrated Point</button>
                             </p>
                             <div class="item-title floating-label">Enter actual point:</div>
                             <div class="item-input-wrap">
-                            <input type="text" name="SG" placeholder="1.047" value="">
+                            <input type="number" id="actualSG-PINK" placeholder="1.000">
                             </div>
                             <p class="round">
-                                <button class="button button-round">Add Points</button>
+                                <button class="button button-round" id="addSGpoint-PINK" onclick="addSGPoints(this)">Add Points</button>
                               </p>
-                              <div class="data-table data-table-init">
+                              <div class="data-table">
                                   <table>
                                       <thead>
                                         <tr>
-                                            <th class="numeric-cell">Select</th>
+                                            <th class="numeric-cell">Delete</th>
                                           <th class="numeric-cell">Uncal.</th>
                                           <th class="numeric-cell">Actual</th>
                                         </tr>
                                       </thead>
-                                      <tbody id="sgcallisttemplate-GREEN">
+                                      <tbody id="sgcallisttemplate-PINK">
                                       </tbody>
                                    </table>
                                </div>
@@ -208,8 +208,8 @@
     <tr>
         <td class="checkbox-cell">
           <label class="checkbox">
-            <input type="checkbox">
-            <i class="icon-checkbox"></i>
+            <input type="checkbox" id="sgcalpoints-{{color}}-{{@index}}" onchange="deleteSGCalPoint(this)">
+            <i class="icon icon-checkbox"></i>
           </label>
         </td>
         <td class="numeric-cell">{{uncalpoint}}</td>

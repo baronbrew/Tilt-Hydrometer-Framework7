@@ -355,7 +355,7 @@ $$(document).on('deviceready', function() {
                  app.toast.create({text: 'Success: Changed ' + actualSGpoint + ' (actual) to ' + uncalSGpoint + ' (uncal.)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
                 }
             }else{
-                app.dialog.alert('The calibration point ' + actual + 'is out of range or not a number. Please try again.', 'Calibration Error');
+                app.dialog.alert('The calibration point ' + actual + ' is out of range or not a number. Please try again.', 'Calibration Error');
             }
             //update list of calibration points in settings
             updateSGcallist(calcolor[1]);
@@ -431,7 +431,7 @@ var displaySGcallistArray = [];
 for (var i = 1; i < actualSGpointsArray.length - 1; i++){
     var actualdisplayFermcalpoint = convertSGtoPreferredUnits (color, Number(actualSGpointsArray[i]));
     var uncaldisplayFermcalpoint = convertSGtoPreferredUnits (color, Number(uncalSGpointsArray[i]));
-    var points = JSON.parse('{ "uncalpoint" : "' + uncaldisplayFermcalpoint + '", "actualpoint" : "' + actualdisplayFermcalpoint + '" }');
+    var points = JSON.parse('{ "color" : "' + color + '", "uncalpoint" : "' + uncaldisplayFermcalpoint + '", "actualpoint" : "' + actualdisplayFermcalpoint + '" }');
     displaySGcallistArray.push(points);
 };
 var displaySGcallistObject = {};
@@ -472,4 +472,89 @@ unCalSGPointsTempArray.sort(function(a, b){return a-b;});
 var indexSG = unCalSGPointsTempArray.indexOf(SG);
 var calSG = linearInterpolation (Number(SG), Number(unCalSGPointsArray[indexSG-1]), Number(actualSGPointsArray[indexSG-1]), Number(unCalSGPointsArray[indexSG]), Number(actualSGPointsArray[indexSG]));
 return calSG;
+}
+
+function deleteSGCalPoint (checkbox){
+//get color and index of selected point to delete in format as follows (sgcalpoints-{{color}}-{{@index}})
+var selectedPoint = checkbox.id.split('-');
+var color = selectedPoint[1];
+var index = Number(selectedPoint[2]) + 1;
+console.log(index);
+var uncalSGpoints = localStorage.getItem('uncalSGpoints-' + color)||'-0.001,1.000,10.000';
+var unCalSGPointsArray = uncalSGpoints.split(',');
+var actualSGpoints = localStorage.getItem('actualSGpoints-' + color)||'-0.001,1.000,10.000';
+var actualSGPointsArray = actualSGpoints.split(',');
+var deleteduncalpoint = unCalSGPointsArray[index];
+var deletedactualpoint = actualSGPointsArray[index];
+//remove from sg cal points array
+unCalSGPointsArray.splice(index, 1);
+actualSGPointsArray.splice(index, 1);
+//update local storage with new cal points
+localStorage.setItem('uncalSGpoints-' + color,unCalSGPointsArray);
+localStorage.setItem('actualSGpoints-' + color,actualSGPointsArray);
+//delete point half second after checking box
+setTimeout(function(){ 
+    if (checkbox.checked){
+        updateSGcallist(color);
+        app.toast.create({text: 'Deleted ' + deleteduncalpoint + ' (uncal.) and ' + deletedactualpoint + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
+    }
+    },300);
+}
+
+function getUncalibratedSGPoint (button){
+    var clickedButton = button.id.split('-');
+    var color = clickedButton[1];
+    $$('#uncalSG-' + color).val(localStorage.getItem('uncalSG-' + color));
+}
+
+function addSGPoints (button){
+    var clickedButton = button.id.split('-');
+    var color = clickedButton[1];
+    //handle quick cal / tare in water
+    if (clickedButton[2] != undefined){
+        var actual = Number(clickedButton[2]);
+        var uncalSGpoint = localStorage.getItem('uncalSG-' + color);
+    }else{
+        var actual = $$('#actualSG-' + color).val();
+        var uncalSGpoint = $$('#uncalSG-' + color).val();
+    }
+    //console.log(actual);
+    var actualSGpoints = localStorage.getItem('actualSGpoints-' + color)||'-0.001,1.000,10.000';
+    var actualSGpointsArray = actualSGpoints.split(',');
+    var uncalSGpoints = localStorage.getItem('uncalSGpoints-' + color)||'-0.001,1.000,10.000';
+    var uncalSGpointsArray = uncalSGpoints.split(',');
+    var actualSGpoint = String(Number(actual).toFixed(3));
+    //console.log(uncalSGpoint);
+    //add uncal. point only if actual doesn't already exist, otherwise replace with new uncal. point
+    var calSGindex = actualSGpointsArray.indexOf(actualSGpoint);
+    var uncalSGindex = uncalSGpointsArray.indexOf(uncalSGpoint);
+    if (Number(actual) > 0.500 && Number(actual) < 2.000){
+     if (calSGindex < 0 && uncalSGindex < 0){
+        actualSGpointsArray.push(actualSGpoint);
+        actualSGpointsArray.sort(function(a, b){return a-b;});
+        localStorage.setItem('actualSGpoints-' + color, actualSGpointsArray);
+        uncalSGpointsArray.push(uncalSGpoint);
+        uncalSGpointsArray.sort(function(a, b){return a-b;});
+        localStorage.setItem('uncalSGpoints-' + color, uncalSGpointsArray);
+        app.toast.create({text: 'Success: Set ' + uncalSGpoint + ' (uncal.) to ' + actualSGpoint + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
+     } else if (calSGindex > 0 && uncalSGindex < 0){
+        localStorage.setItem('actualSGpoints-' + color, actualSGpointsArray);
+        uncalSGpointsArray.splice(calSGindex, 1, uncalSGpoint);
+        uncalSGpointsArray.sort(function(a, b){return a-b;});
+        localStorage.setItem('uncalSGpoints-' + color, uncalSGpointsArray);
+        app.toast.create({text: 'Success: Changed ' + uncalSGpoint + ' (uncal.) to ' + actualSGpoint + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
+    }
+       else if (calSGindex < 0 && uncalSGindex > 0){
+        localStorage.setItem('uncalSGpoints-' + color, uncalSGpointsArray);
+        actualSGpointsArray.splice(uncalSGindex, 1, actualSGpoint);
+        actualSGpointsArray.sort(function(a, b){return a-b;});
+        localStorage.setItem('actualSGpoints-' + color, actualSGpointsArray);
+        app.toast.create({text: 'Success: Changed ' + actualSGpoint + ' (actual) to ' + uncalSGpoint + ' (uncal.)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
+       }
+   }else{
+       app.dialog.alert('The calibration point ' + actual + ' is out of range or not a number. Please try again.', 'Calibration Error');
+   }
+   //update list of calibration points in settings
+   updateSGcallist(color);
+
 }
