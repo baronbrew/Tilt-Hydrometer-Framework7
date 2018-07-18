@@ -163,6 +163,7 @@ $$(document).on('deviceready', function() {
         localStorage.setItem('displayTempunits-' + color,"°F");
         localStorage.setItem('displayFermunits-' + color,"");
     }
+    updateSGcallist(color);
   }
     
 //adds color specific attributes
@@ -274,18 +275,26 @@ $$(document).on('deviceready', function() {
     //add display value and units
     beacon.displayTempunits = localStorage.getItem('displayTempunits-' + beacon.Color)||"°F";
     switch (beacon.displayTempunits){
-        case "°F" : beacon.uncaldisplayTemp = beacon.uncalTemp;
+        case "°F" : 
+        beacon.uncaldisplayTemp = beacon.uncalTemp;
         break;
         case "°C"  : beacon.uncaldisplayTemp = ((beacon.uncalTemp - 32) * 5 / 9).toFixed(1);
         break;
     }
     beacon.displayFermunits = localStorage.getItem('displayFermunits-' + beacon.Color)||"";
     switch (beacon.displayFermunits) {
-        case "" : beacon.uncaldisplayFerm = beacon.uncalSG;
+        case "" : 
+        beacon.uncaldisplayFerm = beacon.uncalSG;
+        beacon.caldisplayFerm = (getCalFerm(beacon.Color)).toFixed(3);
         break;
-        case "°P" : beacon.uncaldisplayFerm = (1111.14 * beacon.uncalSG - 630.272 * beacon.uncalSG * beacon.uncalSG + 135.997 * beacon.uncalSG * beacon.uncalSG * beacon.uncalSG - 616.868).toFixed(1);
+        case "°P" : beacon.uncaldisplayFerm = convertSGtoPreferredUnits(beacon.Color, beacon.uncalSG);
+        beacon.caldisplayFerm = convertSGtoPreferredUnits(beacon.Color, getCalFerm(beacon.Color));
         break;
     }
+
+    //get calibrated values
+    beacon.SG = getCalFerm(beacon.Color);
+
     
     //setup tilt cards (generate new card once for each Tilt found)
     var foundBeacons = localStorage.getItem('foundbeacons');
@@ -297,6 +306,8 @@ $$(document).on('deviceready', function() {
         var displayhtml = compileddisplayTemplate(beacons);
         var tiltCard  = $$('#tiltCard').html(displayhtml);
         var foundBeaconsArraylength = foundBeaconsArray.length;
+        //populate calibration point list
+        updateSGcallist(beacon.Color);
         //setup javascript for each card
         for (var i = 1; i < foundBeaconsArraylength; i++) {
         //set up buttons
@@ -310,7 +321,7 @@ $$(document).on('deviceready', function() {
         $$('#calprompt-' + foundBeaconsArray[i]).on('click', function (e) {
             var calcolor = e.currentTarget.id.split("-");
             //console.log('clicked ' + calcolor[1]);
-            app.dialog.prompt('Enter actual SG/Concentration or tap "Cancel" to calibrate temperature:', 'Calibrate TILT | ' + calcolor[1], function (actual) {
+            app.dialog.prompt('Enter actual SG/Concentration or tap "Cancel" to calibrate temperature:', 'Calibrate ' + calcolor[1], function (actual) {
              var actualSGpoints = localStorage.getItem('actualSGpoints-' + calcolor[1])||'-0.001,1.000,10.000';
              var actualSGpointsArray = actualSGpoints.split(',');
              var uncalSGpoints = localStorage.getItem('uncalSGpoints-' + calcolor[1])||'-0.001,1.000,10.000';
@@ -319,27 +330,37 @@ $$(document).on('deviceready', function() {
              var uncalSGpoint = localStorage.getItem('uncalSG-' + calcolor[1]);
              //add uncal. point only if actual doesn't already exist, otherwise replace with new uncal. point
              var calSGindex = actualSGpointsArray.indexOf(actualSGpoint);
+             var uncalSGindex = uncalSGpointsArray.indexOf(uncalSGpoint);
              if (Number(actual) > 0.500 && Number(actual) < 2.000){
-              if (calSGindex < 0){
+              if (calSGindex < 0 && uncalSGindex < 0){
                  actualSGpointsArray.push(actualSGpoint);
                  actualSGpointsArray.sort(function(a, b){return a-b;});
                  localStorage.setItem('actualSGpoints-' + calcolor[1], actualSGpointsArray);
                  uncalSGpointsArray.push(uncalSGpoint);
                  uncalSGpointsArray.sort(function(a, b){return a-b;});
                  localStorage.setItem('uncalSGpoints-' + calcolor[1], uncalSGpointsArray);
-                 app.toast.create({text: 'Set ' + uncalSGpoint + ' (uncal.) to ' + actualSGpoint + ' (actual)', icon: '<i class="material-icons">adjust</i>', position: 'center', closeTimeout: 4000}).open();
-              } else{
+                 app.toast.create({text: 'Success: Set ' + uncalSGpoint + ' (uncal.) to ' + actualSGpoint + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
+              } else if (calSGindex > 0 && uncalSGindex < 0){
                  localStorage.setItem('actualSGpoints-' + calcolor[1], actualSGpointsArray);
                  uncalSGpointsArray.splice(calSGindex, 1, uncalSGpoint);
                  uncalSGpointsArray.sort(function(a, b){return a-b;});
                  localStorage.setItem('uncalSGpoints-' + calcolor[1], uncalSGpointsArray);
-                 app.toast.create({text: 'Reset ' + uncalSGpoint + ' (uncal.) to ' + actualSGpoint + ' (actual)', icon: '<i class="material-icons">adjust</i>', position: 'center', closeTimeout: 4000}).open();
+                 app.toast.create({text: 'Success: Changed ' + uncalSGpoint + ' (uncal.) to ' + actualSGpoint + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
              }
+                else if (calSGindex < 0 && uncalSGindex > 0){
+                 localStorage.setItem('uncalSGpoints-' + calcolor[1], uncalSGpointsArray);
+                 actualSGpointsArray.splice(uncalSGindex, 1, actualSGpoint);
+                 actualSGpointsArray.sort(function(a, b){return a-b;});
+                 localStorage.setItem('actualSGpoints-' + calcolor[1], actualSGpointsArray);
+                 app.toast.create({text: 'Success: Changed ' + actualSGpoint + ' (actual) to ' + uncalSGpoint + ' (uncal.)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
+                }
             }else{
                 app.dialog.alert('The calibration point ' + actual + 'is out of range or not a number. Please try again.', 'Calibration Error');
             }
-              }, function () {
-                app.dialog.prompt('Enter actual temperature:', 'Calibrate TILT | ' + calcolor[1], function (actualTemp){
+            //update list of calibration points in settings
+            updateSGcallist(calcolor[1]);
+            }, function () {
+                app.dialog.prompt('Enter actual temperature:', 'Calibrate '+ calcolor[1], function (actualTemp){
                var actualTemppoints = localStorage.getItem('actualTemppoints-' + calcolor[1])||'-0.001,1.000,10.000';
                var actualTemppointsArray = actualTemppoints.split(',');
                var uncalTemppoints = localStorage.getItem('uncalTemppoints-' + calcolor[1])||'0,1000';
@@ -384,6 +405,7 @@ $$(document).on('deviceready', function() {
     //update data fields in Tilt card template
     $$('#uncalSG' + beacon.Color).html(beacon.uncalSG);
     $$('#uncaldisplayFerm+displayFermunits' + beacon.Color).html(String(beacon.uncaldisplayFerm) + beacon.displayFermunits);
+    $$('#caldisplayFerm+displayFermunits' + beacon.Color).html(String(beacon.caldisplayFerm) + beacon.displayFermunits);
     $$('#uncalTemp' + beacon.Color).html(beacon.uncalTemp);
     $$('#uncaldisplayTemp+displayTempunits' + beacon.Color).html(String(beacon.uncaldisplayTemp) + beacon.displayTempunits);
     $$('#numberSecondsAgo' + beacon.Color).html(beacon.numberSecondsAgo);
@@ -393,7 +415,8 @@ $$(document).on('deviceready', function() {
     $$('#percentScaleTemp' + beacon.Color).css('width', String((beacon.uncalTemp - 0) / (185 - 0) * 100) + "%");
     //update Tilt objects
     localStorage.setItem('tiltObject-' + beacon.Color,JSON.stringify(beacon));
-    updateSGcallist(beacon.Color);
+    //console.log(beacon);
+    
     };
 
 
@@ -425,4 +448,28 @@ var displayFermunits = localStorage.getItem('displayFermunits-' + color)||'';
         break;
         case '°Bx'  : return ( -584.6957 + 1083.2666 * SG -577.9848 * SG * SG + 124.5209 * SG * SG * SG ).toFixed(1);
     }
+}
+
+function linearInterpolation (x, x0, y0, x1, y1) {
+    var a = (y1 - y0) / (x1 - x0);
+    var b = -a * x0 + y0;
+    return a * x + b;
+  }
+
+function getCalFerm (color){
+//get cal points from local storage
+var uncalSGpoints = localStorage.getItem('uncalSGpoints-' + color)||'-0.001,1.000,10.000';
+var unCalSGPointsArray = uncalSGpoints.split(',');
+var actualSGpoints = localStorage.getItem('actualSGpoints-' + color)||'-0.001,1.000,10.000';
+var actualSGPointsArray= actualSGpoints.split(',');
+var SG = localStorage.getItem('uncalSG-' + color);
+//temporary array for finding correct x and y values
+var unCalSGPointsTempArray = uncalSGpoints.split(',');
+//add current value to calibration point list
+unCalSGPointsTempArray.push(SG);
+//sort list lowest to highest
+unCalSGPointsTempArray.sort(function(a, b){return a-b;});
+var indexSG = unCalSGPointsTempArray.indexOf(SG);
+var calSG = linearInterpolation (Number(SG), Number(unCalSGPointsArray[indexSG-1]), Number(actualSGPointsArray[indexSG-1]), Number(unCalSGPointsArray[indexSG]), Number(actualSGPointsArray[indexSG]));
+return calSG;
 }

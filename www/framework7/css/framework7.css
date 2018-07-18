@@ -1,5 +1,5 @@
 /**
- * Framework7 2.1.1
+ * Framework7 3.0.0
  * Full featured mobile HTML framework for building iOS & Android apps
  * http://framework7.io/
  *
@@ -7,7 +7,7 @@
  *
  * Released under the MIT License
  *
- * Released on: March 17, 2018
+ * Released on: July 5, 2018
  */
 html,
 body,
@@ -44,14 +44,14 @@ a, button, input, textarea, .link, .button, label, .sortable-handler {
   -ms-touch-action: manipulation;
 }
 */
-@media all and (width: 1024px) and (height: 691px) and (orientation: landscape) {
+@media (width: 1024px) and (height: 691px) and (orientation: landscape) {
   html,
   body,
   .framework7-root {
     height: 671px;
   }
 }
-@media all and (width: 1024px) and (height: 692px) and (orientation: landscape) {
+@media (width: 1024px) and (height: 692px) and (orientation: landscape) {
   html,
   body,
   .framework7-root {
@@ -91,14 +91,14 @@ p {
 .ios a {
   color: #007aff;
 }
-@media all and (width: 1024px) and (height: 691px) and (orientation: landscape) {
+@media (width: 1024px) and (height: 691px) and (orientation: landscape) {
   .ios,
   .ios body,
   .ios .framework7-root {
     height: 671px;
   }
 }
-@media all and (width: 1024px) and (height: 692px) and (orientation: landscape) {
+@media (width: 1024px) and (height: 692px) and (orientation: landscape) {
   .ios,
   .ios body,
   .ios .framework7-root {
@@ -261,29 +261,13 @@ html.with-statusbar.device-ios .framework7-root,
 html.with-statusbar.ios:not(.device-ios):not(.device-android) .framework7-root {
   padding-top: 20px;
 }
-html.with-statusbar.device-ios .panel,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) .panel {
-  top: 20px;
-  height: calc(100% - 20px);
-}
 html.with-statusbar.device-android .framework7-root,
 html.with-statusbar.md:not(.device-ios):not(.device-android) .framework7-root {
   padding-top: 24px;
 }
-html.with-statusbar.device-android .panel,
-html.with-statusbar.md:not(.device-ios):not(.device-android) .panel {
-  top: 24px;
-  height: calc(100% - 24px);
-}
 html.with-statusbar.device-iphone-x .framework7-root {
   padding-top: constant(safe-area-inset-top);
   padding-top: env(safe-area-inset-top);
-}
-html.with-statusbar.device-iphone-x .panel {
-  top: constant(safe-area-inset-top);
-  top: env(safe-area-inset-top);
-  height: calc(100% - constant(safe-area-inset-top));
-  height: calc(100% - env(safe-area-inset-top));
 }
 .ios .statusbar {
   background: #f7f7f8;
@@ -413,7 +397,7 @@ html.with-statusbar.device-iphone-x .panel {
   opacity: 1;
 }
 .ios .page-transitioning,
-.ios .page-transitioning page-shadow-effect,
+.ios .page-transitioning .page-shadow-effect,
 .ios .page-transitioning .page-opacity-effect {
   -webkit-transition-duration: 400ms;
   transition-duration: 400ms;
@@ -658,6 +642,30 @@ html.with-statusbar.device-iphone-x .panel {
     opacity: 0;
   }
 }
+.md .page-shadow-effect {
+  position: absolute;
+  top: 0;
+  width: 16px;
+  bottom: 0;
+  z-index: -1;
+  content: '';
+  opacity: 0;
+  right: 100%;
+  background: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0)), color-stop(10%, rgba(0, 0, 0, 0)), color-stop(50%, rgba(0, 0, 0, 0.01)), to(rgba(0, 0, 0, 0.2)));
+  background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.01) 50%, rgba(0, 0, 0, 0.2) 100%);
+  background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.01) 50%, rgba(0, 0, 0, 0.2) 100%);
+}
+.md .page-opacity-effect {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.1);
+  width: 100%;
+  bottom: 0;
+  content: '';
+  opacity: 0;
+  z-index: 10000;
+}
 .md .page {
   background: #fff;
 }
@@ -667,9 +675,21 @@ html.with-statusbar.device-iphone-x .panel {
   opacity: 0;
   pointer-events: none;
 }
-.md .page-transitioning {
+.md .page-next.page-next-on-right {
+  -webkit-transform: translate3d(100%, 0, 0);
+  transform: translate3d(100%, 0, 0);
+}
+.md .page-transitioning,
+.md .page-transitioning .page-shadow-effect,
+.md .page-transitioning .page-opacity-effect {
   -webkit-transition-duration: 250ms;
   transition-duration: 250ms;
+}
+.md .page-transitioning-swipeback,
+.md .page-transitioning-swipeback .page-shadow-effect,
+.md .page-transitioning-swipeback .page-opacity-effect {
+  -webkit-transition-duration: 400ms;
+  transition-duration: 400ms;
 }
 .md .router-transition-forward .page,
 .md .router-transition-backward .page {
@@ -1341,6 +1361,24 @@ html.with-statusbar.device-iphone-x .panel {
 .md .navbar.color-black {
   background: #000000;
 }
+@media (orientation: landscape) {
+  .md.device-iphone-x .ios-left-edge .navbar-inner,
+  .md.device-iphone-x .ios-edges .navbar-inner,
+  .md.device-iphone-x .popup .navbar-inner,
+  .md.device-iphone-x .sheet-modal .navbar-inner,
+  .md.device-iphone-x .panel-left .navbar-inner {
+    padding-left: constant(safe-area-inset-left);
+    padding-left: env(safe-area-inset-left);
+  }
+  .md.device-iphone-x .ios-right-edge .navbar-inner,
+  .md.device-iphone-x .ios-edges .navbar-inner,
+  .md.device-iphone-x .popup .navbar-inner,
+  .md.device-iphone-x .sheet-modal .navbar-inner,
+  .md.device-iphone-x .panel-right .navbar-inner {
+    padding-right: constant(safe-area-inset-right);
+    padding-right: env(safe-area-inset-right);
+  }
+}
 /* === Toolbar === */
 .toolbar {
   width: 100%;
@@ -1887,6 +1925,8 @@ html.with-statusbar.device-iphone-x .panel {
   padding-right: 0;
   font-size: 14px;
   text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.03em;
 }
 .md .tabbar i.icon,
 .md .tabbar-labels i.icon {
@@ -1910,8 +1950,8 @@ html.with-statusbar.device-iphone-x .panel {
 .md .tabbar-labels .tab-link-highlight {
   position: absolute;
   bottom: 0;
-  height: 3px;
-  background: rgba(255, 255, 255, 0.5);
+  height: 2px;
+  background: #fff;
   -webkit-transition-duration: 300ms;
   transition-duration: 300ms;
   left: 0;
@@ -1964,6 +2004,8 @@ html.with-statusbar.device-iphone-x .panel {
 .md .tabbar-labels.toolbar-bottom-md .tabbar-label {
   text-transform: none;
   line-height: 1.2;
+  font-weight: normal;
+  letter-spacing: 0;
 }
 .md .tabbar-scrollable .toolbar-inner {
   overflow: auto;
@@ -2121,6 +2163,101 @@ html.with-statusbar.device-iphone-x .panel {
 }
 .md .toolbar:not(.messagebar).color-black {
   background: #000000;
+}
+.md.device-iphone-x .views > .toolbar:first-child:not(.toolbar-bottom-md),
+.md.device-iphone-x .view > .toolbar:first-child:not(.toolbar-bottom-md),
+.md.device-iphone-x .page > .toolbar:first-child:not(.toolbar-bottom-md),
+.md.device-iphone-x .popup > .toolbar:first-child:not(.toolbar-bottom-md),
+.md.device-iphone-x .panel > .toolbar:first-child:not(.toolbar-bottom-md),
+.md.device-iphone-x .login-screen > .toolbar:first-child:not(.toolbar-bottom-md) {
+  height: calc(48px + constant(safe-area-inset-top));
+  height: calc(48px + env(safe-area-inset-top));
+}
+.md.device-iphone-x .views > .toolbar:first-child:not(.toolbar-bottom-md) .toolbar-inner,
+.md.device-iphone-x .view > .toolbar:first-child:not(.toolbar-bottom-md) .toolbar-inner,
+.md.device-iphone-x .page > .toolbar:first-child:not(.toolbar-bottom-md) .toolbar-inner,
+.md.device-iphone-x .popup > .toolbar:first-child:not(.toolbar-bottom-md) .toolbar-inner,
+.md.device-iphone-x .panel > .toolbar:first-child:not(.toolbar-bottom-md) .toolbar-inner,
+.md.device-iphone-x .login-screen > .toolbar:first-child:not(.toolbar-bottom-md) .toolbar-inner {
+  height: auto;
+}
+.md.device-iphone-x .views > .toolbar:first-child:not(.toolbar-bottom-md) .toolbar-inner,
+.md.device-iphone-x .view > .toolbar:first-child:not(.toolbar-bottom-md) .toolbar-inner,
+.md.device-iphone-x .page > .toolbar:first-child:not(.toolbar-bottom-md) .toolbar-inner,
+.md.device-iphone-x .popup > .toolbar:first-child:not(.toolbar-bottom-md) .toolbar-inner,
+.md.device-iphone-x .panel > .toolbar:first-child:not(.toolbar-bottom-md) .toolbar-inner,
+.md.device-iphone-x .login-screen > .toolbar:first-child:not(.toolbar-bottom-md) .toolbar-inner {
+  bottom: 0;
+  top: constant(safe-area-inset-top);
+  top: env(safe-area-inset-top);
+}
+.md.device-iphone-x .views > .toolbar:first-child:not(.toolbar-bottom-md).tabbar-labels,
+.md.device-iphone-x .view > .toolbar:first-child:not(.toolbar-bottom-md).tabbar-labels,
+.md.device-iphone-x .page > .toolbar:first-child:not(.toolbar-bottom-md).tabbar-labels,
+.md.device-iphone-x .popup > .toolbar:first-child:not(.toolbar-bottom-md).tabbar-labels,
+.md.device-iphone-x .panel > .toolbar:first-child:not(.toolbar-bottom-md).tabbar-labels,
+.md.device-iphone-x .login-screen > .toolbar:first-child:not(.toolbar-bottom-md).tabbar-labels {
+  height: calc(72px + constant(safe-area-inset-top));
+  height: calc(72px + env(safe-area-inset-top));
+}
+.md.device-iphone-x .views > .toolbar-bottom-md,
+.md.device-iphone-x .view > .toolbar-bottom-md,
+.md.device-iphone-x .page > .toolbar-bottom-md,
+.md.device-iphone-x .popup > .toolbar-bottom-md,
+.md.device-iphone-x .panel > .toolbar-bottom-md,
+.md.device-iphone-x .login-screen > .toolbar-bottom-md {
+  height: calc(48px + constant(safe-area-inset-bottom));
+  height: calc(48px + env(safe-area-inset-bottom));
+}
+.md.device-iphone-x .views > .toolbar-bottom-md .toolbar-inner,
+.md.device-iphone-x .view > .toolbar-bottom-md .toolbar-inner,
+.md.device-iphone-x .page > .toolbar-bottom-md .toolbar-inner,
+.md.device-iphone-x .popup > .toolbar-bottom-md .toolbar-inner,
+.md.device-iphone-x .panel > .toolbar-bottom-md .toolbar-inner,
+.md.device-iphone-x .login-screen > .toolbar-bottom-md .toolbar-inner {
+  height: auto;
+  top: 0;
+  bottom: constant(safe-area-inset-bottom);
+  bottom: env(safe-area-inset-bottom);
+}
+.md.device-iphone-x .views > .toolbar-bottom-md.tabbar-labels,
+.md.device-iphone-x .view > .toolbar-bottom-md.tabbar-labels,
+.md.device-iphone-x .page > .toolbar-bottom-md.tabbar-labels,
+.md.device-iphone-x .popup > .toolbar-bottom-md.tabbar-labels,
+.md.device-iphone-x .panel > .toolbar-bottom-md.tabbar-labels,
+.md.device-iphone-x .login-screen > .toolbar-bottom-md.tabbar-labels {
+  height: calc(56px + constant(safe-area-inset-bottom));
+  height: calc(56px + env(safe-area-inset-bottom));
+}
+.md.device-iphone-x .toolbar-bottom-md ~ * .page-content,
+.md.device-iphone-x .toolbar-bottom-md ~ .page-content,
+.md.device-iphone-x .messagebar ~ * .page-content,
+.md.device-iphone-x .messagebar ~ .page-content {
+  padding-bottom: calc(48px + constant(safe-area-inset-bottom));
+  padding-bottom: calc(48px + env(safe-area-inset-bottom));
+}
+.md.device-iphone-x .toolbar-bottom-md.tabbar-labels ~ * .page-content,
+.md.device-iphone-x .toolbar-bottom-md.tabbar-labels ~ .page-content {
+  padding-bottom: calc(56px + constant(safe-area-inset-bottom));
+  padding-bottom: calc(56px + env(safe-area-inset-bottom));
+}
+@media (orientation: landscape) {
+  .md.device-iphone-x .ios-left-edge .toolbar-inner,
+  .md.device-iphone-x .ios-edges .toolbar-inner,
+  .md.device-iphone-x .popup .toolbar-inner,
+  .md.device-iphone-x .sheet-modal .toolbar-inner,
+  .md.device-iphone-x .panel-left .toolbar-inner {
+    padding-left: constant(safe-area-inset-left);
+    padding-left: env(safe-area-inset-left);
+  }
+  .md.device-iphone-x .ios-right-edge .toolbar-inner,
+  .md.device-iphone-x .ios-edges .toolbar-inner,
+  .md.device-iphone-x .popup .toolbar-inner,
+  .md.device-iphone-x .sheet-modal .toolbar-inner,
+  .md.device-iphone-x .panel-right .toolbar-inner {
+    padding-right: constant(safe-area-inset-right);
+    padding-right: env(safe-area-inset-right);
+  }
 }
 /* === Subnavbar === */
 .subnavbar {
@@ -2516,6 +2653,24 @@ html.with-statusbar.device-iphone-x .panel {
 .md .subnavbar.color-black {
   background: #000000;
 }
+@media (orientation: landscape) {
+  .md.device-iphone-x .ios-left-edge .subnavbar-inner,
+  .md.device-iphone-x .ios-edges .subnavbar-inner,
+  .md.device-iphone-x .popup .subnavbar-inner,
+  .md.device-iphone-x .sheet-modal .subnavbar-inner,
+  .md.device-iphone-x .panel-left .subnavbar-inner {
+    padding-left: calc(16px + constant(safe-area-inset-left));
+    padding-left: calc(16px + env(safe-area-inset-left));
+  }
+  .md.device-iphone-x .ios-right-edge .subnavbar-inner,
+  .md.device-iphone-x .ios-edges .subnavbar-inner,
+  .md.device-iphone-x .popup .subnavbar-inner,
+  .md.device-iphone-x .sheet-modal .subnavbar-inner,
+  .md.device-iphone-x .panel-right .subnavbar-inner {
+    padding-right: calc(16px + constant(safe-area-inset-right));
+    padding-right: calc(16px + env(safe-area-inset-right));
+  }
+}
 /* === Content Block === */
 .block {
   -webkit-box-sizing: border-box;
@@ -2640,7 +2795,7 @@ html.with-statusbar.device-iphone-x .panel {
 .block-footer {
   margin-top: 10px;
 }
-@media all and (min-width: 768px) {
+@media (min-width: 768px) {
   .block-strong.tablet-inset:before {
     display: none !important;
   }
@@ -2768,7 +2923,7 @@ html.with-statusbar.device-iphone-x .panel {
   margin-top: -25px;
   margin-bottom: 35px;
 }
-@media all and (min-width: 768px) {
+@media (min-width: 768px) {
   .ios .block.tablet-inset {
     margin-left: 15px;
     margin-right: 15px;
@@ -2887,7 +3042,7 @@ html.with-statusbar.device-iphone-x .panel {
     margin-right: calc(15px + env(safe-area-inset-right));
   }
 }
-@media (orientation: landscape) and all and (min-width: 768px) {
+@media (orientation: landscape) and (min-width: 768px) {
   .ios.device-iphone-x .ios-left-edge .block.tablet-inset:not(.no-ios-edges):not(.no-ios-left-edge),
   .ios.device-iphone-x .ios-edges .block.tablet-inset:not(.no-ios-edges):not(.no-ios-left-edge),
   .ios.device-iphone-x .popup .block.tablet-inset:not(.no-ios-edges):not(.no-ios-left-edge),
@@ -2897,7 +3052,7 @@ html.with-statusbar.device-iphone-x .panel {
     margin-left: calc(15px + env(safe-area-inset-left));
   }
 }
-@media (orientation: landscape) and all and (min-width: 768px) {
+@media (orientation: landscape) and (min-width: 768px) {
   .ios.device-iphone-x .ios-right-edge .block.tablet-inset:not(.no-ios-edges):not(.no-ios-right-edge),
   .ios.device-iphone-x .ios-edges .block.tablet-inset:not(.no-ios-edges):not(.no-ios-right-edge),
   .ios.device-iphone-x .popup .block.tablet-inset:not(.no-ios-edges):not(.no-ios-right-edge),
@@ -3023,7 +3178,7 @@ html.with-statusbar.device-iphone-x .panel {
   margin-top: -22px;
   margin-bottom: 32px;
 }
-@media all and (min-width: 768px) {
+@media (min-width: 768px) {
   .md .block.tablet-inset {
     margin-left: 16px;
     margin-right: 16px;
@@ -3039,6 +3194,114 @@ html.with-statusbar.device-iphone-x .panel {
 .md .theme-dark .block-header,
 .md .theme-dark .block-footer {
   color: rgba(255, 255, 255, 0.54);
+}
+@media (orientation: landscape) {
+  .md.device-iphone-x .ios-left-edge .block:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .ios-edges .block:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .popup .block:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .sheet-modal .block:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .panel-left .block:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .ios-left-edge .block-header,
+  .md.device-iphone-x .ios-edges .block-header,
+  .md.device-iphone-x .popup .block-header,
+  .md.device-iphone-x .sheet-modal .block-header,
+  .md.device-iphone-x .panel-left .block-header,
+  .md.device-iphone-x .ios-left-edge .block-footer,
+  .md.device-iphone-x .ios-edges .block-footer,
+  .md.device-iphone-x .popup .block-footer,
+  .md.device-iphone-x .sheet-modal .block-footer,
+  .md.device-iphone-x .panel-left .block-footer {
+    padding-left: calc(16px + constant(safe-area-inset-left));
+    padding-left: calc(16px + env(safe-area-inset-left));
+  }
+  .md.device-iphone-x .ios-left-edge .block:not(.no-ios-edges):not(.no-ios-left-edge) .block-header,
+  .md.device-iphone-x .ios-edges .block:not(.no-ios-edges):not(.no-ios-left-edge) .block-header,
+  .md.device-iphone-x .popup .block:not(.no-ios-edges):not(.no-ios-left-edge) .block-header,
+  .md.device-iphone-x .sheet-modal .block:not(.no-ios-edges):not(.no-ios-left-edge) .block-header,
+  .md.device-iphone-x .panel-left .block:not(.no-ios-edges):not(.no-ios-left-edge) .block-header,
+  .md.device-iphone-x .ios-left-edge .block:not(.no-ios-edges):not(.no-ios-left-edge) .block-footer,
+  .md.device-iphone-x .ios-edges .block:not(.no-ios-edges):not(.no-ios-left-edge) .block-footer,
+  .md.device-iphone-x .popup .block:not(.no-ios-edges):not(.no-ios-left-edge) .block-footer,
+  .md.device-iphone-x .sheet-modal .block:not(.no-ios-edges):not(.no-ios-left-edge) .block-footer,
+  .md.device-iphone-x .panel-left .block:not(.no-ios-edges):not(.no-ios-left-edge) .block-footer {
+    padding-left: 0;
+  }
+  .md.device-iphone-x .ios-left-edge .block.inset:not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .ios-edges .block.inset:not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .popup .block.inset:not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .sheet-modal .block.inset:not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .panel-left .block.inset:not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .ios-left-edge .block-title:not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .ios-edges .block-title:not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .popup .block-title:not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .sheet-modal .block-title:not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .panel-left .block-title:not(.no-ios-edges):not(.no-ios-left-edge) {
+    margin-left: calc(16px + constant(safe-area-inset-left));
+    margin-left: calc(16px + env(safe-area-inset-left));
+  }
+  .md.device-iphone-x .ios-right-edge .block:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .ios-edges .block:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .popup .block:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .sheet-modal .block:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .panel-right .block:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .ios-right-edge .block-header,
+  .md.device-iphone-x .ios-edges .block-header,
+  .md.device-iphone-x .popup .block-header,
+  .md.device-iphone-x .sheet-modal .block-header,
+  .md.device-iphone-x .panel-right .block-header,
+  .md.device-iphone-x .ios-right-edge .block-footer,
+  .md.device-iphone-x .ios-edges .block-footer,
+  .md.device-iphone-x .popup .block-footer,
+  .md.device-iphone-x .sheet-modal .block-footer,
+  .md.device-iphone-x .panel-right .block-footer {
+    padding-right: calc(16px + constant(safe-area-inset-right));
+    padding-right: calc(16px + env(safe-area-inset-right));
+  }
+  .md.device-iphone-x .ios-right-edge .block:not(.no-ios-edges):not(.no-ios-right-edge) .block-header,
+  .md.device-iphone-x .ios-edges .block:not(.no-ios-edges):not(.no-ios-right-edge) .block-header,
+  .md.device-iphone-x .popup .block:not(.no-ios-edges):not(.no-ios-right-edge) .block-header,
+  .md.device-iphone-x .sheet-modal .block:not(.no-ios-edges):not(.no-ios-right-edge) .block-header,
+  .md.device-iphone-x .panel-right .block:not(.no-ios-edges):not(.no-ios-right-edge) .block-header,
+  .md.device-iphone-x .ios-right-edge .block:not(.no-ios-edges):not(.no-ios-right-edge) .block-footer,
+  .md.device-iphone-x .ios-edges .block:not(.no-ios-edges):not(.no-ios-right-edge) .block-footer,
+  .md.device-iphone-x .popup .block:not(.no-ios-edges):not(.no-ios-right-edge) .block-footer,
+  .md.device-iphone-x .sheet-modal .block:not(.no-ios-edges):not(.no-ios-right-edge) .block-footer,
+  .md.device-iphone-x .panel-right .block:not(.no-ios-edges):not(.no-ios-right-edge) .block-footer {
+    padding-right: 0;
+  }
+  .md.device-iphone-x .ios-right-edge .block.inset:not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .ios-edges .block.inset:not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .popup .block.inset:not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .sheet-modal .block.inset:not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .panel-right .block.inset:not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .ios-right-edge .block-title:not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .ios-edges .block-title:not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .popup .block-title:not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .sheet-modal .block-title:not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .panel-right .block-title:not(.no-ios-edges):not(.no-ios-right-edge) {
+    margin-right: calc(16px + constant(safe-area-inset-right));
+    margin-right: calc(16px + env(safe-area-inset-right));
+  }
+}
+@media (orientation: landscape) and (min-width: 768px) {
+  .md.device-iphone-x .ios-left-edge .block.tablet-inset:not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .ios-edges .block.tablet-inset:not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .popup .block.tablet-inset:not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .sheet-modal .block.tablet-inset:not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .panel-left .block.tablet-inset:not(.no-ios-edges):not(.no-ios-left-edge) {
+    margin-left: calc(16px + constant(safe-area-inset-left));
+    margin-left: calc(16px + env(safe-area-inset-left));
+  }
+}
+@media (orientation: landscape) and (min-width: 768px) {
+  .md.device-iphone-x .ios-right-edge .block.tablet-inset:not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .ios-edges .block.tablet-inset:not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .popup .block.tablet-inset:not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .sheet-modal .block.tablet-inset:not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .panel-right .block.tablet-inset:not(.no-ios-edges):not(.no-ios-right-edge) {
+    margin-right: calc(16px + constant(safe-area-inset-right));
+    margin-right: calc(16px + env(safe-area-inset-right));
+  }
 }
 /* === List View === */
 .list {
@@ -3282,7 +3545,7 @@ html.with-statusbar.device-iphone-x .panel {
 .list.simple-list li {
   position: relative;
   white-space: nowrap;
-  text-oveflow: ellipsis;
+  text-overflow: ellipsis;
   max-width: 100%;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -3331,7 +3594,7 @@ html.with-statusbar.device-iphone-x .panel {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   white-space: nowrap;
-  text-oveflow: ellipsis;
+  text-overflow: ellipsis;
   max-width: 100%;
 }
 .list.links-list li:last-child a:after {
@@ -3683,6 +3946,10 @@ li.list-group-title:before {
   padding: 4px 15px;
   background: #f7f7f7;
   color: #8e8e93;
+}
+.ios .item-divider:after,
+.ios .list-group-title:after {
+  display: none !important;
 }
 .ios .list-group-title {
   margin-top: 0;
@@ -4563,6 +4830,10 @@ html.device-pixel-ratio-3 .ios li:last-child li .item-inner:after {
 .md .list-group-title:before {
   display: none !important;
 }
+.md .item-divider:after,
+.md .list-group-title:after {
+  display: none !important;
+}
 .md .list-group-title {
   margin-top: 0;
 }
@@ -4693,6 +4964,304 @@ html.device-pixel-ratio-3 .md li li:last-child .item-inner:after,
 html.device-pixel-ratio-3 .md li:last-child li .item-inner:after {
   -webkit-transform: scaleY(0.33);
   transform: scaleY(0.33);
+}
+@media (orientation: landscape) {
+  .md.device-iphone-x .ios-left-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge).simple-list li,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge).simple-list li,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge).simple-list li,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge).simple-list li,
+  .md.device-iphone-x .panel-left .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge).simple-list li {
+    padding-left: calc(16px + constant(safe-area-inset-left));
+    padding-left: calc(16px + env(safe-area-inset-left));
+  }
+  .md.device-iphone-x .ios-left-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge) .item-divider,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge) .item-divider,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge) .item-divider,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge) .item-divider,
+  .md.device-iphone-x .panel-left .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge) .item-divider,
+  .md.device-iphone-x .ios-left-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge) .list-group-title,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge) .list-group-title,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge) .list-group-title,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge) .list-group-title,
+  .md.device-iphone-x .panel-left .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge) .list-group-title {
+    padding-left: calc(16px + constant(safe-area-inset-left));
+    padding-left: calc(16px + env(safe-area-inset-left));
+  }
+  .md.device-iphone-x .ios-left-edge .list.inset:not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .ios-edges .list.inset:not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .popup .list.inset:not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .sheet-modal .list.inset:not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .panel-left .list.inset:not(.no-ios-edges):not(.no-ios-left-edge) {
+    margin-left: calc(16px + constant(safe-area-inset-left));
+    margin-left: calc(16px + env(safe-area-inset-left));
+  }
+  .md.device-iphone-x .ios-left-edge .list.inset:not(.no-ios-edges):not(.no-ios-left-edge) .block-header,
+  .md.device-iphone-x .ios-edges .list.inset:not(.no-ios-edges):not(.no-ios-left-edge) .block-header,
+  .md.device-iphone-x .popup .list.inset:not(.no-ios-edges):not(.no-ios-left-edge) .block-header,
+  .md.device-iphone-x .sheet-modal .list.inset:not(.no-ios-edges):not(.no-ios-left-edge) .block-header,
+  .md.device-iphone-x .panel-left .list.inset:not(.no-ios-edges):not(.no-ios-left-edge) .block-header,
+  .md.device-iphone-x .ios-left-edge .list.inset:not(.no-ios-edges):not(.no-ios-left-edge) .block-footer,
+  .md.device-iphone-x .ios-edges .list.inset:not(.no-ios-edges):not(.no-ios-left-edge) .block-footer,
+  .md.device-iphone-x .popup .list.inset:not(.no-ios-edges):not(.no-ios-left-edge) .block-footer,
+  .md.device-iphone-x .sheet-modal .list.inset:not(.no-ios-edges):not(.no-ios-left-edge) .block-footer,
+  .md.device-iphone-x .panel-left .list.inset:not(.no-ios-edges):not(.no-ios-left-edge) .block-footer {
+    padding-left: 15px;
+  }
+  .md.device-iphone-x .ios-left-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge) .item-content,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge) .item-content,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge) .item-content,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge) .item-content,
+  .md.device-iphone-x .panel-left .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge) .item-content {
+    padding-left: calc(16px + constant(safe-area-inset-left));
+    padding-left: calc(16px + env(safe-area-inset-left));
+  }
+  .md.device-iphone-x .ios-left-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge).simple-list li:after,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge).simple-list li:after,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge).simple-list li:after,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge).simple-list li:after,
+  .md.device-iphone-x .panel-left .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge).simple-list li:after {
+    left: calc(16px + constant(safe-area-inset-left));
+    left: calc(16px + env(safe-area-inset-left));
+  }
+  .md.device-iphone-x .ios-left-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge).links-list a,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge).links-list a,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge).links-list a,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge).links-list a,
+  .md.device-iphone-x .panel-left .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge).links-list a {
+    padding-left: calc(16px + constant(safe-area-inset-left));
+    padding-left: calc(16px + env(safe-area-inset-left));
+  }
+  .md.device-iphone-x .ios-left-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge).links-list a:after,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge).links-list a:after,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge).links-list a:after,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge).links-list a:after,
+  .md.device-iphone-x .panel-left .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-left-edge).links-list a:after {
+    left: calc(16px + constant(safe-area-inset-left));
+    left: calc(16px + env(safe-area-inset-left));
+  }
+  .md.device-iphone-x .ios-right-edge .list.inset:not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .ios-edges .list.inset:not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .popup .list.inset:not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .sheet-modal .list.inset:not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .panel-right .list.inset:not(.no-ios-edges):not(.no-ios-right-edge) {
+    margin-right: calc(16px + constant(safe-area-inset-right));
+    margin-right: calc(16px + env(safe-area-inset-right));
+  }
+  .md.device-iphone-x .ios-right-edge .list.inset:not(.no-ios-edges):not(.no-ios-right-edge) .block-header,
+  .md.device-iphone-x .ios-edges .list.inset:not(.no-ios-edges):not(.no-ios-right-edge) .block-header,
+  .md.device-iphone-x .popup .list.inset:not(.no-ios-edges):not(.no-ios-right-edge) .block-header,
+  .md.device-iphone-x .sheet-modal .list.inset:not(.no-ios-edges):not(.no-ios-right-edge) .block-header,
+  .md.device-iphone-x .panel-right .list.inset:not(.no-ios-edges):not(.no-ios-right-edge) .block-header,
+  .md.device-iphone-x .ios-right-edge .list.inset:not(.no-ios-edges):not(.no-ios-right-edge) .block-footer,
+  .md.device-iphone-x .ios-edges .list.inset:not(.no-ios-edges):not(.no-ios-right-edge) .block-footer,
+  .md.device-iphone-x .popup .list.inset:not(.no-ios-edges):not(.no-ios-right-edge) .block-footer,
+  .md.device-iphone-x .sheet-modal .list.inset:not(.no-ios-edges):not(.no-ios-right-edge) .block-footer,
+  .md.device-iphone-x .panel-right .list.inset:not(.no-ios-edges):not(.no-ios-right-edge) .block-footer {
+    padding-right: 16px;
+  }
+  .md.device-iphone-x .ios-right-edge .list.tablet-inset:not(.no-ios-edges):not(.no-ios-right-edge) .block-header,
+  .md.device-iphone-x .ios-edges .list.tablet-inset:not(.no-ios-edges):not(.no-ios-right-edge) .block-header,
+  .md.device-iphone-x .popup .list.tablet-inset:not(.no-ios-edges):not(.no-ios-right-edge) .block-header,
+  .md.device-iphone-x .sheet-modal .list.tablet-inset:not(.no-ios-edges):not(.no-ios-right-edge) .block-header,
+  .md.device-iphone-x .panel-right .list.tablet-inset:not(.no-ios-edges):not(.no-ios-right-edge) .block-header,
+  .md.device-iphone-x .ios-right-edge .list.tablet-inset:not(.no-ios-edges):not(.no-ios-right-edge) .block-footer,
+  .md.device-iphone-x .ios-edges .list.tablet-inset:not(.no-ios-edges):not(.no-ios-right-edge) .block-footer,
+  .md.device-iphone-x .popup .list.tablet-inset:not(.no-ios-edges):not(.no-ios-right-edge) .block-footer,
+  .md.device-iphone-x .sheet-modal .list.tablet-inset:not(.no-ios-edges):not(.no-ios-right-edge) .block-footer,
+  .md.device-iphone-x .panel-right .list.tablet-inset:not(.no-ios-edges):not(.no-ios-right-edge) .block-footer {
+    padding-right: 16px;
+  }
+  .md.device-iphone-x .ios-right-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-divider,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-divider,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-divider,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-divider,
+  .md.device-iphone-x .panel-right .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-divider,
+  .md.device-iphone-x .ios-right-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .list-group-title,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .list-group-title,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .list-group-title,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .list-group-title,
+  .md.device-iphone-x .panel-right .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .list-group-title {
+    padding-right: calc(16px + constant(safe-area-inset-right));
+    padding-right: calc(16px + env(safe-area-inset-right));
+  }
+  .md.device-iphone-x .ios-right-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).simple-list li,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).simple-list li,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).simple-list li,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).simple-list li,
+  .md.device-iphone-x .panel-right .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).simple-list li {
+    padding-right: calc(16px + constant(safe-area-inset-right));
+    padding-right: calc(16px + env(safe-area-inset-right));
+  }
+  .md.device-iphone-x .ios-right-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-link .item-inner,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-link .item-inner,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-link .item-inner,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-link .item-inner,
+  .md.device-iphone-x .panel-right .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-link .item-inner,
+  .md.device-iphone-x .ios-right-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).links-list a,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).links-list a,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).links-list a,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).links-list a,
+  .md.device-iphone-x .panel-right .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).links-list a {
+    background-position: calc(100% - 16px - constant(safe-area-inset-right)) center;
+    background-position: calc(100% - 16px - env(safe-area-inset-right)) center;
+  }
+  .md.device-iphone-x .ios-right-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-inner,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-inner,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-inner,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-inner,
+  .md.device-iphone-x .panel-right .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-inner {
+    padding-right: calc(16px + constant(safe-area-inset-right));
+    padding-right: calc(16px + env(safe-area-inset-right));
+  }
+  .md.device-iphone-x .ios-right-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-link .item-inner,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-link .item-inner,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-link .item-inner,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-link .item-inner,
+  .md.device-iphone-x .panel-right .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-link .item-inner {
+    padding-right: calc(42px + constant(safe-area-inset-right));
+    padding-right: calc(42px + env(safe-area-inset-right));
+  }
+  .md.device-iphone-x .ios-right-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list .item-link .item-inner,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list .item-link .item-inner,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list .item-link .item-inner,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list .item-link .item-inner,
+  .md.device-iphone-x .panel-right .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list .item-link .item-inner,
+  .md.device-iphone-x .ios-right-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) li.media-item .item-link .item-inner,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) li.media-item .item-link .item-inner,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) li.media-item .item-link .item-inner,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) li.media-item .item-link .item-inner,
+  .md.device-iphone-x .panel-right .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) li.media-item .item-link .item-inner {
+    padding-right: calc(16px + constant(safe-area-inset-right));
+    padding-right: calc(16px + env(safe-area-inset-right));
+  }
+  .md.device-iphone-x .ios-right-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).links-list a,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).links-list a,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).links-list a,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).links-list a,
+  .md.device-iphone-x .panel-right .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).links-list a {
+    padding-right: calc(42px + constant(safe-area-inset-right));
+    padding-right: calc(42px + env(safe-area-inset-right));
+  }
+  .md.device-iphone-x .ios-right-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list.chevron-center .item-link .item-inner,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list.chevron-center .item-link .item-inner,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list.chevron-center .item-link .item-inner,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list.chevron-center .item-link .item-inner,
+  .md.device-iphone-x .panel-right .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list.chevron-center .item-link .item-inner,
+  .md.device-iphone-x .ios-right-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list .chevron-center .item-link .item-inner,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list .chevron-center .item-link .item-inner,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list .chevron-center .item-link .item-inner,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list .chevron-center .item-link .item-inner,
+  .md.device-iphone-x .panel-right .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list .chevron-center .item-link .item-inner,
+  .md.device-iphone-x .ios-right-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list .item-link.chevron-center .item-inner,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list .item-link.chevron-center .item-inner,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list .item-link.chevron-center .item-inner,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list .item-link.chevron-center .item-inner,
+  .md.device-iphone-x .panel-right .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list .item-link.chevron-center .item-inner,
+  .md.device-iphone-x .ios-right-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) li.media-item.chevron-center .item-link .item-inner,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) li.media-item.chevron-center .item-link .item-inner,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) li.media-item.chevron-center .item-link .item-inner,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) li.media-item.chevron-center .item-link .item-inner,
+  .md.device-iphone-x .panel-right .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) li.media-item.chevron-center .item-link .item-inner,
+  .md.device-iphone-x .ios-right-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) li.media-item .item-link.chevron-center .item-inner,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) li.media-item .item-link.chevron-center .item-inner,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) li.media-item .item-link.chevron-center .item-inner,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) li.media-item .item-link.chevron-center .item-inner,
+  .md.device-iphone-x .panel-right .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) li.media-item .item-link.chevron-center .item-inner,
+  .md.device-iphone-x .ios-right-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) li.media-item .chevron-center .item-link .item-inner,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) li.media-item .chevron-center .item-link .item-inner,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) li.media-item .chevron-center .item-link .item-inner,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) li.media-item .chevron-center .item-link .item-inner,
+  .md.device-iphone-x .panel-right .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) li.media-item .chevron-center .item-link .item-inner {
+    padding-right: calc(42px + constant(safe-area-inset-right));
+    padding-right: calc(42px + env(safe-area-inset-right));
+  }
+  .md.device-iphone-x .ios-right-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-link.no-chevron .item-inner,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-link.no-chevron .item-inner,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-link.no-chevron .item-inner,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-link.no-chevron .item-inner,
+  .md.device-iphone-x .panel-right .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-link.no-chevron .item-inner,
+  .md.device-iphone-x .ios-right-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).no-chevron .item-link .item-inner,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).no-chevron .item-link .item-inner,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).no-chevron .item-link .item-inner,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).no-chevron .item-link .item-inner,
+  .md.device-iphone-x .panel-right .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).no-chevron .item-link .item-inner,
+  .md.device-iphone-x .ios-right-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .no-chevron .item-link .item-inner,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .no-chevron .item-link .item-inner,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .no-chevron .item-link .item-inner,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .no-chevron .item-link .item-inner,
+  .md.device-iphone-x .panel-right .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .no-chevron .item-link .item-inner,
+  .md.device-iphone-x .ios-right-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).links-list.no-chevron a,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).links-list.no-chevron a,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).links-list.no-chevron a,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).links-list.no-chevron a,
+  .md.device-iphone-x .panel-right .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).links-list.no-chevron a,
+  .md.device-iphone-x .ios-right-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).links-list a.no-chevron,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).links-list a.no-chevron,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).links-list a.no-chevron,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).links-list a.no-chevron,
+  .md.device-iphone-x .panel-right .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).links-list a.no-chevron,
+  .md.device-iphone-x .ios-right-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).links-list .no-chevron a,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).links-list .no-chevron a,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).links-list .no-chevron a,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).links-list .no-chevron a,
+  .md.device-iphone-x .panel-right .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).links-list .no-chevron a {
+    padding-right: calc(16px + constant(safe-area-inset-right));
+    padding-right: calc(16px + env(safe-area-inset-right));
+  }
+  .md.device-iphone-x .ios-right-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list.no-chevron .item-link .item-title-row,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list.no-chevron .item-link .item-title-row,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list.no-chevron .item-link .item-title-row,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list.no-chevron .item-link .item-title-row,
+  .md.device-iphone-x .panel-right .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list.no-chevron .item-link .item-title-row,
+  .md.device-iphone-x .ios-right-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list .no-chevron .item-link .item-title-row,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list .no-chevron .item-link .item-title-row,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list .no-chevron .item-link .item-title-row,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list .no-chevron .item-link .item-title-row,
+  .md.device-iphone-x .panel-right .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).media-list .no-chevron .item-link .item-title-row,
+  .md.device-iphone-x .ios-right-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) li.media-item.no-chevron .item-link .item-title-row,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) li.media-item.no-chevron .item-link .item-title-row,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) li.media-item.no-chevron .item-link .item-title-row,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) li.media-item.no-chevron .item-link .item-title-row,
+  .md.device-iphone-x .panel-right .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) li.media-item.no-chevron .item-link .item-title-row,
+  .md.device-iphone-x .ios-right-edge .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).no-chevron li.media-item .item-link .item-title-row,
+  .md.device-iphone-x .ios-edges .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).no-chevron li.media-item .item-link .item-title-row,
+  .md.device-iphone-x .popup .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).no-chevron li.media-item .item-link .item-title-row,
+  .md.device-iphone-x .sheet-modal .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).no-chevron li.media-item .item-link .item-title-row,
+  .md.device-iphone-x .panel-right .list:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge).no-chevron li.media-item .item-link .item-title-row {
+    padding-right: 0;
+  }
+}
+@media (orientation: landscape) and (min-width: 768px) {
+  .md.device-iphone-x .ios-left-edge .list.tablet-inset:not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .ios-edges .list.tablet-inset:not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .popup .list.tablet-inset:not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .sheet-modal .list.tablet-inset:not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .panel-left .list.tablet-inset:not(.no-ios-edges):not(.no-ios-left-edge) {
+    margin-left: calc(16px + constant(safe-area-inset-left));
+    margin-left: calc(16px + env(safe-area-inset-left));
+  }
+  .md.device-iphone-x .ios-left-edge .list.tablet-inset:not(.no-ios-edges):not(.no-ios-left-edge) .block-header,
+  .md.device-iphone-x .ios-edges .list.tablet-inset:not(.no-ios-edges):not(.no-ios-left-edge) .block-header,
+  .md.device-iphone-x .popup .list.tablet-inset:not(.no-ios-edges):not(.no-ios-left-edge) .block-header,
+  .md.device-iphone-x .sheet-modal .list.tablet-inset:not(.no-ios-edges):not(.no-ios-left-edge) .block-header,
+  .md.device-iphone-x .panel-left .list.tablet-inset:not(.no-ios-edges):not(.no-ios-left-edge) .block-header,
+  .md.device-iphone-x .ios-left-edge .list.tablet-inset:not(.no-ios-edges):not(.no-ios-left-edge) .block-footer,
+  .md.device-iphone-x .ios-edges .list.tablet-inset:not(.no-ios-edges):not(.no-ios-left-edge) .block-footer,
+  .md.device-iphone-x .popup .list.tablet-inset:not(.no-ios-edges):not(.no-ios-left-edge) .block-footer,
+  .md.device-iphone-x .sheet-modal .list.tablet-inset:not(.no-ios-edges):not(.no-ios-left-edge) .block-footer,
+  .md.device-iphone-x .panel-left .list.tablet-inset:not(.no-ios-edges):not(.no-ios-left-edge) .block-footer {
+    padding-left: 15px;
+  }
+}
+@media (orientation: landscape) and (min-width: 768px) {
+  .md.device-iphone-x .ios-right-edge .list.tablet-inset:not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .ios-edges .list.tablet-inset:not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .popup .list.tablet-inset:not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .sheet-modal .list.tablet-inset:not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .panel-right .list.tablet-inset:not(.no-ios-edges):not(.no-ios-right-edge) {
+    margin-right: calc(16px + constant(safe-area-inset-right));
+    margin-right: calc(16px + env(safe-area-inset-right));
+  }
 }
 .md .theme-dark .list ul:before,
 .list.md .theme-dark ul:before {
@@ -5092,6 +5661,9 @@ button {
   border-radius: 5px 0 0 5px;
   border-left-width: 1px;
   border-left-style: solid;
+}
+.ios .segmented .button:first-child.button-small {
+  border-left-width: 2px;
 }
 .ios .segmented .button:last-child {
   border-radius: 0 5px 5px 0;
@@ -5649,7 +6221,7 @@ button {
 }
 .md .button {
   color: #2196f3;
-  border-radius: 2px;
+  border-radius: 4px;
   line-height: 36px;
   height: 36px;
   text-transform: uppercase;
@@ -5660,6 +6232,8 @@ button {
   transition-duration: 300ms;
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
+  font-weight: 500;
+  letter-spacing: 0.03em;
 }
 .md .button.active-state {
   background: rgba(0, 0, 0, 0.1);
@@ -5681,19 +6255,19 @@ button {
 .md .button.button-big-md {
   height: 48px;
   line-height: 48px;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 .md .button.button-round,
 .md .button.button-round-md {
   border-radius: 36px;
 }
 .md .button.button-outline {
-  border: 1px solid #2196f3;
-  line-height: 34px;
+  border: 2px solid #2196f3;
+  line-height: 32px;
 }
 .md .button.button-outline.button-big,
 .md .button.button-outline.button-big-md {
-  line-height: 46px;
+  line-height: 44px;
 }
 .md .button.button-small,
 .md .button.button-small-md {
@@ -5706,7 +6280,7 @@ button {
 .md .button.button-small.button-outline,
 .md .button.button-small-md.button-outline {
   border-width: 2px;
-  line-height: 25px;
+  line-height: 24px;
 }
 .md .button > i.icon + span,
 .md .button > span:not(.ripple-wave) + span,
@@ -5736,7 +6310,7 @@ button {
   background: rgba(255, 255, 255, 0.15);
 }
 .md .segmented {
-  border-radius: 3px;
+  border-radius: 4px;
 }
 .md .segmented.segmented-raised {
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -5747,23 +6321,24 @@ button {
 }
 .md .segmented .button {
   border-radius: 0;
+  min-width: 0;
   border-left: 1px solid rgba(0, 0, 0, 0.1);
 }
 .md .segmented .button:first-child {
-  border-radius: 3px 0 0 3px;
+  border-radius: 4px 0 0 4px;
   border-left: none;
 }
 .md .segmented .button.button-outline {
-  border: 1px solid #2196f3;
+  border: 2px solid #2196f3;
 }
 .md .segmented .button.button-outline:nth-child(n + 2) {
   border-left: none;
 }
 .md .segmented .button:last-child {
-  border-radius: 0 3px 3px 0;
+  border-radius: 0 4px 4px 0;
 }
 .md .segmented .button:first-child:last-child {
-  border-radius: 5px;
+  border-radius: 4px;
 }
 .md .segmented .button.button-round:first-child {
   border-radius: 36px 0 0 36px;
@@ -7088,12 +7663,12 @@ html.with-modal-dialog .page-content {
 .md .dialog {
   width: 280px;
   margin-left: -140px;
-  border-radius: 3px;
+  border-radius: 4px;
   color: #757575;
   background: #fff;
   font-size: 16px;
-  -webkit-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
-  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  -webkit-box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
 }
 .md .dialog.modal-in {
   opacity: 1;
@@ -7165,7 +7740,7 @@ html.with-modal-dialog .page-content {
   box-sizing: border-box;
   vertical-align: middle;
   color: #2196f3;
-  border-radius: 2px;
+  border-radius: 4px;
   line-height: 36px;
   height: 36px;
   text-transform: uppercase;
@@ -7176,6 +7751,8 @@ html.with-modal-dialog .page-content {
   transition-duration: 300ms;
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
+  letter-spacing: 0.03em;
+  font-weight: 500;
 }
 input[type="submit"].md .dialog-button,
 input[type="button"].md .dialog-button {
@@ -7336,7 +7913,7 @@ input[type="button"].md .dialog-button {
     transform: translate3d(0, 100vh, 0);
   }
 }
-@media all and (max-width: 629px), (max-height: 629px) {
+@media (max-width: 629px), (max-height: 629px) {
   html.with-statusbar .popup-backdrop {
     z-index: 9500;
   }
@@ -7357,7 +7934,7 @@ input[type="button"].md .dialog-button {
     top: 24px;
   }
 }
-@media all and (min-width: 630px), (min-height: 630px) {
+@media (min-width: 630px), (min-height: 630px) {
   html.with-statusbar.device-ios .popup-tablet-fullscreen,
   html.with-statusbar.ios:not(.device-ios):not(.device-android) .popup-tablet-fullscreen {
     height: calc(100% - 20px);
@@ -7755,9 +8332,9 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .login-screen {
 }
 .md .popover {
   background: #fff;
-  border-radius: 3px;
-  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  border-radius: 4px;
+  -webkit-box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
   -webkit-transform: scale(0.85, 0.6);
   transform: scale(0.85, 0.6);
   -webkit-transition-property: opacity, border-radius, -webkit-transform;
@@ -7807,54 +8384,6 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .login-screen {
 .md .popover-on-bottom {
   -webkit-transform-origin: center top;
   transform-origin: center top;
-}
-.md .popover-from-fab {
-  -webkit-transform-origin: center center;
-  transform-origin: center center;
-  -webkit-transform: scale(0.7);
-  transform: scale(0.7);
-  border-radius: 50%;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-}
-.md .popover-from-fab.modal-in {
-  border-radius: 0;
-  -webkit-transform: scale(1);
-  transform: scale(1);
-  -webkit-transition-delay: 200ms;
-  transition-delay: 200ms;
-  -webkit-transition-duration: 200ms;
-  transition-duration: 200ms;
-}
-.md .popover-from-fab.modal-out {
-  border-radius: 50%;
-  -webkit-transform: scale(0.7);
-  transform: scale(0.7);
-  -webkit-transition-delay: 0ms;
-  transition-delay: 0ms;
-  -webkit-transition-duration: 100ms;
-  transition-duration: 100ms;
-}
-.md .popover-from-fab .list {
-  margin: 0;
-}
-.md .popover-from-fab .list:first-child ul {
-  border-radius: 0;
-}
-.md .popover-from-fab .list:first-child li:first-child a {
-  border-radius: 0;
-}
-.md .popover-from-fab .list:last-child ul {
-  border-radius: 0;
-}
-.md .popover-from-fab .list:last-child li:last-child a {
-  border-radius: 0;
-}
-.md .popover-from-fab .list:first-child:last-child li:first-child:last-child a,
-.md .popover-from-fab .list:first-child:last-child ul {
-  border-radius: 0;
 }
 .md .popover-from-actions .list {
   margin: 0;
@@ -8420,6 +8949,10 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .login-screen {
 .md .actions-button.color-black .actions-button-text {
   color: #000000;
 }
+.md.device-iphone-x .actions-modal.modal-in {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
 /* === Sheet Modal === */
 .sheet-backdrop {
   position: absolute;
@@ -8523,7 +9056,8 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .login-screen {
   -webkit-transform: scaleY(0.33);
   transform: scaleY(0.33);
 }
-.ios.device-iphone-x .sheet-modal .toolbar ~ .sheet-modal-inner .page-content {
+.ios.device-iphone-x .sheet-modal .toolbar ~ .sheet-modal-inner .page-content,
+.ios.device-iphone-x .sheet-modal .sheet-modal-inner > .page-content {
   padding-bottom: constant(safe-area-inset-bottom);
   padding-bottom: env(safe-area-inset-bottom);
 }
@@ -8551,7 +9085,7 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .login-screen {
 .md .sheet-modal .toolbar + .sheet-modal-inner {
   height: calc(100% - 48px);
 }
-.md .sheet-modal .toolbar a.link {
+.md .sheet-modal .toolbar a.link:not(.tab-link) {
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
@@ -8559,26 +9093,30 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .login-screen {
 .md .sheet-modal .toolbar:not(.toolbar-bottom-md):not(.messagebar) ~ .sheet-modal-inner .page-content {
   padding-top: 0;
 }
+.md.device-iphone-x .sheet-modal .toolbar ~ .sheet-modal-inner .page-content,
+.md.device-iphone-x .sheet-modal .sheet-modal-inner > .page-content {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
 .md .theme-dark .sheet-modal {
   background-color: #202020;
 }
 /* === Toast === */
 .toast {
-  -webkit-transition-duration: 450ms;
-  transition-duration: 450ms;
   -webkit-transition-property: opacity, -webkit-transform;
   transition-property: opacity, -webkit-transform;
   transition-property: transform, opacity;
   transition-property: transform, opacity, -webkit-transform;
   position: absolute;
-  width: 100%;
   max-width: 568px;
-  left: 0;
   z-index: 20000;
   color: #fff;
   font-size: 14px;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+}
+.toast.modal-in {
+  opacity: 1;
 }
 .toast .toast-content {
   display: -webkit-box;
@@ -8627,54 +9165,11 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .login-screen {
 }
 .toast.toast-center {
   top: 50%;
-  left: 50%;
-  width: auto;
   opacity: 0;
-  -webkit-transform: translate3d(-50%, -50%, 0);
-  transform: translate3d(-50%, -50%, 0);
-}
-.toast.toast-center.modal-in {
-  -webkit-transform: translate3d(-50%, -50%, 0);
-  transform: translate3d(-50%, -50%, 0);
-  opacity: 1;
-}
-.toast.toast-top {
-  top: 0;
-  -webkit-transform: translate3d(0, -100%, 0);
-  transform: translate3d(0, -100%, 0);
-}
-.toast.toast-top.modal-in {
-  -webkit-transform: translate3d(0, 0%, 0);
-  transform: translate3d(0, 0%, 0);
-  opacity: 1;
-}
-.toast.toast-bottom {
-  bottom: 0;
-  -webkit-transform: translate3d(0, 100%, 0);
-  transform: translate3d(0, 100%, 0);
-}
-.toast.toast-bottom.modal-in {
-  -webkit-transform: translate3d(0, 0%, 0);
-  transform: translate3d(0, 0%, 0);
-  opacity: 1;
-}
-@media (min-width: 569px) {
-  .toast {
-    left: 50%;
-    margin-left: -284px;
-  }
-  .toast.toast-center {
-    margin-left: 0;
-  }
 }
 @media (min-width: 1024px) {
   .toast {
     opacity: 0;
-    margin-left: auto;
-    width: auto;
-  }
-  .toast.toast-center {
-    margin-left: 0;
   }
 }
 html.with-statusbar.device-ios .toast-top,
@@ -8690,8 +9185,12 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .toast-top {
   margin-top: 24px;
 }
 .ios .toast {
+  -webkit-transition-duration: 450ms;
+  transition-duration: 450ms;
   background: rgba(0, 0, 0, 0.75);
   opacity: 0;
+  width: 100%;
+  left: 0;
 }
 @supports ((-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))) {
   .ios .toast {
@@ -8701,7 +9200,45 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .toast-top {
   }
 }
 .ios .toast.toast-center {
+  width: auto;
+  left: 50%;
   border-radius: 8px;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+}
+.ios .toast.toast-center.modal-in {
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+  opacity: 1;
+}
+.ios .toast.toast-top {
+  top: 0;
+  -webkit-transform: translate3d(0, -100%, 0);
+  transform: translate3d(0, -100%, 0);
+}
+.ios .toast.toast-top.modal-in {
+  -webkit-transform: translate3d(0, 0%, 0);
+  transform: translate3d(0, 0%, 0);
+  opacity: 1;
+}
+.ios .toast.toast-bottom {
+  bottom: 0;
+  -webkit-transform: translate3d(0, 100%, 0);
+  transform: translate3d(0, 100%, 0);
+}
+.ios .toast.toast-bottom.modal-in {
+  -webkit-transform: translate3d(0, 0%, 0);
+  transform: translate3d(0, 0%, 0);
+  opacity: 1;
+}
+@media (min-width: 569px) {
+  .ios .toast {
+    left: 50%;
+    margin-left: -284px;
+  }
+  .ios .toast.toast-center {
+    margin-left: 0;
+  }
 }
 @media (min-width: 569px) {
   .ios .toast {
@@ -8715,6 +9252,10 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .toast-top {
   }
 }
 @media (min-width: 1024px) {
+  .ios .toast {
+    margin-left: 0;
+    width: auto;
+  }
   .ios .toast.toast-bottom,
   .ios .toast.toast-top {
     left: 15px;
@@ -8740,18 +9281,61 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .toast-top {
   }
 }
 .md .toast {
+  -webkit-transition-duration: 200ms;
+  transition-duration: 200ms;
+  border-radius: 4px;
   background: #323232;
+  opacity: 0;
+  left: 8px;
+  width: calc(100% - 16px);
+  -webkit-transform: scale(0.9);
+  transform: scale(0.9);
+}
+.md .toast.modal-in {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  opacity: 1;
+}
+.md .toast.modal-out {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  opacity: 0;
 }
 .md .toast.toast-center {
-  border-radius: 2px;
+  left: 50%;
+  width: auto;
   background: rgba(0, 0, 0, 0.75);
+  -webkit-transform: scale(0.9) translate3d(-55%, -55%, 0);
+  transform: scale(0.9) translate3d(-55%, -55%, 0);
 }
-@media (min-width: 569px) {
+.md .toast.toast-center.modal-in {
+  -webkit-transform: scale(1) translate3d(-50%, -50%, 0);
+  transform: scale(1) translate3d(-50%, -50%, 0);
+}
+.md .toast.toast-center.modal-out {
+  -webkit-transform: scale(1) translate3d(-50%, -50%, 0);
+  transform: scale(1) translate3d(-50%, -50%, 0);
+}
+.md .toast.toast-bottom {
+  bottom: 8px;
+}
+.md .toast.toast-top {
+  top: 8px;
+}
+@media (min-width: 584px) {
   .md .toast {
-    border-radius: 2px;
+    left: 50%;
+    margin-left: -284px;
+  }
+  .md .toast.toast-center {
+    margin-left: 0;
   }
 }
 @media (min-width: 1024px) {
+  .md .toast {
+    margin-left: 0;
+    width: auto;
+  }
   .md .toast.toast-bottom,
   .md .toast.toast-top {
     left: 24px;
@@ -8771,6 +9355,18 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .toast-top {
   margin-bottom: -8px;
   margin-left: 16px;
   margin-right: -8px;
+}
+@media (max-width: 568px) {
+  .md.device-iphone-x .toast-bottom .toast-content {
+    padding-bottom: calc(14px + constant(safe-area-inset-bottom));
+    padding-bottom: calc(14px + env(safe-area-inset-bottom));
+  }
+}
+@media (min-width: 1024px) {
+  .md.device-iphone-x .toast-bottom.modal-in {
+    margin-bottom: constant(safe-area-inset-bottom);
+    margin-bottom: env(safe-area-inset-bottom);
+  }
 }
 /* === Preloader === */
 .preloader {
@@ -9270,79 +9866,29 @@ body > .progressbar-infinite,
   -webkit-transform-origin: center top !important;
   transform-origin: center top !important;
 }
-html.with-statusbar.device-ios body > .progressbar,
-html.with-statusbar.device-ios .view > .progressbar,
-html.with-statusbar.device-ios .views > .progressbar,
-html.with-statusbar.device-ios .page > .progressbar,
-html.with-statusbar.device-ios .panel > .progressbar,
-html.with-statusbar.device-ios .popup > .progressbar,
-html.with-statusbar.device-ios .framework7-root > .progressbar,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) body > .progressbar,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) .view > .progressbar,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) .views > .progressbar,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) .page > .progressbar,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) .panel > .progressbar,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) .popup > .progressbar,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) .framework7-root > .progressbar,
-html.with-statusbar.device-ios body > .progressbar-infinite,
-html.with-statusbar.device-ios .view > .progressbar-infinite,
-html.with-statusbar.device-ios .views > .progressbar-infinite,
-html.with-statusbar.device-ios .page > .progressbar-infinite,
-html.with-statusbar.device-ios .panel > .progressbar-infinite,
-html.with-statusbar.device-ios .popup > .progressbar-infinite,
-html.with-statusbar.device-ios .framework7-root > .progressbar-infinite,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) body > .progressbar-infinite,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) .view > .progressbar-infinite,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) .views > .progressbar-infinite,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) .page > .progressbar-infinite,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) .panel > .progressbar-infinite,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) .popup > .progressbar-infinite,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) .framework7-root > .progressbar-infinite {
+.with-statusbar.device-ios body > .progressbar,
+.with-statusbar.ios:not(.device-ios):not(.device-android) body > .progressbar,
+.with-statusbar.device-ios .framework7-root > .progressbar,
+.with-statusbar.ios:not(.device-ios):not(.device-android) .framework7-root > .progressbar,
+.with-statusbar.device-ios body > .progressbar-infinite,
+.with-statusbar.ios:not(.device-ios):not(.device-android) body > .progressbar-infinite,
+.with-statusbar.device-ios .framework7-root > .progressbar-infinite,
+.with-statusbar.ios:not(.device-ios):not(.device-android) .framework7-root > .progressbar-infinite {
   top: 20px;
 }
-html.with-statusbar.device-android body > .progressbar,
-html.with-statusbar.device-android .view > .progressbar,
-html.with-statusbar.device-android .views > .progressbar,
-html.with-statusbar.device-android .page > .progressbar,
-html.with-statusbar.device-android .panel > .progressbar,
-html.with-statusbar.device-android .popup > .progressbar,
-html.with-statusbar.device-android .framework7-root > .progressbar,
-html.with-statusbar.md:not(.device-ios):not(.device-android) body > .progressbar,
-html.with-statusbar.md:not(.device-ios):not(.device-android) .view > .progressbar,
-html.with-statusbar.md:not(.device-ios):not(.device-android) .views > .progressbar,
-html.with-statusbar.md:not(.device-ios):not(.device-android) .page > .progressbar,
-html.with-statusbar.md:not(.device-ios):not(.device-android) .panel > .progressbar,
-html.with-statusbar.md:not(.device-ios):not(.device-android) .popup > .progressbar,
-html.with-statusbar.md:not(.device-ios):not(.device-android) .framework7-root > .progressbar,
-html.with-statusbar.device-android body > .progressbar-infinite,
-html.with-statusbar.device-android .view > .progressbar-infinite,
-html.with-statusbar.device-android .views > .progressbar-infinite,
-html.with-statusbar.device-android .page > .progressbar-infinite,
-html.with-statusbar.device-android .panel > .progressbar-infinite,
-html.with-statusbar.device-android .popup > .progressbar-infinite,
-html.with-statusbar.device-android .framework7-root > .progressbar-infinite,
-html.with-statusbar.md:not(.device-ios):not(.device-android) body > .progressbar-infinite,
-html.with-statusbar.md:not(.device-ios):not(.device-android) .view > .progressbar-infinite,
-html.with-statusbar.md:not(.device-ios):not(.device-android) .views > .progressbar-infinite,
-html.with-statusbar.md:not(.device-ios):not(.device-android) .page > .progressbar-infinite,
-html.with-statusbar.md:not(.device-ios):not(.device-android) .panel > .progressbar-infinite,
-html.with-statusbar.md:not(.device-ios):not(.device-android) .popup > .progressbar-infinite,
-html.with-statusbar.md:not(.device-ios):not(.device-android) .framework7-root > .progressbar-infinite {
+.with-statusbar.device-android body > .progressbar,
+.with-statusbar.md:not(.device-ios):not(.device-android) body > .progressbar,
+.with-statusbar.device-android .framework7-root > .progressbar,
+.with-statusbar.md:not(.device-ios):not(.device-android) .framework7-root > .progressbar,
+.with-statusbar.device-android body > .progressbar-infinite,
+.with-statusbar.md:not(.device-ios):not(.device-android) body > .progressbar-infinite,
+.with-statusbar.device-android .framework7-root > .progressbar-infinite,
+.with-statusbar.md:not(.device-ios):not(.device-android) .framework7-root > .progressbar-infinite {
   top: 24px;
 }
 .with-statusbar.device-iphone-x body > .progressbar,
-.with-statusbar.device-iphone-x .view > .progressbar,
-.with-statusbar.device-iphone-x .views > .progressbar,
-.with-statusbar.device-iphone-x .page > .progressbar,
-.with-statusbar.device-iphone-x .panel > .progressbar,
-.with-statusbar.device-iphone-x .popup > .progressbar,
 .with-statusbar.device-iphone-x .framework7-root > .progressbar,
 .with-statusbar.device-iphone-x body > .progressbar-infinite,
-.with-statusbar.device-iphone-x .view > .progressbar-infinite,
-.with-statusbar.device-iphone-x .views > .progressbar-infinite,
-.with-statusbar.device-iphone-x .page > .progressbar-infinite,
-.with-statusbar.device-iphone-x .panel > .progressbar-infinite,
-.with-statusbar.device-iphone-x .popup > .progressbar-infinite,
 .with-statusbar.device-iphone-x .framework7-root > .progressbar-infinite {
   top: constant(safe-area-inset-top);
   top: env(safe-area-inset-top);
@@ -10044,7 +10590,6 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .framework7-root > 
   z-index: 10;
   background-repeat: no-repeat;
   background-size: 18px 12px;
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2018%2012'%20fill%3D'%23c7c7cc'%3E%3Cpath%20d%3D'M0%2C2V0h22v2H0z'%2F%3E%3Cpath%20d%3D'M0%2C7V5h22v2H0z'%2F%3E%3Cpath%20d%3D'M0%2C12v-2h22v2H0z'%2F%3E%3C%2Fsvg%3E");
   opacity: 0;
   pointer-events: none;
   cursor: move;
@@ -10077,7 +10622,7 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .framework7-root > 
 }
 .sortable-enabled .item-link .item-inner,
 .sortable-enabled .item-link .item-title-row {
-  background-image: none;
+  background-image: none !important;
 }
 .theme-dark .sortable li.sorting,
 .sortable.theme-dark li.sorting {
@@ -10085,6 +10630,7 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .framework7-root > 
 }
 .ios .sortable-handler {
   width: 35px;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2018%2012'%20fill%3D'%23c7c7cc'%3E%3Cpath%20d%3D'M0%2C2V0h22v2H0z'%2F%3E%3Cpath%20d%3D'M0%2C7V5h22v2H0z'%2F%3E%3Cpath%20d%3D'M0%2C12v-2h22v2H0z'%2F%3E%3C%2Fsvg%3E");
 }
 .ios .sortable li.sorting {
   -webkit-box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.6);
@@ -10092,6 +10638,12 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .framework7-root > 
 }
 .ios .sortable-enabled .item-inner,
 .ios .sortable-enabled .item-link .item-inner {
+  padding-right: 35px;
+}
+.ios .list.sortable-enabled .item-link.no-chevron .item-inner,
+.ios .list.sortable-enabled.no-chevron .item-link .item-inner,
+.ios .list.sortable-enabled .no-chevron .item-link .item-inner,
+.ios .no-chevron .list.sortable-enabled .item-link .item-inner {
   padding-right: 35px;
 }
 @media (orientation: landscape) {
@@ -10119,6 +10671,7 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .framework7-root > 
 }
 .md .sortable-handler {
   width: 50px;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2018%208'%3E%3Crect%20x%3D'0'%20y%3D'0'%20width%3D'18'%20height%3D'2'%20fill%3D'%23c7c7cc'%3E%3C%2Frect%3E%3Crect%20x%3D'0'%20y%3D'6'%20width%3D'18'%20height%3D'2'%20fill%3D'%23c7c7cc'%3E%3C%2Frect%3E%3C%2Fsvg%3E");
 }
 .md .sortable li.sorting {
   -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -10127,6 +10680,35 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .framework7-root > 
 .md .sortable-enabled .item-inner,
 .md .sortable-enabled .item-link .item-inner {
   padding-right: 50px;
+}
+.md .list.sortable-enabled .item-link.no-chevron .item-inner,
+.md .list.sortable-enabled.no-chevron .item-link .item-inner,
+.md .list.sortable-enabled .no-chevron .item-link .item-inner,
+.md .no-chevron .list.sortable-enabled .item-link .item-inner {
+  padding-right: 50px;
+}
+@media (orientation: landscape) {
+  .md.device-iphone-x .ios-right-edge .sortable-handler,
+  .md.device-iphone-x .ios-edges .sortable-handler,
+  .md.device-iphone-x .popup .sortable-handler,
+  .md.device-iphone-x .sheet-modal .sortable-handler,
+  .md.device-iphone-x .panel-right .sortable-handler {
+    right: constant(safe-area-inset-right);
+    right: env(safe-area-inset-right);
+  }
+  .md.device-iphone-x .ios-right-edge .sortable-enabled:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-inner,
+  .md.device-iphone-x .ios-edges .sortable-enabled:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-inner,
+  .md.device-iphone-x .popup .sortable-enabled:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-inner,
+  .md.device-iphone-x .sheet-modal .sortable-enabled:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-inner,
+  .md.device-iphone-x .panel-right .sortable-enabled:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-inner,
+  .md.device-iphone-x .ios-right-edge .sortable-enabled:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-link .item-inner,
+  .md.device-iphone-x .ios-edges .sortable-enabled:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-link .item-inner,
+  .md.device-iphone-x .popup .sortable-enabled:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-link .item-inner,
+  .md.device-iphone-x .sheet-modal .sortable-enabled:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-link .item-inner,
+  .md.device-iphone-x .panel-right .sortable-enabled:not(.inset):not(.tablet-inset):not(.no-ios-edges):not(.no-ios-right-edge) .item-link .item-inner {
+    padding-right: calc(42px + constant(safe-area-inset-right));
+    padding-right: calc(42px + env(safe-area-inset-right));
+  }
 }
 /* === Swipeout === */
 .swipeout {
@@ -10627,7 +11209,7 @@ html.device-android-4 .accordion-item-content {
   padding: 0 16px;
   pointer-events: none;
   background: none;
-  color: #888888;
+  color: #2196f3;
   font-weight: 500;
   line-height: 48px;
   height: 48px;
@@ -10645,6 +11227,526 @@ html.device-android-4 .accordion-item-content {
   color: #fff;
 }
 /* === Virtual List === */
+/* === Indexed List === */
+.list-index {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  text-align: center;
+  z-index: 10;
+  width: 16px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.list-index:before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  top: 0;
+  right: 100%;
+  height: 100%;
+}
+.list-index ul {
+  font-size: 11px;
+  font-weight: 600;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+.list-index li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: relative;
+  height: 14px;
+  line-height: 14px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  display: block;
+  width: 100%;
+}
+.list-index .list-index-skip-placeholder:after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+}
+.list-index .list-index-label {
+  position: absolute;
+  bottom: 0;
+  right: 100%;
+  text-align: center;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: 500;
+}
+.ios .list-index ul {
+  color: #007aff;
+}
+.ios .list-index .list-index-skip-placeholder:after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  margin-top: -3px;
+  background: #007aff;
+}
+.ios .list-index .list-index-label {
+  margin-bottom: -22px;
+  margin-right: 15px;
+  width: 44px;
+  height: 44px;
+  line-height: 44px;
+  border-radius: 50%;
+  background: #007aff;
+  font-size: 17px;
+}
+.ios .list-index .list-index-label:before {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50% 0% 50% 50%;
+  content: '';
+  background-color: inherit;
+  left: 0;
+  top: 0;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  z-index: -1;
+}
+.ios .navbar ~ .page > .list-index,
+.ios .navbar ~ .list-index {
+  top: 44px;
+}
+.ios .toolbar ~ .page > .list-index,
+.ios .toolbar ~ * .page > .list-index,
+.ios .toolbar ~ .list-index {
+  bottom: 44px;
+}
+.ios .tabbar-labels ~ .page > .list-index,
+.ios .tabbar-labels ~ * .page > .list-index,
+.ios .tabbar-labels ~ .list-index {
+  bottom: 50px;
+}
+@media (min-width: 768px) {
+  .ios .tabbar-labels ~ .page > .list-index,
+  .ios .tabbar-labels ~ * .page > .list-index,
+  .ios .tabbar-labels ~ .list-index {
+    bottom: 56px;
+  }
+}
+.ios.device-iphone-x .toolbar ~ .page > .list-index,
+.ios.device-iphone-x .toolbar ~ * .page > .list-index,
+.ios.device-iphone-x .toolbar ~ .list-index {
+  bottom: calc(44px + constant(safe-area-inset-bottom));
+  bottom: calc(44px + env(safe-area-inset-bottom));
+}
+.ios.device-iphone-x .tabbar-labels ~ .page > .list-index,
+.ios.device-iphone-x .tabbar-labels ~ * .page > .list-index,
+.ios.device-iphone-x .tabbar-labels ~ .list-index {
+  bottom: calc(50px + constant(safe-area-inset-bottom));
+  bottom: calc(50px + env(safe-area-inset-bottom));
+}
+@media (min-width: 768px) {
+  .ios.device-iphone-x .tabbar-labels ~ .page > .list-index,
+  .ios.device-iphone-x .tabbar-labels ~ * .page > .list-index,
+  .ios.device-iphone-x .tabbar-labels ~ .list-index {
+    bottom: calc(56px + constant(safe-area-inset-bottom));
+    bottom: calc(56px + env(safe-area-inset-bottom));
+  }
+}
+.ios .color-theme-red .list-index ul,
+.ios .list-index.color-theme-red ul {
+  color: #ff3b30;
+}
+.ios .color-theme-red .list-index .list-index-skip-placeholder:after,
+.ios .list-index.color-theme-red .list-index-skip-placeholder:after,
+.ios .color-theme-red .list-index .list-index-label,
+.ios .list-index.color-theme-red .list-index-label {
+  background-color: #ff3b30;
+}
+.ios .color-theme-green .list-index ul,
+.ios .list-index.color-theme-green ul {
+  color: #4cd964;
+}
+.ios .color-theme-green .list-index .list-index-skip-placeholder:after,
+.ios .list-index.color-theme-green .list-index-skip-placeholder:after,
+.ios .color-theme-green .list-index .list-index-label,
+.ios .list-index.color-theme-green .list-index-label {
+  background-color: #4cd964;
+}
+.ios .color-theme-blue .list-index ul,
+.ios .list-index.color-theme-blue ul {
+  color: #007aff;
+}
+.ios .color-theme-blue .list-index .list-index-skip-placeholder:after,
+.ios .list-index.color-theme-blue .list-index-skip-placeholder:after,
+.ios .color-theme-blue .list-index .list-index-label,
+.ios .list-index.color-theme-blue .list-index-label {
+  background-color: #007aff;
+}
+.ios .color-theme-pink .list-index ul,
+.ios .list-index.color-theme-pink ul {
+  color: #ff2d55;
+}
+.ios .color-theme-pink .list-index .list-index-skip-placeholder:after,
+.ios .list-index.color-theme-pink .list-index-skip-placeholder:after,
+.ios .color-theme-pink .list-index .list-index-label,
+.ios .list-index.color-theme-pink .list-index-label {
+  background-color: #ff2d55;
+}
+.ios .color-theme-yellow .list-index ul,
+.ios .list-index.color-theme-yellow ul {
+  color: #ffcc00;
+}
+.ios .color-theme-yellow .list-index .list-index-skip-placeholder:after,
+.ios .list-index.color-theme-yellow .list-index-skip-placeholder:after,
+.ios .color-theme-yellow .list-index .list-index-label,
+.ios .list-index.color-theme-yellow .list-index-label {
+  background-color: #ffcc00;
+}
+.ios .color-theme-orange .list-index ul,
+.ios .list-index.color-theme-orange ul {
+  color: #ff9500;
+}
+.ios .color-theme-orange .list-index .list-index-skip-placeholder:after,
+.ios .list-index.color-theme-orange .list-index-skip-placeholder:after,
+.ios .color-theme-orange .list-index .list-index-label,
+.ios .list-index.color-theme-orange .list-index-label {
+  background-color: #ff9500;
+}
+.ios .color-theme-gray .list-index ul,
+.ios .list-index.color-theme-gray ul {
+  color: #8e8e93;
+}
+.ios .color-theme-gray .list-index .list-index-skip-placeholder:after,
+.ios .list-index.color-theme-gray .list-index-skip-placeholder:after,
+.ios .color-theme-gray .list-index .list-index-label,
+.ios .list-index.color-theme-gray .list-index-label {
+  background-color: #8e8e93;
+}
+.ios .color-theme-white .list-index ul,
+.ios .list-index.color-theme-white ul {
+  color: #ffffff;
+}
+.ios .color-theme-white .list-index .list-index-skip-placeholder:after,
+.ios .list-index.color-theme-white .list-index-skip-placeholder:after,
+.ios .color-theme-white .list-index .list-index-label,
+.ios .list-index.color-theme-white .list-index-label {
+  background-color: #ffffff;
+}
+.ios .color-theme-black .list-index ul,
+.ios .list-index.color-theme-black ul {
+  color: #000000;
+}
+.ios .color-theme-black .list-index .list-index-skip-placeholder:after,
+.ios .list-index.color-theme-black .list-index-skip-placeholder:after,
+.ios .color-theme-black .list-index .list-index-label,
+.ios .list-index.color-theme-black .list-index-label {
+  background-color: #000000;
+}
+.ios .list-index.color-red ul {
+  color: #ff3b30;
+}
+.ios .list-index.color-red .list-index-skip-placeholder:after,
+.ios .list-index.color-red .list-index-label {
+  background-color: #ff3b30;
+}
+.ios .list-index.color-green ul {
+  color: #4cd964;
+}
+.ios .list-index.color-green .list-index-skip-placeholder:after,
+.ios .list-index.color-green .list-index-label {
+  background-color: #4cd964;
+}
+.ios .list-index.color-blue ul {
+  color: #007aff;
+}
+.ios .list-index.color-blue .list-index-skip-placeholder:after,
+.ios .list-index.color-blue .list-index-label {
+  background-color: #007aff;
+}
+.ios .list-index.color-pink ul {
+  color: #ff2d55;
+}
+.ios .list-index.color-pink .list-index-skip-placeholder:after,
+.ios .list-index.color-pink .list-index-label {
+  background-color: #ff2d55;
+}
+.ios .list-index.color-yellow ul {
+  color: #ffcc00;
+}
+.ios .list-index.color-yellow .list-index-skip-placeholder:after,
+.ios .list-index.color-yellow .list-index-label {
+  background-color: #ffcc00;
+}
+.ios .list-index.color-orange ul {
+  color: #ff9500;
+}
+.ios .list-index.color-orange .list-index-skip-placeholder:after,
+.ios .list-index.color-orange .list-index-label {
+  background-color: #ff9500;
+}
+.ios .list-index.color-gray ul {
+  color: #8e8e93;
+}
+.ios .list-index.color-gray .list-index-skip-placeholder:after,
+.ios .list-index.color-gray .list-index-label {
+  background-color: #8e8e93;
+}
+.ios .list-index.color-white ul {
+  color: #ffffff;
+}
+.ios .list-index.color-white .list-index-skip-placeholder:after,
+.ios .list-index.color-white .list-index-label {
+  background-color: #ffffff;
+}
+.ios .list-index.color-black ul {
+  color: #000000;
+}
+.ios .list-index.color-black .list-index-skip-placeholder:after,
+.ios .list-index.color-black .list-index-label {
+  background-color: #000000;
+}
+.md .list-index ul {
+  color: #2196f3;
+}
+.md .list-index .list-index-skip-placeholder:after {
+  content: '';
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  margin-top: -2px;
+  background: #2196f3;
+}
+.md .list-index .list-index-label {
+  width: 56px;
+  height: 56px;
+  line-height: 56px;
+  border-radius: 50% 50% 0 50%;
+  background: #2196f3;
+  font-size: 20px;
+}
+.md .navbar ~ .list-index {
+  top: 56px;
+}
+@media (min-width: 768px) {
+  .md .navbar ~ .list-index {
+    top: 64px;
+  }
+}
+.md .navbar ~ .toolbar:not(.toolbar-bottom-md) ~ .list-index,
+.md .navbar ~ .subnavbar ~ .list-index,
+.md .page-with-subnavbar .navbar ~ .list-index {
+  top: 104px;
+}
+.md .navbar ~ .tabbar-labels:not(.toolbar-bottom-md) ~ .list-index {
+  top: 128px;
+}
+.md .toolbar-bottom-md ~ .page > .list-index,
+.md .toolbar-bottom-md ~ * .page > .list-index,
+.md .toolbar-bottom-md ~ * .page > .list-index {
+  bottom: 48px;
+}
+.md .tabbar-labels.toolbar-bottom-md ~ .page > .list-index,
+.md .tabbar-labels.toolbar-bottom-md ~ * .page > .list-index,
+.md .tabbar-labels.toolbar-bottom-md ~ .list-index {
+  bottom: 56px;
+}
+.md.device-iphone-x .toolbar-bottom-md ~ .page > .list-index,
+.md.device-iphone-x .toolbar-bottom-md ~ * .page > .list-index,
+.md.device-iphone-x .toolbar-bottom-md ~ * .page > .list-index {
+  bottom: calc(48px + constant(safe-area-inset-bottom));
+  bottom: calc(48px + env(safe-area-inset-bottom));
+}
+.md.device-iphone-x .tabbar-labels.toolbar-bottom-md ~ .page > .list-index,
+.md.device-iphone-x .tabbar-labels.toolbar-bottom-md ~ * .page > .list-index,
+.md.device-iphone-x .tabbar-labels.toolbar-bottom-md ~ .list-index {
+  bottom: calc(56px + constant(safe-area-inset-bottom));
+  bottom: calc(56px + env(safe-area-inset-bottom));
+}
+.md .color-theme-red .list-index ul,
+.md .list-index.color-theme-red ul {
+  color: #f44336;
+}
+.md .color-theme-red .list-index .list-index-skip-placeholder:after,
+.md .list-index.color-theme-red .list-index-skip-placeholder:after,
+.md .color-theme-red .list-index .list-index-label,
+.md .list-index.color-theme-red .list-index-label {
+  background-color: #f44336;
+}
+.md .color-theme-green .list-index ul,
+.md .list-index.color-theme-green ul {
+  color: #4caf50;
+}
+.md .color-theme-green .list-index .list-index-skip-placeholder:after,
+.md .list-index.color-theme-green .list-index-skip-placeholder:after,
+.md .color-theme-green .list-index .list-index-label,
+.md .list-index.color-theme-green .list-index-label {
+  background-color: #4caf50;
+}
+.md .color-theme-blue .list-index ul,
+.md .list-index.color-theme-blue ul {
+  color: #2196f3;
+}
+.md .color-theme-blue .list-index .list-index-skip-placeholder:after,
+.md .list-index.color-theme-blue .list-index-skip-placeholder:after,
+.md .color-theme-blue .list-index .list-index-label,
+.md .list-index.color-theme-blue .list-index-label {
+  background-color: #2196f3;
+}
+.md .color-theme-pink .list-index ul,
+.md .list-index.color-theme-pink ul {
+  color: #e91e63;
+}
+.md .color-theme-pink .list-index .list-index-skip-placeholder:after,
+.md .list-index.color-theme-pink .list-index-skip-placeholder:after,
+.md .color-theme-pink .list-index .list-index-label,
+.md .list-index.color-theme-pink .list-index-label {
+  background-color: #e91e63;
+}
+.md .color-theme-yellow .list-index ul,
+.md .list-index.color-theme-yellow ul {
+  color: #ffeb3b;
+}
+.md .color-theme-yellow .list-index .list-index-skip-placeholder:after,
+.md .list-index.color-theme-yellow .list-index-skip-placeholder:after,
+.md .color-theme-yellow .list-index .list-index-label,
+.md .list-index.color-theme-yellow .list-index-label {
+  background-color: #ffeb3b;
+}
+.md .color-theme-orange .list-index ul,
+.md .list-index.color-theme-orange ul {
+  color: #ff9800;
+}
+.md .color-theme-orange .list-index .list-index-skip-placeholder:after,
+.md .list-index.color-theme-orange .list-index-skip-placeholder:after,
+.md .color-theme-orange .list-index .list-index-label,
+.md .list-index.color-theme-orange .list-index-label {
+  background-color: #ff9800;
+}
+.md .color-theme-gray .list-index ul,
+.md .list-index.color-theme-gray ul {
+  color: #9e9e9e;
+}
+.md .color-theme-gray .list-index .list-index-skip-placeholder:after,
+.md .list-index.color-theme-gray .list-index-skip-placeholder:after,
+.md .color-theme-gray .list-index .list-index-label,
+.md .list-index.color-theme-gray .list-index-label {
+  background-color: #9e9e9e;
+}
+.md .color-theme-white .list-index ul,
+.md .list-index.color-theme-white ul {
+  color: #ffffff;
+}
+.md .color-theme-white .list-index .list-index-skip-placeholder:after,
+.md .list-index.color-theme-white .list-index-skip-placeholder:after,
+.md .color-theme-white .list-index .list-index-label,
+.md .list-index.color-theme-white .list-index-label {
+  background-color: #ffffff;
+}
+.md .color-theme-black .list-index ul,
+.md .list-index.color-theme-black ul {
+  color: #000000;
+}
+.md .color-theme-black .list-index .list-index-skip-placeholder:after,
+.md .list-index.color-theme-black .list-index-skip-placeholder:after,
+.md .color-theme-black .list-index .list-index-label,
+.md .list-index.color-theme-black .list-index-label {
+  background-color: #000000;
+}
+.md .list-index.color-red ul {
+  color: #f44336;
+}
+.md .list-index.color-red .list-index-skip-placeholder:after,
+.md .list-index.color-red .list-index-label {
+  background-color: #f44336;
+}
+.md .list-index.color-green ul {
+  color: #4caf50;
+}
+.md .list-index.color-green .list-index-skip-placeholder:after,
+.md .list-index.color-green .list-index-label {
+  background-color: #4caf50;
+}
+.md .list-index.color-blue ul {
+  color: #2196f3;
+}
+.md .list-index.color-blue .list-index-skip-placeholder:after,
+.md .list-index.color-blue .list-index-label {
+  background-color: #2196f3;
+}
+.md .list-index.color-pink ul {
+  color: #e91e63;
+}
+.md .list-index.color-pink .list-index-skip-placeholder:after,
+.md .list-index.color-pink .list-index-label {
+  background-color: #e91e63;
+}
+.md .list-index.color-yellow ul {
+  color: #ffeb3b;
+}
+.md .list-index.color-yellow .list-index-skip-placeholder:after,
+.md .list-index.color-yellow .list-index-label {
+  background-color: #ffeb3b;
+}
+.md .list-index.color-orange ul {
+  color: #ff9800;
+}
+.md .list-index.color-orange .list-index-skip-placeholder:after,
+.md .list-index.color-orange .list-index-label {
+  background-color: #ff9800;
+}
+.md .list-index.color-gray ul {
+  color: #9e9e9e;
+}
+.md .list-index.color-gray .list-index-skip-placeholder:after,
+.md .list-index.color-gray .list-index-label {
+  background-color: #9e9e9e;
+}
+.md .list-index.color-white ul {
+  color: #ffffff;
+}
+.md .list-index.color-white .list-index-skip-placeholder:after,
+.md .list-index.color-white .list-index-label {
+  background-color: #ffffff;
+}
+.md .list-index.color-black ul {
+  color: #000000;
+}
+.md .list-index.color-black .list-index-skip-placeholder:after,
+.md .list-index.color-black .list-index-label {
+  background-color: #000000;
+}
 /* === Timeline === */
 .timeline {
   -webkit-box-sizing: border-box;
@@ -10879,7 +11981,7 @@ html.device-android-4 .accordion-item-content {
 .timeline-horizontal.col-5 .timeline-item {
   width: 5vw;
 }
-@media all and (min-width: 768px) {
+@media (min-width: 768px) {
   .timeline-horizontal.tablet-100 .timeline-item {
     width: 100vw;
   }
@@ -11662,6 +12764,154 @@ html.device-android-4 .accordion-item-content {
 .md .timeline-year-title span {
   margin-top: 2px;
 }
+@media (orientation: landscape) {
+  .md.device-iphone-x .ios-left-edge .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .ios-edges .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .popup .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .sheet-modal .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .panel-left .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) {
+    padding-left: constant(safe-area-inset-left);
+    padding-left: env(safe-area-inset-left);
+  }
+  .md.device-iphone-x .ios-left-edge .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year-title span,
+  .md.device-iphone-x .ios-edges .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year-title span,
+  .md.device-iphone-x .popup .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year-title span,
+  .md.device-iphone-x .sheet-modal .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year-title span,
+  .md.device-iphone-x .panel-left .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year-title span,
+  .md.device-iphone-x .ios-left-edge .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-month-title span,
+  .md.device-iphone-x .ios-edges .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-month-title span,
+  .md.device-iphone-x .popup .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-month-title span,
+  .md.device-iphone-x .sheet-modal .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-month-title span,
+  .md.device-iphone-x .panel-left .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-month-title span {
+    left: calc(12px + constant(safe-area-inset-left));
+    left: calc(12px + env(safe-area-inset-left));
+  }
+  .md.device-iphone-x .ios-left-edge .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title,
+  .md.device-iphone-x .ios-edges .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title,
+  .md.device-iphone-x .popup .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title,
+  .md.device-iphone-x .sheet-modal .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title,
+  .md.device-iphone-x .panel-left .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title,
+  .md.device-iphone-x .ios-left-edge .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-month:first-child .timeline-month-title,
+  .md.device-iphone-x .ios-edges .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-month:first-child .timeline-month-title,
+  .md.device-iphone-x .popup .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-month:first-child .timeline-month-title,
+  .md.device-iphone-x .sheet-modal .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-month:first-child .timeline-month-title,
+  .md.device-iphone-x .panel-left .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-month:first-child .timeline-month-title,
+  .md.device-iphone-x .ios-left-edge .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title + .timeline-month .timeline-month-title,
+  .md.device-iphone-x .ios-edges .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title + .timeline-month .timeline-month-title,
+  .md.device-iphone-x .popup .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title + .timeline-month .timeline-month-title,
+  .md.device-iphone-x .sheet-modal .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title + .timeline-month .timeline-month-title,
+  .md.device-iphone-x .panel-left .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title + .timeline-month .timeline-month-title {
+    left: -44px;
+    right: 0;
+    width: auto;
+  }
+  .md.device-iphone-x .ios-left-edge .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) > .timeline-item:first-child,
+  .md.device-iphone-x .ios-edges .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) > .timeline-item:first-child,
+  .md.device-iphone-x .popup .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) > .timeline-item:first-child,
+  .md.device-iphone-x .sheet-modal .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) > .timeline-item:first-child,
+  .md.device-iphone-x .panel-left .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) > .timeline-item:first-child,
+  .md.device-iphone-x .ios-left-edge .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-month:first-child .timeline-item:first-child,
+  .md.device-iphone-x .ios-edges .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-month:first-child .timeline-item:first-child,
+  .md.device-iphone-x .popup .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-month:first-child .timeline-item:first-child,
+  .md.device-iphone-x .sheet-modal .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-month:first-child .timeline-item:first-child,
+  .md.device-iphone-x .panel-left .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-month:first-child .timeline-item:first-child,
+  .md.device-iphone-x .ios-left-edge .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title + .timeline-month .timeline-item:first-child,
+  .md.device-iphone-x .ios-edges .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title + .timeline-month .timeline-item:first-child,
+  .md.device-iphone-x .popup .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title + .timeline-month .timeline-item:first-child,
+  .md.device-iphone-x .sheet-modal .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title + .timeline-month .timeline-item:first-child,
+  .md.device-iphone-x .panel-left .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title + .timeline-month .timeline-item:first-child,
+  .md.device-iphone-x .ios-left-edge .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title + .timeline-month .timeline-month-title + .timeline-item,
+  .md.device-iphone-x .ios-edges .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title + .timeline-month .timeline-month-title + .timeline-item,
+  .md.device-iphone-x .popup .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title + .timeline-month .timeline-month-title + .timeline-item,
+  .md.device-iphone-x .sheet-modal .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title + .timeline-month .timeline-month-title + .timeline-item,
+  .md.device-iphone-x .panel-left .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title + .timeline-month .timeline-month-title + .timeline-item {
+    overflow: visible;
+  }
+  .md.device-iphone-x .ios-left-edge .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) > .timeline-item:first-child .timeline-item-date,
+  .md.device-iphone-x .ios-edges .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) > .timeline-item:first-child .timeline-item-date,
+  .md.device-iphone-x .popup .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) > .timeline-item:first-child .timeline-item-date,
+  .md.device-iphone-x .sheet-modal .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) > .timeline-item:first-child .timeline-item-date,
+  .md.device-iphone-x .panel-left .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) > .timeline-item:first-child .timeline-item-date,
+  .md.device-iphone-x .ios-left-edge .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-month:first-child .timeline-item:first-child .timeline-item-date,
+  .md.device-iphone-x .ios-edges .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-month:first-child .timeline-item:first-child .timeline-item-date,
+  .md.device-iphone-x .popup .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-month:first-child .timeline-item:first-child .timeline-item-date,
+  .md.device-iphone-x .sheet-modal .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-month:first-child .timeline-item:first-child .timeline-item-date,
+  .md.device-iphone-x .panel-left .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-month:first-child .timeline-item:first-child .timeline-item-date,
+  .md.device-iphone-x .ios-left-edge .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title + .timeline-month .timeline-item:first-child .timeline-item-date,
+  .md.device-iphone-x .ios-edges .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title + .timeline-month .timeline-item:first-child .timeline-item-date,
+  .md.device-iphone-x .popup .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title + .timeline-month .timeline-item:first-child .timeline-item-date,
+  .md.device-iphone-x .sheet-modal .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title + .timeline-month .timeline-item:first-child .timeline-item-date,
+  .md.device-iphone-x .panel-left .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title + .timeline-month .timeline-item:first-child .timeline-item-date,
+  .md.device-iphone-x .ios-left-edge .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title + .timeline-month .timeline-month-title + .timeline-item .timeline-item-date,
+  .md.device-iphone-x .ios-edges .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title + .timeline-month .timeline-month-title + .timeline-item .timeline-item-date,
+  .md.device-iphone-x .popup .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title + .timeline-month .timeline-month-title + .timeline-item .timeline-item-date,
+  .md.device-iphone-x .sheet-modal .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title + .timeline-month .timeline-month-title + .timeline-item .timeline-item-date,
+  .md.device-iphone-x .panel-left .timeline-horizontal:not(.no-ios-edges):not(.no-ios-left-edge) .timeline-year:first-child .timeline-year-title + .timeline-month .timeline-month-title + .timeline-item .timeline-item-date {
+    width: auto;
+    padding-left: calc(12px + constant(safe-area-inset-left));
+    padding-left: calc(12px + env(safe-area-inset-left));
+    left: calc(0px - constant(safe-area-inset-left));
+    left: calc(0px - env(safe-area-inset-left));
+    right: 0;
+  }
+  .md.device-iphone-x .ios-left-edge .timeline:not(.no-ios-edges):not(.no-ios-left-edge):not(.timeline-horizontal),
+  .md.device-iphone-x .ios-edges .timeline:not(.no-ios-edges):not(.no-ios-left-edge):not(.timeline-horizontal),
+  .md.device-iphone-x .popup .timeline:not(.no-ios-edges):not(.no-ios-left-edge):not(.timeline-horizontal),
+  .md.device-iphone-x .sheet-modal .timeline:not(.no-ios-edges):not(.no-ios-left-edge):not(.timeline-horizontal),
+  .md.device-iphone-x .panel-left .timeline:not(.no-ios-edges):not(.no-ios-left-edge):not(.timeline-horizontal) {
+    padding-left: calc(16px + constant(safe-area-inset-left));
+    padding-left: calc(16px + env(safe-area-inset-left));
+  }
+  .md.device-iphone-x .ios-right-edge .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) .timeline-year:last-child .timeline-year-title,
+  .md.device-iphone-x .ios-edges .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) .timeline-year:last-child .timeline-year-title,
+  .md.device-iphone-x .popup .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) .timeline-year:last-child .timeline-year-title,
+  .md.device-iphone-x .sheet-modal .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) .timeline-year:last-child .timeline-year-title,
+  .md.device-iphone-x .panel-right .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) .timeline-year:last-child .timeline-year-title,
+  .md.device-iphone-x .ios-right-edge .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) .timeline-year:last-child .timeline-month:last-child .timeline-month-title,
+  .md.device-iphone-x .ios-edges .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) .timeline-year:last-child .timeline-month:last-child .timeline-month-title,
+  .md.device-iphone-x .popup .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) .timeline-year:last-child .timeline-month:last-child .timeline-month-title,
+  .md.device-iphone-x .sheet-modal .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) .timeline-year:last-child .timeline-month:last-child .timeline-month-title,
+  .md.device-iphone-x .panel-right .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) .timeline-year:last-child .timeline-month:last-child .timeline-month-title {
+    width: auto;
+    right: calc(0px - constant(safe-area-inset-right));
+    right: calc(0px - env(safe-area-inset-right));
+  }
+  .md.device-iphone-x .ios-right-edge .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) > .timeline-item:last-child,
+  .md.device-iphone-x .ios-edges .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) > .timeline-item:last-child,
+  .md.device-iphone-x .popup .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) > .timeline-item:last-child,
+  .md.device-iphone-x .sheet-modal .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) > .timeline-item:last-child,
+  .md.device-iphone-x .panel-right .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) > .timeline-item:last-child,
+  .md.device-iphone-x .ios-right-edge .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) .timeline-year:last-child .timeline-month:last-child .timeline-item:last-child,
+  .md.device-iphone-x .ios-edges .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) .timeline-year:last-child .timeline-month:last-child .timeline-item:last-child,
+  .md.device-iphone-x .popup .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) .timeline-year:last-child .timeline-month:last-child .timeline-item:last-child,
+  .md.device-iphone-x .sheet-modal .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) .timeline-year:last-child .timeline-month:last-child .timeline-item:last-child,
+  .md.device-iphone-x .panel-right .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) .timeline-year:last-child .timeline-month:last-child .timeline-item:last-child {
+    overflow: visible;
+  }
+  .md.device-iphone-x .ios-right-edge .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) > .timeline-item:last-child .timeline-item-date,
+  .md.device-iphone-x .ios-edges .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) > .timeline-item:last-child .timeline-item-date,
+  .md.device-iphone-x .popup .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) > .timeline-item:last-child .timeline-item-date,
+  .md.device-iphone-x .sheet-modal .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) > .timeline-item:last-child .timeline-item-date,
+  .md.device-iphone-x .panel-right .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) > .timeline-item:last-child .timeline-item-date,
+  .md.device-iphone-x .ios-right-edge .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) .timeline-year:last-child .timeline-month:last-child .timeline-item:last-child .timeline-item-date,
+  .md.device-iphone-x .ios-edges .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) .timeline-year:last-child .timeline-month:last-child .timeline-item:last-child .timeline-item-date,
+  .md.device-iphone-x .popup .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) .timeline-year:last-child .timeline-month:last-child .timeline-item:last-child .timeline-item-date,
+  .md.device-iphone-x .sheet-modal .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) .timeline-year:last-child .timeline-month:last-child .timeline-item:last-child .timeline-item-date,
+  .md.device-iphone-x .panel-right .timeline-horizontal:not(.no-ios-edges):not(.no-ios-right-edge) .timeline-year:last-child .timeline-month:last-child .timeline-item:last-child .timeline-item-date {
+    width: auto;
+    right: calc(0px - constant(safe-area-inset-right));
+    right: calc(0px - env(safe-area-inset-right));
+    left: 0;
+  }
+  .md.device-iphone-x .ios-right-edge .timeline:not(.no-ios-edges):not(.no-ios-right-edge):not(.timeline-horizontal),
+  .md.device-iphone-x .ios-edges .timeline:not(.no-ios-edges):not(.no-ios-right-edge):not(.timeline-horizontal),
+  .md.device-iphone-x .popup .timeline:not(.no-ios-edges):not(.no-ios-right-edge):not(.timeline-horizontal),
+  .md.device-iphone-x .sheet-modal .timeline:not(.no-ios-edges):not(.no-ios-right-edge):not(.timeline-horizontal),
+  .md.device-iphone-x .panel-right .timeline:not(.no-ios-edges):not(.no-ios-right-edge):not(.timeline-horizontal) {
+    padding-right: calc(16px + constant(safe-area-inset-right));
+    padding-right: calc(16px + env(safe-area-inset-right));
+  }
+}
 .md .theme-dark .timeline-item-inner {
   background-color: rgba(255, 255, 255, 0.03);
 }
@@ -11906,6 +13156,22 @@ html.with-panel-right-cover .panel-right {
   -webkit-transform: translate3d(0px, 0, 0);
   transform: translate3d(0px, 0, 0);
 }
+html.with-statusbar.device-ios .panel,
+html.with-statusbar.ios:not(.device-ios):not(.device-android) .panel {
+  top: 20px;
+  height: calc(100% - 20px);
+}
+html.with-statusbar.device-android .panel,
+html.with-statusbar.md:not(.device-ios):not(.device-android) .panel {
+  top: 24px;
+  height: calc(100% - 24px);
+}
+html.with-statusbar.device-iphone-x .panel {
+  top: constant(safe-area-inset-top);
+  top: env(safe-area-inset-top);
+  height: calc(100% - constant(safe-area-inset-top));
+  height: calc(100% - env(safe-area-inset-top));
+}
 .ios .panel-backdrop {
   -webkit-transition-duration: 400ms;
   transition-duration: 400ms;
@@ -11981,7 +13247,7 @@ html.with-panel-right-cover .panel-right {
 .card {
   background: #fff;
   position: relative;
-  border-radius: 2px;
+  border-radius: 4px;
   font-size: 14px;
 }
 .card .list,
@@ -12062,7 +13328,7 @@ html.with-panel-right-cover .panel-right {
   margin: 0;
 }
 .card-header {
-  border-radius: 2px 2px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 .card-header:after {
   content: '';
@@ -12091,7 +13357,7 @@ html.device-pixel-ratio-3 .card-header:after {
   display: none !important;
 }
 .card-footer {
-  border-radius: 0 0 2px 2px;
+  border-radius: 0 0 4px 4px;
 }
 .card-footer:before {
   content: '';
@@ -12127,6 +13393,11 @@ html.device-pixel-ratio-3 .card-footer:before {
   -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
   margin: 10px;
+}
+.ios .card-outline {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: 1px solid rgba(0, 0, 0, 0.12);
 }
 .ios .card-header a.link,
 .ios .card-footer a.link {
@@ -12186,6 +13457,9 @@ html.device-pixel-ratio-3 .card-footer:before {
 .ios .theme-dark .card {
   background-color: #1c1c1d;
 }
+.ios .theme-dark .card-outline {
+  border-color: #282829;
+}
 .ios .theme-dark .card-header:after {
   background-color: #282829;
 }
@@ -12201,8 +13475,13 @@ html.device-pixel-ratio-3 .card-footer:before {
 }
 .md .card {
   margin: 8px;
-  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  -webkit-box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}
+.md .card-outline {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: 1px solid rgba(0, 0, 0, 0.12);
 }
 .md .card-header a.link,
 .md .card-footer a.link {
@@ -12227,7 +13506,7 @@ html.device-pixel-ratio-3 .card-footer:before {
   box-sizing: border-box;
   vertical-align: middle;
   color: #2196f3;
-  border-radius: 2px;
+  border-radius: 4px;
   line-height: 36px;
   height: 36px;
   text-transform: uppercase;
@@ -12238,6 +13517,8 @@ html.device-pixel-ratio-3 .card-footer:before {
   transition-duration: 300ms;
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
+  font-weight: 500;
+  letter-spacing: 0.03em;
 }
 input[type="submit"].md .card-header a.link,
 input[type="submit"].md .card-footer a.link,
@@ -12277,6 +13558,9 @@ input[type="button"].md .card-footer a.link {
 .md .theme-dark .card {
   background-color: rgba(255, 255, 255, 0.03);
 }
+.md .theme-dark .card-outline {
+  border-color: #282829;
+}
 .md .theme-dark .card-header:after {
   background-color: rgba(255, 255, 255, 0.08);
 }
@@ -12285,6 +13569,24 @@ input[type="button"].md .card-footer a.link {
 }
 .md .theme-dark .card-footer:before {
   background-color: rgba(255, 255, 255, 0.08);
+}
+@media (orientation: landscape) {
+  .md.device-iphone-x .ios-left-edge .card:not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .ios-edges .card:not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .popup .card:not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .sheet-modal .card:not(.no-ios-edges):not(.no-ios-left-edge),
+  .md.device-iphone-x .panel-left .card:not(.no-ios-edges):not(.no-ios-left-edge) {
+    margin-left: calc(8px + constant(safe-area-inset-left));
+    margin-left: calc(8px + env(safe-area-inset-left));
+  }
+  .md.device-iphone-x .ios-right-edge .card:not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .ios-edges .card:not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .popup .card:not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .sheet-modal .card:not(.no-ios-edges):not(.no-ios-right-edge),
+  .md.device-iphone-x .panel-right .card:not(.no-ios-edges):not(.no-ios-right-edge) {
+    margin-right: calc(8px + constant(safe-area-inset-right));
+    margin-right: calc(8px + env(safe-area-inset-right));
+  }
 }
 .md .color-theme-red .card-header a.link,
 .md .color-theme-red .card-footer a.link,
@@ -12442,17 +13744,20 @@ input[type="button"].md .card-footer a.link {
   opacity: 1;
 }
 .ios .chip {
-  font-size: 14px;
-  color: #fff;
-  background: rgba(0, 0, 0, 0.37);
-  height: 23px;
-  line-height: 23px;
+  font-size: 13px;
+  color: #000;
+  background: rgba(0, 0, 0, 0.12);
+  height: 24px;
   border-radius: 12px;
-  padding: 0 6px;
+  padding: 0 10px;
+}
+.ios .chip-outline {
+  background: none;
+  border: 1px solid rgba(0, 0, 0, 0.12);
 }
 .ios .chip-media {
-  width: 23px;
-  height: 23px;
+  width: 24px;
+  height: 24px;
   vertical-align: middle;
   border-radius: 50%;
   text-align: center;
@@ -12461,7 +13766,7 @@ input[type="button"].md .card-footer a.link {
   font-size: 12px;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  margin-left: -6px;
+  margin-left: -10px;
 }
 .ios .chip-media + .chip-label {
   margin-left: 4px;
@@ -12471,44 +13776,106 @@ input[type="button"].md .card-footer a.link {
   height: 16px;
 }
 .ios .chip-delete {
-  width: 23px;
-  height: 23px;
-  line-height: 23px;
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2028%2028'%3E%3Ccircle%20cx%3D'14'%20cy%3D'14'%20r%3D'14'%20fill%3D'%23fff'%2F%3E%3Cline%20stroke%3D'%23000'%20stroke-width%3D'2'%20stroke-miterlimit%3D'10'%20x1%3D'8'%20y1%3D'8'%20x2%3D'20'%20y2%3D'20'%2F%3E%3Cline%20fill%3D'none'%20stroke%3D'%23000'%20stroke-width%3D'2'%20stroke-miterlimit%3D'10'%20x1%3D'20'%20y1%3D'8'%20x2%3D'8'%20y2%3D'20'%2F%3E%3C%2Fsvg%3E");
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2028%2028'%3E%3Ccircle%20cx%3D'14'%20cy%3D'14'%20r%3D'14'%20fill%3D'%23000'%2F%3E%3Cline%20stroke%3D'%23fff'%20stroke-width%3D'3'%20stroke-miterlimit%3D'10'%20x1%3D'8'%20y1%3D'8'%20x2%3D'20'%20y2%3D'20'%2F%3E%3Cline%20fill%3D'none'%20stroke%3D'%23fff'%20stroke-width%3D'3'%20stroke-miterlimit%3D'10'%20x1%3D'20'%20y1%3D'8'%20x2%3D'8'%20y2%3D'20'%2F%3E%3C%2Fsvg%3E");
   background-position: center;
-  background-size: 13px 13px;
-  opacity: 0.7;
-  margin-right: -6px;
+  background-size: 14px 14px;
+  opacity: 0.54;
+  margin-right: -10px;
 }
 .ios .theme-dark .chip {
   background-color: #333;
+  color: #fff;
+}
+.ios .theme-dark .chip-outline {
+  background: none;
+  border-color: #333;
+}
+.ios .theme-dark .chip-delete {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2028%2028'%3E%3Ccircle%20cx%3D'14'%20cy%3D'14'%20r%3D'14'%20fill%3D'%23fff'%2F%3E%3Cline%20stroke%3D'%23000'%20stroke-width%3D'3'%20stroke-miterlimit%3D'10'%20x1%3D'8'%20y1%3D'8'%20x2%3D'20'%20y2%3D'20'%2F%3E%3Cline%20fill%3D'none'%20stroke%3D'%23000'%20stroke-width%3D'3'%20stroke-miterlimit%3D'10'%20x1%3D'20'%20y1%3D'8'%20x2%3D'8'%20y2%3D'20'%2F%3E%3C%2Fsvg%3E");
 }
 .ios .chip.color-red {
   background: #ff3b30;
+  color: #fff;
+}
+.ios .chip.color-red.chip-outline {
+  background: none;
+  border-color: #ff3b30;
+  color: #ff3b30;
 }
 .ios .chip.color-green {
   background: #4cd964;
+  color: #fff;
+}
+.ios .chip.color-green.chip-outline {
+  background: none;
+  border-color: #4cd964;
+  color: #4cd964;
 }
 .ios .chip.color-blue {
   background: #007aff;
+  color: #fff;
+}
+.ios .chip.color-blue.chip-outline {
+  background: none;
+  border-color: #007aff;
+  color: #007aff;
 }
 .ios .chip.color-pink {
   background: #ff2d55;
+  color: #fff;
+}
+.ios .chip.color-pink.chip-outline {
+  background: none;
+  border-color: #ff2d55;
+  color: #ff2d55;
 }
 .ios .chip.color-yellow {
   background: #ffcc00;
+  color: #fff;
+}
+.ios .chip.color-yellow.chip-outline {
+  background: none;
+  border-color: #ffcc00;
+  color: #ffcc00;
 }
 .ios .chip.color-orange {
   background: #ff9500;
+  color: #fff;
+}
+.ios .chip.color-orange.chip-outline {
+  background: none;
+  border-color: #ff9500;
+  color: #ff9500;
 }
 .ios .chip.color-gray {
   background: #8e8e93;
+  color: #fff;
+}
+.ios .chip.color-gray.chip-outline {
+  background: none;
+  border-color: #8e8e93;
+  color: #8e8e93;
 }
 .ios .chip.color-white {
   background: #ffffff;
+  color: #fff;
+}
+.ios .chip.color-white.chip-outline {
+  background: none;
+  border-color: #ffffff;
+  color: #ffffff;
 }
 .ios .chip.color-black {
   background: #000000;
+  color: #fff;
+}
+.ios .chip.color-black.chip-outline {
+  background: none;
+  border-color: #000000;
+  color: #000000;
 }
 .md .chip {
   font-size: 13px;
@@ -12518,6 +13885,10 @@ input[type="button"].md .card-footer a.link {
   line-height: 32px;
   border-radius: 16px;
   padding: 0 12px;
+}
+.md .chip-outline {
+  background: none;
+  border: 1px solid rgba(0, 0, 0, 0.12);
 }
 .md .chip-media {
   width: 32px;
@@ -12550,6 +13921,10 @@ input[type="button"].md .card-footer a.link {
   background: #333;
   color: rgba(255, 255, 255, 0.87);
 }
+.md .theme-dark .chip-outline {
+  background: none;
+  border-color: #333;
+}
 .md .theme-dark .chip-delete {
   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20fill%3D'%23fff'%20height%3D'24'%20viewBox%3D'0%200%2024%2024'%20width%3D'24'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%3E%3Cpath%20d%3D'M12%202C6.47%202%202%206.47%202%2012s4.47%2010%2010%2010%2010-4.47%2010-10S17.53%202%2012%202zm5%2013.59L15.59%2017%2012%2013.41%208.41%2017%207%2015.59%2010.59%2012%207%208.41%208.41%207%2012%2010.59%2015.59%207%2017%208.41%2013.41%2012%2017%2015.59z'%2F%3E%3Cpath%20d%3D'M0%200h24v24H0z'%20fill%3D'none'%2F%3E%3C%2Fsvg%3E");
 }
@@ -12557,37 +13932,82 @@ input[type="button"].md .card-footer a.link {
   background: #f44336;
   color: #fff;
 }
+.md .chip.color-red.chip-outline {
+  background: none;
+  border-color: #f44336;
+  color: #f44336;
+}
 .md .chip.color-green {
   background: #4caf50;
   color: #fff;
+}
+.md .chip.color-green.chip-outline {
+  background: none;
+  border-color: #4caf50;
+  color: #4caf50;
 }
 .md .chip.color-blue {
   background: #2196f3;
   color: #fff;
 }
+.md .chip.color-blue.chip-outline {
+  background: none;
+  border-color: #2196f3;
+  color: #2196f3;
+}
 .md .chip.color-pink {
   background: #e91e63;
   color: #fff;
+}
+.md .chip.color-pink.chip-outline {
+  background: none;
+  border-color: #e91e63;
+  color: #e91e63;
 }
 .md .chip.color-yellow {
   background: #ffeb3b;
   color: #fff;
 }
+.md .chip.color-yellow.chip-outline {
+  background: none;
+  border-color: #ffeb3b;
+  color: #ffeb3b;
+}
 .md .chip.color-orange {
   background: #ff9800;
   color: #fff;
+}
+.md .chip.color-orange.chip-outline {
+  background: none;
+  border-color: #ff9800;
+  color: #ff9800;
 }
 .md .chip.color-gray {
   background: #9e9e9e;
   color: #fff;
 }
+.md .chip.color-gray.chip-outline {
+  background: none;
+  border-color: #9e9e9e;
+  color: #9e9e9e;
+}
 .md .chip.color-white {
   background: #ffffff;
   color: #fff;
 }
+.md .chip.color-white.chip-outline {
+  background: none;
+  border-color: #ffffff;
+  color: #ffffff;
+}
 .md .chip.color-black {
   background: #000000;
   color: #fff;
+}
+.md .chip.color-black.chip-outline {
+  background: none;
+  border-color: #000000;
+  color: #000000;
 }
 /* === Input === */
 input[type="text"],
@@ -12870,7 +14290,7 @@ textarea {
   margin-top: -7px;
 }
 .ios .input-clear-button:after {
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2028%2028'%3E%3Ccircle%20cx%3D'14'%20cy%3D'14'%20r%3D'14'%20fill%3D'%238e8e93'%2F%3E%3Cline%20stroke%3D'%23ffffff'%20stroke-width%3D'2'%20stroke-miterlimit%3D'10'%20x1%3D'8'%20y1%3D'8'%20x2%3D'20'%20y2%3D'20'%2F%3E%3Cline%20fill%3D'none'%20stroke%3D'%23ffffff'%20stroke-width%3D'2'%20stroke-miterlimit%3D'10'%20x1%3D'20'%20y1%3D'8'%20x2%3D'8'%20y2%3D'20'%2F%3E%3C%2Fsvg%3E");
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2028%2028'%3E%3Ccircle%20cx%3D'14'%20cy%3D'14'%20r%3D'14'%20fill%3D'%238e8e93'%2F%3E%3Cline%20stroke%3D'%23ffffff'%20stroke-width%3D'3'%20stroke-miterlimit%3D'10'%20x1%3D'8'%20y1%3D'8'%20x2%3D'20'%20y2%3D'20'%2F%3E%3Cline%20fill%3D'none'%20stroke%3D'%23ffffff'%20stroke-width%3D'3'%20stroke-miterlimit%3D'10'%20x1%3D'20'%20y1%3D'8'%20x2%3D'8'%20y2%3D'20'%2F%3E%3C%2Fsvg%3E");
   background-size: 14px 14px;
 }
 .ios .input-clear-button:before {
@@ -15145,6 +16565,13 @@ label.item-radio.disabled,
   flex-shrink: 1;
   text-align: center;
 }
+.stepper-button-plus,
+.stepper-button-minus {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 .stepper-button-plus:after,
 .stepper-button-minus:after,
 .stepper-button-plus:before,
@@ -15316,10 +16743,16 @@ label.item-radio.disabled,
 }
 .ios .stepper-small.stepper-fill .stepper-button.active-state,
 .ios .stepper-small-ios.stepper-fill .stepper-button.active-state,
+.ios .stepper-small.stepper-fill-ios .stepper-button.active-state,
+.ios .stepper-small-ios.stepper-fill-ios .stepper-button.active-state,
 .ios .stepper-small.stepper-fill .stepper-button-minus.active-state,
 .ios .stepper-small-ios.stepper-fill .stepper-button-minus.active-state,
+.ios .stepper-small.stepper-fill-ios .stepper-button-minus.active-state,
+.ios .stepper-small-ios.stepper-fill-ios .stepper-button-minus.active-state,
 .ios .stepper-small.stepper-fill .stepper-button-plus.active-state,
-.ios .stepper-small-ios.stepper-fill .stepper-button-plus.active-state {
+.ios .stepper-small-ios.stepper-fill .stepper-button-plus.active-state,
+.ios .stepper-small.stepper-fill-ios .stepper-button-plus.active-state,
+.ios .stepper-small-ios.stepper-fill-ios .stepper-button-plus.active-state {
   color: #007aff;
   border-color: #007aff;
   background-color: transparent;
@@ -15327,12 +16760,20 @@ label.item-radio.disabled,
 }
 .ios .stepper-small.stepper-fill .stepper-button-plus.active-state:before,
 .ios .stepper-small-ios.stepper-fill .stepper-button-plus.active-state:before,
+.ios .stepper-small.stepper-fill-ios .stepper-button-plus.active-state:before,
+.ios .stepper-small-ios.stepper-fill-ios .stepper-button-plus.active-state:before,
 .ios .stepper-small.stepper-fill .stepper-button-minus.active-state:before,
 .ios .stepper-small-ios.stepper-fill .stepper-button-minus.active-state:before,
+.ios .stepper-small.stepper-fill-ios .stepper-button-minus.active-state:before,
+.ios .stepper-small-ios.stepper-fill-ios .stepper-button-minus.active-state:before,
 .ios .stepper-small.stepper-fill .stepper-button-plus.active-state:after,
 .ios .stepper-small-ios.stepper-fill .stepper-button-plus.active-state:after,
+.ios .stepper-small.stepper-fill-ios .stepper-button-plus.active-state:after,
+.ios .stepper-small-ios.stepper-fill-ios .stepper-button-plus.active-state:after,
 .ios .stepper-small.stepper-fill .stepper-button-minus.active-state:after,
-.ios .stepper-small-ios.stepper-fill .stepper-button-minus.active-state:after {
+.ios .stepper-small-ios.stepper-fill .stepper-button-minus.active-state:after,
+.ios .stepper-small.stepper-fill-ios .stepper-button-minus.active-state:after,
+.ios .stepper-small-ios.stepper-fill-ios .stepper-button-minus.active-state:after {
   background-color: #007aff;
 }
 .ios .stepper-big,
@@ -16542,7 +17983,7 @@ label.item-radio.disabled,
 .md .stepper-button,
 .md .stepper-button-minus,
 .md .stepper-button-plus {
-  border: 1px solid #2196f3;
+  border: 2px solid #2196f3;
   color: #2196f3;
   line-height: 34px;
   height: 36px;
@@ -16572,12 +18013,12 @@ label.item-radio.disabled,
 .md .stepper-button:first-child,
 .md .stepper-button-minus:first-child,
 .md .stepper-button-plus:first-child {
-  border-radius: 2px 0 0 2px;
+  border-radius: 4px 0 0 4px;
 }
 .md .stepper-button:last-child,
 .md .stepper-button-minus:last-child,
 .md .stepper-button-plus:last-child {
-  border-radius: 0 2px 2px 0;
+  border-radius: 0 4px 4px 0;
 }
 .md .stepper-button-plus:after,
 .md .stepper-button-minus:after,
@@ -16587,18 +18028,18 @@ label.item-radio.disabled,
 }
 .md .stepper-value,
 .md .stepper-input-wrap {
-  border-top: 1px solid #2196f3;
-  border-bottom: 1px solid #2196f3;
+  border-top: 2px solid #2196f3;
+  border-bottom: 2px solid #2196f3;
 }
-.md .stepper .stepper-value {
+.md .stepper .stepper-value,
+.md .stepper .stepper-input-wrap input {
   color: #2196f3;
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
 }
 .md .stepper .stepper-input-wrap input {
   height: 100%;
-  text-align: center;
-  color: #2196f3;
-  font-size: 16px;
 }
 .md .stepper-fill .stepper-button,
 .md .stepper-fill-md .stepper-button,
@@ -16711,7 +18152,7 @@ label.item-radio.disabled,
 .md .stepper-big-md .stepper-button-minus:first-child,
 .md .stepper-big .stepper-button-plus:first-child,
 .md .stepper-big-md .stepper-button-plus:first-child {
-  border-radius: 3px 0 0 3px;
+  border-radius: 4px 0 0 4px;
 }
 .md .stepper-big .stepper-button:last-child,
 .md .stepper-big-md .stepper-button:last-child,
@@ -16719,7 +18160,7 @@ label.item-radio.disabled,
 .md .stepper-big-md .stepper-button-minus:last-child,
 .md .stepper-big .stepper-button-plus:last-child,
 .md .stepper-big-md .stepper-button-plus:last-child {
-  border-radius: 0 3px 3px 0;
+  border-radius: 0 4px 4px 0;
 }
 .md .stepper-round .stepper-button:first-child,
 .md .stepper-round-md .stepper-button:first-child,
@@ -16740,12 +18181,14 @@ label.item-radio.disabled,
 .md .stepper-raised {
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  border-radius: 2px;
+  border-radius: 4px;
 }
-.md .stepper-raised.stepper-big {
-  border-radius: 3px;
+.md .stepper-raised.stepper-big,
+.md .stepper-raised.stepper-big-md {
+  border-radius: 4px;
 }
-.md .stepper-raised.stepper-round {
+.md .stepper-raised.stepper-round,
+.md .stepper-raised.stepper-round-md {
   border-radius: 36px;
 }
 .md .stepper-raised .stepper-value,
@@ -18170,7 +19613,7 @@ label.item-radio.disabled,
 .ios .row.no-gap .col:nth-last-child(21) ~ .col {
   width: 4.76190476%;
 }
-@media all and (min-width: 768px) {
+@media (min-width: 768px) {
   .ios .row .tablet-100 {
     width: 100%;
     width: calc((100% - 15px*0) / 1);
@@ -18515,7 +19958,7 @@ label.item-radio.disabled,
     width: 4.76190476%;
   }
 }
-@media all and (min-width: 1025px) {
+@media (min-width: 1025px) {
   .ios .row .desktop-100 {
     width: 100%;
     width: calc((100% - 15px*0) / 1);
@@ -19204,7 +20647,7 @@ label.item-radio.disabled,
 .md .row.no-gap .col:nth-last-child(21) ~ .col {
   width: 4.76190476%;
 }
-@media all and (min-width: 768px) {
+@media (min-width: 768px) {
   .md .row .tablet-100 {
     width: 100%;
     width: calc((100% - 16px*0) / 1);
@@ -19549,7 +20992,7 @@ label.item-radio.disabled,
     width: 4.76190476%;
   }
 }
-@media all and (min-width: 1025px) {
+@media (min-width: 1025px) {
   .md .row .desktop-100 {
     width: 100%;
     width: calc((100% - 16px*0) / 1);
@@ -20028,14 +21471,18 @@ label.item-radio.disabled,
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  flex-shink: 1;
+  -webkit-flex-shrink: 1;
+  -ms-flex-negative: 1;
+  flex-shrink: 1;
   width: 100%;
   position: relative;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 .calendar-day {
-  flex-shink: 1;
+  -webkit-flex-shrink: 1;
+  -ms-flex-negative: 1;
+  flex-shrink: 1;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -20127,7 +21574,9 @@ label.item-radio.disabled,
   align-items: center;
   width: 50%;
   max-width: 200px;
-  flex-shink: 10;
+  -webkit-flex-shrink: 10;
+  -ms-flex-negative: 10;
+  flex-shrink: 10;
 }
 .calendar-month-selector span,
 .calendar-year-selector span {
@@ -20537,6 +21986,58 @@ label.item-radio.disabled,
 .md.device-pixel-ratio-3 .calendar-sheet:before {
   -webkit-transform: scaleY(0.33);
   transform: scaleY(0.33);
+}
+.md.device-iphone-x .calendar-sheet .sheet-modal-inner {
+  margin-bottom: constant(safe-area-inset-bottom);
+  margin-bottom: env(safe-area-inset-bottom);
+}
+@media (orientation: landscape) {
+  .md.device-iphone-x .ios-left-edge.calendar .calendar-row,
+  .md.device-iphone-x .ios-edges.calendar .calendar-row,
+  .md.device-iphone-x .popup.calendar .calendar-row,
+  .md.device-iphone-x .sheet-modal.calendar .calendar-row,
+  .md.device-iphone-x .panel-left.calendar .calendar-row,
+  .md.device-iphone-x .ios-left-edge .calendar:not(.no-ios-edges):not(.no-ios-left-edge) .calendar-row,
+  .md.device-iphone-x .ios-edges .calendar:not(.no-ios-edges):not(.no-ios-left-edge) .calendar-row,
+  .md.device-iphone-x .popup .calendar:not(.no-ios-edges):not(.no-ios-left-edge) .calendar-row,
+  .md.device-iphone-x .sheet-modal .calendar:not(.no-ios-edges):not(.no-ios-left-edge) .calendar-row,
+  .md.device-iphone-x .panel-left .calendar:not(.no-ios-edges):not(.no-ios-left-edge) .calendar-row,
+  .md.device-iphone-x .ios-left-edge.calendar .calendar-week-header,
+  .md.device-iphone-x .ios-edges.calendar .calendar-week-header,
+  .md.device-iphone-x .popup.calendar .calendar-week-header,
+  .md.device-iphone-x .sheet-modal.calendar .calendar-week-header,
+  .md.device-iphone-x .panel-left.calendar .calendar-week-header,
+  .md.device-iphone-x .ios-left-edge .calendar:not(.no-ios-edges):not(.no-ios-left-edge) .calendar-week-header,
+  .md.device-iphone-x .ios-edges .calendar:not(.no-ios-edges):not(.no-ios-left-edge) .calendar-week-header,
+  .md.device-iphone-x .popup .calendar:not(.no-ios-edges):not(.no-ios-left-edge) .calendar-week-header,
+  .md.device-iphone-x .sheet-modal .calendar:not(.no-ios-edges):not(.no-ios-left-edge) .calendar-week-header,
+  .md.device-iphone-x .panel-left .calendar:not(.no-ios-edges):not(.no-ios-left-edge) .calendar-week-header {
+    padding-left: constant(safe-area-inset-left);
+    padding-left: env(safe-area-inset-left);
+  }
+  .md.device-iphone-x .ios-right-edge.calendar .calendar-row,
+  .md.device-iphone-x .ios-edges.calendar .calendar-row,
+  .md.device-iphone-x .popup.calendar .calendar-row,
+  .md.device-iphone-x .sheet-modal.calendar .calendar-row,
+  .md.device-iphone-x .panel-right.calendar .calendar-row,
+  .md.device-iphone-x .ios-right-edge .calendar:not(.no-ios-edges):not(.no-ios-right-edge) .calendar-row,
+  .md.device-iphone-x .ios-edges .calendar:not(.no-ios-edges):not(.no-ios-right-edge) .calendar-row,
+  .md.device-iphone-x .popup .calendar:not(.no-ios-edges):not(.no-ios-right-edge) .calendar-row,
+  .md.device-iphone-x .sheet-modal .calendar:not(.no-ios-edges):not(.no-ios-right-edge) .calendar-row,
+  .md.device-iphone-x .panel-right .calendar:not(.no-ios-edges):not(.no-ios-right-edge) .calendar-row,
+  .md.device-iphone-x .ios-right-edge.calendar .calendar-week-header,
+  .md.device-iphone-x .ios-edges.calendar .calendar-week-header,
+  .md.device-iphone-x .popup.calendar .calendar-week-header,
+  .md.device-iphone-x .sheet-modal.calendar .calendar-week-header,
+  .md.device-iphone-x .panel-right.calendar .calendar-week-header,
+  .md.device-iphone-x .ios-right-edge .calendar:not(.no-ios-edges):not(.no-ios-right-edge) .calendar-week-header,
+  .md.device-iphone-x .ios-edges .calendar:not(.no-ios-edges):not(.no-ios-right-edge) .calendar-week-header,
+  .md.device-iphone-x .popup .calendar:not(.no-ios-edges):not(.no-ios-right-edge) .calendar-week-header,
+  .md.device-iphone-x .sheet-modal .calendar:not(.no-ios-edges):not(.no-ios-right-edge) .calendar-week-header,
+  .md.device-iphone-x .panel-right .calendar:not(.no-ios-edges):not(.no-ios-right-edge) .calendar-week-header {
+    padding-right: constant(safe-area-inset-right);
+    padding-right: env(safe-area-inset-right);
+  }
 }
 .md .theme-dark .calendar-popover .calendar-week-header {
   background-color: transparent;
@@ -21293,6 +22794,18 @@ label.item-radio.disabled,
   top: auto;
   bottom: 100%;
   margin-bottom: 7px;
+}
+.md .page-with-subnavbar .ptr-preloader,
+.md .toolbar:not(.toolbar-bottom-md) ~ .ptr-content .ptr-preloader,
+.md .searchbar ~ .ptr-content .ptr-preloader {
+  top: 64px;
+}
+@media (min-width: 768px) {
+  .md .page-with-subnavbar .ptr-preloader,
+  .md .toolbar:not(.toolbar-bottom-md) ~ .ptr-content .ptr-preloader,
+  .md .searchbar ~ .ptr-content .ptr-preloader {
+    top: 72px;
+  }
 }
 /* === Images Lazy Loading === */
 .lazy-loaded.lazy-fade-in {
@@ -22547,6 +24060,43 @@ html.device-desktop .data-table .sortable-cell:not(.sortable-cell-active) .table
 .fab-morph-target:not(.fab-morph-target-visible) {
   display: none;
 }
+.fab-extended {
+  width: auto;
+}
+.fab-extended > a {
+  width: 100% !important;
+}
+.fab-text {
+  padding-left: 20px;
+  padding-right: 20px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+.fab-label-button {
+  overflow: visible !important;
+}
+.fab-label {
+  position: absolute;
+  top: 50%;
+  padding: 4px 12px;
+  border-radius: 4px;
+  background: #fff;
+  color: #333;
+  white-space: nowrap;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.fab[class*="fab-right-"] .fab-label {
+  right: 100%;
+  margin-right: 8px;
+}
+.fab[class*="fab-left-"] .fab-label {
+  left: 100%;
+  margin-left: 8px;
+}
 .ios .fab > a,
 .ios .fab-buttons a {
   background: #007aff;
@@ -22607,6 +24157,23 @@ html.device-desktop .data-table .sortable-cell:not(.sortable-cell-active) .table
   -webkit-box-shadow: none;
   box-shadow: none;
   background: none !important;
+}
+.ios .fab-extended {
+  min-width: 50px;
+}
+.ios .fab-extended > a {
+  width: 100%;
+  height: 50px;
+}
+.ios .fab-extended > a i {
+  left: 25px;
+}
+.ios .fab-extended i ~ .fab-text {
+  padding-left: 50px;
+}
+.ios .fab-label {
+  -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
 }
 .ios .color-theme-red .fab > a,
 .ios .color-theme-red .fab-buttons a,
@@ -22934,8 +24501,8 @@ html.device-desktop .data-table .sortable-cell:not(.sortable-cell-active) .table
   height: 56px;
   border-radius: 28px;
   color: #fff;
-  -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  -webkit-box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
 }
 .md .fab > a.active-state,
 .md .fab-buttons a.active-state {
@@ -23002,13 +24569,33 @@ html.device-desktop .data-table .sortable-cell:not(.sortable-cell-active) .table
 .md .fab-morph {
   border-radius: 28px;
   background: #2196f3;
-  -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  -webkit-box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
 }
 .md .fab-morph > a {
   -webkit-box-shadow: none;
   box-shadow: none;
   background: none !important;
+}
+.md .fab-extended {
+  min-width: 48px;
+}
+.md .fab-extended > a {
+  height: 48px;
+}
+.md .fab-extended > a i {
+  left: 24px;
+}
+.md .fab-extended i ~ .fab-text {
+  padding-left: 48px;
+}
+.md .fab-text {
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+.md .fab-label {
+  -webkit-box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
 }
 .md .color-theme-red .fab > a,
 .md .color-theme-red .fab-buttons a,
@@ -23307,6 +24894,28 @@ html.device-desktop .data-table .sortable-cell:not(.sortable-cell-active) .table
 .md .fab-morph.color-black {
   background: #000000;
 }
+.md.device-iphone-x .fab[class*="-bottom"] {
+  bottom: calc(16px + constant(safe-area-inset-bottom));
+  bottom: calc(16px + env(safe-area-inset-bottom));
+}
+@media (orientation: landscape) {
+  .md.device-iphone-x .ios-left-edge .fab[class*="fab-left"],
+  .md.device-iphone-x .ios-edges .fab[class*="fab-left"],
+  .md.device-iphone-x .popup .fab[class*="fab-left"],
+  .md.device-iphone-x .sheet-modal .fab[class*="fab-left"],
+  .md.device-iphone-x .panel-left .fab[class*="fab-left"] {
+    left: calc(16px + constant(safe-area-inset-left));
+    left: calc(16px + env(safe-area-inset-left));
+  }
+  .md.device-iphone-x .ios-right-edge .fab[class*="fab-right"],
+  .md.device-iphone-x .ios-edges .fab[class*="fab-right"],
+  .md.device-iphone-x .popup .fab[class*="fab-right"],
+  .md.device-iphone-x .sheet-modal .fab[class*="fab-right"],
+  .md.device-iphone-x .panel-right .fab[class*="fab-right"] {
+    right: calc(16px + constant(safe-area-inset-right));
+    right: calc(16px + env(safe-area-inset-right));
+  }
+}
 /* === Searchbar === */
 .searchbar {
   width: 100%;
@@ -23456,6 +25065,7 @@ html.device-desktop .data-table .sortable-cell:not(.sortable-cell-active) .table
 }
 .ios .searchbar .input-clear-button {
   z-index: 40;
+  right: 7px;
 }
 .ios .searchbar-inner {
   padding: 0 8px;
@@ -23931,6 +25541,32 @@ html.device-desktop .data-table .sortable-cell:not(.sortable-cell-active) .table
   .md .page > .navbar ~ .tabbar-labels:not(.toolbar-bottom-md) ~ .searchbar ~ * .page-content,
   .md .page > .navbar ~ .tabbar-labels:not(.toolbar-bottom-md) ~ .searchbar ~ .page-content {
     padding-top: 184px;
+  }
+}
+@media (orientation: landscape) {
+  .md.device-iphone-x .ios-left-edge .searchbar-inner,
+  .md.device-iphone-x .ios-edges .searchbar-inner,
+  .md.device-iphone-x .popup .searchbar-inner,
+  .md.device-iphone-x .sheet-modal .searchbar-inner,
+  .md.device-iphone-x .panel-left .searchbar-inner {
+    padding-left: constant(safe-area-inset-left);
+    padding-left: env(safe-area-inset-left);
+  }
+  .md.device-iphone-x .ios-left-edge .searchbar-disable-button,
+  .md.device-iphone-x .ios-edges .searchbar-disable-button,
+  .md.device-iphone-x .popup .searchbar-disable-button,
+  .md.device-iphone-x .sheet-modal .searchbar-disable-button,
+  .md.device-iphone-x .panel-left .searchbar-disable-button {
+    left: calc(4px + constant(safe-area-inset-left));
+    left: calc(4px + env(safe-area-inset-left));
+  }
+  .md.device-iphone-x .ios-right-edge .searchbar-inner,
+  .md.device-iphone-x .ios-edges .searchbar-inner,
+  .md.device-iphone-x .popup .searchbar-inner,
+  .md.device-iphone-x .sheet-modal .searchbar-inner,
+  .md.device-iphone-x .panel-right .searchbar-inner {
+    padding-right: constant(safe-area-inset-right);
+    padding-right: env(safe-area-inset-right);
   }
 }
 /* === Messages === */
@@ -24509,6 +26145,24 @@ html.device-desktop .data-table .sortable-cell:not(.sortable-cell-active) .table
 .md .theme-dark .message-name {
   color: rgba(255, 255, 255, 0.54);
 }
+@media (orientation: landscape) {
+  .md.device-iphone-x .ios-left-edge .message-received,
+  .md.device-iphone-x .ios-edges .message-received,
+  .md.device-iphone-x .popup .message-received,
+  .md.device-iphone-x .sheet-modal .message-received,
+  .md.device-iphone-x .panel-left .message-received {
+    margin-left: calc(8px + constant(safe-area-inset-left));
+    margin-left: calc(8px + env(safe-area-inset-left));
+  }
+  .md.device-iphone-x .ios-right-edge .message-sent,
+  .md.device-iphone-x .ios-edges .message-sent,
+  .md.device-iphone-x .popup .message-sent,
+  .md.device-iphone-x .sheet-modal .message-sent,
+  .md.device-iphone-x .panel-right .message-sent {
+    margin-right: calc(8px + constant(safe-area-inset-right));
+    margin-right: calc(8px + env(safe-area-inset-right));
+  }
+}
 @-webkit-keyframes md-message-typing-indicator {
   0% {
     -webkit-transform: translateY(0%);
@@ -24692,6 +26346,24 @@ html.device-desktop .data-table .sortable-cell:not(.sortable-cell-active) .table
 .messagebar:not(.messagebar-sheet-visible) .messagebar-sheet {
   display: none;
 }
+.ios.device-iphone-x .messagebar:not(.messagebar-top),
+.md.device-iphone-x .messagebar:not(.messagebar-top) {
+  height: auto !important;
+}
+.ios.device-iphone-x .messagebar:not(.messagebar-top):not(.messagebar-sheet-visible),
+.md.device-iphone-x .messagebar:not(.messagebar-top):not(.messagebar-sheet-visible) {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.ios.device-iphone-x .messagebar-sheet,
+.md.device-iphone-x .messagebar-sheet {
+  padding-left: constant(safe-area-inset-left);
+  padding-left: env(safe-area-inset-left);
+  padding-right: constant(safe-area-inset-right);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
 .ios .messagebar {
   background: #fff;
   min-height: 44px;
@@ -24769,21 +26441,6 @@ html.device-desktop .data-table .sortable-cell:not(.sortable-cell-active) .table
 .ios .theme-dark .messagebar-attachments {
   border-color: #282829;
   background-color: #000;
-}
-.ios.device-iphone-x .messagebar:not(.messagebar-top) {
-  height: auto;
-}
-.ios.device-iphone-x .messagebar:not(.messagebar-top):not(.messagebar-sheet-visible) {
-  padding-bottom: constant(safe-area-inset-bottom);
-  padding-bottom: env(safe-area-inset-bottom);
-}
-.ios.device-iphone-x .messagebar-sheet {
-  padding-left: constant(safe-area-inset-left);
-  padding-left: env(safe-area-inset-left);
-  padding-right: constant(safe-area-inset-right);
-  padding-right: env(safe-area-inset-right);
-  padding-bottom: constant(safe-area-inset-bottom);
-  padding-bottom: env(safe-area-inset-bottom);
 }
 .md .messagebar {
   font-size: 16px;
@@ -24916,6 +26573,10 @@ html.device-desktop .data-table .sortable-cell:not(.sortable-cell-active) .table
   opacity: 1;
   -webkit-transition-duration: 150ms;
   transition-duration: 150ms;
+}
+.md .theme-dark .messagebar textarea,
+.messagebar.md .theme-dark textarea {
+  color: rgba(255, 255, 255, 0.87);
 }
 .md .theme-dark .messagebar-attachments {
   border-bottom-color: rgba(255, 255, 255, 0.2);
@@ -25388,13 +27049,15 @@ button.swiper-pagination-bullet {
   -webkit-transform-origin: right top;
   transform-origin: right top;
 }
-.swiper-container-horizontal > .swiper-pagination-progressbar {
+.swiper-container-horizontal > .swiper-pagination-progressbar,
+.swiper-container-vertical > .swiper-pagination-progressbar.swiper-pagination-progressbar-opposite {
   width: 100%;
   height: 4px;
   left: 0;
   top: 0;
 }
-.swiper-container-vertical > .swiper-pagination-progressbar {
+.swiper-container-vertical > .swiper-pagination-progressbar,
+.swiper-container-horizontal > .swiper-pagination-progressbar.swiper-pagination-progressbar-opposite {
   width: 4px;
   height: 100%;
   left: 0;
@@ -26374,6 +28037,14 @@ button.swiper-pagination-bullet {
 .md .color-black .photo-browser-page:not(.photo-browser-page-dark) .toolbar {
   background-color: rgba(0, 0, 0, 0.95);
 }
+.md.device-iphone-x .photo-browser-captions {
+  bottom: constant(safe-area-inset-bottom);
+  bottom: env(safe-area-inset-bottom);
+}
+.md.device-iphone-x .toolbar ~ .photo-browser-captions {
+  bottom: calc(48px + constant(safe-area-inset-bottom));
+  bottom: calc(48px + env(safe-area-inset-bottom));
+}
 /* === Notifications === */
 .notification {
   position: absolute;
@@ -26839,6 +28510,64 @@ html.with-statusbar.device-iphone-x .notification {
 .md .searchbar-input-wrap .autocomplete-dropdown .autocomplete-dropdown-placeholder {
   color: #939398;
 }
+/* === Tooltip === */
+.tooltip {
+  position: absolute;
+  z-index: 20000;
+  background: rgba(0, 0, 0, 0.87);
+  border-radius: 4px;
+  padding: 8px 16px;
+  color: #fff;
+  font-size: 14px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  line-height: 1.2;
+  opacity: 0;
+  -webkit-transform: scale(0.9);
+  transform: scale(0.9);
+  -webkit-transition-duration: 150ms;
+  transition-duration: 150ms;
+  -webkit-transition-property: opacity, -webkit-transform;
+  transition-property: opacity, -webkit-transform;
+  transition-property: opacity, transform;
+  transition-property: opacity, transform, -webkit-transform;
+  z-index: 99000;
+  font-weight: 500;
+}
+.tooltip.tooltip-in {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  opacity: 1;
+}
+.tooltip.tooltip-out {
+  opacity: 0;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+.device-desktop .tooltip {
+  font-size: 12px;
+  padding: 6px 8px;
+}
+/* === Gauge === */
+.gauge {
+  position: relative;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+}
+.gauge-svg,
+.gauge svg {
+  max-width: 100%;
+  height: auto;
+}
+.gauge-svg circle,
+.gauge svg circle,
+.gauge-svg path,
+.gauge svg path {
+  -webkit-transition-duration: 400ms;
+  transition-duration: 400ms;
+}
 iframe#viAd {
   z-index: 12900 !important;
   background: #000 !important;
@@ -26916,6 +28645,373 @@ iframe#viAd {
   margin-left: 2px;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+}
+/* === Elevation === */
+.elevation-0 {
+  -webkit-box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0) !important;
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0) !important;
+}
+.elevation-1 {
+  -webkit-box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-2 {
+  -webkit-box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-3 {
+  -webkit-box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-4 {
+  -webkit-box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-5 {
+  -webkit-box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 5px 8px 0px rgba(0, 0, 0, 0.14), 0px 1px 14px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 5px 8px 0px rgba(0, 0, 0, 0.14), 0px 1px 14px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-6 {
+  -webkit-box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-7 {
+  -webkit-box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2), 0px 7px 10px 1px rgba(0, 0, 0, 0.14), 0px 2px 16px 1px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2), 0px 7px 10px 1px rgba(0, 0, 0, 0.14), 0px 2px 16px 1px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-8 {
+  -webkit-box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-9 {
+  -webkit-box-shadow: 0px 5px 6px -3px rgba(0, 0, 0, 0.2), 0px 9px 12px 1px rgba(0, 0, 0, 0.14), 0px 3px 16px 2px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 5px 6px -3px rgba(0, 0, 0, 0.2), 0px 9px 12px 1px rgba(0, 0, 0, 0.14), 0px 3px 16px 2px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-10 {
+  -webkit-box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.2), 0px 10px 14px 1px rgba(0, 0, 0, 0.14), 0px 4px 18px 3px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.2), 0px 10px 14px 1px rgba(0, 0, 0, 0.14), 0px 4px 18px 3px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-11 {
+  -webkit-box-shadow: 0px 6px 7px -4px rgba(0, 0, 0, 0.2), 0px 11px 15px 1px rgba(0, 0, 0, 0.14), 0px 4px 20px 3px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 6px 7px -4px rgba(0, 0, 0, 0.2), 0px 11px 15px 1px rgba(0, 0, 0, 0.14), 0px 4px 20px 3px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-12 {
+  -webkit-box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 12px 17px 2px rgba(0, 0, 0, 0.14), 0px 5px 22px 4px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 12px 17px 2px rgba(0, 0, 0, 0.14), 0px 5px 22px 4px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-13 {
+  -webkit-box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 13px 19px 2px rgba(0, 0, 0, 0.14), 0px 5px 24px 4px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 13px 19px 2px rgba(0, 0, 0, 0.14), 0px 5px 24px 4px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-14 {
+  -webkit-box-shadow: 0px 7px 9px -4px rgba(0, 0, 0, 0.2), 0px 14px 21px 2px rgba(0, 0, 0, 0.14), 0px 5px 26px 4px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 7px 9px -4px rgba(0, 0, 0, 0.2), 0px 14px 21px 2px rgba(0, 0, 0, 0.14), 0px 5px 26px 4px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-15 {
+  -webkit-box-shadow: 0px 8px 9px -5px rgba(0, 0, 0, 0.2), 0px 15px 22px 2px rgba(0, 0, 0, 0.14), 0px 6px 28px 5px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 8px 9px -5px rgba(0, 0, 0, 0.2), 0px 15px 22px 2px rgba(0, 0, 0, 0.14), 0px 6px 28px 5px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-16 {
+  -webkit-box-shadow: 0px 8px 10px -5px rgba(0, 0, 0, 0.2), 0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 8px 10px -5px rgba(0, 0, 0, 0.2), 0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-17 {
+  -webkit-box-shadow: 0px 8px 11px -5px rgba(0, 0, 0, 0.2), 0px 17px 26px 2px rgba(0, 0, 0, 0.14), 0px 6px 32px 5px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 8px 11px -5px rgba(0, 0, 0, 0.2), 0px 17px 26px 2px rgba(0, 0, 0, 0.14), 0px 6px 32px 5px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-18 {
+  -webkit-box-shadow: 0px 9px 11px -5px rgba(0, 0, 0, 0.2), 0px 18px 28px 2px rgba(0, 0, 0, 0.14), 0px 7px 34px 6px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 9px 11px -5px rgba(0, 0, 0, 0.2), 0px 18px 28px 2px rgba(0, 0, 0, 0.14), 0px 7px 34px 6px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-19 {
+  -webkit-box-shadow: 0px 9px 12px -6px rgba(0, 0, 0, 0.2), 0px 19px 29px 2px rgba(0, 0, 0, 0.14), 0px 7px 36px 6px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 9px 12px -6px rgba(0, 0, 0, 0.2), 0px 19px 29px 2px rgba(0, 0, 0, 0.14), 0px 7px 36px 6px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-20 {
+  -webkit-box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2), 0px 20px 31px 3px rgba(0, 0, 0, 0.14), 0px 8px 38px 7px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2), 0px 20px 31px 3px rgba(0, 0, 0, 0.14), 0px 8px 38px 7px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-21 {
+  -webkit-box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2), 0px 21px 33px 3px rgba(0, 0, 0, 0.14), 0px 8px 40px 7px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2), 0px 21px 33px 3px rgba(0, 0, 0, 0.14), 0px 8px 40px 7px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-22 {
+  -webkit-box-shadow: 0px 10px 14px -6px rgba(0, 0, 0, 0.2), 0px 22px 35px 3px rgba(0, 0, 0, 0.14), 0px 8px 42px 7px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 10px 14px -6px rgba(0, 0, 0, 0.2), 0px 22px 35px 3px rgba(0, 0, 0, 0.14), 0px 8px 42px 7px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-23 {
+  -webkit-box-shadow: 0px 11px 14px -7px rgba(0, 0, 0, 0.2), 0px 23px 36px 3px rgba(0, 0, 0, 0.14), 0px 9px 44px 8px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 11px 14px -7px rgba(0, 0, 0, 0.2), 0px 23px 36px 3px rgba(0, 0, 0, 0.14), 0px 9px 44px 8px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-24 {
+  -webkit-box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-0:hover {
+  -webkit-box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0) !important;
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0) !important;
+}
+.device-desktop .elevation-hover-1:hover {
+  -webkit-box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-2:hover {
+  -webkit-box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-3:hover {
+  -webkit-box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-4:hover {
+  -webkit-box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-5:hover {
+  -webkit-box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 5px 8px 0px rgba(0, 0, 0, 0.14), 0px 1px 14px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 5px 8px 0px rgba(0, 0, 0, 0.14), 0px 1px 14px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-6:hover {
+  -webkit-box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-7:hover {
+  -webkit-box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2), 0px 7px 10px 1px rgba(0, 0, 0, 0.14), 0px 2px 16px 1px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2), 0px 7px 10px 1px rgba(0, 0, 0, 0.14), 0px 2px 16px 1px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-8:hover {
+  -webkit-box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-9:hover {
+  -webkit-box-shadow: 0px 5px 6px -3px rgba(0, 0, 0, 0.2), 0px 9px 12px 1px rgba(0, 0, 0, 0.14), 0px 3px 16px 2px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 5px 6px -3px rgba(0, 0, 0, 0.2), 0px 9px 12px 1px rgba(0, 0, 0, 0.14), 0px 3px 16px 2px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-10:hover {
+  -webkit-box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.2), 0px 10px 14px 1px rgba(0, 0, 0, 0.14), 0px 4px 18px 3px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.2), 0px 10px 14px 1px rgba(0, 0, 0, 0.14), 0px 4px 18px 3px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-11:hover {
+  -webkit-box-shadow: 0px 6px 7px -4px rgba(0, 0, 0, 0.2), 0px 11px 15px 1px rgba(0, 0, 0, 0.14), 0px 4px 20px 3px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 6px 7px -4px rgba(0, 0, 0, 0.2), 0px 11px 15px 1px rgba(0, 0, 0, 0.14), 0px 4px 20px 3px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-12:hover {
+  -webkit-box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 12px 17px 2px rgba(0, 0, 0, 0.14), 0px 5px 22px 4px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 12px 17px 2px rgba(0, 0, 0, 0.14), 0px 5px 22px 4px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-13:hover {
+  -webkit-box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 13px 19px 2px rgba(0, 0, 0, 0.14), 0px 5px 24px 4px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 13px 19px 2px rgba(0, 0, 0, 0.14), 0px 5px 24px 4px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-14:hover {
+  -webkit-box-shadow: 0px 7px 9px -4px rgba(0, 0, 0, 0.2), 0px 14px 21px 2px rgba(0, 0, 0, 0.14), 0px 5px 26px 4px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 7px 9px -4px rgba(0, 0, 0, 0.2), 0px 14px 21px 2px rgba(0, 0, 0, 0.14), 0px 5px 26px 4px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-15:hover {
+  -webkit-box-shadow: 0px 8px 9px -5px rgba(0, 0, 0, 0.2), 0px 15px 22px 2px rgba(0, 0, 0, 0.14), 0px 6px 28px 5px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 8px 9px -5px rgba(0, 0, 0, 0.2), 0px 15px 22px 2px rgba(0, 0, 0, 0.14), 0px 6px 28px 5px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-16:hover {
+  -webkit-box-shadow: 0px 8px 10px -5px rgba(0, 0, 0, 0.2), 0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 8px 10px -5px rgba(0, 0, 0, 0.2), 0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-17:hover {
+  -webkit-box-shadow: 0px 8px 11px -5px rgba(0, 0, 0, 0.2), 0px 17px 26px 2px rgba(0, 0, 0, 0.14), 0px 6px 32px 5px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 8px 11px -5px rgba(0, 0, 0, 0.2), 0px 17px 26px 2px rgba(0, 0, 0, 0.14), 0px 6px 32px 5px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-18:hover {
+  -webkit-box-shadow: 0px 9px 11px -5px rgba(0, 0, 0, 0.2), 0px 18px 28px 2px rgba(0, 0, 0, 0.14), 0px 7px 34px 6px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 9px 11px -5px rgba(0, 0, 0, 0.2), 0px 18px 28px 2px rgba(0, 0, 0, 0.14), 0px 7px 34px 6px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-19:hover {
+  -webkit-box-shadow: 0px 9px 12px -6px rgba(0, 0, 0, 0.2), 0px 19px 29px 2px rgba(0, 0, 0, 0.14), 0px 7px 36px 6px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 9px 12px -6px rgba(0, 0, 0, 0.2), 0px 19px 29px 2px rgba(0, 0, 0, 0.14), 0px 7px 36px 6px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-20:hover {
+  -webkit-box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2), 0px 20px 31px 3px rgba(0, 0, 0, 0.14), 0px 8px 38px 7px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2), 0px 20px 31px 3px rgba(0, 0, 0, 0.14), 0px 8px 38px 7px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-21:hover {
+  -webkit-box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2), 0px 21px 33px 3px rgba(0, 0, 0, 0.14), 0px 8px 40px 7px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2), 0px 21px 33px 3px rgba(0, 0, 0, 0.14), 0px 8px 40px 7px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-22:hover {
+  -webkit-box-shadow: 0px 10px 14px -6px rgba(0, 0, 0, 0.2), 0px 22px 35px 3px rgba(0, 0, 0, 0.14), 0px 8px 42px 7px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 10px 14px -6px rgba(0, 0, 0, 0.2), 0px 22px 35px 3px rgba(0, 0, 0, 0.14), 0px 8px 42px 7px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-23:hover {
+  -webkit-box-shadow: 0px 11px 14px -7px rgba(0, 0, 0, 0.2), 0px 23px 36px 3px rgba(0, 0, 0, 0.14), 0px 9px 44px 8px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 11px 14px -7px rgba(0, 0, 0, 0.2), 0px 23px 36px 3px rgba(0, 0, 0, 0.14), 0px 9px 44px 8px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-24:hover {
+  -webkit-box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-0,
+.device-desktop .active-state.elevation-pressed-0 {
+  -webkit-box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0) !important;
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0) !important;
+}
+.active-state.elevation-pressed-1,
+.device-desktop .active-state.elevation-pressed-1 {
+  -webkit-box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-2,
+.device-desktop .active-state.elevation-pressed-2 {
+  -webkit-box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-3,
+.device-desktop .active-state.elevation-pressed-3 {
+  -webkit-box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-4,
+.device-desktop .active-state.elevation-pressed-4 {
+  -webkit-box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-5,
+.device-desktop .active-state.elevation-pressed-5 {
+  -webkit-box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 5px 8px 0px rgba(0, 0, 0, 0.14), 0px 1px 14px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 5px 8px 0px rgba(0, 0, 0, 0.14), 0px 1px 14px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-6,
+.device-desktop .active-state.elevation-pressed-6 {
+  -webkit-box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-7,
+.device-desktop .active-state.elevation-pressed-7 {
+  -webkit-box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2), 0px 7px 10px 1px rgba(0, 0, 0, 0.14), 0px 2px 16px 1px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2), 0px 7px 10px 1px rgba(0, 0, 0, 0.14), 0px 2px 16px 1px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-8,
+.device-desktop .active-state.elevation-pressed-8 {
+  -webkit-box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-9,
+.device-desktop .active-state.elevation-pressed-9 {
+  -webkit-box-shadow: 0px 5px 6px -3px rgba(0, 0, 0, 0.2), 0px 9px 12px 1px rgba(0, 0, 0, 0.14), 0px 3px 16px 2px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 5px 6px -3px rgba(0, 0, 0, 0.2), 0px 9px 12px 1px rgba(0, 0, 0, 0.14), 0px 3px 16px 2px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-10,
+.device-desktop .active-state.elevation-pressed-10 {
+  -webkit-box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.2), 0px 10px 14px 1px rgba(0, 0, 0, 0.14), 0px 4px 18px 3px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.2), 0px 10px 14px 1px rgba(0, 0, 0, 0.14), 0px 4px 18px 3px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-11,
+.device-desktop .active-state.elevation-pressed-11 {
+  -webkit-box-shadow: 0px 6px 7px -4px rgba(0, 0, 0, 0.2), 0px 11px 15px 1px rgba(0, 0, 0, 0.14), 0px 4px 20px 3px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 6px 7px -4px rgba(0, 0, 0, 0.2), 0px 11px 15px 1px rgba(0, 0, 0, 0.14), 0px 4px 20px 3px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-12,
+.device-desktop .active-state.elevation-pressed-12 {
+  -webkit-box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 12px 17px 2px rgba(0, 0, 0, 0.14), 0px 5px 22px 4px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 12px 17px 2px rgba(0, 0, 0, 0.14), 0px 5px 22px 4px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-13,
+.device-desktop .active-state.elevation-pressed-13 {
+  -webkit-box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 13px 19px 2px rgba(0, 0, 0, 0.14), 0px 5px 24px 4px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 13px 19px 2px rgba(0, 0, 0, 0.14), 0px 5px 24px 4px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-14,
+.device-desktop .active-state.elevation-pressed-14 {
+  -webkit-box-shadow: 0px 7px 9px -4px rgba(0, 0, 0, 0.2), 0px 14px 21px 2px rgba(0, 0, 0, 0.14), 0px 5px 26px 4px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 7px 9px -4px rgba(0, 0, 0, 0.2), 0px 14px 21px 2px rgba(0, 0, 0, 0.14), 0px 5px 26px 4px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-15,
+.device-desktop .active-state.elevation-pressed-15 {
+  -webkit-box-shadow: 0px 8px 9px -5px rgba(0, 0, 0, 0.2), 0px 15px 22px 2px rgba(0, 0, 0, 0.14), 0px 6px 28px 5px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 8px 9px -5px rgba(0, 0, 0, 0.2), 0px 15px 22px 2px rgba(0, 0, 0, 0.14), 0px 6px 28px 5px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-16,
+.device-desktop .active-state.elevation-pressed-16 {
+  -webkit-box-shadow: 0px 8px 10px -5px rgba(0, 0, 0, 0.2), 0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 8px 10px -5px rgba(0, 0, 0, 0.2), 0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-17,
+.device-desktop .active-state.elevation-pressed-17 {
+  -webkit-box-shadow: 0px 8px 11px -5px rgba(0, 0, 0, 0.2), 0px 17px 26px 2px rgba(0, 0, 0, 0.14), 0px 6px 32px 5px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 8px 11px -5px rgba(0, 0, 0, 0.2), 0px 17px 26px 2px rgba(0, 0, 0, 0.14), 0px 6px 32px 5px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-18,
+.device-desktop .active-state.elevation-pressed-18 {
+  -webkit-box-shadow: 0px 9px 11px -5px rgba(0, 0, 0, 0.2), 0px 18px 28px 2px rgba(0, 0, 0, 0.14), 0px 7px 34px 6px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 9px 11px -5px rgba(0, 0, 0, 0.2), 0px 18px 28px 2px rgba(0, 0, 0, 0.14), 0px 7px 34px 6px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-19,
+.device-desktop .active-state.elevation-pressed-19 {
+  -webkit-box-shadow: 0px 9px 12px -6px rgba(0, 0, 0, 0.2), 0px 19px 29px 2px rgba(0, 0, 0, 0.14), 0px 7px 36px 6px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 9px 12px -6px rgba(0, 0, 0, 0.2), 0px 19px 29px 2px rgba(0, 0, 0, 0.14), 0px 7px 36px 6px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-20,
+.device-desktop .active-state.elevation-pressed-20 {
+  -webkit-box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2), 0px 20px 31px 3px rgba(0, 0, 0, 0.14), 0px 8px 38px 7px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2), 0px 20px 31px 3px rgba(0, 0, 0, 0.14), 0px 8px 38px 7px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-21,
+.device-desktop .active-state.elevation-pressed-21 {
+  -webkit-box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2), 0px 21px 33px 3px rgba(0, 0, 0, 0.14), 0px 8px 40px 7px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2), 0px 21px 33px 3px rgba(0, 0, 0, 0.14), 0px 8px 40px 7px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-22,
+.device-desktop .active-state.elevation-pressed-22 {
+  -webkit-box-shadow: 0px 10px 14px -6px rgba(0, 0, 0, 0.2), 0px 22px 35px 3px rgba(0, 0, 0, 0.14), 0px 8px 42px 7px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 10px 14px -6px rgba(0, 0, 0, 0.2), 0px 22px 35px 3px rgba(0, 0, 0, 0.14), 0px 8px 42px 7px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-23,
+.device-desktop .active-state.elevation-pressed-23 {
+  -webkit-box-shadow: 0px 11px 14px -7px rgba(0, 0, 0, 0.2), 0px 23px 36px 3px rgba(0, 0, 0, 0.14), 0px 9px 44px 8px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 11px 14px -7px rgba(0, 0, 0, 0.2), 0px 23px 36px 3px rgba(0, 0, 0, 0.14), 0px 9px 44px 8px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-24,
+.device-desktop .active-state.elevation-pressed-24 {
+  -webkit-box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-transition-100 {
+  -webkit-transition-duration: 100ms;
+  transition-duration: 100ms;
+  -webkit-transition-property: -webkit-box-shadow;
+  transition-property: -webkit-box-shadow;
+  transition-property: box-shadow;
+  transition-property: box-shadow, -webkit-box-shadow;
+}
+.elevation-transition,
+.elevation-transition-200 {
+  -webkit-transition-duration: 200ms;
+  transition-duration: 200ms;
+  -webkit-transition-property: -webkit-box-shadow;
+  transition-property: -webkit-box-shadow;
+  transition-property: box-shadow;
+  transition-property: box-shadow, -webkit-box-shadow;
+}
+.elevation-transition-300 {
+  -webkit-transition-duration: 300ms;
+  transition-duration: 300ms;
+  -webkit-transition-property: -webkit-box-shadow;
+  transition-property: -webkit-box-shadow;
+  transition-property: box-shadow;
+  transition-property: box-shadow, -webkit-box-shadow;
+}
+.elevation-transition-400 {
+  -webkit-transition-duration: 400ms;
+  transition-duration: 400ms;
+  -webkit-transition-property: -webkit-box-shadow;
+  transition-property: -webkit-box-shadow;
+  transition-property: box-shadow;
+  transition-property: box-shadow, -webkit-box-shadow;
+}
+.elevation-transition-500 {
+  -webkit-transition-duration: 500ms;
+  transition-duration: 500ms;
+  -webkit-transition-property: -webkit-box-shadow;
+  transition-property: -webkit-box-shadow;
+  transition-property: box-shadow;
+  transition-property: box-shadow, -webkit-box-shadow;
 }
 /* === Typography === */
 .display-flex {

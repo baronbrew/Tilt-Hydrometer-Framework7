@@ -1,5 +1,5 @@
 /**
- * Framework7 2.1.1
+ * Framework7 3.0.0
  * Full featured mobile HTML framework for building iOS & Android apps
  * http://framework7.io/
  *
@@ -7,7 +7,7 @@
  *
  * Released under the MIT License
  *
- * Released on: March 17, 2018
+ * Released on: July 5, 2018
  */
 html {
   direction: rtl;
@@ -47,14 +47,14 @@ a, button, input, textarea, .link, .button, label, .sortable-handler {
   -ms-touch-action: manipulation;
 }
 */
-@media all and (width: 1024px) and (height: 691px) and (orientation: landscape) {
+@media (width: 1024px) and (height: 691px) and (orientation: landscape) {
   html,
   body,
   .framework7-root {
     height: 671px;
   }
 }
-@media all and (width: 1024px) and (height: 692px) and (orientation: landscape) {
+@media (width: 1024px) and (height: 692px) and (orientation: landscape) {
   html,
   body,
   .framework7-root {
@@ -94,14 +94,14 @@ p {
 .ios a {
   color: #007aff;
 }
-@media all and (width: 1024px) and (height: 691px) and (orientation: landscape) {
+@media (width: 1024px) and (height: 691px) and (orientation: landscape) {
   .ios,
   .ios body,
   .ios .framework7-root {
     height: 671px;
   }
 }
-@media all and (width: 1024px) and (height: 692px) and (orientation: landscape) {
+@media (width: 1024px) and (height: 692px) and (orientation: landscape) {
   .ios,
   .ios body,
   .ios .framework7-root {
@@ -195,29 +195,13 @@ html.with-statusbar.device-ios .framework7-root,
 html.with-statusbar.ios:not(.device-ios):not(.device-android) .framework7-root {
   padding-top: 20px;
 }
-html.with-statusbar.device-ios .panel,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) .panel {
-  top: 20px;
-  height: calc(100% - 20px);
-}
 html.with-statusbar.device-android .framework7-root,
 html.with-statusbar.md:not(.device-ios):not(.device-android) .framework7-root {
   padding-top: 24px;
 }
-html.with-statusbar.device-android .panel,
-html.with-statusbar.md:not(.device-ios):not(.device-android) .panel {
-  top: 24px;
-  height: calc(100% - 24px);
-}
 html.with-statusbar.device-iphone-x .framework7-root {
   padding-top: constant(safe-area-inset-top);
   padding-top: env(safe-area-inset-top);
-}
-html.with-statusbar.device-iphone-x .panel {
-  top: constant(safe-area-inset-top);
-  top: env(safe-area-inset-top);
-  height: calc(100% - constant(safe-area-inset-top));
-  height: calc(100% - env(safe-area-inset-top));
 }
 .ios .statusbar {
   background: #f7f7f8;
@@ -317,7 +301,7 @@ html.with-statusbar.device-iphone-x .panel {
   opacity: 1;
 }
 .ios .page-transitioning,
-.ios .page-transitioning page-shadow-effect,
+.ios .page-transitioning .page-shadow-effect,
 .ios .page-transitioning .page-opacity-effect {
   -webkit-transition-duration: 400ms;
   transition-duration: 400ms;
@@ -1772,7 +1756,7 @@ html.with-statusbar.device-iphone-x .panel {
 .block-footer {
   margin-top: 10px;
 }
-@media all and (min-width: 768px) {
+@media (min-width: 768px) {
   .block-strong.tablet-inset:before {
     display: none !important;
   }
@@ -1900,7 +1884,7 @@ html.with-statusbar.device-iphone-x .panel {
   margin-top: -25px;
   margin-bottom: 35px;
 }
-@media all and (min-width: 768px) {
+@media (min-width: 768px) {
   .ios .block.tablet-inset {
     margin-left: 15px;
     margin-right: 15px;
@@ -2019,7 +2003,7 @@ html.with-statusbar.device-iphone-x .panel {
     margin-right: calc(15px + env(safe-area-inset-right));
   }
 }
-@media (orientation: landscape) and all and (min-width: 768px) {
+@media (orientation: landscape) and (min-width: 768px) {
   .ios.device-iphone-x .ios-left-edge .block.tablet-inset:not(.no-ios-edges):not(.no-ios-left-edge),
   .ios.device-iphone-x .ios-edges .block.tablet-inset:not(.no-ios-edges):not(.no-ios-left-edge),
   .ios.device-iphone-x .popup .block.tablet-inset:not(.no-ios-edges):not(.no-ios-left-edge),
@@ -2029,7 +2013,7 @@ html.with-statusbar.device-iphone-x .panel {
     margin-left: calc(15px + env(safe-area-inset-left));
   }
 }
-@media (orientation: landscape) and all and (min-width: 768px) {
+@media (orientation: landscape) and (min-width: 768px) {
   .ios.device-iphone-x .ios-right-edge .block.tablet-inset:not(.no-ios-edges):not(.no-ios-right-edge),
   .ios.device-iphone-x .ios-edges .block.tablet-inset:not(.no-ios-edges):not(.no-ios-right-edge),
   .ios.device-iphone-x .popup .block.tablet-inset:not(.no-ios-edges):not(.no-ios-right-edge),
@@ -2281,7 +2265,7 @@ html.with-statusbar.device-iphone-x .panel {
 .list.simple-list li {
   position: relative;
   white-space: nowrap;
-  text-oveflow: ellipsis;
+  text-overflow: ellipsis;
   max-width: 100%;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -2330,7 +2314,7 @@ html.with-statusbar.device-iphone-x .panel {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   white-space: nowrap;
-  text-oveflow: ellipsis;
+  text-overflow: ellipsis;
   max-width: 100%;
 }
 .list.links-list li:last-child a:after {
@@ -2684,6 +2668,10 @@ li.list-group-title:before {
   padding: 4px 15px;
   background: #f7f7f7;
   color: #8e8e93;
+}
+.ios .item-divider:after,
+.ios .list-group-title:after {
+  display: none !important;
 }
 .ios .list-group-title {
   margin-top: 0;
@@ -3541,6 +3529,9 @@ button {
   border-radius: 0 5px 5px 0;
   border-right-width: 1px;
   border-right-style: solid;
+}
+.ios .segmented .button:first-child.button-small {
+  border-right-width: 2px;
 }
 .ios .segmented .button:last-child {
   border-radius: 5px 0 0 5px;
@@ -4745,7 +4736,7 @@ html.with-modal-dialog .page-content {
     transform: translate3d(0, 100vh, 0);
   }
 }
-@media all and (max-width: 629px), (max-height: 629px) {
+@media (max-width: 629px), (max-height: 629px) {
   html.with-statusbar .popup-backdrop {
     z-index: 9500;
   }
@@ -4766,7 +4757,7 @@ html.with-modal-dialog .page-content {
     top: 24px;
   }
 }
-@media all and (min-width: 630px), (min-height: 630px) {
+@media (min-width: 630px), (min-height: 630px) {
   html.with-statusbar.device-ios .popup-tablet-fullscreen,
   html.with-statusbar.ios:not(.device-ios):not(.device-android) .popup-tablet-fullscreen {
     height: calc(100% - 20px);
@@ -5563,7 +5554,8 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .login-screen {
   -webkit-transform: scaleY(0.33);
   transform: scaleY(0.33);
 }
-.ios.device-iphone-x .sheet-modal .toolbar ~ .sheet-modal-inner .page-content {
+.ios.device-iphone-x .sheet-modal .toolbar ~ .sheet-modal-inner .page-content,
+.ios.device-iphone-x .sheet-modal .sheet-modal-inner > .page-content {
   padding-bottom: constant(safe-area-inset-bottom);
   padding-bottom: env(safe-area-inset-bottom);
 }
@@ -5581,21 +5573,20 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .login-screen {
 }
 /* === Toast === */
 .toast {
-  -webkit-transition-duration: 450ms;
-  transition-duration: 450ms;
   -webkit-transition-property: opacity, -webkit-transform;
   transition-property: opacity, -webkit-transform;
   transition-property: transform, opacity;
   transition-property: transform, opacity, -webkit-transform;
   position: absolute;
-  width: 100%;
   max-width: 568px;
-  left: 0;
   z-index: 20000;
   color: #fff;
   font-size: 14px;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+}
+.toast.modal-in {
+  opacity: 1;
 }
 .toast .toast-content {
   display: -webkit-box;
@@ -5644,54 +5635,11 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .login-screen {
 }
 .toast.toast-center {
   top: 50%;
-  left: 50%;
-  width: auto;
   opacity: 0;
-  -webkit-transform: translate3d(-50%, -50%, 0);
-  transform: translate3d(-50%, -50%, 0);
-}
-.toast.toast-center.modal-in {
-  -webkit-transform: translate3d(-50%, -50%, 0);
-  transform: translate3d(-50%, -50%, 0);
-  opacity: 1;
-}
-.toast.toast-top {
-  top: 0;
-  -webkit-transform: translate3d(0, -100%, 0);
-  transform: translate3d(0, -100%, 0);
-}
-.toast.toast-top.modal-in {
-  -webkit-transform: translate3d(0, 0%, 0);
-  transform: translate3d(0, 0%, 0);
-  opacity: 1;
-}
-.toast.toast-bottom {
-  bottom: 0;
-  -webkit-transform: translate3d(0, 100%, 0);
-  transform: translate3d(0, 100%, 0);
-}
-.toast.toast-bottom.modal-in {
-  -webkit-transform: translate3d(0, 0%, 0);
-  transform: translate3d(0, 0%, 0);
-  opacity: 1;
-}
-@media (min-width: 569px) {
-  .toast {
-    left: 50%;
-    margin-left: -284px;
-  }
-  .toast.toast-center {
-    margin-left: 0;
-  }
 }
 @media (min-width: 1024px) {
   .toast {
     opacity: 0;
-    margin-left: auto;
-    width: auto;
-  }
-  .toast.toast-center {
-    margin-left: 0;
   }
 }
 html.with-statusbar.device-ios .toast-top,
@@ -5707,8 +5655,12 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .toast-top {
   margin-top: 24px;
 }
 .ios .toast {
+  -webkit-transition-duration: 450ms;
+  transition-duration: 450ms;
   background: rgba(0, 0, 0, 0.75);
   opacity: 0;
+  width: 100%;
+  left: 0;
 }
 @supports ((-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))) {
   .ios .toast {
@@ -5718,7 +5670,45 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .toast-top {
   }
 }
 .ios .toast.toast-center {
+  width: auto;
+  left: 50%;
   border-radius: 8px;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+}
+.ios .toast.toast-center.modal-in {
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+  opacity: 1;
+}
+.ios .toast.toast-top {
+  top: 0;
+  -webkit-transform: translate3d(0, -100%, 0);
+  transform: translate3d(0, -100%, 0);
+}
+.ios .toast.toast-top.modal-in {
+  -webkit-transform: translate3d(0, 0%, 0);
+  transform: translate3d(0, 0%, 0);
+  opacity: 1;
+}
+.ios .toast.toast-bottom {
+  bottom: 0;
+  -webkit-transform: translate3d(0, 100%, 0);
+  transform: translate3d(0, 100%, 0);
+}
+.ios .toast.toast-bottom.modal-in {
+  -webkit-transform: translate3d(0, 0%, 0);
+  transform: translate3d(0, 0%, 0);
+  opacity: 1;
+}
+@media (min-width: 569px) {
+  .ios .toast {
+    left: 50%;
+    margin-left: -284px;
+  }
+  .ios .toast.toast-center {
+    margin-left: 0;
+  }
 }
 @media (min-width: 569px) {
   .ios .toast {
@@ -5732,6 +5722,10 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .toast-top {
   }
 }
 @media (min-width: 1024px) {
+  .ios .toast {
+    margin-left: 0;
+    width: auto;
+  }
   .ios .toast.toast-bottom,
   .ios .toast.toast-top {
     left: 15px;
@@ -5899,79 +5893,29 @@ body > .progressbar-infinite,
   -webkit-transform-origin: center top !important;
   transform-origin: center top !important;
 }
-html.with-statusbar.device-ios body > .progressbar,
-html.with-statusbar.device-ios .view > .progressbar,
-html.with-statusbar.device-ios .views > .progressbar,
-html.with-statusbar.device-ios .page > .progressbar,
-html.with-statusbar.device-ios .panel > .progressbar,
-html.with-statusbar.device-ios .popup > .progressbar,
-html.with-statusbar.device-ios .framework7-root > .progressbar,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) body > .progressbar,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) .view > .progressbar,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) .views > .progressbar,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) .page > .progressbar,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) .panel > .progressbar,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) .popup > .progressbar,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) .framework7-root > .progressbar,
-html.with-statusbar.device-ios body > .progressbar-infinite,
-html.with-statusbar.device-ios .view > .progressbar-infinite,
-html.with-statusbar.device-ios .views > .progressbar-infinite,
-html.with-statusbar.device-ios .page > .progressbar-infinite,
-html.with-statusbar.device-ios .panel > .progressbar-infinite,
-html.with-statusbar.device-ios .popup > .progressbar-infinite,
-html.with-statusbar.device-ios .framework7-root > .progressbar-infinite,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) body > .progressbar-infinite,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) .view > .progressbar-infinite,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) .views > .progressbar-infinite,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) .page > .progressbar-infinite,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) .panel > .progressbar-infinite,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) .popup > .progressbar-infinite,
-html.with-statusbar.ios:not(.device-ios):not(.device-android) .framework7-root > .progressbar-infinite {
+.with-statusbar.device-ios body > .progressbar,
+.with-statusbar.ios:not(.device-ios):not(.device-android) body > .progressbar,
+.with-statusbar.device-ios .framework7-root > .progressbar,
+.with-statusbar.ios:not(.device-ios):not(.device-android) .framework7-root > .progressbar,
+.with-statusbar.device-ios body > .progressbar-infinite,
+.with-statusbar.ios:not(.device-ios):not(.device-android) body > .progressbar-infinite,
+.with-statusbar.device-ios .framework7-root > .progressbar-infinite,
+.with-statusbar.ios:not(.device-ios):not(.device-android) .framework7-root > .progressbar-infinite {
   top: 20px;
 }
-html.with-statusbar.device-android body > .progressbar,
-html.with-statusbar.device-android .view > .progressbar,
-html.with-statusbar.device-android .views > .progressbar,
-html.with-statusbar.device-android .page > .progressbar,
-html.with-statusbar.device-android .panel > .progressbar,
-html.with-statusbar.device-android .popup > .progressbar,
-html.with-statusbar.device-android .framework7-root > .progressbar,
-html.with-statusbar.md:not(.device-ios):not(.device-android) body > .progressbar,
-html.with-statusbar.md:not(.device-ios):not(.device-android) .view > .progressbar,
-html.with-statusbar.md:not(.device-ios):not(.device-android) .views > .progressbar,
-html.with-statusbar.md:not(.device-ios):not(.device-android) .page > .progressbar,
-html.with-statusbar.md:not(.device-ios):not(.device-android) .panel > .progressbar,
-html.with-statusbar.md:not(.device-ios):not(.device-android) .popup > .progressbar,
-html.with-statusbar.md:not(.device-ios):not(.device-android) .framework7-root > .progressbar,
-html.with-statusbar.device-android body > .progressbar-infinite,
-html.with-statusbar.device-android .view > .progressbar-infinite,
-html.with-statusbar.device-android .views > .progressbar-infinite,
-html.with-statusbar.device-android .page > .progressbar-infinite,
-html.with-statusbar.device-android .panel > .progressbar-infinite,
-html.with-statusbar.device-android .popup > .progressbar-infinite,
-html.with-statusbar.device-android .framework7-root > .progressbar-infinite,
-html.with-statusbar.md:not(.device-ios):not(.device-android) body > .progressbar-infinite,
-html.with-statusbar.md:not(.device-ios):not(.device-android) .view > .progressbar-infinite,
-html.with-statusbar.md:not(.device-ios):not(.device-android) .views > .progressbar-infinite,
-html.with-statusbar.md:not(.device-ios):not(.device-android) .page > .progressbar-infinite,
-html.with-statusbar.md:not(.device-ios):not(.device-android) .panel > .progressbar-infinite,
-html.with-statusbar.md:not(.device-ios):not(.device-android) .popup > .progressbar-infinite,
-html.with-statusbar.md:not(.device-ios):not(.device-android) .framework7-root > .progressbar-infinite {
+.with-statusbar.device-android body > .progressbar,
+.with-statusbar.md:not(.device-ios):not(.device-android) body > .progressbar,
+.with-statusbar.device-android .framework7-root > .progressbar,
+.with-statusbar.md:not(.device-ios):not(.device-android) .framework7-root > .progressbar,
+.with-statusbar.device-android body > .progressbar-infinite,
+.with-statusbar.md:not(.device-ios):not(.device-android) body > .progressbar-infinite,
+.with-statusbar.device-android .framework7-root > .progressbar-infinite,
+.with-statusbar.md:not(.device-ios):not(.device-android) .framework7-root > .progressbar-infinite {
   top: 24px;
 }
 .with-statusbar.device-iphone-x body > .progressbar,
-.with-statusbar.device-iphone-x .view > .progressbar,
-.with-statusbar.device-iphone-x .views > .progressbar,
-.with-statusbar.device-iphone-x .page > .progressbar,
-.with-statusbar.device-iphone-x .panel > .progressbar,
-.with-statusbar.device-iphone-x .popup > .progressbar,
 .with-statusbar.device-iphone-x .framework7-root > .progressbar,
 .with-statusbar.device-iphone-x body > .progressbar-infinite,
-.with-statusbar.device-iphone-x .view > .progressbar-infinite,
-.with-statusbar.device-iphone-x .views > .progressbar-infinite,
-.with-statusbar.device-iphone-x .page > .progressbar-infinite,
-.with-statusbar.device-iphone-x .panel > .progressbar-infinite,
-.with-statusbar.device-iphone-x .popup > .progressbar-infinite,
 .with-statusbar.device-iphone-x .framework7-root > .progressbar-infinite {
   top: constant(safe-area-inset-top);
   top: env(safe-area-inset-top);
@@ -6245,7 +6189,6 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .framework7-root > 
   z-index: 10;
   background-repeat: no-repeat;
   background-size: 18px 12px;
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2018%2012'%20fill%3D'%23c7c7cc'%3E%3Cpath%20d%3D'M0%2C2V0h22v2H0z'%2F%3E%3Cpath%20d%3D'M0%2C7V5h22v2H0z'%2F%3E%3Cpath%20d%3D'M0%2C12v-2h22v2H0z'%2F%3E%3C%2Fsvg%3E");
   opacity: 0;
   pointer-events: none;
   cursor: move;
@@ -6278,7 +6221,7 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .framework7-root > 
 }
 .sortable-enabled .item-link .item-inner,
 .sortable-enabled .item-link .item-title-row {
-  background-image: none;
+  background-image: none !important;
 }
 .theme-dark .sortable li.sorting,
 .sortable.theme-dark li.sorting {
@@ -6286,6 +6229,7 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .framework7-root > 
 }
 .ios .sortable-handler {
   width: 35px;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2018%2012'%20fill%3D'%23c7c7cc'%3E%3Cpath%20d%3D'M0%2C2V0h22v2H0z'%2F%3E%3Cpath%20d%3D'M0%2C7V5h22v2H0z'%2F%3E%3Cpath%20d%3D'M0%2C12v-2h22v2H0z'%2F%3E%3C%2Fsvg%3E");
 }
 .ios .sortable li.sorting {
   -webkit-box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.6);
@@ -6293,6 +6237,12 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .framework7-root > 
 }
 .ios .sortable-enabled .item-inner,
 .ios .sortable-enabled .item-link .item-inner {
+  padding-left: 35px;
+}
+.ios .list.sortable-enabled .item-link.no-chevron .item-inner,
+.ios .list.sortable-enabled.no-chevron .item-link .item-inner,
+.ios .list.sortable-enabled .no-chevron .item-link .item-inner,
+.ios .no-chevron .list.sortable-enabled .item-link .item-inner {
   padding-left: 35px;
 }
 @media (orientation: landscape) {
@@ -6659,6 +6609,316 @@ html.device-android-4 .accordion-item-content {
   color: #fff;
 }
 /* === Virtual List === */
+/* === Indexed List === */
+.list-index {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  text-align: center;
+  z-index: 10;
+  width: 16px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.list-index:before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  top: 0;
+  right: 100%;
+  height: 100%;
+}
+.list-index ul {
+  font-size: 11px;
+  font-weight: 600;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+.list-index li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: relative;
+  height: 14px;
+  line-height: 14px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  display: block;
+  width: 100%;
+}
+.list-index .list-index-skip-placeholder:after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+}
+.list-index .list-index-label {
+  position: absolute;
+  bottom: 0;
+  right: 100%;
+  text-align: center;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: 500;
+}
+.ios .list-index ul {
+  color: #007aff;
+}
+.ios .list-index .list-index-skip-placeholder:after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  margin-top: -3px;
+  background: #007aff;
+}
+.ios .list-index .list-index-label {
+  margin-bottom: -22px;
+  margin-right: 15px;
+  width: 44px;
+  height: 44px;
+  line-height: 44px;
+  border-radius: 50%;
+  background: #007aff;
+  font-size: 17px;
+}
+.ios .list-index .list-index-label:before {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50% 0% 50% 50%;
+  content: '';
+  background-color: inherit;
+  left: 0;
+  top: 0;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  z-index: -1;
+}
+.ios .navbar ~ .page > .list-index,
+.ios .navbar ~ .list-index {
+  top: 44px;
+}
+.ios .toolbar ~ .page > .list-index,
+.ios .toolbar ~ * .page > .list-index,
+.ios .toolbar ~ .list-index {
+  bottom: 44px;
+}
+.ios .tabbar-labels ~ .page > .list-index,
+.ios .tabbar-labels ~ * .page > .list-index,
+.ios .tabbar-labels ~ .list-index {
+  bottom: 50px;
+}
+@media (min-width: 768px) {
+  .ios .tabbar-labels ~ .page > .list-index,
+  .ios .tabbar-labels ~ * .page > .list-index,
+  .ios .tabbar-labels ~ .list-index {
+    bottom: 56px;
+  }
+}
+.ios.device-iphone-x .toolbar ~ .page > .list-index,
+.ios.device-iphone-x .toolbar ~ * .page > .list-index,
+.ios.device-iphone-x .toolbar ~ .list-index {
+  bottom: calc(44px + constant(safe-area-inset-bottom));
+  bottom: calc(44px + env(safe-area-inset-bottom));
+}
+.ios.device-iphone-x .tabbar-labels ~ .page > .list-index,
+.ios.device-iphone-x .tabbar-labels ~ * .page > .list-index,
+.ios.device-iphone-x .tabbar-labels ~ .list-index {
+  bottom: calc(50px + constant(safe-area-inset-bottom));
+  bottom: calc(50px + env(safe-area-inset-bottom));
+}
+@media (min-width: 768px) {
+  .ios.device-iphone-x .tabbar-labels ~ .page > .list-index,
+  .ios.device-iphone-x .tabbar-labels ~ * .page > .list-index,
+  .ios.device-iphone-x .tabbar-labels ~ .list-index {
+    bottom: calc(56px + constant(safe-area-inset-bottom));
+    bottom: calc(56px + env(safe-area-inset-bottom));
+  }
+}
+.ios .color-theme-red .list-index ul,
+.ios .list-index.color-theme-red ul {
+  color: #ff3b30;
+}
+.ios .color-theme-red .list-index .list-index-skip-placeholder:after,
+.ios .list-index.color-theme-red .list-index-skip-placeholder:after,
+.ios .color-theme-red .list-index .list-index-label,
+.ios .list-index.color-theme-red .list-index-label {
+  background-color: #ff3b30;
+}
+.ios .color-theme-green .list-index ul,
+.ios .list-index.color-theme-green ul {
+  color: #4cd964;
+}
+.ios .color-theme-green .list-index .list-index-skip-placeholder:after,
+.ios .list-index.color-theme-green .list-index-skip-placeholder:after,
+.ios .color-theme-green .list-index .list-index-label,
+.ios .list-index.color-theme-green .list-index-label {
+  background-color: #4cd964;
+}
+.ios .color-theme-blue .list-index ul,
+.ios .list-index.color-theme-blue ul {
+  color: #007aff;
+}
+.ios .color-theme-blue .list-index .list-index-skip-placeholder:after,
+.ios .list-index.color-theme-blue .list-index-skip-placeholder:after,
+.ios .color-theme-blue .list-index .list-index-label,
+.ios .list-index.color-theme-blue .list-index-label {
+  background-color: #007aff;
+}
+.ios .color-theme-pink .list-index ul,
+.ios .list-index.color-theme-pink ul {
+  color: #ff2d55;
+}
+.ios .color-theme-pink .list-index .list-index-skip-placeholder:after,
+.ios .list-index.color-theme-pink .list-index-skip-placeholder:after,
+.ios .color-theme-pink .list-index .list-index-label,
+.ios .list-index.color-theme-pink .list-index-label {
+  background-color: #ff2d55;
+}
+.ios .color-theme-yellow .list-index ul,
+.ios .list-index.color-theme-yellow ul {
+  color: #ffcc00;
+}
+.ios .color-theme-yellow .list-index .list-index-skip-placeholder:after,
+.ios .list-index.color-theme-yellow .list-index-skip-placeholder:after,
+.ios .color-theme-yellow .list-index .list-index-label,
+.ios .list-index.color-theme-yellow .list-index-label {
+  background-color: #ffcc00;
+}
+.ios .color-theme-orange .list-index ul,
+.ios .list-index.color-theme-orange ul {
+  color: #ff9500;
+}
+.ios .color-theme-orange .list-index .list-index-skip-placeholder:after,
+.ios .list-index.color-theme-orange .list-index-skip-placeholder:after,
+.ios .color-theme-orange .list-index .list-index-label,
+.ios .list-index.color-theme-orange .list-index-label {
+  background-color: #ff9500;
+}
+.ios .color-theme-gray .list-index ul,
+.ios .list-index.color-theme-gray ul {
+  color: #8e8e93;
+}
+.ios .color-theme-gray .list-index .list-index-skip-placeholder:after,
+.ios .list-index.color-theme-gray .list-index-skip-placeholder:after,
+.ios .color-theme-gray .list-index .list-index-label,
+.ios .list-index.color-theme-gray .list-index-label {
+  background-color: #8e8e93;
+}
+.ios .color-theme-white .list-index ul,
+.ios .list-index.color-theme-white ul {
+  color: #ffffff;
+}
+.ios .color-theme-white .list-index .list-index-skip-placeholder:after,
+.ios .list-index.color-theme-white .list-index-skip-placeholder:after,
+.ios .color-theme-white .list-index .list-index-label,
+.ios .list-index.color-theme-white .list-index-label {
+  background-color: #ffffff;
+}
+.ios .color-theme-black .list-index ul,
+.ios .list-index.color-theme-black ul {
+  color: #000000;
+}
+.ios .color-theme-black .list-index .list-index-skip-placeholder:after,
+.ios .list-index.color-theme-black .list-index-skip-placeholder:after,
+.ios .color-theme-black .list-index .list-index-label,
+.ios .list-index.color-theme-black .list-index-label {
+  background-color: #000000;
+}
+.ios .list-index.color-red ul {
+  color: #ff3b30;
+}
+.ios .list-index.color-red .list-index-skip-placeholder:after,
+.ios .list-index.color-red .list-index-label {
+  background-color: #ff3b30;
+}
+.ios .list-index.color-green ul {
+  color: #4cd964;
+}
+.ios .list-index.color-green .list-index-skip-placeholder:after,
+.ios .list-index.color-green .list-index-label {
+  background-color: #4cd964;
+}
+.ios .list-index.color-blue ul {
+  color: #007aff;
+}
+.ios .list-index.color-blue .list-index-skip-placeholder:after,
+.ios .list-index.color-blue .list-index-label {
+  background-color: #007aff;
+}
+.ios .list-index.color-pink ul {
+  color: #ff2d55;
+}
+.ios .list-index.color-pink .list-index-skip-placeholder:after,
+.ios .list-index.color-pink .list-index-label {
+  background-color: #ff2d55;
+}
+.ios .list-index.color-yellow ul {
+  color: #ffcc00;
+}
+.ios .list-index.color-yellow .list-index-skip-placeholder:after,
+.ios .list-index.color-yellow .list-index-label {
+  background-color: #ffcc00;
+}
+.ios .list-index.color-orange ul {
+  color: #ff9500;
+}
+.ios .list-index.color-orange .list-index-skip-placeholder:after,
+.ios .list-index.color-orange .list-index-label {
+  background-color: #ff9500;
+}
+.ios .list-index.color-gray ul {
+  color: #8e8e93;
+}
+.ios .list-index.color-gray .list-index-skip-placeholder:after,
+.ios .list-index.color-gray .list-index-label {
+  background-color: #8e8e93;
+}
+.ios .list-index.color-white ul {
+  color: #ffffff;
+}
+.ios .list-index.color-white .list-index-skip-placeholder:after,
+.ios .list-index.color-white .list-index-label {
+  background-color: #ffffff;
+}
+.ios .list-index.color-black ul {
+  color: #000000;
+}
+.ios .list-index.color-black .list-index-skip-placeholder:after,
+.ios .list-index.color-black .list-index-label {
+  background-color: #000000;
+}
 /* === Timeline === */
 .timeline {
   -webkit-box-sizing: border-box;
@@ -6894,7 +7154,7 @@ html.device-android-4 .accordion-item-content {
 .timeline-horizontal.col-5 .timeline-item {
   width: 5vw;
 }
-@media all and (min-width: 768px) {
+@media (min-width: 768px) {
   .timeline-horizontal.tablet-100 .timeline-item {
     width: 100vw;
   }
@@ -7596,6 +7856,22 @@ html.with-panel-right-cover .panel-right {
   -webkit-transform: translate3d(0px, 0, 0);
   transform: translate3d(0px, 0, 0);
 }
+html.with-statusbar.device-ios .panel,
+html.with-statusbar.ios:not(.device-ios):not(.device-android) .panel {
+  top: 20px;
+  height: calc(100% - 20px);
+}
+html.with-statusbar.device-android .panel,
+html.with-statusbar.md:not(.device-ios):not(.device-android) .panel {
+  top: 24px;
+  height: calc(100% - 24px);
+}
+html.with-statusbar.device-iphone-x .panel {
+  top: constant(safe-area-inset-top);
+  top: env(safe-area-inset-top);
+  height: calc(100% - constant(safe-area-inset-top));
+  height: calc(100% - env(safe-area-inset-top));
+}
 .ios .panel-backdrop {
   -webkit-transition-duration: 400ms;
   transition-duration: 400ms;
@@ -7630,7 +7906,7 @@ html.with-panel-right-cover .panel-right {
 .card {
   background: #fff;
   position: relative;
-  border-radius: 2px;
+  border-radius: 4px;
   font-size: 14px;
 }
 .card .list,
@@ -7711,7 +7987,7 @@ html.with-panel-right-cover .panel-right {
   margin: 0;
 }
 .card-header {
-  border-radius: 2px 2px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 .card-header:after {
   content: '';
@@ -7740,7 +8016,7 @@ html.device-pixel-ratio-3 .card-header:after {
   display: none !important;
 }
 .card-footer {
-  border-radius: 0 0 2px 2px;
+  border-radius: 0 0 4px 4px;
 }
 .card-footer:before {
   content: '';
@@ -7776,6 +8052,11 @@ html.device-pixel-ratio-3 .card-footer:before {
   -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
   margin: 10px;
+}
+.ios .card-outline {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: 1px solid rgba(0, 0, 0, 0.12);
 }
 .ios .card-header a.link,
 .ios .card-footer a.link {
@@ -7834,6 +8115,9 @@ html.device-pixel-ratio-3 .card-footer:before {
 }
 .ios .theme-dark .card {
   background-color: #1c1c1d;
+}
+.ios .theme-dark .card-outline {
+  border-color: #282829;
 }
 .ios .theme-dark .card-header:after {
   background-color: #282829;
@@ -7910,17 +8194,20 @@ html.device-pixel-ratio-3 .card-footer:before {
   opacity: 1;
 }
 .ios .chip {
-  font-size: 14px;
-  color: #fff;
-  background: rgba(0, 0, 0, 0.37);
-  height: 23px;
-  line-height: 23px;
+  font-size: 13px;
+  color: #000;
+  background: rgba(0, 0, 0, 0.12);
+  height: 24px;
   border-radius: 12px;
-  padding: 0 6px;
+  padding: 0 10px;
+}
+.ios .chip-outline {
+  background: none;
+  border: 1px solid rgba(0, 0, 0, 0.12);
 }
 .ios .chip-media {
-  width: 23px;
-  height: 23px;
+  width: 24px;
+  height: 24px;
   vertical-align: middle;
   border-radius: 50%;
   text-align: center;
@@ -7929,7 +8216,7 @@ html.device-pixel-ratio-3 .card-footer:before {
   font-size: 12px;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  margin-right: -6px;
+  margin-right: -10px;
 }
 .ios .chip-media + .chip-label {
   margin-right: 4px;
@@ -7939,44 +8226,106 @@ html.device-pixel-ratio-3 .card-footer:before {
   height: 16px;
 }
 .ios .chip-delete {
-  width: 23px;
-  height: 23px;
-  line-height: 23px;
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2028%2028'%3E%3Ccircle%20cx%3D'14'%20cy%3D'14'%20r%3D'14'%20fill%3D'%23fff'%2F%3E%3Cline%20stroke%3D'%23000'%20stroke-width%3D'2'%20stroke-miterlimit%3D'10'%20x1%3D'8'%20y1%3D'8'%20x2%3D'20'%20y2%3D'20'%2F%3E%3Cline%20fill%3D'none'%20stroke%3D'%23000'%20stroke-width%3D'2'%20stroke-miterlimit%3D'10'%20x1%3D'20'%20y1%3D'8'%20x2%3D'8'%20y2%3D'20'%2F%3E%3C%2Fsvg%3E");
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2028%2028'%3E%3Ccircle%20cx%3D'14'%20cy%3D'14'%20r%3D'14'%20fill%3D'%23000'%2F%3E%3Cline%20stroke%3D'%23fff'%20stroke-width%3D'3'%20stroke-miterlimit%3D'10'%20x1%3D'8'%20y1%3D'8'%20x2%3D'20'%20y2%3D'20'%2F%3E%3Cline%20fill%3D'none'%20stroke%3D'%23fff'%20stroke-width%3D'3'%20stroke-miterlimit%3D'10'%20x1%3D'20'%20y1%3D'8'%20x2%3D'8'%20y2%3D'20'%2F%3E%3C%2Fsvg%3E");
   background-position: center;
-  background-size: 13px 13px;
-  opacity: 0.7;
-  margin-left: -6px;
+  background-size: 14px 14px;
+  opacity: 0.54;
+  margin-left: -10px;
 }
 .ios .theme-dark .chip {
   background-color: #333;
+  color: #fff;
+}
+.ios .theme-dark .chip-outline {
+  background: none;
+  border-color: #333;
+}
+.ios .theme-dark .chip-delete {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2028%2028'%3E%3Ccircle%20cx%3D'14'%20cy%3D'14'%20r%3D'14'%20fill%3D'%23fff'%2F%3E%3Cline%20stroke%3D'%23000'%20stroke-width%3D'3'%20stroke-miterlimit%3D'10'%20x1%3D'8'%20y1%3D'8'%20x2%3D'20'%20y2%3D'20'%2F%3E%3Cline%20fill%3D'none'%20stroke%3D'%23000'%20stroke-width%3D'3'%20stroke-miterlimit%3D'10'%20x1%3D'20'%20y1%3D'8'%20x2%3D'8'%20y2%3D'20'%2F%3E%3C%2Fsvg%3E");
 }
 .ios .chip.color-red {
   background: #ff3b30;
+  color: #fff;
+}
+.ios .chip.color-red.chip-outline {
+  background: none;
+  border-color: #ff3b30;
+  color: #ff3b30;
 }
 .ios .chip.color-green {
   background: #4cd964;
+  color: #fff;
+}
+.ios .chip.color-green.chip-outline {
+  background: none;
+  border-color: #4cd964;
+  color: #4cd964;
 }
 .ios .chip.color-blue {
   background: #007aff;
+  color: #fff;
+}
+.ios .chip.color-blue.chip-outline {
+  background: none;
+  border-color: #007aff;
+  color: #007aff;
 }
 .ios .chip.color-pink {
   background: #ff2d55;
+  color: #fff;
+}
+.ios .chip.color-pink.chip-outline {
+  background: none;
+  border-color: #ff2d55;
+  color: #ff2d55;
 }
 .ios .chip.color-yellow {
   background: #ffcc00;
+  color: #fff;
+}
+.ios .chip.color-yellow.chip-outline {
+  background: none;
+  border-color: #ffcc00;
+  color: #ffcc00;
 }
 .ios .chip.color-orange {
   background: #ff9500;
+  color: #fff;
+}
+.ios .chip.color-orange.chip-outline {
+  background: none;
+  border-color: #ff9500;
+  color: #ff9500;
 }
 .ios .chip.color-gray {
   background: #8e8e93;
+  color: #fff;
+}
+.ios .chip.color-gray.chip-outline {
+  background: none;
+  border-color: #8e8e93;
+  color: #8e8e93;
 }
 .ios .chip.color-white {
   background: #ffffff;
+  color: #fff;
+}
+.ios .chip.color-white.chip-outline {
+  background: none;
+  border-color: #ffffff;
+  color: #ffffff;
 }
 .ios .chip.color-black {
   background: #000000;
+  color: #fff;
+}
+.ios .chip.color-black.chip-outline {
+  background: none;
+  border-color: #000000;
+  color: #000000;
 }
 /* === Input === */
 input[type="text"],
@@ -8269,7 +8618,7 @@ textarea {
   margin-top: -7px;
 }
 .ios .input-clear-button:after {
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2028%2028'%3E%3Ccircle%20cx%3D'14'%20cy%3D'14'%20r%3D'14'%20fill%3D'%238e8e93'%2F%3E%3Cline%20stroke%3D'%23ffffff'%20stroke-width%3D'2'%20stroke-miterlimit%3D'10'%20x1%3D'8'%20y1%3D'8'%20x2%3D'20'%20y2%3D'20'%2F%3E%3Cline%20fill%3D'none'%20stroke%3D'%23ffffff'%20stroke-width%3D'2'%20stroke-miterlimit%3D'10'%20x1%3D'20'%20y1%3D'8'%20x2%3D'8'%20y2%3D'20'%2F%3E%3C%2Fsvg%3E");
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2028%2028'%3E%3Ccircle%20cx%3D'14'%20cy%3D'14'%20r%3D'14'%20fill%3D'%238e8e93'%2F%3E%3Cline%20stroke%3D'%23ffffff'%20stroke-width%3D'3'%20stroke-miterlimit%3D'10'%20x1%3D'8'%20y1%3D'8'%20x2%3D'20'%20y2%3D'20'%2F%3E%3Cline%20fill%3D'none'%20stroke%3D'%23ffffff'%20stroke-width%3D'3'%20stroke-miterlimit%3D'10'%20x1%3D'20'%20y1%3D'8'%20x2%3D'8'%20y2%3D'20'%2F%3E%3C%2Fsvg%3E");
   background-size: 14px 14px;
 }
 .ios .input-clear-button:before {
@@ -9105,6 +9454,13 @@ label.item-radio.disabled,
   flex-shrink: 1;
   text-align: center;
 }
+.stepper-button-plus,
+.stepper-button-minus {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 .stepper-button-plus:after,
 .stepper-button-minus:after,
 .stepper-button-plus:before,
@@ -9276,10 +9632,16 @@ label.item-radio.disabled,
 }
 .ios .stepper-small.stepper-fill .stepper-button.active-state,
 .ios .stepper-small-ios.stepper-fill .stepper-button.active-state,
+.ios .stepper-small.stepper-fill-ios .stepper-button.active-state,
+.ios .stepper-small-ios.stepper-fill-ios .stepper-button.active-state,
 .ios .stepper-small.stepper-fill .stepper-button-minus.active-state,
 .ios .stepper-small-ios.stepper-fill .stepper-button-minus.active-state,
+.ios .stepper-small.stepper-fill-ios .stepper-button-minus.active-state,
+.ios .stepper-small-ios.stepper-fill-ios .stepper-button-minus.active-state,
 .ios .stepper-small.stepper-fill .stepper-button-plus.active-state,
-.ios .stepper-small-ios.stepper-fill .stepper-button-plus.active-state {
+.ios .stepper-small-ios.stepper-fill .stepper-button-plus.active-state,
+.ios .stepper-small.stepper-fill-ios .stepper-button-plus.active-state,
+.ios .stepper-small-ios.stepper-fill-ios .stepper-button-plus.active-state {
   color: #007aff;
   border-color: #007aff;
   background-color: transparent;
@@ -9287,12 +9649,20 @@ label.item-radio.disabled,
 }
 .ios .stepper-small.stepper-fill .stepper-button-plus.active-state:before,
 .ios .stepper-small-ios.stepper-fill .stepper-button-plus.active-state:before,
+.ios .stepper-small.stepper-fill-ios .stepper-button-plus.active-state:before,
+.ios .stepper-small-ios.stepper-fill-ios .stepper-button-plus.active-state:before,
 .ios .stepper-small.stepper-fill .stepper-button-minus.active-state:before,
 .ios .stepper-small-ios.stepper-fill .stepper-button-minus.active-state:before,
+.ios .stepper-small.stepper-fill-ios .stepper-button-minus.active-state:before,
+.ios .stepper-small-ios.stepper-fill-ios .stepper-button-minus.active-state:before,
 .ios .stepper-small.stepper-fill .stepper-button-plus.active-state:after,
 .ios .stepper-small-ios.stepper-fill .stepper-button-plus.active-state:after,
+.ios .stepper-small.stepper-fill-ios .stepper-button-plus.active-state:after,
+.ios .stepper-small-ios.stepper-fill-ios .stepper-button-plus.active-state:after,
 .ios .stepper-small.stepper-fill .stepper-button-minus.active-state:after,
-.ios .stepper-small-ios.stepper-fill .stepper-button-minus.active-state:after {
+.ios .stepper-small-ios.stepper-fill .stepper-button-minus.active-state:after,
+.ios .stepper-small.stepper-fill-ios .stepper-button-minus.active-state:after,
+.ios .stepper-small-ios.stepper-fill-ios .stepper-button-minus.active-state:after {
   background-color: #007aff;
 }
 .ios .stepper-big,
@@ -10925,7 +11295,7 @@ label.item-radio.disabled,
 .ios .row.no-gap .col:nth-last-child(21) ~ .col {
   width: 4.76190476%;
 }
-@media all and (min-width: 768px) {
+@media (min-width: 768px) {
   .ios .row .tablet-100 {
     width: 100%;
     width: calc((100% - 15px*0) / 1);
@@ -11270,7 +11640,7 @@ label.item-radio.disabled,
     width: 4.76190476%;
   }
 }
-@media all and (min-width: 1025px) {
+@media (min-width: 1025px) {
   .ios .row .desktop-100 {
     width: 100%;
     width: calc((100% - 15px*0) / 1);
@@ -11749,14 +12119,18 @@ label.item-radio.disabled,
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  flex-shink: 1;
+  -webkit-flex-shrink: 1;
+  -ms-flex-negative: 1;
+  flex-shrink: 1;
   width: 100%;
   position: relative;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 .calendar-day {
-  flex-shink: 1;
+  -webkit-flex-shrink: 1;
+  -ms-flex-negative: 1;
+  flex-shrink: 1;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -11848,7 +12222,9 @@ label.item-radio.disabled,
   align-items: center;
   width: 50%;
   max-width: 200px;
-  flex-shink: 10;
+  -webkit-flex-shrink: 10;
+  -ms-flex-negative: 10;
+  flex-shrink: 10;
 }
 .calendar-month-selector span,
 .calendar-year-selector span {
@@ -12184,10 +12560,10 @@ label.item-radio.disabled,
   top: 0;
 }
 .picker-column.picker-column-first:before {
-  right: 100%;
+  left: 100%;
 }
 .picker-column.picker-column-last:after {
-  left: 100%;
+  right: 100%;
 }
 .picker-column.picker-column-left {
   text-align: left;
@@ -13333,6 +13709,43 @@ html.device-desktop .data-table .sortable-cell:not(.sortable-cell-active) .table
 .fab-morph-target:not(.fab-morph-target-visible) {
   display: none;
 }
+.fab-extended {
+  width: auto;
+}
+.fab-extended > a {
+  width: 100% !important;
+}
+.fab-text {
+  padding-left: 20px;
+  padding-right: 20px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+.fab-label-button {
+  overflow: visible !important;
+}
+.fab-label {
+  position: absolute;
+  top: 50%;
+  padding: 4px 12px;
+  border-radius: 4px;
+  background: #fff;
+  color: #333;
+  white-space: nowrap;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.fab[class*="fab-right-"] .fab-label {
+  right: 100%;
+  margin-right: 8px;
+}
+.fab[class*="fab-left-"] .fab-label {
+  left: 100%;
+  margin-left: 8px;
+}
 .ios .fab > a,
 .ios .fab-buttons a {
   background: #007aff;
@@ -13393,6 +13806,23 @@ html.device-desktop .data-table .sortable-cell:not(.sortable-cell-active) .table
   -webkit-box-shadow: none;
   box-shadow: none;
   background: none !important;
+}
+.ios .fab-extended {
+  min-width: 50px;
+}
+.ios .fab-extended > a {
+  width: 100%;
+  height: 50px;
+}
+.ios .fab-extended > a i {
+  left: 25px;
+}
+.ios .fab-extended i ~ .fab-text {
+  padding-left: 50px;
+}
+.ios .fab-label {
+  -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
 }
 .ios .color-theme-red .fab > a,
 .ios .color-theme-red .fab-buttons a,
@@ -13862,6 +14292,7 @@ html.device-desktop .data-table .sortable-cell:not(.sortable-cell-active) .table
 }
 .ios .searchbar .input-clear-button {
   z-index: 40;
+  left: 7px;
 }
 .ios .searchbar-inner {
   padding: 0 8px;
@@ -14624,6 +15055,24 @@ html.device-desktop .data-table .sortable-cell:not(.sortable-cell-active) .table
 .messagebar:not(.messagebar-sheet-visible) .messagebar-sheet {
   display: none;
 }
+.ios.device-iphone-x .messagebar:not(.messagebar-top),
+.md.device-iphone-x .messagebar:not(.messagebar-top) {
+  height: auto !important;
+}
+.ios.device-iphone-x .messagebar:not(.messagebar-top):not(.messagebar-sheet-visible),
+.md.device-iphone-x .messagebar:not(.messagebar-top):not(.messagebar-sheet-visible) {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.ios.device-iphone-x .messagebar-sheet,
+.md.device-iphone-x .messagebar-sheet {
+  padding-left: constant(safe-area-inset-left);
+  padding-left: env(safe-area-inset-left);
+  padding-right: constant(safe-area-inset-right);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
 .ios .messagebar {
   background: #fff;
   min-height: 44px;
@@ -14701,21 +15150,6 @@ html.device-desktop .data-table .sortable-cell:not(.sortable-cell-active) .table
 .ios .theme-dark .messagebar-attachments {
   border-color: #282829;
   background-color: #000;
-}
-.ios.device-iphone-x .messagebar:not(.messagebar-top) {
-  height: auto;
-}
-.ios.device-iphone-x .messagebar:not(.messagebar-top):not(.messagebar-sheet-visible) {
-  padding-bottom: constant(safe-area-inset-bottom);
-  padding-bottom: env(safe-area-inset-bottom);
-}
-.ios.device-iphone-x .messagebar-sheet {
-  padding-left: constant(safe-area-inset-left);
-  padding-left: env(safe-area-inset-left);
-  padding-right: constant(safe-area-inset-right);
-  padding-right: env(safe-area-inset-right);
-  padding-bottom: constant(safe-area-inset-bottom);
-  padding-bottom: env(safe-area-inset-bottom);
 }
 /* === Swiper === */
 .swiper-container {
@@ -15185,13 +15619,15 @@ button.swiper-pagination-bullet {
   -webkit-transform-origin: right top;
   transform-origin: right top;
 }
-.swiper-container-horizontal > .swiper-pagination-progressbar {
+.swiper-container-horizontal > .swiper-pagination-progressbar,
+.swiper-container-vertical > .swiper-pagination-progressbar.swiper-pagination-progressbar-opposite {
   width: 100%;
   height: 4px;
   left: 0;
   top: 0;
 }
-.swiper-container-vertical > .swiper-pagination-progressbar {
+.swiper-container-vertical > .swiper-pagination-progressbar,
+.swiper-container-horizontal > .swiper-pagination-progressbar.swiper-pagination-progressbar-opposite {
   width: 4px;
   height: 100%;
   left: 0;
@@ -16077,6 +16513,64 @@ html.with-statusbar.device-iphone-x .notification {
 .ios .theme-dark .searchbar-input-wrap .autocomplete-dropdown {
   background-color: #171717;
 }
+/* === Tooltip === */
+.tooltip {
+  position: absolute;
+  z-index: 20000;
+  background: rgba(0, 0, 0, 0.87);
+  border-radius: 4px;
+  padding: 8px 16px;
+  color: #fff;
+  font-size: 14px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  line-height: 1.2;
+  opacity: 0;
+  -webkit-transform: scale(0.9);
+  transform: scale(0.9);
+  -webkit-transition-duration: 150ms;
+  transition-duration: 150ms;
+  -webkit-transition-property: opacity, -webkit-transform;
+  transition-property: opacity, -webkit-transform;
+  transition-property: opacity, transform;
+  transition-property: opacity, transform, -webkit-transform;
+  z-index: 99000;
+  font-weight: 500;
+}
+.tooltip.tooltip-in {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  opacity: 1;
+}
+.tooltip.tooltip-out {
+  opacity: 0;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+.device-desktop .tooltip {
+  font-size: 12px;
+  padding: 6px 8px;
+}
+/* === Gauge === */
+.gauge {
+  position: relative;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+}
+.gauge-svg,
+.gauge svg {
+  max-width: 100%;
+  height: auto;
+}
+.gauge-svg circle,
+.gauge svg circle,
+.gauge-svg path,
+.gauge svg path {
+  -webkit-transition-duration: 400ms;
+  transition-duration: 400ms;
+}
 iframe#viAd {
   z-index: 12900 !important;
   background: #000 !important;
@@ -16154,6 +16648,373 @@ iframe#viAd {
   margin-left: 2px;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+}
+/* === Elevation === */
+.elevation-0 {
+  -webkit-box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0) !important;
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0) !important;
+}
+.elevation-1 {
+  -webkit-box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-2 {
+  -webkit-box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-3 {
+  -webkit-box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-4 {
+  -webkit-box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-5 {
+  -webkit-box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 5px 8px 0px rgba(0, 0, 0, 0.14), 0px 1px 14px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 5px 8px 0px rgba(0, 0, 0, 0.14), 0px 1px 14px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-6 {
+  -webkit-box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-7 {
+  -webkit-box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2), 0px 7px 10px 1px rgba(0, 0, 0, 0.14), 0px 2px 16px 1px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2), 0px 7px 10px 1px rgba(0, 0, 0, 0.14), 0px 2px 16px 1px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-8 {
+  -webkit-box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-9 {
+  -webkit-box-shadow: 0px 5px 6px -3px rgba(0, 0, 0, 0.2), 0px 9px 12px 1px rgba(0, 0, 0, 0.14), 0px 3px 16px 2px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 5px 6px -3px rgba(0, 0, 0, 0.2), 0px 9px 12px 1px rgba(0, 0, 0, 0.14), 0px 3px 16px 2px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-10 {
+  -webkit-box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.2), 0px 10px 14px 1px rgba(0, 0, 0, 0.14), 0px 4px 18px 3px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.2), 0px 10px 14px 1px rgba(0, 0, 0, 0.14), 0px 4px 18px 3px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-11 {
+  -webkit-box-shadow: 0px 6px 7px -4px rgba(0, 0, 0, 0.2), 0px 11px 15px 1px rgba(0, 0, 0, 0.14), 0px 4px 20px 3px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 6px 7px -4px rgba(0, 0, 0, 0.2), 0px 11px 15px 1px rgba(0, 0, 0, 0.14), 0px 4px 20px 3px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-12 {
+  -webkit-box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 12px 17px 2px rgba(0, 0, 0, 0.14), 0px 5px 22px 4px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 12px 17px 2px rgba(0, 0, 0, 0.14), 0px 5px 22px 4px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-13 {
+  -webkit-box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 13px 19px 2px rgba(0, 0, 0, 0.14), 0px 5px 24px 4px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 13px 19px 2px rgba(0, 0, 0, 0.14), 0px 5px 24px 4px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-14 {
+  -webkit-box-shadow: 0px 7px 9px -4px rgba(0, 0, 0, 0.2), 0px 14px 21px 2px rgba(0, 0, 0, 0.14), 0px 5px 26px 4px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 7px 9px -4px rgba(0, 0, 0, 0.2), 0px 14px 21px 2px rgba(0, 0, 0, 0.14), 0px 5px 26px 4px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-15 {
+  -webkit-box-shadow: 0px 8px 9px -5px rgba(0, 0, 0, 0.2), 0px 15px 22px 2px rgba(0, 0, 0, 0.14), 0px 6px 28px 5px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 8px 9px -5px rgba(0, 0, 0, 0.2), 0px 15px 22px 2px rgba(0, 0, 0, 0.14), 0px 6px 28px 5px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-16 {
+  -webkit-box-shadow: 0px 8px 10px -5px rgba(0, 0, 0, 0.2), 0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 8px 10px -5px rgba(0, 0, 0, 0.2), 0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-17 {
+  -webkit-box-shadow: 0px 8px 11px -5px rgba(0, 0, 0, 0.2), 0px 17px 26px 2px rgba(0, 0, 0, 0.14), 0px 6px 32px 5px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 8px 11px -5px rgba(0, 0, 0, 0.2), 0px 17px 26px 2px rgba(0, 0, 0, 0.14), 0px 6px 32px 5px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-18 {
+  -webkit-box-shadow: 0px 9px 11px -5px rgba(0, 0, 0, 0.2), 0px 18px 28px 2px rgba(0, 0, 0, 0.14), 0px 7px 34px 6px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 9px 11px -5px rgba(0, 0, 0, 0.2), 0px 18px 28px 2px rgba(0, 0, 0, 0.14), 0px 7px 34px 6px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-19 {
+  -webkit-box-shadow: 0px 9px 12px -6px rgba(0, 0, 0, 0.2), 0px 19px 29px 2px rgba(0, 0, 0, 0.14), 0px 7px 36px 6px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 9px 12px -6px rgba(0, 0, 0, 0.2), 0px 19px 29px 2px rgba(0, 0, 0, 0.14), 0px 7px 36px 6px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-20 {
+  -webkit-box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2), 0px 20px 31px 3px rgba(0, 0, 0, 0.14), 0px 8px 38px 7px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2), 0px 20px 31px 3px rgba(0, 0, 0, 0.14), 0px 8px 38px 7px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-21 {
+  -webkit-box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2), 0px 21px 33px 3px rgba(0, 0, 0, 0.14), 0px 8px 40px 7px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2), 0px 21px 33px 3px rgba(0, 0, 0, 0.14), 0px 8px 40px 7px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-22 {
+  -webkit-box-shadow: 0px 10px 14px -6px rgba(0, 0, 0, 0.2), 0px 22px 35px 3px rgba(0, 0, 0, 0.14), 0px 8px 42px 7px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 10px 14px -6px rgba(0, 0, 0, 0.2), 0px 22px 35px 3px rgba(0, 0, 0, 0.14), 0px 8px 42px 7px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-23 {
+  -webkit-box-shadow: 0px 11px 14px -7px rgba(0, 0, 0, 0.2), 0px 23px 36px 3px rgba(0, 0, 0, 0.14), 0px 9px 44px 8px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 11px 14px -7px rgba(0, 0, 0, 0.2), 0px 23px 36px 3px rgba(0, 0, 0, 0.14), 0px 9px 44px 8px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-24 {
+  -webkit-box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-0:hover {
+  -webkit-box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0) !important;
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0) !important;
+}
+.device-desktop .elevation-hover-1:hover {
+  -webkit-box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-2:hover {
+  -webkit-box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-3:hover {
+  -webkit-box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-4:hover {
+  -webkit-box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-5:hover {
+  -webkit-box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 5px 8px 0px rgba(0, 0, 0, 0.14), 0px 1px 14px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 5px 8px 0px rgba(0, 0, 0, 0.14), 0px 1px 14px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-6:hover {
+  -webkit-box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-7:hover {
+  -webkit-box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2), 0px 7px 10px 1px rgba(0, 0, 0, 0.14), 0px 2px 16px 1px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2), 0px 7px 10px 1px rgba(0, 0, 0, 0.14), 0px 2px 16px 1px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-8:hover {
+  -webkit-box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-9:hover {
+  -webkit-box-shadow: 0px 5px 6px -3px rgba(0, 0, 0, 0.2), 0px 9px 12px 1px rgba(0, 0, 0, 0.14), 0px 3px 16px 2px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 5px 6px -3px rgba(0, 0, 0, 0.2), 0px 9px 12px 1px rgba(0, 0, 0, 0.14), 0px 3px 16px 2px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-10:hover {
+  -webkit-box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.2), 0px 10px 14px 1px rgba(0, 0, 0, 0.14), 0px 4px 18px 3px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.2), 0px 10px 14px 1px rgba(0, 0, 0, 0.14), 0px 4px 18px 3px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-11:hover {
+  -webkit-box-shadow: 0px 6px 7px -4px rgba(0, 0, 0, 0.2), 0px 11px 15px 1px rgba(0, 0, 0, 0.14), 0px 4px 20px 3px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 6px 7px -4px rgba(0, 0, 0, 0.2), 0px 11px 15px 1px rgba(0, 0, 0, 0.14), 0px 4px 20px 3px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-12:hover {
+  -webkit-box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 12px 17px 2px rgba(0, 0, 0, 0.14), 0px 5px 22px 4px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 12px 17px 2px rgba(0, 0, 0, 0.14), 0px 5px 22px 4px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-13:hover {
+  -webkit-box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 13px 19px 2px rgba(0, 0, 0, 0.14), 0px 5px 24px 4px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 13px 19px 2px rgba(0, 0, 0, 0.14), 0px 5px 24px 4px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-14:hover {
+  -webkit-box-shadow: 0px 7px 9px -4px rgba(0, 0, 0, 0.2), 0px 14px 21px 2px rgba(0, 0, 0, 0.14), 0px 5px 26px 4px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 7px 9px -4px rgba(0, 0, 0, 0.2), 0px 14px 21px 2px rgba(0, 0, 0, 0.14), 0px 5px 26px 4px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-15:hover {
+  -webkit-box-shadow: 0px 8px 9px -5px rgba(0, 0, 0, 0.2), 0px 15px 22px 2px rgba(0, 0, 0, 0.14), 0px 6px 28px 5px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 8px 9px -5px rgba(0, 0, 0, 0.2), 0px 15px 22px 2px rgba(0, 0, 0, 0.14), 0px 6px 28px 5px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-16:hover {
+  -webkit-box-shadow: 0px 8px 10px -5px rgba(0, 0, 0, 0.2), 0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 8px 10px -5px rgba(0, 0, 0, 0.2), 0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-17:hover {
+  -webkit-box-shadow: 0px 8px 11px -5px rgba(0, 0, 0, 0.2), 0px 17px 26px 2px rgba(0, 0, 0, 0.14), 0px 6px 32px 5px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 8px 11px -5px rgba(0, 0, 0, 0.2), 0px 17px 26px 2px rgba(0, 0, 0, 0.14), 0px 6px 32px 5px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-18:hover {
+  -webkit-box-shadow: 0px 9px 11px -5px rgba(0, 0, 0, 0.2), 0px 18px 28px 2px rgba(0, 0, 0, 0.14), 0px 7px 34px 6px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 9px 11px -5px rgba(0, 0, 0, 0.2), 0px 18px 28px 2px rgba(0, 0, 0, 0.14), 0px 7px 34px 6px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-19:hover {
+  -webkit-box-shadow: 0px 9px 12px -6px rgba(0, 0, 0, 0.2), 0px 19px 29px 2px rgba(0, 0, 0, 0.14), 0px 7px 36px 6px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 9px 12px -6px rgba(0, 0, 0, 0.2), 0px 19px 29px 2px rgba(0, 0, 0, 0.14), 0px 7px 36px 6px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-20:hover {
+  -webkit-box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2), 0px 20px 31px 3px rgba(0, 0, 0, 0.14), 0px 8px 38px 7px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2), 0px 20px 31px 3px rgba(0, 0, 0, 0.14), 0px 8px 38px 7px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-21:hover {
+  -webkit-box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2), 0px 21px 33px 3px rgba(0, 0, 0, 0.14), 0px 8px 40px 7px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2), 0px 21px 33px 3px rgba(0, 0, 0, 0.14), 0px 8px 40px 7px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-22:hover {
+  -webkit-box-shadow: 0px 10px 14px -6px rgba(0, 0, 0, 0.2), 0px 22px 35px 3px rgba(0, 0, 0, 0.14), 0px 8px 42px 7px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 10px 14px -6px rgba(0, 0, 0, 0.2), 0px 22px 35px 3px rgba(0, 0, 0, 0.14), 0px 8px 42px 7px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-23:hover {
+  -webkit-box-shadow: 0px 11px 14px -7px rgba(0, 0, 0, 0.2), 0px 23px 36px 3px rgba(0, 0, 0, 0.14), 0px 9px 44px 8px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 11px 14px -7px rgba(0, 0, 0, 0.2), 0px 23px 36px 3px rgba(0, 0, 0, 0.14), 0px 9px 44px 8px rgba(0, 0, 0, 0.12) !important;
+}
+.device-desktop .elevation-hover-24:hover {
+  -webkit-box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-0,
+.device-desktop .active-state.elevation-pressed-0 {
+  -webkit-box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0) !important;
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0) !important;
+}
+.active-state.elevation-pressed-1,
+.device-desktop .active-state.elevation-pressed-1 {
+  -webkit-box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-2,
+.device-desktop .active-state.elevation-pressed-2 {
+  -webkit-box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-3,
+.device-desktop .active-state.elevation-pressed-3 {
+  -webkit-box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-4,
+.device-desktop .active-state.elevation-pressed-4 {
+  -webkit-box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-5,
+.device-desktop .active-state.elevation-pressed-5 {
+  -webkit-box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 5px 8px 0px rgba(0, 0, 0, 0.14), 0px 1px 14px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 5px 8px 0px rgba(0, 0, 0, 0.14), 0px 1px 14px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-6,
+.device-desktop .active-state.elevation-pressed-6 {
+  -webkit-box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-7,
+.device-desktop .active-state.elevation-pressed-7 {
+  -webkit-box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2), 0px 7px 10px 1px rgba(0, 0, 0, 0.14), 0px 2px 16px 1px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2), 0px 7px 10px 1px rgba(0, 0, 0, 0.14), 0px 2px 16px 1px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-8,
+.device-desktop .active-state.elevation-pressed-8 {
+  -webkit-box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-9,
+.device-desktop .active-state.elevation-pressed-9 {
+  -webkit-box-shadow: 0px 5px 6px -3px rgba(0, 0, 0, 0.2), 0px 9px 12px 1px rgba(0, 0, 0, 0.14), 0px 3px 16px 2px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 5px 6px -3px rgba(0, 0, 0, 0.2), 0px 9px 12px 1px rgba(0, 0, 0, 0.14), 0px 3px 16px 2px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-10,
+.device-desktop .active-state.elevation-pressed-10 {
+  -webkit-box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.2), 0px 10px 14px 1px rgba(0, 0, 0, 0.14), 0px 4px 18px 3px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.2), 0px 10px 14px 1px rgba(0, 0, 0, 0.14), 0px 4px 18px 3px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-11,
+.device-desktop .active-state.elevation-pressed-11 {
+  -webkit-box-shadow: 0px 6px 7px -4px rgba(0, 0, 0, 0.2), 0px 11px 15px 1px rgba(0, 0, 0, 0.14), 0px 4px 20px 3px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 6px 7px -4px rgba(0, 0, 0, 0.2), 0px 11px 15px 1px rgba(0, 0, 0, 0.14), 0px 4px 20px 3px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-12,
+.device-desktop .active-state.elevation-pressed-12 {
+  -webkit-box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 12px 17px 2px rgba(0, 0, 0, 0.14), 0px 5px 22px 4px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 12px 17px 2px rgba(0, 0, 0, 0.14), 0px 5px 22px 4px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-13,
+.device-desktop .active-state.elevation-pressed-13 {
+  -webkit-box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 13px 19px 2px rgba(0, 0, 0, 0.14), 0px 5px 24px 4px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 13px 19px 2px rgba(0, 0, 0, 0.14), 0px 5px 24px 4px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-14,
+.device-desktop .active-state.elevation-pressed-14 {
+  -webkit-box-shadow: 0px 7px 9px -4px rgba(0, 0, 0, 0.2), 0px 14px 21px 2px rgba(0, 0, 0, 0.14), 0px 5px 26px 4px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 7px 9px -4px rgba(0, 0, 0, 0.2), 0px 14px 21px 2px rgba(0, 0, 0, 0.14), 0px 5px 26px 4px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-15,
+.device-desktop .active-state.elevation-pressed-15 {
+  -webkit-box-shadow: 0px 8px 9px -5px rgba(0, 0, 0, 0.2), 0px 15px 22px 2px rgba(0, 0, 0, 0.14), 0px 6px 28px 5px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 8px 9px -5px rgba(0, 0, 0, 0.2), 0px 15px 22px 2px rgba(0, 0, 0, 0.14), 0px 6px 28px 5px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-16,
+.device-desktop .active-state.elevation-pressed-16 {
+  -webkit-box-shadow: 0px 8px 10px -5px rgba(0, 0, 0, 0.2), 0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 8px 10px -5px rgba(0, 0, 0, 0.2), 0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-17,
+.device-desktop .active-state.elevation-pressed-17 {
+  -webkit-box-shadow: 0px 8px 11px -5px rgba(0, 0, 0, 0.2), 0px 17px 26px 2px rgba(0, 0, 0, 0.14), 0px 6px 32px 5px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 8px 11px -5px rgba(0, 0, 0, 0.2), 0px 17px 26px 2px rgba(0, 0, 0, 0.14), 0px 6px 32px 5px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-18,
+.device-desktop .active-state.elevation-pressed-18 {
+  -webkit-box-shadow: 0px 9px 11px -5px rgba(0, 0, 0, 0.2), 0px 18px 28px 2px rgba(0, 0, 0, 0.14), 0px 7px 34px 6px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 9px 11px -5px rgba(0, 0, 0, 0.2), 0px 18px 28px 2px rgba(0, 0, 0, 0.14), 0px 7px 34px 6px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-19,
+.device-desktop .active-state.elevation-pressed-19 {
+  -webkit-box-shadow: 0px 9px 12px -6px rgba(0, 0, 0, 0.2), 0px 19px 29px 2px rgba(0, 0, 0, 0.14), 0px 7px 36px 6px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 9px 12px -6px rgba(0, 0, 0, 0.2), 0px 19px 29px 2px rgba(0, 0, 0, 0.14), 0px 7px 36px 6px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-20,
+.device-desktop .active-state.elevation-pressed-20 {
+  -webkit-box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2), 0px 20px 31px 3px rgba(0, 0, 0, 0.14), 0px 8px 38px 7px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2), 0px 20px 31px 3px rgba(0, 0, 0, 0.14), 0px 8px 38px 7px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-21,
+.device-desktop .active-state.elevation-pressed-21 {
+  -webkit-box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2), 0px 21px 33px 3px rgba(0, 0, 0, 0.14), 0px 8px 40px 7px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2), 0px 21px 33px 3px rgba(0, 0, 0, 0.14), 0px 8px 40px 7px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-22,
+.device-desktop .active-state.elevation-pressed-22 {
+  -webkit-box-shadow: 0px 10px 14px -6px rgba(0, 0, 0, 0.2), 0px 22px 35px 3px rgba(0, 0, 0, 0.14), 0px 8px 42px 7px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 10px 14px -6px rgba(0, 0, 0, 0.2), 0px 22px 35px 3px rgba(0, 0, 0, 0.14), 0px 8px 42px 7px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-23,
+.device-desktop .active-state.elevation-pressed-23 {
+  -webkit-box-shadow: 0px 11px 14px -7px rgba(0, 0, 0, 0.2), 0px 23px 36px 3px rgba(0, 0, 0, 0.14), 0px 9px 44px 8px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 11px 14px -7px rgba(0, 0, 0, 0.2), 0px 23px 36px 3px rgba(0, 0, 0, 0.14), 0px 9px 44px 8px rgba(0, 0, 0, 0.12) !important;
+}
+.active-state.elevation-pressed-24,
+.device-desktop .active-state.elevation-pressed-24 {
+  -webkit-box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12) !important;
+}
+.elevation-transition-100 {
+  -webkit-transition-duration: 100ms;
+  transition-duration: 100ms;
+  -webkit-transition-property: -webkit-box-shadow;
+  transition-property: -webkit-box-shadow;
+  transition-property: box-shadow;
+  transition-property: box-shadow, -webkit-box-shadow;
+}
+.elevation-transition,
+.elevation-transition-200 {
+  -webkit-transition-duration: 200ms;
+  transition-duration: 200ms;
+  -webkit-transition-property: -webkit-box-shadow;
+  transition-property: -webkit-box-shadow;
+  transition-property: box-shadow;
+  transition-property: box-shadow, -webkit-box-shadow;
+}
+.elevation-transition-300 {
+  -webkit-transition-duration: 300ms;
+  transition-duration: 300ms;
+  -webkit-transition-property: -webkit-box-shadow;
+  transition-property: -webkit-box-shadow;
+  transition-property: box-shadow;
+  transition-property: box-shadow, -webkit-box-shadow;
+}
+.elevation-transition-400 {
+  -webkit-transition-duration: 400ms;
+  transition-duration: 400ms;
+  -webkit-transition-property: -webkit-box-shadow;
+  transition-property: -webkit-box-shadow;
+  transition-property: box-shadow;
+  transition-property: box-shadow, -webkit-box-shadow;
+}
+.elevation-transition-500 {
+  -webkit-transition-duration: 500ms;
+  transition-duration: 500ms;
+  -webkit-transition-property: -webkit-box-shadow;
+  transition-property: -webkit-box-shadow;
+  transition-property: box-shadow;
+  transition-property: box-shadow, -webkit-box-shadow;
 }
 /* === Typography === */
 .display-flex {
