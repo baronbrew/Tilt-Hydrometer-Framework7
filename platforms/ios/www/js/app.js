@@ -123,21 +123,14 @@ $$(document).on('deviceready', function() {
       }
   }
 
-
-  function stopScan() {
-      console.log("stopScan");
-      // Start ranging beacons.
-          locationManager.stopRangingBeaconsInRegion(beaconRegion);
-  }
-
   function startScan() {
       console.log("startScan");
       // Start ranging beacons.
       for (var i in regions) {
           var beaconRegion = new locationManager.BeaconRegion(
-              i + 1,
+              i,
               regions[i].uuid);
-
+             //console.log(beaconRegion);
           // Start ranging.
           locationManager.startRangingBeaconsInRegion(beaconRegion);
       }
@@ -174,13 +167,15 @@ $$(document).on('deviceready', function() {
     $$('#tiltcard-' + beacon.Color).show();
     var date = new Date(beacon.timeStamp);
     beacon.displaytimeStamp = date.toLocaleString();
-    //handle bad RSSI values from iOS by using previous value if value is "0"
+    //add beer name
+    beacon.Beername = localStorage.getItem('beerName-' + beacon.Color)||'Untitled';
+    //handle null RSSI values from iOS by using previous value if value is "0"
     if (beacon.rssi == 0){
         beacon.displayRSSI = localStorage.getItem('prevRSSI-' + beacon.Color)||""
     }else{
         beacon.displayRSSI = beacon.rssi + " dBm";
         localStorage.setItem('prevRSSI-' + beacon.Color,beacon.displayRSSI);
-    }    
+    } 
 }
 
   function initScan() {
@@ -308,10 +303,12 @@ $$(document).on('deviceready', function() {
         var foundBeaconsArraylength = foundBeaconsArray.length;
         //populate calibration point list
         updateSGcallist(beacon.Color);
+        //show beer name in settings
+        showBeerName(beacon.Color);
         //setup javascript for each card
         for (var i = 1; i < foundBeaconsArraylength; i++) {
         //set up buttons
-        console.log(beacon.Color);
+        //console.log(beacon.Color);
         $$('#unitstoggle-' + foundBeaconsArray[i]).on('click', function (e) {
             var unitscolor = e.currentTarget.id.split("-");
             //console.log('clicked ' + unitscolor[1]);
@@ -403,6 +400,7 @@ $$(document).on('deviceready', function() {
     }
     //initialize display units
     //update data fields in Tilt card template
+    $$('#beerName' + beacon.Color).html(beacon.Beername);
     $$('#uncalSG' + beacon.Color).html(beacon.uncalSG);
     $$('#uncaldisplayFerm+displayFermunits' + beacon.Color).html(String(beacon.uncaldisplayFerm) + beacon.displayFermunits);
     $$('#caldisplayFerm+displayFermunits' + beacon.Color).html(String(beacon.caldisplayFerm) + beacon.displayFermunits);
@@ -415,7 +413,7 @@ $$(document).on('deviceready', function() {
     $$('#percentScaleTemp' + beacon.Color).css('width', String((beacon.uncalTemp - 0) / (185 - 0) * 100) + "%");
     //update Tilt objects
     localStorage.setItem('tiltObject-' + beacon.Color,JSON.stringify(beacon));
-    //console.log(beacon);
+    //console.log(beacon.Beername);
     
     };
 
@@ -557,4 +555,55 @@ function addSGPoints (button){
    //update list of calibration points in settings
    updateSGcallist(color);
 
+}
+
+function clearBeerName (button){
+    var clickedButton = button.id.split('-');
+    var color = clickedButton[1];
+    var currentBeerName = localStorage.getItem('beerName-' + color);
+    var currentBeerNameArray = currentBeerName.split(',');
+    var newBeerName = $$('#beername-' + color).val();
+    //warn user that about deleting name with associated cloud ID
+    if (Number(currentBeerNameArray[1]) > 0){
+        var cancelled = false;
+        app.dialog.confirm('Clearing the beer name could disconnect ' + color + ' from cloud logging.','Continue clearing beer name for ' + color + '?',function(){
+        localStorage.setItem('beerName-' + color, 'Untitled');
+        showBeerName(color);
+        $$('#beername-' + color).val('');
+        },function(){
+            cancelled = true;
+        });
+    }else if (!cancelled){
+        localStorage.setItem('beerName-' + color, 'Untitled');
+        showBeerName(color);
+        $$('#beername-' + color).val('');
+    }
+}
+
+function setBeerName (button){
+    var clickedButton = button.id.split('-');
+    var color = clickedButton[1];
+    var currentBeerName = localStorage.getItem('beerName-' + color);
+    var currentBeerNameArray = currentBeerName.split(',');
+    var newBeerName = $$('#beername-' + color).val();
+    //only update beer name if field is not empty
+    if (newBeerName == "") {
+        app.dialog.alert('No name entered. Please try again.','Error');
+        //warn if name has an associated cloud ID
+    } else if (Number(currentBeerNameArray[1]) > 0) {
+        app.dialog.confirm('This could disconnect ' + color + ' from cloud logging.','Update beer name for ' + color + '?',function(){
+            localStorage.setItem('beerName-' + color, newBeerName);
+            showBeerName(color);
+        })
+        //don't warn if beer name doesn't have a cloud id associated
+    } else {
+        localStorage.setItem('beerName-' + color, newBeerName);
+        showBeerName(color);
+    }
+}
+
+function showBeerName (color){
+    var beerName = localStorage.getItem('beerName-' + color);
+    //console.log (beerName);
+    $$('#currentbeername-' + color).val(beerName);
 }
