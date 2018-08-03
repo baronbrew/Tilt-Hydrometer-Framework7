@@ -35,12 +35,15 @@ var mainView = app.views.create('.view-main', {
   url: '/'
 });
 
-//templates
+//Templates
 var displayTemplate = $$('#displaytemplate').html();
 var compileddisplayTemplate = Template7.compile(displayTemplate);
 
 var sgcallistTemplate = $$('#sgcallisttemplate').html();
 var compiledsgcallistTemplate = Template7.compile(sgcallistTemplate);
+
+var settingsTemplate = $$('#settingstemplate').html();
+var compiledsettingsTemplate = Template7.compile(settingsTemplate);
 
 //Permissions
 var permissions;
@@ -300,15 +303,16 @@ $$(document).on('deviceready', function() {
         localStorage.setItem('foundbeacons',foundBeaconsArray);
         var displayhtml = compileddisplayTemplate(beacons);
         var tiltCard  = $$('#tiltCard').html(displayhtml);
+        var settingshtml = compiledsettingsTemplate(beacons);
+        var settingspanel = $$('#settingsPanel').html(settingshtml);
         var foundBeaconsArraylength = foundBeaconsArray.length;
-        //populate calibration point list
-        updateSGcallist(beacon.Color);
-        //show beer name in settings
-        showBeerName(beacon.Color);
         //setup javascript for each card
         for (var i = 1; i < foundBeaconsArraylength; i++) {
+        //populate calibration point list
+        updateSGcallist(foundBeaconsArray[i]);
+        //show beer name in settings
+        showBeerName(foundBeaconsArray[i]);
         //set up buttons
-        //console.log(beacon.Color);
         $$('#unitstoggle-' + foundBeaconsArray[i]).on('click', function (e) {
             var unitscolor = e.currentTarget.id.split("-");
             //console.log('clicked ' + unitscolor[1]);
@@ -560,7 +564,7 @@ function addSGPoints (button){
 function clearBeerName (button){
     var clickedButton = button.id.split('-');
     var color = clickedButton[1];
-    var currentBeerName = localStorage.getItem('beerName-' + color);
+    var currentBeerName = localStorage.getItem('beerName-' + color)||"Untitled";
     var currentBeerNameArray = currentBeerName.split(',');
     var newBeerName = $$('#beername-' + color).val();
     //warn user that about deleting name with associated cloud ID
@@ -583,7 +587,7 @@ function clearBeerName (button){
 function setBeerName (button){
     var clickedButton = button.id.split('-');
     var color = clickedButton[1];
-    var currentBeerName = localStorage.getItem('beerName-' + color);
+    var currentBeerName = localStorage.getItem('beerName-' + color)||"Untitled";
     var currentBeerNameArray = currentBeerName.split(',');
     var newBeerName = $$('#beername-' + color).val();
     //only update beer name if field is not empty
@@ -603,7 +607,10 @@ function setBeerName (button){
 }
 
 function showBeerName (color){
-    var beerName = localStorage.getItem('beerName-' + color);
-    //console.log (beerName);
-    $$('#currentbeername-' + color).val(beerName);
+    var beerName = localStorage.getItem('beerName-' + color)||'Untitled';
+    //set beer name in settings panel
+    $$('#currentbeername-' + color).html(beerName);
+    //set beer name on tilt card
+    $$('#beerName' + color).html(beerName);
+
 }

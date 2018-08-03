@@ -43,21 +43,25 @@
                   <ul>
                     <li class="accordion-item" id="accordion">
                         <div class="accordion-item-toggle">
-                          <div class="item-title margin-horizontal padding"><i class="f7-icons color-custom-green">chevron_down</i> GREEN</div>
+                          <div class="item-title margin-horizontal padding"><i class="f7-icons color-custom-pink">chevron_down</i> PINK</div>
                         </div>
                       <div class="accordion-item-content">
-                        <div class="block-title no-margin-top">Beer Name</div>
+                        <div class="block-title no-margin-top">Beer Name / Cloud ID</div>
                         <div class="block block-strong">
                             <div class="content-block">
                             <div class="content-block-inner">
-                            <div class="item-title floating-label">Enter Beer Name:</div>
+                            <div class="item-title floating-label">Current Beer Name:</div>
                             <div class="item-input-wrap">
-                            <input type="text" name="beername" placeholder="Mosaic NE IPA">
+                            <input type="text" id="currentbeername-PINK" placeholder="(Set beer name below.)">
                             </div>
-                            <div class="item-title floating-label">Cloud Name and Assigned ID:<i class="f7-icons color-custom-gray">info</i></div>
+                            <div class="item-title floating-label">Set Beer Name[,ID]:</div>
                             <div class="item-input-wrap">
-                            <input type="text" name="beerid" placeholder="Mosaic NE IPA,9976">
+                            <input type="text" id="beername-PINK" placeholder="Mosaic NE IPA">
                             </div>
+                            <p class="segmented segmented-raised segmented-round" >
+                                <button class="button button-round" id="setBeerName-PINK" onclick="setBeerName(this)">Set Name</button>
+                                <button class="button button-round button-active" id="clearBeerName-PINK" onclick="clearBeerName(this)">Clear Name</button>
+                            </p>
                             </div>
                         </div>
                         </div>
@@ -94,33 +98,33 @@
                               <div class="content-block-inner">
                                 <p class="no-margin-top">Quick Calibration</p>
                                   <p class="round no-margin-top">
-                                      <button class="button button-round">Tare in Water</button>
+                                      <button class="button button-round" id="tareinwater-PINK-1.000" onclick="addSGPoints(this)">Tare in Water</button>
                                   </p>
                                   <p>Standard Calibration</p>
                             <div class="item-title floating-label">Enter uncalibrated point:</div>
                             <div class="item-input-wrap">
-                            <input type="text" name="uncalSG" placeholder="1.045" value="">
+                            <input type="number" id="uncalSG-PINK" placeholder="1.002">
                             </div>
                             <p class="round">
-                                <button class="button button-round">Get Uncalibrated Point</button>
+                                <button class="button button-round" id="getuncalibratedSGpoint-PINK" onclick="getUncalibratedSGPoint(this)">Get Uncalibrated Point</button>
                             </p>
                             <div class="item-title floating-label">Enter actual point:</div>
                             <div class="item-input-wrap">
-                            <input type="text" name="SG" placeholder="1.047" value="">
+                            <input type="number" id="actualSG-PINK" placeholder="1.000">
                             </div>
                             <p class="round">
-                                <button class="button button-round">Add Points</button>
+                                <button class="button button-round" id="addSGpoint-PINK" onclick="addSGPoints(this)">Add Points</button>
                               </p>
-                              <div class="data-table data-table-init">
+                              <div class="data-table">
                                   <table>
                                       <thead>
                                         <tr>
-                                            <th class="numeric-cell">Select</th>
+                                            <th class="numeric-cell">Delete</th>
                                           <th class="numeric-cell">Uncal.</th>
                                           <th class="numeric-cell">Actual</th>
                                         </tr>
                                       </thead>
-                                      <tbody id="sgcallisttemplate-GREEN">
+                                      <tbody id="sgcallisttemplate-PINK">
                                       </tbody>
                                    </table>
                                </div>
@@ -178,7 +182,7 @@
   <script id="displaytemplate" type="text/template7">
     {{#each this}}
     <div id="tiltcard-{{Color}}" class="card card-outline elevation-12 col-100 tablet-45">
-        <div class="card-content card-content-padding"><p class="no-margin-bottom">{{Beername}}</p><strong>TILT | {{Color}}</strong></div>
+        <div class="card-content card-content-padding"><p class="no-margin-bottom" id="beerName{{Color}}">{{Beername}}</p><strong>TILT | {{Color}}</strong></div>
         <div id="quicksettings" class="accordion-item">
         <div class="accordion-item-toggle">
         <div <button class="margin-horizontal button button-round" style="background:{{Color}};height:30px;color:{{Color}}">Show options for {{Color}} Tilt.</button></div>
@@ -208,8 +212,8 @@
     <tr>
         <td class="checkbox-cell">
           <label class="checkbox">
-            <input type="checkbox">
-            <i class="icon-checkbox"></i>
+            <input type="checkbox" id="sgcalpoints-{{color}}-{{@index}}" onchange="deleteSGCalPoint(this)">
+            <i class="icon icon-checkbox"></i>
           </label>
         </td>
         <td class="numeric-cell">{{uncalpoint}}</td>
