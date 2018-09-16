@@ -290,10 +290,6 @@ $$(document).on('deviceready', function() {
         break;
     }
 
-    //get calibrated values
-    beacon.SG = getCalFerm(beacon.Color);
-
-    
     //setup tilt cards (generate new card once for each Tilt found)
     var foundBeacons = localStorage.getItem('foundbeacons');
     var foundBeaconsArray = foundBeacons.split(",");
@@ -312,6 +308,11 @@ $$(document).on('deviceready', function() {
         updateSGcallist(foundBeaconsArray[i]);
         //show beer name in settings
         showBeerName(foundBeaconsArray[i]);
+        //set up cloud logging toggles
+        toggleDefaultCloudURL(foundBeaconsArray[i]);
+        toggleCustomCloudURL1(foundBeaconsArray[i]);
+        //toggleCustomCloudURL2(foundBeaconsArray[i]);
+        console.log(foundBeaconsArray[i]);
         //set up buttons
         $$('#unitstoggle-' + foundBeaconsArray[i]).on('click', function (e) {
             var unitscolor = e.currentTarget.id.split("-");
@@ -570,7 +571,7 @@ function clearBeerName (button){
     //warn user that about deleting name with associated cloud ID
     if (Number(currentBeerNameArray[1]) > 0){
         var cancelled = false;
-        app.dialog.confirm('Clearing the beer name could disconnect ' + color + ' from cloud logging.','Continue clearing beer name for ' + color + '?',function(){
+        app.dialog.confirm('Your ' + color + ' Tilt has an associated cloud ID that will be cleared as well.','Continue clearing beer name for ' + color + '?',function(){
         localStorage.setItem('beerName-' + color, 'Untitled');
         showBeerName(color);
         $$('#beername-' + color).val('');
@@ -613,4 +614,68 @@ function showBeerName (color){
     //set beer name on tilt card
     $$('#beerName' + color).html(beerName);
 
+}
+
+function toggleDefaultCloudURL (color) {
+    var toggle = app.toggle.create({
+        el: '#toggleDefaultCloudURL-' + color,
+        on: {
+          change: function () {
+            var cloudURLsenabled = localStorage.getItem('cloudurlsenabled-' + color)||'1,0,0';
+            var cloudURLsenabledArray = cloudURLsenabled.split(',');
+            if (toggle.checked){
+                //set dynamic global variable for interval timers
+                //eval(color +  "= setInterval(function(){ app.request.post('https://script.google.com/a/baronbrew.com/macros/s/AKfycbydNOcB-_3RB3c-7sOTI-ZhTnN43Ye1tt0EFvvMxTxjdbheaw/exec',{ Timepoint : 'test', SG : localStorage.getItem('uncalSG-' + color), Temp : 'test', Color : color, Beer : 'Test,6', Comment : 'test' }); }, 10000);");
+                cloudURLsenabledArray[0] = '1';
+                localStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray);
+
+            }
+            if (!toggle.checked){
+                cloudURLsenabledArray[0] = '0';
+                localStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray);
+            }
+          }
+        }
+      })
+    var cloudURLsenabled = localStorage.getItem('cloudurlsenabled-' + color)||'1,0,0';
+    var cloudURLsenabledArray = cloudURLsenabled.split(',');
+    if (cloudURLsenabledArray[0] == '1' && !toggle.checked){
+       toggle.toggle();
+    }
+}
+
+function defaultToggle (color) {
+    var toggle = app.toggle.get('#toggleDefaultCloudURL-' + color);
+    toggle.toggle();
+}
+
+function toggleCustomCloudURL1 (color) {
+    var toggle = app.toggle.create({
+        el: '#toggleCustomCloudURL1-' + color,
+        on: {
+          change: function () {
+            var cloudURLsenabled = localStorage.getItem('cloudurlsenabled-' + color)||'1,0,0';
+            var cloudURLsenabledArray = cloudURLsenabled.split(',');
+            if (toggle.checked){
+                cloudURLsenabledArray[1] = '1';
+                localStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray);
+            }
+            if (!toggle.checked){
+                cloudURLsenabledArray[1] = '0';
+                localStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray);
+            }
+            
+          }
+        }
+      })
+      var cloudURLsenabled = localStorage.getItem('cloudurlsenabled-' + color)||'1,0,0';
+      var cloudURLsenabledArray = cloudURLsenabled.split(',');
+      if (cloudURLsenabledArray[1] == '1' && !toggle.checked){
+         toggle.toggle();
+      }
+}
+
+function custom1Toggle (color) {
+    var toggle = app.toggle.get('#toggleCustomCloudURL1-' + color);
+    toggle.toggle();
 }
