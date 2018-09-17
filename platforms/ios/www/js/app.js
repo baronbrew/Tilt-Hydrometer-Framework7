@@ -172,6 +172,9 @@ $$(document).on('deviceready', function() {
     beacon.displaytimeStamp = date.toLocaleString();
     //add beer name
     beacon.Beername = localStorage.getItem('beerName-' + beacon.Color)||'Untitled';
+    //add calibrated SG and Temp (F) for cloud posting
+    beacon.SG = getCalFerm(beacon.Color).toFixed(4);
+    beacon.Temp = getCalTemp(beacon.Color).toFixed(1);
     //handle null RSSI values from iOS by using previous value if value is "0"
     if (beacon.rssi == 0){
         beacon.displayRSSI = localStorage.getItem('prevRSSI-' + beacon.Color)||""
@@ -312,7 +315,7 @@ $$(document).on('deviceready', function() {
         toggleDefaultCloudURL(foundBeaconsArray[i]);
         toggleCustomCloudURL1(foundBeaconsArray[i]);
         //toggleCustomCloudURL2(foundBeaconsArray[i]);
-        console.log(foundBeaconsArray[i]);
+        //console.log(foundBeaconsArray[i]);
         //set up buttons
         $$('#unitstoggle-' + foundBeaconsArray[i]).on('click', function (e) {
             var unitscolor = e.currentTarget.id.split("-");
@@ -477,6 +480,11 @@ var calSG = linearInterpolation (Number(SG), Number(unCalSGPointsArray[indexSG-1
 return calSG;
 }
 
+function getCalTemp (color) {
+    //copy above for temp calibration
+    return Number(localStorage.getItem('uncalTemp-' + color));
+}
+
 function deleteSGCalPoint (checkbox){
 //get color and index of selected point to delete in format as follows (sgcalpoints-{{color}}-{{@index}})
 var selectedPoint = checkbox.id.split('-');
@@ -624,8 +632,6 @@ function toggleDefaultCloudURL (color) {
             var cloudURLsenabled = localStorage.getItem('cloudurlsenabled-' + color)||'1,0,0';
             var cloudURLsenabledArray = cloudURLsenabled.split(',');
             if (toggle.checked){
-                //set dynamic global variable for interval timers
-                //eval(color +  "= setInterval(function(){ app.request.post('https://script.google.com/a/baronbrew.com/macros/s/AKfycbydNOcB-_3RB3c-7sOTI-ZhTnN43Ye1tt0EFvvMxTxjdbheaw/exec',{ Timepoint : 'test', SG : localStorage.getItem('uncalSG-' + color), Temp : 'test', Color : color, Beer : 'Test,6', Comment : 'test' }); }, 10000);");
                 cloudURLsenabledArray[0] = '1';
                 localStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray);
 
@@ -678,4 +684,34 @@ function toggleCustomCloudURL1 (color) {
 function custom1Toggle (color) {
     var toggle = app.toggle.get('#toggleCustomCloudURL1-' + color);
     toggle.toggle();
+}
+
+function postToCloudURLs (color, comment) {
+    if (comment === undefined){
+        comment = "";
+    };
+    var beacon = JSON.parse(localStorage.getItem('tiltObject-' + color));
+    var cloudURLs = localStorage.getItem('cloudurls-' + color)||'https://script.google.com/a/baronbrew.com/macros/s/AKfycbydNOcB-_3RB3c-7sOTI-ZhTnN43Ye1tt0EFvvMxTxjdbheaw/exec,,';//temporary default cloud url
+    var cloudURLsArray = cloudURLs.split(',');
+    var cloudURLsenabled = localStorage.getItem('cloudurlsenabled-' + color)||'1,0,0';
+    var cloudURLsenabledArray = cloudURLsenabled.split(',');
+    for (var i = 1; i < 3; i++) {
+        if (cloudURLsenabledArray[i] == '1'){
+        //convert beacon timeStamp (UTC) to Excel formatted TimePoint (local time)
+        var timeStamp = new Date(beacon.timeStamp);
+        var localTime = timeStamp.toString();
+        var localTimeMS = new Date(localTime);
+        var localTimeExcel = localTimeMS / 1000 / 60 / 60 / 24 + 25569;
+        console.log(cloudURLsArray[i - 1]);
+        app.request.post(cloudURLsArray[i - 1],{ Timepoint : localTimeExcel, SG : beacon.SG, Temp : beacon.Temp, Color : beacon.Color, Beer : beacon.Beername, Comment : comment }, function (data){
+            var successData = JSON.parse(data);
+            console.log(successData);
+            if (successData.beername != null) {
+                localStorage.setItem('beerName-' + color, successData.beername);
+                showBeerName(color);
+            }
+        });
+        }
+    }
+
 }
