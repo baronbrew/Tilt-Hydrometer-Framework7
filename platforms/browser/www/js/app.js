@@ -14,10 +14,7 @@ var app  = new Framework7({
   // App root data
   data: function () {
     return {
-      user: {
-        firstName: 'John',
-        lastName: 'Doe',
-      },
+      defaultCloudURL : 'https://script.google.com/a/baronbrew.com/macros/s/AKfycbydNOcB-_3RB3c-7sOTI-ZhTnN43Ye1tt0EFvvMxTxjdbheaw/exec'
     };
   },
   // App root methods
@@ -311,11 +308,15 @@ $$(document).on('deviceready', function() {
         updateSGcallist(foundBeaconsArray[i]);
         //show beer name in settings
         showBeerName(foundBeaconsArray[i]);
+        //show email if available
+        showEmail(foundBeaconsArray[i]);
         //set up cloud logging toggles
         toggleDefaultCloudURL(foundBeaconsArray[i]);
         toggleCustomCloudURL1(foundBeaconsArray[i]);
-        //toggleCustomCloudURL2(foundBeaconsArray[i]);
+        toggleCustomCloudURL2(foundBeaconsArray[i]);
         //console.log(foundBeaconsArray[i]);
+        //set up cloud interval stepper
+        cloudIntervalStepper(foundBeaconsArray[i]);
         //set up buttons
         $$('#unitstoggle-' + foundBeaconsArray[i]).on('click', function (e) {
             var unitscolor = e.currentTarget.id.split("-");
@@ -686,12 +687,45 @@ function custom1Toggle (color) {
     toggle.toggle();
 }
 
+function toggleCustomCloudURL2 (color) {
+    var toggle = app.toggle.create({
+        el: '#toggleCustomCloudURL2-' + color,
+        on: {
+          change: function () {
+            var cloudURLsenabled = localStorage.getItem('cloudurlsenabled-' + color)||'1,0,0';
+            var cloudURLsenabledArray = cloudURLsenabled.split(',');
+            if (toggle.checked){
+                cloudURLsenabledArray[2] = '1';
+                localStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray);
+
+            }
+            if (!toggle.checked){
+                cloudURLsenabledArray[2] = '0';
+                localStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray);
+            }
+            
+          }
+        }
+      })
+      var cloudURLsenabled = localStorage.getItem('cloudurlsenabled-' + color)||'1,0,0';
+      var cloudURLsenabledArray = cloudURLsenabled.split(',');
+      if (cloudURLsenabledArray[2] == '1' && !toggle.checked){
+         toggle.toggle();
+      }
+}
+
+function custom2Toggle (color) {
+    var toggle = app.toggle.get('#toggleCustomCloudURL2-' + color);
+    toggle.toggle();
+}
+
 function postToCloudURLs (color, comment) {
+    $$('#cloudStatus-' + color).html("Contacting cloud...");
     if (comment === undefined){
         comment = "";
     };
     var beacon = JSON.parse(localStorage.getItem('tiltObject-' + color));
-    var cloudURLs = localStorage.getItem('cloudurls-' + color)||'https://script.google.com/a/baronbrew.com/macros/s/AKfycbydNOcB-_3RB3c-7sOTI-ZhTnN43Ye1tt0EFvvMxTxjdbheaw/exec,,';//temporary default cloud url
+    var cloudURLs = localStorage.getItem('cloudurls-' + color) || app.data.defaultCloudURL + ',,';
     var cloudURLsArray = cloudURLs.split(',');
     var cloudURLsenabled = localStorage.getItem('cloudurlsenabled-' + color)||'1,0,0';
     var cloudURLsenabledArray = cloudURLsenabled.split(',');
@@ -705,8 +739,10 @@ function postToCloudURLs (color, comment) {
         console.log(cloudURLsArray[i - 1]);
         app.request.post(cloudURLsArray[i - 1],{ Timepoint : localTimeExcel, SG : beacon.SG, Temp : beacon.Temp, Color : beacon.Color, Beer : beacon.Beername, Comment : comment }, function (data){
             var successData = JSON.parse(data);
-            console.log(successData);
-            if (successData.beername != null) {
+            var successDataArray = successData.beername.split(",");
+            console.log(successDataArray[1]);
+            $$('#cloudStatus-' + color).html(localTime + '<br>' + successData.result);
+            if (successData.beername[1] != undefined) {
                 localStorage.setItem('beerName-' + color, successData.beername);
                 showBeerName(color);
             }
@@ -714,4 +750,73 @@ function postToCloudURLs (color, comment) {
         }
     }
 
+}
+
+function cloudIntervalStepper (color) {
+    var stepper = app.stepper.create({
+        el: '#cloudStepper-' + color,
+        on : {
+            change: function () {
+            var cloudInterval = stepper.getValue();
+            localStorage.setItem('cloudInterval-' + color,cloudInterval);
+            }
+        }
+    })
+}
+
+function clearEmail (button){
+    var clickedButton = button.id.split('-');
+    var color = clickedButton[1];
+    localStorage.setItem('emailAddress-' + color,'');
+    $$('#emailAddress-' + color).val('');
+}
+        
+
+function setEmail (button){
+    var clickedButton = button.id.split('-');
+    var color = clickedButton[1];
+    var newEmailOriginal = $$('#emailAddress-' + color).val();
+    var newEmail = newEmailOriginal.trim();
+    if (ValidateEmail(newEmail)){
+    localStorage.setItem('emailAddress-' + color, newEmail);
+    app.dialog.alert('Note: It is recommended to use a Gmail email address for full edit access to data.','Success: Email Address Set');
+    showEmail(color);
+    }else{
+        app.dialog.alert('Please check email address.','Error: Invalid Email');
+    }
+}
+
+function showEmail (color){
+   var email = localStorage.getItem('emailAddress-' + color)||'';
+    $$('#emailAddress-' + color).val(email);
+}
+
+function ValidateEmail(email) {
+ if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
+    return (true)
+  }
+    return (false)
+}
+
+function startCloudLogging(button) {
+    console.log('test');
+    var clickedButton = button.id.split('-');
+    var color = clickedButton[1];
+    //check if email address required to start new log (i.e. default cloud url is being used)
+    var cloudURLs = localStorage.getItem('cloudurls-' + color) || app.data.defaultCloudURL + ',,';
+    var cloudURLsArray = cloudURLs.split(',');
+    var cloudURLsEnabled = localStorage.getItem('cloudurlsenabled-' + color)||'1,0,0';
+    var cloudURLsEnabledArray = cloudURLsEnabled.split(',');
+    var email = localStorage.getItem('emailAddress-' + color)||$$('#emailAddress-' + color).val();
+    var emailValid = ValidateEmail(email);
+    if (!emailValid) {
+        app.dialog.prompt('Please enter a valid Gmail email address to start a new log or click "Cancel" to start a log without an email address','Valid Gmail Address Recommended', function(newEmail) { 
+        localStorage.setItem('emailAddress-' + color, newEmail);
+        postToCloudURLs(color, newEmail); },
+        function(){
+        postToCloudURLs(color);
+        });
+    } else {
+        postToCloudURLs(color, email);
+        }
 }
