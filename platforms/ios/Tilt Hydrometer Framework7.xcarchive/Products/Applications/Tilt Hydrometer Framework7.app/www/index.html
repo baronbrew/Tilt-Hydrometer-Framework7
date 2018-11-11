@@ -41,94 +41,7 @@
               <div class="block-title">Select Tilt Color</div>
               <div class="list">
                   <ul>
-                    <li class="accordion-item" id="accordion">
-                        <div class="accordion-item-toggle">
-                          <div class="item-title margin-horizontal padding"><i class="f7-icons color-custom-pink">chevron_down</i> PINK</div>
-                        </div>
-                      <div class="accordion-item-content">
-                        <div class="block-title no-margin-top">Beer Name / Cloud ID</div>
-                        <div class="block block-strong">
-                            <div class="content-block">
-                            <div class="content-block-inner">
-                            <div class="item-title floating-label">Current Beer Name:</div>
-                            <div class="item-input-wrap">
-                            <input type="text" id="currentbeername-PINK" placeholder="(Set beer name below.)">
-                            </div>
-                            <div class="item-title floating-label">Set Beer Name[,ID]:</div>
-                            <div class="item-input-wrap">
-                            <input type="text" id="beername-PINK" placeholder="Mosaic NE IPA">
-                            </div>
-                            <p class="segmented segmented-raised segmented-round" >
-                                <button class="button button-round" id="setBeerName-PINK" onclick="setBeerName(this)">Set Name</button>
-                                <button class="button button-round button-active" id="clearBeerName-PINK" onclick="clearBeerName(this)">Clear Name</button>
-                            </p>
-                            </div>
-                        </div>
-                        </div>
-                        <div class="block-title">Cloud Logging</div>
-                      <div class="block block-strong">
-                        <div class="content-block">
-                        <div class="content-block-inner">
-                            <p class="no-margin-top"><label class="toggle toggle-init">
-                                <input type="checkbox" checked>
-                                <span class="toggle-icon"></span>
-                                </label> Use Default Cloud URL</p>
-                            <p><label class="toggle toggle-init">
-                                <input type="checkbox" unchecked>
-                                <span class="toggle-icon"></span>
-                                </label> Use Custom Cloud URL</p>
-                        <div class="item-title floating-label">Enter Custom Cloud URL: <i class="f7-icons color-custom-gray">info</i></div>
-                        <div class="item-input">
-                        <input type="text" placeholder="https://...">
-                        </div>
-                        <div class="item-title floating-label">Enter Email Address: <i class="f7-icons color-custom-gray">info</i></div>
-                        <div class="item-input">
-                        <input type="text" placeholder="example@gmail.com">
-                        </div>
-                        </div>
-                            <p class="segmented segmented-raised segmented-round">
-                                <button class="button button-round">Start Log</button>
-                                <button class="button button-round button-active">Stop Log</button>
-                              </p>
-                            </div>
-                            </div>
-                            <div class="block-title">Calibration (SG/Conc)</div>
-                            <div class="block block-strong">
-                              <div class="content-block">
-                              <div class="content-block-inner">
-                                <p class="no-margin-top">Quick Calibration</p>
-                                  <p class="round no-margin-top">
-                                      <button class="button button-round" id="tareinwater-PINK-1.000" onclick="addSGPoints(this)">Tare in Water</button>
-                                  </p>
-                                  <p>Standard Calibration</p>
-                            <div class="item-title floating-label">Enter uncalibrated point:</div>
-                            <div class="item-input-wrap">
-                            <input type="number" id="uncalSG-PINK" placeholder="1.002">
-                            </div>
-                            <p class="round">
-                                <button class="button button-round" id="getuncalibratedSGpoint-PINK" onclick="getUncalibratedSGPoint(this)">Get Uncalibrated Point</button>
-                            </p>
-                            <div class="item-title floating-label">Enter actual point:</div>
-                            <div class="item-input-wrap">
-                            <input type="number" id="actualSG-PINK" placeholder="1.000">
-                            </div>
-                            <p class="round">
-                                <button class="button button-round" id="addSGpoint-PINK" onclick="addSGPoints(this)">Add Points</button>
-                              </p>
-                              <div class="data-table">
-                                  <table>
-                                      <thead>
-                                        <tr>
-                                            <th class="numeric-cell">Delete</th>
-                                          <th class="numeric-cell">Uncal.</th>
-                                          <th class="numeric-cell">Actual</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody id="sgcallisttemplate-PINK">
-                                      </tbody>
-                                   </table>
-                               </div>
-                 </li>
+                    <div id="settingsPanel"></div>
               </ul>
             </div>
           </div>
@@ -195,8 +108,8 @@
           </div>
         </div>
         </div>
-        <div class="card-content card-content-padding">SG/Concentration: <span id="uncaldisplayFerm+displayFermunits{{Color}}">{{uncalSG}}</span> (uncal.)</div>
-        <div id="caldisplayFerm+displayFermunits{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{SG}}</div>
+        <div class="card-content card-content-padding">SG/Concentration: <span id="uncaldisplayFerm+displayFermunits{{Color}}">{{uncaldisplayFerm}}</span> (uncal.)</div>
+        <div id="caldisplayFerm+displayFermunits{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{caldisplayFerm}}</div>
         <div id="percentScaleSG{{Color}}" class="margin-horizontal button button-round" style="background:{{Color}};height:10px;max-width:95%;"></div>
         <div class="card-content card-content-padding">Temperature: {{uncalTemp}} (uncal.)</div>
         <div id="uncaldisplayTemp+displayTempunits{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{uncalTemp}}{{displayTempunits}}</div>
@@ -221,6 +134,134 @@
     </tr>
     {{/each}}
   </script>
+
+  <script id="settingstemplate" type="text/template7">
+  {{#each this}}
+  <li class="accordion-item" id="accordion-{{Color}}">
+      <div class="accordion-item-toggle">
+        <div class="item-title margin-horizontal padding"><i class="f7-icons color-custom-{{Color}}">chevron_down</i> {{Color}}</div>
+      </div>
+    <div class="accordion-item-content">
+      <div class="block-title no-margin-top"><i class="icon material-icons color-custom-{{Color}}">local_drink</i> Beer Name</div>
+      <div class="block block-strong">
+          <div class="content-block">
+          <div class="content-block-inner">
+            <div class="chip">
+          <div class="chip-media bg-color-black text-color-white"><i class="icon material-icons">smartphone</i></div>
+          <div class="chip-label" id="currentbeername-{{Color}}">Untitled</div>
+          </div>
+          <div class="item-title floating-label margin-top">Enter beer name:</div>
+          <div class="item-input-wrap">
+          <input type="text" id="beername-{{Color}}" placeholder="IPA">
+          </div>
+          <p class="segmented segmented-raised segmented-round" >
+              <button class="button button-round" id="setBeerName-{{Color}}" onclick="setBeerName(this)">Set Name</button>
+              <button class="button button-round button-active" id="clearBeerName-{{Color}}" onclick="clearBeerName(this)">Clear Name</button>
+          </p>
+          </div>
+      </div>
+      </div>
+      <div class="block-title"><i class="icon material-icons color-custom-{{Color}}">cloud_upload</i> Cloud Logging</div>
+    <div class="block block-strong">
+      <div class="content-block">
+      <div class="content-block-inner">
+          <div class="item-title floating-label">Enter email for logging: <i class="f7-icons color-custom-gray">info</i></div>
+          <div class="item-input">
+          <input type="email" id="emailAddress-{{Color}}" placeholder="example@gmail.com">
+          </div>
+          <p class="segmented segmented-raised segmented-round" >
+              <button class="button button-round" id="setEmail-{{Color}}" onclick="setEmail(this)">Save Email</button>
+              <button class="button button-round button-active" id="clearEmail-{{Color}}" onclick="clearEmail(this)">Delete Email</button>
+          </p>
+          <p>
+              <button class="button button-round" id="startCloudLog-{{Color}}" onclick="startCloudLogging(this)">Start New Cloud Log</button>
+            </p>
+            <p>Cloud Status:</p>
+            <div class="card"><div class="card-content card-content-padding" id="cloudStatus-{{Color}}">Tap "Start New Cloud Log" to start logging data to the cloud for {{Color}} Tilt.</div></div>
+            </div>
+            <p class="segmented segmented-raised segmented-round">
+                <button class="button button-round" id="logOnce-{{Color}}" onclick="logOnce(this)">Log Once</button>
+                <button class="button button-round button-active" id="endLog-{{Color}}" onclick="endLog(this)">End Log</button>
+              </p>
+          <p class="no-margin-top"><label class="toggle" id="toggleDefaultCloudURL-{{Color}}">
+              <input type="checkbox" unchecked>
+              <span class="toggle-icon"></span>
+              </label><a onclick="defaultToggle('{{Color}}')"> Use default cloud URL</a></p>
+              <div class="item-title floating-label">Enter New Default Cloud URL: <i class="f7-icons color-custom-gray">info</i></div>
+              <div class="item-input">
+              <input type="text" id="defaultCloudURL-{{Color}}" placeholder="(optional)">
+              </div>
+                </div>
+          <div class="accordion-item">
+          <div class="accordion-item-toggle"><button class="button button-round">Log to additional URLs...</button></div>
+          <div class="accordion-item-content">
+          <p><label class="toggle" id="toggleCustomCloudURL1-{{Color}}">
+              <input type="checkbox" unchecked>
+              <span class="toggle-icon"></span>
+              </label><a onclick="custom1Toggle('{{Color}}')"> Use Custom Cloud URL 1</a></p>
+      <div class="item-title floating-label">Enter Custom Cloud URL 1: <i class="f7-icons color-custom-gray">info</i></div>
+      <div class="item-input">
+      <input type="text" id="customCloudURL1-{{Color}}" placeholder="https://...">
+      </div>
+      <p><label class="toggle" id="toggleCustomCloudURL2-{{Color}}">
+          <input type="checkbox" unchecked>
+          <span class="toggle-icon"></span>
+          </label><a onclick="custom2Toggle('{{Color}}')"> Use Custom Cloud URL 2</a></p>
+  <div class="item-title floating-label">Enter Custom Cloud URL 2: <i class="f7-icons color-custom-gray">info</i></div>
+  <div class="item-input">
+  <input type="text" id="customCloudURL2-{{Color}}" placeholder="https://...">
+  </div>
+  </div>
+  <p>Set cloud logging interval:
+  <div class="stepper stepper-big padding-horizontal" id="cloudStepper-{{Color}}">
+      <div class="stepper-button-minus"><small>-</small></div>
+      <div class="stepper-input-wrap">
+        <input type="text" readonly value="15" min="15" max="1440" step="15">
+      </div>
+      <div class="stepper-button-plus"><small>+</small></div>
+  </div>minutes
+  </p>
+  </div>
+  </div>
+          <div class="block-title">Calibration (Gravity)</div>
+          <div class="block block-strong">
+            <div class="content-block">
+            <div class="content-block-inner">
+              <p class="no-margin-top">With Water:</p>
+                <p class="round no-margin-top">
+                    <button class="button button-round" id="tareinwater-{{Color}}-1.000" onclick="addSGPoints(this)">Calibrate in Water</button>
+                </p>
+                <p>With Known Gravity:</p>
+          <div class="item-title floating-label">Enter uncalibrated (Tilt) point:</div>
+          <div class="item-input-wrap">
+          <input type="number" id="uncalSG-{{Color}}" placeholder="1.002">
+          </div>
+          <p class="round">
+              <button class="button button-round" id="getuncalibratedSGpoint-{{Color}}" onclick="getUncalibratedSGPoint(this)">Get Current Gravity</button>
+          </p>
+          <div class="item-title floating-label">Enter actual (known) point:</div>
+          <div class="item-input-wrap">
+          <input type="number" id="actualSG-{{Color}}" placeholder="1.000">
+          </div>
+          <p class="round">
+              <button class="button button-round" id="addSGpoint-{{Color}}" onclick="addSGPoints(this)">Calibrate in Known Gravity</button>
+            </p>
+            <div class="data-table">
+                <table>
+                    <thead>
+                      <tr>
+                          <th class="numeric-cell">Delete</th>
+                        <th class="numeric-cell">Uncal/Tilt</th>
+                        <th class="numeric-cell">Actual</th>
+                      </tr>
+                    </thead>
+                    <tbody id="sgcallisttemplate-{{Color}}">
+                    </tbody>
+                 </table>
+             </div>
+</li>
+{{/each}}
+</script>
 
   <!-- Cordova -->
   <script type="text/javascript" src="cordova.js"></script>

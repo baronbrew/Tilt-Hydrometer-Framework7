@@ -1,16 +1,21 @@
 /* Your app styles here */
-.color-custom-red { color: red;
+.color-custom-RED { color: red;
 }
-.color-custom-green { color: green;
+.color-custom-GREEN { color: green;
 }
-.color-custom-gray { color: gray;
+.color-custom-GRAY { color: gray;
 }
-.color-custom-purple { color: purple;
+.color-custom-PURPLE { color: purple;
 }
-.color-custom-black { color: black;
+.color-custom-BLACK { color: black;
 }
-
-.color-custom-pink { color: hotpink;
+.color-custom-PINK { color: hotpink;
+}
+.color-custom-ORANGE { color: orange;
+}
+.color-custom-BLUE { color: blue;
+}
+.color-custom-YELLOW { color: yellow;
 }
 
 div.sg-temp {
@@ -25,3 +30,4 @@ div.lastrec {
     text-align: center;
     font-size: smaller;
 }
+

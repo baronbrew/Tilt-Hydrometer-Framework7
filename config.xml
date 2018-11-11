@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.baronbrew.tilthydrometerf7" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Tilt Hydrometer Framework7</name>
+    <name>Tilt App v2</name>
     <description>
-        A basic Framework7 template for PhoneGap.
+        Generation two app for Tilt scanning and logging data.
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="noah@baronbrew.com" href="http://www.tilthydrometer.com">
+        Baron Brew Equipment
     </author>
     <content src="index.html" />
     <access origin="*" />
@@ -15,6 +15,7 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <allow-navigation href="https://docs.google.com/*" />
     <platform name="android">
         <preference name="android-minSdkVersion" value="14" />
         <allow-intent href="market:*" />

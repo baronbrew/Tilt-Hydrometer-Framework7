@@ -310,6 +310,8 @@ $$(document).on('deviceready', function() {
         showBeerName(foundBeaconsArray[i]);
         //show email if available
         showEmail(foundBeaconsArray[i]);
+        //show cloud URLs
+        showCloudURLs(foundBeaconsArray[i]);
         //set up cloud logging toggles
         toggleDefaultCloudURL(foundBeaconsArray[i]);
         toggleCustomCloudURL1(foundBeaconsArray[i]);
@@ -396,7 +398,12 @@ $$(document).on('deviceready', function() {
             }
                 });
                 });
-            });       
+            });
+        $$('#logprompt-' + foundBeaconsArray[i]).on('click', function (e) {
+                //var calcolor = e.currentTarget.id.split("-");
+                startCloudLogging(e.currentTarget);
+                
+        });   
         }
     }
     
@@ -576,22 +583,26 @@ function clearBeerName (button){
     var color = clickedButton[1];
     var currentBeerName = localStorage.getItem('beerName-' + color)||"Untitled";
     var currentBeerNameArray = currentBeerName.split(',');
-    var newBeerName = $$('#beername-' + color).val();
     //warn user that about deleting name with associated cloud ID
     if (Number(currentBeerNameArray[1]) > 0){
-        var cancelled = false;
-        app.dialog.confirm('Your ' + color + ' Tilt has an associated cloud ID that will be cleared as well.','Continue clearing beer name for ' + color + '?',function(){
-        localStorage.setItem('beerName-' + color, 'Untitled');
-        showBeerName(color);
-        $$('#beername-' + color).val('');
-        },function(){
-            cancelled = true;
-        });
-    }else if (!cancelled){
-        localStorage.setItem('beerName-' + color, 'Untitled');
-        showBeerName(color);
-        $$('#beername-' + color).val('');
+        var notificationFull = app.notification.create({
+            icon: '<i class="f7-icons">check</i>',
+            title: 'Name and Cloud ID Cleared',
+            titleRightText: 'alert',
+            subtitle: currentBeerName + ' disconnected from cloud log.',
+            text: 'tap here to undo',
+            closeTimeout: 8000,
+            closeOnClick: true,
+          });
+        notificationFull.open();
+        notificationFull.on('click', 
+         function() { 
+          localStorage.setItem('beerName-' + color, currentBeerName);
+          showBeerName(color);
+         });
     }
+    localStorage.setItem('beerName-' + color, 'Untitled');
+    showBeerName(color);
 }
 
 function setBeerName (button){
@@ -599,18 +610,32 @@ function setBeerName (button){
     var color = clickedButton[1];
     var currentBeerName = localStorage.getItem('beerName-' + color)||"Untitled";
     var currentBeerNameArray = currentBeerName.split(',');
-    var newBeerName = $$('#beername-' + color).val();
+    var newBeerName = $$('#currentbeername-' + color).val();
     //only update beer name if field is not empty
     if (newBeerName == "") {
-        app.dialog.alert('No name entered. Please try again.','Error');
+        var notificationFull = app.notification.create({
+            icon: '<i class="f7-icons">info</i>',
+            title: 'Error Saving Name',
+            titleRightText: 'alert',
+            subtitle: 'No name entered.',
+            text: 'Please enter a beer name.',
+            closeTimeout: 5000,
+          });
+        notificationFull.open();
         //warn if name has an associated cloud ID
     } else if (Number(currentBeerNameArray[1]) > 0) {
-        app.dialog.confirm('This could disconnect ' + color + ' from cloud logging.','Update beer name for ' + color + '?',function(){
-            localStorage.setItem('beerName-' + color, newBeerName);
-            showBeerName(color);
-        })
+        var notificationFull = app.notification.create({
+            icon: '<i class="f7-icons">info</i>',
+            title: 'Error Saving Name',
+            titleRightText: 'alert',
+            subtitle: 'Cloud logging in progress.',
+            text: 'Please clear name before saving new name.',
+            closeTimeout: 5000,
+          });
+        notificationFull.open();
+        }
         //don't warn if beer name doesn't have a cloud id associated
-    } else {
+      else {
         localStorage.setItem('beerName-' + color, newBeerName);
         showBeerName(color);
     }
@@ -618,8 +643,13 @@ function setBeerName (button){
 
 function showBeerName (color){
     var beerName = localStorage.getItem('beerName-' + color)||'Untitled';
-    //set beer name in settings panel
-    $$('#currentbeername-' + color).html(beerName);
+    //set beer name in settings panel unless it is untitled leave blank
+    if (beerName == 'Untitled'){
+    $$('#currentbeername-' + color).val('');
+    }
+    else {
+    $$('#currentbeername-' + color).val(beerName);
+    }
     //set beer name on tilt card
     $$('#beerName' + color).html(beerName);
 
@@ -635,6 +665,7 @@ function toggleDefaultCloudURL (color) {
             if (toggle.checked){
                 cloudURLsenabledArray[0] = '1';
                 localStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray);
+                postToCloudURLs(color);
 
             }
             if (!toggle.checked){
@@ -666,6 +697,7 @@ function toggleCustomCloudURL1 (color) {
             if (toggle.checked){
                 cloudURLsenabledArray[1] = '1';
                 localStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray);
+                postToCloudURLs(color);
             }
             if (!toggle.checked){
                 cloudURLsenabledArray[1] = '0';
@@ -697,6 +729,7 @@ function toggleCustomCloudURL2 (color) {
             if (toggle.checked){
                 cloudURLsenabledArray[2] = '1';
                 localStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray);
+                postToCloudURLs(color);
 
             }
             if (!toggle.checked){
@@ -720,33 +753,45 @@ function custom2Toggle (color) {
 }
 
 function postToCloudURLs (color, comment) {
-    $$('#cloudStatus-' + color).html("Contacting cloud...");
+    $$('#cloudStatus-' + color).html('<div class="text-align-center"><div class="preloader"></div><p>Contacting cloud...</p></div>');
     if (comment === undefined){
         comment = "";
     };
     var beacon = JSON.parse(localStorage.getItem('tiltObject-' + color));
+    //get beer name from local storage in case beer name updated from prompt
+    var currentBeerName = localStorage.getItem('beerName-' + color)||"Untitled";
     var cloudURLs = localStorage.getItem('cloudurls-' + color) || app.data.defaultCloudURL + ',,';
-    var cloudURLsArray = cloudURLs.split(',');
+    var defaultCloudURL = $$('#defaultCloudURL-' + color).val();
+    if ( defaultCloudURL == ''){
+         defaultCloudURL = app.data.defaultCloudURL
+    }
+    var cloudURLsArray = [ defaultCloudURL, $$('#customCloudURL1-' + color).val(), $$('#customCloudURL2-' + color).val() ];
     var cloudURLsenabled = localStorage.getItem('cloudurlsenabled-' + color)||'1,0,0';
     var cloudURLsenabledArray = cloudURLsenabled.split(',');
-    for (var i = 1; i < 3; i++) {
+    for (var i = 0; i < 2; i++) {
         if (cloudURLsenabledArray[i] == '1'){
         //convert beacon timeStamp (UTC) to Excel formatted TimePoint (local time)
         var timeStamp = new Date(beacon.timeStamp);
         var localTime = timeStamp.toString();
         var localTimeMS = new Date(localTime);
         var localTimeExcel = localTimeMS / 1000 / 60 / 60 / 24 + 25569;
-        console.log(cloudURLsArray[i - 1]);
-        app.request.post(cloudURLsArray[i - 1],{ Timepoint : localTimeExcel, SG : beacon.SG, Temp : beacon.Temp, Color : beacon.Color, Beer : beacon.Beername, Comment : comment }, function (data){
+        //console.log(cloudURLsArray[i - 1]);
+        app.request.post(cloudURLsArray[i],{ Timepoint : localTimeExcel, SG : beacon.SG, Temp : beacon.Temp, Color : beacon.Color, Beer : currentBeerName, Comment : comment }, function (data){
+            app.preloader.hide();
             var successData = JSON.parse(data);
-            var successDataArray = successData.beername.split(",");
-            console.log(successDataArray[1]);
-            $$('#cloudStatus-' + color).html(localTime + '<br>' + successData.result);
-            if (successData.beername[1] != undefined) {
+            $$('#cloudStatus-' + color).html(localTime + '<br><br>' + successData.result);
+            var beerNameArray = successData.beername.split(",");
+            if (beerNameArray[1] != undefined && comment != 'End of log') {
                 localStorage.setItem('beerName-' + color, successData.beername);
                 showBeerName(color);
             }
-        });
+        }, function (errorData) {
+            app.preloader.hide();
+            app.dialog.alert("Check Internet connection.", "Error Logging to Cloud", function () {
+            $$('#cloudStatus-' + color).html('Error logging to cloud. Check Internet connection.');
+            })
+        }
+        );
         }
     }
 
@@ -779,7 +824,7 @@ function setEmail (button){
     var newEmail = newEmailOriginal.trim();
     if (ValidateEmail(newEmail)){
     localStorage.setItem('emailAddress-' + color, newEmail);
-    app.dialog.alert('Note: It is recommended to use a Gmail email address for full edit access to data.','Success: Email Address Set');
+    app.dialog.alert('Saved email can be used for starting new cloud logs.','Email Address Saved');
     showEmail(color);
     }else{
         app.dialog.alert('Please check email address.','Error: Invalid Email');
@@ -791,6 +836,14 @@ function showEmail (color){
     $$('#emailAddress-' + color).val(email);
 }
 
+function showCloudURLs (color){
+    var urls = localStorage.getItem('cloudurls-' + color)||',,';
+    var urlsArray = urls.split(',');
+     $$('#defaultCloudURL-' + color).val(urlsArray[0]);
+     $$('#customCloudURL1-' + color).val(urlsArray[1]);
+     $$('#customCloudURL2-' + color).val(urlsArray[2]);
+ }
+
 function ValidateEmail(email) {
  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
     return (true)
@@ -799,24 +852,63 @@ function ValidateEmail(email) {
 }
 
 function startCloudLogging(button) {
-    console.log('test');
     var clickedButton = button.id.split('-');
     var color = clickedButton[1];
-    //check if email address required to start new log (i.e. default cloud url is being used)
-    var cloudURLs = localStorage.getItem('cloudurls-' + color) || app.data.defaultCloudURL + ',,';
-    var cloudURLsArray = cloudURLs.split(',');
-    var cloudURLsEnabled = localStorage.getItem('cloudurlsenabled-' + color)||'1,0,0';
-    var cloudURLsEnabledArray = cloudURLsEnabled.split(',');
+    var beerName = localStorage.getItem('beerName-' + color)||'Untitled';
+    var beerNameArray = beerName.split(',');
     var email = localStorage.getItem('emailAddress-' + color)||$$('#emailAddress-' + color).val();
     var emailValid = ValidateEmail(email);
-    if (!emailValid) {
-        app.dialog.prompt('Please enter a valid Gmail email address to start a new log or click "Cancel" to start a log without an email address','Valid Gmail Address Recommended', function(newEmail) { 
+    //handle the following situations: beer already logging, email address invalid, beer name not set (Untitled)
+    if (Number(beerNameArray[1]) > 0){
+        app.preloader.hide();
+        app.dialog.alert('Cloud logging for "name,cloud ID" : "' + beerName + '" is currently in progress. Tap "End Log" before starting a new log.','Cloud Log Already Started');
+    } else if (!emailValid) {
+        app.dialog.prompt('Gmail address recommended for instant edit access to your cloud log or use another email address and get edit access later. Tap "Cancel" to start a new log without an email address and a link will be displayed in the app.','Enter Email Address', function(newEmail) { 
         localStorage.setItem('emailAddress-' + color, newEmail);
-        postToCloudURLs(color, newEmail); },
+        showEmail(color);
+        postToCloudURLs(color, newEmail);
+    },
         function(){
-        postToCloudURLs(color);
+        postToCloudURLs(color,'@');
         });
+    } else if (beerNameArray[0] == 'Untitled'){
+        app.dialog.prompt('Please enter a beer name to start a new log or tap "Cancel" to start a new log without a beer name.','Beer Name Recommended', function(newBeerName) { 
+        localStorage.setItem('beerName-' + color, newBeerName);
+        showBeerName(color);
+        postToCloudURLs(color, email);
+        app.preloader.show();
+        setTimeout(function() {app.preloader.hide();}, 10000);
+    },
+        function(){
+        postToCloudURLs(color, email);
+        app.preloader.show();
+        setTimeout(function() {app.preloader.hide();}, 10000);
+        });
+
     } else {
         postToCloudURLs(color, email);
+        app.preloader.show();
+        setTimeout(function() {app.preloader.hide();}, 10000);
         }
+}
+
+function logOnce(button) {
+    var clickedButton = button.id.split('-');
+    var color = clickedButton[1];
+    app.dialog.prompt('Enter comment and tap "OK" or tap "Cancel" if no comment.','Add Comment?', function (comment) {
+        postToCloudURLs(color, comment);
+    }, function(){
+        postToCloudURLs(color);
+    })
+}
+
+function endLog(button) {
+    var clickedButton = button.id.split('-');
+    var color = clickedButton[1];
+    app.dialog.confirm('Beer name will be reset to "Untitled" and "End of log" will be sent as a comment.','End Cloud Log?', function () {
+        postToCloudURLs(color, "End of log");
+        localStorage.setItem('beerName-' + color, 'Untitled');
+        showBeerName(color);
+        $$('#beername-' + color).val('');
+    })
 }

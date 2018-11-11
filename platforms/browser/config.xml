@@ -3,12 +3,12 @@
     <feature name="Device">
         <param name="browser-package" value="Device" />
     </feature>
-    <name>Tilt Hydrometer Framework7</name>
+    <name>Tilt App v2</name>
     <description>
-        A basic Framework7 template for PhoneGap.
+        Generation two app for Tilt scanning and logging data.
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="noah@baronbrew.com" href="http://www.tilthydrometer.com">
+        Baron Brew Equipment
     </author>
     <content src="index.html" />
     <access origin="*" />
@@ -18,5 +18,6 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <allow-navigation href="https://docs.google.com/*" />
     <preference name="DisallowOverscroll" value="true" />
 </widget>
