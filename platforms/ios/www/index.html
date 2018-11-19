@@ -126,7 +126,7 @@
         <td class="checkbox-cell">
           <label class="checkbox">
             <input type="checkbox" id="sgcalpoints-{{color}}-{{@index}}" onchange="deleteSGCalPoint(this)">
-            <i class="icon icon-checkbox"></i>
+            <i class="f7-icons">delete</i>
           </label>
         </td>
         <td class="numeric-cell">{{uncalpoint}}</td>
@@ -139,9 +139,10 @@
   {{#each this}}
   <li class="accordion-item" id="accordion-{{Color}}">
       <div class="accordion-item-toggle">
-        <div class="item-title margin-horizontal padding"><i class="f7-icons color-custom-{{Color}}">circle_fill</i><strong> TILT | {{Color}}</strong></div>
+        <div class="item-title margin-horizontal padding"><strong>TILT <i class="f7-icons color-custom-{{Color}} size-15">circle_fill</i> {{Color}}</strong></div>
       </div>
     <div class="accordion-item-content">
+        <div class="block-title no-margin-top"><i class="f7-icons">graph_round</i> Logging</div>
       <div class="block block-strong">
           <div class="content-block">
           <div class="content-block-inner">
@@ -155,69 +156,85 @@
           </div>
       </div>
       </div>
-      <div class="block-title"><i class="icon material-icons color-custom-{{Color}}">cloud_upload</i> Cloud Logging</div>
-    <div class="block block-strong">
+      <div class="block block-strong">
       <div class="content-block">
       <div class="content-block-inner">
+      <div class="item-input">
+      <input type="email" id="emailAddress-{{Color}}" placeholder="Enter Gmail email here">
+      </div>
+      <p class="segmented segmented-raised segmented-round" >
+          <button class="button button-round button-active" id="setEmail-{{Color}}" onclick="setEmail(this)">Save</button>
+          <button class="button button-round" id="clearEmail-{{Color}}" onclick="clearEmail(this)">Clear</button>
+      </p>
+      <div class="card"><div class="card-content card-content-padding" id="emailAddressWarning-{{Color}}"><p><i class="f7-icons size-15">info</i> Your Gmail email address will only used to send a link to your cloud log and enable editing. Gmail address is optional, however editing the log is only possible with a Gmail/Google account.</p></div></div>
+      </div>
+      </div>
+      </div>
+      <div class="block block-strong">
+      <div class="content-block">
+      <div class="content-block-inner">
+      <p>
+          <button class="button button-round button-active" id="startCloudLog-{{Color}}" onclick="startCloudLogging(this)">Start New Cloud Log</button>
+      </p>
+      <p class="segmented segmented-raised segmented-round">
+          <button class="button button-round" id="logOnce-{{Color}}" onclick="logOnce(this)">Comment</button>
+          <button class="button button-round" id="endLog-{{Color}}" onclick="endLog(this)">End Log</button>
+      </p>
+      <div class="card"><div class="card-content card-content-padding" id="cloudStatus-{{Color}}">Tap "Start New Cloud Log" to start logging data to the cloud for {{Color}} Tilt.</div></div>
+      <p>Change cloud logging interval:
+          <div class="stepper stepper-big padding-horizontal" id="cloudStepper-{{Color}}">
+              <div class="stepper-button-minus"><small>-</small></div>
+              <div class="stepper-input-wrap">
+                <input type="text" readonly value="15" min="15" max="1440" step="15">
+              </div>
+              <div class="stepper-button-plus"><small>+</small></div>
+          </div>minutes
+          </p>
           <p class="no-margin-top"><label class="toggle" id="toggleDefaultCloudURL-{{Color}}">
-              <input type="checkbox" unchecked>
+              <input type="checkbox" checked>
               <span class="toggle-icon"></span>
               </label><a onclick="defaultToggle('{{Color}}')"> Use default cloud URL</a>
               </p>
-              <div class="item-title floating-label">Enter default cloud URL: <i class="f7-icons color-custom-gray">info</i></div>
+              <div class="item-title floating-label">Change default cloud URL:</div>
               <div class="item-input">
-              <input type="text" id="defaultCloudURL-{{Color}}" placeholder="(optional)">
+              <input type="text" id="defaultCloudURL-{{Color}}" placeholder="https://script.google.com/...">
               </div>
-          <p>
-              <button class="button button-round" id="startCloudLog-{{Color}}" onclick="startCloudLogging(this)">Start New Cloud Log</button>
-          </p>
-          <p class="segmented segmented-raised segmented-round">
-              <button class="button button-round" id="logOnce-{{Color}}" onclick="logOnce(this)">Comment</button>
-              <button class="button button-round button-active" id="endLog-{{Color}}" onclick="endLog(this)">End Log</button>
-            </p>
-          <div class="item-title floating-label">Enter email for logging: <i class="f7-icons color-custom-gray">info</i></div>
+              <p class="segmented segmented-raised segmented-round" >
+                  <button class="button button-round button-active" id="setDefaultCloudURL-{{Color}}" onclick="setDefaultCloudURL(this)">Save</button>
+                  <button class="button button-round" id="clearDefaultCloudURL-{{Color}}" onclick="clearDefaultCloudURL(this)">Clear</button>
+              </p>
+              <div class="accordion-item">
+                  <div class="accordion-item-toggle"><button class="button button-round">Log to additional URLs...</button></div>
+                  <div class="accordion-item-content">
+                  <p><label class="toggle" id="toggleCustomCloudURL1-{{Color}}">
+                      <input type="checkbox" checked>
+                      <span class="toggle-icon"></span>
+                      </label><a onclick="custom1Toggle('{{Color}}')"> Use custom cloud URL 1</a></p>
+              <div class="item-title floating-label">Enter custom cloud URL 1:</div>
+              <div class="item-input">
+              <input type="text" id="customCloudURL1-{{Color}}" placeholder="https://...">
+              </div>
+              <p class="segmented segmented-raised segmented-round" >
+                  <button class="button button-round button-active" id="setCustomCloudURL1-{{Color}}" onclick="setCustomCloudURL1(this)">Save</button>
+                  <button class="button button-round" id="clearCustomCloudURL1-{{Color}}" onclick="clearCustomCloudURL1(this)">Clear</button>
+              </p>
+              <p><label class="toggle" id="toggleCustomCloudURL2-{{Color}}">
+                  <input type="checkbox" checked>
+                  <span class="toggle-icon"></span>
+                  </label><a onclick="custom2Toggle('{{Color}}')"> Use custom cloud URL 2</a></p>
+          <div class="item-title floating-label">Enter custom cloud URL 2:</div>
           <div class="item-input">
-          <input type="email" id="emailAddress-{{Color}}" placeholder="example@gmail.com">
+          <input type="text" id="customCloudURL2-{{Color}}" placeholder="https://...">
           </div>
           <p class="segmented segmented-raised segmented-round" >
-              <button class="button button-round" id="setEmail-{{Color}}" onclick="setEmail(this)">Save Email</button>
-              <button class="button button-round button-active" id="clearEmail-{{Color}}" onclick="clearEmail(this)">Delete Email</button>
+              <button class="button button-round button-active" id="setCustomCloudURL2-{{Color}}" onclick="setCustomCloudURL2(this)">Save</button>
+              <button class="button button-round" id="clearCustomCloudURL2-{{Color}}" onclick="clearCustomCloudURL2(this)">Clear</button>
           </p>
-            <p>Cloud Status:</p>
-            <div class="card"><div class="card-content card-content-padding" id="cloudStatus-{{Color}}">Tap "Start New Cloud Log" to start logging data to the cloud for {{Color}} Tilt.</div></div>
-            </div>
-                </div>
-                <p>Set cloud logging interval:
-                    <div class="stepper stepper-big padding-horizontal" id="cloudStepper-{{Color}}">
-                        <div class="stepper-button-minus"><small>-</small></div>
-                        <div class="stepper-input-wrap">
-                          <input type="text" readonly value="15" min="15" max="1440" step="15">
-                        </div>
-                        <div class="stepper-button-plus"><small>+</small></div>
-                    </div>minutes
-                    </p>
-          <div class="accordion-item">
-          <div class="accordion-item-toggle"><button class="button button-round">Log to additional URLs...</button></div>
-          <div class="accordion-item-content">
-          <p><label class="toggle" id="toggleCustomCloudURL1-{{Color}}">
-              <input type="checkbox" unchecked>
-              <span class="toggle-icon"></span>
-              </label><a onclick="custom1Toggle('{{Color}}')"> Use Custom Cloud URL 1</a></p>
-      <div class="item-title floating-label">Enter Custom Cloud URL 1: <i class="f7-icons color-custom-gray">info</i></div>
-      <div class="item-input">
-      <input type="text" id="customCloudURL1-{{Color}}" placeholder="https://...">
+        </div>
       </div>
-      <p><label class="toggle" id="toggleCustomCloudURL2-{{Color}}">
-          <input type="checkbox" unchecked>
-          <span class="toggle-icon"></span>
-          </label><a onclick="custom2Toggle('{{Color}}')"> Use Custom Cloud URL 2</a></p>
-  <div class="item-title floating-label">Enter Custom Cloud URL 2: <i class="f7-icons color-custom-gray">info</i></div>
-  <div class="item-input">
-  <input type="text" id="customCloudURL2-{{Color}}" placeholder="https://...">
-  </div>
-  </div>
-  </div>
-  </div>
+     </div>
+     </div>
+     </div>
           <div class="block-title">Calibration (Gravity)</div>
           <div class="block block-strong">
             <div class="content-block">

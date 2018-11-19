@@ -18,6 +18,8 @@
 .color-custom-YELLOW { color: yellow;
 }
 
+.size-15 { font-size: 15px }
+
 div.sg-temp {
     font-size: 500%;
     margin-left: 5%;

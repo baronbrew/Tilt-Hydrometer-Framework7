@@ -60,6 +60,14 @@ $$(document).on('deviceready', function() {
   
           //permissions.checkPermission(permissions.BLUETOOTH, checkBluetoothPermissionCallback, null);
           //permissions.checkPermission(permissions.ACCESS_COARSE_LOCATION, checkCoarseLocationPermissionCallback, null);
+          
+          //setup local files
+          writeToFile('example.json', { foo3: 'bar' }, false);
+          readFromFile('example.json', function (data) {
+              var fileData = data;
+              console.log(fileData);
+          });
+
 });
 
   // Specify your beacon 128bit UUIDs here.
@@ -416,7 +424,7 @@ $$(document).on('deviceready', function() {
     }
     //initialize display units
     //update data fields in Tilt card template
-    $$('#beerName' + beacon.Color).html(beacon.Beername);
+    $$('#beerName' + beacon.Color).html(beacon.Beername.split(',')[0]);
     $$('#uncalSG' + beacon.Color).html(beacon.uncalSG);
     $$('#uncaldisplayFerm+displayFermunits' + beacon.Color).html(String(beacon.uncaldisplayFerm) + beacon.displayFermunits);
     $$('#caldisplayFerm+displayFermunits' + beacon.Color).html(String(beacon.caldisplayFerm) + beacon.displayFermunits);
@@ -590,7 +598,7 @@ function clearBeerName (button){
             title: 'Name and Cloud ID Cleared',
             titleRightText: 'alert',
             subtitle: currentBeerName + ' disconnected from cloud log.',
-            text: 'tap here to undo',
+            text: 'UNDO',
             closeTimeout: 8000,
             closeOnClick: true,
           });
@@ -610,7 +618,8 @@ function setBeerName (button){
     var color = clickedButton[1];
     var currentBeerName = localStorage.getItem('beerName-' + color)||"Untitled";
     var currentBeerNameArray = currentBeerName.split(',');
-    var newBeerName = $$('#currentbeername-' + color).val();
+    var newBeerNameRaw = $$('#currentbeername-' + color).val();
+    var newBeerName = newBeerNameRaw.trim();
     //only update beer name if field is not empty
     if (newBeerName == "") {
         var notificationFull = app.notification.create({
@@ -636,6 +645,15 @@ function setBeerName (button){
         }
         //don't warn if beer name doesn't have a cloud id associated
       else {
+        var notificationFull = app.notification.create({
+            icon: '<i class="f7-icons">check</i>',
+            title: 'Beer Name Saved',
+            titleRightText: 'alert',
+            subtitle: newBeerName,
+            text: 'This name will be used for logging.',
+            closeTimeout: 5000,
+          });
+        notificationFull.open();
         localStorage.setItem('beerName-' + color, newBeerName);
         showBeerName(color);
     }
@@ -643,6 +661,7 @@ function setBeerName (button){
 
 function showBeerName (color){
     var beerName = localStorage.getItem('beerName-' + color)||'Untitled';
+    var beerNameArray = beerName.split(',');
     //set beer name in settings panel unless it is untitled leave blank
     if (beerName == 'Untitled'){
     $$('#currentbeername-' + color).val('');
@@ -651,7 +670,7 @@ function showBeerName (color){
     $$('#currentbeername-' + color).val(beerName);
     }
     //set beer name on tilt card
-    $$('#beerName' + color).html(beerName);
+    $$('#beerName' + color).html(beerNameArray[0]);
 
 }
 
@@ -660,31 +679,77 @@ function toggleDefaultCloudURL (color) {
         el: '#toggleDefaultCloudURL-' + color,
         on: {
           change: function () {
-            var cloudURLsenabled = localStorage.getItem('cloudurlsenabled-' + color)||'1,0,0';
+            var cloudURLsenabled = localStorage.getItem('cloudurlsenabled-' + color)||'0,0,0';
             var cloudURLsenabledArray = cloudURLsenabled.split(',');
             if (toggle.checked){
                 cloudURLsenabledArray[0] = '1';
                 localStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray);
                 postToCloudURLs(color);
-
+                startCloudLoggingInterval(color);
             }
             if (!toggle.checked){
                 cloudURLsenabledArray[0] = '0';
                 localStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray);
+                stopCloudLoggingInterval(color);
             }
           }
         }
       })
-    var cloudURLsenabled = localStorage.getItem('cloudurlsenabled-' + color)||'1,0,0';
+    var cloudURLsenabled = localStorage.getItem('cloudurlsenabled-' + color)||'0,0,0';
     var cloudURLsenabledArray = cloudURLsenabled.split(',');
     if (cloudURLsenabledArray[0] == '1' && !toggle.checked){
        toggle.toggle();
     }
+    else if (cloudURLsenabledArray[0] == '0' && toggle.checked){
+        toggle.toggle();
+     } else {
+         //toggle twice to clear/restart logging interval
+         toggle.toggle();
+         toggle.toggle();
+     }
 }
 
 function defaultToggle (color) {
     var toggle = app.toggle.get('#toggleDefaultCloudURL-' + color);
     toggle.toggle();
+}
+
+function setDefaultCloudURL (button){
+    var clickedButton = button.id.split('-');
+    var color = clickedButton[1];
+    var customCloudURLs = localStorage.getItem('cloudurls-' + color) || app.data.defaultCloudURL + ',,';
+    var customCloudURLsArray = customCloudURLs.split(',');
+    var newDefaultCloudURLRaw = $$('#defaultCloudURL-' + color).val();
+    var newDefaultCloudURL = newDefaultCloudURLRaw.trim();
+    localStorage.setItem('cloudurls-' + color, newDefaultCloudURL + ',' + customCloudURLsArray[1] + ',' + customCloudURLsArray[2]);
+    var notificationFull = app.notification.create({
+        icon: '<i class="f7-icons">check</i>',
+        title: 'New Default Cloud URL Saved',
+        titleRightText: 'alert',
+        subtitle: newDefaultCloudURL.substring(0,32) + '...',
+        text: 'URL will be used for cloud logging.',
+        closeTimeout: 5000,
+      });
+    notificationFull.open();
+}
+
+function clearDefaultCloudURL (button){
+    var clickedButton = button.id.split('-');
+    var color = clickedButton[1];
+    var customCloudURLs = localStorage.getItem('cloudurls-' + color) || app.data.defaultCloudURL + ',,';
+    var customCloudURLsArray = customCloudURLs.split(',');
+    var newDefaultCloudURL = app.data.defaultCloudURL;
+    $$('#defaultCloudURL-' + color).val('');
+    localStorage.setItem('cloudurls-' + color, newDefaultCloudURL + ',' + customCloudURLsArray[1] + ',' + customCloudURLsArray[2])
+    var notificationFull = app.notification.create({
+        icon: '<i class="f7-icons">info</i>',
+        title: 'Default Cloud URL Reset',
+        titleRightText: 'alert',
+        subtitle: newDefaultCloudURL.substring(0,32) + '...',
+        text: 'Original default URL will be used for cloud logging.',
+        closeTimeout: 5000,
+      });
+    notificationFull.open();
 }
 
 function toggleCustomCloudURL1 (color) {
@@ -698,10 +763,17 @@ function toggleCustomCloudURL1 (color) {
                 cloudURLsenabledArray[1] = '1';
                 localStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray);
                 postToCloudURLs(color);
+                startCloudLoggingInterval(color);
+
             }
-            if (!toggle.checked){
+            else if (!toggle.checked){
                 cloudURLsenabledArray[1] = '0';
                 localStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray);
+                stopCloudLoggingInterval(color);
+            }else {
+                //toggle twice to clear/restart logging interval
+                toggle.toggle();
+                toggle.toggle();
             }
             
           }
@@ -712,12 +784,54 @@ function toggleCustomCloudURL1 (color) {
       if (cloudURLsenabledArray[1] == '1' && !toggle.checked){
          toggle.toggle();
       }
+      if (cloudURLsenabledArray[1] == '0' && toggle.checked){
+        toggle.toggle();
+     }
 }
 
 function custom1Toggle (color) {
     var toggle = app.toggle.get('#toggleCustomCloudURL1-' + color);
     toggle.toggle();
 }
+
+function setCustomCloudURL1 (button){
+    var clickedButton = button.id.split('-');
+    var color = clickedButton[1];
+    var customCloudURLs = localStorage.getItem('cloudurls-' + color) || app.data.defaultCloudURL + ',,';
+    var customCloudURLsArray = customCloudURLs.split(',');
+    var newCustomCloudURL1Raw = $$('#customCloudURL1-' + color).val();
+    var newCustomCloudURL1 = newCustomCloudURL1Raw.trim();
+    localStorage.setItem('cloudurls-' + color, customCloudURLsArray[0] + ',' + newCustomCloudURL1 + ',' + customCloudURLsArray[2]);
+    var notificationFull = app.notification.create({
+        icon: '<i class="f7-icons">check</i>',
+        title: 'Custom Cloud URL 1 Saved',
+        titleRightText: 'alert',
+        subtitle: newCustomCloudURL1.substring(0,32) + '...',
+        text: 'URL will be used for cloud logging.',
+        closeTimeout: 5000,
+      });
+    notificationFull.open();
+}
+
+function clearCustomCloudURL1 (button){
+    var clickedButton = button.id.split('-');
+    var color = clickedButton[1];
+    var customCloudURLs = localStorage.getItem('cloudurls-' + color) || app.data.defaultCloudURL + ',,';
+    var customCloudURLsArray = customCloudURLs.split(',');
+    var newCustomCloudURL1 = '';
+    $$('#customCloudURL1-' + color).val('');
+    localStorage.setItem('cloudurls-' + color, customCloudURLsArray[0] + ',' + newCustomCloudURL1 + ',' + customCloudURLsArray[2]);
+    var notificationFull = app.notification.create({
+        icon: '<i class="f7-icons">info</i>',
+        title: 'Custom Cloud URL 1 Cleared',
+        titleRightText: 'alert',
+        subtitle: customCloudURLsArray[1].substring(0,32) + '...',
+        text: 'URL will no longer be used for cloud logging.',
+        closeTimeout: 5000,
+      });
+    notificationFull.open();
+}
+
 
 function toggleCustomCloudURL2 (color) {
     var toggle = app.toggle.create({
@@ -730,11 +844,17 @@ function toggleCustomCloudURL2 (color) {
                 cloudURLsenabledArray[2] = '1';
                 localStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray);
                 postToCloudURLs(color);
+                startCloudLoggingInterval(color);
 
             }
-            if (!toggle.checked){
+            else if (!toggle.checked){
                 cloudURLsenabledArray[2] = '0';
                 localStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray);
+                stopCloudLoggingInterval(color);
+            }else {
+                //toggle twice to clear/restart logging interval
+                toggle.toggle();
+                toggle.toggle();
             }
             
           }
@@ -745,6 +865,9 @@ function toggleCustomCloudURL2 (color) {
       if (cloudURLsenabledArray[2] == '1' && !toggle.checked){
          toggle.toggle();
       }
+      if (cloudURLsenabledArray[2] == '0' && toggle.checked){
+        toggle.toggle();
+     }
 }
 
 function custom2Toggle (color) {
@@ -752,58 +875,167 @@ function custom2Toggle (color) {
     toggle.toggle();
 }
 
+function setCustomCloudURL2 (button){
+    var clickedButton = button.id.split('-');
+    var color = clickedButton[1];
+    var customCloudURLs = localStorage.getItem('cloudurls-' + color) || app.data.defaultCloudURL + ',,';
+    var customCloudURLsArray = customCloudURLs.split(',');
+    var newCustomCloudURL2Raw = $$('#customCloudURL2-' + color).val();
+    var newCustomCloudURL2 = newCustomCloudURL2Raw.trim();
+    localStorage.setItem('cloudurls-' + color, customCloudURLsArray[0] + ',' + customCloudURLsArray[1] + ',' + newCustomCloudURL2);
+    var notificationFull = app.notification.create({
+        icon: '<i class="f7-icons">check</i>',
+        title: 'Custom Cloud URL 2 Saved',
+        titleRightText: 'alert',
+        subtitle: newCustomCloudURL2.substring(0,32) + '...',
+        text: 'URL will be used for cloud logging.',
+        closeTimeout: 5000,
+      });
+    notificationFull.open();
+}
+
+function clearCustomCloudURL2 (button){
+    var clickedButton = button.id.split('-');
+    var color = clickedButton[1];
+    var customCloudURLs = localStorage.getItem('cloudurls-' + color) || app.data.defaultCloudURL + ',,';
+    var customCloudURLsArray = customCloudURLs.split(',');
+    var newCustomCloudURL2 = '';
+    $$('#customCloudURL2-' + color).val('');
+    localStorage.setItem('cloudurls-' + color, customCloudURLsArray[0] + ',' + customCloudURLsArray[1] + ',' + newCustomCloudURL2);
+    var notificationFull = app.notification.create({
+        icon: '<i class="f7-icons">info</i>',
+        title: 'Custom Cloud URL 2 Cleared',
+        titleRightText: 'alert',
+        subtitle: customCloudURLsArray[2].substring(0,32) + '...',
+        text: 'URL will no longer be used for cloud logging.',
+        closeTimeout: 5000,
+      });
+    notificationFull.open();
+}
+
 function postToCloudURLs (color, comment) {
-    $$('#cloudStatus-' + color).html('<div class="text-align-center"><div class="preloader"></div><p>Contacting cloud...</p></div>');
+    //get beer name from local storage in case beer name updated from prompt
+    var currentBeerName = localStorage.getItem('beerName-' + color)||"Untitled";
+    var notificationCloud = app.notification.create({
+        icon: '<i class="preloader"></i>',
+        title: 'Connecting to cloud...',
+        titleRightText: 'alert',
+        subtitle: currentBeerName.split(',')[0] + ' (' + color + ' TILT)',
+        text: 'Allow up to 30 seconds to connect.',
+        closeOnClick: true,
+        closeTimeout: 30000,
+      });
+    notificationCloud.open();
+    //$$('#cloudStatus-' + color).html('<div class="text-align-center"><div class="preloader"></div><p>Contacting cloud...</p></div>');
     if (comment === undefined){
         comment = "";
     };
     var beacon = JSON.parse(localStorage.getItem('tiltObject-' + color));
-    //get beer name from local storage in case beer name updated from prompt
-    var currentBeerName = localStorage.getItem('beerName-' + color)||"Untitled";
     var cloudURLs = localStorage.getItem('cloudurls-' + color) || app.data.defaultCloudURL + ',,';
-    var defaultCloudURL = $$('#defaultCloudURL-' + color).val();
-    if ( defaultCloudURL == ''){
-         defaultCloudURL = app.data.defaultCloudURL
-    }
-    var cloudURLsArray = [ defaultCloudURL, $$('#customCloudURL1-' + color).val(), $$('#customCloudURL2-' + color).val() ];
+    var cloudURLsArray = cloudURLs.split(',');
     var cloudURLsenabled = localStorage.getItem('cloudurlsenabled-' + color)||'1,0,0';
     var cloudURLsenabledArray = cloudURLsenabled.split(',');
-    for (var i = 0; i < 2; i++) {
+    for (var i = 0; i < 3; i++) {
         if (cloudURLsenabledArray[i] == '1'){
-        //convert beacon timeStamp (UTC) to Excel formatted TimePoint (local time)
+        //convert beacon timeStamp (UTC) to Excel formatted Timepoint (local time)
         var timeStamp = new Date(beacon.timeStamp);
-        var localTime = timeStamp.toString();
-        var localTimeMS = new Date(localTime);
-        var localTimeExcel = localTimeMS / 1000 / 60 / 60 / 24 + 25569;
+        var localTime = timeStamp.toLocaleString();
+        var tzOffsetDays = timeStamp.getTimezoneOffset() / 60 / 24;
+        var localTimeExcel = timeStamp.valueOf() / 1000 / 60 / 60 / 24 + 25569 - tzOffsetDays;
+        //only send beer name with beer ID if using default cloud URL
+         if (i != 0){
+            currentBeerName = currentBeerName.split(',')[0];
+         }
         //console.log(cloudURLsArray[i - 1]);
-        app.request.post(cloudURLsArray[i],{ Timepoint : localTimeExcel, SG : beacon.SG, Temp : beacon.Temp, Color : beacon.Color, Beer : currentBeerName, Comment : comment }, function (data){
-            app.preloader.hide();
-            var successData = JSON.parse(data);
-            $$('#cloudStatus-' + color).html(localTime + '<br><br>' + successData.result);
-            var beerNameArray = successData.beername.split(",");
-            if (beerNameArray[1] != undefined && comment != 'End of log') {
-                localStorage.setItem('beerName-' + color, successData.beername);
+        //app.request.post(cloudURLsArray[i],{ Timepoint : localTimeExcel, SG : beacon.SG, Temp : beacon.Temp, Color : beacon.Color, Beer : currentBeerName, Comment : comment }, function (data){
+        app.request.post(cloudURLsArray[i], encodeURI("Timepoint=" + localTimeExcel + "&SG=" + beacon.SG + "&Temp=" + beacon.Temp + "&Color=" + beacon.Color + "&Beer=" + currentBeerName + "&Comment=" + comment), function (stringData){
+            //try to parse data from Baron Brew Google Sheets
+            try {
+            var jsonData = JSON.parse(stringData);
+            //$$('#cloudStatus-' + color).html(localTime + '<br><br>' + jsonData.result);
+            var notificationSuccess = app.notification.create({
+                icon: '<i class="f7-icons">check</i>',
+                title: 'Success',
+                titleRightText: 'alert',
+                subtitle: localTime,
+                text: jsonData.result,
+                closeOnClick: false,
+                closeTimeout: 8000,
+              });
+            notificationSuccess.open();
+            //set beername with returned cloud ID
+            var beerNameArray = jsonData.beername.split(",");
+            if (beerNameArray[1] !== undefined && comment != 'End of log') {
+              localStorage.setItem('beerName-' + color, jsonData.beername);
                 showBeerName(color);
             }
+            }
+            //just show "result" if not Baron Brew Google Sheets
+            catch(error){
+                var notificationSuccess = app.notification.create({
+                    icon: '<i class="f7-icons">check</i>',
+                    title: 'Success',
+                    titleRightText: 'alert',
+                    subtitle: localTime,
+                    text: jsonData.result,
+                    closeOnClick: false,
+                    closeTimeout: 8000,
+                  });
+                notificationSuccess.open();
+            }
         }, function (errorData) {
-            app.preloader.hide();
-            app.dialog.alert("Check Internet connection.", "Error Logging to Cloud", function () {
-            $$('#cloudStatus-' + color).html('Error logging to cloud. Check Internet connection.');
-            })
+            var notificationCloudError = app.notification.create({
+                icon: '<i class="f7-icons">info</i>',
+                title: 'Error Logging to the Cloud',
+                titleRightText: 'alert',
+                subtitle: 'TILT | ' + color,
+                text: 'Check WiFi or Internet connection.',
+                closeTimeout: 5000,
+              });
+            notificationCloudError.open();
         }
         );
         }
+    }
+    if (cloudURLsenabled == '0,0,0'){
+    var notificationURLError = app.notification.create({
+        icon: '<i class="f7-icons">info</i>',
+        title: 'Error Logging to the Cloud',
+        titleRightText: 'alert',
+        subtitle: 'TILT | ' + color,
+        text: 'No cloud URLs in use. Enable at least one cloud URL.',
+        closeTimeout: 5000,
+      });
+    notificationURLError.open();
     }
 
 }
 
 function cloudIntervalStepper (color) {
+    var cloudIntervalCurrent = localStorage.getItem('cloudInterval-' + color)||'15';
+    app.stepper.setValue('#cloudStepper-' + color, cloudIntervalCurrent);
     var stepper = app.stepper.create({
         el: '#cloudStepper-' + color,
         on : {
             change: function () {
             var cloudInterval = stepper.getValue();
-            localStorage.setItem('cloudInterval-' + color,cloudInterval);
+            var cloudIntervalID = localStorage.getItem('cloudIntervalID-' + color)||'0';
+            //change interval
+            clearInterval(cloudIntervalID);
+            cloudIntervalID = setInterval(function() { postToCloudURLs(color); }, cloudInterval * 1000 * 60);
+            localStorage.setItem('cloudIntervalID-' + color, cloudIntervalID);
+            localStorage.setItem('cloudInterval-' + color, cloudInterval);
+            if (cloudInterval == 15){
+                var notificationInterval = app.notification.create({
+                    icon: '<i class="f7-icons">info</i>',
+                    title: 'Lowest Interval',
+                    titleRightText: 'alert',
+                    subtitle: 'Interval set to 15 minutes.',
+                    text: 'This is the shortest interval available.',
+                    closeTimeout: 5000,
+            });
+            notificationInterval.open();
+            }
             }
         }
     })
@@ -813,7 +1045,8 @@ function clearEmail (button){
     var clickedButton = button.id.split('-');
     var color = clickedButton[1];
     localStorage.setItem('emailAddress-' + color,'');
-    $$('#emailAddress-' + color).val('');
+    //$$('#emailAddress-' + color).val('');
+    showEmail(color);
 }
         
 
@@ -823,23 +1056,48 @@ function setEmail (button){
     var newEmailOriginal = $$('#emailAddress-' + color).val();
     var newEmail = newEmailOriginal.trim();
     if (ValidateEmail(newEmail)){
+    var notificationEmailOK = app.notification.create({
+            icon: '<i class="f7-icons">check</i>',
+            title: 'Email Address Saved',
+            titleRightText: 'alert',
+            subtitle: newEmail,
+            text: 'Email address will be used to send a link to your cloud log as well as allow edit access.',
+            closeTimeout: 5000,
+    });
+    notificationEmailOK.open();
     localStorage.setItem('emailAddress-' + color, newEmail);
-    app.dialog.alert('Saved email can be used for starting new cloud logs.','Email Address Saved');
     showEmail(color);
     }else{
-        app.dialog.alert('Please check email address.','Error: Invalid Email');
+        var notificationEmailBad = app.notification.create({
+            icon: '<i class="f7-icons">info</i>',
+            title: 'Error Saving Email',
+            titleRightText: 'alert',
+            subtitle: 'Email: ' + newEmail,
+            text: 'Email address must be valid to save. Leave blank and a link will be provided in the app. Edit access may be requested later.',
+            closeTimeout: 8000,
+    });
+    notificationEmailBad.open();
     }
 }
 
 function showEmail (color){
    var email = localStorage.getItem('emailAddress-' + color)||'';
     $$('#emailAddress-' + color).val(email);
+    if (ValidateEmail(email)) {
+    $$('#emailAddressWarning-' + color).html('<p>Gmail address above will have automatic edit access to Google Sheets log.</p>');
+    }else{
+    $$('#emailAddressWarning-' + color).html('<p><i class="f7-icons size-15">info</i> Your Gmail email address will only used to send a link to your cloud log and enable editing. Gmail address is optional, however editing the log is only possible with a Gmail/Google account.</p>');
+    }
 }
 
 function showCloudURLs (color){
     var urls = localStorage.getItem('cloudurls-' + color)||',,';
     var urlsArray = urls.split(',');
-     $$('#defaultCloudURL-' + color).val(urlsArray[0]);
+    if (urlsArray[0] == app.data.defaultCloudURL){
+        $$('#defaultCloudURL-' + color).val('');
+    }else{
+        $$('#defaultCloudURL-' + color).val(urlsArray[0]);
+    }
      $$('#customCloudURL1-' + color).val(urlsArray[1]);
      $$('#customCloudURL2-' + color).val(urlsArray[2]);
  }
@@ -861,30 +1119,46 @@ function startCloudLogging(button) {
     //handle the following situations: beer already logging, email address invalid, beer name not set (Untitled)
     if (Number(beerNameArray[1]) > 0){
         app.preloader.hide();
-        app.dialog.alert('Cloud logging for "name,cloud ID" : "' + beerName + '" is currently in progress. Tap "End Log" before starting a new log.','Cloud Log Already Started');
-    } else if (!emailValid) {
-        app.dialog.prompt('Gmail address recommended for instant edit access to your cloud log or use another email address and get edit access later. Tap "Cancel" to start a new log without an email address and a link will be displayed in the app.','Enter Email Address', function(newEmail) { 
-        localStorage.setItem('emailAddress-' + color, newEmail);
-        showEmail(color);
-        postToCloudURLs(color, newEmail);
-    },
-        function(){
-        postToCloudURLs(color,'@');
-        });
+        var notificationLogStarted = app.notification.create({
+            icon: '<i class="f7-icons">info</i>',
+            title: 'Logging Requested',
+            titleRightText: 'alert',
+            subtitle: 'Cloud logging already in progress.',
+            text: 'An additional line will be added to the current log.',
+            closeTimeout: 5000,
+          });
+            notificationLogStarted.open();
+            setTimeout(function(){postToCloudURLs(color);},3000);
+    }  else if (!emailValid) {
+        var notificationEmailInvalid = app.notification.create({
+            icon: '<i class="f7-icons">info</i>',
+            title: 'Email Invalid',
+            titleRightText: 'alert',
+            subtitle: 'Log will be started without email address.',
+            text: 'tap here to cancel',
+            closeTimeout: 5000,
+            closeOnClick: true,
+          });
+        notificationEmailInvalid.open();
+        var cancelT = setTimeout(function() { 
+            localStorage.setItem('emailAddress-' + color, '');
+            showEmail(color);
+            postToCloudURLs(color,'@');
+            }, 5000);
+        notificationEmailInvalid.on('click', 
+         function() { 
+            clearInterval(cancelT);
+         });
+         app.preloader.show();
+         setTimeout(function() {app.preloader.hide();}, 10000);
     } else if (beerNameArray[0] == 'Untitled'){
-        app.dialog.prompt('Please enter a beer name to start a new log or tap "Cancel" to start a new log without a beer name.','Beer Name Recommended', function(newBeerName) { 
+        app.dialog.prompt('Please enter a beer name to start a new log.','Enter Beer Name', function(newBeerName) { 
         localStorage.setItem('beerName-' + color, newBeerName);
         showBeerName(color);
         postToCloudURLs(color, email);
         app.preloader.show();
         setTimeout(function() {app.preloader.hide();}, 10000);
-    },
-        function(){
-        postToCloudURLs(color, email);
-        app.preloader.show();
-        setTimeout(function() {app.preloader.hide();}, 10000);
-        });
-
+    });
     } else {
         postToCloudURLs(color, email);
         app.preloader.show();
@@ -905,10 +1179,147 @@ function logOnce(button) {
 function endLog(button) {
     var clickedButton = button.id.split('-');
     var color = clickedButton[1];
-    app.dialog.confirm('Beer name will be reset to "Untitled" and "End of log" will be sent as a comment.','End Cloud Log?', function () {
-        postToCloudURLs(color, "End of log");
-        localStorage.setItem('beerName-' + color, 'Untitled');
-        showBeerName(color);
-        $$('#beername-' + color).val('');
-    })
+    var currentBeerName = localStorage.getItem('beerName-' + color)||"Untitled";
+    var notificationLogEnded = app.notification.create({
+        icon: '<i class="f7-icons">info</i>',
+        title: 'End of Log',
+        titleRightText: 'alert',
+        subtitle: 'Logging for ' + currentBeerName + ' has ended. Sending comment "End of log"',
+        text: 'UNDO',
+        closeTimeout: 5000,
+        closeOnClick: true,
+      });
+    notificationLogEnded.open();
+    var cancelE = setTimeout(function() { 
+            localStorage.setItem('beerName-' + color, 'Untitled');
+            showBeerName(color);
+            postToCloudURLs(color, "End of log");
+            $$('#beername-' + color).val('');
+            }, 5000);
+    notificationLogEnded.on('click', 
+            function() { 
+               clearTimeout(cancelE);
+            });
 }
+
+function startCloudLoggingInterval (color){
+    var interval = localStorage.getItem('cloudInterval-' + color)||'15';
+    var logInterval = localStorage.getItem('cloudIntervalID-' + color)||'0';
+    if (logInterval == '0'){
+    var intervalMS = interval * 1000 * 60;
+    logInterval = setInterval(function() { postToCloudURLs(color); },intervalMS);
+    localStorage.setItem('cloudIntervalID-' + color,logInterval);
+    }
+    else{
+        //already started
+    }
+}
+
+function stopCloudLoggingInterval (color){
+    var logInterval = localStorage.getItem('cloudIntervalID-' + color)||'0';
+    var cloudURLsEnabled = localStorage.getItem('cloudurlsenabled-' + color)||'0,0,0';
+    if (logInterval == '0'){
+        //already stopped or never started
+        //console.log(logInterval);
+    }else if (cloudURLsEnabled == '0,0,0'){
+        clearInterval(logInterval);
+        localStorage.setItem('cloudIntervalID-' + color,'0');
+    }
+}
+
+function writeToFile(fileName, data, isAppend) {
+    var errorHandler = function (fileName, e) {  
+        var msg = '';
+    
+        switch (e.code) {
+            case FileError.QUOTA_EXCEEDED_ERR:
+                msg = 'Storage quota exceeded';
+                break;
+            case FileError.NOT_FOUND_ERR:
+                msg = 'File not found';
+                break;
+            case FileError.SECURITY_ERR:
+                msg = 'Security error';
+                break;
+            case FileError.INVALID_MODIFICATION_ERR:
+                msg = 'Invalid modification';
+                break;
+            case FileError.INVALID_STATE_ERR:
+                msg = 'Invalid state';
+                break;
+            default:
+                msg = 'Unknown error';
+                break;
+        };
+    
+        console.log('Error (' + fileName + '): ' + msg);
+    }
+        data = JSON.stringify(data, null, '\t');
+        window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (directoryEntry) {
+            directoryEntry.getFile(fileName, { create: true }, function (fileEntry) {
+                fileEntry.createWriter(function (fileWriter) {
+                    fileWriter.onwriteend = function (e) {
+                        // for real-world usage, you might consider passing a success callback
+                        console.log('Write of file "' + fileName + '"" completed.');
+                    };
+
+                    fileWriter.onerror = function (e) {
+                        // you could hook this up with our global error handler, or pass in an error callback
+                        console.log('Write failed: ' + e.toString());
+                    };
+                    // If we are appending data to file, go to the end of the file.
+                    if (isAppend) {
+                    try {
+                    fileWriter.seek(fileWriter.length);
+                      }
+                    catch (e) {
+                    console.log("file doesn't exist!");
+                          }
+                      }
+                    var blob = new Blob([data], { type: 'text/plain' });
+                    fileWriter.write(blob);
+                }, errorHandler.bind(null, fileName));
+            }, errorHandler.bind(null, fileName));
+        }, errorHandler.bind(null, fileName));
+    }
+
+    function readFromFile(fileName, cb) {
+        var errorHandler = function (fileName, e) {  
+            var msg = '';
+        
+            switch (e.code) {
+                case FileError.QUOTA_EXCEEDED_ERR:
+                    msg = 'Storage quota exceeded';
+                    break;
+                case FileError.NOT_FOUND_ERR:
+                    msg = 'File not found';
+                    break;
+                case FileError.SECURITY_ERR:
+                    msg = 'Security error';
+                    break;
+                case FileError.INVALID_MODIFICATION_ERR:
+                    msg = 'Invalid modification';
+                    break;
+                case FileError.INVALID_STATE_ERR:
+                    msg = 'Invalid state';
+                    break;
+                default:
+                    msg = 'Unknown error';
+                    break;
+            };
+        
+            console.log('Error (' + fileName + '): ' + msg);
+        }
+        var pathToFile = cordova.file.dataDirectory + fileName;
+        window.resolveLocalFileSystemURL(pathToFile, function (fileEntry) {
+            fileEntry.file(function (file) {
+                var reader = new FileReader();
+
+                reader.onloadend = function (e) {
+                    cb(this.result);
+                };
+
+                reader.readAsText(file);
+            }, errorHandler.bind(null, fileName));
+        }, errorHandler.bind(null, fileName));
+    }

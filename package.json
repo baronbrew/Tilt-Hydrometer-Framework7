@@ -9,14 +9,20 @@
     "plugins": {
       "cordova-plugin-whitelist": {},
       "cordova-plugin-statusbar": {},
-      "com.unarin.cordova.beacon": {}
+      "com.unarin.cordova.beacon": {},
+      "cordova-plugin-file": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-email-composer": {}
     }
   },
   "dependencies": {
     "com.unarin.cordova.beacon": "git+https://github.com/petermetz/cordova-plugin-ibeacon.git",
     "cordova-ios": "^4.5.4",
     "cordova-plugin-device": "^2.0.2",
+    "cordova-plugin-email-composer": "^0.8.15",
+    "cordova-plugin-file": "^6.0.1",
     "cordova-plugin-ibeacon": "^3.6.1",
+    "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "~1.0.1",
     "cordova-plugin-whitelist": "~1.2.0"
   }

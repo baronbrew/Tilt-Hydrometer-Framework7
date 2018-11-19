@@ -15,6 +15,15 @@
     },
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
+    },
+    "cordova-plugin-email-composer": {
+      "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
     }
   },
   "dependent_plugins": {
