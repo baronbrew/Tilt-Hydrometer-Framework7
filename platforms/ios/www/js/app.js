@@ -61,13 +61,8 @@ $$(document).on('deviceready', function() {
           //permissions.checkPermission(permissions.BLUETOOTH, checkBluetoothPermissionCallback, null);
           //permissions.checkPermission(permissions.ACCESS_COARSE_LOCATION, checkCoarseLocationPermissionCallback, null);
           
-          //setup local files
-          writeToFile('example.json', { foo3: 'bar' }, false);
-          readFromFile('example.json', function (data) {
-              var fileData = data;
-              console.log(fileData);
-          });
-
+          var test = cordova.plugins.email.isAvailable(function (hasAccount) {});
+          console.log(test);
 });
 
   // Specify your beacon 128bit UUIDs here.
@@ -327,6 +322,7 @@ $$(document).on('deviceready', function() {
         //console.log(foundBeaconsArray[i]);
         //set up cloud interval stepper
         cloudIntervalStepper(foundBeaconsArray[i]);
+
         //set up buttons
         $$('#unitstoggle-' + foundBeaconsArray[i]).on('click', function (e) {
             var unitscolor = e.currentTarget.id.split("-");
@@ -1013,7 +1009,6 @@ function postToCloudURLs (color, comment) {
 
 function cloudIntervalStepper (color) {
     var cloudIntervalCurrent = localStorage.getItem('cloudInterval-' + color)||'15';
-    app.stepper.setValue('#cloudStepper-' + color, cloudIntervalCurrent);
     var stepper = app.stepper.create({
         el: '#cloudStepper-' + color,
         on : {
@@ -1039,6 +1034,7 @@ function cloudIntervalStepper (color) {
             }
         }
     })
+    app.stepper.setValue('#cloudStepper-' + color, Number(cloudIntervalCurrent));
 }
 
 function clearEmail (button){
@@ -1083,11 +1079,6 @@ function setEmail (button){
 function showEmail (color){
    var email = localStorage.getItem('emailAddress-' + color)||'';
     $$('#emailAddress-' + color).val(email);
-    if (ValidateEmail(email)) {
-    $$('#emailAddressWarning-' + color).html('<p>Gmail address above will have automatic edit access to Google Sheets log.</p>');
-    }else{
-    $$('#emailAddressWarning-' + color).html('<p><i class="f7-icons size-15">info</i> Your Gmail email address will only used to send a link to your cloud log and enable editing. Gmail address is optional, however editing the log is only possible with a Gmail/Google account.</p>');
-    }
 }
 
 function showCloudURLs (color){
@@ -1116,9 +1107,16 @@ function startCloudLogging(button) {
     var beerNameArray = beerName.split(',');
     var email = localStorage.getItem('emailAddress-' + color)||$$('#emailAddress-' + color).val();
     var emailValid = ValidateEmail(email);
+    //auto-toggle default cloud url if not enabled and button pressed to start logging
+    var toggle = app.toggle.get('#toggleDefaultCloudURL-' + color);
+    if (!toggle.checked){
+        toggle.toggle();
+        //return after toggling so user will know default cloud URL will be used.
+        return;
+    }
     //handle the following situations: beer already logging, email address invalid, beer name not set (Untitled)
     if (Number(beerNameArray[1]) > 0){
-        app.preloader.hide();
+        //app.preloader.hide();
         var notificationLogStarted = app.notification.create({
             icon: '<i class="f7-icons">info</i>',
             title: 'Logging Requested',
@@ -1150,19 +1148,19 @@ function startCloudLogging(button) {
             clearInterval(cancelT);
          });
          app.preloader.show();
-         setTimeout(function() {app.preloader.hide();}, 10000);
+         setTimeout(function() {app.preloader.hide();}, 3000);
     } else if (beerNameArray[0] == 'Untitled'){
         app.dialog.prompt('Please enter a beer name to start a new log.','Enter Beer Name', function(newBeerName) { 
         localStorage.setItem('beerName-' + color, newBeerName);
         showBeerName(color);
         postToCloudURLs(color, email);
         app.preloader.show();
-        setTimeout(function() {app.preloader.hide();}, 10000);
+        setTimeout(function() {app.preloader.hide();}, 3000);
     });
     } else {
         postToCloudURLs(color, email);
         app.preloader.show();
-        setTimeout(function() {app.preloader.hide();}, 10000);
+        setTimeout(function() {app.preloader.hide();}, 3000);
         }
 }
 
@@ -1227,7 +1225,7 @@ function stopCloudLoggingInterval (color){
     }
 }
 
-function writeToFile(fileName, data, isAppend) {
+function writeToFile(fileName, data, isAppend, fileType, color) {
     var errorHandler = function (fileName, e) {  
         var msg = '';
     
@@ -1254,13 +1252,21 @@ function writeToFile(fileName, data, isAppend) {
     
         console.log('Error (' + fileName + '): ' + msg);
     }
+    if (fileType == 'json'){
         data = JSON.stringify(data, null, '\t');
+    }
+    //var pathToFile = cordova.file.dataDirectory + fileName;
         window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (directoryEntry) {
             directoryEntry.getFile(fileName, { create: true }, function (fileEntry) {
                 fileEntry.createWriter(function (fileWriter) {
                     fileWriter.onwriteend = function (e) {
                         // for real-world usage, you might consider passing a success callback
-                        console.log('Write of file "' + fileName + '"" completed.');
+                        console.log('Write of file "' + fileName + '" completed.');
+                        if (fileType == 'csv'){
+                        localStorage.setItem('localCSVfileName-' + color, fileName);
+                        }else{
+                        localStorage.setItem('localJSONfileName-' + color, fileName);
+                        }
                     };
 
                     fileWriter.onerror = function (e) {
@@ -1276,14 +1282,18 @@ function writeToFile(fileName, data, isAppend) {
                     console.log("file doesn't exist!");
                           }
                       }
+                    if (fileType == 'csv'){
+                    var blob = new Blob([data + '\n'], { type: 'text/plain' });
+                }else{
                     var blob = new Blob([data], { type: 'text/plain' });
+                }
                     fileWriter.write(blob);
                 }, errorHandler.bind(null, fileName));
             }, errorHandler.bind(null, fileName));
         }, errorHandler.bind(null, fileName));
     }
 
-    function readFromFile(fileName, cb) {
+function readFromFile(fileName, cb, fileType) {
         var errorHandler = function (fileName, e) {  
             var msg = '';
         
@@ -1311,15 +1321,73 @@ function writeToFile(fileName, data, isAppend) {
             console.log('Error (' + fileName + '): ' + msg);
         }
         var pathToFile = cordova.file.dataDirectory + fileName;
+        console.log(pathToFile);
         window.resolveLocalFileSystemURL(pathToFile, function (fileEntry) {
             fileEntry.file(function (file) {
                 var reader = new FileReader();
 
                 reader.onloadend = function (e) {
+                    if (fileType == 'json'){
+                        cb(JSON.stringify(this.result));
+                    }else{
                     cb(this.result);
+                    }
                 };
 
                 reader.readAsText(file);
             }, errorHandler.bind(null, fileName));
         }, errorHandler.bind(null, fileName));
     }
+
+function logToDevice(color, comment){
+    var currentBeerName = localStorage.getItem('beerName-' + color)||"Untitled";
+    var isAppend = true;
+    if (comment === undefined){
+         comment = '';
+    };
+    if (comment == 'start new local log'){
+        isAppend = false;
+        comment = 'new log started';
+    }
+    var beacon = JSON.parse(localStorage.getItem('tiltObject-' + color));
+    var timeStamp = new Date(beacon.timeStamp);
+    var localTime = timeStamp.toLocaleDateString() + ' ' + timeStamp.toLocaleTimeString();
+    var tzOffsetDays = timeStamp.getTimezoneOffset() / 60 / 24;
+    var localTimeExcel = timeStamp.valueOf() / 1000 / 60 / 60 / 24 + 25569 - tzOffsetDays;
+    //beer name only
+    currentBeerName = currentBeerName.split(',')[0];
+    var fileNameAppend = timeStamp.getFullYear() + '-' + (timeStamp.getMonth() + 1) + '-' + timeStamp.getDate();
+    var defaultfileName = currentBeerName + ' (' + color + ' TILT) ' + fileNameAppend;
+    var CSVfileName;
+    var JSONfileName;
+    if (isAppend){
+        CSVfileName = localStorage.getItem('localCSVfileName-' + color);
+        JSONfileName = localStorage.getItem('localJSONfileName-' + color);
+    }else{
+        CSVfileName = defaultfileName + '.csv';
+        JSONfileName = defaultfileName + '.json';
+        writeToFile(CSVfileName, 'Timestamp,Timepoint,SG,Temp,Color,Beer,Comment', isAppend,'csv', color);
+    }
+    writeToFile(CSVfileName, localTime + ',' + localTimeExcel + ',' + beacon.SG + ',' + beacon.Temp + ',' + beacon.Color + ',' + currentBeerName + ',' + comment, isAppend,'csv', color);
+    writeToFile(JSONfileName, { Timestamp : localTime, Timepoint : localTimeExcel, SG : beacon.SG, Temp : beacon.Temp, Color : beacon.Color, Beer : currentBeerName, Comment : comment }, isAppend,'json', color);
+    setTimeout(function(){ readFromFile(JSONfileName, function (data) {
+        var fileData = JSON.parse(data);
+        console.log(fileData);
+        console.log(JSONfileName);
+    },'json');},
+    1000)
+}
+
+function emailCSV(color){
+    var fileName = cordova.file.dataDirectory + localStorage.getItem('localCSVfileName-' + color);
+    var email = localStorage.getItem('emailAddress-' + color)||'';
+    var currentBeerName = localStorage.getItem('beerName-' + color);
+    var currentBeerNameArray = currentBeerName.split(',');
+    var beacon = JSON.parse(localStorage.getItem('tiltObject-' + color));
+    cordova.plugins.email.open({
+        to: email,
+        subject: 'Tilt Hydrometer Log for ' + currentBeerNameArray[0] + ' (' + color + ' TILT)',
+        body: '<p>Attached CSV file can be viewed in Excel, Google Sheets, or other data viewer.</p><h2>Last Reading</h2><h3>Gravity: ' + String(beacon.caldisplayFerm) + beacon.displayFermunits + '</h3><h3> Temperature: ' + String(beacon.uncaldisplayTemp) + beacon.displayTempunits + '</h3><h3>' + beacon.displaytimeStamp + '</h3>',
+        isHtml: true,
+        attachments : fileName });
+}

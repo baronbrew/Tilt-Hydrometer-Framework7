@@ -56,6 +56,7 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <allow-navigation href="https://docs.google.com/*" />
+    <allow-navigation href="https://tilthydrometer.com/*" />
     <splash src="res/screen/ios/Default@2x~universal~anyany.png" />
     <allow-intent href="itms:*" />
     <allow-intent href="itms-apps:*" />

@@ -16,6 +16,7 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <allow-navigation href="https://docs.google.com/*" />
+    <allow-navigation href="https://tilthydrometer.com/*" />
     <preference name="Orientation" value="all" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="ShowSplashScreenSpinner" value="false" />
@@ -35,6 +36,6 @@
     <plugin name="com.unarin.cordova.beacon" spec="git+https://github.com/petermetz/cordova-plugin-ibeacon.git" />
     <plugin name="cordova-plugin-file" spec="^6.0.1" />
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
-    <engine name="ios" spec="^4.5.4" />
     <plugin name="cordova-plugin-email-composer" spec="^0.8.15" />
+    <engine name="ios" spec="^4.5.4" />
 </widget>

@@ -166,13 +166,29 @@
           <button class="button button-round button-active" id="setEmail-{{Color}}" onclick="setEmail(this)">Save</button>
           <button class="button button-round" id="clearEmail-{{Color}}" onclick="clearEmail(this)">Clear</button>
       </p>
-      <div class="card"><div class="card-content card-content-padding" id="emailAddressWarning-{{Color}}"><p><i class="f7-icons size-15">info</i> Your Gmail email address will only used to send a link to your cloud log and enable editing. Gmail address is optional, however editing the log is only possible with a Gmail/Google account.</p></div></div>
+        <p><a href="#" data-popover=".email-popover" class="popover-open"><i class="f7-icons size-15">info</i> More information...</a></p>
+        <div class="popover email-popover">
+            <div class="popover-inner padding">
+                <span><i class="f7-icons size-15">info</i> Your Gmail email address will only be used to send a link to your cloud log and enable editing. Gmail address is optional, however editing the log is only possible with a Gmail/Google account.</span>
+            </div>
+          </div>
       </div>
       </div>
       </div>
       <div class="block block-strong">
       <div class="content-block">
       <div class="content-block-inner">
+       <p class="no-margin-top"><label class="toggle" id="toggleDefaultCloudURL-{{Color}}">
+          <input type="checkbox" checked>
+          <span class="toggle-icon"></span>
+          </label><a onclick="defaultToggle('{{Color}}')"> Use default cloud URL</a>
+       </p>
+       <p><a href="#" data-popover=".defaultcloudurl-popover" class="popover-open"><i class="f7-icons size-15">info</i> More information...</a></p>
+        <div class="popover defaultcloudurl-popover">
+            <div class="popover-inner padding">
+                <span><i class="f7-icons size-15">info</i> Enables cloud logging to the default cloud URL. (Google Sheets cloud logging solution provided by Baron Brew.)</span>
+            </div>
+          </div>
       <p>
           <button class="button button-round button-active" id="startCloudLog-{{Color}}" onclick="startCloudLogging(this)">Start New Cloud Log</button>
       </p>
@@ -180,7 +196,6 @@
           <button class="button button-round" id="logOnce-{{Color}}" onclick="logOnce(this)">Comment</button>
           <button class="button button-round" id="endLog-{{Color}}" onclick="endLog(this)">End Log</button>
       </p>
-      <div class="card"><div class="card-content card-content-padding" id="cloudStatus-{{Color}}">Tap "Start New Cloud Log" to start logging data to the cloud for {{Color}} Tilt.</div></div>
       <p>Change cloud logging interval:
           <div class="stepper stepper-big padding-horizontal" id="cloudStepper-{{Color}}">
               <div class="stepper-button-minus"><small>-</small></div>
@@ -190,11 +205,6 @@
               <div class="stepper-button-plus"><small>+</small></div>
           </div>minutes
           </p>
-          <p class="no-margin-top"><label class="toggle" id="toggleDefaultCloudURL-{{Color}}">
-              <input type="checkbox" checked>
-              <span class="toggle-icon"></span>
-              </label><a onclick="defaultToggle('{{Color}}')"> Use default cloud URL</a>
-              </p>
               <div class="item-title floating-label">Change default cloud URL:</div>
               <div class="item-input">
               <input type="text" id="defaultCloudURL-{{Color}}" placeholder="https://script.google.com/...">
@@ -203,8 +213,20 @@
                   <button class="button button-round button-active" id="setDefaultCloudURL-{{Color}}" onclick="setDefaultCloudURL(this)">Save</button>
                   <button class="button button-round" id="clearDefaultCloudURL-{{Color}}" onclick="clearDefaultCloudURL(this)">Clear</button>
               </p>
+              <p><a href="#" data-popover=".changedefaultcloudurl-popover" class="popover-open"><i class="f7-icons size-15">info</i> More information...</a></p>
+              <div class="popover changedefaultcloudurl-popover">
+              <div class="popover-inner padding">
+              <span><i class="f7-icons size-15">info</i> Changing the default cloud URL allows you to copy Baron Brew's cloud logging solution and run it under your own Gmail/Google account. See more information at <a class="link external" href="https://tilthydrometer.com/pages/app">tilthydrometer.com/pages/app</a></span>
+              </div>
+              </div>
               <div class="accordion-item">
-                  <div class="accordion-item-toggle"><button class="button button-round">Log to additional URLs...</button></div>
+                  <div class="accordion-item-toggle"><button class="button button-round">3rd Party Cloud Logging...</button></div>
+                  <p><a href="#" data-popover=".customcloudurl-popover" class="popover-open"><i class="f7-icons size-15">info</i> More information...</a></p>
+              <div class="popover customcloudurl-popover">
+              <div class="popover-inner padding">
+              <span><i class="f7-icons size-15">info</i> Optional 3rd party cloud logging allows you to log to additional cloud services such as brewstat.us, monitor.beer, brewfather.net, and brewersfriend.com. Visit the respective websites to get more information on how to get a cloud URL.</span>
+              </div>
+              </div>
                   <div class="accordion-item-content">
                   <p><label class="toggle" id="toggleCustomCloudURL1-{{Color}}">
                       <input type="checkbox" checked>

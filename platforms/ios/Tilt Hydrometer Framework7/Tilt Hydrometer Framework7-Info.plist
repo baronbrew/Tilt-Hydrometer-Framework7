@@ -54,6 +54,8 @@
       <dict>
         <key>docs.google.com</key>
         <dict/>
+        <key>tilthydrometer.com</key>
+        <dict/>
       </dict>
       <key>NSAllowsArbitraryLoads</key>
       <true/>
