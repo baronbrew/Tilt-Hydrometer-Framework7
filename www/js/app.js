@@ -36,6 +36,9 @@ var mainView = app.views.create('.view-main', {
 var displayTemplate = $$('#displaytemplate').html();
 var compileddisplayTemplate = Template7.compile(displayTemplate);
 
+var filelistTemplate = $$('#filelisttemplate').html();
+var compiledfilelistTemplate = Template7.compile(filelistTemplate);
+
 var sgcallistTemplate = $$('#sgcallisttemplate').html();
 var compiledsgcallistTemplate = Template7.compile(sgcallistTemplate);
 
@@ -60,9 +63,6 @@ $$(document).on('deviceready', function() {
   
           //permissions.checkPermission(permissions.BLUETOOTH, checkBluetoothPermissionCallback, null);
           //permissions.checkPermission(permissions.ACCESS_COARSE_LOCATION, checkCoarseLocationPermissionCallback, null);
-          
-          var test = cordova.plugins.email.isAvailable(function (hasAccount) {});
-          console.log(test);
 });
 
   // Specify your beacon 128bit UUIDs here.
@@ -264,7 +264,14 @@ $$(document).on('deviceready', function() {
 
       startScan();
   }
-    
+    //populate list of logging files
+    var listOfCSVFiles = localStorage.getItem('listOfCSVFiles')||false;//set to false if no csv files exist
+    if (listOfCSVFiles){//only create list of csv files exist
+    var listOfCSVFilesArray = listOfCSVFiles.split(',');
+    var displayhtml = compiledfilelistTemplate(listOfCSVFilesArray);
+    $$('#fileList').html(displayhtml);
+    };
+
     //reset list of found beacons
     localStorage.setItem('foundbeacons','NONE');
 
@@ -315,6 +322,8 @@ $$(document).on('deviceready', function() {
         showEmail(foundBeaconsArray[i]);
         //show cloud URLs
         showCloudURLs(foundBeaconsArray[i]);
+        //setup device toggle
+        toggleDeviceLogging(foundBeaconsArray[i]);
         //set up cloud logging toggles
         toggleDefaultCloudURL(foundBeaconsArray[i]);
         toggleCustomCloudURL1(foundBeaconsArray[i]);
@@ -405,7 +414,7 @@ $$(document).on('deviceready', function() {
             });
         $$('#logprompt-' + foundBeaconsArray[i]).on('click', function (e) {
                 //var calcolor = e.currentTarget.id.split("-");
-                startCloudLogging(e.currentTarget);
+                startLogging(e.currentTarget);
                 
         });   
         }
@@ -414,6 +423,8 @@ $$(document).on('deviceready', function() {
     //update timer for last scan recieved
     beacon.numberSecondsAgo = ((currentTime - beacon.timeStamp) / 1000).toFixed(1);
     localStorage.setItem('lastUpdate-' + beacon.Color,beacon.timeStamp);
+    //get time since last cloud logged
+    beacon.lastCloudLogged = ((Date.now() - localStorage.getItem('lastCloudLogged-' + beacon.Color)) / 1000 / 60).toFixed(0) + 'm ago';
     //disconnect if no scans within 2 minutes
     if (Number(beacon.numberSecondsAgo) > 120){
         $$('#tiltcard-' + beacon.Color).hide();
@@ -421,6 +432,7 @@ $$(document).on('deviceready', function() {
     //initialize display units
     //update data fields in Tilt card template
     $$('#beerName' + beacon.Color).html(beacon.Beername.split(',')[0]);
+    $$('#lastCloudLogged' + beacon.Color).html(beacon.lastCloudLogged);
     $$('#uncalSG' + beacon.Color).html(beacon.uncalSG);
     $$('#uncaldisplayFerm+displayFermunits' + beacon.Color).html(String(beacon.uncaldisplayFerm) + beacon.displayFermunits);
     $$('#caldisplayFerm+displayFermunits' + beacon.Color).html(String(beacon.caldisplayFerm) + beacon.displayFermunits);
@@ -587,25 +599,36 @@ function clearBeerName (button){
     var color = clickedButton[1];
     var currentBeerName = localStorage.getItem('beerName-' + color)||"Untitled";
     var currentBeerNameArray = currentBeerName.split(',');
-    //warn user that about deleting name with associated cloud ID
-    if (Number(currentBeerNameArray[1]) > 0){
+    var localJSONfileName = localStorage.getItem('localJSONfileName-' + color)||'not logging';
+    var localCSVfileName = localStorage.getItem('localCSVfileName-' + color)||'not logging';
+    localStorage.setItem('localJSONfileName-' + color, 'not logging');
+    localStorage.setItem('localCSVfileName-' + color, 'not logging');
+    //warn user that about deleting name with associated cloud ID or if device logging is in progress
+    if (Number(currentBeerNameArray[1] > 0) || localCSVfileName != 'not logging' || localJSONfileName != 'not logging' ){
         var notificationFull = app.notification.create({
             icon: '<i class="f7-icons">check</i>',
             title: 'Name and Cloud ID Cleared',
             titleRightText: 'alert',
-            subtitle: currentBeerName + ' disconnected from cloud log.',
-            text: 'UNDO',
+            subtitle: currentBeerName + ' disconnected from cloud log and/or device log.',
+            text: 'tap here to undo',
             closeTimeout: 8000,
             closeOnClick: true,
           });
         notificationFull.open();
         notificationFull.on('click', 
          function() { 
+             //restore beername and cloud file name if user cancels deletion
           localStorage.setItem('beerName-' + color, currentBeerName);
+          localStorage.setItem('localJSONfileName-' + color, localJSONfileName);
+          localStorage.setItem('localCSVfileName-' + color, localCSVfileName);
           showBeerName(color);
          });
     }
     localStorage.setItem('beerName-' + color, 'Untitled');
+    localStorage.setItem('localJSONfileName-' + color, 'not logging');
+    localStorage.setItem('localCSVfileName-' + color, 'not logging');
+    $$('#cloudStatus' + color).html('');
+    $$('#deviceStatus' + color).html('');
     showBeerName(color);
 }
 
@@ -668,6 +691,44 @@ function showBeerName (color){
     //set beer name on tilt card
     $$('#beerName' + color).html(beerNameArray[0]);
 
+}
+
+function toggleDeviceLogging (color) {
+    var toggle = app.toggle.create({
+        el: '#toggleDeviceLogging-' + color,
+        on: {
+          change: function () {
+            var deviceLoggingEnabled = localStorage.getItem('deviceLoggingEnabled-' + color)||'0';
+            if (toggle.checked){
+                deviceLoggingEnabled = '1';
+                localStorage.setItem('deviceLoggingEnabled-' + color, deviceLoggingEnabled);
+                logToDevice(color,'device logging toggled');
+                startCloudLoggingInterval(color);
+            }
+            if (!toggle.checked){
+                deviceLoggingEnabled = '0';
+                localStorage.setItem('deviceLoggingEnabled-' + color, deviceLoggingEnabled);
+                stopCloudLoggingInterval(color);
+            }
+          }
+        }
+      })
+    var deviceLoggingEnabled = localStorage.getItem('deviceLoggingEnabled-' + color)||'0';
+    if (deviceLoggingEnabled == '1' && !toggle.checked){
+       toggle.toggle();
+    }
+    else if (deviceLoggingEnabled == '0' && toggle.checked){
+        toggle.toggle();
+     } else {
+         //toggle twice to clear/restart logging interval
+         toggle.toggle();
+         toggle.toggle();
+     }
+}
+
+function deviceToggle (color) {
+    var toggle = app.toggle.get('#toggleDeviceLogging-' + color);
+    toggle.toggle();
 }
 
 function toggleDefaultCloudURL (color) {
@@ -922,7 +983,6 @@ function postToCloudURLs (color, comment) {
         closeTimeout: 30000,
       });
     notificationCloud.open();
-    //$$('#cloudStatus-' + color).html('<div class="text-align-center"><div class="preloader"></div><p>Contacting cloud...</p></div>');
     if (comment === undefined){
         comment = "";
     };
@@ -942,13 +1002,11 @@ function postToCloudURLs (color, comment) {
          if (i != 0){
             currentBeerName = currentBeerName.split(',')[0];
          }
-        //console.log(cloudURLsArray[i - 1]);
-        //app.request.post(cloudURLsArray[i],{ Timepoint : localTimeExcel, SG : beacon.SG, Temp : beacon.Temp, Color : beacon.Color, Beer : currentBeerName, Comment : comment }, function (data){
         app.request.post(cloudURLsArray[i], encodeURI("Timepoint=" + localTimeExcel + "&SG=" + beacon.SG + "&Temp=" + beacon.Temp + "&Color=" + beacon.Color + "&Beer=" + currentBeerName + "&Comment=" + comment), function (stringData){
+            localStorage.setItem('lastCloudLogged-' + color, Date.now());
             //try to parse data from Baron Brew Google Sheets
             try {
             var jsonData = JSON.parse(stringData);
-            //$$('#cloudStatus-' + color).html(localTime + '<br><br>' + jsonData.result);
             var notificationSuccess = app.notification.create({
                 icon: '<i class="f7-icons">check</i>',
                 title: 'Success',
@@ -964,9 +1022,11 @@ function postToCloudURLs (color, comment) {
             if (beerNameArray[1] !== undefined && comment != 'End of log') {
               localStorage.setItem('beerName-' + color, jsonData.beername);
                 showBeerName(color);
+                $$('#cloudStatus' + color).html('<a class="link external" href="' + jsonData.doclongurl + '">|&nbsp;<i class="f7-icons size-15">cloud_fill</i><span id="lastCloudLogged' + beacon.Color +'"></span></a>');
+                localStorage.setItem('docLongURL-' + color, jsonData.doclongurl);
             }
             }
-            //just show "result" if not Baron Brew Google Sheets
+            //json parse error - just show "result" if not Baron Brew Google Sheets
             catch(error){
                 var notificationSuccess = app.notification.create({
                     icon: '<i class="f7-icons">check</i>',
@@ -978,6 +1038,8 @@ function postToCloudURLs (color, comment) {
                     closeTimeout: 8000,
                   });
                 notificationSuccess.open();
+                $$('#cloudStatus' + beacon.Color).html('<i class="f7-icons size-15">cloud_fill</i><span id="lastCloudLogged' + beacon.Color +'"></span>');
+
             }
         }, function (errorData) {
             var notificationCloudError = app.notification.create({
@@ -989,22 +1051,24 @@ function postToCloudURLs (color, comment) {
                 closeTimeout: 5000,
               });
             notificationCloudError.open();
+            $$('#cloudStatus' + beacon.Color).html('cloud error');
+
         }
         );
         }
     }
     if (cloudURLsenabled == '0,0,0'){
-    var notificationURLError = app.notification.create({
+     var notificationURLError = app.notification.create({
         icon: '<i class="f7-icons">info</i>',
-        title: 'Error Logging to the Cloud',
+        title: 'Cloud Logging Not Enabled',
         titleRightText: 'alert',
         subtitle: 'TILT | ' + color,
-        text: 'No cloud URLs in use. Enable at least one cloud URL.',
+        text: 'No cloud logging options in use. First enable at least one cloud URL.',
         closeTimeout: 5000,
       });
     notificationURLError.open();
     }
-
+    
 }
 
 function cloudIntervalStepper (color) {
@@ -1100,40 +1164,69 @@ function ValidateEmail(email) {
     return (false)
 }
 
-function startCloudLogging(button) {
+function startLogging(button) {
     var clickedButton = button.id.split('-');
     var color = clickedButton[1];
     var beerName = localStorage.getItem('beerName-' + color)||'Untitled';
     var beerNameArray = beerName.split(',');
     var email = localStorage.getItem('emailAddress-' + color)||$$('#emailAddress-' + color).val();
+    if (email == ''){
+        email = '@';
+    };
     var emailValid = ValidateEmail(email);
+    var cloudURLsEnabled = localStorage.getItem('cloudurlsenabled-' + color);
+    var cloudURLsEnabledArray = cloudURLsEnabled.split(',');
+    //check if device logging in progress
+    var deviceLoggingJSONFileName = localStorage.getItem('localJSONfileName-' + color)||'not logging';
+    var deviceLoggingCSVFileName = localStorage.getItem('localCSVfileName-' + color)||'not logging';
     //auto-toggle default cloud url if not enabled and button pressed to start logging
-    var toggle = app.toggle.get('#toggleDefaultCloudURL-' + color);
-    if (!toggle.checked){
-        toggle.toggle();
+    var defaultToggle = app.toggle.get('#toggleDefaultCloudURL-' + color);
+    var deviceToggle = app.toggle.get('#toggleDeviceLogging-' + color);
+    if (!defaultToggle.checked && !deviceToggle.checked){
+        defaultToggle.toggle();
+        deviceToggle.toggle();
         //return after toggling so user will know default cloud URL will be used.
         return;
     }
     //handle the following situations: beer already logging, email address invalid, beer name not set (Untitled)
-    if (Number(beerNameArray[1]) > 0){
-        //app.preloader.hide();
+    if (Number(beerNameArray[1]) > 0 || deviceLoggingJSONFileName != 'not logging' || deviceLoggingCSVFileName != 'not logging'){
+        if (Number(beerNameArray[1]) > 0) {
         var notificationLogStarted = app.notification.create({
             icon: '<i class="f7-icons">info</i>',
-            title: 'Logging Requested',
+            title: 'Log Not Started',
             titleRightText: 'alert',
             subtitle: 'Cloud logging already in progress.',
-            text: 'An additional line will be added to the current log.',
+            text: 'Data will be added to the current log.',
             closeTimeout: 5000,
           });
             notificationLogStarted.open();
-            setTimeout(function(){postToCloudURLs(color);},3000);
-    }  else if (!emailValid) {
+            setTimeout(function(){
+                postToCloudURLs(color);
+            },3000);
+        }else{//already logging to device
+            var notificationLogStarted = app.notification.create({
+                icon: '<i class="f7-icons">info</i>',
+                title: 'Log Not Started',
+                titleRightText: 'alert',
+                subtitle: 'Device logging already in progress.',
+                text: 'Data will be added to the current log.',
+                closeTimeout: 5000,
+              });
+                notificationLogStarted.open();
+                setTimeout(function(){
+                    logToDevice(color);
+                    postToCloudURLs(color, email);
+                    console.log(email);
+                },3000);
+
+        }//only warn email invalid if at least one cloud url is active
+    }  else if (!emailValid && cloudURLsEnabledArray.indexOf('1') > -1) {
         var notificationEmailInvalid = app.notification.create({
             icon: '<i class="f7-icons">info</i>',
             title: 'Email Invalid',
             titleRightText: 'alert',
             subtitle: 'Log will be started without email address.',
-            text: 'tap here to cancel',
+            text: 'CANCEL',
             closeTimeout: 5000,
             closeOnClick: true,
           });
@@ -1142,6 +1235,8 @@ function startCloudLogging(button) {
             localStorage.setItem('emailAddress-' + color, '');
             showEmail(color);
             postToCloudURLs(color,'@');
+            app.preloader.show();
+            setTimeout(function() {app.preloader.hide();}, 3000);
             }, 5000);
         notificationEmailInvalid.on('click', 
          function() { 
@@ -1150,27 +1245,31 @@ function startCloudLogging(button) {
          app.preloader.show();
          setTimeout(function() {app.preloader.hide();}, 3000);
     } else if (beerNameArray[0] == 'Untitled'){
-        app.dialog.prompt('Please enter a beer name to start a new log.','Enter Beer Name', function(newBeerName) { 
+        app.dialog.prompt('Enter new beer name or leave blank for "Untitled".','Enter Beer Name?', function(newBeerName) { 
         localStorage.setItem('beerName-' + color, newBeerName);
         showBeerName(color);
         postToCloudURLs(color, email);
+        //comments starts device log
+        logToDevice(color, 'start new local log');
         app.preloader.show();
         setTimeout(function() {app.preloader.hide();}, 3000);
     });
     } else {
         postToCloudURLs(color, email);
+        logToDevice(color, 'start new local log');
         app.preloader.show();
         setTimeout(function() {app.preloader.hide();}, 3000);
-        }
+    }
 }
 
 function logOnce(button) {
     var clickedButton = button.id.split('-');
     var color = clickedButton[1];
-    app.dialog.prompt('Enter comment and tap "OK" or tap "Cancel" if no comment.','Add Comment?', function (comment) {
+    app.dialog.prompt('Enter comment below and tap "OK"','Add Comment', function (comment) {
         postToCloudURLs(color, comment);
+        logToDevice(color, comment);
     }, function(){
-        postToCloudURLs(color);
+        //cancelled
     })
 }
 
@@ -1178,23 +1277,29 @@ function endLog(button) {
     var clickedButton = button.id.split('-');
     var color = clickedButton[1];
     var currentBeerName = localStorage.getItem('beerName-' + color)||"Untitled";
+    var currentBeerNameArray = currentBeerName.split(',');
     var notificationLogEnded = app.notification.create({
         icon: '<i class="f7-icons">info</i>',
-        title: 'End of Log',
+        title: 'Success Ending Log',
         titleRightText: 'alert',
-        subtitle: 'Logging for ' + currentBeerName + ' has ended. Sending comment "End of log"',
+        subtitle: 'Logging completed for ' + currentBeerNameArray[0] + ' (' + color + ' TILT)',
         text: 'UNDO',
         closeTimeout: 5000,
         closeOnClick: true,
       });
     notificationLogEnded.open();
+    //end log unless user cancels within 5 seconds
     var cancelE = setTimeout(function() { 
             localStorage.setItem('beerName-' + color, 'Untitled');
             showBeerName(color);
             postToCloudURLs(color, "End of log");
+            localStorage.setItem('localJSONfileName-' + color, 'not logging');
+            localStorage.setItem('localCSVfileName-' + color, 'not logging');
+            $$('#deviceStatus' + color).html('');
             $$('#beername-' + color).val('');
+            $$('#cloudStatus' + color).html('');
             }, 5000);
-    notificationLogEnded.on('click', 
+            notificationLogEnded.on('click', 
             function() { 
                clearTimeout(cancelE);
             });
@@ -1205,7 +1310,10 @@ function startCloudLoggingInterval (color){
     var logInterval = localStorage.getItem('cloudIntervalID-' + color)||'0';
     if (logInterval == '0'){
     var intervalMS = interval * 1000 * 60;
-    logInterval = setInterval(function() { postToCloudURLs(color); },intervalMS);
+    logInterval = setInterval(function() { 
+     postToCloudURLs(color); 
+     logToDevice(color);
+    },intervalMS);
     localStorage.setItem('cloudIntervalID-' + color,logInterval);
     }
     else{
@@ -1216,10 +1324,11 @@ function startCloudLoggingInterval (color){
 function stopCloudLoggingInterval (color){
     var logInterval = localStorage.getItem('cloudIntervalID-' + color)||'0';
     var cloudURLsEnabled = localStorage.getItem('cloudurlsenabled-' + color)||'0,0,0';
+    var deviceLoggingEnabled = localStorage.getItem('deviceLoggingEnabled-' + color)||'0';
     if (logInterval == '0'){
         //already stopped or never started
         //console.log(logInterval);
-    }else if (cloudURLsEnabled == '0,0,0'){
+    }else if (cloudURLsEnabled == '0,0,0' && deviceLoggingEnabled == '0'){
         clearInterval(logInterval);
         localStorage.setItem('cloudIntervalID-' + color,'0');
     }
@@ -1261,7 +1370,7 @@ function writeToFile(fileName, data, isAppend, fileType, color) {
                 fileEntry.createWriter(function (fileWriter) {
                     fileWriter.onwriteend = function (e) {
                         // for real-world usage, you might consider passing a success callback
-                        console.log('Write of file "' + fileName + '" completed.');
+                        //console.log('Write of file "' + fileName + '" completed.');
                         if (fileType == 'csv'){
                         localStorage.setItem('localCSVfileName-' + color, fileName);
                         }else{
@@ -1321,7 +1430,7 @@ function readFromFile(fileName, cb, fileType) {
             console.log('Error (' + fileName + '): ' + msg);
         }
         var pathToFile = cordova.file.dataDirectory + fileName;
-        console.log(pathToFile);
+        //console.log(pathToFile);
         window.resolveLocalFileSystemURL(pathToFile, function (fileEntry) {
             fileEntry.file(function (file) {
                 var reader = new FileReader();
@@ -1341,13 +1450,30 @@ function readFromFile(fileName, cb, fileType) {
 
 function logToDevice(color, comment){
     var currentBeerName = localStorage.getItem('beerName-' + color)||"Untitled";
+    var deviceLoggingEnabled = localStorage.getItem('deviceLoggingEnabled-' + color)||'0';
+ if (deviceLoggingEnabled == '1'){
     var isAppend = true;
+    //default is 'not logging'
+    CSVfileName = localStorage.getItem('localCSVfileName-' + color)||'not logging';
+    JSONfileName = localStorage.getItem('localJSONfileName-' + color)||'not logging';
     if (comment === undefined){
          comment = '';
     };
     if (comment == 'start new local log'){
         isAppend = false;
         comment = 'new log started';
+    }
+    if (comment == 'device logging toggled'){
+        var notificationReadyStart = app.notification.create({
+            icon: '<i class="f7-icons">info</i>',
+            title: 'Ready to Start New Log',
+            titleRightText: 'alert',
+            subtitle: 'TILT | ' + color + ' device logging enabled',
+            text: 'Tap "Start New Log" in settings menu to start logging.',
+            closeTimeout: 5000,
+          });
+        notificationReadyStart.open();
+        return
     }
     var beacon = JSON.parse(localStorage.getItem('tiltObject-' + color));
     var timeStamp = new Date(beacon.timeStamp);
@@ -1358,28 +1484,85 @@ function logToDevice(color, comment){
     currentBeerName = currentBeerName.split(',')[0];
     var fileNameAppend = timeStamp.getFullYear() + '-' + (timeStamp.getMonth() + 1) + '-' + timeStamp.getDate();
     var defaultfileName = currentBeerName + ' (' + color + ' TILT) ' + fileNameAppend;
-    var CSVfileName;
-    var JSONfileName;
     if (isAppend){
-        CSVfileName = localStorage.getItem('localCSVfileName-' + color);
-        JSONfileName = localStorage.getItem('localJSONfileName-' + color);
-    }else{
-        CSVfileName = defaultfileName + '.csv';
-        JSONfileName = defaultfileName + '.json';
-        writeToFile(CSVfileName, 'Timestamp,Timepoint,SG,Temp,Color,Beer,Comment', isAppend,'csv', color);
-    }
+        var notificationAppendedLog = app.notification.create({
+            icon: '<i class="f7-icons">check</i>',
+            title: 'Success Logging to Device',
+            titleRightText: 'alert',
+            subtitle: currentBeerName + ' (' + color + ' TILT)',
+            text: 'Logged to CSV file: ' + CSVfileName,
+            closeTimeout: 5000,
+          });
+    notificationAppendedLog.open();
     writeToFile(CSVfileName, localTime + ',' + localTimeExcel + ',' + beacon.SG + ',' + beacon.Temp + ',' + beacon.Color + ',' + currentBeerName + ',' + comment, isAppend,'csv', color);
     writeToFile(JSONfileName, { Timestamp : localTime, Timepoint : localTimeExcel, SG : beacon.SG, Temp : beacon.Temp, Color : beacon.Color, Beer : currentBeerName, Comment : comment }, isAppend,'json', color);
-    setTimeout(function(){ readFromFile(JSONfileName, function (data) {
-        var fileData = JSON.parse(data);
-        console.log(fileData);
-        console.log(JSONfileName);
-    },'json');},
-    1000)
+    $$('#deviceStatus' + color).html('<a class="link">| share&nbsp;<i class="f7-icons size-15">share</i></a>');
+    var deviceStatusElement = document.getElementById('deviceStatus' + color);
+    deviceStatusElement.addEventListener('click', function(e) {
+        emailCurrentCSV(color);
+      });
+    //isAppend false, will create a new file
+    }else {
+        CSVfileName = defaultfileName + '.csv';
+        JSONfileName = defaultfileName + '.json';
+        var notificationNewLog = app.notification.create({
+            icon: '<i class="f7-icons">check</i>',
+            title: 'New Device Log Started',
+            titleRightText: 'alert',
+            subtitle: currentBeerName + ' (' + color + ' TILT)',
+            text: 'Logged to CSV file: ' + CSVfileName,
+            closeTimeout: 5000,
+          });
+    notificationNewLog.open();
+    //set CSV filename
+    localStorage.setItem('localCSVfileName-' + color, CSVfileName);
+    //add to list of CSV files
+    var listOfCSVFiles = localStorage.getItem('listOfCSVFiles')||'';
+    var listOfCSVFilesArray = listOfCSVFiles.split(',');
+    if (listOfCSVFilesArray.indexOf(CSVfileName) < 0){
+    listOfCSVFilesArray.unshift(CSVfileName);
+        //remove blank filename
+        if (listOfCSVFiles == ''){
+            listOfCSVFilesArray.pop();
+        }
+    localStorage.setItem('listOfCSVFiles',listOfCSVFilesArray);
+    }
+    //update file list
+    var displayhtml = compiledfilelistTemplate(listOfCSVFilesArray);
+    $$('#fileList').html(displayhtml);
+    //set JSON file name
+    localStorage.setItem('localJSONfileName-' + color, JSONfileName);
+    //add to list of JSON files
+    var listOfJSONFiles = localStorage.getItem('listOfJSONFiles')||'';
+    var listOfJSONFilesArray = listOfJSONFiles.split(',');
+    //check if filename already exists in list
+    if (listOfJSONFilesArray.indexOf(JSONfileName) < 0){
+        listOfJSONFilesArray.unshift(JSONfileName);
+        //remove blank filename
+        if (listOfJSONFiles == ''){
+            listOfJSONFilesArray.pop();
+        }
+        localStorage.setItem('listOfJSONFiles', listOfJSONFilesArray);
+    }
+    writeToFile(CSVfileName, 'Timestamp,Timepoint,SG,Temp,Color,Beer,Comment', isAppend,'csv', color);
+    writeToFile(JSONfileName, { Timestamp : localTime, Timepoint : localTimeExcel, SG : beacon.SG, Temp : beacon.Temp, Color : beacon.Color, Beer : currentBeerName, Comment : comment }, isAppend,'json', color);
+    $$('#deviceStatus' + color).html('<a class="link">| share&nbsp;<i class="f7-icons size-15">share</i></a>');
+    var deviceStatusElement = document.getElementById('deviceStatus' + color);
+    deviceStatusElement.addEventListener('click', function(e) {
+        emailCurrentCSV(color);
+      });
+    }
+    //setTimeout(function(){ readFromFile(JSONfileName, function (data) {
+        //var fileData = JSON.parse(data);
+        //console.log(fileData);
+        //console.log(JSONfileName);
+    //},'json');},
+    //1000);
+ }
 }
 
-function emailCSV(color){
-    var fileName = cordova.file.dataDirectory + localStorage.getItem('localCSVfileName-' + color);
+function emailCurrentCSV(color){
+    var filePathAndName = cordova.file.dataDirectory + localStorage.getItem('localCSVfileName-' + color);
     var email = localStorage.getItem('emailAddress-' + color)||'';
     var currentBeerName = localStorage.getItem('beerName-' + color);
     var currentBeerNameArray = currentBeerName.split(',');
@@ -1387,7 +1570,18 @@ function emailCSV(color){
     cordova.plugins.email.open({
         to: email,
         subject: 'Tilt Hydrometer Log for ' + currentBeerNameArray[0] + ' (' + color + ' TILT)',
-        body: '<p>Attached CSV file can be viewed in Excel, Google Sheets, or other data viewer.</p><h2>Last Reading</h2><h3>Gravity: ' + String(beacon.caldisplayFerm) + beacon.displayFermunits + '</h3><h3> Temperature: ' + String(beacon.uncaldisplayTemp) + beacon.displayTempunits + '</h3><h3>' + beacon.displaytimeStamp + '</h3>',
+        body: '<p>Attached CSV file can be viewed in Excel, Google Sheets, and directly in web browsers.</p><h2>Last Reading</h2><h3>Gravity: ' + String(beacon.caldisplayFerm) + beacon.displayFermunits + '</h3><h3> Temperature: ' + String(beacon.uncaldisplayTemp) + beacon.displayTempunits + '</h3><h3>' + beacon.displaytimeStamp + '</h3><p>You may also view the data directly in the cloud if cloud logging was enabled: <a href="' + localStorage.getItem('docLongURL-' + color) + '">' + localStorage.getItem('docLongURL-' + color) + '</a></p>',
         isHtml: true,
-        attachments : fileName });
+        attachments : filePathAndName });
+}
+
+function emailClickedCSV(fileName, color){
+    var filePathAndName = cordova.file.dataDirectory + fileName;
+    var email = localStorage.getItem('emailAddress-' + color)||'';
+    cordova.plugins.email.open({
+        to: email,
+        subject: fileName,
+        body: '<p>Attached CSV file can be viewed in Excel, Google Sheets, and directly in web browsers.</p>',
+        isHtml: true,
+        attachments : filePathAndName });
 }

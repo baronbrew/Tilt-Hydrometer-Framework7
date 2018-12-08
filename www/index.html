@@ -58,7 +58,7 @@
             </div>
           </div>
           <div class="page-content">
-            <div class="block">Right panel content goes here</div>
+            <div class="list" id="fileList">Right panel content goes here</div>
           </div>
         </div>
       </div>
@@ -95,7 +95,7 @@
   <script id="displaytemplate" type="text/template7">
     {{#each this}}
     <div id="tiltcard-{{Color}}" class="card card-outline elevation-12 col-100 tablet-45">
-        <div class="card-content card-content-padding"><p class="no-margin-bottom" id="beerName{{Color}}">{{Beername}}</p><strong>TILT | {{Color}}</strong></div>
+        <div class="card-content card-content-padding"><p class="no-margin-bottom" id="beerName{{Color}}">{{Beername}}</p><strong>TILT | {{Color}} </strong><span id="cloudStatus{{Color}}"></span> <span id="deviceStatus{{Color}}"></span></div>
         <div id="quicksettings" class="accordion-item">
         <div class="accordion-item-toggle">
         <div <button class="margin-horizontal button button-round" style="background:{{Color}};height:30px;color:{{Color}}">Show options for {{Color}} Tilt.</button></div>
@@ -118,6 +118,27 @@
     </div>
     {{/each}}
       
+  </script>
+
+ <script id="filelisttemplate" type="text/template7">
+  <div class="list media-list">
+          <ul>
+  {{#each this}}
+            <li>
+                <a onclick="emailClickedCSV('{{this}}', '{{js "this.match('RED|GREEN|BLACK|PURPLE|ORANGE|BLUE|PINK|YELLOW')[0]"}}')" class="item-link item-content">
+                    <div class="item-inner">
+                        <div class="item-title-row">
+                        <div class="item-title">{{js "this.split(' (')[0]"}}</div>
+                        <div class="item-after"><i class="f7-icons">share</i></div>
+          </div>
+          <div class="item-subtitle">({{js "this.match('RED|GREEN|BLACK|PURPLE|ORANGE|BLUE|PINK|YELLOW')[0]"}} TILT)</div>
+          <div class="item-text">CSV File: {{this}}</div>
+        </div>
+      </a>
+    </li>
+  {{/each}}
+   </ul>
+  </div>
   </script>
 
   <script id="sgcallisttemplate" type="text/template7">
@@ -178,6 +199,17 @@
       <div class="block block-strong">
       <div class="content-block">
       <div class="content-block-inner">
+          <p class="no-margin-top"><label class="toggle" id="toggleDeviceLogging-{{Color}}">
+              <input type="checkbox" checked>
+              <span class="toggle-icon"></span>
+              </label><a onclick="deviceToggle('{{Color}}')"> Use device logging</a>
+           </p>
+           <p><a href="#" data-popover=".locallogging-popover" class="popover-open"><i class="f7-icons size-15">info</i> More information...</a></p>
+            <div class="popover locallogging-popover">
+                <div class="popover-inner padding">
+                    <span><i class="f7-icons size-15">info</i> Enables logging to this phone. Connection to WiFi or cellular Internet not required. Log file will be saved as CSV and can be emailed from this app for later viewing.</span>
+                </div>
+              </div>
        <p class="no-margin-top"><label class="toggle" id="toggleDefaultCloudURL-{{Color}}">
           <input type="checkbox" checked>
           <span class="toggle-icon"></span>
@@ -190,7 +222,7 @@
             </div>
           </div>
       <p>
-          <button class="button button-round button-active" id="startCloudLog-{{Color}}" onclick="startCloudLogging(this)">Start New Cloud Log</button>
+          <button class="button button-round button-active" id="startCloudLog-{{Color}}" onclick="startLogging(this)">Start New Log</button>
       </p>
       <p class="segmented segmented-raised segmented-round">
           <button class="button button-round" id="logOnce-{{Color}}" onclick="logOnce(this)">Comment</button>
