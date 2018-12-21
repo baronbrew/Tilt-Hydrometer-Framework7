@@ -10,6 +10,8 @@ var app  = new Framework7({
   statusbar: {
       iosOverlaysWebView: true,
       enabled: true,
+      iosTextColor: 'white',
+      iosBackgroundColor: 'black',
   },
   // App root data
   data: function () {
@@ -53,12 +55,11 @@ $$(document).on('deviceready', function() {
   console.log("Device is ready!");
           // Specify a shortcut for the location manager holding the iBeacon functions.
           window.locationManager = cordova.plugins.locationManager;
-
           // Start tracking beacons
           initScan();
-  
+          //detect orientation change for fixing status bar if needed 
+          window.addEventListener('orientationchange', doOnOrientationChange);
           console.log(device);
-  
           //permissions = cordova.plugins.permissions;
   
           //permissions.checkPermission(permissions.BLUETOOTH, checkBluetoothPermissionCallback, null);
@@ -126,8 +127,26 @@ $$(document).on('deviceready', function() {
       }
   }
 
+  function doOnOrientationChange() {
+    switch(window.orientation) {  
+      case -90 || 90:
+        app.statusbar.hide();
+        $$('.card').css('max-width','45%');
+        $$('.card').css('font-size','80%');
+        $$('.navbar').css('display','none');
+        break; 
+      default:
+        app.statusbar.show();
+        $$('.card').css('max-width','100%');
+        $$('.card').css('font-size','100%');
+        $$('.navbar').css('display','block');
+        break; 
+    }
+}
+
   function startScan() {
       console.log("startScan");
+      scanningToast = app.toast.create({text: 'Scanning for nearby Tilts...<br>Ensure Bluetooth and Location Services are enabled and Tilt is floating.', icon: '<i class="material-icons">bluetooth_searching</i>', position: 'bottom', }).open();
       // Start ranging beacons.
       for (var i in regions) {
           var beaconRegion = new locationManager.BeaconRegion(
@@ -135,8 +154,7 @@ $$(document).on('deviceready', function() {
               regions[i].uuid);
              //console.log(beaconRegion);
           // Start ranging.
-          locationManager.startRangingBeaconsInRegion(beaconRegion);
-      }
+          locationManager.startRangingBeaconsInRegion(beaconRegion);      }
 
   }
 
@@ -146,20 +164,40 @@ $$(document).on('deviceready', function() {
     if (displaytempunits == "°F" && displayfermunits == "") {
         localStorage.setItem('displayTempunits-' + color,"°C");
         localStorage.setItem('displayFermunits-' + color,"");
+        //update radio buttons
+        $$("input[name=gravityRadio-" + color + "][value='SG']").prop("checked",true);
+        $$("input[name=temperatureRadio-" + color + "][value='°C']").prop("checked",true);
     }
     if (displaytempunits == "°C" && displayfermunits == "") {
         localStorage.setItem('displayTempunits-' + color,"°C");
         localStorage.setItem('displayFermunits-' + color,"°P");
+        $$("input[name=gravityRadio-" + color + "][value='°P']").prop("checked",true);
+        $$("input[name=temperatureRadio-" + color + "][value='°C']").prop("checked",true);
     }
     if (displaytempunits == "°C" && displayfermunits == "°P") {
         localStorage.setItem('displayTempunits-' + color,"°F");
         localStorage.setItem('displayFermunits-' + color,"°P");
+        $$("input[name=gravityRadio-" + color + "][value='°P']").prop("checked",true);
+        $$("input[name=temperatureRadio-" + color + "][value='°F']").prop("checked",true);
     }
     if (displaytempunits == "°F" && displayfermunits == "°P") {
         localStorage.setItem('displayTempunits-' + color,"°F");
         localStorage.setItem('displayFermunits-' + color,"");
+        $$("input[name=gravityRadio-" + color + "][value='SG']").prop("checked",true);
+        $$("input[name=temperatureRadio-" + color + "][value='°F']").prop("checked",true);
     }
     updateSGcallist(color);
+  }
+
+  function getUnitsFromSettings(color) {
+  var displayFermUnits = $$(("input[type='radio'][name='gravityRadio-" + color + "']:checked")).val();
+  if (displayFermUnits == 'SG'){//remove pseudo-units
+      displayFermUnits = '';
+  }
+  localStorage.setItem('displayFermunits-' + color, displayFermUnits);
+  var displayTempUnits = $$(("input[type='radio'][name='temperatureRadio-" + color + "']:checked")).val();
+  localStorage.setItem('displayTempunits-' + color, displayTempUnits);
+  updateSGcallist(color);
   }
     
 //adds color specific attributes
@@ -168,6 +206,7 @@ $$(document).on('deviceready', function() {
     beacon.lastUpdate = localStorage.getItem('lastUpdate-' + beacon.Color)||beacon.timeStamp;
     //make sure tilt card is visible
     $$('#tiltcard-' + beacon.Color).show();
+    $$('#accordion-' + beacon.Color).show();
     var date = new Date(beacon.timeStamp);
     beacon.displaytimeStamp = date.toLocaleString();
     //add beer name
@@ -188,9 +227,8 @@ $$(document).on('deviceready', function() {
       // The delegate object holds the iBeacon callback functions
       // specified below.
       delegate = new locationManager.Delegate();
-
       console.log('initScan');
-
+      //for android phones, doesn't work on iOS
       locationManager.enableBluetooth();
 
       // Called continuously when ranging beacons.
@@ -261,7 +299,6 @@ $$(document).on('deviceready', function() {
       // Request permission from user to access location info.
       // This is needed on iOS 8.
       locationManager.requestWhenInUseAuthorization();
-
       startScan();
   }
     //populate list of logging files
@@ -275,6 +312,8 @@ $$(document).on('deviceready', function() {
     //reset list of found beacons
     localStorage.setItem('foundbeacons','NONE');
 
+    
+
     function updateBeacons() {
     for (var key in beacons) {
     var beacon = beacons[key];
@@ -285,8 +324,10 @@ $$(document).on('deviceready', function() {
     switch (beacon.displayTempunits){
         case "°F" : 
         beacon.uncaldisplayTemp = beacon.uncalTemp;
+        beacon.caldisplayTemp = beacon.uncalTemp;//need to change once temperature calibration is setup
         break;
         case "°C"  : beacon.uncaldisplayTemp = ((beacon.uncalTemp - 32) * 5 / 9).toFixed(1);
+        beacon.caldisplayTemp = ((beacon.uncalTemp - 32) * 5 / 9).toFixed(1);
         break;
     }
     beacon.displayFermunits = localStorage.getItem('displayFermunits-' + beacon.Color)||"";
@@ -305,6 +346,8 @@ $$(document).on('deviceready', function() {
     var foundBeaconsArray = foundBeacons.split(",");
     //reset list of tilt cards if new tilt color found
     if (foundBeaconsArray.indexOf(beacon.Color) < 0){
+        //tilt found, close scanning for tilts message
+        scanningToast.close();
         foundBeaconsArray.push(beacon.Color);
         localStorage.setItem('foundbeacons',foundBeaconsArray);
         var displayhtml = compileddisplayTemplate(beacons);
@@ -314,6 +357,7 @@ $$(document).on('deviceready', function() {
         var foundBeaconsArraylength = foundBeaconsArray.length;
         //setup javascript for each card
         for (var i = 1; i < foundBeaconsArraylength; i++) {
+        doOnOrientationChange();
         //populate calibration point list
         updateSGcallist(foundBeaconsArray[i]);
         //show beer name in settings
@@ -331,7 +375,6 @@ $$(document).on('deviceready', function() {
         //console.log(foundBeaconsArray[i]);
         //set up cloud interval stepper
         cloudIntervalStepper(foundBeaconsArray[i]);
-
         //set up buttons
         $$('#unitstoggle-' + foundBeaconsArray[i]).on('click', function (e) {
             var unitscolor = e.currentTarget.id.split("-");
@@ -339,10 +382,16 @@ $$(document).on('deviceready', function() {
             toggleUnits(unitscolor[1]);
             updateBeacons();
           });
+          //set up change units in settings
+        $$('#unitsradio-' + foundBeaconsArray[i]).on('click', function (e) {
+            var unitscolor = e.currentTarget.id.split("-");
+            setTimeout ( function() { getUnitsFromSettings(unitscolor[1]);
+            updateBeacons(); }, 300);
+          });
         $$('#calprompt-' + foundBeaconsArray[i]).on('click', function (e) {
             var calcolor = e.currentTarget.id.split("-");
             //console.log('clicked ' + calcolor[1]);
-            app.dialog.prompt('Enter actual SG/Concentration or tap "Cancel" to calibrate temperature:', 'Calibrate ' + calcolor[1], function (actual) {
+            app.dialog.prompt('Enter actual gravity or tap "Cancel" to calibrate temperature:', 'Calibrate TILT | ' + calcolor[1], function (actual) {
              var actualSGpoints = localStorage.getItem('actualSGpoints-' + calcolor[1])||'-0.001,1.000,10.000';
              var actualSGpointsArray = actualSGpoints.split(',');
              var uncalSGpoints = localStorage.getItem('uncalSGpoints-' + calcolor[1])||'-0.001,1.000,10.000';
@@ -360,20 +409,20 @@ $$(document).on('deviceready', function() {
                  uncalSGpointsArray.push(uncalSGpoint);
                  uncalSGpointsArray.sort(function(a, b){return a-b;});
                  localStorage.setItem('uncalSGpoints-' + calcolor[1], uncalSGpointsArray);
-                 app.toast.create({text: 'Success: Set ' + uncalSGpoint + ' (uncal.) to ' + actualSGpoint + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
+                 app.toast.create({text: 'Success calibrating ' + uncalSGpoint + ' (uncal.) to ' + actualSGpoint + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
               } else if (calSGindex > 0 && uncalSGindex < 0){
                  localStorage.setItem('actualSGpoints-' + calcolor[1], actualSGpointsArray);
                  uncalSGpointsArray.splice(calSGindex, 1, uncalSGpoint);
                  uncalSGpointsArray.sort(function(a, b){return a-b;});
                  localStorage.setItem('uncalSGpoints-' + calcolor[1], uncalSGpointsArray);
-                 app.toast.create({text: 'Success: Changed ' + uncalSGpoint + ' (uncal.) to ' + actualSGpoint + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
+                 app.toast.create({text: 'Success calibrating ' + uncalSGpoint + ' (uncal.) to ' + actualSGpoint + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
              }
                 else if (calSGindex < 0 && uncalSGindex > 0){
                  localStorage.setItem('uncalSGpoints-' + calcolor[1], uncalSGpointsArray);
                  actualSGpointsArray.splice(uncalSGindex, 1, actualSGpoint);
                  actualSGpointsArray.sort(function(a, b){return a-b;});
                  localStorage.setItem('actualSGpoints-' + calcolor[1], actualSGpointsArray);
-                 app.toast.create({text: 'Success: Changed ' + actualSGpoint + ' (actual) to ' + uncalSGpoint + ' (uncal.)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
+                 app.toast.create({text: 'Success calibrating ' + actualSGpoint + ' (actual) to ' + uncalSGpoint + ' (uncal.)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
                 }
             }else{
                 app.dialog.alert('The calibration point ' + actual + ' is out of range or not a number. Please try again.', 'Calibration Error');
@@ -398,13 +447,13 @@ $$(document).on('deviceready', function() {
                  uncalTemppointsArray.push(uncalTemppoint);
                  uncalTemppointsArray.sort(function(a, b){return a-b;});
                  localStorage.setItem('uncalTemppoints-' + calcolor[1], uncalTemppointsArray);
-                 app.toast.create({text: 'Set ' + uncalTemppoint + ' (uncal.) to ' + actualTemppoint + ' (actual)', icon: '<i class="material-icons">adjust</i>', position: 'center', closeTimeout: 4000}).open();
+                 app.toast.create({text: 'Success calibrating ' + uncalTemppoint + ' (uncal.) to ' + actualTemppoint + ' (actual)', icon: '<i class="material-icons">adjust</i>', position: 'center', closeTimeout: 4000}).open();
               } else{
                  localStorage.setItem('actualTemppoints-' + calcolor[1], actualTemppointsArray);
                  uncalTemppointsArray.splice(calTempindex, 1, uncalTemppoint);
                  uncalSGpointsArray.sort(function(a, b){return a-b;});
                  localStorage.setItem('uncalTemppoints-' + calcolor[1], uncalTemppointsArray);
-                 app.toast.create({text: 'Reset ' + uncalTemppoint + ' (uncal.) to ' + actualTemppoint + ' (actual)', icon: '<i class="material-icons">adjust</i>', position: 'center', closeTimeout: 4000}).open();
+                 app.toast.create({text: 'Success calibrating ' + uncalTemppoint + ' (uncal.) to ' + actualTemppoint + ' (actual)', icon: '<i class="material-icons">adjust</i>', position: 'center', closeTimeout: 4000}).open();
              }
             }else{
                 app.dialog.alert('The calibration point ' + actualTemp + 'is out of range or not a number. Please try again.', 'Calibration Error');
@@ -428,6 +477,7 @@ $$(document).on('deviceready', function() {
     //disconnect if no scans within 2 minutes
     if (Number(beacon.numberSecondsAgo) > 120){
         $$('#tiltcard-' + beacon.Color).hide();
+        $$('#accordion-' + beacon.Color).hide();
     }
     //initialize display units
     //update data fields in Tilt card template
@@ -438,6 +488,7 @@ $$(document).on('deviceready', function() {
     $$('#caldisplayFerm+displayFermunits' + beacon.Color).html(String(beacon.caldisplayFerm) + beacon.displayFermunits);
     $$('#uncalTemp' + beacon.Color).html(beacon.uncalTemp);
     $$('#uncaldisplayTemp+displayTempunits' + beacon.Color).html(String(beacon.uncaldisplayTemp) + beacon.displayTempunits);
+    $$('#caldisplayTemp+displayTempunits' + beacon.Color).html(String(beacon.caldisplayTemp) + beacon.displayTempunits);
     $$('#numberSecondsAgo' + beacon.Color).html(beacon.numberSecondsAgo);
     $$('#displayRSSI' + beacon.Color).html(beacon.displayRSSI);
     $$('#displaytimeStamp' + beacon.Color).html(beacon.displaytimeStamp);
@@ -474,7 +525,8 @@ var displayFermunits = localStorage.getItem('displayFermunits-' + color)||'';
     switch (displayFermunits){
         case '' : return ( SG * 1 ).toFixed(3);
         break;
-        case '°P'  : return ( -616.868 + 1111.14 * SG - 630.272 * SG * SG + 135.997 * SG * SG * SG ).toFixed(1);
+        //0.005 added to prevent rounding to a negative 0 from sg of 1.000
+        case '°P'  : return ( 0.005 - 616.868 + 1111.14 * SG - 630.272 * SG * SG + 135.997 * SG * SG * SG ).toFixed(1);
         break;
         case '°Bx'  : return ( -584.6957 + 1083.2666 * SG -577.9848 * SG * SG + 124.5209 * SG * SG * SG ).toFixed(1);
     }
@@ -666,10 +718,10 @@ function setBeerName (button){
       else {
         var notificationFull = app.notification.create({
             icon: '<i class="f7-icons">check</i>',
-            title: 'Beer Name Saved',
+            title: 'Saved',
             titleRightText: 'alert',
-            subtitle: newBeerName,
-            text: 'This name will be used for logging.',
+            subtitle: 'Beer name for TILT | ' + color + ' saved as ' + newBeerName,
+            text: 'Name will be displayed and used for logging.',
             closeTimeout: 5000,
           });
         notificationFull.open();
@@ -973,16 +1025,6 @@ function clearCustomCloudURL2 (button){
 function postToCloudURLs (color, comment) {
     //get beer name from local storage in case beer name updated from prompt
     var currentBeerName = localStorage.getItem('beerName-' + color)||"Untitled";
-    var notificationCloud = app.notification.create({
-        icon: '<i class="preloader"></i>',
-        title: 'Connecting to cloud...',
-        titleRightText: 'alert',
-        subtitle: currentBeerName.split(',')[0] + ' (' + color + ' TILT)',
-        text: 'Allow up to 30 seconds to connect.',
-        closeOnClick: true,
-        closeTimeout: 30000,
-      });
-    notificationCloud.open();
     if (comment === undefined){
         comment = "";
     };
@@ -991,6 +1033,19 @@ function postToCloudURLs (color, comment) {
     var cloudURLsArray = cloudURLs.split(',');
     var cloudURLsenabled = localStorage.getItem('cloudurlsenabled-' + color)||'1,0,0';
     var cloudURLsenabledArray = cloudURLsenabled.split(',');
+    if (cloudURLsenabled == '0,0,0'){
+       return;//return undefined if no cloud options checked
+       }
+       var notificationCloud = app.notification.create({
+        icon: '<i class="preloader"></i>',
+        title: 'Connecting to cloud...',
+        titleRightText: 'alert',
+        subtitle: currentBeerName.split(',')[0] + ' (' + color + ' TILT)',
+        text: 'Allow up to 30 seconds to connect.',
+        closeOnClick: true,
+        closeTimeout: 30000,
+      });
+    setTimeout(function(){ notificationCloud.open(); }, 1000); //prevents notification being overwritten by device log notification
     for (var i = 0; i < 3; i++) {
         if (cloudURLsenabledArray[i] == '1'){
         //convert beacon timeStamp (UTC) to Excel formatted Timepoint (local time)
@@ -1057,18 +1112,6 @@ function postToCloudURLs (color, comment) {
         );
         }
     }
-    if (cloudURLsenabled == '0,0,0'){
-     var notificationURLError = app.notification.create({
-        icon: '<i class="f7-icons">info</i>',
-        title: 'Cloud Logging Not Enabled',
-        titleRightText: 'alert',
-        subtitle: 'TILT | ' + color,
-        text: 'No cloud logging options in use. First enable at least one cloud URL.',
-        closeTimeout: 5000,
-      });
-    notificationURLError.open();
-    }
-    
 }
 
 function cloudIntervalStepper (color) {
@@ -1118,7 +1161,7 @@ function setEmail (button){
     if (ValidateEmail(newEmail)){
     var notificationEmailOK = app.notification.create({
             icon: '<i class="f7-icons">check</i>',
-            title: 'Email Address Saved',
+            title: 'Saved',
             titleRightText: 'alert',
             subtitle: newEmail,
             text: 'Email address will be used to send a link to your cloud log as well as allow edit access.',
@@ -1190,12 +1233,12 @@ function startLogging(button) {
     }
     //handle the following situations: beer already logging, email address invalid, beer name not set (Untitled)
     if (Number(beerNameArray[1]) > 0 || deviceLoggingJSONFileName != 'not logging' || deviceLoggingCSVFileName != 'not logging'){
-        if (Number(beerNameArray[1]) > 0) {
+        if (Number(beerNameArray[1]) > 0 && cloudURLsEnabledArray.indexOf('1') > -1 ) {
         var notificationLogStarted = app.notification.create({
             icon: '<i class="f7-icons">info</i>',
-            title: 'Log Not Started',
+            title: 'Already Logging',
             titleRightText: 'alert',
-            subtitle: 'Cloud logging already in progress.',
+            subtitle: 'Cloud logging for TILT | ' + color +  ' in progress.',
             text: 'Data will be added to the current log.',
             closeTimeout: 5000,
           });
@@ -1203,12 +1246,12 @@ function startLogging(button) {
             setTimeout(function(){
                 postToCloudURLs(color);
             },3000);
-        }else{//already logging to device
+        } else {//already logging to device but not cloud
             var notificationLogStarted = app.notification.create({
                 icon: '<i class="f7-icons">info</i>',
-                title: 'Log Not Started',
+                title: 'Already Logging',
                 titleRightText: 'alert',
-                subtitle: 'Device logging already in progress.',
+                subtitle: 'Device logging for TILT |' + color + ' in progress.',
                 text: 'Data will be added to the current log.',
                 closeTimeout: 5000,
               });
@@ -1219,14 +1262,16 @@ function startLogging(button) {
                     console.log(email);
                 },3000);
 
-        }//only warn email invalid if at least one cloud url is active
+        }
+        logToDevice(color, 'start new local log');
+        //only warn email invalid if at least one cloud url is active
     }  else if (!emailValid && cloudURLsEnabledArray.indexOf('1') > -1) {
         var notificationEmailInvalid = app.notification.create({
             icon: '<i class="f7-icons">info</i>',
-            title: 'Email Invalid',
+            title: 'Email not provided or is invalid',
             titleRightText: 'alert',
             subtitle: 'Log will be started without email address.',
-            text: 'CANCEL',
+            text: 'Tap to Cancel',
             closeTimeout: 5000,
             closeOnClick: true,
           });
@@ -1235,6 +1280,7 @@ function startLogging(button) {
             localStorage.setItem('emailAddress-' + color, '');
             showEmail(color);
             postToCloudURLs(color,'@');
+            logToDevice(color, 'start new local log');
             app.preloader.show();
             setTimeout(function() {app.preloader.hide();}, 3000);
             }, 5000);
@@ -1283,7 +1329,7 @@ function endLog(button) {
         title: 'Success Ending Log',
         titleRightText: 'alert',
         subtitle: 'Logging completed for ' + currentBeerNameArray[0] + ' (' + color + ' TILT)',
-        text: 'UNDO',
+        text: 'Tap to Undo',
         closeTimeout: 5000,
         closeOnClick: true,
       });
@@ -1456,14 +1502,20 @@ function logToDevice(color, comment){
     //default is 'not logging'
     CSVfileName = localStorage.getItem('localCSVfileName-' + color)||'not logging';
     JSONfileName = localStorage.getItem('localJSONfileName-' + color)||'not logging';
+    console.log(comment);
     if (comment === undefined){
          comment = '';
-    };
-    if (comment == 'start new local log'){
-        isAppend = false;
-        comment = 'new log started';
     }
-    if (comment == 'device logging toggled'){
+    //append to file if user trys to start new log without ending log first
+    else if (comment == 'start new local log' && CSVfileName != 'not logging' && JSONfileName != 'not logging'){
+            isAppend = true;
+            comment = '';
+        }
+    else if (comment == 'start new local log'){
+        isAppend = false;
+        comment = '';
+    }
+    else if (comment == 'device logging toggled' && CSVfileName == 'not logging' && JSONfileName == 'not logging'){
         var notificationReadyStart = app.notification.create({
             icon: '<i class="f7-icons">info</i>',
             title: 'Ready to Start New Log',
@@ -1473,7 +1525,8 @@ function logToDevice(color, comment){
             closeTimeout: 5000,
           });
         notificationReadyStart.open();
-        return
+        comment = '';
+        return;
     }
     var beacon = JSON.parse(localStorage.getItem('tiltObject-' + color));
     var timeStamp = new Date(beacon.timeStamp);
@@ -1570,7 +1623,7 @@ function emailCurrentCSV(color){
     cordova.plugins.email.open({
         to: email,
         subject: 'Tilt Hydrometer Log for ' + currentBeerNameArray[0] + ' (' + color + ' TILT)',
-        body: '<p>Attached CSV file can be viewed in Excel, Google Sheets, and directly in web browsers.</p><h2>Last Reading</h2><h3>Gravity: ' + String(beacon.caldisplayFerm) + beacon.displayFermunits + '</h3><h3> Temperature: ' + String(beacon.uncaldisplayTemp) + beacon.displayTempunits + '</h3><h3>' + beacon.displaytimeStamp + '</h3><p>You may also view the data directly in the cloud if cloud logging was enabled: <a href="' + localStorage.getItem('docLongURL-' + color) + '">' + localStorage.getItem('docLongURL-' + color) + '</a></p>',
+        body: '<p>Attached CSV file can be viewed in Excel, Google Sheets, and directly in web browsers.</p><h2>Last Reading</h2><h3>Gravity: ' + String(beacon.caldisplayFerm) + beacon.displayFermunits + '</h3><h3> Temperature: ' + String(beacon.uncaldisplayTemp) + beacon.displayTempunits + '</h3><h3>' + beacon.displaytimeStamp + '</h3><p>You may also view the data directly in the cloud if cloud logging was enabled: <a href="' + localStorage.getItem('docLongURL-' + color) + '">' + localStorage.getItem('docLongURL-' + color) + '</a> Or use our Google Sheets template to <a href="https://docs.google.com/spreadsheets/d/1owuNOn25IHQ1Ck8pBgAEGkOifIBA7YhVc5JpE9Tlb1c/edit?usp=sharing">import your CSV data into a pre-formatted spreadsheet.</a> Works with laptop/desktop version of Google Sheets.</p>',
         isHtml: true,
         attachments : filePathAndName });
 }
@@ -1581,7 +1634,7 @@ function emailClickedCSV(fileName, color){
     cordova.plugins.email.open({
         to: email,
         subject: fileName,
-        body: '<p>Attached CSV file can be viewed in Excel, Google Sheets, and directly in web browsers.</p>',
+        body: '<p>Attached CSV file can be viewed in Excel, Google Sheets, and directly in web browsers. Or use our Google Sheets template to <a href="https://docs.google.com/spreadsheets/d/1owuNOn25IHQ1Ck8pBgAEGkOifIBA7YhVc5JpE9Tlb1c/edit?usp=sharing">import your CSV data into a pre-formatted spreadsheet.</a> Works with laptop/desktop version of Google Sheets.</p>',
         isHtml: true,
         attachments : filePathAndName });
 }

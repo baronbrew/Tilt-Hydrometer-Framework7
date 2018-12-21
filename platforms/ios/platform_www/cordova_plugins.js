@@ -59,14 +59,6 @@ module.exports = [
     "runs": true
   },
   {
-    "id": "cordova-plugin-statusbar.statusbar",
-    "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
-    "pluginId": "cordova-plugin-statusbar",
-    "clobbers": [
-      "window.StatusBar"
-    ]
-  },
-  {
     "id": "cordova-plugin-file.DirectoryEntry",
     "file": "plugins/cordova-plugin-file/www/DirectoryEntry.js",
     "pluginId": "cordova-plugin-file",
@@ -255,6 +247,14 @@ module.exports = [
       "cordova.plugins.email",
       "plugin.email"
     ]
+  },
+  {
+    "id": "cordova-plugin-statusbar.statusbar",
+    "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
+    "pluginId": "cordova-plugin-statusbar",
+    "clobbers": [
+      "window.StatusBar"
+    ]
   }
 ];
 module.exports.metadata = 
@@ -262,11 +262,11 @@ module.exports.metadata =
 {
   "cordova-plugin-device": "2.0.2",
   "com.unarin.cordova.beacon": "3.6.1",
-  "cordova-plugin-statusbar": "1.0.1",
   "cordova-plugin-whitelist": "1.2.2",
   "cordova-plugin-file": "6.0.1",
   "cordova-plugin-splashscreen": "5.0.2",
-  "cordova-plugin-email-composer": "0.8.15"
+  "cordova-plugin-email-composer": "0.8.15",
+  "cordova-plugin-statusbar": "2.4.2"
 };
 // BOTTOM OF METADATA
 });

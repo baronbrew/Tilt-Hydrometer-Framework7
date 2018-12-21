@@ -17,18 +17,6 @@
               "count": 1
             },
             {
-              "xml": "<feature name=\"StatusBar\"><param name=\"ios-package\" value=\"CDVStatusBar\" /><param name=\"onload\" value=\"true\" /></feature>",
-              "count": 1
-            },
-            {
-              "xml": "<preference name=\"StatusBarOverlaysWebView\" value=\"true\" />",
-              "count": 1
-            },
-            {
-              "xml": "<preference name=\"StatusBarStyle\" value=\"lightcontent\" />",
-              "count": 1
-            },
-            {
               "xml": "<feature name=\"File\"><param name=\"ios-package\" value=\"CDVFile\" /><param name=\"onload\" value=\"true\" /></feature>",
               "count": 1
             },
@@ -38,6 +26,18 @@
             },
             {
               "xml": "<feature name=\"EmailComposer\"><param name=\"ios-package\" value=\"APPEmailComposer\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"StatusBar\"><param name=\"ios-package\" value=\"CDVStatusBar\" /><param name=\"onload\" value=\"true\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<preference name=\"StatusBarOverlaysWebView\" value=\"true\" />",
+              "count": 1
+            },
+            {
+              "xml": "<preference name=\"StatusBarStyle\" value=\"lightcontent\" />",
               "count": 1
             }
           ]
@@ -86,9 +86,6 @@
     "com.unarin.cordova.beacon": {
       "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
     },
-    "cordova-plugin-statusbar": {
-      "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
-    },
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
     },
@@ -99,6 +96,9 @@
       "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
     },
     "cordova-plugin-email-composer": {
+      "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
+    },
+    "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
     }
   },
@@ -161,14 +161,6 @@
       "file": "plugins/com.unarin.cordova.beacon/www/model/BeaconRegion.js",
       "pluginId": "com.unarin.cordova.beacon",
       "runs": true
-    },
-    {
-      "id": "cordova-plugin-statusbar.statusbar",
-      "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
-      "pluginId": "cordova-plugin-statusbar",
-      "clobbers": [
-        "window.StatusBar"
-      ]
     },
     {
       "id": "cordova-plugin-file.DirectoryEntry",
@@ -359,15 +351,23 @@
         "cordova.plugins.email",
         "plugin.email"
       ]
+    },
+    {
+      "id": "cordova-plugin-statusbar.statusbar",
+      "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
+      "pluginId": "cordova-plugin-statusbar",
+      "clobbers": [
+        "window.StatusBar"
+      ]
     }
   ],
   "plugin_metadata": {
     "cordova-plugin-device": "2.0.2",
     "com.unarin.cordova.beacon": "3.6.1",
-    "cordova-plugin-statusbar": "1.0.1",
     "cordova-plugin-whitelist": "1.2.2",
     "cordova-plugin-file": "6.0.1",
     "cordova-plugin-splashscreen": "5.0.2",
-    "cordova-plugin-email-composer": "0.8.15"
+    "cordova-plugin-email-composer": "0.8.15",
+    "cordova-plugin-statusbar": "2.4.2"
   }
 }

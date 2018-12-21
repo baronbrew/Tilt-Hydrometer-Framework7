@@ -10,9 +10,6 @@
     "com.unarin.cordova.beacon": {
       "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
     },
-    "cordova-plugin-statusbar": {
-      "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
-    },
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
     },
@@ -23,6 +20,9 @@
       "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
     },
     "cordova-plugin-email-composer": {
+      "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
+    },
+    "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
     }
   },

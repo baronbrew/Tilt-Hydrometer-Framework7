@@ -8,11 +8,11 @@
     ],
     "plugins": {
       "cordova-plugin-whitelist": {},
-      "cordova-plugin-statusbar": {},
       "com.unarin.cordova.beacon": {},
       "cordova-plugin-file": {},
       "cordova-plugin-splashscreen": {},
-      "cordova-plugin-email-composer": {}
+      "cordova-plugin-email-composer": {},
+      "cordova-plugin-statusbar": {}
     }
   },
   "dependencies": {
@@ -23,7 +23,7 @@
     "cordova-plugin-file": "^6.0.1",
     "cordova-plugin-ibeacon": "^3.6.1",
     "cordova-plugin-splashscreen": "^5.0.2",
-    "cordova-plugin-statusbar": "~1.0.1",
+    "cordova-plugin-statusbar": "^2.4.2",
     "cordova-plugin-whitelist": "~1.2.0"
   }
 }
