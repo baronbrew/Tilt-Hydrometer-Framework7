@@ -73,10 +73,10 @@
     <preference name="PageLength" value="0" />
     <preference name="PaginationBreakingMode" value="page" />
     <preference name="PaginationMode" value="unpaginated" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarStyle" value="lightcontent" />
-    <preference name="Orientation" value="all" />
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="KeepRunning" value="true" />
-    <preference name="StatusBarOverlaysWebView" value="true" />
+    <preference name="Orientation" value="all" />
     <preference name="AutoHideSplashScreen" value="true" />
 </widget>

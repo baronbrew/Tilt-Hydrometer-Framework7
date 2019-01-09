@@ -8,10 +8,14 @@ var app  = new Framework7({
   name: 'Tilt Hydrometer', // App name
   theme: 'auto', // Automatic theme detection
   statusbar: {
+      overlay: true,
       iosOverlaysWebView: true,
+      androidOverlaysWebView: true,
       enabled: true,
       iosTextColor: 'white',
+      androidTextColor: 'white',
       iosBackgroundColor: 'black',
+      androidBackgroundColor: 'black',
   },
   // App root data
   data: function () {
@@ -62,10 +66,10 @@ $$(document).on('deviceready', function() {
           //detect when app is opened from background
           document.addEventListener('resume', onResume, false);
           console.log(device);
-          //permissions = cordova.plugins.permissions;
+          permissions = cordova.plugins.permissions;
   
-          //permissions.checkPermission(permissions.BLUETOOTH, checkBluetoothPermissionCallback, null);
-          //permissions.checkPermission(permissions.ACCESS_COARSE_LOCATION, checkCoarseLocationPermissionCallback, null);
+          permissions.checkPermission(permissions.BLUETOOTH, checkBluetoothPermissionCallback, null);
+          permissions.checkPermission(permissions.ACCESS_COARSE_LOCATION, checkCoarseLocationPermissionCallback, null);
 });
 
   // Specify your beacon 128bit UUIDs here.
@@ -124,8 +128,8 @@ $$(document).on('deviceready', function() {
       }
       else {
           locationManager.disableBluetooth();
-          //wait 5s then enable
-          locationManager.enableBluetooth();
+          //wait 3s then enable
+          setTimeout(function(){locationManager.enableBluetooth();},3000);
       }
   }
 
@@ -240,8 +244,7 @@ $$(document).on('deviceready', function() {
       delegate = new locationManager.Delegate();
       console.log('initScan');
       //for android phones, doesn't work on iOS
-      locationManager.enableBluetooth();
-
+      toggleBluetooth();
       // Called continuously when ranging beacons.
       delegate.didRangeBeaconsInRegion = function (pluginResult) {
           if (pluginResult.beacons.length > 0) {
@@ -495,6 +498,13 @@ $$(document).on('deviceready', function() {
     localStorage.setItem('lastUpdate-' + beacon.Color,beacon.timeStamp);
     //get time since last cloud logged
     beacon.lastCloudLogged = ((Date.now() - localStorage.getItem('lastCloudLogged-' + beacon.Color)) / 1000 / 60).toFixed(0);
+    //toggle bluetooth if tilt disconnects
+    if (Number(beacon.numberSecondsAgo) > 60 && Number(beacon.numberSecondsAgo) < 61){
+        toggleBluetooth();
+    }
+    if (Number(beacon.numberSecondsAgo) > 120 && Number(beacon.numberSecondsAgo) < 121){
+        toggleBluetooth();
+    }
     //disconnect if no scans within 2 minutes
     if (Number(beacon.numberSecondsAgo) > 120){
         $$('#tiltcard-' + beacon.Color).hide();
@@ -526,9 +536,9 @@ $$(document).on('deviceready', function() {
     //log to cloud or device
     var cloudInterval = localStorage.getItem('cloudInterval-' + beacon.Color)||15;
     if (Number(cloudInterval) <= Number(beacon.lastCloudLogged)){
-        localStorage.setItem('lastCloudLogged-' + beacon.Color, Date.now() - ((Number(cloudInterval) - 1) * 1000 * 60));//allow 1 minute to update log
-            postToCloudURLs(beacon.Color);
-            logToDevice(beacon.Color);
+        postToCloudURLs(beacon.Color);
+        logToDevice(beacon.Color);
+        localStorage.setItem('lastCloudLogged-' + beacon.Color, Date.now());//reset timer
     };
     };
 }
@@ -795,9 +805,7 @@ function toggleDeviceLogging (color) {
       })
     var deviceLoggingEnabled = localStorage.getItem('deviceLoggingEnabled-' + color)||'0';
     if (deviceLoggingEnabled == '1' && !toggle.checked){
-        setTimeout(function(){
             toggle.toggle();
-        }, 3000);//allow 3 seconds to scan for fresh data
     }
     else if (deviceLoggingEnabled == '0' && toggle.checked){
         toggle.toggle();
@@ -831,9 +839,7 @@ function toggleDefaultCloudURL (color) {
     var cloudURLsenabled = localStorage.getItem('cloudurlsenabled-' + color)||'0,0,0';
     var cloudURLsenabledArray = cloudURLsenabled.split(',');
     if (cloudURLsenabledArray[0] == '1' && !toggle.checked){
-        setTimeout(function(){
             toggle.toggle();
-        }, 3000);//allow 3 seconds to scan for fresh data
     }
     else if (cloudURLsenabledArray[0] == '0' && toggle.checked){
         toggle.toggle();
@@ -907,9 +913,7 @@ function toggleCustomCloudURL1 (color) {
       var cloudURLsenabled = localStorage.getItem('cloudurlsenabled-' + color)||'1,0,0';
       var cloudURLsenabledArray = cloudURLsenabled.split(',');
       if (cloudURLsenabledArray[1] == '1' && !toggle.checked){
-        setTimeout(function(){
-            toggle.toggle();
-        }, 3000);//allow 3 seconds to scan for fresh data
+         toggle.toggle();
       }
       if (cloudURLsenabledArray[1] == '0' && toggle.checked){
         toggle.toggle();
@@ -984,9 +988,7 @@ function toggleCustomCloudURL2 (color) {
       var cloudURLsenabled = localStorage.getItem('cloudurlsenabled-' + color)||'1,0,0';
       var cloudURLsenabledArray = cloudURLsenabled.split(',');
       if (cloudURLsenabledArray[2] == '1' && !toggle.checked){
-        setTimeout(function(){
-            toggle.toggle();
-        }, 3000);//allow 3 seconds to scan for fresh data
+        toggle.toggle();
       }
       if (cloudURLsenabledArray[2] == '0' && toggle.checked){
         toggle.toggle();
@@ -1248,26 +1250,26 @@ function startLogging(button) {
           });
             notificationLogStarted.open();
             setTimeout(function(){
+                logToDevice(color);
                 postToCloudURLs(color);
             },3000);
         } else {//already logging to device but not cloud
             var notificationLogStarted = app.notification.create({
                 icon: '<i class="f7-icons">info</i>',
-                title: 'Already Logging',
+                title: 'Already Logging to Device',
                 titleRightText: 'alert',
                 subtitle: 'Device logging for TILT |' + color + ' in progress.',
-                text: 'Data will be added to the current log.',
+                text: 'Data will be added to the current device log.',
                 closeTimeout: 5000,
               });
                 notificationLogStarted.open();
                 setTimeout(function(){
                     logToDevice(color);
                     postToCloudURLs(color, email);
-                    console.log(email);
+                    //console.log(email);
                 },3000);
 
         }
-        logToDevice(color, 'start new local log');
         //only warn email invalid if at least one cloud url is active
     }  else if (!emailValid && cloudURLsEnabledArray.indexOf('1') > -1) {
         var notificationEmailInvalid = app.notification.create({
@@ -1472,25 +1474,26 @@ function readFromFile(fileName, cb, fileType) {
 function logToDevice(color, comment){
     var currentBeerName = localStorage.getItem('beerName-' + color)||"Untitled";
     var deviceLoggingEnabled = localStorage.getItem('deviceLoggingEnabled-' + color)||'0';
- if (deviceLoggingEnabled == '1'){
+    var inRangeBeaconsArray = localStorage.getItem('inrangebeacons').split(',');
+    var indexOfColor = inRangeBeaconsArray.indexOf(color);
     var isAppend = true;
-    //default is 'not logging'
+    //check if currently logging, default is 'not logging'
     CSVfileName = localStorage.getItem('localCSVfileName-' + color)||'not logging';
     JSONfileName = localStorage.getItem('localJSONfileName-' + color)||'not logging';
-    //console.log(comment);
-    if (comment === undefined){
-         comment = '';
-    }
-    //append to file if user trys to start new log without ending log first
-    else if (comment == 'start new local log' && CSVfileName != 'not logging' && JSONfileName != 'not logging'){
-            isAppend = true;
-            comment = '';
-        }
-    else if (comment == 'start new local log'){
-        isAppend = false;
+    if (deviceLoggingEnabled == '1' && indexOfColor > -1){//device logging is enabled and tilt is in range
+    //process request based on contents of comment
+    if (comment == 'start new local log' && CSVfileName != 'not logging' && JSONfileName != 'not logging'){
+        isAppend = true;
         comment = '';
     }
-    else if (comment == 'device logging toggled' && CSVfileName == 'not logging' && JSONfileName == 'not logging'){
+    else if (comment == 'start new local log'){
+    isAppend = false;
+    comment = '';
+    }
+    else if (comment == 'device logging toggled' && CSVfileName != 'not logging' && JSONfileName != 'not logging'){
+        comment = '';
+    }
+    else if (comment == 'device logging toggled' || CSVfileName == 'not logging' || JSONfileName == 'not logging'){
         var notificationReadyStart = app.notification.create({
             icon: '<i class="f7-icons">info</i>',
             title: 'Ready to Start New Log',
@@ -1501,8 +1504,20 @@ function logToDevice(color, comment){
           });
         notificationReadyStart.open();
         comment = '';
-        return;
+        return;//return undefined if toggling on and user needs to start new log
     }
+    //append to file if user trys to start new log without ending log first
+    else if (comment == 'start new local log' && CSVfileName != 'not logging' && JSONfileName != 'not logging'){
+            isAppend = true;
+            comment = '';
+        }
+    else if (comment == 'start new local log'){
+        isAppend = false;
+        comment = '';
+    }
+    else if (comment === undefined){
+        comment = '';
+   }
     var beacon = JSON.parse(localStorage.getItem('tiltObject-' + color));
     var timeStamp = new Date(beacon.timeStamp);
     var localTime = timeStamp.toLocaleDateString() + ' ' + timeStamp.toLocaleTimeString();
@@ -1615,6 +1630,7 @@ function emailClickedCSV(fileName, color){
 }
 
 function onResume() {
+    toggleBluetooth();
     scanningToast = app.toast.create({text: 'Scanning for nearby Tilts...<br>Ensure Bluetooth and Location Services are enabled and Tilt is floating.', icon: '<i class="material-icons">bluetooth_searching</i>', position: 'bottom', }).open();
 //log data on resume
     setTimeout(function(){

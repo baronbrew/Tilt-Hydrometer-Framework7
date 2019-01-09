@@ -32,3 +32,6 @@ div.lastrec {
     text-align: center;
     font-size: smaller;
 }
+.statusbar {
+    background: black;
+  }
