@@ -1,10 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.baronbrew.tilthydrometerf7" version="1.0.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.baronbrew.tilthydrometerf7" version="1.0.8" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <feature name="Device">
         <param name="android-package" value="org.apache.cordova.device.Device" />
     </feature>
     <feature name="LocationManager">
         <param name="android-package" value="com.unarin.cordova.beacon.LocationManager" />
+    </feature>
+    <feature name="Permissions">
+        <param name="android-package" value="com.android.plugins.Permissions" />
     </feature>
     <feature name="EmailComposer">
         <param name="android-package" value="de.appplant.cordova.emailcomposer.EmailComposer" />
@@ -26,9 +29,6 @@
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
     </feature>
-    <feature name="Permissions">
-        <param name="android-package" value="com.android.plugins.Permissions" />
-    </feature>
     <name>Tilt 2</name>
     <description>
         Generation two app for Tilt scanning and logging data.
@@ -47,11 +47,31 @@
     <allow-navigation href="https://docs.google.com/*" />
     <allow-navigation href="https://tilthydrometer.com/*" />
     <allow-intent href="market:*" />
+    <splash density="land-ldpi" src="res/screens/android/drawable-land-ldpi-screen.png" />
+    <splash density="land-mdpi" src="res/screens/android/drawable-land-mdpi-screen.png" />
+    <splash density="land-hdpi" src="res/screens/android/drawable-land-hdpi-screen.png" />
+    <splash density="land-xhdpi" src="res/screens/android/drawable-land-xhdpi-screen.png" />
+    <splash density="land-xxhdpi" src="res/screens/android/drawable-land-xxhdpi-screen.png" />
+    <splash density="land-xxxhdpi" src="res/screens/android/drawable-land-xxxhdpi-screen.png" />
+    <splash density="port-ldpi" src="res/screens/android/drawable-port-ldpi-screen.png" />
+    <splash density="port-mdpi" src="res/screens/android/drawable-port-mdpi-screen.png" />
+    <splash density="port-hdpi" src="res/screens/android/drawable-port-hdpi-screen.png" />
+    <splash density="port-xhdpi" src="res/screens/android/drawable-port-xhdpi-screen.png" />
+    <splash density="port-xxhdpi" src="res/screens/android/drawable-port-xxhdpi-screen.png" />
+    <splash density="port-xxxhdpi" src="res/screens/android/drawable-port-xxxhdpi-screen.png" />
+    <icon density="ldpi" src="res/icons/android/mipmap-ldpi/ic_launcher.png" />
+    <icon density="mdpi" src="res/icons/android/mipmap-mdpi/ic_launcher.png" />
+    <icon density="hdpi" src="res/icons/android/mipmap-hdpi/ic_launcher.png" />
+    <icon density="xhdpi" src="res/icons/android/mipmap-xhdpi/ic_launcher.png" />
+    <icon density="xxhdpi" src="res/icons/android/mipmap-xxhdpi/ic_launcher.png" />
     <preference name="loglevel" value="DEBUG" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="KeepRunning" value="true" />
     <preference name="android-minSdkVersion" value="16" />
     <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarBackgroundColor" value="#000000" />
+    <preference name="StatusBarStyle" value="lightcontent" />
     <preference name="Orientation" value="default" />
+    <preference name="SplashMaintainAspectRatio" value="true" />
 </widget>

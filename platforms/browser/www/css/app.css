@@ -35,3 +35,8 @@ div.lastrec {
 .statusbar {
     background: black;
   }
+
+  .md .data-table th {
+    padding-left: 0px;
+    padding-right: 0px;
+}

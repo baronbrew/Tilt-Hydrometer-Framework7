@@ -59,6 +59,14 @@ module.exports = [
     "runs": true
   },
   {
+    "id": "cordova-plugin-android-permissions.Permissions",
+    "file": "plugins/cordova-plugin-android-permissions/www/permissions.js",
+    "pluginId": "cordova-plugin-android-permissions",
+    "clobbers": [
+      "cordova.plugins.permissions"
+    ]
+  },
+  {
     "id": "cordova-plugin-email-composer.EmailComposer",
     "file": "plugins/cordova-plugin-email-composer/www/email_composer.js",
     "pluginId": "cordova-plugin-email-composer",
@@ -255,14 +263,6 @@ module.exports = [
     "clobbers": [
       "window.StatusBar"
     ]
-  },
-  {
-    "id": "cordova-plugin-android-permissions.Permissions",
-    "file": "plugins/cordova-plugin-android-permissions/www/permissions.js",
-    "pluginId": "cordova-plugin-android-permissions",
-    "clobbers": [
-      "cordova.plugins.permissions"
-    ]
   }
 ];
 module.exports.metadata = 
@@ -270,12 +270,12 @@ module.exports.metadata =
 {
   "cordova-plugin-device": "2.0.2",
   "com.unarin.cordova.beacon": "3.6.1",
+  "cordova-plugin-android-permissions": "1.0.0",
   "cordova-plugin-email-composer": "0.8.15",
   "cordova-plugin-file": "6.0.1",
   "cordova-plugin-splashscreen": "5.0.2",
   "cordova-plugin-statusbar": "2.4.2",
-  "cordova-plugin-whitelist": "1.2.2",
-  "cordova-plugin-android-permissions": "1.0.0"
+  "cordova-plugin-whitelist": "1.2.2"
 };
 // BOTTOM OF METADATA
 });

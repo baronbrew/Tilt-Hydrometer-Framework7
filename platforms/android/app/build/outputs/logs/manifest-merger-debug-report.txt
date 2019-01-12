@@ -15,7 +15,7 @@ ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydromete
 INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-40:12
 INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-40:12
 INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-40:12
-MERGED from [com.android.support:support-v4:24.1.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-v4-24.1.1.aar/a67a2cda2f40665f1672640c177e5b2a/AndroidManifest.xml:17:1-27:12
+MERGED from [com.android.support:support-v4:24.1.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-v4-24.1.1.aar/3e65ade57d4b0120bbf51c3bdb159154/AndroidManifest.xml:17:1-27:12
 MERGED from [:CordovaLib] /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/CordovaLib/build/intermediates/manifests/full/debug/AndroidManifest.xml:20:1-27:12
 INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-40:12
 INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-40:12
@@ -56,8 +56,8 @@ ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydromete
 		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:4:22-64
 application
 ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:5:5-32:19
-MERGED from [com.android.support:support-v4:24.1.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-v4-24.1.1.aar/a67a2cda2f40665f1672640c177e5b2a/AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-v4:24.1.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-v4-24.1.1.aar/a67a2cda2f40665f1672640c177e5b2a/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-v4:24.1.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-v4-24.1.1.aar/3e65ade57d4b0120bbf51c3bdb159154/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-v4:24.1.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-v4-24.1.1.aar/3e65ade57d4b0120bbf51c3bdb159154/AndroidManifest.xml:25:5-20
 	android:supportsRtl
 		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:5:114-140
 	android:label
@@ -154,12 +154,12 @@ ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydromete
 		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:26:25-94
 uses-sdk
 ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:33:5-74
-MERGED from [com.android.support:support-v4:24.1.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-v4-24.1.1.aar/a67a2cda2f40665f1672640c177e5b2a/AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-v4:24.1.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-v4-24.1.1.aar/a67a2cda2f40665f1672640c177e5b2a/AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-v4:24.1.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-v4-24.1.1.aar/3e65ade57d4b0120bbf51c3bdb159154/AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-v4:24.1.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-v4-24.1.1.aar/3e65ade57d4b0120bbf51c3bdb159154/AndroidManifest.xml:21:5-23:54
 MERGED from [:CordovaLib] /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/CordovaLib/build/intermediates/manifests/full/debug/AndroidManifest.xml:25:5-44
 MERGED from [:CordovaLib] /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/CordovaLib/build/intermediates/manifests/full/debug/AndroidManifest.xml:25:5-44
 	tools:overrideLibrary
-		ADDED from [com.android.support:support-v4:24.1.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-v4-24.1.1.aar/a67a2cda2f40665f1672640c177e5b2a/AndroidManifest.xml:23:9-51
+		ADDED from [com.android.support:support-v4:24.1.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-v4-24.1.1.aar/3e65ade57d4b0120bbf51c3bdb159154/AndroidManifest.xml:23:9-51
 	android:targetSdkVersion
 		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:33:42-71
 	android:minSdkVersion
