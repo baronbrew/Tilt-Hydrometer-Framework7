@@ -41,7 +41,7 @@
               <folding>
                 <element signature="e#593#611#0" expanded="true" />
                 <element signature="e#981#1004#0" expanded="true" />
-                <marker date="1547244817000" expanded="false" signature="750:773" ph="&quot;@string/launcher_name&quot;" />
+                <marker date="1547391225000" expanded="false" signature="750:773" ph="&quot;@string/launcher_name&quot;" />
               </folding>
             </state>
           </provider>
@@ -2897,7 +2897,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
+    <option name="x" value="-56" />
+    <option name="y" value="109" />
     <option name="width" value="1260" />
     <option name="height" value="691" />
   </component>
@@ -3083,7 +3084,7 @@
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
       <method>
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1547244863991" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1547391699567" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -3329,7 +3330,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1260" height="691" extended-state="0" />
+    <frame x="-56" y="109" width="1260" height="691" extended-state="0" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -3391,7 +3392,7 @@
           <folding>
             <element signature="e#593#611#0" expanded="true" />
             <element signature="e#981#1004#0" expanded="true" />
-            <marker date="1547244817000" expanded="false" signature="750:773" ph="&quot;@string/launcher_name&quot;" />
+            <marker date="1547391225000" expanded="false" signature="750:773" ph="&quot;@string/launcher_name&quot;" />
           </folding>
         </state>
       </provider>
@@ -3411,7 +3412,7 @@
           <folding>
             <element signature="e#593#611#0" expanded="true" />
             <element signature="e#981#1004#0" expanded="true" />
-            <marker date="1547244817000" expanded="false" signature="750:773" ph="&quot;@string/launcher_name&quot;" />
+            <marker date="1547391225000" expanded="false" signature="750:773" ph="&quot;@string/launcher_name&quot;" />
           </folding>
         </state>
       </provider>
@@ -3439,7 +3440,7 @@
           <folding>
             <element signature="e#593#611#0" expanded="true" />
             <element signature="e#981#1004#0" expanded="true" />
-            <marker date="1547244817000" expanded="false" signature="750:773" ph="&quot;@string/launcher_name&quot;" />
+            <marker date="1547391225000" expanded="false" signature="750:773" ph="&quot;@string/launcher_name&quot;" />
           </folding>
         </state>
       </provider>

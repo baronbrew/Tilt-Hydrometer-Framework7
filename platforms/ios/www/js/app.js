@@ -70,11 +70,11 @@ $$(document).on('deviceready', function() {
           document.addEventListener('resume', onResume, false);
           console.log(device);
           if (device.platform == 'Android' || device.platform == 'amazon-fireos'){
-            setInterval(function(){ watchBluetooth(); }, 30000);//check if tilts are connected every 30 seconds, toggle bluetooth if not
-        }
+          setInterval(function(){ watchBluetooth(); }, 30000);//check if tilts are connected every 30 seconds, toggle bluetooth if not
           permissions = cordova.plugins.permissions;
           permissions.checkPermission(permissions.BLUETOOTH, checkBluetoothPermissionCallback, null);
           permissions.checkPermission(permissions.ACCESS_COARSE_LOCATION, checkCoarseLocationPermissionCallback, null);
+          }
 });
 
   // Specify your beacon 128bit UUIDs here.
@@ -126,15 +126,19 @@ $$(document).on('deviceready', function() {
   var delegate = null;
 
   function toggleBluetooth() {
-      console.log('toggleBluetooth');
       // if(device.version)  don't toggle if android and 4
-      if ((device.platform == "Android") && (device.version[0] == "4")) {
-          console.log("skipping toggle, Android 4.x");
+      if ((device.platform == "Android") && (device.version[0] == "4") || device.platform == 'iOS') {
+          console.log("skipping toggle, Android 4.x or iOS");
       }
       else {
           locationManager.disableBluetooth();
-          //wait 2.5s then enable
-          setTimeout(function(){locationManager.enableBluetooth();},2500);
+          console.log('toggleBluetooth');
+          bluetoothToggled = true;
+          //wait 3.5s then enable
+          setTimeout(function(){
+            locationManager.enableBluetooth();
+            bluetoothToggled = false;
+        },3500);
       }
   }
 
@@ -240,7 +244,12 @@ $$(document).on('deviceready', function() {
     }else{
         beacon.displayRSSI = beacon.rssi + " dBm";
         localStorage.setItem('prevRSSI-' + beacon.Color,beacon.displayRSSI);
-    } 
+    }
+    //log data upon seeing tilts in range
+    if (resumed){
+        setTimeout(function(){logNow();}, 4000);
+        resumed = false;
+    }
 }
 
   function initScan() {
@@ -248,8 +257,8 @@ $$(document).on('deviceready', function() {
       // specified below.
       delegate = new locationManager.Delegate();
       console.log('initScan');
-      //for android phones, doesn't work on iOS
-      toggleBluetooth();
+      //will log data and toggle bluetooth (works for android phones, doesn't work on iOS)
+      resumed = true;
       // Called continuously when ranging beacons.
       delegate.didRangeBeaconsInRegion = function (pluginResult) {
           if (pluginResult.beacons.length > 0) {
@@ -341,7 +350,10 @@ $$(document).on('deviceready', function() {
     localStorage.setItem('foundbeacons','NONE');
     localStorage.setItem('inrangebeacons','NONE');
 
-    
+    //globals
+    //set blutooth toggled state
+    bluetoothToggled = false;
+    resumed = false;
 
     function updateBeacons() {
     for (var key in beacons) {
@@ -372,9 +384,9 @@ $$(document).on('deviceready', function() {
 
     //setup tilt cards (generate new card once for each Tilt found)
     var foundBeacons = localStorage.getItem('foundbeacons');
+    var foundBeaconsArray = foundBeacons.split(',');
     var inRangeBeacons = localStorage.getItem('inrangebeacons');
-    var foundBeaconsArray = foundBeacons.split(",");
-    var inRangeBeaconsArray = inRangeBeacons.split(",");
+    var inRangeBeaconsArray = inRangeBeacons.split(',');
     //reset list of tilt cards if new tilt color found
     if (foundBeaconsArray.indexOf(beacon.Color) < 0){
         foundBeaconsArray.push(beacon.Color);
@@ -383,9 +395,8 @@ $$(document).on('deviceready', function() {
         var tiltCard  = $$('#tiltCard').html(displayhtml);
         var settingshtml = compiledsettingsTemplate(beacons);
         var settingspanel = $$('#settingsPanel').html(settingshtml);
-        var foundBeaconsArraylength = foundBeaconsArray.length;
         //setup javascript for each card
-        for (var i = 1; i < foundBeaconsArraylength; i++) {
+        for (var i = 1; i < foundBeaconsArray.length; i++) {
         doOnOrientationChange();
         //populate calibration point list
         updateSGcallist(foundBeaconsArray[i]);
@@ -507,11 +518,24 @@ $$(document).on('deviceready', function() {
     if (Number(beacon.numberSecondsAgo) > 120){
         $$('#tiltcard-' + beacon.Color).hide();
         $$('#accordion-' + beacon.Color).hide();
-        var inRangeBeaconsArray = localStorage.getItem('inrangebeacons').split(',');
         var indexOfColor = inRangeBeaconsArray.indexOf(beacon.Color);
         if (indexOfColor > -1){
         inRangeBeaconsArray.splice(indexOfColor, 1);
         localStorage.setItem('inrangebeacons',inRangeBeaconsArray);
+        }
+    }
+    //check freshness of tilt connections for Android, toggle if average exceeds 15s
+    var totalSecondsAgo = 0;
+    for (var i = 1; i < inRangeBeaconsArray.length; i++){
+        var lastUpdate = Number(localStorage.getItem('lastUpdate-' + inRangeBeaconsArray[i]))||Date.now();
+        var SecondsAgo = (Date.now() - lastUpdate) / 1000;
+        totalSecondsAgo += SecondsAgo;
+    }
+    var averageSecondsAgo = (totalSecondsAgo / (inRangeBeaconsArray.length - 1)).toFixed(0);
+    if (averageSecondsAgo == 15 || averageSecondsAgo == 30 || averageSecondsAgo == 60){//toggle bluetooth every 15-30 seconds when Android bluetooth fails   
+        if (!bluetoothToggled){
+        toggleBluetooth();
+        bluetoothToggled == true;
         }
     }
     //initialize display units
@@ -526,7 +550,7 @@ $$(document).on('deviceready', function() {
     $$('#caldisplayTemp+displayTempunits' + beacon.Color).html(String(beacon.caldisplayTemp) + beacon.displayTempunits);
     $$('#numberSecondsAgo' + beacon.Color).html(beacon.numberSecondsAgo);
     $$('#displayRSSI' + beacon.Color).html(beacon.displayRSSI);
-    $$('#displaytimeStamp' + beacon.Color).html(beacon.displaytimeStamp);
+    $$('#displaytimeStamp' + beacon.Color).html(beacon.displaytimeStamp + ' (v1.0.8)');
     $$('#percentScaleSG' + beacon.Color).css('width', String((beacon.uncalSG - 0.980) / (1.150 - 0.980) * 100) + "%");
     $$('#percentScaleTemp' + beacon.Color).css('width', String((beacon.uncalTemp - 0) / (185 - 0) * 100) + "%");
     //update Tilt objects
@@ -1655,22 +1679,24 @@ function emailClickedCSV(fileName, color){
 function onResume() {
     toggleBluetooth();
     scanningToast = app.toast.create({text: 'Scanning for nearby Tilts...<br>Ensure Bluetooth and Location Services are enabled and Tilt is floating.', icon: '<i class="material-icons">bluetooth_searching</i>', position: 'bottom', }).open();
-//log data on resume
-    setTimeout(function(){
-        var foundBeacons = localStorage.getItem('foundbeacons')||'NONE';
-        var foundBeaconsArray = foundBeacons.split(',');
-        //console.log('resumed' + foundBeaconsArray[i]);
-        for (var i = 1; i < foundBeaconsArray.length; i++) {
-        logToDevice(foundBeaconsArray[i]);
-        postToCloudURLs(foundBeaconsArray[i]);
-        }
-    },
-        5000);
+    //set resumed flag to trigger logging as soon as tilts are in range
+    resumed = true;
 }
 
 function watchBluetooth() {//function run every 30 seconds on Android and Fire devices
     var inRangeBeaconsArray = localStorage.getItem('inrangebeacons').split(',');
     if (inRangeBeaconsArray.length == 1){//no tilts in range
             toggleBluetooth();
+    }
+}
+
+function logNow(){
+    var foundBeacons = localStorage.getItem('foundbeacons')||'NONE';
+    var foundBeaconsArray = foundBeacons.split(',');
+    //console.log('resumed' + foundBeaconsArray[i]);
+    for (var i = 1; i < foundBeaconsArray.length; i++) {
+        console.log(foundBeaconsArray[i]);
+    logToDevice(foundBeaconsArray[i]);
+    postToCloudURLs(foundBeaconsArray[i]);
     }
 }
