@@ -4,30 +4,31 @@
   "displayName": "Tilt Hydrometer Framework7",
   "cordova": {
     "platforms": [
-      "ios",
-      "android"
+      "android",
+      "ios"
     ],
     "plugins": {
-      "cordova-plugin-whitelist": {},
-      "com.unarin.cordova.beacon": {},
+      "cordova-plugin-statusbar": {},
       "cordova-plugin-file": {},
       "cordova-plugin-splashscreen": {},
+      "cordova-plugin-android-permissions": {},
       "cordova-plugin-email-composer": {},
-      "cordova-plugin-statusbar": {},
-      "cordova-plugin-android-permissions": {}
+      "cordova-plugin-android-support-v4": {},
+      "cordova-plugin-device": {},
+      "com.unarin.cordova.beacon": {}
     }
   },
   "dependencies": {
-    "com.unarin.cordova.beacon": "git+https://github.com/petermetz/cordova-plugin-ibeacon.git",
-    "cordova-android": "^7.0.0",
-    "cordova-ios": "^4.5.4",
-    "cordova-plugin-android-permissions": "^1.0.0",
-    "cordova-plugin-device": "^2.0.2",
-    "cordova-plugin-email-composer": "^0.8.15",
-    "cordova-plugin-file": "^6.0.1",
+    "com.unarin.cordova.beacon": "https://github.com/petermetz/cordova-plugin-ibeacon.git",
+    "cordova-android": "^7.1.4",
+    "cordova-ios": "^4.5.5",
+    "cordova-plugin-android-permissions": "~1.0.0",
+    "cordova-plugin-android-support-v4": "^21.0.1",
+    "cordova-plugin-device": "~2.0.2",
+    "cordova-plugin-email-composer": "git+https://github.com/katzer/cordova-plugin-email-composer.git",
+    "cordova-plugin-file": "~6.0.1",
     "cordova-plugin-ibeacon": "^3.6.1",
-    "cordova-plugin-splashscreen": "^5.0.2",
-    "cordova-plugin-statusbar": "^2.4.2",
-    "cordova-plugin-whitelist": "~1.2.0"
+    "cordova-plugin-splashscreen": "~5.0.2",
+    "cordova-plugin-statusbar": "~2.4.2"
   }
 }

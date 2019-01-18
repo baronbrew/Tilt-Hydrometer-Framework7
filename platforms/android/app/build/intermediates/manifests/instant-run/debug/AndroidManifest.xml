@@ -6,8 +6,8 @@
     android:versionName="1.0.8" >
 
     <uses-sdk
-        android:minSdkVersion="16"
-        android:targetSdkVersion="26" />
+        android:minSdkVersion="19"
+        android:targetSdkVersion="27" />
 
     <supports-screens
         android:anyDensity="true"
@@ -18,12 +18,11 @@
         android:xlargeScreens="true" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:debuggable="true"
@@ -46,6 +45,16 @@
             </intent-filter>
         </activity>
 
+        <provider
+            android:name="de.appplant.cordova.emailcomposer.Provider"
+            android:authorities="com.baronbrew.tilthydrometerf7.emailcomposer.provider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/emailcomposer_provider_paths" />
+        </provider>
+
         <receiver android:name="org.altbeacon.beacon.startup.StartupBroadcastReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -59,11 +68,7 @@
             android:enabled="true"
             android:exported="true"
             android:isolatedProcess="false"
-            android:label="iBeacon" >
-            <meta-data
-                android:name="longScanForcingEnabled"
-                android:value="true" />
-        </service>
+            android:label="iBeacon" />
         <service
             android:name="org.altbeacon.beacon.BeaconIntentProcessor"
             android:enabled="true" >
@@ -77,15 +82,6 @@
             </intent-filter>
         </service>
 
-        <provider
-            android:name="de.appplant.cordova.emailcomposer.Provider"
-            android:authorities="com.baronbrew.tilthydrometerf7.provider"
-            android:exported="false"
-            android:grantUriPermissions="true" >
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/emailcomposer_provider_paths" />
-        </provider>
         <provider
             android:name="com.android.tools.ir.server.InstantRunContentProvider"
             android:authorities="com.baronbrew.tilthydrometerf7.com.android.tools.ir.server.InstantRunContentProvider"

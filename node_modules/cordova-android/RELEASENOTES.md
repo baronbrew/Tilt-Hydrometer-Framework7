@@ -20,6 +20,50 @@
 -->
 ## Release Notes for Cordova (Android) ##
 
+### 7.1.4 (Nov 22, 2018)
+
+* Update android-versions to `1.4.0`, with added support for Android Pie ([#573](https://github.com/apache/cordova-android/pull/573))
+* Output current package name if package name can't be validated ([#567](https://github.com/apache/cordova-android/pull/567))
+* Resolve issue with plugin `target-dir="*app*"` subdirs ([#572](https://github.com/apache/cordova-android/pull/572))
+
+### 7.1.3 (Nov 19, 2018)
+
+* [GH-495](https://github.com/apache/cordova-android/pull/495) Incorrect default sdk version issue fix
+* [GH-496](https://github.com/apache/cordova-android/pull/496) update comments in `build.gradle`
+* [GH-539](https://github.com/apache/cordova-android/pull/539) Fix dest overwrite, in case of of plugin `source-file` element with `target-dir` that does not need remapping
+* [GH-540](https://github.com/apache/cordova-android/issues/540) support plugin `source-file` element with any app `target-dir` value
+* [GH-547](https://github.com/apache/cordova-android/issues/547) Compatibility of old plugins with non-Java `source-file` entries (individual files)
+* [GH-551](https://github.com/apache/cordova-android/pull/551) add missing cast for cdvMinSdkVersion to `build.gradle`
+* [GH-552](https://github.com/apache/cordova-android/issues/552) check for `build-extras.gradle` in the parent app directory
+
+### 7.1.2 (Nov 08, 2018)
+* [CB-14127](https://issues.apache.org/jira/browse/CB-14127): Always put the Google repo above jcenter
+* [CB-14165](https://issues.apache.org/jira/browse/CB-14165): Emulator: handle "device still connecting" error (#457)
+* [CB-14125](https://issues.apache.org/jira/browse/CB-14125): Increase old plugin compatibility
+* [CB-13830](https://issues.apache.org/jira/browse/CB-13830): Add handlers for plugins that use non-Java source files, such as Camera
+* [CB-14038](https://issues.apache.org/jira/browse/CB-14038): fix false positive detecting project type
+
+### 7.1.1 (Jul 11, 2018)
+* Fix unsafe property access in run.js (#445)
+* Emit log event instead of logging directly (#452)
+* [CB-14101](https://issues.apache.org/jira/browse/CB-14101) Fix Java version check for Java >= 9 (#446)
+* [CB-14127](https://issues.apache.org/jira/browse/CB-14127) (android) Move google maven repo ahead of jcenter
+* [CB-13923](https://issues.apache.org/jira/browse/CB-13923) (android) fix -1 length for compressed files
+* [CB-14145](https://issues.apache.org/jira/browse/CB-14145) use cordova-common@2.2.5 and update other dependencies to resolve `npm audit` warnings
+* [CB-9366](https://issues.apache.org/jira/browse/CB-9366) log error.stack in cordova.js
+
+### 7.1.0 (Feb 20, 2018)
+* [CB-13879](https://issues.apache.org/jira/browse/CB-13879) updated gradle tools dependency to 3.0.1 for project template
+* [CB-13831](https://issues.apache.org/jira/browse/CB-13831) Update `android-versions` to 1.3.0 to support SDK 27.
+* [CB-13800](https://issues.apache.org/jira/browse/CB-13800) Drop pre-KitKat specific code
+* [CB-13724](https://issues.apache.org/jira/browse/CB-13724) Updated the **Android** Tooling required for the latest version on both the test project, and the template
+* [CB-13724](https://issues.apache.org/jira/browse/CB-13724) Bump Target SDK to API 27
+* [CB-13646](https://issues.apache.org/jira/browse/CB-13646) Using the deprecated `NDK` by default breaks the build.  Crosswalk users need to specify the Gradle parameters to keep it working.
+* [CB-12218](https://issues.apache.org/jira/browse/CB-12218) Fix consistency of null result message
+* [CB-13571](https://issues.apache.org/jira/browse/CB-13571) Prevent crash with unrecognized **Android** version
+* [CB-13721](https://issues.apache.org/jira/browse/CB-13721) Fix build apps that use `cdvHelpers.getConfigPreference`
+* [CB-13621](https://issues.apache.org/jira/browse/CB-13621) Wrote similar warning to [CB-12948](https://issues.apache.org/jira/browse/CB-12948) on **iOS**. We no longer support `cordova update` command.
+
 ### 7.0.0 (Nov 30, 2017)
 * [CB-13612](https://issues.apache.org/jira/browse/CB-13612) Fix the remapper so that XML files copy over and the Camera works again.
 * [CB-13741](https://issues.apache.org/jira/browse/CB-13741) Bump `package.json` so we can install plugins

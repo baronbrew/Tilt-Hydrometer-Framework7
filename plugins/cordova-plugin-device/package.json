@@ -2,18 +2,19 @@
   "_args": [
     [
       {
-        "raw": "cordova-plugin-device@*",
+        "raw": "cordova-plugin-device",
         "scope": null,
         "escapedName": "cordova-plugin-device",
         "name": "cordova-plugin-device",
-        "rawSpec": "*",
-        "spec": "*",
-        "type": "range"
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
       },
       "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7"
     ]
   ],
-  "_from": "cordova-plugin-device@*",
+  "_from": "cordova-plugin-device@latest",
+  "_hasShrinkwrap": false,
   "_id": "cordova-plugin-device@2.0.2",
   "_inCache": true,
   "_location": "/cordova-plugin-device",
@@ -29,22 +30,21 @@
   "_npmVersion": "3.10.10",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "cordova-plugin-device@*",
+    "raw": "cordova-plugin-device",
     "scope": null,
     "escapedName": "cordova-plugin-device",
     "name": "cordova-plugin-device",
-    "rawSpec": "*",
-    "spec": "*",
-    "type": "range"
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
   },
   "_requiredBy": [
-    "#USER",
-    "/"
+    "#USER"
   ],
   "_resolved": "https://registry.npmjs.org/cordova-plugin-device/-/cordova-plugin-device-2.0.2.tgz",
   "_shasum": "fc08f3722e67eef7b6c67bfc99a83df6add0baba",
   "_shrinkwrap": null,
-  "_spec": "cordova-plugin-device@*",
+  "_spec": "cordova-plugin-device",
   "_where": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7",
   "author": {
     "name": "Apache Software Foundation"

@@ -1,14 +1,6 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
   {
-    "id": "cordova-plugin-device.device",
-    "file": "plugins/cordova-plugin-device/www/device.js",
-    "pluginId": "cordova-plugin-device",
-    "clobbers": [
-      "device"
-    ]
-  },
-  {
     "id": "com.unarin.cordova.beacon.underscorejs",
     "file": "plugins/com.unarin.cordova.beacon/www/lib/underscore-min-1.6.js",
     "pluginId": "com.unarin.cordova.beacon",
@@ -57,6 +49,30 @@ module.exports = [
     "file": "plugins/com.unarin.cordova.beacon/www/model/BeaconRegion.js",
     "pluginId": "com.unarin.cordova.beacon",
     "runs": true
+  },
+  {
+    "id": "cordova-plugin-android-permissions.Permissions",
+    "file": "plugins/cordova-plugin-android-permissions/www/permissions-dummy.js",
+    "pluginId": "cordova-plugin-android-permissions",
+    "clobbers": [
+      "cordova.plugins.permissions"
+    ]
+  },
+  {
+    "id": "cordova-plugin-device.device",
+    "file": "plugins/cordova-plugin-device/www/device.js",
+    "pluginId": "cordova-plugin-device",
+    "clobbers": [
+      "device"
+    ]
+  },
+  {
+    "id": "cordova-plugin-email-composer.EmailComposer",
+    "file": "plugins/cordova-plugin-email-composer/www/email_composer.js",
+    "pluginId": "cordova-plugin-email-composer",
+    "clobbers": [
+      "cordova.plugins.email"
+    ]
   },
   {
     "id": "cordova-plugin-file.DirectoryEntry",
@@ -240,42 +256,26 @@ module.exports = [
     ]
   },
   {
-    "id": "cordova-plugin-email-composer.EmailComposer",
-    "file": "plugins/cordova-plugin-email-composer/www/email_composer.js",
-    "pluginId": "cordova-plugin-email-composer",
-    "clobbers": [
-      "cordova.plugins.email",
-      "plugin.email"
-    ]
-  },
-  {
     "id": "cordova-plugin-statusbar.statusbar",
     "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
     "pluginId": "cordova-plugin-statusbar",
     "clobbers": [
       "window.StatusBar"
     ]
-  },
-  {
-    "id": "cordova-plugin-android-permissions.Permissions",
-    "file": "plugins/cordova-plugin-android-permissions/www/permissions-dummy.js",
-    "pluginId": "cordova-plugin-android-permissions",
-    "clobbers": [
-      "cordova.plugins.permissions"
-    ]
   }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
+  "com.unarin.cordova.beacon": "3.4.1",
+  "cordova-plugin-android-permissions": "1.0.0",
+  "cordova-plugin-android-support-v4": "21.0.1",
   "cordova-plugin-device": "2.0.2",
-  "com.unarin.cordova.beacon": "3.6.1",
-  "cordova-plugin-whitelist": "1.2.2",
+  "cordova-plugin-email-composer": "0.9.1",
   "cordova-plugin-file": "6.0.1",
   "cordova-plugin-splashscreen": "5.0.2",
-  "cordova-plugin-email-composer": "0.8.15",
   "cordova-plugin-statusbar": "2.4.2",
-  "cordova-plugin-android-permissions": "1.0.0"
+  "cordova-plugin-whitelist": "1.3.3"
 };
 // BOTTOM OF METADATA
 });

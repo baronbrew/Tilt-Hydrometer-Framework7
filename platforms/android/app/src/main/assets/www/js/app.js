@@ -11,7 +11,7 @@ var app  = new Framework7({
       overlay: true,
       iosOverlaysWebView: true,
       androidOverlaysWebView: false,
-      enabled: false,
+      enabled: true,
       iosTextColor: 'white',
       androidTextColor: 'white',
       iosBackgroundColor: 'black',
@@ -169,9 +169,23 @@ $$(document).on('deviceready', function() {
               regions[i].uuid);
              //console.log(beaconRegion);
           // Start ranging.
-          locationManager.startRangingBeaconsInRegion(beaconRegion);      }
+          locationManager.startRangingBeaconsInRegion(beaconRegion);
+        }
 
   }
+
+  function stopScan() {
+    // Start ranging beacons.
+    for (var i in regions) {
+        var beaconRegion = new locationManager.BeaconRegion(
+            i,
+            regions[i].uuid);
+           //console.log(beaconRegion);
+        // Start ranging.
+        locationManager.stopRangingBeaconsInRegion(beaconRegion);
+      }
+
+}
 
   function toggleUnits(color) {
     var displaytempunits = localStorage.getItem('displayTempunits-' + color)||"°F";

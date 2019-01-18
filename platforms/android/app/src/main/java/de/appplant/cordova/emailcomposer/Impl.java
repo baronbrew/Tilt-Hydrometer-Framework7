@@ -21,10 +21,14 @@ package de.appplant.cordova.emailcomposer;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.os.Parcelable;
 import android.text.Html;
 import android.util.Log;
 import android.util.Patterns;
@@ -33,10 +37,17 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
+import static android.content.Intent.ACTION_SENDTO;
+import static android.content.Intent.EXTRA_INITIAL_INTENTS;
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK;
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+import static android.content.Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP;
 import static de.appplant.cordova.emailcomposer.EmailComposer.LOG_TAG;
 
+@SuppressWarnings("Convert2Diamond")
 class Impl {
 
     // The default mailto: scheme.
@@ -55,17 +66,29 @@ class Impl {
     }
 
     /**
-     * Tells if the device has the capability to send emails.
+     * The intent with the containing email properties.
      *
-     * @param id The app id.
+     * @param params    The email properties like subject or body.
+     * @return          The resulting intent.
      */
-    boolean[] canSendMail (String id) {
-        // is possible with specified app
-        boolean withScheme = isAppInstalled(id);
-        // is possible in general
-        boolean isPossible = isEmailAccountConfigured();
+    Intent getDraft (JSONObject params) {
+        Intent draft  = getFilledEmailIntent(params);
+        String app    = params.optString("app", MAILTO_SCHEME);
+        String header = params.optString("chooserHeader", "Open with");
 
-        return new boolean[] { isPossible, withScheme };
+        if (!app.equals(MAILTO_SCHEME) && isAppInstalled(app)) {
+            return draft.setPackage(app);
+        }
+
+        List<Intent> targets = new ArrayList<>();
+
+        for (String clientId : getEmailClientIds()) {
+            Intent target = (Intent) draft.clone();
+            targets.add(target.setPackage(clientId));
+        }
+
+        return Intent.createChooser(targets.remove(0), header)
+                .putExtra(EXTRA_INITIAL_INTENTS, targets.toArray(new Parcelable[0]));
     }
 
     /**
@@ -74,36 +97,28 @@ class Impl {
      * @param params    The email properties like subject or body.
      * @return          The resulting intent.
      */
-    Intent getDraft (JSONObject params) {
-        Intent mail = getEmailIntent();
-        String app  = params.optString("app", MAILTO_SCHEME);
+    private Intent getFilledEmailIntent (JSONObject params) {
+        Intent draft = getEmailIntent();
 
         if (params.has("subject"))
-            setSubject(params, mail);
+            setSubject(params, draft);
 
         if (params.has("body"))
-            setBody(params, mail);
+            setBody(params, draft);
 
         if (params.has("to"))
-            setRecipients(params, mail);
+            setRecipients(params, draft);
 
         if (params.has("cc"))
-            setCcRecipients(params, mail);
+            setCcRecipients(params, draft);
 
         if (params.has("bcc"))
-            setBccRecipients(params, mail);
+            setBccRecipients(params, draft);
 
         if (params.has("attachments"))
-            setAttachments(params, mail);
+            setAttachments(params, draft);
 
-        if (params.has("type"))
-            setType(params, mail);
-
-        if (!app.equals(MAILTO_SCHEME) && isAppInstalled(app)) {
-            mail.setPackage(app);
-        }
-
-        return mail;
+        return draft;
     }
 
     /**
@@ -124,7 +139,7 @@ class Impl {
      * @param draft     The intent to send.
      */
     private void setBody (JSONObject params, Intent draft) {
-        String body       = params.optString("body");
+        String body       = fixLineBreaks(params.optString("body"));
         boolean isHTML    = params.optBoolean("isHtml");
         CharSequence text = isHTML ? Html.fromHtml(body) : body;
 
@@ -189,7 +204,6 @@ class Impl {
      * @param draft     The intent to send.
      */
     private void setAttachments (JSONObject params, Intent draft) {
-
         JSONArray attachments = params.optJSONArray("attachments");
         ArrayList<Uri> uris   = new ArrayList<Uri>();
         AssetUtil assets      = new AssetUtil(ctx);
@@ -203,7 +217,7 @@ class Impl {
             return;
 
         draft.setAction(Intent.ACTION_SEND_MULTIPLE)
-                .setType("message/rfc822")
+                .setType("*/*")
                 .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 .putExtra(Intent.EXTRA_STREAM, uris);
 
@@ -215,22 +229,12 @@ class Impl {
     }
 
     /**
-     * Setter for the email type.
-     *
-     * @param params    The email properties like subject or body.
-     * @param draft     The intent to send.
-     */
-    private void setType (JSONObject params, Intent draft) {
-        String type = params.optString("type", "message/rfc822");
-        draft.setType(type);
-    }
-
-    /**
      * If email apps are available.
      *
      * @return true if available, otherwise false
      */
-    private boolean isEmailAccountConfigured() {
+    @SuppressLint("MissingPermission")
+    boolean isEmailAccountConfigured() {
         AccountManager am  = AccountManager.get(ctx);
 
         try {
@@ -249,12 +253,44 @@ class Impl {
     }
 
     /**
+     * Get the info for all available email client activities.
+     */
+    private List<ActivityInfo> getEmailClients() {
+        Intent           intent = getEmailIntent();
+        PackageManager       pm = ctx.getPackageManager();
+        List<ResolveInfo>  apps = pm.queryIntentActivities(intent, 0);
+        List<ActivityInfo> list = new ArrayList<>();
+
+        for (ResolveInfo app : apps) {
+            if (app.activityInfo.isEnabled()) {
+                list.add(app.activityInfo);
+            }
+        }
+
+        return list;
+    }
+
+    /**
+     * Get package IDs for all available email clients.
+     */
+    List<String> getEmailClientIds() {
+        List<String> ids = new ArrayList<>();
+
+        for (ActivityInfo app : getEmailClients()) {
+            ids.add(app.packageName);
+        }
+
+        return ids;
+    }
+
+    /**
      * Ask the package manager if the app is installed on the device.
      *
      * @param id    The app id.
-     * @return      true if yes otherwise false.
+     *
+     * @return true if yes otherwise false.
      */
-    private boolean isAppInstalled (String id) {
+    boolean isAppInstalled (String id) {
 
         if (id.equalsIgnoreCase(MAILTO_SCHEME)) {
             Intent intent     = getEmailIntent();
@@ -265,8 +301,9 @@ class Impl {
         }
 
         try {
-            ctx.getPackageManager().getPackageInfo(id, 0);
-            return true;
+            return ctx.getPackageManager()
+                    .getPackageInfo(id, 0)
+                    .applicationInfo.enabled;
         } catch (PackageManager.NameNotFoundException e) {
             return false;
         }
@@ -278,12 +315,23 @@ class Impl {
      * @return intent
      */
     private static Intent getEmailIntent() {
-        Intent intent = new Intent(Intent.ACTION_SENDTO,
-                Uri.parse(MAILTO_SCHEME));
+        Intent intent = new Intent(ACTION_SENDTO, Uri.parse(MAILTO_SCHEME));
 
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(FLAG_ACTIVITY_PREVIOUS_IS_TOP);
 
         return intent;
+    }
+
+    /**
+     * Fix line breaks within the provided text.
+     *
+     * @param text The text where to fix the line breaks.
+     *
+     * @return The fixed text.
+     */
+    private static String fixLineBreaks (String text) {
+        return text.replaceAll("\r\n", "\n");
     }
 
 }
