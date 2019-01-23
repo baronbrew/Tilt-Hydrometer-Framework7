@@ -3,8 +3,8 @@
     package="com.baronbrew.tilthydrometerf7"
     android:hardwareAccelerated="true"
     android:targetSandboxVersion="2"
-    android:versionCode="10009"
-    android:versionName="1.0.9" >
+    android:versionCode="10011"
+    android:versionName="1.0.11" >
 
     <uses-sdk
         android:minSdkVersion="19"

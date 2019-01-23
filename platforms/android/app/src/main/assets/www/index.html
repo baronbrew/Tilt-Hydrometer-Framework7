@@ -252,7 +252,7 @@
               </div>
               </div>
               <div class="accordion-item">
-                  <div class="accordion-item-toggle"><button class="button button-round">3rd Party Cloud Logging...</button></div>
+                  <div class="accordion-item-toggle"><button class="button button-round button-raised">3rd Party Cloud Logging...</button></div>
                   <p><a href="#" data-popover=".customcloudurl-popover" class="popover-open"><i class="f7-icons size-15">info</i> More information...</a></p>
               <div class="popover customcloudurl-popover">
               <div class="popover-inner padding">
@@ -295,7 +295,7 @@
             <div class="content-block-inner">
               <p class="no-margin-top">With Water:</p>
                 <p class="round no-margin-top">
-                    <button class="button button-round" id="tareinwater-{{Color}}-1.000" onclick="addSGPoints(this)">Calibrate in Water</button>
+                    <button class="button button-round button-fill button-raised" id="tareinwater-{{Color}}-1.000" onclick="addSGPoints(this)">Calibrate in Water</button>
                 </p>
                 <p>With Known Gravity:</p>
           <div class="item-title floating-label">Enter uncalibrated (Tilt) point:</div>
@@ -303,14 +303,14 @@
           <input type="number" id="uncalSG-{{Color}}" placeholder="1.002">
           </div>
           <p class="round">
-              <button class="button button-round" id="getuncalibratedSGpoint-{{Color}}" onclick="getUncalibratedSGPoint(this)">Get Current Gravity</button>
+              <button class="button button-round button-raised" id="getuncalibratedSGpoint-{{Color}}" onclick="getUncalibratedSGPoint(this)">Get Current Gravity</button>
           </p>
           <div class="item-title floating-label">Enter actual (known) point:</div>
           <div class="item-input-wrap">
           <input type="number" id="actualSG-{{Color}}" placeholder="1.000">
           </div>
           <p class="round">
-              <button class="button button-round" id="addSGpoint-{{Color}}" onclick="addSGPoints(this)">Calibrate in Known Gravity</button>
+              <button class="button button-round button-fill button-raised" id="addSGpoint-{{Color}}" onclick="addSGPoints(this)">Calibrate in Known</button>
             </p>
             <div class="data-table">
                 <table>

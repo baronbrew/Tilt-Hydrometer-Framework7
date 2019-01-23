@@ -68,8 +68,8 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="KeepRunning" value="true" />
-    <preference name="com.unarin.cordova.beacon.android.altbeacon.ForegroundScanPeriod" value="2500" />
-    <preference name="com.unarin.cordova.beacon.android.altbeacon.ForegroundBetweenScanPeriod" value="2500" />
+    <preference name="com.unarin.cordova.beacon.android.altbeacon.ForegroundScanPeriod" value="2100" />
+    <preference name="com.unarin.cordova.beacon.android.altbeacon.ForegroundBetweenScanPeriod" value="5900" />
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#000000" />
     <preference name="StatusBarStyle" value="lightcontent" />

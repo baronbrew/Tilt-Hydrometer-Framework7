@@ -10,12 +10,9 @@ var app  = new Framework7({
   statusbar: {
       overlay: true,
       iosOverlaysWebView: true,
-      androidOverlaysWebView: false,
-      enabled: true,
+      enabled: false,//disable for android
       iosTextColor: 'white',
-      androidTextColor: 'white',
       iosBackgroundColor: 'black',
-      androidBackgroundColor: 'black',
   },
   panel: {
     swipe: 'both',
@@ -68,6 +65,7 @@ $$(document).on('deviceready', function() {
           window.addEventListener('orientationchange', doOnOrientationChange);
           //detect when app is opened from background
           document.addEventListener('resume', onResume, false);
+          document.addEventListener("pause", onPause, false);
           console.log(device);
           if (device.platform == 'Android' || device.platform == 'amazon-fireos'){
           setInterval(function(){ watchBluetooth(); }, 30000);//check if tilts are connected every 30 seconds, toggle bluetooth if not
@@ -131,9 +129,9 @@ $$(document).on('deviceready', function() {
           console.log("skipping toggle, Android 4.x or iOS");
       }
       else {
+          bluetoothToggled = true;
           locationManager.disableBluetooth();
           console.log('toggleBluetooth');
-          bluetoothToggled = true;
           //wait 3.5s then enable
           setTimeout(function(){
             locationManager.enableBluetooth();
@@ -159,6 +157,7 @@ $$(document).on('deviceready', function() {
     }
 }
 
+
   function startScan() {
       console.log("startScan");
       scanningToast = app.toast.create({text: 'Scanning for nearby Tilts...<br>Ensure Bluetooth and Location Services are enabled and Tilt is floating.', icon: '<i class="material-icons">bluetooth_searching</i>', position: 'bottom', }).open();
@@ -171,11 +170,10 @@ $$(document).on('deviceready', function() {
           // Start ranging.
           locationManager.startRangingBeaconsInRegion(beaconRegion);
         }
-
   }
 
   function stopScan() {
-    // Start ranging beacons.
+    // Stop ranging beacons.
     for (var i in regions) {
         var beaconRegion = new locationManager.BeaconRegion(
             i,
@@ -184,7 +182,6 @@ $$(document).on('deviceready', function() {
         // Start ranging.
         locationManager.stopRangingBeaconsInRegion(beaconRegion);
       }
-
 }
 
   function toggleUnits(color) {
@@ -231,6 +228,8 @@ $$(document).on('deviceready', function() {
     
 //adds color specific attributes
   function addtoScan(beacon){
+    //tilt found, close scanning for tilts message
+    scanningToast.close();
     //add time since last update
     beacon.lastUpdate = localStorage.getItem('lastUpdate-' + beacon.Color)||beacon.timeStamp;
     //make sure tilt card is visible
@@ -245,8 +244,6 @@ $$(document).on('deviceready', function() {
         }
     var date = new Date(beacon.timeStamp);
     beacon.displaytimeStamp = date.toLocaleString();
-    //tilt found, close scanning for tilts message
-    scanningToast.close();
     //add beer name
     beacon.Beername = localStorage.getItem('beerName-' + beacon.Color)||'Untitled';
     //add calibrated SG and Temp (F) for cloud posting
@@ -339,7 +336,7 @@ $$(document).on('deviceready', function() {
                   //console.log(beacons);
               }
           }
-          if (pluginResult.region.identifier == 7){//update display after each scan period regardless if Beacon found
+          if (pluginResult.region.identifier == 0){//update display after each scan period regardless if Beacon found
               updateBeacons();
           }
       };
@@ -351,6 +348,11 @@ $$(document).on('deviceready', function() {
       // This is needed on iOS 8.
       locationManager.requestWhenInUseAuthorization();
       startScan();
+      //update beacons even if nothing scanned
+      updateInterval = setInterval(function(){ 
+          updateBeacons();
+        }, 1000);
+        
   }
     //populate list of logging files
     var listOfCSVFiles = localStorage.getItem('listOfCSVFiles')||false;//set to false if no csv files exist
@@ -546,10 +548,9 @@ $$(document).on('deviceready', function() {
         totalSecondsAgo += SecondsAgo;
     }
     var averageSecondsAgo = (totalSecondsAgo / (inRangeBeaconsArray.length - 1)).toFixed(0);
-    if (averageSecondsAgo == 15 || averageSecondsAgo == 30 || averageSecondsAgo == 60){//toggle bluetooth every 15-30 seconds when Android bluetooth fails   
+    if (averageSecondsAgo > 60 && averageSecondsAgo < 65){//toggle bluetooth after 60 seconds disconnected when Android bluetooth fails   
         if (!bluetoothToggled){
         toggleBluetooth();
-        bluetoothToggled == true;
         }
     }
     //initialize display units
@@ -564,7 +565,7 @@ $$(document).on('deviceready', function() {
     $$('#caldisplayTemp+displayTempunits' + beacon.Color).html(String(beacon.caldisplayTemp) + beacon.displayTempunits);
     $$('#numberSecondsAgo' + beacon.Color).html(beacon.numberSecondsAgo);
     $$('#displayRSSI' + beacon.Color).html(beacon.displayRSSI);
-    $$('#displaytimeStamp' + beacon.Color).html(beacon.displaytimeStamp + ' (v1.0.8)');
+    $$('#displaytimeStamp' + beacon.Color).html(beacon.displaytimeStamp + ' v1.0.11');
     $$('#percentScaleSG' + beacon.Color).css('width', String((beacon.uncalSG - 0.980) / (1.150 - 0.980) * 100) + "%");
     $$('#percentScaleTemp' + beacon.Color).css('width', String((beacon.uncalTemp - 0) / (185 - 0) * 100) + "%");
     //update Tilt objects
@@ -1691,10 +1692,23 @@ function emailClickedCSV(fileName, color){
 }
 
 function onResume() {
-    toggleBluetooth();
+    //resume scanning, needed for Android 8+ devices
+    if ((device.platform == "Android") && (Number(device.version[0]) > 7)) {
+        startScan();
+        updateInterval = setInterval(function(){ updateBeacons(); }, 1000);
+    }
+    //toggleBluetooth();
     scanningToast = app.toast.create({text: 'Scanning for nearby Tilts...<br>Ensure Bluetooth and Location Services are enabled and Tilt is floating.', icon: '<i class="material-icons">bluetooth_searching</i>', position: 'bottom', }).open();
     //set resumed flag to trigger logging as soon as tilts are in range
     resumed = true;
+}
+
+function onPause() {
+    //Android 8+ doesn't allow scanning to continue in background
+    if ((device.platform == "Android") && (Number(device.version[0]) > 7)) {
+        stopScan();
+        clearInterval(updateInterval);
+    }
 }
 
 function watchBluetooth() {//function run every 30 seconds on Android and Fire devices
