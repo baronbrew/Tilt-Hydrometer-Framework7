@@ -65,6 +65,6 @@
     <plugin name="cordova-plugin-android-support-v4" spec="^21.0.1" />
     <plugin name="cordova-plugin-device" spec="~2.0.2" />
     <plugin name="com.unarin.cordova.beacon" spec="https://github.com/petermetz/cordova-plugin-ibeacon.git" />
-    <engine name="android" spec="^7.1.4" />
     <engine name="ios" spec="^4.5.5" />
+    <engine name="android" spec="^7.1.4" />
 </widget>

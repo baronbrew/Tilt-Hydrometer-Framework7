@@ -14,6 +14,13 @@ var app  = new Framework7({
       iosTextColor: 'white',
       iosBackgroundColor: 'black',
   },
+  touch: {
+    tapHold: true,
+    fastClicks:true,
+    materialRipple:true,
+    activeState: true,
+    disableContextMenu: false,
+    },
   panel: {
     swipe: 'both',
   },

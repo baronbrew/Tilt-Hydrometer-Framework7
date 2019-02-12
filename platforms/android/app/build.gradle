@@ -26,11 +26,10 @@ buildscript {
             url "https://maven.google.com"
         }
         jcenter()
-        google()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.0'
+        classpath 'com.android.tools.build:gradle:3.0.1'
     }
 }
 
@@ -167,8 +166,6 @@ android {
     defaultConfig {
         versionCode cdvVersionCode ?: new BigInteger("" + privateHelpers.extractIntFromManifest("versionCode"))
         applicationId privateHelpers.extractStringFromManifest("package")
-        minSdkVersion 19
-        targetSdkVersion 27
 
         if (cdvMinSdkVersion != null) {
             minSdkVersion cdvMinSdkVersion

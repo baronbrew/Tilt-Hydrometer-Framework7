@@ -9,9 +9,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <provider android:authorities="${applicationId}.emailcomposer.provider" android:exported="false" android:grantUriPermissions="true" android:name="de.appplant.cordova.emailcomposer.Provider">
-            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/emailcomposer_provider_paths" />
-        </provider>
         <receiver android:name="org.altbeacon.beacon.startup.StartupBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -27,10 +24,14 @@
                 <action android:name="com.unarin.cordova.beacon.IBeaconPlugin.DID_MONITORING" />
             </intent-filter>
         </service>
+        <provider android:authorities="${applicationId}.emailcomposer.provider" android:exported="false" android:grantUriPermissions="true" android:name="de.appplant.cordova.emailcomposer.Provider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/emailcomposer_provider_paths" />
+        </provider>
     </application>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-sdk android:minSdkVersion="19" android:targetSdkVersion="27" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 </manifest>
