@@ -60,6 +60,10 @@
         "source": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/res/drawable-land-hdpi/screen.png"
     },
     {
+        "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/release/mipmap-xxxhdpi_icon.png.flat",
+        "source": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/res/mipmap-xxxhdpi/icon.png"
+    },
+    {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/release/mipmap-xxhdpi_icon.png.flat",
         "source": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/res/mipmap-xxhdpi/icon.png"
     },

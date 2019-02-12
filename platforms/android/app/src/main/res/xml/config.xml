@@ -64,6 +64,7 @@
     <icon density="hdpi" src="res/icons/android/mipmap-hdpi/ic_launcher.png" />
     <icon density="xhdpi" src="res/icons/android/mipmap-xhdpi/ic_launcher.png" />
     <icon density="xxhdpi" src="res/icons/android/mipmap-xxhdpi/ic_launcher.png" />
+    <icon density="xxxhdpi" src="res/icons/android/mipmap-xxxhdpi/ic_launcher.png" />
     <preference name="loglevel" value="DEBUG" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="ShowSplashScreenSpinner" value="false" />

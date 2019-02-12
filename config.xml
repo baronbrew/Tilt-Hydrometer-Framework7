@@ -46,7 +46,7 @@
         <icon density="hdpi" src="res/icons/android/mipmap-hdpi/ic_launcher.png" />
         <icon density="xhdpi" src="res/icons/android/mipmap-xhdpi/ic_launcher.png" />
         <icon density="xxhdpi" src="res/icons/android/mipmap-xxhdpi/ic_launcher.png" />
-        <icon density="xxhdpi" src="res/icons/android/mipmap-xxhdpi/ic_launcher.png" />
+        <icon density="xxxhdpi" src="res/icons/android/mipmap-xxxhdpi/ic_launcher.png" />
     </platform>
     <platform name="ios">
         <splash src="/res/screens/ios/Default@2x~universal~anyany.png" />

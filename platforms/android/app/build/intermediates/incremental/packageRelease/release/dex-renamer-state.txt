@@ -1,4 +1,4 @@
-#Tue Feb 12 13:08:05 PST 2019
+#Tue Feb 12 13:18:07 PST 2019
 base.0=/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/transforms/dex/release/0
 path.0=classes.dex
 renamed.0=classes.dex
