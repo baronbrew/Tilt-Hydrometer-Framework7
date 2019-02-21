@@ -572,7 +572,7 @@ $$(document).on('deviceready', function() {
     $$('#caldisplayTemp+displayTempunits' + beacon.Color).html(String(beacon.caldisplayTemp) + beacon.displayTempunits);
     $$('#numberSecondsAgo' + beacon.Color).html(beacon.numberSecondsAgo);
     $$('#displayRSSI' + beacon.Color).html(beacon.displayRSSI);
-    $$('#displaytimeStamp' + beacon.Color).html(beacon.displaytimeStamp + ' v1.0.11');
+    $$('#displaytimeStamp' + beacon.Color).html(beacon.displaytimeStamp + ' v1.0.12');
     $$('#percentScaleSG' + beacon.Color).css('width', String((beacon.uncalSG - 0.980) / (1.150 - 0.980) * 100) + "%");
     $$('#percentScaleTemp' + beacon.Color).css('width', String((beacon.uncalTemp - 0) / (185 - 0) * 100) + "%");
     //update Tilt objects

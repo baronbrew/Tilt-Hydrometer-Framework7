@@ -79,4 +79,7 @@
     <preference name="KeepRunning" value="true" />
     <preference name="Orientation" value="all" />
     <preference name="AutoHideSplashScreen" value="true" />
+    <feature name="NativeStorage">
+        <param name="ios-package" value="NativeStorage" />
+    </feature>
 </widget>

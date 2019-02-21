@@ -27,7 +27,8 @@ var app  = new Framework7({
   // App root data
   data: function () {
     return {
-      defaultCloudURL : 'https://script.google.com/a/baronbrew.com/macros/s/AKfycbydNOcB-_3RB3c-7sOTI-ZhTnN43Ye1tt0EFvvMxTxjdbheaw/exec'
+      defaultCloudURL : 'https://script.google.com/a/baronbrew.com/macros/s/AKfycbydNOcB-_3RB3c-7sOTI-ZhTnN43Ye1tt0EFvvMxTxjdbheaw/exec',
+      tiltColors : ['RED', 'GREEN', 'BLACK', 'PURPLE', 'ORANGE', 'BLUE', 'YELLOW', 'PINK']
     };
   },
   // App root methods
@@ -64,6 +65,10 @@ var permissions;
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
   console.log("Device is ready!");
+          //restore settings if needed
+          app.data.tiltColors.forEach(restoreLoggingSettings);
+          app.data.tiltColors.forEach(restoreCalibrationPoints);
+          app.data.tiltColors.forEach(restorePreferredUnits);
           // Specify a shortcut for the location manager holding the iBeacon functions.
           window.locationManager = cordova.plugins.locationManager;
           // Start tracking beacons
@@ -135,14 +140,16 @@ $$(document).on('deviceready', function() {
       if ((device.platform == "Android") && (device.version[0] == "4") || device.platform == 'iOS') {
           console.log("skipping toggle, Android 4.x or iOS");
       }
-      else {
+      else if (bluetoothToggled == false) {
           bluetoothToggled = true;
           locationManager.disableBluetooth();
+          stopScan();
           console.log('toggleBluetooth');
           //wait 3.5s then enable
           setTimeout(function(){
             locationManager.enableBluetooth();
             bluetoothToggled = false;
+            startScan();
         },3500);
       }
   }
@@ -196,26 +203,34 @@ $$(document).on('deviceready', function() {
     var displayfermunits = localStorage.getItem('displayFermunits-' + color)||"";
     if (displaytempunits == "°F" && displayfermunits == "") {
         localStorage.setItem('displayTempunits-' + color,"°C");
+        NativeStorage.setItem('displayTempunits-' + color, "°C", function (result) { }, function (e) { });
         localStorage.setItem('displayFermunits-' + color,"");
+        NativeStorage.setItem('displayFermunits-' + color, "", function (result) { }, function (e) { });
         //update radio buttons
         $$("input[name=gravityRadio-" + color + "][value='SG']").prop("checked",true);
         $$("input[name=temperatureRadio-" + color + "][value='°C']").prop("checked",true);
     }
     if (displaytempunits == "°C" && displayfermunits == "") {
         localStorage.setItem('displayTempunits-' + color,"°C");
+        NativeStorage.setItem('displayTempunits-' + color, "°C", function (result) { }, function (e) { });
         localStorage.setItem('displayFermunits-' + color,"°P");
+        NativeStorage.setItem('displayFermunits-' + color, "°P", function (result) { }, function (e) { });
         $$("input[name=gravityRadio-" + color + "][value='°P']").prop("checked",true);
         $$("input[name=temperatureRadio-" + color + "][value='°C']").prop("checked",true);
     }
     if (displaytempunits == "°C" && displayfermunits == "°P") {
         localStorage.setItem('displayTempunits-' + color,"°F");
+        NativeStorage.setItem('displayTempunits-' + color, "°F", function (result) { }, function (e) { });
         localStorage.setItem('displayFermunits-' + color,"°P");
+        NativeStorage.setItem('displayFermunits-' + color, "°P", function (result) { }, function (e) { });
         $$("input[name=gravityRadio-" + color + "][value='°P']").prop("checked",true);
         $$("input[name=temperatureRadio-" + color + "][value='°F']").prop("checked",true);
     }
     if (displaytempunits == "°F" && displayfermunits == "°P") {
         localStorage.setItem('displayTempunits-' + color,"°F");
+        NativeStorage.setItem('displayTempunits-' + color, "°F", function (result) { }, function (e) { });
         localStorage.setItem('displayFermunits-' + color,"");
+        NativeStorage.setItem('displayFermunits-' + color, "", function (result) { }, function (e) { });
         $$("input[name=gravityRadio-" + color + "][value='SG']").prop("checked",true);
         $$("input[name=temperatureRadio-" + color + "][value='°F']").prop("checked",true);
     }
@@ -243,7 +258,8 @@ $$(document).on('deviceready', function() {
     $$('#tiltcard-' + beacon.Color).show();
     $$('#accordion-' + beacon.Color).show();
     //update list of in range beacons
-    var inRangeBeaconsArray = localStorage.getItem('inrangebeacons').split(',');
+    var inRangeBeacons = localStorage.getItem('inrangebeacons')||'NONE';
+    var inRangeBeaconsArray = inRangeBeacons.split(',');
     var indexOfColor = inRangeBeaconsArray.indexOf(beacon.Color);
         if (indexOfColor < 0){
         inRangeBeaconsArray.push(beacon.Color);
@@ -252,7 +268,15 @@ $$(document).on('deviceready', function() {
     var date = new Date(beacon.timeStamp);
     beacon.displaytimeStamp = date.toLocaleString();
     //add beer name
-    beacon.Beername = localStorage.getItem('beerName-' + beacon.Color)||'Untitled';
+    beacon.Beername = localStorage.getItem('beerName-' + beacon.Color);
+    if (beacon.Beername === null){
+        NativeStorage.getItem('beerName-' + beacon.Color, function (result) { 
+            if(result !== undefined){
+            localStorage.setItem('beerName-' + beacon.Color, result);
+            }
+         }, function (e) { });
+         setTimeout(function(){beacon.Beername = localStorage.getItem('beerName-' + beacon.Color)||'Untitled';},250);
+    }
     //add calibrated SG and Temp (F) for cloud posting
     beacon.SG = getCalFerm(beacon.Color).toFixed(4);
     beacon.Temp = getCalTemp(beacon.Color).toFixed(1);
@@ -382,7 +406,6 @@ $$(document).on('deviceready', function() {
     for (var key in beacons) {
     var beacon = beacons[key];
     var currentTime = Date.now();
-    
     //add display value and units
     beacon.displayTempunits = localStorage.getItem('displayTempunits-' + beacon.Color)||"°F";
     switch (beacon.displayTempunits){
@@ -404,11 +427,18 @@ $$(document).on('deviceready', function() {
         beacon.caldisplayFerm = convertSGtoPreferredUnits(beacon.Color, getCalFerm(beacon.Color));
         break;
     }
-
     //setup tilt cards (generate new card once for each Tilt found)
     var foundBeacons = localStorage.getItem('foundbeacons');
+    if (foundBeacons === null){//system cleared local storage while scanning
+        //restore settings if needed
+        app.data.tiltColors.forEach(restoreLoggingSettings);
+        app.data.tiltColors.forEach(restoreCalibrationPoints);
+        app.data.tiltColors.forEach(restorePreferredUnits);
+        localStorage.setItem('foundbeacons', 'NONE');
+        return;//can't continue
+    }
     var foundBeaconsArray = foundBeacons.split(',');
-    var inRangeBeacons = localStorage.getItem('inrangebeacons');
+    var inRangeBeacons = localStorage.getItem('inrangebeacons')||'NONE';
     var inRangeBeaconsArray = inRangeBeacons.split(',');
     //reset list of tilt cards if new tilt color found
     if (foundBeaconsArray.indexOf(beacon.Color) < 0){
@@ -418,8 +448,8 @@ $$(document).on('deviceready', function() {
         var tiltCard  = $$('#tiltCard').html(displayhtml);
         var settingshtml = compiledsettingsTemplate(beacons);
         var settingspanel = $$('#settingsPanel').html(settingshtml);
-        //setup javascript for each card
         for (var i = 1; i < foundBeaconsArray.length; i++) {
+        //setup javascript for each card
         doOnOrientationChange();
         //populate calibration point list
         updateSGcallist(foundBeaconsArray[i]);
@@ -531,7 +561,8 @@ $$(document).on('deviceready', function() {
         });   
         }
     }
-    
+    //update beer name
+    beacon.Beername = localStorage.getItem('beerName-' + beacon.Color)||'Untitled';
     //update timer for last scan recieved
     beacon.numberSecondsAgo = ((currentTime - beacon.timeStamp) / 1000).toFixed(1);
     localStorage.setItem('lastUpdate-' + beacon.Color,beacon.timeStamp);
@@ -547,7 +578,7 @@ $$(document).on('deviceready', function() {
         localStorage.setItem('inrangebeacons',inRangeBeaconsArray);
         }
     }
-    //check freshness of tilt connections for Android, toggle if average exceeds 15s
+    //check freshness of tilt connections for Android, toggle if average exceeds 60s
     var totalSecondsAgo = 0;
     for (var i = 1; i < inRangeBeaconsArray.length; i++){
         var lastUpdate = Number(localStorage.getItem('lastUpdate-' + inRangeBeaconsArray[i]))||Date.now();
@@ -572,7 +603,7 @@ $$(document).on('deviceready', function() {
     $$('#caldisplayTemp+displayTempunits' + beacon.Color).html(String(beacon.caldisplayTemp) + beacon.displayTempunits);
     $$('#numberSecondsAgo' + beacon.Color).html(beacon.numberSecondsAgo);
     $$('#displayRSSI' + beacon.Color).html(beacon.displayRSSI);
-    $$('#displaytimeStamp' + beacon.Color).html(beacon.displaytimeStamp + ' v1.0.11');
+    $$('#displaytimeStamp' + beacon.Color).html(beacon.displaytimeStamp + ' v1.0.13');
     $$('#percentScaleSG' + beacon.Color).css('width', String((beacon.uncalSG - 0.980) / (1.150 - 0.980) * 100) + "%");
     $$('#percentScaleTemp' + beacon.Color).css('width', String((beacon.uncalTemp - 0) / (185 - 0) * 100) + "%");
     //update Tilt objects
@@ -602,6 +633,9 @@ for (var i = 1; i < actualSGpointsArray.length - 1; i++){
 var displaySGcallistObject = {};
 displaySGcallistObject.SGcalpoints = displaySGcallistArray;
 $$('#sgcallisttemplate-' + color).html(compiledsgcallistTemplate(displaySGcallistObject));
+//save updated calibration points to native storage
+NativeStorage.setItem('uncalSGpoints-' + color, uncalSGpoints, function (result) { }, function (e) { });
+NativeStorage.setItem('actualSGpoints-' + color, actualSGpoints, function (result) { }, function (e) { });
 };
 
 function convertSGtoPreferredUnits (color, SG) {
@@ -628,9 +662,9 @@ var uncalSGpoints = localStorage.getItem('uncalSGpoints-' + color)||'-0.001,1.00
 var unCalSGPointsArray = uncalSGpoints.split(',');
 var actualSGpoints = localStorage.getItem('actualSGpoints-' + color)||'-0.001,1.000,10.000';
 var actualSGPointsArray= actualSGpoints.split(',');
-var SG = localStorage.getItem('uncalSG-' + color);
 //temporary array for finding correct x and y values
 var unCalSGPointsTempArray = uncalSGpoints.split(',');
+var SG = localStorage.getItem('uncalSG-' + color);
 //add current value to calibration point list
 unCalSGPointsTempArray.push(SG);
 //sort list lowest to highest
@@ -811,6 +845,7 @@ function setBeerName (button){
           });
         notificationFull.open();
         localStorage.setItem('beerName-' + color, validBeerName);
+        NativeStorage.setItem('beerName-' + color, validBeerName, function (result) { }, function (e) { });
         showBeerName(color);
     }
 }
@@ -827,7 +862,6 @@ function showBeerName (color){
     }
     //set beer name on tilt card
     $$('#beerName' + color).html(beerNameArray[0]);
-
 }
 
 function toggleDeviceLogging (color) {
@@ -845,6 +879,7 @@ function toggleDeviceLogging (color) {
                 deviceLoggingEnabled = '0';
                 localStorage.setItem('deviceLoggingEnabled-' + color, deviceLoggingEnabled);
             }
+          NativeStorage.setItem('deviceLoggingEnabled-' + color, deviceLoggingEnabled, function (result) { }, function (e) { });
           }
         }
       })
@@ -878,6 +913,7 @@ function toggleDefaultCloudURL (color) {
                 cloudURLsenabledArray[0] = '0';
                 localStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray);
             }
+            NativeStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray, function (result) { }, function (e) { });
           }
         }
       })
@@ -904,6 +940,7 @@ function setDefaultCloudURL (button){
     var newDefaultCloudURLRaw = $$('#defaultCloudURL-' + color).val();
     var newDefaultCloudURL = newDefaultCloudURLRaw.trim();
     localStorage.setItem('cloudurls-' + color, newDefaultCloudURL + ',' + customCloudURLsArray[1] + ',' + customCloudURLsArray[2]);
+    NativeStorage.setItem('cloudurls-' + color, newDefaultCloudURL + ',' + customCloudURLsArray[1] + ',' + customCloudURLsArray[2], function (result) { }, function (e) { });
     var notificationFull = app.notification.create({
         icon: '<i class="f7-icons">check</i>',
         title: 'New Default Cloud URL Saved',
@@ -922,7 +959,8 @@ function clearDefaultCloudURL (button){
     var customCloudURLsArray = customCloudURLs.split(',');
     var newDefaultCloudURL = app.data.defaultCloudURL;
     $$('#defaultCloudURL-' + color).val('');
-    localStorage.setItem('cloudurls-' + color, newDefaultCloudURL + ',' + customCloudURLsArray[1] + ',' + customCloudURLsArray[2])
+    localStorage.setItem('cloudurls-' + color, newDefaultCloudURL + ',' + customCloudURLsArray[1] + ',' + customCloudURLsArray[2]);
+    NativeStorage.setItem('cloudurls-' + color, newDefaultCloudURL + ',' + customCloudURLsArray[1] + ',' + customCloudURLsArray[2], function (result) { }, function (e) { });
     var notificationFull = app.notification.create({
         icon: '<i class="f7-icons">info</i>',
         title: 'Default Cloud URL Reset',
@@ -951,7 +989,7 @@ function toggleCustomCloudURL1 (color) {
                 cloudURLsenabledArray[1] = '0';
                 localStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray);
             }
-            
+            NativeStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray, function (result) { }, function (e) { });
           }
         }
       })
@@ -978,6 +1016,7 @@ function setCustomCloudURL1 (button){
     var newCustomCloudURL1Raw = $$('#customCloudURL1-' + color).val();
     var newCustomCloudURL1 = newCustomCloudURL1Raw.trim();
     localStorage.setItem('cloudurls-' + color, customCloudURLsArray[0] + ',' + newCustomCloudURL1 + ',' + customCloudURLsArray[2]);
+    NativeStorage.setItem('cloudurls-' + color, customCloudURLsArray[0] + ',' + newCustomCloudURL1 + ',' + customCloudURLsArray[2], function (result) { }, function (e) { });
     var notificationFull = app.notification.create({
         icon: '<i class="f7-icons">check</i>',
         title: 'Custom Cloud URL 1 Saved',
@@ -997,6 +1036,7 @@ function clearCustomCloudURL1 (button){
     var newCustomCloudURL1 = '';
     $$('#customCloudURL1-' + color).val('');
     localStorage.setItem('cloudurls-' + color, customCloudURLsArray[0] + ',' + newCustomCloudURL1 + ',' + customCloudURLsArray[2]);
+    NativeStorage.setItem('cloudurls-' + color, customCloudURLsArray[0] + ',' + newCustomCloudURL1 + ',' + customCloudURLsArray[2], function (result) { }, function (e) { });
     var notificationFull = app.notification.create({
         icon: '<i class="f7-icons">info</i>',
         title: 'Custom Cloud URL 1 Cleared',
@@ -1026,7 +1066,7 @@ function toggleCustomCloudURL2 (color) {
                 cloudURLsenabledArray[2] = '0';
                 localStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray);
             }
-            
+            NativeStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray, function (result) { }, function (e) { });
           }
         }
       })
@@ -1053,6 +1093,7 @@ function setCustomCloudURL2 (button){
     var newCustomCloudURL2Raw = $$('#customCloudURL2-' + color).val();
     var newCustomCloudURL2 = newCustomCloudURL2Raw.trim();
     localStorage.setItem('cloudurls-' + color, customCloudURLsArray[0] + ',' + customCloudURLsArray[1] + ',' + newCustomCloudURL2);
+    NativeStorage.setItem('cloudurls-' + color, customCloudURLsArray[0] + ',' + customCloudURLsArray[1] + ',' + newCustomCloudURL2, function (result) { }, function (e) { });
     var notificationFull = app.notification.create({
         icon: '<i class="f7-icons">check</i>',
         title: 'Custom Cloud URL 2 Saved',
@@ -1094,7 +1135,8 @@ function postToCloudURLs (color, comment) {
     var cloudURLsArray = cloudURLs.split(',');
     var cloudURLsenabled = localStorage.getItem('cloudurlsenabled-' + color)||'1,0,0';
     var cloudURLsenabledArray = cloudURLsenabled.split(',');
-    var inRangeBeaconsArray = localStorage.getItem('inrangebeacons').split(',');
+    var inRangeBeacons = localStorage.getItem('inrangebeacons')||'NONE';
+    var inRangeBeaconsArray = inRangeBeacons.split(',');
     var indexOfColor = inRangeBeaconsArray.indexOf(color);
     if (cloudURLsenabled == '0,0,0' || indexOfColor < 0){
        return;//return undefined if no cloud options checked or Tilts not in range
@@ -1153,8 +1195,9 @@ function postToCloudURLs (color, comment) {
             var beerNameArray = jsonData.beername.split(",");
             if (beerNameArray[1] !== undefined && comment != 'End of log') {
               localStorage.setItem('beerName-' + color, jsonData.beername);
+              NativeStorage.setItem('beerName-' + color, jsonData.beername, function (result) { }, function (e) { });
                 showBeerName(color);
-                $$('#cloudStatus' + color).html('<a class="link external" href="' + jsonData.doclongurl + '">|&nbsp;<i class="f7-icons size-15">cloud_fill</i><span id="lastCloudLogged' + beacon.Color +'"></span></a>');
+                $$('#cloudStatus' + color).html('<a class="link external" href="' + jsonData.doclongurl + '">&nbsp;<i class="f7-icons size-15">cloud_fill</i><span id="lastCloudLogged' + beacon.Color +'"></span></a>');
                 localStorage.setItem('docLongURL-' + color, jsonData.doclongurl);
             }
             }
@@ -1200,6 +1243,7 @@ function cloudIntervalStepper (color) {
             change: function () {
             var cloudInterval = stepper.getValue();
             localStorage.setItem('cloudInterval-' + color, cloudInterval);
+            NativeStorage.setItem('cloudInterval-' + color, cloudInterval, function (result) { }, function (e) { });
             if (cloudInterval == 15){
                 app.toast.create({text: 'Set to minimum logging interval.', icon: '<i class="material-icons">check</i>', position: 'center', closeTimeout: 2000}).open();
             }
@@ -1213,6 +1257,7 @@ function clearEmail (button){
     var clickedButton = button.id.split('-');
     var color = clickedButton[1];
     localStorage.setItem('emailAddress-' + color,'');
+    NativeStorage.setItem('emailAddress-' + color, '', function (result) { }, function (e) { });
     //$$('#emailAddress-' + color).val('');
     showEmail(color);
 }
@@ -1234,6 +1279,7 @@ function setEmail (button){
     });
     notificationEmailOK.open();
     localStorage.setItem('emailAddress-' + color, newEmail);
+    NativeStorage.setItem('emailAddress-' + color, newEmail, function (result) { }, function (e) { });
     showEmail(color);
     }else{
         var notificationEmailBad = app.notification.create({
@@ -1535,7 +1581,8 @@ function readFromFile(fileName, cb, fileType) {
 function logToDevice(color, comment){
     var currentBeerName = localStorage.getItem('beerName-' + color)||"Untitled";
     var deviceLoggingEnabled = localStorage.getItem('deviceLoggingEnabled-' + color)||'0';
-    var inRangeBeaconsArray = localStorage.getItem('inrangebeacons').split(',');
+    var inRangeBeacons = localStorage.getItem('inrangebeacons')||'NONE';
+    var inRangeBeaconsArray = inRangeBeacons.split(',');
     var indexOfColor = inRangeBeaconsArray.indexOf(color);
     var isAppend = true;
     //check if currently logging, default is 'not logging'
@@ -1620,6 +1667,7 @@ function logToDevice(color, comment){
     notificationNewLog.open();
     //set CSV filename
     localStorage.setItem('localCSVfileName-' + color, CSVfileName);
+    NativeStorage.setItem('localCSVfileName-' + color, CSVfileName, function (result) { }, function (e) { });
     //add to list of CSV files
     var listOfCSVFiles = localStorage.getItem('listOfCSVFiles')||'';
     var listOfCSVFilesArray = listOfCSVFiles.split(',');
@@ -1630,12 +1678,14 @@ function logToDevice(color, comment){
             listOfCSVFilesArray.pop();
         }
     localStorage.setItem('listOfCSVFiles',listOfCSVFilesArray);
+    NativeStorage.setItem('listOfCSVFiles', listOfCSVFilesArray, function (result) { }, function (e) { });
     }
     //update file list
     var displayhtml = compiledfilelistTemplate(listOfCSVFilesArray);
     $$('#fileList').html(displayhtml);
     //set JSON file name
     localStorage.setItem('localJSONfileName-' + color, JSONfileName);
+    NativeStorage.setItem('localJSONfileName-' + color, JSONfileName, function (result) { }, function (e) { });
     //add to list of JSON files
     var listOfJSONFiles = localStorage.getItem('listOfJSONFiles')||'';
     var listOfJSONFilesArray = listOfJSONFiles.split(',');
@@ -1647,6 +1697,7 @@ function logToDevice(color, comment){
             listOfJSONFilesArray.pop();
         }
         localStorage.setItem('listOfJSONFiles', listOfJSONFilesArray);
+        NativeStorage.setItem('listOfJSONFiles', listOfJSONFilesArray, function (result) { }, function (e) { });
     }
     writeToFile(CSVfileName, 'Timestamp,Timepoint,SG,Temp,Color,Beer,Comment', isAppend,'csv', color);
     writeToFile(JSONfileName, { Timestamp : localTime, Timepoint : localTimeExcel, SG : beacon.SG, Temp : beacon.Temp, Color : beacon.Color, Beer : currentBeerName, Comment : comment }, isAppend,'json', color);
@@ -1730,8 +1781,82 @@ function logNow(){
     var foundBeaconsArray = foundBeacons.split(',');
     //console.log('resumed' + foundBeaconsArray[i]);
     for (var i = 1; i < foundBeaconsArray.length; i++) {
-        console.log(foundBeaconsArray[i]);
+        //console.log(foundBeaconsArray[i]);
     logToDevice(foundBeaconsArray[i]);
     postToCloudURLs(foundBeaconsArray[i]);
     }
+}
+
+function restoreLoggingSettings(color){
+    NativeStorage.getItem('cloudurls-' + color, function (result) { 
+        if(result !== undefined){
+        localStorage.setItem('cloudurls-' + color, result);
+        }
+     }, function (e) { });
+    NativeStorage.getItem('cloudurlsenabled-' + color, function (result) { 
+        if(result !== undefined){
+        localStorage.setItem('cloudurlsenabled-' + color, result);
+        }
+     }, function (e) { });
+    NativeStorage.getItem('emailAddress-' + color, function (result) { 
+        if(result !== undefined){
+        localStorage.setItem('emailAddress-' + color, result);
+        }
+     }, function (e) { });
+    NativeStorage.getItem('cloudInterval-' + color, function (result) { 
+        if(result !== undefined){
+        localStorage.setItem('cloudInterval-' + color, result);
+        }
+     }, function (e) { });
+    NativeStorage.getItem('deviceLoggingEnabled-' + color, function (result) { 
+        if(result !== undefined){
+        localStorage.setItem('deviceLoggingEnabled-' + color, result);
+        }
+     }, function (e) { });
+    NativeStorage.getItem('localCSVfileName-' + color, function (result) { 
+        if(result !== undefined){
+        localStorage.setItem('localCSVfileName-' + color, result);
+        }
+     }, function (e) { });
+    NativeStorage.getItem('localJSONfileName-' + color, function (result) { 
+        if(result !== undefined){
+        localStorage.setItem('localJSONfileName-' + color, result);
+        }
+     }, function (e) { });
+    NativeStorage.getItem('listOfCSVFiles', function (result) { 
+        if(result !== undefined){
+        localStorage.setItem('listOfCSVFiles', result);
+        }
+     }, function (e) { });
+    NativeStorage.getItem('listOfJSONFiles', function (result) { 
+        if(result !== undefined){
+        localStorage.setItem('listOfJSONFiles', result);
+        }
+     }, function (e) { });
+}
+
+function restorePreferredUnits(color){
+    NativeStorage.getItem('displayTempunits-' + color, function (result) { 
+        if(result !== undefined){
+        localStorage.setItem('displayTempunits-' + color, result);
+        }
+     }, function (e) { });
+    NativeStorage.getItem('displayFermunits-' + color, function (result) { 
+        if(result !== undefined){
+        localStorage.setItem('displayFermunits-' + color, result);
+        }
+     }, function (e) { });
+}
+
+function restoreCalibrationPoints(color){
+            NativeStorage.getItem('uncalSGpoints-' + color, function (result) { 
+                if(result !== undefined){
+                localStorage.setItem('uncalSGpoints-' + color, result);
+                }
+             }, function (e) { });
+            NativeStorage.getItem('actualSGpoints-' + color, function (result) { 
+                if(result !== undefined){
+                localStorage.setItem('actualSGpoints-' + color, result);
+                }
+             }, function (e) { });
 }
