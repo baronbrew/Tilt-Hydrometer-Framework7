@@ -8,9 +8,9 @@ var app  = new Framework7({
   name: 'Tilt Hydrometer', // App name
   theme: 'auto', // Automatic theme detection
   statusbar: {
-      overlay: true,
-      iosOverlaysWebView: true,
-      enabled: false,//disable for android
+      overlay: false,
+      iosOverlaysWebView: false,
+      enabled: true,//disable for android
       iosTextColor: 'white',
       iosBackgroundColor: 'black',
   },
@@ -79,6 +79,8 @@ $$(document).on('deviceready', function() {
           document.addEventListener('resume', onResume, false);
           document.addEventListener("pause", onPause, false);
           console.log(device);
+          setTimeout(function() { navigator.splashscreen.hide(); }, 100);
+
           if (device.platform == 'Android' || device.platform == 'amazon-fireos'){
           setInterval(function(){ watchBluetooth(); }, 30000);//check if tilts are connected every 30 seconds, toggle bluetooth if not
           permissions = cordova.plugins.permissions;
@@ -156,12 +158,18 @@ $$(document).on('deviceready', function() {
 
   function doOnOrientationChange() {
     switch(window.orientation) {  
-      case -90 || 90:
+      case -90:
         app.statusbar.hide();
         $$('.card').css('max-width','45%');
         $$('.card').css('font-size','80%');
         $$('.navbar').css('display','none');
-        break; 
+        break;
+      case 90:
+        app.statusbar.hide();
+        $$('.card').css('max-width','45%');
+        $$('.card').css('font-size','80%');
+        $$('.navbar').css('display','none');
+        break;
       default:
         app.statusbar.show();
         $$('.card').css('max-width','100%');
@@ -264,6 +272,9 @@ $$(document).on('deviceready', function() {
         if (indexOfColor < 0){
         inRangeBeaconsArray.push(beacon.Color);
         localStorage.setItem('inrangebeacons',inRangeBeaconsArray);
+        //log data when Tilt comes in range
+        setTimeout(function(){ postToCloudURLs(beacon.Color)},4000);
+        setTimeout(function(){ logToDevice(beacon.Color)},4000);
         }
     var date = new Date(beacon.timeStamp);
     beacon.displaytimeStamp = date.toLocaleString();
@@ -287,11 +298,16 @@ $$(document).on('deviceready', function() {
         beacon.displayRSSI = beacon.rssi + " dBm";
         localStorage.setItem('prevRSSI-' + beacon.Color,beacon.displayRSSI);
     }
-    //log data upon seeing tilts in range
-    if (resumed){
-        setTimeout(function(){logNow();}, 4000);
-        resumed = false;
-    }
+    //log data at interval to cloud or device
+    var cloudInterval = localStorage.getItem('cloudInterval-' + beacon.Color)||15;
+    var lastCloudLogged = localStorage.getItem('lastCloudLogged-' + beacon.Color)||date;
+    beacon.lastCloudLogged = (Number(date) - Number(lastCloudLogged)) / 1000 / 60;
+    if (Number(cloudInterval) <= Number(beacon.lastCloudLogged)){
+        postToCloudURLs(beacon.Color);
+        logToDevice(beacon.Color);
+        localStorage.setItem('lastCloudLogged-' + beacon.Color, Date.now());//reset timer
+    };
+    
 }
 
   function initScan() {
@@ -299,8 +315,6 @@ $$(document).on('deviceready', function() {
       // specified below.
       delegate = new locationManager.Delegate();
       console.log('initScan');
-      //will log data and toggle bluetooth (works for android phones, doesn't work on iOS)
-      resumed = true;
       // Called continuously when ranging beacons.
       delegate.didRangeBeaconsInRegion = function (pluginResult) {
           if (pluginResult.beacons.length > 0) {
@@ -451,6 +465,12 @@ $$(document).on('deviceready', function() {
         for (var i = 1; i < foundBeaconsArray.length; i++) {
         //setup javascript for each card
         doOnOrientationChange();
+        //populate logging links
+        var docLongURL = localStorage.getItem('docLongURL-' + foundBeaconsArray[i]);
+        if (docLongURL !== null){
+        $$('#cloudStatus' + foundBeaconsArray[i]).html('<a class="link external" href="' + docLongURL + '" target="_system">&nbsp;<i class="material-icons size-15">cloud</i><span id="lastCloudLogged' + foundBeaconsArray[i] +'"></span></a>');
+        console.log("cloud status updated");
+        }
         //populate calibration point list
         updateSGcallist(foundBeaconsArray[i]);
         //show beer name in settings
@@ -603,18 +623,11 @@ $$(document).on('deviceready', function() {
     $$('#caldisplayTemp+displayTempunits' + beacon.Color).html(String(beacon.caldisplayTemp) + beacon.displayTempunits);
     $$('#numberSecondsAgo' + beacon.Color).html(beacon.numberSecondsAgo);
     $$('#displayRSSI' + beacon.Color).html(beacon.displayRSSI);
-    $$('#displaytimeStamp' + beacon.Color).html(beacon.displaytimeStamp + ' v1.0.13');
+    $$('#displaytimeStamp' + beacon.Color).html(beacon.displaytimeStamp + ' v1.0.16');
     $$('#percentScaleSG' + beacon.Color).css('width', String((beacon.uncalSG - 0.980) / (1.150 - 0.980) * 100) + "%");
     $$('#percentScaleTemp' + beacon.Color).css('width', String((beacon.uncalTemp - 0) / (185 - 0) * 100) + "%");
     //update Tilt objects
     localStorage.setItem('tiltObject-' + beacon.Color,JSON.stringify(beacon));
-    //log to cloud or device
-    var cloudInterval = localStorage.getItem('cloudInterval-' + beacon.Color)||15;
-    if (Number(cloudInterval) <= Number(beacon.lastCloudLogged)){
-        postToCloudURLs(beacon.Color);
-        logToDevice(beacon.Color);
-        localStorage.setItem('lastCloudLogged-' + beacon.Color, Date.now());//reset timer
-    };
     };
 }
 
@@ -1162,7 +1175,9 @@ function postToCloudURLs (color, comment) {
          if (i != 0){
             currentBeerName = currentBeerName.split(',')[0];
          }
+        stopScan();//stop bt scan while using wifi
         app.request.post(cloudURLsArray[i], encodeURI("Timepoint=" + localTimeExcel + "&SG=" + beacon.SG + "&Temp=" + beacon.Temp + "&Color=" + beacon.Color + "&Beer=" + currentBeerName + "&Comment=" + comment), function (stringData){
+            startScan();//restart scanning
             localStorage.setItem('lastCloudLogged-' + color, Date.now());
             //try to parse data from Baron Brew Google Sheets
             try {
@@ -1197,7 +1212,7 @@ function postToCloudURLs (color, comment) {
               localStorage.setItem('beerName-' + color, jsonData.beername);
               NativeStorage.setItem('beerName-' + color, jsonData.beername, function (result) { }, function (e) { });
                 showBeerName(color);
-                $$('#cloudStatus' + color).html('<a class="link external" href="' + jsonData.doclongurl + '">&nbsp;<i class="f7-icons size-15">cloud_fill</i><span id="lastCloudLogged' + beacon.Color +'"></span></a>');
+                $$('#cloudStatus' + color).html('<a class="link external" href="' + jsonData.doclongurl + '" target="_system">&nbsp;<i class="material-icons size-15">cloud_done</i><span id="lastCloudLogged' + beacon.Color +'"></span></a>');
                 localStorage.setItem('docLongURL-' + color, jsonData.doclongurl);
             }
             }
@@ -1213,10 +1228,11 @@ function postToCloudURLs (color, comment) {
                     closeTimeout: 8000,
                   });
                 notificationSuccess.open();
-                $$('#cloudStatus' + beacon.Color).html('<i class="f7-icons size-15">cloud_fill</i><span id="lastCloudLogged' + beacon.Color +'"></span>');
+                $$('#cloudStatus' + beacon.Color).html('<i class="material-icons size-15">cloud_done</i><span id="lastCloudLogged' + beacon.Color +'"></span>');
 
             }
         }, function (errorData) {
+            startScan();//restart scanning
             var notificationCloudError = app.notification.create({
                 icon: '<i class="f7-icons">info</i>',
                 title: 'Error Logging to Cloud',
@@ -1758,7 +1774,7 @@ function onResume() {
     //toggleBluetooth();
     scanningToast = app.toast.create({text: 'Scanning for nearby Tilts...<br>Ensure Bluetooth and Location Services are enabled and Tilt is floating.', icon: '<i class="material-icons">bluetooth_searching</i>', position: 'bottom', }).open();
     //set resumed flag to trigger logging as soon as tilts are in range
-    resumed = true;
+    localStorage.setItem('inrangebeacons','NONE');
 }
 
 function onPause() {
@@ -1773,17 +1789,6 @@ function watchBluetooth() {//function run every 30 seconds on Android and Fire d
     var inRangeBeaconsArray = localStorage.getItem('inrangebeacons').split(',');
     if (inRangeBeaconsArray.length == 1){//no tilts in range
             toggleBluetooth();
-    }
-}
-
-function logNow(){
-    var foundBeacons = localStorage.getItem('foundbeacons')||'NONE';
-    var foundBeaconsArray = foundBeacons.split(',');
-    //console.log('resumed' + foundBeaconsArray[i]);
-    for (var i = 1; i < foundBeaconsArray.length; i++) {
-        //console.log(foundBeaconsArray[i]);
-    logToDevice(foundBeaconsArray[i]);
-    postToCloudURLs(foundBeaconsArray[i]);
     }
 }
 

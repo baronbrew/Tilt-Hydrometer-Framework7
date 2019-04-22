@@ -65,7 +65,7 @@
     </div>
 
     <!-- Your main view, should have "view-main" class -->
-    <div class="view view-main ios-edges theme-dark">
+    <div class="view view-main view-init ios-edges theme-dark">
       <!-- Page, data-name contains page name which can be used in callbacks -->
       <div class="page  color-theme-gray" data-name="home">
         <!-- Top Navbar -->
@@ -94,7 +94,7 @@
   <!-- template7 templates -->
   <script id="displaytemplate" type="text/template7">
     {{#each this}}
-    <div id="tiltcard-{{Color}}" class="card card-outline elevation-12 col-100 tablet-45">
+    <div id="tiltcard-{{Color}}" class="card card-outline elevation-12 col-100 tablet-45 no-gap">
         <div class="card-content card-content-padding"><p class="no-margin-bottom" id="beerName{{Color}}">{{Beername}}</p><strong>TILT | {{Color}} </strong><span id="cloudStatus{{Color}}"></span> <span id="deviceStatus{{Color}}"></span></div>
         <div id="quicksettings" class="accordion-item">
         <div class="accordion-item-toggle">
@@ -103,7 +103,7 @@
         <div class="accordion-item-content">
         <div class="margin-top segmented margin-horizontal">
             <button id="calprompt-{{Color}}" class="button col button-round"><i class="material-icons">adjust</i>CAL</button>
-            <button id="logprompt-{{Color}}" class="button col button-round"><i class="f7-icons">graph_round</i> LOG</button>
+            <button id="logprompt-{{Color}}" class="button col button-round"><i class="material-icons">show_chart</i> LOG</button>
             <button id="unitstoggle-{{Color}}" class="button col button-round"><i class="material-icons">straighten</i>UNITS</button>
           </div>
         </div>
@@ -163,7 +163,7 @@
         <div class="item-title margin-horizontal padding"><strong>TILT <i class="f7-icons color-custom-{{Color}} size-15">circle_fill</i> {{Color}}</strong></div>
       </div>
     <div class="accordion-item-content">
-        <div class="block-title no-margin-top"><i class="f7-icons">graph_round</i> Logging</div>
+        <div class="block-title no-margin-top"><i class="material-icons">show_chart</i> Logging</div>
       <div class="block block-strong">
           <div class="content-block">
           <div class="content-block-inner">
@@ -222,7 +222,7 @@
             </div>
           </div>
       <p>
-          <button class="button button-round button-active" id="startCloudLog-{{Color}}" onclick="startLogging(this)">Start New Log</button>
+          <button class="button button-round button-fill button-raised" id="startCloudLog-{{Color}}" onclick="startLogging(this)">Start New Log</button>
       </p>
       <p class="segmented segmented-raised segmented-round">
           <button class="button button-round" id="logOnce-{{Color}}" onclick="logOnce(this)">Comment</button>
@@ -252,7 +252,7 @@
               </div>
               </div>
               <div class="accordion-item">
-                  <div class="accordion-item-toggle"><button class="button button-round">3rd Party Cloud Logging...</button></div>
+                  <div class="accordion-item-toggle"><button class="button button-round button-raised">3rd Party Cloud Logging...</button></div>
                   <p><a href="#" data-popover=".customcloudurl-popover" class="popover-open"><i class="f7-icons size-15">info</i> More information...</a></p>
               <div class="popover customcloudurl-popover">
               <div class="popover-inner padding">
@@ -295,7 +295,7 @@
             <div class="content-block-inner">
               <p class="no-margin-top">With Water:</p>
                 <p class="round no-margin-top">
-                    <button class="button button-round" id="tareinwater-{{Color}}-1.000" onclick="addSGPoints(this)">Calibrate in Water</button>
+                    <button class="button button-round button-fill button-raised" id="tareinwater-{{Color}}-1.000" onclick="addSGPoints(this)">Calibrate in Water</button>
                 </p>
                 <p>With Known Gravity:</p>
           <div class="item-title floating-label">Enter uncalibrated (Tilt) point:</div>
@@ -303,14 +303,14 @@
           <input type="number" id="uncalSG-{{Color}}" placeholder="1.002">
           </div>
           <p class="round">
-              <button class="button button-round" id="getuncalibratedSGpoint-{{Color}}" onclick="getUncalibratedSGPoint(this)">Get Current Gravity</button>
+              <button class="button button-round button-raised" id="getuncalibratedSGpoint-{{Color}}" onclick="getUncalibratedSGPoint(this)">Get Current Gravity</button>
           </p>
           <div class="item-title floating-label">Enter actual (known) point:</div>
           <div class="item-input-wrap">
           <input type="number" id="actualSG-{{Color}}" placeholder="1.000">
           </div>
           <p class="round">
-              <button class="button button-round" id="addSGpoint-{{Color}}" onclick="addSGPoints(this)">Calibrate in Known Gravity</button>
+              <button class="button button-round button-fill button-raised" id="addSGpoint-{{Color}}" onclick="addSGPoints(this)">Calibrate in Known</button>
             </p>
             <div class="data-table">
                 <table>

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.baronbrew.tilthydrometerf7" version="1.0.13" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.baronbrew.tilthydrometerf7" version="1.0.16" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Tilt 2</name>
     <description>
         Generation two app for Tilt scanning and logging data.
@@ -7,7 +7,6 @@
     <author email="noah@baronbrew.com" href="http://www.tilthydrometer.com">
         Baron Brew Equipment
     </author>
-    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -15,6 +14,7 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <content src="index.html" />
     <allow-navigation href="https://docs.google.com/*" />
     <allow-navigation href="https://tilthydrometer.com/*" />
     <preference name="DisallowOverscroll" value="true" />
@@ -50,22 +50,23 @@
     </platform>
     <platform name="ios">
         <splash src="/res/screens/ios/Default@2x~universal~anyany.png" />
-        <preference name="Orientation" value="all" />
         <preference name="StatusBarOverlaysWebView" value="false" />
-        <preference name="AutoHideSplashScreen" value="true" />
-        <allow-intent href="itms:*" />
-        <allow-intent href="itms-apps:*" />
+        <preference name="StatusBarBackgroundColor" value="#000000" />
+        <preference name="StatusBarStyle" value="lightcontent" />
+        <preference name="Orientation" value="all" />
+        <preference name="AutoHideSplashScreen" value="false" />
         <preference name="BackupWebStorage" value="none" />
     </platform>
-    <plugin name="cordova-plugin-statusbar" spec="~2.4.2" />
     <plugin name="cordova-plugin-file" spec="~6.0.1" />
-    <plugin name="cordova-plugin-splashscreen" spec="~5.0.2" />
     <plugin name="cordova-plugin-android-permissions" spec="~1.0.0" />
     <plugin name="cordova-plugin-email-composer" spec="https://github.com/katzer/cordova-plugin-email-composer.git" />
     <plugin name="cordova-plugin-android-support-v4" spec="^21.0.1" />
     <plugin name="cordova-plugin-device" spec="~2.0.2" />
     <plugin name="com.unarin.cordova.beacon" spec="https://github.com/petermetz/cordova-plugin-ibeacon.git" />
     <plugin name="cordova-plugin-nativestorage" spec="^2.3.2" />
-    <engine name="ios" spec="^4.5.5" />
+    <plugin name="cordova-plugin-statusbar" spec="~2.4.2" />
+    <plugin name="cordova-plugin-inappbrowser" spec="~3.0.0" />
+    <plugin name="cordova-plugin-splashscreen" spec="~5.0.2" />
     <engine name="android" spec="^7.1.4" />
+    <engine name="ios" spec="^5.0.0" />
 </widget>
