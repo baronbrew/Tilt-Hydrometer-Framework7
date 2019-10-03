@@ -269,12 +269,15 @@ $$(document).on('deviceready', function() {
     var inRangeBeacons = localStorage.getItem('inrangebeacons')||'NONE';
     var inRangeBeaconsArray = inRangeBeacons.split(',');
     var indexOfColor = inRangeBeaconsArray.indexOf(beacon.Color);
+    var loggingTimeout = 0;
         if (indexOfColor < 0){
         inRangeBeaconsArray.push(beacon.Color);
         localStorage.setItem('inrangebeacons',inRangeBeaconsArray);
         //log data when Tilt comes in range
-        setTimeout(function(){ postToCloudURLs(beacon.Color)},4000);
-        setTimeout(function(){ logToDevice(beacon.Color)},4000);
+        loggingTimeout = setTimeout(function(){ 
+            postToCloudURLs(beacon.Color);
+            logToDevice(beacon.Color)
+        },4000);
         }
     var date = new Date(beacon.timeStamp);
     beacon.displaytimeStamp = date.toLocaleString();
@@ -303,8 +306,11 @@ $$(document).on('deviceready', function() {
     var lastCloudLogged = localStorage.getItem('lastCloudLogged-' + beacon.Color)||date;
     beacon.lastCloudLogged = (Number(date) - Number(lastCloudLogged)) / 1000 / 60;
     if (Number(cloudInterval) <= Number(beacon.lastCloudLogged)){
-        postToCloudURLs(beacon.Color);
-        logToDevice(beacon.Color);
+        clearTimeout(loggingTimeout);
+        setTimeout(function(){ 
+            postToCloudURLs(beacon.Color);
+            logToDevice(beacon.Color);
+        },4000);
         localStorage.setItem('lastCloudLogged-' + beacon.Color, Date.now());//reset timer
     };
     
@@ -623,7 +629,7 @@ $$(document).on('deviceready', function() {
     $$('#caldisplayTemp+displayTempunits' + beacon.Color).html(String(beacon.caldisplayTemp) + beacon.displayTempunits);
     $$('#numberSecondsAgo' + beacon.Color).html(beacon.numberSecondsAgo);
     $$('#displayRSSI' + beacon.Color).html(beacon.displayRSSI);
-    $$('#displaytimeStamp' + beacon.Color).html(beacon.displaytimeStamp + ' v1.0.16');
+    $$('#displaytimeStamp' + beacon.Color).html(beacon.displaytimeStamp + ' v1.0.17');
     $$('#percentScaleSG' + beacon.Color).css('width', String((beacon.uncalSG - 0.980) / (1.150 - 0.980) * 100) + "%");
     $$('#percentScaleTemp' + beacon.Color).css('width', String((beacon.uncalTemp - 0) / (185 - 0) * 100) + "%");
     //update Tilt objects

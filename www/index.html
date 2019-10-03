@@ -110,11 +110,11 @@
         </div>
         <div class="card-content card-content-padding">Uncalibrated Gravity: <span id="uncaldisplayFerm+displayFermunits{{Color}}">{{uncaldisplayFerm}}</span></div>
         <div id="caldisplayFerm+displayFermunits{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{caldisplayFerm}}</div>
-        <div id="percentScaleSG{{Color}}" class="margin-horizontal button button-round" style="background:{{Color}};height:10px;max-width:95%;"></div>
+        <div id="percentScaleSG{{Color}}" class="margin-horizontal button button-round" style="background:{{Color}};height:10px;width:0%;max-width:95%;"></div>
         <div class="card-content card-content-padding">Uncalibrated Temperature: <span id="uncaldisplayTemp+displayTempunits{{Color}}">{{uncaldisplayTemp}}</span></div>
         <div id="caldisplayTemp+displayTempunits{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{caldisplayTemp}}{{displayTempunits}}</div>
-        <div id="percentScaleTemp{{Color}}" class="margin-horizontal button button-round" style="background:{{Color}};height:10px;max-width:95%;"></div>
-        <div class="card-content card-content-padding lastrec">Received <span id=numberSecondsAgo{{Color}}></span> seconds ago <span id=displayRSSI{{Color}}></span><br><span id=displaytimeStamp{{Color}}></span></div>
+        <div id="percentScaleTemp{{Color}}" class="margin-horizontal button button-round" style="background:{{Color}};height:10px;width:0%;max-width:95%;"></div>
+        <div class="card-content card-content-padding lastrec"><span id=numberSecondsAgo{{Color}}></span> seconds ago <span id=displayRSSI{{Color}}></span><br><span id=displaytimeStamp{{Color}}></span></div>
     </div>
     {{/each}}
       
@@ -156,6 +156,21 @@
     {{/each}}
   </script>
 
+  <script id="tempcallisttemplate" type="text/template7">
+    {{#each Tempcalpoints}}
+    <tr>
+        <td class="checkbox-cell">
+          <label class="checkbox">
+            <input type="checkbox" id="tempcalpoints-{{color}}-{{@index}}" onchange="deleteTempCalPoint(this)">
+            <i class="f7-icons">delete</i>
+          </label>
+        </td>
+        <td class="numeric-cell">{{uncalpoint}}</td>
+        <td class="numeric-cell">{{actualpoint}}</td>
+    </tr>
+    {{/each}}
+  </script>
+
   <script id="settingstemplate" type="text/template7">
   {{#each this}}
   <li class="accordion-item" id="accordion-{{Color}}">
@@ -163,7 +178,7 @@
         <div class="item-title margin-horizontal padding"><strong>TILT <i class="f7-icons color-custom-{{Color}} size-15">circle_fill</i> {{Color}}</strong></div>
       </div>
     <div class="accordion-item-content">
-        <div class="block-title no-margin-top"><i class="material-icons">show_chart</i> Logging</div>
+        <div class="block-title no-margin-top"><i class="material-icons">show_chart</i> Logging <i class="f7-icons color-custom-{{Color}} size-15">circle_fill</i></div>
       <div class="block block-strong">
           <div class="content-block">
           <div class="content-block-inner">
@@ -207,7 +222,7 @@
            <p><a href="#" data-popover=".locallogging-popover" class="popover-open"><i class="f7-icons size-15">info</i> More information...</a></p>
             <div class="popover locallogging-popover">
                 <div class="popover-inner padding">
-                    <span><i class="f7-icons size-15">info</i> Enables logging to this phone. Connection to WiFi or cellular Internet not required. Log file will be saved as CSV and can be emailed from this app for later viewing.</span>
+                    <span><i class="f7-icons size-15">info</i> Enables logging to this phone. Connection to WiFi or cellular Internet not required. Log file will be saved as CSV and can be emailed from this app for later viewing. Note: If already logging to a cloud URL, disable "Use default cloud URL", tap "Start New Log", and re-enable "Use default cloud URL"</span>
                 </div>
               </div>
        <p class="no-margin-top"><label class="toggle" id="toggleDefaultCloudURL-{{Color}}">
@@ -218,7 +233,7 @@
        <p><a href="#" data-popover=".defaultcloudurl-popover" class="popover-open"><i class="f7-icons size-15">info</i> More information...</a></p>
         <div class="popover defaultcloudurl-popover">
             <div class="popover-inner padding">
-                <span><i class="f7-icons size-15">info</i> Enables cloud logging to the default cloud URL. (Google Sheets cloud logging solution provided by Baron Brew.)</span>
+                <span><i class="f7-icons size-15">info</i> Enables cloud logging to the default cloud URL (Google Sheets hosted by Baron Brew). Note: You must keep phone in kiosk mode (screen on and unlocked) next to fermentor for automatic and continuous logging.</span>
             </div>
           </div>
       <p>
@@ -289,7 +304,7 @@
      </div>
      </div>
      </div>
-          <div class="block-title"><i class="material-icons">adjust</i> Calibration (Gravity)</div>
+     <div class="block-title"><i class="material-icons">adjust</i>SG Cal. <i class="f7-icons color-custom-{{Color}} size-15">circle_fill</i></div>
           <div class="block block-strong">
             <div class="content-block">
             <div class="content-block-inner">
@@ -298,19 +313,19 @@
                     <button class="button button-round button-fill button-raised" id="tareinwater-{{Color}}-1.000" onclick="addSGPoints(this)">Calibrate in Water</button>
                 </p>
                 <p>With Known Gravity:</p>
-          <div class="item-title floating-label">Enter uncalibrated (Tilt) point:</div>
+          <div class="item-title floating-label">Enter uncalibrated (Tilt) SG:</div>
           <div class="item-input-wrap">
-          <input type="number" id="uncalSG-{{Color}}" placeholder="1.002">
+          <input type="number" id="uncalSG-{{Color}}" placeholder="Enter uncal/Tilt SG here">
           </div>
           <p class="round">
-              <button class="button button-round button-raised" id="getuncalibratedSGpoint-{{Color}}" onclick="getUncalibratedSGPoint(this)">Get Current Gravity</button>
+              <button class="button button-round button-raised" id="getuncalibratedSGpoint-{{Color}}" onclick="getUncalibratedSGPoint(this)">Get Current SG</button>
           </p>
-          <div class="item-title floating-label">Enter actual (known) point:</div>
+          <div class="item-title floating-label">Enter actual (known) SG:</div>
           <div class="item-input-wrap">
-          <input type="number" id="actualSG-{{Color}}" placeholder="1.000">
+          <input type="number" id="actualSG-{{Color}}" placeholder="Enter actual SG here">
           </div>
           <p class="round">
-              <button class="button button-round button-fill button-raised" id="addSGpoint-{{Color}}" onclick="addSGPoints(this)">Calibrate in Known</button>
+              <button class="button button-round button-fill button-raised" id="addSGpoint-{{Color}}" onclick="addSGPoints(this)">Calibrate in Known SG</button>
             </p>
             <div class="data-table">
                 <table>
@@ -328,7 +343,41 @@
             </div>
           </div>
         </div>
-           <div class="block-title"><i class="material-icons">straighten</i> Units</div>
+          <div class="block-title"><i class="material-icons">adjust</i>Temperature Cal.  <i class="f7-icons color-custom-{{Color}} size-15">circle_fill</i></div>
+          <div class="block block-strong">
+            <div class="content-block">
+            <div class="content-block-inner">
+          <div class="item-title floating-label">Enter uncalibrated (Tilt) temp.:</div>
+          <div class="item-input-wrap">
+          <input type="number" id="uncalTemp-{{Color}}" placeholder="Enter uncal/Tilt temp here">
+          </div>
+          <p class="round">
+              <button class="button button-round button-raised" id="getuncalibratedTemppoint-{{Color}}" onclick="getUncalibratedTempPoint(this)">Get Current Temperature</button>
+          </p>
+          <div class="item-title floating-label">Enter actual (known) temp.:</div>
+          <div class="item-input-wrap">
+          <input type="number" id="actualTemp-{{Color}}" placeholder="Enter actual temp here">
+          </div>
+          <p class="round">
+              <button class="button button-round button-fill button-raised" id="addTemppoint-{{Color}}" onclick="addTempPoints(this)">Calibrate</button>
+            </p>
+            <div class="data-table">
+                <table>
+                    <thead>
+                      <tr>
+                          <th class="numeric-cell">Delete</th>
+                        <th class="numeric-cell">Uncal/Tilt</th>
+                        <th class="numeric-cell">Actual</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tempcallisttemplate-{{Color}}">
+                    </tbody>
+                 </table>
+             </div>
+            </div>
+          </div>
+        </div>
+           <div class="block-title"><i class="material-icons">straighten</i> Units  <i class="f7-icons color-custom-{{Color}} size-15">circle_fill</i></div>
            <div class="block block-strong">
            <div class="content-block">
               <div id="unitsradio-{{Color}}" class="list">
@@ -338,7 +387,7 @@
                         <input type="radio" name="gravityRadio-{{Color}}" value="SG" checked />
                         <i class="icon icon-radio"></i>
                         <div class="item-inner">
-                          <div class="item-title">SG (60°F/60°F)</div>
+                          <div class="item-title">SG (60°F/15.6°C)</div>
                         </div>
                       </label>
                     </li>

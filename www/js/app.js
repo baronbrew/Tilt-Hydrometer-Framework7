@@ -56,6 +56,9 @@ var compiledfilelistTemplate = Template7.compile(filelistTemplate);
 var sgcallistTemplate = $$('#sgcallisttemplate').html();
 var compiledsgcallistTemplate = Template7.compile(sgcallistTemplate);
 
+var tempcallistTemplate = $$('#tempcallisttemplate').html();
+var compiledtempcallistTemplate = Template7.compile(tempcallistTemplate);
+
 var settingsTemplate = $$('#settingstemplate').html();
 var compiledsettingsTemplate = Template7.compile(settingsTemplate);
 
@@ -166,7 +169,7 @@ $$(document).on('deviceready', function() {
         break;
       case 90:
         app.statusbar.hide();
-        $$('.card').css('max-width','45%');
+        $$('.card').css('max-width','30%');
         $$('.card').css('font-size','80%');
         $$('.navbar').css('display','none');
         break;
@@ -254,6 +257,7 @@ $$(document).on('deviceready', function() {
   var displayTempUnits = $$(("input[type='radio'][name='temperatureRadio-" + color + "']:checked")).val();
   localStorage.setItem('displayTempunits-' + color, displayTempUnits);
   updateSGcallist(color);
+  updateTempcallist(color);
   }
     
 //adds color specific attributes
@@ -265,19 +269,28 @@ $$(document).on('deviceready', function() {
     //make sure tilt card is visible
     $$('#tiltcard-' + beacon.Color).show();
     $$('#accordion-' + beacon.Color).show();
+    //set displayed time stamp
+    var date = new Date(beacon.timeStamp);
+    beacon.displaytimeStamp = date.toLocaleString();
     //update list of in range beacons
     var inRangeBeacons = localStorage.getItem('inrangebeacons')||'NONE';
     var inRangeBeaconsArray = inRangeBeacons.split(',');
     var indexOfColor = inRangeBeaconsArray.indexOf(beacon.Color);
-        if (indexOfColor < 0){
+        if (indexOfColor < 0){//check if new Tilt color in range
         inRangeBeaconsArray.push(beacon.Color);
         localStorage.setItem('inrangebeacons',inRangeBeaconsArray);
-        //log data when Tilt comes in range
-        setTimeout(function(){ postToCloudURLs(beacon.Color)},4000);
-        setTimeout(function(){ logToDevice(beacon.Color)},4000);
+        }else{ //if no new Tilt color in range, check interval to log to cloud or device
+        var cloudInterval = localStorage.getItem('cloudInterval-' + beacon.Color)||15;
+        var lastCloudLogged = Number(localStorage.getItem('loggingTimer-' + beacon.Color))||Date.now() - (30 * 60 * 1000);
+        beacon.loggingTimer = (Date.now() - lastCloudLogged) / 1000 / 60;//min since last logged
+        if (Number(cloudInterval) <= beacon.loggingTimer){
+        setTimeout(function(){ 
+            postToCloudURLs(beacon.Color);
+            logToDevice(beacon.Color);
+        },4000);
+        localStorage.setItem('loggingTimer-' + beacon.Color, Date.now());//reset timer
+    };
         }
-    var date = new Date(beacon.timeStamp);
-    beacon.displaytimeStamp = date.toLocaleString();
     //add beer name
     beacon.Beername = localStorage.getItem('beerName-' + beacon.Color);
     if (beacon.Beername === null){
@@ -297,17 +310,7 @@ $$(document).on('deviceready', function() {
     }else{
         beacon.displayRSSI = beacon.rssi + " dBm";
         localStorage.setItem('prevRSSI-' + beacon.Color,beacon.displayRSSI);
-    }
-    //log data at interval to cloud or device
-    var cloudInterval = localStorage.getItem('cloudInterval-' + beacon.Color)||15;
-    var lastCloudLogged = localStorage.getItem('lastCloudLogged-' + beacon.Color)||date;
-    beacon.lastCloudLogged = (Number(date) - Number(lastCloudLogged)) / 1000 / 60;
-    if (Number(cloudInterval) <= Number(beacon.lastCloudLogged)){
-        postToCloudURLs(beacon.Color);
-        logToDevice(beacon.Color);
-        localStorage.setItem('lastCloudLogged-' + beacon.Color, Date.now());//reset timer
-    };
-    
+    }    
 }
 
   function initScan() {
@@ -425,10 +428,10 @@ $$(document).on('deviceready', function() {
     switch (beacon.displayTempunits){
         case "°F" : 
         beacon.uncaldisplayTemp = beacon.uncalTemp;
-        beacon.caldisplayTemp = beacon.uncalTemp;//need to change once temperature calibration is setup
+        beacon.caldisplayTemp = (getCalTemp(beacon.Color)).toFixed(0);
         break;
         case "°C"  : beacon.uncaldisplayTemp = ((beacon.uncalTemp - 32) * 5 / 9).toFixed(1);
-        beacon.caldisplayTemp = ((beacon.uncalTemp - 32) * 5 / 9).toFixed(1);
+        beacon.caldisplayTemp = ((getCalTemp(beacon.Color) - 32) * 5 / 9).toFixed(1);
         break;
     }
     beacon.displayFermunits = localStorage.getItem('displayFermunits-' + beacon.Color)||"";
@@ -469,10 +472,10 @@ $$(document).on('deviceready', function() {
         var docLongURL = localStorage.getItem('docLongURL-' + foundBeaconsArray[i]);
         if (docLongURL !== null){
         $$('#cloudStatus' + foundBeaconsArray[i]).html('<a class="link external" href="' + docLongURL + '" target="_system">&nbsp;<i class="material-icons size-15">cloud</i><span id="lastCloudLogged' + foundBeaconsArray[i] +'"></span></a>');
-        console.log("cloud status updated");
         }
         //populate calibration point list
         updateSGcallist(foundBeaconsArray[i]);
+        updateTempcallist(foundBeaconsArray[i]);
         //show beer name in settings
         showBeerName(foundBeaconsArray[i]);
         //show email if available
@@ -544,33 +547,42 @@ $$(document).on('deviceready', function() {
             updateSGcallist(calcolor[1]);
             }, function () {
                 app.dialog.prompt('Enter actual temperature:', 'Calibrate '+ calcolor[1], function (actualTemp){
-               var actualTemppoints = localStorage.getItem('actualTemppoints-' + calcolor[1])||'-0.001,1.000,10.000';
+               var actualTemppoints = localStorage.getItem('actualTemppoints-' + calcolor[1])||'-1000,1000';
                var actualTemppointsArray = actualTemppoints.split(',');
-               var uncalTemppoints = localStorage.getItem('uncalTemppoints-' + calcolor[1])||'0,1000';
+               var uncalTemppoints = localStorage.getItem('uncalTemppoints-' + calcolor[1])||'-1000,1000';
                var uncalTemppointsArray = uncalTemppoints.split(',');
-               var actualTemppoint = String(Number(actualTemp).toFixed(0));
                var uncalTemppoint = localStorage.getItem('uncalTemp-' + calcolor[1]);
-               //add uncal. point only if actual doesn't already exist, otherwise replace with new uncal. point
-               var calTempindex = actualTemppointsArray.indexOf(actualTemppoint);
+               if (localStorage.getItem('displayTempunits-' + calcolor[1]) == "°C") {
+                    var actualTemppointToast = Number(actualTemp).toFixed(1);
+                    var uncalTemppointToast = ((Number(uncalTemppoint) - 32 ) * 5 / 9).toFixed(1);
+                    var actualTemppoint = ((Number(actualTemp) * 9 / 5) + 32).toFixed(0);
+                    }else{//degrees F
+                    var uncalTemppointToast = Number(uncalTemppoint).toFixed(0);
+                    var actualTemppoint = Number(actualTemp).toFixed(0);
+                }
+                var actualTempToast = actualTemp;
+                //add uncal. point only if actual doesn't already exist, otherwise replace with new uncal. point
+                var calTempindex = actualTemppointsArray.indexOf(actualTemppoint);
              if (Number(actualTemp) > -1 && Number(actualTemp) < 213){
-              if (calTempindex < 0){
+              if (calTempindex < 0){//new calibration point was entered
                  actualTemppointsArray.push(actualTemppoint);
                  actualTemppointsArray.sort(function(a, b){return a-b;});
                  localStorage.setItem('actualTemppoints-' + calcolor[1], actualTemppointsArray);
                  uncalTemppointsArray.push(uncalTemppoint);
                  uncalTemppointsArray.sort(function(a, b){return a-b;});
                  localStorage.setItem('uncalTemppoints-' + calcolor[1], uncalTemppointsArray);
-                 app.toast.create({text: 'Success calibrating ' + uncalTemppoint + ' (uncal.) to ' + actualTemppoint + ' (actual)', icon: '<i class="material-icons">adjust</i>', position: 'center', closeTimeout: 4000}).open();
+                 app.toast.create({text: 'Success calibrating ' + uncalTemppointToast + ' (uncal.) to ' + actualTemppointToast + ' (actual)', icon: '<i class="material-icons">adjust</i>', position: 'center', closeTimeout: 4000}).open();
               } else{
                  localStorage.setItem('actualTemppoints-' + calcolor[1], actualTemppointsArray);
                  uncalTemppointsArray.splice(calTempindex, 1, uncalTemppoint);
-                 uncalSGpointsArray.sort(function(a, b){return a-b;});
+                 uncalTemppointsArray.sort(function(a, b){return a-b;});
                  localStorage.setItem('uncalTemppoints-' + calcolor[1], uncalTemppointsArray);
-                 app.toast.create({text: 'Success calibrating ' + uncalTemppoint + ' (uncal.) to ' + actualTemppoint + ' (actual)', icon: '<i class="material-icons">adjust</i>', position: 'center', closeTimeout: 4000}).open();
+                 app.toast.create({text: 'Success calibrating ' + uncalTemppointToast + ' (uncal.) to ' + actualTemppointToast + ' (actual)', icon: '<i class="material-icons">adjust</i>', position: 'center', closeTimeout: 4000}).open();
              }
             }else{
-                app.dialog.alert('The calibration point ' + actualTemp + 'is out of range or not a number. Please try again.', 'Calibration Error');
+                app.dialog.alert('The calibration point "' + actualTempToast + '" is out of range or not a number. Please try again.', 'Calibration Error');
             }
+            updateTempcallist(calcolor[1]);
                 });
                 });
             });
@@ -623,7 +635,7 @@ $$(document).on('deviceready', function() {
     $$('#caldisplayTemp+displayTempunits' + beacon.Color).html(String(beacon.caldisplayTemp) + beacon.displayTempunits);
     $$('#numberSecondsAgo' + beacon.Color).html(beacon.numberSecondsAgo);
     $$('#displayRSSI' + beacon.Color).html(beacon.displayRSSI);
-    $$('#displaytimeStamp' + beacon.Color).html(beacon.displaytimeStamp + ' v1.0.16');
+    $$('#displaytimeStamp' + beacon.Color).html(beacon.displaytimeStamp + ' v1.0.18');
     $$('#percentScaleSG' + beacon.Color).css('width', String((beacon.uncalSG - 0.980) / (1.150 - 0.980) * 100) + "%");
     $$('#percentScaleTemp' + beacon.Color).css('width', String((beacon.uncalTemp - 0) / (185 - 0) * 100) + "%");
     //update Tilt objects
@@ -651,6 +663,26 @@ NativeStorage.setItem('uncalSGpoints-' + color, uncalSGpoints, function (result)
 NativeStorage.setItem('actualSGpoints-' + color, actualSGpoints, function (result) { }, function (e) { });
 };
 
+function updateTempcallist(color) {
+    var uncalTemppoints = localStorage.getItem('uncalTemppoints-' + color)||'-0.001,1.000,10.000';
+    var uncalTemppointsArray = uncalTemppoints.split(',');
+    var actualTemppoints = localStorage.getItem('actualTemppoints-' + color)||'-0.001,1.000,10.000';
+    var actualTemppointsArray = actualTemppoints.split(',');
+    var displayTempcallistArray = [];
+    for (var i = 1; i < actualTemppointsArray.length - 1; i++){
+        var actualdisplayTempcalpoint = convertTemptoPreferredUnits (color, Number(actualTemppointsArray[i]));
+        var uncaldisplayTempcalpoint = convertTemptoPreferredUnits (color, Number(uncalTemppointsArray[i]));
+        var points = JSON.parse('{ "color" : "' + color + '", "uncalpoint" : "' + uncaldisplayTempcalpoint + '", "actualpoint" : "' + actualdisplayTempcalpoint + '" }');
+        displayTempcallistArray.push(points);
+    };
+    var displayTempcallistObject = {};
+    displayTempcallistObject.Tempcalpoints = displayTempcallistArray;
+    $$('#tempcallisttemplate-' + color).html(compiledtempcallistTemplate(displayTempcallistObject));
+    //save updated calibration points to native storage
+    NativeStorage.setItem('uncalTemppoints-' + color, uncalTemppoints, function (result) { }, function (e) { });
+    NativeStorage.setItem('actualTemppoints-' + color, actualTemppoints, function (result) { }, function (e) { });
+    };
+
 function convertSGtoPreferredUnits (color, SG) {
 var displayFermunits = localStorage.getItem('displayFermunits-' + color)||'';
     switch (displayFermunits){
@@ -662,6 +694,16 @@ var displayFermunits = localStorage.getItem('displayFermunits-' + color)||'';
         case '°Bx'  : return ( -584.6957 + 1083.2666 * SG -577.9848 * SG * SG + 124.5209 * SG * SG * SG ).toFixed(1);
     }
 }
+
+function convertTemptoPreferredUnits (color, Temp) {
+var displayTempunits = localStorage.getItem('displayTempunits-' + color)||'°F';
+    switch (displayTempunits){
+        case '°F' : return Temp.toFixed(0);
+        break;
+        case '°C'  : return ((Temp - 32) * 5 / 9).toFixed(1);
+    }
+}
+
 
 function linearInterpolation (x, x0, y0, x1, y1) {
     var a = (y1 - y0) / (x1 - x0);
@@ -688,8 +730,21 @@ return calSG;
 }
 
 function getCalTemp (color) {
-    //copy above for temp calibration
-    return Number(localStorage.getItem('uncalTemp-' + color));
+//get cal points from local storage
+var uncalTemppoints = localStorage.getItem('uncalTemppoints-' + color)||'-1000,1000';
+var unCalTempPointsArray = uncalTemppoints.split(',');
+var actualTemppoints = localStorage.getItem('actualTemppoints-' + color)||'-1000,1000';
+var actualTempPointsArray= actualTemppoints.split(',');
+//temporary array for finding correct x and y values
+var unCalTempPointsTempArray = uncalTemppoints.split(',');
+var Temp = localStorage.getItem('uncalTemp-' + color);
+//add current value to calibration point list
+unCalTempPointsTempArray.push(Temp);
+//sort list lowest to highest
+unCalTempPointsTempArray.sort(function(a, b){return a-b;});
+var indexTemp = unCalTempPointsTempArray.indexOf(Temp);
+var calTemp = linearInterpolation (Number(Temp), Number(unCalTempPointsArray[indexTemp-1]), Number(actualTempPointsArray[indexTemp-1]), Number(unCalTempPointsArray[indexTemp]), Number(actualTempPointsArray[indexTemp]));
+return calTemp;
 }
 
 function deleteSGCalPoint (checkbox){
@@ -714,15 +769,57 @@ localStorage.setItem('actualSGpoints-' + color,actualSGPointsArray);
 setTimeout(function(){ 
     if (checkbox.checked){
         updateSGcallist(color);
-        app.toast.create({text: 'Deleted ' + deleteduncalpoint + ' (uncal.) and ' + deletedactualpoint + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
+        var deleteduncalpointToast = convertTemptoPreferredUnits(color, Number(deleteduncalpoint));
+        var deleteduncalpointToast = convertTemptoPreferredUnits(color, Number(deleteduncalpoint));
+        app.toast.create({text: 'Calibration points Deleted: ' + deleteduncalpointToast + ' (uncal.) and ' + deletedactualpoint + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
     }
     },300);
 }
+
+function deleteTempCalPoint (checkbox){
+    //get color and index of selected point to delete in format as follows (tempcalpoints-{{color}}-{{@index}})
+    var selectedPoint = checkbox.id.split('-');
+    var color = selectedPoint[1];
+    var index = Number(selectedPoint[2]) + 1;
+    console.log(index);
+    var uncalTemppoints = localStorage.getItem('uncalTemppoints-' + color)||'-1000,1000';
+    var unCalTempPointsArray = uncalTemppoints.split(',');
+    var actualTemppoints = localStorage.getItem('actualTemppoints-' + color)||'-1000,1000';
+    var actualTempPointsArray = actualTemppoints.split(',');
+    var deleteduncalpoint = unCalTempPointsArray[index];
+    var deletedactualpoint = actualTempPointsArray[index];
+    //remove from temp cal points array
+    unCalTempPointsArray.splice(index, 1);
+    actualTempPointsArray.splice(index, 1);
+    //update local storage with new cal points
+    localStorage.setItem('uncalTemppoints-' + color,unCalTempPointsArray);
+    localStorage.setItem('actualTemppoints-' + color,actualTempPointsArray);
+    //delete point half second after checking box
+    setTimeout(function(){ 
+        if (checkbox.checked){
+            updateTempcallist(color);
+            var deleteduncalpointToast = convertTemptoPreferredUnits(color, Number(deleteduncalpoint));
+            var deletedactualpointToast = convertTemptoPreferredUnits(color, Number(deletedactualpoint));
+            app.toast.create({text: 'Calibration points deleted: ' + deleteduncalpointToast + ' (uncal.) and ' + deletedactualpointToast + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
+        }
+        },300);
+    }
 
 function getUncalibratedSGPoint (button){
     var clickedButton = button.id.split('-');
     var color = clickedButton[1];
     $$('#uncalSG-' + color).val(localStorage.getItem('uncalSG-' + color));
+}
+
+function getUncalibratedTempPoint (button){
+    var clickedButton = button.id.split('-');
+    var color = clickedButton[1];
+    var uncalTemp = localStorage.getItem('uncalTemp-' + color);
+    var units = localStorage.getItem('displayTempunits-' + color);
+    if (units == "°C"){
+        uncalTemp = ((uncalTemp - 32) * 5 / 9).toFixed(1);
+    }
+    $$('#uncalTemp-' + color).val(uncalTemp);
 }
 
 function addSGPoints (button){
@@ -754,26 +851,81 @@ function addSGPoints (button){
         uncalSGpointsArray.push(uncalSGpoint);
         uncalSGpointsArray.sort(function(a, b){return a-b;});
         localStorage.setItem('uncalSGpoints-' + color, uncalSGpointsArray);
-        app.toast.create({text: 'Success: Set ' + uncalSGpoint + ' (uncal.) to ' + actualSGpoint + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
+        app.toast.create({text: 'Success: Set calibration ' + uncalSGpoint + ' (uncal.) to ' + actualSGpoint + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
      } else if (calSGindex > 0 && uncalSGindex < 0){
         localStorage.setItem('actualSGpoints-' + color, actualSGpointsArray);
         uncalSGpointsArray.splice(calSGindex, 1, uncalSGpoint);
         uncalSGpointsArray.sort(function(a, b){return a-b;});
         localStorage.setItem('uncalSGpoints-' + color, uncalSGpointsArray);
-        app.toast.create({text: 'Success: Changed ' + uncalSGpoint + ' (uncal.) to ' + actualSGpoint + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
+        app.toast.create({text: 'Success: Changed calibration from ' + uncalSGpoint + ' (uncal.) to ' + actualSGpoint + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
     }
        else if (calSGindex < 0 && uncalSGindex > 0){
         localStorage.setItem('uncalSGpoints-' + color, uncalSGpointsArray);
         actualSGpointsArray.splice(uncalSGindex, 1, actualSGpoint);
         actualSGpointsArray.sort(function(a, b){return a-b;});
         localStorage.setItem('actualSGpoints-' + color, actualSGpointsArray);
-        app.toast.create({text: 'Success: Changed ' + actualSGpoint + ' (actual) to ' + uncalSGpoint + ' (uncal.)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
+        app.toast.create({text: 'Success: Changed calibration from ' + actualSGpoint + ' (actual) to ' + uncalSGpoint + ' (uncal.)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
        }
    }else{
-       app.dialog.alert('The calibration point ' + actual + ' is out of range or not a number. Please try again.', 'Calibration Error');
+       app.dialog.alert('Error: The calibration point ' + actual + ' is out of range or not a number. Please try again.', 'Calibration Error');
    }
    //update list of calibration points in settings
    updateSGcallist(color);
+
+}
+
+function addTempPoints (button){
+    var clickedButton = button.id.split('-');
+    var color = clickedButton[1];
+    var units = localStorage.getItem('displayTempunits-' + color)||"°F";
+   //get values from settings panel
+    var actual = $$('#actualTemp-' + color).val();
+    var uncalTemppoint = $$('#uncalTemp-' + color).val();
+    //convert values from display units to default units if needed
+    if (units == "°C"){
+        actual = ((actual * 9 / 5) + 32).toFixed(0);
+        uncalTemppoint = ((uncalTemppoint * 9 / 5) + 32).toFixed(0);
+    }
+    //console.log(actual);
+    var actualTemppoints = localStorage.getItem('actualTemppoints-' + color)||'-1000,1000';
+    var actualTemppointsArray = actualTemppoints.split(',');
+    var uncalTemppoints = localStorage.getItem('uncalTemppoints-' + color)||'-1000,1000';
+    var uncalTemppointsArray = uncalTemppoints.split(',');
+    var actualTemppoint = Number(actual).toFixed(0);
+    //console.log(uncalTemppoint);
+    //add uncal. point only if actual doesn't already exist, otherwise replace with new uncal. point
+    var calTempindex = actualTemppointsArray.indexOf(actualTemppoint);
+    var uncalTempindex = uncalTemppointsArray.indexOf(uncalTemppoint);
+    if (Number(actual) > -1 && Number(actual) < 213){
+     if (calTempindex < 0 && uncalTempindex < 0){
+        actualTemppointsArray.push(actualTemppoint);
+        actualTemppointsArray.sort(function(a, b){return a-b;});
+        localStorage.setItem('actualTemppoints-' + color, actualTemppointsArray);
+        uncalTemppointsArray.push(uncalTemppoint);
+        uncalTemppointsArray.sort(function(a, b){return a-b;});
+        localStorage.setItem('uncalTemppoints-' + color, uncalTemppointsArray);
+        var actualTemppointToast = convertTemptoPreferredUnits(color, Number(actualTemppoint));
+        var uncalTemppointToast = convertTemptoPreferredUnits(color, Number(uncalTemppoint));
+        app.toast.create({text: 'Success: Set calibration ' + uncalTemppointToast + ' (uncal.) to ' + actualTemppointToast + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
+     } else if (calTempindex > 0 && uncalTempindex < 0){
+        localStorage.setItem('actualTemppoints-' + color, actualTemppointsArray);
+        uncalTemppointsArray.splice(calTempindex, 1, uncalTemppoint);
+        uncalTemppointsArray.sort(function(a, b){return a-b;});
+        localStorage.setItem('uncalTemppoints-' + color, uncalTemppointsArray);
+        app.toast.create({text: 'Success: Changed calibration from ' + uncalTemppointToast + ' (uncal.) to ' + actualTemppointToast + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
+    }
+       else if (calTempindex < 0 && uncalTempindex > 0){
+        localStorage.setItem('uncalTemppoints-' + color, uncalTemppointsArray);
+        actualTemppointsArray.splice(uncalTempindex, 1, actualTemppoint);
+        actualTemppointsArray.sort(function(a, b){return a-b;});
+        localStorage.setItem('actualTemppoints-' + color, actualTemppointsArray);
+        app.toast.create({text: 'Success: Changed calibration from ' + actualTemppointToast + ' (actual) to ' + uncalTemppointToast + ' (uncal.)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
+       }
+   }else{
+       app.dialog.alert('Error: The calibration point "' + actual + '" is out of range or not a number. Please try again.', 'Calibration Error');
+   }
+   //update list of calibration points in settings
+   updateTempcallist(color);
 
 }
 
@@ -1745,7 +1897,7 @@ function emailCurrentCSV(color){
     cordova.plugins.email.open({
         to: email,
         subject: 'Tilt Hydrometer Log for ' + currentBeerNameArray[0] + ' (' + color + ' TILT)',
-        body: '<p>Attached CSV file can be viewed in Excel, Google Sheets, and directly in web browsers.</p><h2>Last Reading</h2><h3>Gravity: ' + String(beacon.caldisplayFerm) + beacon.displayFermunits + '</h3><h3> Temperature: ' + String(beacon.uncaldisplayTemp) + beacon.displayTempunits + '</h3><h3>' + beacon.displaytimeStamp + '</h3><p>You may also view the data directly in the cloud if cloud logging was enabled: <a href="' + localStorage.getItem('docLongURL-' + color) + '">' + localStorage.getItem('docLongURL-' + color) + '</a> Or use our Google Sheets template to <a href="https://docs.google.com/spreadsheets/d/1owuNOn25IHQ1Ck8pBgAEGkOifIBA7YhVc5JpE9Tlb1c/edit?usp=sharing">import your CSV data into a pre-formatted spreadsheet.</a> Works with laptop/desktop version of Google Sheets.</p>',
+        body: '<p>Attached CSV file can be viewed in Excel, Google Sheets, and directly in web browsers.</p><h2>Last Reading</h2><h3>Gravity: ' + String(beacon.caldisplayFerm) + beacon.displayFermunits + '</h3><h3> Temperature: ' + String(beacon.uncaldisplayTemp) + beacon.displayTempunits + '</h3><h3>' + beacon.displaytimeStamp + '</h3><p>You may also view the data directly in the cloud if cloud logging was enabled: <a href="' + localStorage.getItem('docLongURL-' + color) + '">' + localStorage.getItem('docLongURL-' + color) + '</a> Or use our Google Sheets template (https://docs.google.com/spreadsheets/d/1owuNOn25IHQ1Ck8pBgAEGkOifIBA7YhVc5JpE9Tlb1c/edit?usp=sharing) to import your CSV data into a pre-formatted spreadsheet. Works only with the laptop/desktop version of Google Sheets.</p>',
         isHtml: true,
         attachments : filePathAndName });
 }
