@@ -169,7 +169,7 @@ $$(document).on('deviceready', function() {
         break;
       case 90:
         app.statusbar.hide();
-        $$('.card').css('max-width','30%');
+        $$('.card').css('max-width','45%');
         $$('.card').css('font-size','80%');
         $$('.navbar').css('display','none');
         break;
@@ -557,6 +557,7 @@ $$(document).on('deviceready', function() {
                     var uncalTemppointToast = ((Number(uncalTemppoint) - 32 ) * 5 / 9).toFixed(1);
                     var actualTemppoint = ((Number(actualTemp) * 9 / 5) + 32).toFixed(0);
                     }else{//degrees F
+                    var actualTemppointToast = Number(actualTemp).toFixed(0);
                     var uncalTemppointToast = Number(uncalTemppoint).toFixed(0);
                     var actualTemppoint = Number(actualTemp).toFixed(0);
                 }
@@ -635,7 +636,7 @@ $$(document).on('deviceready', function() {
     $$('#caldisplayTemp+displayTempunits' + beacon.Color).html(String(beacon.caldisplayTemp) + beacon.displayTempunits);
     $$('#numberSecondsAgo' + beacon.Color).html(beacon.numberSecondsAgo);
     $$('#displayRSSI' + beacon.Color).html(beacon.displayRSSI);
-    $$('#displaytimeStamp' + beacon.Color).html(beacon.displaytimeStamp + ' v1.0.18');
+    $$('#displaytimeStamp' + beacon.Color).html(beacon.displaytimeStamp + ' v1.0.21');
     $$('#percentScaleSG' + beacon.Color).css('width', String((beacon.uncalSG - 0.980) / (1.150 - 0.980) * 100) + "%");
     $$('#percentScaleTemp' + beacon.Color).css('width', String((beacon.uncalTemp - 0) / (185 - 0) * 100) + "%");
     //update Tilt objects
@@ -664,9 +665,9 @@ NativeStorage.setItem('actualSGpoints-' + color, actualSGpoints, function (resul
 };
 
 function updateTempcallist(color) {
-    var uncalTemppoints = localStorage.getItem('uncalTemppoints-' + color)||'-0.001,1.000,10.000';
+    var uncalTemppoints = localStorage.getItem('uncalTemppoints-' + color)||'-1000,1000';
     var uncalTemppointsArray = uncalTemppoints.split(',');
-    var actualTemppoints = localStorage.getItem('actualTemppoints-' + color)||'-0.001,1.000,10.000';
+    var actualTemppoints = localStorage.getItem('actualTemppoints-' + color)||'-1000,1000';
     var actualTemppointsArray = actualTemppoints.split(',');
     var displayTempcallistArray = [];
     for (var i = 1; i < actualTemppointsArray.length - 1; i++){
@@ -896,6 +897,8 @@ function addTempPoints (button){
     //add uncal. point only if actual doesn't already exist, otherwise replace with new uncal. point
     var calTempindex = actualTemppointsArray.indexOf(actualTemppoint);
     var uncalTempindex = uncalTemppointsArray.indexOf(uncalTemppoint);
+    var actualTemppointToast = convertTemptoPreferredUnits(color, Number(actualTemppoint));
+    var uncalTemppointToast = convertTemptoPreferredUnits(color, Number(uncalTemppoint));
     if (Number(actual) > -1 && Number(actual) < 213){
      if (calTempindex < 0 && uncalTempindex < 0){
         actualTemppointsArray.push(actualTemppoint);
@@ -904,8 +907,6 @@ function addTempPoints (button){
         uncalTemppointsArray.push(uncalTemppoint);
         uncalTemppointsArray.sort(function(a, b){return a-b;});
         localStorage.setItem('uncalTemppoints-' + color, uncalTemppointsArray);
-        var actualTemppointToast = convertTemptoPreferredUnits(color, Number(actualTemppoint));
-        var uncalTemppointToast = convertTemptoPreferredUnits(color, Number(uncalTemppoint));
         app.toast.create({text: 'Success: Set calibration ' + uncalTemppointToast + ' (uncal.) to ' + actualTemppointToast + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
      } else if (calTempindex > 0 && uncalTempindex < 0){
         localStorage.setItem('actualTemppoints-' + color, actualTemppointsArray);
@@ -1912,7 +1913,7 @@ function emailClickedCSV(fileName, color){
     cordova.plugins.email.open({
         to: email,
         subject: fileName,
-        body: '<p>Attached CSV file can be viewed in Excel, Google Sheets, and directly in web browsers. Or use our Google Sheets template to <a href="https://docs.google.com/spreadsheets/d/1owuNOn25IHQ1Ck8pBgAEGkOifIBA7YhVc5JpE9Tlb1c/edit?usp=sharing">import your CSV data into a pre-formatted spreadsheet.</a> Works with laptop/desktop version of Google Sheets.</p>',
+        body: '<p>Attached CSV file can be viewed in Excel, Google Sheets, and directly in web browsers. Or use our Google Sheets template (https://docs.google.com/spreadsheets/d/1owuNOn25IHQ1Ck8pBgAEGkOifIBA7YhVc5JpE9Tlb1c/edit?usp=sharing) to import your CSV data into a pre-formatted spreadsheet. Works with laptop/desktop version of Google Sheets.</p>',
         isHtml: true,
         attachments : filePathAndName });
 }
@@ -2016,4 +2017,39 @@ function restoreCalibrationPoints(color){
                 localStorage.setItem('actualSGpoints-' + color, result);
                 }
              }, function (e) { });
+            NativeStorage.getItem('uncalTemppoints-' + color, function (result) { 
+                if(result !== undefined){
+                localStorage.setItem('uncalTemppoints-' + color, result);
+                }
+             }, function (e) { });
+            NativeStorage.getItem('actualTemppoints-' + color, function (result) { 
+                if(result !== undefined){
+                localStorage.setItem('actualTemppoints-' + color, result);
+                }
+             }, function (e) { });
+}
+
+function showHelpVideo(name){
+    switch(name) {  
+        case 'sgcal':
+        var myPhotoBrowserPopupDark = app.photoBrowser.create({
+          photos : [
+            {
+                html: '<iframe src="https://www.youtube.com/embed/gpeiVhfmJ0w" frameborder="0" allow="accelerometer; autoplay;" allowfullscreen></iframe>',
+                caption: 'Calibrate in Water'
+            },
+            {
+                url: 'http://lorempixel.com/1024/1024/sports/2/',
+                caption: 'Second Caption Text'
+            },
+            {
+                url: 'http://lorempixel.com/1024/1024/sports/3/',
+            },
+          ],
+        theme: 'dark',
+        type: 'standalone'
+      });
+      myPhotoBrowserPopupDark.open();
+      break;
+    }
 }

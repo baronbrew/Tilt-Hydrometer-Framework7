@@ -300,8 +300,8 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-file": "6.0.1",
     "cordova-plugin-nativestorage": "2.3.2",
     "cordova-plugin-splashscreen": "5.0.2",
-    "cordova-plugin-whitelist": "1.3.3",
     "cordova-plugin-statusbar": "2.4.2",
-    "cordova-plugin-inappbrowser": "3.0.0"
+    "cordova-plugin-whitelist": "1.3.3",
+    "cordova-plugin-inappbrowser": "3.1.0"
   };
 });

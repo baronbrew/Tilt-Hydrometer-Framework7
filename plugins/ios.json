@@ -31,10 +31,10 @@
     "cordova-plugin-splashscreen": {
       "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
-    "cordova-plugin-whitelist": {
+    "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
-    "cordova-plugin-statusbar": {
+    "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
     "cordova-plugin-inappbrowser": {
