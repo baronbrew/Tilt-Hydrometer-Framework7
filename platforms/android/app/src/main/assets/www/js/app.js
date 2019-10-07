@@ -2028,28 +2028,3 @@ function restoreCalibrationPoints(color){
                 }
              }, function (e) { });
 }
-
-function showHelpVideo(name){
-    switch(name) {  
-        case 'sgcal':
-        var myPhotoBrowserPopupDark = app.photoBrowser.create({
-          photos : [
-            {
-                html: '<iframe src="https://www.youtube.com/embed/gpeiVhfmJ0w" frameborder="0" allow="accelerometer; autoplay;" allowfullscreen></iframe>',
-                caption: 'Calibrate in Water'
-            },
-            {
-                url: 'http://lorempixel.com/1024/1024/sports/2/',
-                caption: 'Second Caption Text'
-            },
-            {
-                url: 'http://lorempixel.com/1024/1024/sports/3/',
-            },
-          ],
-        theme: 'dark',
-        type: 'standalone'
-      });
-      myPhotoBrowserPopupDark.open();
-      break;
-    }
-}
