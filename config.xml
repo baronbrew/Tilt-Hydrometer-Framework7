@@ -22,8 +22,8 @@
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="KeepRunning" value="true" />
     <platform name="android">
-        <preference name="com.unarin.cordova.beacon.android.altbeacon.ForegroundScanPeriod" value="2100" />
-        <preference name="com.unarin.cordova.beacon.android.altbeacon.ForegroundBetweenScanPeriod" value="5900" />
+        <preference name="com.unarin.cordova.beacon.android.altbeacon.ForegroundScanPeriod" value="2500" />
+        <preference name="com.unarin.cordova.beacon.android.altbeacon.ForegroundBetweenScanPeriod" value="2500" />
         <preference name="StatusBarOverlaysWebView" value="false" />
         <preference name="StatusBarBackgroundColor" value="#000000" />
         <preference name="StatusBarStyle" value="lightcontent" />
@@ -68,6 +68,5 @@
     <plugin name="cordova-plugin-statusbar" spec="~2.4.2" />
     <plugin name="cordova-plugin-splashscreen" spec="~5.0.2" />
     <plugin name="cordova-plugin-inappbrowser" spec="~3.1.0" />
-    <engine name="android" spec="^7.1.4" />
     <engine name="ios" spec="^5.0.0" />
 </widget>

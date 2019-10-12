@@ -25,19 +25,19 @@
     "cordova-plugin-file": {
       "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
     },
-    "cordova-plugin-splashscreen": {
-      "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
-    },
-    "cordova-plugin-whitelist": {
+    "cordova-plugin-inappbrowser": {
       "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
     },
     "cordova-plugin-nativestorage": {
       "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
     },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
+    },
     "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
     },
-    "cordova-plugin-inappbrowser": {
+    "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
     }
   },

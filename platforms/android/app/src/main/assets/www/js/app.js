@@ -10,7 +10,7 @@ var app  = new Framework7({
   statusbar: {
       overlay: false,
       iosOverlaysWebView: false,
-      enabled: true,//disable for android
+      enabled: false,//disable for android
       iosTextColor: 'white',
       iosBackgroundColor: 'black',
   },
