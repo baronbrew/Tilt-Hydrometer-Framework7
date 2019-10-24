@@ -10,3 +10,4 @@ string app_name
 string launcher_name
 xml config
 xml emailcomposer_provider_paths
+xml network_security_config

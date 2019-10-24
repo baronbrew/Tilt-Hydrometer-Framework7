@@ -28,7 +28,8 @@ var app  = new Framework7({
   data: function () {
     return {
       defaultCloudURL : 'https://script.google.com/a/baronbrew.com/macros/s/AKfycbydNOcB-_3RB3c-7sOTI-ZhTnN43Ye1tt0EFvvMxTxjdbheaw/exec',
-      tiltColors : ['RED', 'GREEN', 'BLACK', 'PURPLE', 'ORANGE', 'BLUE', 'YELLOW', 'PINK']
+      tiltColors : ['RED', 'GREEN', 'BLACK', 'PURPLE', 'ORANGE', 'BLUE', 'YELLOW', 'PINK'],
+      appVersion : '1.0.23'
     };
   },
   // App root methods
@@ -636,7 +637,7 @@ $$(document).on('deviceready', function() {
     $$('#caldisplayTemp+displayTempunits' + beacon.Color).html(String(beacon.caldisplayTemp) + beacon.displayTempunits);
     $$('#numberSecondsAgo' + beacon.Color).html(beacon.numberSecondsAgo);
     $$('#displayRSSI' + beacon.Color).html(beacon.displayRSSI);
-    $$('#displaytimeStamp' + beacon.Color).html(beacon.displaytimeStamp + ' v1.0.21');
+    $$('#displaytimeStamp' + beacon.Color).html(beacon.displaytimeStamp + ' v' + app.data.appVersion);
     $$('#percentScaleSG' + beacon.Color).css('width', String((beacon.uncalSG - 0.980) / (1.150 - 0.980) * 100) + "%");
     $$('#percentScaleTemp' + beacon.Color).css('width', String((beacon.uncalTemp - 0) / (185 - 0) * 100) + "%");
     //update Tilt objects

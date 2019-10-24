@@ -63,6 +63,8 @@ ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydromete
 		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:5:18-52
 	android:icon
 		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:5:53-87
+	android:usesCleartextTraffic
+		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:5:148-183
 activity#com.baronbrew.tilthydrometerf7.MainActivity
 ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:6:9-11:20
 	android:label

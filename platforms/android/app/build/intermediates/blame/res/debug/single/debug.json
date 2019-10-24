@@ -104,6 +104,10 @@
         "source": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/res/drawable-xxhdpi/ic_action_remove.png"
     },
     {
+        "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/xml_network_security_config.xml.flat",
+        "source": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/res/xml/network_security_config.xml"
+    },
+    {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/mipmap-hdpi_icon.png.flat",
         "source": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/res/mipmap-hdpi/icon.png"
     },
@@ -144,11 +148,11 @@
         "source": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/res/drawable-xhdpi/ic_action_remove.png"
     },
     {
-        "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-land-xxxhdpi_screen.png.flat",
-        "source": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/res/drawable-land-xxxhdpi/screen.png"
-    },
-    {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/mipmap-xhdpi_icon.png.flat",
         "source": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/res/mipmap-xhdpi/icon.png"
+    },
+    {
+        "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-land-xxxhdpi_screen.png.flat",
+        "source": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/res/drawable-land-xxxhdpi/screen.png"
     }
 ]
