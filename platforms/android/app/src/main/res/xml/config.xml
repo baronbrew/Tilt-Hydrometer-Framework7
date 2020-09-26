@@ -1,14 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.baronbrew.tilthydrometerf7" version="1.0.21" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <feature name="LocationManager">
-        <param name="android-package" value="com.unarin.cordova.beacon.LocationManager" />
-    </feature>
-    <feature name="Permissions">
-        <param name="android-package" value="com.android.plugins.Permissions" />
-    </feature>
-    <feature name="Device">
-        <param name="android-package" value="org.apache.cordova.device.Device" />
-    </feature>
+<widget id="com.baronbrew.tilthydrometerf7" version="1.0.27" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <feature name="File">
         <param name="android-package" value="org.apache.cordova.file.FileUtils" />
         <param name="onload" value="true" />
@@ -27,6 +18,15 @@
     <feature name="StatusBar">
         <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
         <param name="onload" value="true" />
+    </feature>
+    <feature name="Device">
+        <param name="android-package" value="org.apache.cordova.device.Device" />
+    </feature>
+    <feature name="LocationManager">
+        <param name="android-package" value="com.unarin.cordova.beacon.LocationManager" />
+    </feature>
+    <feature name="Permissions">
+        <param name="android-package" value="com.android.plugins.Permissions" />
     </feature>
     <feature name="Whitelist">
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
@@ -76,8 +76,12 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="KeepRunning" value="true" />
-    <preference name="com.unarin.cordova.beacon.android.altbeacon.ForegroundScanPeriod" value="2500" />
-    <preference name="com.unarin.cordova.beacon.android.altbeacon.ForegroundBetweenScanPeriod" value="2500" />
+    <preference name="android-minSdkVersion" value="19" />
+    <preference name="android-targetSdkVersion" value="29" />
+    <preference name="android-maxSdkVersion" value="29" />
+    <preference name="com.unarin.cordova.beacon.android.altbeacon.RequestBtPermission" value="false" />
+    <preference name="com.unarin.cordova.beacon.android.altbeacon.ForegroundScanPeriod" value="1500" />
+    <preference name="com.unarin.cordova.beacon.android.altbeacon.ForegroundBetweenScanPeriod" value="500" />
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#000000" />
     <preference name="StatusBarStyle" value="lightcontent" />

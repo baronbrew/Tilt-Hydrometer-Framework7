@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Gradle: __local_aars__:/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/libs/android-support-v4.jar:unspecified@jar">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/libs/android-support-v4.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

@@ -19,12 +19,6 @@
         <param name="ios-package" value="CDVGestureHandler" />
         <param name="onload" value="true" />
     </feature>
-    <feature name="LocationManager">
-        <param name="ios-package" value="CDVLocationManager" />
-    </feature>
-    <feature name="Device">
-        <param name="ios-package" value="CDVDevice" />
-    </feature>
     <feature name="EmailComposer">
         <param name="ios-package" value="APPEmailComposer" />
     </feature>
@@ -94,4 +88,10 @@
     <preference name="StatusBarStyle" value="lightcontent" />
     <preference name="Orientation" value="all" />
     <preference name="AutoHideSplashScreen" value="false" />
+    <feature name="Device">
+        <param name="ios-package" value="CDVDevice" />
+    </feature>
+    <feature name="LocationManager">
+        <param name="ios-package" value="CDVLocationManager" />
+    </feature>
 </widget>

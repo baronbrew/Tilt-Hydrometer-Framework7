@@ -37,17 +37,11 @@
     self.debugLogEnabled = true;
     self.debugNotificationsEnabled = false;
     
-    [self resumeEventPropagationToDom]; // DOM propagation when Location Manager, PeripheralManager initiated
 }
 
 - (void) initLocationManager {
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
-    
-    
-    if (IsAtLeastiOSVersion(@"9.0")) {
-        self.locationManager.allowsBackgroundLocationUpdates = YES;
-    }
 }
 
 - (void) initPeripheralManager {
@@ -95,6 +89,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region {
     
+    if (manager != self.locationManager) return;
     [self.commandDelegate runInBackground:^{
         
         [[self getLogger] debugLog:@"didDetermineState: %@ for region: %@", [self regionStateAsString:state], region];
@@ -113,6 +108,7 @@
 
 -(void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
     
+    if (manager != self.locationManager) return;
     [self.queue addOperationWithBlock:^{
         
         [self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand *command) {
@@ -134,6 +130,7 @@
 
 -(void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
 
+    if (manager != self.locationManager) return;
     [self.queue addOperationWithBlock:^{
         
         [self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand *command) {
@@ -155,6 +152,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region {
 
+    if (manager != self.locationManager) return;
     [self.queue addOperationWithBlock:^{
         
         [self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand *command) {
@@ -175,6 +173,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region withError:(NSError *)error {
     
+    if (manager != self.locationManager) return;
     [self.queue addOperationWithBlock:^{
         
         [self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand *command) {
@@ -196,6 +195,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region {
     
+    if (manager != self.locationManager) return;
     NSMutableArray* beaconsMapsArray = [NSMutableArray new];
     for (CLBeacon* beacon in beacons) {
         NSDictionary* dictOfBeacon = [self mapOfBeacon:beacon];

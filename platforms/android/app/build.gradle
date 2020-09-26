@@ -98,6 +98,7 @@ ext {
 }
 
 // PLUGIN GRADLE EXTENSIONS START
+apply from: "../com.unarin.cordova.beacon/tilthydrometerf7-cordova-plugin-ibeacon.gradle"
 // PLUGIN GRADLE EXTENSIONS END
 
 def hasBuildExtras1 = file('build-extras.gradle').exists()
@@ -293,6 +294,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: '*.jar')
     // SUB-PROJECT DEPENDENCIES START
     implementation(project(path: ":CordovaLib"))
+    implementation "com.android.support:support-core-utils:26+"
     // SUB-PROJECT DEPENDENCIES END
 }
 

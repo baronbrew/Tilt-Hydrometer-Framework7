@@ -1,24 +1,28 @@
 -- Merging decision tree log ---
 provider#de.appplant.cordova.emailcomposer.Provider
-INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:27:9-29:20
+INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:12:9-14:20
 	android:grantUriPermissions
-		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:27:106-140
+		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:12:106-140
 	android:authorities
 		INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:27:19-80
+		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:12:19-80
 	android:exported
-		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:27:81-105
+		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:12:81-105
 	android:name
-		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:27:141-198
+		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:12:141-198
 manifest
-ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-36:12
-INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-36:12
-INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-36:12
-INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-36:12
+ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-19:12
+INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-19:12
+INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-19:12
+INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-19:12
+MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:2:1-58:12
 MERGED from [:CordovaLib] /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/CordovaLib/build/intermediates/library_manifest/release/AndroidManifest.xml:20:1-27:12
-INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-36:12
-INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-36:12
-INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-36:12
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/37053dfebe21692bf24769d36f21363d/AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-compat:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/AndroidManifest.xml:17:1-31:12
+MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/8d16fcec2dce52bd5c4f7b91673fb034/AndroidManifest.xml:17:1-30:12
+INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-19:12
+INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-19:12
+INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-19:12
 	package
 		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:103-143
 		INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml
@@ -54,7 +58,15 @@ ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydromete
 	android:name
 		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:4:22-64
 application
-ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:5:5-30:19
+ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:5:5-15:19
+MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:20:5-56:19
+MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:20:5-56:19
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/37053dfebe21692bf24769d36f21363d/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/37053dfebe21692bf24769d36f21363d/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-compat:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-compat:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/AndroidManifest.xml:25:5-29:19
+MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/8d16fcec2dce52bd5c4f7b91673fb034/AndroidManifest.xml:24:5-28:19
+MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/8d16fcec2dce52bd5c4f7b91673fb034/AndroidManifest.xml:24:5-28:19
 	android:supportsRtl
 		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:5:121-147
 	android:label
@@ -63,6 +75,8 @@ ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydromete
 		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:5:18-52
 	android:icon
 		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:5:53-87
+	android:usesCleartextTraffic
+		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:5:148-183
 activity#com.baronbrew.tilthydrometerf7.MainActivity
 ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:6:9-11:20
 	android:label
@@ -89,88 +103,42 @@ category#android.intent.category.LAUNCHER
 ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:9:17-77
 	android:name
 		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:9:27-74
-receiver#org.altbeacon.beacon.startup.StartupBroadcastReceiver
-ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:12:9-18:20
-	android:name
-		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:12:19-87
-intent-filter#action:name:android.intent.action.ACTION_POWER_CONNECTED+action:name:android.intent.action.ACTION_POWER_DISCONNECTED+action:name:android.intent.action.BOOT_COMPLETED
-ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:13:13-17:29
-action#android.intent.action.BOOT_COMPLETED
-ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:14:17-79
-	android:name
-		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:14:25-76
-action#android.intent.action.ACTION_POWER_CONNECTED
-ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:15:17-87
-	android:name
-		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:15:25-84
-action#android.intent.action.ACTION_POWER_DISCONNECTED
-ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:16:17-90
-	android:name
-		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:16:25-87
-service#org.altbeacon.beacon.service.BeaconService
-ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:19:9-181
-	android:enabled
-		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:19:18-40
-	android:label
-		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:19:97-120
-	android:exported
-		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:19:41-64
-	android:isolatedProcess
-		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:19:65-96
-	android:name
-		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:19:121-178
-service#org.altbeacon.beacon.BeaconIntentProcessor
-ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:20:9-26:19
-	android:enabled
-		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:20:18-40
-	android:name
-		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:20:41-98
-meta-data#background
-ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:21:13-73
-	android:value
-		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:21:50-70
-	android:name
-		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:21:24-49
-intent-filter#action:name:com.unarin.cordova.beacon.IBeaconPlugin.DID_MONITORING+action:name:com.unarin.cordova.beacon.IBeaconPlugin.DID_RANGING
-ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:22:13-25:29
-	android:priority
-		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:22:28-48
-action#com.unarin.cordova.beacon.IBeaconPlugin.DID_RANGING
-ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:23:17-94
-	android:name
-		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:23:25-91
-action#com.unarin.cordova.beacon.IBeaconPlugin.DID_MONITORING
-ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:24:17-97
-	android:name
-		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:24:25-94
-uses-permission#android.permission.BLUETOOTH
-ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:31:5-68
-	android:name
-		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:31:22-65
-uses-permission#android.permission.BLUETOOTH_ADMIN
-ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:32:5-74
-	android:name
-		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:32:22-71
-uses-permission#android.permission.READ_EXTERNAL_STORAGE
-ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:33:5-80
-	android:name
-		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:33:22-77
-uses-permission#android.permission.ACCESS_COARSE_LOCATION
-ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:34:5-81
-	android:name
-		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:34:22-78
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:35:5-81
+ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:16:5-81
 	android:name
-		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:35:22-78
+		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:16:22-78
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:17:5-80
+	android:name
+		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:17:22-77
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:18:5-79
+	android:name
+		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:18:22-76
 uses-sdk
 INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml
 INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml
+MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:7:5-9:41
+MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:7:5-9:41
 MERGED from [:CordovaLib] /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/CordovaLib/build/intermediates/library_manifest/release/AndroidManifest.xml:25:5-44
 MERGED from [:CordovaLib] /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/CordovaLib/build/intermediates/library_manifest/release/AndroidManifest.xml:25:5-44
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/37053dfebe21692bf24769d36f21363d/AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-core-utils:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/37053dfebe21692bf24769d36f21363d/AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/AndroidManifest.xml:21:5-23:58
+MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/8d16fcec2dce52bd5c4f7b91673fb034/AndroidManifest.xml:20:5-22:41
+MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/8d16fcec2dce52bd5c4f7b91673fb034/AndroidManifest.xml:20:5-22:41
 INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml
 INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml
+	tools:overrideLibrary
+		ADDED from [com.android.support:support-core-utils:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/37053dfebe21692bf24769d36f21363d/AndroidManifest.xml:23:9-58
+	android:maxSdkVersion
+		INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml
 	android:targetSdkVersion
 		INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml
 		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml
@@ -180,8 +148,110 @@ INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrom
 		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml
 meta-data#android.support.FILE_PROVIDER_PATHS
-ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:28:13-130
+ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:13:13-130
 	android:resource
-		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:28:75-127
+		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:13:75-127
 	android:name
-		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:28:24-74
+		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:13:24-74
+uses-permission#android.permission.BLUETOOTH
+ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:11:5-13:36
+	android:required
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:13:9-33
+	android:name
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:12:9-52
+uses-permission#android.permission.BLUETOOTH_ADMIN
+ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:14:5-16:36
+	android:required
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:16:9-33
+	android:name
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:15:9-58
+uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
+ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:17:5-81
+	android:name
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:17:22-78
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:18:5-81
+	android:name
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:18:22-78
+receiver#org.altbeacon.beacon.startup.StartupBroadcastReceiver
+ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:21:9-27:20
+	android:name
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:21:19-87
+intent-filter#action:name:android.intent.action.ACTION_POWER_CONNECTED+action:name:android.intent.action.ACTION_POWER_DISCONNECTED+action:name:android.intent.action.BOOT_COMPLETED
+ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:22:13-26:29
+action#android.intent.action.BOOT_COMPLETED
+ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:23:17-79
+	android:name
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:23:25-76
+action#android.intent.action.ACTION_POWER_CONNECTED
+ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:24:17-87
+	android:name
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:24:25-84
+action#android.intent.action.ACTION_POWER_DISCONNECTED
+ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:25:17-90
+	android:name
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:25:25-87
+service#org.altbeacon.beacon.service.BeaconService
+ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:29:9-34:38
+	android:enabled
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:31:13-35
+	android:label
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:34:13-35
+	android:exported
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:32:13-37
+	android:isolatedProcess
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:33:13-44
+	android:name
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:30:13-70
+service#org.altbeacon.beacon.BeaconIntentProcessor
+ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:35:9-38:40
+	android:enabled
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:37:13-35
+	android:exported
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:38:13-37
+	android:name
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:36:13-70
+service#org.altbeacon.beacon.service.ScanJob
+ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:39:9-48:19
+	android:permission
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:41:13-69
+	android:name
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:40:13-64
+meta-data#immediateScanJobId
+ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:42:13-44:45
+	android:value
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:44:17-42
+	android:name
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:43:17-50
+meta-data#periodicScanJobId
+ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:45:13-47:45
+	android:value
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:47:17-42
+	android:name
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:46:17-49
+service#org.altbeacon.bluetooth.BluetoothTestJob
+ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:49:9-55:19
+	android:permission
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:51:13-69
+	android:name
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:50:13-68
+meta-data#jobId
+ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:52:13-54:46
+	android:value
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:54:17-43
+	android:name
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:53:17-37
+meta-data#android.support.VERSION
+ADDED from [com.android.support:support-core-utils:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/37053dfebe21692bf24769d36f21363d/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-compat:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-compat:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/AndroidManifest.xml:26:9-28:38
+	android:value
+		ADDED from [com.android.support:support-core-utils:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/37053dfebe21692bf24769d36f21363d/AndroidManifest.xml:28:13-35
+	android:name
+		ADDED from [com.android.support:support-core-utils:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/37053dfebe21692bf24769d36f21363d/AndroidManifest.xml:27:13-51
+meta-data#android.arch.lifecycle.VERSION
+ADDED from [android.arch.lifecycle:runtime:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/8d16fcec2dce52bd5c4f7b91673fb034/AndroidManifest.xml:25:9-27:47
+	android:value
+		ADDED from [android.arch.lifecycle:runtime:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/8d16fcec2dce52bd5c4f7b91673fb034/AndroidManifest.xml:27:13-44
+	android:name
+		ADDED from [android.arch.lifecycle:runtime:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/8d16fcec2dce52bd5c4f7b91673fb034/AndroidManifest.xml:26:13-58
