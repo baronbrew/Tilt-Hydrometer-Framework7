@@ -546,20 +546,20 @@ function checkFineLocationPermissionCallback(status) {
                  uncalSGpointsArray.push(uncalSGpoint);
                  uncalSGpointsArray.sort(function(a, b){return a-b;});
                  localStorage.setItem('uncalSGpoints-' + calcolor[1], uncalSGpointsArray);
-                 app.toast.create({text: 'Success calibrating ' + uncalSGpoint + ' (uncal.) to ' + actualSGpoint + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
+                 app.toast.create({text: 'Success calibrating ' + uncalSGpoint + ' (pre-cal.) to ' + actualSGpoint + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
               } else if (calSGindex > 0 && uncalSGindex < 0){
                  localStorage.setItem('actualSGpoints-' + calcolor[1], actualSGpointsArray);
                  uncalSGpointsArray.splice(calSGindex, 1, uncalSGpoint);
                  uncalSGpointsArray.sort(function(a, b){return a-b;});
                  localStorage.setItem('uncalSGpoints-' + calcolor[1], uncalSGpointsArray);
-                 app.toast.create({text: 'Success calibrating ' + uncalSGpoint + ' (uncal.) to ' + actualSGpoint + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
+                 app.toast.create({text: 'Success calibrating ' + uncalSGpoint + ' (pre-cal.) to ' + actualSGpoint + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
              }
                 else if (calSGindex < 0 && uncalSGindex > 0){
                  localStorage.setItem('uncalSGpoints-' + calcolor[1], uncalSGpointsArray);
                  actualSGpointsArray.splice(uncalSGindex, 1, actualSGpoint);
                  actualSGpointsArray.sort(function(a, b){return a-b;});
                  localStorage.setItem('actualSGpoints-' + calcolor[1], actualSGpointsArray);
-                 app.toast.create({text: 'Success calibrating ' + actualSGpoint + ' (actual) to ' + uncalSGpoint + ' (uncal.)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
+                 app.toast.create({text: 'Success calibrating ' + actualSGpoint + ' (actual) to ' + uncalSGpoint + ' (pre-cal.)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
                 }
             }else{
                 app.dialog.alert('The calibration point ' + actual + ' is out of range or not a number. Please try again.', 'Calibration Error');
@@ -874,7 +874,7 @@ function addSGPoints (button){
         actualSGpointsArray.splice(uncalSGindex, 1, actualSGpoint);
         actualSGpointsArray.sort(function(a, b){return a-b;});
         localStorage.setItem('actualSGpoints-' + color, actualSGpointsArray);
-        app.toast.create({text: 'Success: Changed calibration from ' + actualSGpoint + ' (actual) to ' + uncalSGpoint + ' (uncal.)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
+        app.toast.create({text: 'Success: Changed calibration from ' + actualSGpoint + ' (actual) to ' + uncalSGpoint + ' (pre-cal.)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
        }
    }else{
        app.dialog.alert('Error: The calibration point ' + actual + ' is out of range or not a number. Please try again.', 'Calibration Error');
