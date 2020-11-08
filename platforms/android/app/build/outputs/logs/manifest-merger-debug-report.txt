@@ -17,9 +17,31 @@ INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrom
 INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-21:12
 MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:2:1-58:12
 MERGED from [:CordovaLib] /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/CordovaLib/build/intermediates/library_manifest/debug/AndroidManifest.xml:20:1-27:12
-MERGED from [com.android.support:support-core-utils:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/37053dfebe21692bf24769d36f21363d/AndroidManifest.xml:17:1-31:12
-MERGED from [com.android.support:support-compat:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/AndroidManifest.xml:17:1-31:12
-MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/8d16fcec2dce52bd5c4f7b91673fb034/AndroidManifest.xml:17:1-30:12
+MERGED from [com.android.support:support-v4:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-v4-28.0.0.aar/aac35617476973e317c176792021143d/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/5cc0fcfaf31a2ae7fcc50f5b8551754b/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/55b4ae5b6c78c96f50c8c706450dee36/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/41f1ef0281df1ab38d6a6ca20f78b76b/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-media-compat:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/cf2d83e80bbcb57dc72912f32cc31377/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/ec92eefa27e65b36401f2c9ec040f9df/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/40a737222aabb275469f2f2d60609ad6/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/db4804d5fd49b65db28db781b99259ad/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/b666de09451107fb68bc68c1d394ea57/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/fcc1a4a77ce08c3b237f88c3df912195/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/271a4af098e4f38cd0018565e81db8f3/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/41f4c0531989bf064f6083ea6babd616/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/997c2debc1a1330e45925e59157e942d/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/1173eb0941f34b66b8e84bb1ade11979/AndroidManifest.xml:17:1-25:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/a775d5937315bcb44e9a0c849ad63813/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/82a8c68c608b63aa6470955e78990f12/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/c2ee5486b2b0c688f3490504be6af2f1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/872bbcf1c12ee0de929e48e80c1ab0ab/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/4df93270d12b2c6795e3f5cf33a94c68/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/d4f53c6b6b0c2b8ef9f1d3020705e9fe/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/e5b8be0872047c740408abfe26ff58da/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/402f4bb759b0e264c1fd2e1e65ca05c6/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/1215355e6cc5291bdb6e7e96ca7d79ce/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/cc17aa394b3eec7a961eeece3a5daebb/AndroidManifest.xml:17:1-22:12
 INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-21:12
 INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-21:12
 INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-21:12
@@ -73,12 +95,12 @@ application
 ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:7:5-17:19
 MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:20:5-56:19
 MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:20:5-56:19
-MERGED from [com.android.support:support-core-utils:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/37053dfebe21692bf24769d36f21363d/AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-core-utils:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/37053dfebe21692bf24769d36f21363d/AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-compat:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-compat:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/AndroidManifest.xml:25:5-29:19
-MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/8d16fcec2dce52bd5c4f7b91673fb034/AndroidManifest.xml:24:5-28:19
-MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/8d16fcec2dce52bd5c4f7b91673fb034/AndroidManifest.xml:24:5-28:19
+MERGED from [com.android.support:support-compat:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/1173eb0941f34b66b8e84bb1ade11979/AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/1173eb0941f34b66b8e84bb1ade11979/AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [com.android.support:support-compat:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/AndroidManifest.xml:22:18-91
 	android:supportsRtl
 		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:7:121-147
 	android:label
@@ -115,14 +137,14 @@ category#android.intent.category.LAUNCHER
 ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:11:17-77
 	android:name
 		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:11:27-74
-uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:18:5-81
-	android:name
-		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:18:22-78
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
-ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:19:5-80
+ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:18:5-80
 	android:name
-		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:19:22-77
+		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:18:22-77
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:19:5-81
+	android:name
+		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:19:22-78
 uses-permission#android.permission.ACCESS_FINE_LOCATION
 ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml:20:5-79
 	android:name
@@ -136,17 +158,59 @@ MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.g
 MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:7:5-9:41
 MERGED from [:CordovaLib] /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/CordovaLib/build/intermediates/library_manifest/debug/AndroidManifest.xml:25:5-44
 MERGED from [:CordovaLib] /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/CordovaLib/build/intermediates/library_manifest/debug/AndroidManifest.xml:25:5-44
-MERGED from [com.android.support:support-core-utils:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/37053dfebe21692bf24769d36f21363d/AndroidManifest.xml:21:5-23:61
-MERGED from [com.android.support:support-core-utils:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/37053dfebe21692bf24769d36f21363d/AndroidManifest.xml:21:5-23:61
-MERGED from [com.android.support:support-compat:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/AndroidManifest.xml:21:5-23:58
-MERGED from [com.android.support:support-compat:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/AndroidManifest.xml:21:5-23:58
-MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/8d16fcec2dce52bd5c4f7b91673fb034/AndroidManifest.xml:20:5-22:41
-MERGED from [android.arch.lifecycle:runtime:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/8d16fcec2dce52bd5c4f7b91673fb034/AndroidManifest.xml:20:5-22:41
+MERGED from [com.android.support:support-v4:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-v4-28.0.0.aar/aac35617476973e317c176792021143d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-v4-28.0.0.aar/aac35617476973e317c176792021143d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/5cc0fcfaf31a2ae7fcc50f5b8551754b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/5cc0fcfaf31a2ae7fcc50f5b8551754b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/55b4ae5b6c78c96f50c8c706450dee36/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/55b4ae5b6c78c96f50c8c706450dee36/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/41f1ef0281df1ab38d6a6ca20f78b76b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/41f1ef0281df1ab38d6a6ca20f78b76b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/cf2d83e80bbcb57dc72912f32cc31377/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/cf2d83e80bbcb57dc72912f32cc31377/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/ec92eefa27e65b36401f2c9ec040f9df/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/ec92eefa27e65b36401f2c9ec040f9df/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/40a737222aabb275469f2f2d60609ad6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/40a737222aabb275469f2f2d60609ad6/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/db4804d5fd49b65db28db781b99259ad/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/db4804d5fd49b65db28db781b99259ad/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/b666de09451107fb68bc68c1d394ea57/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/b666de09451107fb68bc68c1d394ea57/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/fcc1a4a77ce08c3b237f88c3df912195/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/fcc1a4a77ce08c3b237f88c3df912195/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/271a4af098e4f38cd0018565e81db8f3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/271a4af098e4f38cd0018565e81db8f3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/41f4c0531989bf064f6083ea6babd616/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/41f4c0531989bf064f6083ea6babd616/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/997c2debc1a1330e45925e59157e942d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/997c2debc1a1330e45925e59157e942d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/1173eb0941f34b66b8e84bb1ade11979/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/1173eb0941f34b66b8e84bb1ade11979/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/a775d5937315bcb44e9a0c849ad63813/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/a775d5937315bcb44e9a0c849ad63813/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/82a8c68c608b63aa6470955e78990f12/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/82a8c68c608b63aa6470955e78990f12/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/c2ee5486b2b0c688f3490504be6af2f1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/c2ee5486b2b0c688f3490504be6af2f1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/872bbcf1c12ee0de929e48e80c1ab0ab/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/872bbcf1c12ee0de929e48e80c1ab0ab/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/4df93270d12b2c6795e3f5cf33a94c68/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/4df93270d12b2c6795e3f5cf33a94c68/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/d4f53c6b6b0c2b8ef9f1d3020705e9fe/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/d4f53c6b6b0c2b8ef9f1d3020705e9fe/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/e5b8be0872047c740408abfe26ff58da/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/e5b8be0872047c740408abfe26ff58da/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/402f4bb759b0e264c1fd2e1e65ca05c6/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/402f4bb759b0e264c1fd2e1e65ca05c6/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/1215355e6cc5291bdb6e7e96ca7d79ce/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/1215355e6cc5291bdb6e7e96ca7d79ce/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/cc17aa394b3eec7a961eeece3a5daebb/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/cc17aa394b3eec7a961eeece3a5daebb/AndroidManifest.xml:20:5-44
 INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml
 INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml
 INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml
-	tools:overrideLibrary
-		ADDED from [com.android.support:support-core-utils:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/37053dfebe21692bf24769d36f21363d/AndroidManifest.xml:23:9-58
 	android:maxSdkVersion
 		INJECTED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml
 		ADDED from /Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/AndroidManifest.xml
@@ -253,17 +317,3 @@ ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gr
 		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:54:17-43
 	android:name
 		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/android-beacon-library-2.16.1.aar/1c960b5a0a8343737a7419566857853e/AndroidManifest.xml:53:17-37
-meta-data#android.support.VERSION
-ADDED from [com.android.support:support-core-utils:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/37053dfebe21692bf24769d36f21363d/AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-compat:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-compat:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/AndroidManifest.xml:26:9-28:38
-	android:value
-		ADDED from [com.android.support:support-core-utils:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/37053dfebe21692bf24769d36f21363d/AndroidManifest.xml:28:13-35
-	android:name
-		ADDED from [com.android.support:support-core-utils:26.1.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-core-utils-26.1.0.aar/37053dfebe21692bf24769d36f21363d/AndroidManifest.xml:27:13-51
-meta-data#android.arch.lifecycle.VERSION
-ADDED from [android.arch.lifecycle:runtime:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/8d16fcec2dce52bd5c4f7b91673fb034/AndroidManifest.xml:25:9-27:47
-	android:value
-		ADDED from [android.arch.lifecycle:runtime:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/8d16fcec2dce52bd5c4f7b91673fb034/AndroidManifest.xml:27:13-44
-	android:name
-		ADDED from [android.arch.lifecycle:runtime:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/runtime-1.0.0.aar/8d16fcec2dce52bd5c4f7b91673fb034/AndroidManifest.xml:26:13-58

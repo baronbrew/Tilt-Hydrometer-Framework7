@@ -1,5 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.baronbrew.tilthydrometerf7" version="1.0.21" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.baronbrew.tilthydrometerf7" version="1.0.29" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <feature name="CDVWebViewEngine">
+        <param name="ios-package" value="CDVWebViewEngine" />
+    </feature>
+    <feature name="LaunchScreen">
+        <param name="ios-package" value="CDVLaunchScreen" />
+    </feature>
     <feature name="LocalStorage">
         <param name="ios-package" value="CDVLocalStorage" />
     </feature>
@@ -19,11 +25,11 @@
         <param name="ios-package" value="CDVGestureHandler" />
         <param name="onload" value="true" />
     </feature>
-    <feature name="LocationManager">
-        <param name="ios-package" value="CDVLocationManager" />
-    </feature>
     <feature name="Device">
         <param name="ios-package" value="CDVDevice" />
+    </feature>
+    <feature name="LocationManager">
+        <param name="ios-package" value="CDVLocationManager" />
     </feature>
     <feature name="EmailComposer">
         <param name="ios-package" value="APPEmailComposer" />
@@ -44,14 +50,6 @@
         <param name="onload" value="true" />
     </feature>
     <feature name="InAppBrowser">
-        <param name="ios-package" value="CDVInAppBrowser" />
-        <param name="onload" value="true" />
-    </feature>
-    <feature name="UIInAppBrowser">
-        <param name="ios-package" value="CDVUIInAppBrowser" />
-        <param name="onload" value="true" />
-    </feature>
-    <feature name="WKInAppBrowser">
         <param name="ios-package" value="CDVWKInAppBrowser" />
         <param name="onload" value="true" />
     </feature>
@@ -79,7 +77,7 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="EnableViewportScale" value="false" />
     <preference name="KeyboardDisplayRequiresUserAction" value="true" />
-    <preference name="MediaPlaybackRequiresUserAction" value="false" />
+    <preference name="MediaTypesRequiringUserActionForPlayback" value="none" />
     <preference name="SuppressesIncrementalRendering" value="false" />
     <preference name="SuppressesLongPressGesture" value="false" />
     <preference name="Suppresses3DTouchGesture" value="false" />

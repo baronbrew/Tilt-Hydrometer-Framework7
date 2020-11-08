@@ -1,140 +1,1180 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="debug" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="8199e4f9-3bd9-4866-a6a9-b90ec3729f58" name="Default Changelist" comment="">
+    <list default="true" id="99e8b4e1-484e-419c-bb23-978576aaae65" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../../config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/.bin/tape" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/.bin/uuid" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/.bin/uuid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/android-versions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/android-versions/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/android-versions/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/android-versions/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/android-versions/tests/index.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/android-versions/tests/index.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/array-ify/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/array-ify/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/bplist-creator/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/bplist-creator/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/bplist-creator/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/bplist-creator/bplistCreator.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/bplist-creator/bplistCreator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/bplist-creator/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/bplist-creator/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/bplist-parser/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/bplist-parser/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/compare-func/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/compare-func/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-common/.eslintrc.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-common/.eslintrc.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-common/RELEASENOTES.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-common/RELEASENOTES.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-common/appveyor.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-common/appveyor.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-common/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-common/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-common/src/ConfigChanges/ConfigChanges.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-common/src/ConfigChanges/ConfigChanges.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-common/src/ConfigChanges/ConfigFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-common/src/ConfigChanges/ConfigFile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-common/src/ConfigChanges/munge-util.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-common/src/ConfigChanges/munge-util.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-common/src/ConfigParser/ConfigParser.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-common/src/ConfigParser/ConfigParser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-common/src/CordovaError/CordovaError.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-common/src/CordovaError/CordovaError.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-common/src/CordovaLogger.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-common/src/CordovaLogger.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-common/src/FileUpdater.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-common/src/FileUpdater.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-common/src/PlatformJson.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-common/src/PlatformJson.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-common/src/PluginInfo/PluginInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-common/src/PluginInfo/PluginInfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-common/src/PluginManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-common/src/PluginManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-common/src/superspawn.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-common/src/superspawn.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-common/src/util/addProperty.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-common/src/util/addProperty.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-common/src/util/plist-helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-common/src/util/plist-helpers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-common/src/util/xml-helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-common/src/util/xml-helpers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/.eslintignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/.eslintrc.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/.github/PULL_REQUEST_TEMPLATE.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/.ratignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CONTRIBUTING.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/CONTRIBUTING.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Private/Plugins/CDVIntentAndNavigationFilter/CDVIntentAndNavigationFilter.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Private/Plugins/CDVIntentAndNavigationFilter/CDVIntentAndNavigationFilter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Private/Plugins/CDVIntentAndNavigationFilter/CDVIntentAndNavigationFilter.m" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Private/Plugins/CDVIntentAndNavigationFilter/CDVIntentAndNavigationFilter.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Private/Plugins/CDVLocalStorage/CDVLocalStorage.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Private/Plugins/CDVLocalStorage/CDVLocalStorage.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Private/Plugins/CDVUIWebViewEngine/CDVUIWebViewDelegate.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Private/Plugins/CDVUIWebViewEngine/CDVUIWebViewDelegate.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Private/Plugins/CDVUIWebViewEngine/CDVUIWebViewEngine.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Private/Plugins/CDVUIWebViewEngine/CDVUIWebViewEngine.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Private/Plugins/CDVUIWebViewEngine/CDVUIWebViewNavigationDelegate.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Private/Plugins/CDVUIWebViewEngine/CDVUIWebViewNavigationDelegate.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Public/CDV.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Public/CDV.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Public/CDVAppDelegate.m" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Public/CDVAppDelegate.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Public/CDVAvailability.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Public/CDVAvailability.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Public/CDVCommandDelegate.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Public/CDVCommandDelegate.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Public/CDVCommandDelegateImpl.m" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Public/CDVCommandDelegateImpl.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Public/CDVPluginResult.m" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Public/CDVPluginResult.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Public/CDVScreenOrientationDelegate.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Public/CDVScreenOrientationDelegate.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Public/CDVURLProtocol.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Public/CDVURLProtocol.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Public/CDVUserAgentUtil.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Public/CDVUserAgentUtil.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Public/CDVViewController.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Public/CDVViewController.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Public/CDVViewController.m" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Public/CDVViewController.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Public/CDVWebViewEngineProtocol.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Public/CDVWebViewEngineProtocol.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Public/NSDictionary+CordovaPreferences.m" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Classes/Public/NSDictionary+CordovaPreferences.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Cordova/Cordova.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/Cordova/Cordova.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/CordovaLib.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/CordovaLib.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/CordovaLib.xcodeproj/xcshareddata/xcschemes/Cordova.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/CordovaLib.xcodeproj/xcshareddata/xcschemes/Cordova.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/VERSION" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/VERSION" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/cordova.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/CordovaLib/cordova.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/RELEASENOTES.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/RELEASENOTES.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/appveyor.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/apple_ios_version" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/apple_ios_version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/apple_ios_version.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/apple_ios_version.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/apple_osx_version" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/apple_osx_version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/apple_osx_version.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/apple_osx_version.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/apple_xcode_version" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/apple_xcode_version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/apple_xcode_version.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/apple_xcode_version.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/autotest" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/autotest" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/check_reqs" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/check_reqs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/check_reqs.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/check_reqs.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/cordova_plist_to_config_xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/cordova_plist_to_config_xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/create" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/create" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/create.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/create.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/lib/create.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/lib/create.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/CDVLaunchScreen.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/CDVLaunchScreen.storyboard" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Classes/MainViewController.m" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Classes/MainViewController.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-20.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-20.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-20@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-20@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-20@3x.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-20@3x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-24@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-24@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-27.5@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-27.5@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-29.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-29.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-29@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-29@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-29@3x.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-29@3x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-40.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-40.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-40@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-40@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-44@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-44@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-50.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-50.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-50@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-50@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-60@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-60@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-60@3x.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-60@3x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-72.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-72.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-72@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-72@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-76.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-76.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-76@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-76@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-83.5@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-83.5@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-86@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-86@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-98@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon-98@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/AppIcon.appiconset/icon@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/LaunchImage.launchimage/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/LaunchImage.launchimage/Default-2436h.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/LaunchImage.launchimage/Default-568h@2x~iphone.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/LaunchImage.launchimage/Default-667h.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/LaunchImage.launchimage/Default-736h.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/LaunchImage.launchimage/Default-Landscape-2436h.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/LaunchImage.launchimage/Default-Landscape-736h.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/LaunchImage.launchimage/Default-Landscape@2x~ipad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/LaunchImage.launchimage/Default-Landscape~ipad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/LaunchImage.launchimage/Default-Portrait@2x~ipad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/LaunchImage.launchimage/Default-Portrait~ipad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/LaunchImage.launchimage/Default@2x~iphone.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/LaunchImage.launchimage/Default~iphone.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/LaunchStoryboard.imageset/Contents.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/Images.xcassets/LaunchStoryboard.imageset/Contents.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/__PROJECT_NAME__-Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/__PROJECT_NAME__-Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__PROJECT_NAME__/config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__TEMP__.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/__TEMP__.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/www/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/project/www/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/Api.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/Api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/build" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/build" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/build-debug.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/build-debug.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/build.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/build.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/build.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/build.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/clean" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/clean" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/clean.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/clean.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/defaults.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/defaults.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/BridgingHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/BridgingHeader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/Podfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/Podfile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/PodsJson.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/PodsJson.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/build.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/build.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/check_reqs.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/check_reqs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/clean.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/clean.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/copy-www-build-step.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/list-devices" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/list-devices" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/list-emulator-build-targets" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/list-emulator-build-targets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/list-emulator-images" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/list-emulator-images" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/list-started-emulators" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/list-started-emulators" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/plugman/pluginHandlers.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/plugman/pluginHandlers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/prepare.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/prepare.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/projectFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/projectFile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/run.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/run.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/spawn.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/versions.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/lib/versions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/log.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/log.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/loggingHelper.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/loggingHelper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/run" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/run" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/run.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/run.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/version" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/version.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/templates/scripts/cordova/version.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/tests/autotest.coffee" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/tests/create.coffee" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/tests/debug.coffee" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/tests/test.coffee" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/update" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/update" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/update.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/bin/update.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/component.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/cordova-js-src/exec.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/cordova-js-src/exec.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/cordova-js-src/platform.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/cordova-js-src/platform.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/cordova-js-src/plugin/ios/console.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/cordova-js-src/plugin/ios/console.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/cordova-js-src/plugin/ios/logger.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/cordova-js-src/plugin/ios/logger.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/guides/API changes in 4.0.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/guides/Cordova Custom URL Scheme Handling.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/guides/Setting Delegates, Preferences and Script Message Handlers in the WebView.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/hooks/pre-commit" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-ios/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/CordovaLibTests/CDVBase64Tests.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/CordovaLibTests/CDVCommandDelegateTests.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/CordovaLibTests/CDVFakeFileManager.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/CordovaLibTests/CDVFakeFileManager.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/CordovaLibTests/CDVInvokedUrlCommandTests.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/CordovaLibTests/CDVLocalStorageTests.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/CordovaLibTests/CDVPluginResultJSONSerializationTests.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/CordovaLibTests/CDVStartPageTests.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/CordovaLibTests/CDVUserAgentTest.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/CordovaLibTests/CDVViewControllerTest.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/CordovaLibTests/CDVWebViewDelegateTests.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/CordovaLibTests/CDVWebViewTest.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/CordovaLibTests/CDVWebViewTest.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/CordovaLibTests/CDVWhitelistTests.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/CordovaLibTests/CordovaLibApp/AppDelegate.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/CordovaLibTests/CordovaLibApp/AppDelegate.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/CordovaLibTests/CordovaLibApp/Bridging-Header.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/CordovaLibTests/CordovaLibApp/CordovaLibApp-Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/CordovaLibTests/CordovaLibApp/ViewController.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/CordovaLibTests/CordovaLibApp/ViewController.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/CordovaLibTests/CordovaLibApp/config.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/CordovaLibTests/CordovaLibApp/en.lproj/InfoPlist.strings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/CordovaLibTests/CordovaLibApp/main.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/CordovaLibTests/CordovaLibApp/www/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/CordovaLibTests/CordovaLibTests-Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/CordovaLibTests/CordovaLibTests.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/CordovaLibTests/Default-568h@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/CordovaLibTests/config-custom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/CordovaLibTests/en.lproj/InfoPlist.strings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/cordova-ios.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/cordova-ios.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/cordova-ios.xcworkspace/xcshareddata/cordova-ios.xccheckout" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/cordova-ios.xcworkspace/xcshareddata/xcschemes/CordovaFrameworkApp.xcscheme" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/cordova-ios.xcworkspace/xcshareddata/xcschemes/CordovaLib.xcscheme" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/cordova-ios.xcworkspace/xcshareddata/xcschemes/CordovaLibApp.xcscheme" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/cordova-ios.xcworkspace/xcshareddata/xcschemes/CordovaLibTests.xcscheme" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/scripts/killsim.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/.eslintrc.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/component.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/component/versions.spec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/coverage.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/create.spec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/Api.spec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/BridgingHeader.spec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/Plugman/common.spec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/Plugman/pluginHandler.spec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/Podfile.spec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/PodsJson.spec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/build.spec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/dummyProj/config.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/dummyProj/platforms/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/dummyProj/www/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/CordovaLib/CordovaLib.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/CordovaLib/VERSION" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp.xcodeproj/project.orig.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Bridging-Header.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/CDVLaunchScreen.storyboard" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Classes/AppDelegate.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Classes/AppDelegate.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Classes/MainViewController.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Classes/MainViewController.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Classes/MainViewController.xib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Entitlements-Debug.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Entitlements-Release.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/AppIcon.appiconset/icon-40.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/AppIcon.appiconset/icon-40@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/AppIcon.appiconset/icon-50.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/AppIcon.appiconset/icon-50@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/AppIcon.appiconset/icon-60@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/AppIcon.appiconset/icon-60@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/AppIcon.appiconset/icon-72.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/AppIcon.appiconset/icon-72@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/AppIcon.appiconset/icon-76.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/AppIcon.appiconset/icon-76@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/AppIcon.appiconset/icon-83.5@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/AppIcon.appiconset/icon-small.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/AppIcon.appiconset/icon-small@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/AppIcon.appiconset/icon-small@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/AppIcon.appiconset/icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/AppIcon.appiconset/icon@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/LaunchImage.launchimage/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/LaunchImage.launchimage/Default-568h@2x~iphone.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/LaunchImage.launchimage/Default-667h.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/LaunchImage.launchimage/Default-736h.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/LaunchImage.launchimage/Default-Landscape-736h.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/LaunchImage.launchimage/Default-Landscape@2x~ipad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/LaunchImage.launchimage/Default-Landscape~ipad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/LaunchImage.launchimage/Default-Portrait@2x~ipad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/LaunchImage.launchimage/Default-Portrait~ipad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/LaunchImage.launchimage/Default@2x~iphone.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/LaunchImage.launchimage/Default~iphone.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Images.xcassets/LaunchStoryboard.imageset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/Plugins/README" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/SampleApp-Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/SampleApp-Prefix.pch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/config.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/SampleApp/main.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/platform_www/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/ios-config-xml/www/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/launch-storyboard-support/configs/legacy-only.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/launch-storyboard-support/configs/modern-and-legacy.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/launch-storyboard-support/configs/modern-only.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/launch-storyboard-support/configs/none.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/launch-storyboard-support/contents-json/empty.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/launch-storyboard-support/contents-json/single-2xanyany.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/launch-storyboard-support/contents-json/typical-universal.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/launch-storyboard-support/contents-json/varied-device.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/launch-storyboard-support/contents-map/empty-map.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/launch-storyboard-support/contents-map/single-2xanyany-map.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/launch-storyboard-support/contents-map/typical-universal-map.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/launch-storyboard-support/contents-map/varied-device-map.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/launch-storyboard-support/res/screen/ios/Default@2x~universal~anyany.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/launch-storyboard-support/res/screen/ios/Default@2x~universal~comany.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/launch-storyboard-support/res/screen/ios/Default@2x~universal~comcom.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/launch-storyboard-support/res/screen/ios/Default@3x~universal~anyany.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/launch-storyboard-support/res/screen/ios/Default@3x~universal~anycom.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/launch-storyboard-support/res/screen/ios/Default@3x~universal~comany.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.dummyplugin/plugin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.dummyplugin/src/ios/Custom.framework/someFheader.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.dummyplugin/src/ios/Custom.framework/somebinlib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.dummyplugin/src/ios/CustomEmbeddable.framework/someFheader.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.dummyplugin/src/ios/CustomEmbeddable.framework/somebinlib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.dummyplugin/src/ios/DummyPlugin.bundle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.dummyplugin/src/ios/DummyPluginCommand.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.dummyplugin/src/ios/DummyPluginCommand.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.dummyplugin/src/ios/SourceWithFramework.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.dummyplugin/src/ios/TargetDirTest.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.dummyplugin/src/ios/TargetDirTest.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.dummyplugin/src/ios/libsqlite3.dylib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.dummyplugin/www/dummyplugin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.dummyplugin/www/dummyplugin/image.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.faultyplugin/plugin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.faultyplugin/src/ios/FaultyPlugin.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.faultyplugin/src/ios/FaultyPlugin.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.weblessplugin/plugin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.weblessplugin/src/ios/WeblessPlugin.bundle/arrow_left.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.weblessplugin/src/ios/WeblessPlugin.bundle/arrow_left@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.weblessplugin/src/ios/WeblessPlugin.bundle/arrow_right.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.weblessplugin/src/ios/WeblessPlugin.bundle/arrow_right@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.weblessplugin/src/ios/WeblessPlugin.bundle/but_refresh.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.weblessplugin/src/ios/WeblessPlugin.bundle/but_refresh@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.weblessplugin/src/ios/WeblessPlugin.bundle/compass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.weblessplugin/src/ios/WeblessPlugin.bundle/compass@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.weblessplugin/src/ios/WeblessPluginCommand.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.weblessplugin/src/ios/WeblessPluginCommand.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.weblessplugin/src/ios/WeblessPluginViewController.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.weblessplugin/src/ios/WeblessPluginViewController.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/org.test.plugins.weblessplugin/src/ios/WeblessPluginViewController.xib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/resource-file-support/config.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/resource-file-support/image-1234.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/resource-file-support/image-5678.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/resource-file-support/image-8888.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/sample-cocoapod-plugin-no-spec-overlapping-dependency/plugin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/sample-cocoapod-plugin-no-spec-overlapping-dependency/www/test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/sample-cordova-plugin-with-spec/plugin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/sample-cordova-plugin-with-spec/www/test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/test-Bridging-Header.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/test-config-2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/test-config-3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/test-config.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/fixtures/testProj/platforms/ios/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/lib/check_reqs.spec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/lib/list-devices.spec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/lib/list-emulator-images.spec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/lib/run.spec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/prepare.spec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/preparePlatform.spec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/projectFile.spec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-ios/tests/spec/unit/versions.spec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-device/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-device/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-email-composer/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-email-composer/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-email-composer/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-email-composer/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-email-composer/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-email-composer/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-email-composer/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-email-composer/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-email-composer/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-email-composer/plugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-email-composer/src/android/EmailComposer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-email-composer/src/android/EmailComposer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-email-composer/src/ios/APPEmailComposerImpl.m" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-email-composer/src/ios/APPEmailComposerImpl.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-email-composer/www/email_composer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-email-composer/www/email_composer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/CONTRIBUTING.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/CONTRIBUTING.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/RELEASENOTES.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/RELEASENOTES.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/plugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/src/android/InAppBrowser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/src/android/InAppBrowser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/src/ios/CDVInAppBrowser.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/src/ios/CDVInAppBrowser.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/src/ios/CDVInAppBrowserNavigationController.m" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/src/ios/CDVInAppBrowserNavigationController.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/src/ios/CDVInAppBrowserOptions.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/src/ios/CDVInAppBrowserOptions.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/src/ios/CDVInAppBrowserOptions.m" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/src/ios/CDVInAppBrowserOptions.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/src/ios/CDVUIInAppBrowser.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/src/ios/CDVUIInAppBrowser.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/src/ios/CDVWKInAppBrowser.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/src/ios/CDVWKInAppBrowser.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/src/ios/CDVWKInAppBrowser.m" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/src/ios/CDVWKInAppBrowser.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/tests/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/tests/plugin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/tests/resources/inject.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/tests/resources/inject.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/tests/resources/inject.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/tests/resources/local.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/tests/resources/local.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/tests/resources/video.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/tests/tests.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/types/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/types/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/www/inappbrowser.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/www/inappbrowser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cross-spawn/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cross-spawn/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/deep-equal/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/deep-equal/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/deep-equal/example/cmp.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/deep-equal/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/deep-equal/lib/is_arguments.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/deep-equal/lib/keys.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/deep-equal/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/deep-equal/readme.markdown" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/deep-equal/test/cmp.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/define-properties/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/define-properties/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/define-properties/.jscs.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/define-properties/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/define-properties/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/define-properties/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/define-properties/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/define-properties/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/define-properties/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/define-properties/test/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/defined/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/defined/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/defined/example/defined.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/defined/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/defined/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/defined/readme.markdown" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/defined/test/def.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/defined/test/falsy.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/dot-prop/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/dot-prop/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/endent/endent.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/endent/endent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/endent/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/endent/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/endent/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/endent/test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/.github/FUNDING.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/.nycrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/GetIntrinsic.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/es2015.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/es2016.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/es2017.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/es2018.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/es2019.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/es5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/es6.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/es7.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/helpers/assertRecord.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/helpers/assign.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/helpers/callBind.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/helpers/callBound.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/helpers/every.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/helpers/forEach.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/helpers/isFinite.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/helpers/isNaN.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/helpers/isPrefixOf.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/helpers/isPrimitive.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/helpers/isPropertyDescriptor.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/helpers/isSamePropertyDescriptor.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/helpers/maxSafeInteger.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/helpers/mod.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/helpers/regexTester.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/helpers/sign.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/operations/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/test/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/test/GetIntrinsic.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/test/diffOps.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/test/es2015.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/test/es2016.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/test/es2017.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/test/es2018.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/test/es2019.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/test/es5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/test/es6.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/test/es7.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/test/helpers/assertRecord.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/test/helpers/values.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/test/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-abstract/test/tests.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-to-primitive/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-to-primitive/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-to-primitive/.jscs.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-to-primitive/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-to-primitive/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-to-primitive/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-to-primitive/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-to-primitive/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-to-primitive/es2015.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-to-primitive/es5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-to-primitive/es6.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-to-primitive/helpers/isPrimitive.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-to-primitive/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-to-primitive/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-to-primitive/test/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-to-primitive/test/es2015.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-to-primitive/test/es5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-to-primitive/test/es6.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/es-to-primitive/test/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/for-each/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/for-each/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/for-each/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/for-each/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/for-each/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/for-each/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/for-each/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/for-each/test/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/for-each/test/test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fs-extra/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fs-extra/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/function-bind/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/function-bind/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/glob/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/glob/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/glob/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/glob/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/has-symbols/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/has-symbols/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/has-symbols/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/has-symbols/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/has-symbols/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/has-symbols/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/has-symbols/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/has-symbols/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/has-symbols/shams.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/has-symbols/test/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/has-symbols/test/shams/core-js.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/has-symbols/test/shams/get-own-property-symbols.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/has-symbols/test/tests.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/has/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/has/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/ios-sim/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/ios-sim/.eslintrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/ios-sim/.eslintrc.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/ios-sim/.jscsrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/ios-sim/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/ios-sim/.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/ios-sim/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/ios-sim/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/ios-sim/appveyor.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/ios-sim/appveyor.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/ios-sim/ios-sim.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/ios-sim/ios-sim.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/ios-sim/node_modules/bplist-parser/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/ios-sim/node_modules/bplist-parser/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/ios-sim/node_modules/nopt/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/ios-sim/node_modules/nopt/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/ios-sim/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/ios-sim/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/ios-sim/spec/.eslintrc.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/ios-sim/spec/cli.spec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/ios-sim/spec/commands.spec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/ios-sim/spec/fixture/list.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/ios-sim/spec/jasmine.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/ios-sim/spec/lib.spec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/ios-sim/src/.eslintrc.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/ios-sim/src/cli.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/ios-sim/src/cli.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/ios-sim/src/commands.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/ios-sim/src/commands.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/ios-sim/src/help.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/ios-sim/src/help.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/ios-sim/src/lib.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/ios-sim/src/lib.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-callable/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-callable/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-callable/.istanbul.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-callable/.jscs.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-callable/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-callable/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-callable/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-callable/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-callable/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-callable/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-callable/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-callable/test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-date-object/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-date-object/.jscs.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-date-object/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-date-object/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-date-object/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-date-object/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-date-object/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-date-object/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-date-object/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-date-object/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-date-object/test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-obj/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/is-obj/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-regex/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-regex/.jscs.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-regex/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-regex/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-regex/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-regex/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-regex/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-regex/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-regex/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-regex/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-regex/test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-symbol/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-symbol/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-symbol/.jscs.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-symbol/.nvmrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-symbol/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-symbol/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-symbol/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-symbol/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-symbol/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-symbol/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-symbol/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-symbol/test/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-symbol/test/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/jsonfile/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/jsonfile/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/minimist/example/parse.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/minimist/example/parse.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/minimist/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/minimist/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/minimist/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/minimist/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/minimist/readme.markdown" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/minimist/readme.markdown" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/minimist/test/bool.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/minimist/test/bool.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/nice-try/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/nice-try/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/nopt/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/nopt/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/nopt/examples/my-program.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/nopt/lib/nopt.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/nopt/lib/nopt.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/nopt/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/nopt/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/nopt/test/basic.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-inspect/.nycrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-inspect/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-inspect/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-inspect/example/all.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-inspect/example/circular.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-inspect/example/fn.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-inspect/example/inspect.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-inspect/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-inspect/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-inspect/readme.markdown" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-inspect/test-core-js.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-inspect/test/bigint.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-inspect/test/browser/dom.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-inspect/test/circular.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-inspect/test/deep.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-inspect/test/element.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-inspect/test/err.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-inspect/test/fn.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-inspect/test/has.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-inspect/test/holes.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-inspect/test/inspect.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-inspect/test/lowbyte.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-inspect/test/number.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-inspect/test/quoteStyle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-inspect/test/undef.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-inspect/test/values.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-inspect/util.inspect.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-keys/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-keys/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-keys/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-keys/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-keys/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-keys/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-keys/implementation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-keys/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-keys/isArguments.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-keys/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/object-keys/test/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/objectorarray/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/objectorarray/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/objectorarray/yarn.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/path-key/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/path-key/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/path-parse/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/path-parse/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/properties-parser/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/properties-parser/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resolve/.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/resolve/.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resolve/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/resolve/.eslintrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resolve/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/resolve/.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resolve/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resolve/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/resolve/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resolve/appveyor.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/resolve/appveyor.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resolve/changelog.hbs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resolve/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/resolve/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resolve/lib/async.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/resolve/lib/async.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resolve/lib/core.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/resolve/lib/core.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resolve/lib/core.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/resolve/lib/core.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resolve/lib/sync.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/resolve/lib/sync.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resolve/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/resolve/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resolve/readme.markdown" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/resolve/readme.markdown" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resolve/reaf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resolve/test/core.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/resolve/test/core.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resolve/test/filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/resolve/test/filter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resolve/test/filter_sync.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/resolve/test/filter_sync.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resolve/test/mock.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/resolve/test/mock.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resolve/test/mock_sync.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/resolve/test/mock_sync.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resolve/test/resolver.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/resolve/test/resolver.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resolve/test/resolver/baz/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/resolve/test/resolver/baz/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resolve/test/resolver_sync.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/resolve/test/resolver_sync.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resolve/test/symlinks.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/resolve/test/symlinks.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resumer/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resumer/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resumer/example/resume.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resumer/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resumer/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resumer/readme.markdown" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resumer/test/resume.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/resumer/test/through.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/semver/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/semver/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/shebang-command/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/shebang-command/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/shebang-regex/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/shebang-regex/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/shelljs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/shelljs/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/simctl/lib/simctl-extensions.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/simctl/lib/simctl-extensions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/simctl/node_modules/shelljs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/simctl/node_modules/shelljs/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/simctl/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/simctl/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/simctl/simctl.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/simctl/simctl.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/simple-plist/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/simple-plist/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/simple-plist/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/simple-plist/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/simple-plist/simple-plist.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/simple-plist/simple-plist.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/stream-buffers/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/stream-buffers/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.codepointat/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/string.prototype.codepointat/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trim/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trim/.jscs.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trim/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trim/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trim/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trim/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trim/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trim/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trim/implementation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trim/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trim/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trim/polyfill.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trim/shim.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trim/test/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trim/test/shimmed.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trim/test/tests.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimleft/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimleft/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimleft/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimleft/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimleft/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimleft/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimleft/auto.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimleft/implementation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimleft/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimleft/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimleft/polyfill.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimleft/shim.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimleft/test/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimleft/test/shimmed.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimleft/test/tests.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimright/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimright/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimright/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimright/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimright/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimright/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimright/auto.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimright/implementation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimright/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimright/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimright/polyfill.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimright/shim.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimright/test/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimright/test/shimmed.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.trimright/test/tests.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/strip-bom/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/strip-bom/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tail/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/tail/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/bin/tape" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/example/array.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/example/fail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/example/nested.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/example/nested_fail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/example/not_enough.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/example/static/build.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/example/static/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/example/static/server.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/example/stream/object.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/example/stream/tap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/example/stream/test/x.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/example/stream/test/y.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/example/throw.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/example/timing.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/example/too_many.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/example/two.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/lib/default_stream.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/lib/results.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/lib/test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/readme.markdown" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/add-subtest-async.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/anonymous-fn.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/anonymous-fn/test-wrapper.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/array.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/bound.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/browser/asserts.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/child_ordering.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/circular-things.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/comment.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/common.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/create_multiple_streams.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/deep-equal-failure.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/deep.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/default-messages.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/double_end.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/double_end/double.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/end-as-callback.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/exit.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/exit/fail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/exit/ok.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/exit/second.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/exit/todo.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/exit/todo_fail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/exit/too_few.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/exposed-harness.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/fail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/has spaces.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/many.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/max_listeners.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/max_listeners/source.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/messages/defaults.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/nested-async-plan-noend.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/nested-sync-noplan-noend.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/nested.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/nested2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/no_callback.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/not-deep-equal-failure.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/not-equal-failure.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/objectMode.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/onFailure.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/onFinish.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/only-twice.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/only.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/only2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/only3.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/only4.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/only5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/order.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/plan_optional.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/require.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/require/a.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/require/b.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/require/test-a.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/require/test-b.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/skip.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/skip_explanation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/stackTrace.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/subcount.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/subtest_and_async.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/subtest_plan.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/throws.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/timeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/timeoutAfter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/todo.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/todo_explanation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/todo_single.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/too_many.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/tape/test/undef.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/through/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/through/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/underscore/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/underscore/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/underscore/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/underscore/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/underscore/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/underscore/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/underscore/underscore-min.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/underscore/underscore-min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/underscore/underscore-min.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/underscore/underscore-min.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/underscore/underscore.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/underscore/underscore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/universalify/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/universalify/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/unorm/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/unorm/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/uuid/AUTHORS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/uuid/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/uuid/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/uuid/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/uuid/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/uuid/bin/uuid" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/uuid/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/uuid/lib/bytesToUuid.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/uuid/lib/md5-browser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/uuid/lib/md5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/uuid/lib/rng-browser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/uuid/lib/rng.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/uuid/lib/sha1-browser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/uuid/lib/sha1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/uuid/lib/v35.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/uuid/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/uuid/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/uuid/v1.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/uuid/v1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/uuid/v3.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/uuid/v3.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/uuid/v4.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/uuid/v4.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/uuid/v5.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/uuid/v5.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/which/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/which/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/xcode/.ratignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/xcode/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/xcode/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/xcode/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/xcode/RELEASENOTES.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/xcode/RELEASENOTES.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/xcode/lib/pbxProject.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/xcode/lib/pbxProject.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/xcode/lib/pbxWriter.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/xcode/lib/pbxWriter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/xcode/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/xcode/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/xml-escape/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/xml-escape/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/CordovaLib.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/build/generated/source/buildConfig/release/org/apache/cordova/BuildConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/build/intermediates/incremental/mergeReleaseJniLibFolders/merger.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/build/intermediates/incremental/mergeReleaseShaders/merger.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/build/intermediates/incremental/packageReleaseResources/compile-file-map.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/build/intermediates/incremental/packageReleaseResources/merger.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/build/intermediates/incremental/release-mergeJniLibs/merge-state" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/build/intermediates/intermediate-jars/release/classes.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/build/intermediates/intermediate-jars/release/res.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/build/intermediates/res/symbol-table-with-package/release/package-aware-r.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/build/intermediates/transforms/mergeJniLibs/release/__content__.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/build/outputs/logs/manifest-merger-release-report.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android.json" beforeDir="false" afterPath="$PROJECT_DIR$/android.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/baronbrew/tilthydrometerf7/BuildConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/baronbrew/tilthydrometerf7/BuildConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/source/buildConfig/release/com/baronbrew/tilthydrometerf7/BuildConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/source/buildConfig/release/com/baronbrew/tilthydrometerf7/BuildConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/release/single/release.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/release/single/release.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/generated/source/buildConfig/release/com/baronbrew/tilthydrometerf7/BuildConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/debug.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/release/multi-v2/release.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/release/multi-v2/values.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/release/single/release.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeReleaseResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeReleaseResources/compile-file-map.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeReleaseAssets/merger.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeReleaseJniLibFolders/merger.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeReleaseResources/compile-file-map.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeReleaseResources/merger.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeReleaseShaders/merger.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/release-mergeJavaRes/merge-state" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/release-mergeJavaRes/zip-cache/HPAHv_5WBguSi89VjWgSjrDAbyY=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/release-mergeJniLibs/merge-state" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/release-mergeJniLibs/zip-cache/HPAHv_5WBguSi89VjWgSjrDAbyY=" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/xml_config.xml.flat" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/xml_config.xml.flat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/release/xml_config.xml.flat" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/release/xml_config.xml.flat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/xml_emailcomposer_provider_paths.xml.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/release/drawable-land-hdpi_screen.png.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/release/drawable-land-ldpi_screen.png.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/release/drawable-land-mdpi_screen.png.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/release/drawable-land-xhdpi_screen.png.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/release/drawable-land-xxhdpi_screen.png.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/release/drawable-land-xxxhdpi_screen.png.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/release/drawable-port-hdpi_screen.png.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/release/drawable-port-ldpi_screen.png.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/release/drawable-port-mdpi_screen.png.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/release/drawable-port-xhdpi_screen.png.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/release/drawable-port-xxhdpi_screen.png.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/release/drawable-port-xxxhdpi_screen.png.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/release/values_values.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/release/xml_config.xml.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/release/xml_emailcomposer_provider_paths.xml.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/symbol-table-with-package/debug/package-aware-r.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/res/symbol-table-with-package/debug/package-aware-r.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/symbol-table-with-package/release/package-aware-r.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/symbols/release/R.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/__content__.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/__content__.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/mergeJavaRes/debug/0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/mergeJavaRes/debug/0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/mergeJavaRes/release/0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/mergeJavaRes/release/__content__.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/mergeJniLibs/release/__content__.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/output.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-release-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-release-report.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/reports/lint-results-release-fatal.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/reports/lint-results-release-fatal.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/release/app-release.apk" beforeDir="false" afterPath="$PROJECT_DIR$/app/release/app-release.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/release/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/release/output.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-release-report.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/reports/lint-results-release-fatal.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/reports/lint-results-release-fatal.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/release/app-release.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/release/output.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/www/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/www/cordova_plugins.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/assets/www/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/www/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/www/plugins/cordova-plugin-email-composer/www/email_composer.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/www/plugins/cordova-plugin-email-composer/www/email_composer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/de/appplant/cordova/emailcomposer/EmailComposer.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/de/appplant/cordova/emailcomposer/EmailComposer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/xml/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/xml/config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform_www/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/platform_www/cordova_plugins.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform_www/plugins/cordova-plugin-email-composer/www/email_composer.js" beforeDir="false" afterPath="$PROJECT_DIR$/platform_www/plugins/cordova-plugin-email-composer/www/email_composer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/project.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Private/Plugins/CDVIntentAndNavigationFilter/CDVIntentAndNavigationFilter.h" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Private/Plugins/CDVIntentAndNavigationFilter/CDVIntentAndNavigationFilter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Private/Plugins/CDVIntentAndNavigationFilter/CDVIntentAndNavigationFilter.m" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Private/Plugins/CDVIntentAndNavigationFilter/CDVIntentAndNavigationFilter.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Private/Plugins/CDVLocalStorage/CDVLocalStorage.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Private/Plugins/CDVLocalStorage/CDVLocalStorage.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Private/Plugins/CDVUIWebViewEngine/CDVUIWebViewDelegate.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Private/Plugins/CDVUIWebViewEngine/CDVUIWebViewDelegate.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Private/Plugins/CDVUIWebViewEngine/CDVUIWebViewEngine.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Private/Plugins/CDVUIWebViewEngine/CDVUIWebViewEngine.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Private/Plugins/CDVUIWebViewEngine/CDVUIWebViewNavigationDelegate.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Private/Plugins/CDVUIWebViewEngine/CDVUIWebViewNavigationDelegate.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Public/CDV.h" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Public/CDV.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Public/CDVAppDelegate.m" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Public/CDVAppDelegate.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Public/CDVAvailability.h" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Public/CDVAvailability.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Public/CDVCommandDelegate.h" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Public/CDVCommandDelegate.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Public/CDVCommandDelegateImpl.m" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Public/CDVCommandDelegateImpl.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Public/CDVPluginResult.m" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Public/CDVPluginResult.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Public/CDVScreenOrientationDelegate.h" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Public/CDVScreenOrientationDelegate.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Public/CDVURLProtocol.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Public/CDVURLProtocol.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Public/CDVUserAgentUtil.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Public/CDVUserAgentUtil.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Public/CDVViewController.h" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Public/CDVViewController.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Public/CDVViewController.m" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Public/CDVViewController.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Public/CDVWebViewEngineProtocol.h" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Public/CDVWebViewEngineProtocol.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Public/NSDictionary+CordovaPreferences.m" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/CordovaLib/Classes/Public/NSDictionary+CordovaPreferences.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/CordovaLib/CordovaLib.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/CordovaLib/CordovaLib.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/CordovaLib/CordovaLib.xcodeproj/xcuserdata/noahneibaron.xcuserdatad/xcschemes/xcschememanagement.plist" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/CordovaLib/CordovaLib.xcodeproj/xcuserdata/noahneibaron.xcuserdatad/xcschemes/xcschememanagement.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/CordovaLib/VERSION" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/CordovaLib/VERSION" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/CordovaLib/cordova.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/CordovaLib/cordova.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/AppIcon20x20@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/AppIcon20x20@2x~ipad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/AppIcon20x20@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/AppIcon20x20~ipad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/AppIcon29x29.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/AppIcon29x29@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/AppIcon29x29@2x~ipad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/AppIcon29x29@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/AppIcon29x29~ipad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/AppIcon40x40@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/AppIcon40x40@2x~ipad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/AppIcon40x40@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/AppIcon40x40~ipad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/AppIcon50x50@2x~ipad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/AppIcon50x50~ipad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/AppIcon57x57.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/AppIcon57x57@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/AppIcon60x60@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/AppIcon60x60@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/AppIcon60x60@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/AppIcon72x72@2x~ipad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/AppIcon72x72~ipad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/AppIcon76x76@2x~ipad.png" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/AppIcon76x76@2x~ipad.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/AppIcon76x76~ipad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/AppIcon83.5x83.5@2x~ipad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/Assets.car" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/Assets.car" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/Tilt 2" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/Tilt 2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/_CodeSignature/CodeResources" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/_CodeSignature/CodeResources" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/embedded.mobileprovision" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/embedded.mobileprovision" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/www/cordova-js-src/exec.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/www/cordova-js-src/exec.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/www/cordova-js-src/platform.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/www/cordova-js-src/platform.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/www/cordova-js-src/plugin/ios/console.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/www/cordova-js-src/plugin/ios/console.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/www/cordova-js-src/plugin/ios/logger.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/www/cordova-js-src/plugin/ios/logger.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/www/cordova.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/www/cordova.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/www/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/www/cordova_plugins.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/www/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/www/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/www/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/www/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/www/plugins/com.unarin.cordova.beacon/www/model/BeaconRegion.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/www/plugins/com.unarin.cordova.beacon/www/model/BeaconRegion.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcworkspace/xcuserdata/noahneibaron.xcuserdatad/UserInterfaceState.xcuserstate" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcworkspace/xcuserdata/noahneibaron.xcuserdatad/UserInterfaceState.xcuserstate" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/CDVLaunchScreen.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2/CDVLaunchScreen.storyboard" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Classes/MainViewController.m" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2/Classes/MainViewController.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Images.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2/Images.xcassets/AppIcon.appiconset/Contents.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Images.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Images.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Images.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Images.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Images.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Images.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Images.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Images.xcassets/AppIcon.appiconset/Icon-App-57x57@1x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Images.xcassets/AppIcon.appiconset/Icon-App-57x57@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Images.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Images.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Images.xcassets/AppIcon.appiconset/Icon-App-72x72@1x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Images.xcassets/AppIcon.appiconset/Icon-App-72x72@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Images.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Images.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Images.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Images.xcassets/AppIcon.appiconset/Icon-Small-50x50@1x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Images.xcassets/AppIcon.appiconset/Icon-Small-50x50@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Images.xcassets/AppIcon.appiconset/ItunesArtwork@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Images.xcassets/LaunchImage.launchimage/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Images.xcassets/LaunchStoryboard.imageset/Contents.json" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2/Images.xcassets/LaunchStoryboard.imageset/Contents.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Plugins/cordova-plugin-email-composer/APPEmailComposerImpl.m" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2/Plugins/cordova-plugin-email-composer/APPEmailComposerImpl.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Tilt 2-Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2/Tilt 2-Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2/config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/Api.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/cordova/Api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/apple_ios_version" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/cordova/apple_ios_version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/apple_osx_version" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/cordova/apple_osx_version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/apple_xcode_version" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/cordova/apple_xcode_version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/build" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/cordova/build" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/build-debug.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/cordova/build-debug.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/build-extras.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/cordova/build-extras.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/build-release.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/cordova/build-release.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/build.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/cordova/build.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/check_reqs" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/cordova/check_reqs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/clean" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/cordova/clean" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/defaults.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/cordova/defaults.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/lib/Podfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/cordova/lib/Podfile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/lib/PodsJson.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/cordova/lib/PodsJson.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/lib/build.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/cordova/lib/build.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/lib/check_reqs.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/cordova/lib/check_reqs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/lib/clean.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/cordova/lib/clean.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/lib/copy-www-build-step.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/lib/list-devices" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/cordova/lib/list-devices" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/lib/list-emulator-build-targets" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/cordova/lib/list-emulator-build-targets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/lib/list-emulator-images" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/cordova/lib/list-emulator-images" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/lib/list-started-emulators" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/cordova/lib/list-started-emulators" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/lib/plugman/pluginHandlers.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/cordova/lib/plugman/pluginHandlers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/lib/prepare.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/cordova/lib/prepare.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/lib/projectFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/cordova/lib/projectFile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/lib/run.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/cordova/lib/run.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/lib/spawn.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/lib/versions.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/cordova/lib/versions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/loggingHelper.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/cordova/loggingHelper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/run" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/cordova/run" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/cordova/version" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/cordova/version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/frameworks.json" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/frameworks.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/ios.json" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/ios.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/platform_www/cordova-js-src/exec.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/platform_www/cordova-js-src/exec.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/platform_www/cordova-js-src/platform.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/platform_www/cordova-js-src/platform.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/platform_www/cordova-js-src/plugin/ios/console.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/platform_www/cordova-js-src/plugin/ios/console.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/platform_www/cordova-js-src/plugin/ios/logger.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/platform_www/cordova-js-src/plugin/ios/logger.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/platform_www/cordova.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/platform_www/cordova.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/platform_www/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/platform_www/cordova_plugins.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/platform_www/plugins/cordova-plugin-email-composer/www/email_composer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/platform_www/plugins/cordova-plugin-email-composer/www/email_composer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/www/cordova-js-src/exec.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/www/cordova-js-src/exec.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/www/cordova-js-src/platform.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/www/cordova-js-src/platform.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/www/cordova-js-src/plugin/ios/console.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/www/cordova-js-src/plugin/ios/console.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/www/cordova-js-src/plugin/ios/logger.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/www/cordova-js-src/plugin/ios/logger.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/www/cordova.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/www/cordova.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/www/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/www/cordova_plugins.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/www/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/www/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/www/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/www/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/www/plugins/cordova-plugin-email-composer/www/email_composer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/www/plugins/cordova-plugin-email-composer/www/email_composer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/android.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/android.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/plugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/src/android/EmailComposer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/src/android/EmailComposer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/src/ios/APPEmailComposerImpl.m" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/src/ios/APPEmailComposerImpl.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/www/email_composer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/www/email_composer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/fetch.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/fetch.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/ios.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/ios.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../www/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../www/js/app.js" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="DefaultGradleProjectSettings">
-    <option name="isMigrated" value="true" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[HT84A1A02040]" />
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="HT84A1A02040" />
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
-        <projects_view />
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
       </state>
     </system>
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-          <provider editor-type-id="android-manifest" />
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="78" selection-start-line="19" selection-start-column="78" selection-end-line="19" selection-end-column="78" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
-  <component name="GenerateSignedApkSettings">
-    <option name="KEY_STORE_PATH" value="$PROJECT_DIR$/../../../../android-keystore/signature.jks" />
-    <option name="KEY_ALIAS" value="upload" />
-    <option name="REMEMBER_PASSWORDS" value="true" />
-    <option name="BUILD_TARGET_KEY" value="apk" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="118" />
-    <option name="y" value="35" />
-    <option name="width" value="1280" />
-    <option name="height" value="721" />
-  </component>
+  <component name="ProjectId" id="1jyeUxd1LJcYOWLnFmCxxU7Gq1Z" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane" />
-      <pane id="AndroidView">
-        <subPane>
-          <expand>
-            <path>
-              <item name="android" type="1abcf292:AndroidViewProjectNode" />
-              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
-    </panes>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="HT84A1A02040" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-09-25T20:04:59.857Z" />
-    <property name="ExportApk.ApkPath" value="$PROJECT_DIR$/app" />
-    <property name="ExportApk.BuildVariants" value="release" />
-    <property name="ExportApk.SignV1" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-11-07T20:46:55.807Z" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.17" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
-    <property name="sync.plugin.last.upgrade.timestamp" value="1580864660562" />
-  </component>
-  <component name="PsdUISettings">
-    <option name="LAST_EDITED_BUILD_TYPE" value="debug" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunManager">
+    <configuration name="&lt;template&gt;" type="Applet" default="true" selected="false">
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -167,12 +1207,13 @@
       </method>
     </configuration>
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
-      <module name="app" />
+      <module name="android.app" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
       <option name="DEPLOY_AS_INSTANT" value="false" />
       <option name="ARTIFACT_NAME" value="" />
       <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
       <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
       <option name="ACTIVITY_EXTRA_FLAGS" value="" />
       <option name="MODE" value="default_activity" />
@@ -181,8 +1222,6 @@
       <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
       <option name="FORCE_STOP_RUNNING_APP" value="true" />
       <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
       <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
       <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
       <option name="DEBUGGER_TYPE" value="Auto" />
@@ -210,19 +1249,18 @@
       </Native>
       <Profilers>
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
         <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
         <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
       </Profilers>
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
       <method v="2">
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="Applet">
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <method v="2">
-        <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -246,103 +1284,34 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="8199e4f9-3bd9-4866-a6a9-b90ec3729f58" name="Default Changelist" comment="" />
-      <created>1580864001426</created>
+      <changelist id="99e8b4e1-484e-419c-bb23-978576aaae65" name="Default Changelist" comment="" />
+      <created>1604780777873</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1580864001426</updated>
+      <updated>1604780777873</updated>
     </task>
     <servers />
   </component>
-  <component name="ToolWindowManager">
-    <frame x="118" y="35" width="1280" height="721" extended-state="0" />
-    <editor active="true" />
-    <layout>
-      <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.33441034" />
-      <window_info id="Structure" order="2" side_tool="true" />
-      <window_info id="Favorites" order="3" side_tool="true" />
-      <window_info id="Build Variants" order="4" side_tool="true" />
-      <window_info id="Image Layers" order="5" />
-      <window_info id="Designer" order="6" />
-      <window_info id="Resources Explorer" order="7" weight="0.32956383" />
-      <window_info id="Capture Tool" order="8" />
-      <window_info anchor="bottom" id="Version Control" order="0" weight="0.3290938" />
-      <window_info anchor="bottom" id="Logcat" order="1" weight="0.3290938" />
-      <window_info anchor="bottom" id="TODO" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="3" weight="0.3290938" />
-      <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.50080776" side_tool="true" weight="0.3290938" />
-      <window_info anchor="bottom" id="Build" order="5" sideWeight="0.49919224" visible="true" weight="0.3290938" />
-      <window_info anchor="bottom" id="Android Profiler" order="6" />
-      <window_info anchor="bottom" id="Run" order="7" weight="0.3290938" />
-      <window_info anchor="bottom" id="Debug" order="8" />
-      <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
-      <window_info anchor="right" id="Capture Analysis" order="1" />
-      <window_info anchor="right" id="Gradle" order="2" />
-      <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info anchor="right" id="Palette&#9;" order="4" />
-      <window_info anchor="right" id="Assistant" order="5" show_stripe_button="false" weight="0.32956383" />
-    </layout>
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/baronbrew/tilthydrometerf7/BuildConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/jshell/jshell_console.snippet">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wrapper.gradle">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CordovaLib/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1965">
-          <folding>
-            <element signature="e#0#799#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/settings.gradle">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CordovaLib/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest" />
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gradle.properties">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-604">
-          <folding>
-            <element signature="e#0#858#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="45" column="33" selection-start-line="45" selection-start-column="33" selection-end-line="45" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#799#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="78" selection-start-line="19" selection-start-column="78" selection-end-line="19" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
+  <component name="WindowStateProjectService">
+    <state x="321" y="23" key="#app" timestamp="1604782790857">
+      <screen x="0" y="23" width="1280" height="742" />
+    </state>
+    <state x="321" y="23" key="#app/0.23.1280.742@0.23.1280.742" timestamp="1604782790857" />
+    <state width="1238" height="137" key="GridCell.Tab.0.bottom" timestamp="1604782061246">
+      <screen x="0" y="23" width="1280" height="742" />
+    </state>
+    <state width="1238" height="137" key="GridCell.Tab.0.bottom/0.23.1280.742@0.23.1280.742" timestamp="1604782061246" />
+    <state width="1238" height="137" key="GridCell.Tab.0.center" timestamp="1604782061246">
+      <screen x="0" y="23" width="1280" height="742" />
+    </state>
+    <state width="1238" height="137" key="GridCell.Tab.0.center/0.23.1280.742@0.23.1280.742" timestamp="1604782061246" />
+    <state width="1238" height="137" key="GridCell.Tab.0.left" timestamp="1604782061245">
+      <screen x="0" y="23" width="1280" height="742" />
+    </state>
+    <state width="1238" height="137" key="GridCell.Tab.0.left/0.23.1280.742@0.23.1280.742" timestamp="1604782061245" />
+    <state width="1238" height="137" key="GridCell.Tab.0.right" timestamp="1604782061246">
+      <screen x="0" y="23" width="1280" height="742" />
+    </state>
+    <state width="1238" height="137" key="GridCell.Tab.0.right/0.23.1280.742@0.23.1280.742" timestamp="1604782061246" />
   </component>
 </project>

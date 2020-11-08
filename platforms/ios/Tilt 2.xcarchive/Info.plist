@@ -9,18 +9,18 @@
 		<key>CFBundleIdentifier</key>
 		<string>com.baronbrew.tilthydrometerf7</string>
 		<key>CFBundleShortVersionString</key>
-		<string>1.0.21</string>
+		<string>1.0.29</string>
 		<key>CFBundleVersion</key>
-		<string>1.0.21</string>
+		<string>1.0.29</string>
 		<key>SigningIdentity</key>
-		<string>iPhone Developer: Noah Baron (VXKKJQN765)</string>
+		<string>Apple Development: Noah Baron (VXKKJQN765)</string>
 		<key>Team</key>
 		<string>YS8PZRE64N</string>
 	</dict>
 	<key>ArchiveVersion</key>
 	<integer>2</integer>
 	<key>CreationDate</key>
-	<date>2019-10-07T20:43:18Z</date>
+	<date>2020-11-06T23:13:04Z</date>
 	<key>Name</key>
 	<string>Tilt 2</string>
 	<key>SchemeName</key>

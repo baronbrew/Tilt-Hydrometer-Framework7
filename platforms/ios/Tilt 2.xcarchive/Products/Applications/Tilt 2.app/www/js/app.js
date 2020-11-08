@@ -10,7 +10,7 @@ var app  = new Framework7({
   statusbar: {
       overlay: false,
       iosOverlaysWebView: false,
-      enabled: true,//disable for android
+      enabled: false,//disable for android
       iosTextColor: 'white',
       iosBackgroundColor: 'black',
   },
@@ -28,7 +28,8 @@ var app  = new Framework7({
   data: function () {
     return {
       defaultCloudURL : 'https://script.google.com/a/baronbrew.com/macros/s/AKfycbydNOcB-_3RB3c-7sOTI-ZhTnN43Ye1tt0EFvvMxTxjdbheaw/exec',
-      tiltColors : ['RED', 'GREEN', 'BLACK', 'PURPLE', 'ORANGE', 'BLUE', 'YELLOW', 'PINK']
+      tiltColors : ['RED', 'GREEN', 'BLACK', 'PURPLE', 'ORANGE', 'BLUE', 'YELLOW', 'PINK'],
+      appVersion : '1.0.29'
     };
   },
   // App root methods
@@ -65,9 +66,14 @@ var compiledsettingsTemplate = Template7.compile(settingsTemplate);
 //Permissions
 var permissions;
 
+//Interval Timers
+var watchBluetoothInterval;
+
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
   console.log("Device is ready!");
+  document.addEventListener("resume", onResume, false);
+  document.addEventListener("pause", onPause, false);
           //restore settings if needed
           app.data.tiltColors.forEach(restoreLoggingSettings);
           app.data.tiltColors.forEach(restoreCalibrationPoints);
@@ -79,16 +85,14 @@ $$(document).on('deviceready', function() {
           //detect orientation change for fixing status bar if needed 
           window.addEventListener('orientationchange', doOnOrientationChange);
           //detect when app is opened from background
-          document.addEventListener('resume', onResume, false);
-          document.addEventListener("pause", onPause, false);
           console.log(device);
           setTimeout(function() { navigator.splashscreen.hide(); }, 100);
-
           if (device.platform == 'Android' || device.platform == 'amazon-fireos'){
-          setInterval(function(){ watchBluetooth(); }, 30000);//check if tilts are connected every 30 seconds, toggle bluetooth if not
+          watchBluetoothInterval = setInterval(function(){ watchBluetooth(); }, 30000);//check if tilts are connected every 30 seconds, toggle bluetooth if not
           permissions = cordova.plugins.permissions;
           permissions.checkPermission(permissions.BLUETOOTH, checkBluetoothPermissionCallback, null);
-          permissions.checkPermission(permissions.ACCESS_COARSE_LOCATION, checkCoarseLocationPermissionCallback, null);
+          permissions.checkPermission(permissions.ACCESS_FINE_LOCATION, checkFineLocationPermissionCallback, null);
+          //permissions.checkPermission(permissions.ACCESS_COARSE_LOCATION, checkCoarseLocationPermissionCallback, null);
           }
 });
 
@@ -124,25 +128,40 @@ $$(document).on('deviceready', function() {
   }
 
   function checkCoarseLocationPermissionCallback(status) {
-      if (!status.hasPermission) {
-          var errorCallback = function () {
-              console.warn('ACCESS_COARSE_LOCATION permission is not turned on');
-          }
+    if (!status.hasPermission) {
+        var errorCallback = function () {
+            console.warn('ACCESS_COARSE_LOCATION permission is not turned on');
+        }
 
-          permissions.requestPermission(
-              permissions.ACCESS_COARSE_LOCATION,
-              function (status) {
-                  if (!status.hasPermission) errorCallback();
-              },
-              errorCallback);
-      }
-  }
+        permissions.requestPermission(
+            permissions.ACCESS_COARSE_LOCATION,
+            function (status) {
+                if (!status.hasPermission) errorCallback();
+            },
+            errorCallback);
+    }
+}
+
+function checkFineLocationPermissionCallback(status) {
+    if (!status.hasPermission) {
+        var errorCallback = function () {
+            console.warn('ACCESS_FINE_LOCATION permission is not turned on');
+        }
+
+        permissions.requestPermission(
+            permissions.ACCESS_FINE_LOCATION,
+            function (status) {
+                if (!status.hasPermission) errorCallback();
+            },
+            errorCallback);
+    }
+}
   //beacon delegate
   var delegate = null;
 
   function toggleBluetooth() {
       // if(device.version)  don't toggle if android and 4
-      if ((device.platform == "Android") && (device.version[0] == "4") || device.platform == 'iOS') {
+      if ((device.platform == "Android") && (device.version == "4") || device.platform == 'iOS') {
           console.log("skipping toggle, Android 4.x or iOS");
       }
       else if (bluetoothToggled == false) {
@@ -369,6 +388,8 @@ $$(document).on('deviceready', function() {
                     localStorage.setItem('uncalSG-' + beacon.Color, beacon.uncalSG);
                     localStorage.setItem('uncalTemp-' + beacon.Color, beacon.uncalTemp);
                     beacon.hd = true;
+                    beacon.tempDecimals = 1;
+                    beacon.sgDecimals = 4;
                 } else {
                 //setup SD tilt
                   beacon.uncalTemp = beacon.major;
@@ -377,6 +398,8 @@ $$(document).on('deviceready', function() {
                   localStorage.setItem('uncalSG-' + beacon.Color, beacon.uncalSG);
                   localStorage.setItem('uncalTemp-' + beacon.Color, beacon.uncalTemp);
                   beacon.hd = false;
+                  beacon.tempDecimals = 0;
+                  beacon.sgDecimals = 3;
                 }
                   //set key by UUID
                   var key = beacon.uuid;
@@ -413,11 +436,9 @@ $$(document).on('deviceready', function() {
     //reset list of found beacons
     localStorage.setItem('foundbeacons','NONE');
     localStorage.setItem('inrangebeacons','NONE');
-
-    //globals
+    
     //set blutooth toggled state
     bluetoothToggled = false;
-    resumed = false;
 
     function updateBeacons() {
     for (var key in beacons) {
@@ -428,7 +449,7 @@ $$(document).on('deviceready', function() {
     switch (beacon.displayTempunits){
         case "°F" : 
         beacon.uncaldisplayTemp = beacon.uncalTemp;
-        beacon.caldisplayTemp = (getCalTemp(beacon.Color)).toFixed(0);
+        beacon.caldisplayTemp = (getCalTemp(beacon.Color)).toFixed(beacon.tempDecimals);
         break;
         case "°C"  : beacon.uncaldisplayTemp = ((beacon.uncalTemp - 32) * 5 / 9).toFixed(1);
         beacon.caldisplayTemp = ((getCalTemp(beacon.Color) - 32) * 5 / 9).toFixed(1);
@@ -438,7 +459,7 @@ $$(document).on('deviceready', function() {
     switch (beacon.displayFermunits) {
         case "" : 
         beacon.uncaldisplayFerm = beacon.uncalSG;
-        beacon.caldisplayFerm = (getCalFerm(beacon.Color)).toFixed(3);
+        beacon.caldisplayFerm = (getCalFerm(beacon.Color)).toFixed(beacon.sgDecimals);
         break;
         case "°P" : beacon.uncaldisplayFerm = convertSGtoPreferredUnits(beacon.Color, beacon.uncalSG);
         beacon.caldisplayFerm = convertSGtoPreferredUnits(beacon.Color, getCalFerm(beacon.Color));
@@ -512,7 +533,7 @@ $$(document).on('deviceready', function() {
              var actualSGpointsArray = actualSGpoints.split(',');
              var uncalSGpoints = localStorage.getItem('uncalSGpoints-' + calcolor[1])||'-0.001,1.000,10.000';
              var uncalSGpointsArray = uncalSGpoints.split(',');
-             var actualSGpoint = String(Number(actual).toFixed(3));
+             var actualSGpoint = String(Number(actual).toFixed(4));
              var uncalSGpoint = localStorage.getItem('uncalSG-' + calcolor[1]);
              //add uncal. point only if actual doesn't already exist, otherwise replace with new uncal. point
              var calSGindex = actualSGpointsArray.indexOf(actualSGpoint);
@@ -525,20 +546,20 @@ $$(document).on('deviceready', function() {
                  uncalSGpointsArray.push(uncalSGpoint);
                  uncalSGpointsArray.sort(function(a, b){return a-b;});
                  localStorage.setItem('uncalSGpoints-' + calcolor[1], uncalSGpointsArray);
-                 app.toast.create({text: 'Success calibrating ' + uncalSGpoint + ' (uncal.) to ' + actualSGpoint + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
+                 app.toast.create({text: 'Success calibrating ' + uncalSGpoint + ' (pre-cal.) to ' + actualSGpoint + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
               } else if (calSGindex > 0 && uncalSGindex < 0){
                  localStorage.setItem('actualSGpoints-' + calcolor[1], actualSGpointsArray);
                  uncalSGpointsArray.splice(calSGindex, 1, uncalSGpoint);
                  uncalSGpointsArray.sort(function(a, b){return a-b;});
                  localStorage.setItem('uncalSGpoints-' + calcolor[1], uncalSGpointsArray);
-                 app.toast.create({text: 'Success calibrating ' + uncalSGpoint + ' (uncal.) to ' + actualSGpoint + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
+                 app.toast.create({text: 'Success calibrating ' + uncalSGpoint + ' (pre-cal.) to ' + actualSGpoint + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
              }
                 else if (calSGindex < 0 && uncalSGindex > 0){
                  localStorage.setItem('uncalSGpoints-' + calcolor[1], uncalSGpointsArray);
                  actualSGpointsArray.splice(uncalSGindex, 1, actualSGpoint);
                  actualSGpointsArray.sort(function(a, b){return a-b;});
                  localStorage.setItem('actualSGpoints-' + calcolor[1], actualSGpointsArray);
-                 app.toast.create({text: 'Success calibrating ' + actualSGpoint + ' (actual) to ' + uncalSGpoint + ' (uncal.)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
+                 app.toast.create({text: 'Success calibrating ' + actualSGpoint + ' (actual) to ' + uncalSGpoint + ' (pre-cal.)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
                 }
             }else{
                 app.dialog.alert('The calibration point ' + actual + ' is out of range or not a number. Please try again.', 'Calibration Error');
@@ -547,19 +568,19 @@ $$(document).on('deviceready', function() {
             updateSGcallist(calcolor[1]);
             }, function () {
                 app.dialog.prompt('Enter actual temperature:', 'Calibrate '+ calcolor[1], function (actualTemp){
-               var actualTemppoints = localStorage.getItem('actualTemppoints-' + calcolor[1])||'-1000,1000';
+               var actualTemppoints = localStorage.getItem('actualTemppoints-' + calcolor[1])||'-100000,100000';
                var actualTemppointsArray = actualTemppoints.split(',');
-               var uncalTemppoints = localStorage.getItem('uncalTemppoints-' + calcolor[1])||'-1000,1000';
+               var uncalTemppoints = localStorage.getItem('uncalTemppoints-' + calcolor[1])||'-100000,100000';
                var uncalTemppointsArray = uncalTemppoints.split(',');
                var uncalTemppoint = localStorage.getItem('uncalTemp-' + calcolor[1]);
                if (localStorage.getItem('displayTempunits-' + calcolor[1]) == "°C") {
                     var actualTemppointToast = Number(actualTemp).toFixed(1);
                     var uncalTemppointToast = ((Number(uncalTemppoint) - 32 ) * 5 / 9).toFixed(1);
-                    var actualTemppoint = ((Number(actualTemp) * 9 / 5) + 32).toFixed(0);
+                    var actualTemppoint = ((Number(actualTemp) * 9 / 5) + 32).toFixed(1);
                     }else{//degrees F
-                    var actualTemppointToast = Number(actualTemp).toFixed(0);
-                    var uncalTemppointToast = Number(uncalTemppoint).toFixed(0);
-                    var actualTemppoint = Number(actualTemp).toFixed(0);
+                    var actualTemppointToast = Number(actualTemp).toFixed(1);
+                    var uncalTemppointToast = Number(uncalTemppoint).toFixed(1);
+                    var actualTemppoint = Number(actualTemp).toFixed(1);
                 }
                 var actualTempToast = actualTemp;
                 //add uncal. point only if actual doesn't already exist, otherwise replace with new uncal. point
@@ -572,13 +593,13 @@ $$(document).on('deviceready', function() {
                  uncalTemppointsArray.push(uncalTemppoint);
                  uncalTemppointsArray.sort(function(a, b){return a-b;});
                  localStorage.setItem('uncalTemppoints-' + calcolor[1], uncalTemppointsArray);
-                 app.toast.create({text: 'Success calibrating ' + uncalTemppointToast + ' (uncal.) to ' + actualTemppointToast + ' (actual)', icon: '<i class="material-icons">adjust</i>', position: 'center', closeTimeout: 4000}).open();
+                 app.toast.create({text: 'Success calibrating ' + uncalTemppointToast + ' (pre-cal.) to ' + actualTemppointToast + ' (actual)', icon: '<i class="material-icons">adjust</i>', position: 'center', closeTimeout: 4000}).open();
               } else{
                  localStorage.setItem('actualTemppoints-' + calcolor[1], actualTemppointsArray);
                  uncalTemppointsArray.splice(calTempindex, 1, uncalTemppoint);
                  uncalTemppointsArray.sort(function(a, b){return a-b;});
                  localStorage.setItem('uncalTemppoints-' + calcolor[1], uncalTemppointsArray);
-                 app.toast.create({text: 'Success calibrating ' + uncalTemppointToast + ' (uncal.) to ' + actualTemppointToast + ' (actual)', icon: '<i class="material-icons">adjust</i>', position: 'center', closeTimeout: 4000}).open();
+                 app.toast.create({text: 'Success calibrating ' + uncalTemppointToast + ' (pre-cal.) to ' + actualTemppointToast + ' (actual)', icon: '<i class="material-icons">adjust</i>', position: 'center', closeTimeout: 4000}).open();
              }
             }else{
                 app.dialog.alert('The calibration point "' + actualTempToast + '" is out of range or not a number. Please try again.', 'Calibration Error');
@@ -604,26 +625,14 @@ $$(document).on('deviceready', function() {
     //disconnect if no scans within 2 minutes
     if (Number(beacon.numberSecondsAgo) > 120){
         $$('#tiltcard-' + beacon.Color).hide();
-        $$('#accordion-' + beacon.Color).hide();
+        //$$('#accordion-' + beacon.Color).hide();
         var indexOfColor = inRangeBeaconsArray.indexOf(beacon.Color);
-        if (indexOfColor > -1){
+     if (indexOfColor > -1){
         inRangeBeaconsArray.splice(indexOfColor, 1);
         localStorage.setItem('inrangebeacons',inRangeBeaconsArray);
         }
     }
-    //check freshness of tilt connections for Android, toggle if average exceeds 60s
-    var totalSecondsAgo = 0;
-    for (var i = 1; i < inRangeBeaconsArray.length; i++){
-        var lastUpdate = Number(localStorage.getItem('lastUpdate-' + inRangeBeaconsArray[i]))||Date.now();
-        var SecondsAgo = (Date.now() - lastUpdate) / 1000;
-        totalSecondsAgo += SecondsAgo;
-    }
-    var averageSecondsAgo = (totalSecondsAgo / (inRangeBeaconsArray.length - 1)).toFixed(0);
-    if (averageSecondsAgo > 60 && averageSecondsAgo < 65){//toggle bluetooth after 60 seconds disconnected when Android bluetooth fails   
-        if (!bluetoothToggled){
-        toggleBluetooth();
-        }
-    }
+
     //initialize display units
     //update data fields in Tilt card template
     $$('#beerName' + beacon.Color).html(beacon.Beername.split(',')[0]);
@@ -636,7 +645,7 @@ $$(document).on('deviceready', function() {
     $$('#caldisplayTemp+displayTempunits' + beacon.Color).html(String(beacon.caldisplayTemp) + beacon.displayTempunits);
     $$('#numberSecondsAgo' + beacon.Color).html(beacon.numberSecondsAgo);
     $$('#displayRSSI' + beacon.Color).html(beacon.displayRSSI);
-    $$('#displaytimeStamp' + beacon.Color).html(beacon.displaytimeStamp + ' v1.0.21');
+    $$('#displaytimeStamp' + beacon.Color).html(beacon.displaytimeStamp + ' v' + app.data.appVersion);
     $$('#percentScaleSG' + beacon.Color).css('width', String((beacon.uncalSG - 0.980) / (1.150 - 0.980) * 100) + "%");
     $$('#percentScaleTemp' + beacon.Color).css('width', String((beacon.uncalTemp - 0) / (185 - 0) * 100) + "%");
     //update Tilt objects
@@ -665,9 +674,9 @@ NativeStorage.setItem('actualSGpoints-' + color, actualSGpoints, function (resul
 };
 
 function updateTempcallist(color) {
-    var uncalTemppoints = localStorage.getItem('uncalTemppoints-' + color)||'-1000,1000';
+    var uncalTemppoints = localStorage.getItem('uncalTemppoints-' + color)||'-100000,100000';
     var uncalTemppointsArray = uncalTemppoints.split(',');
-    var actualTemppoints = localStorage.getItem('actualTemppoints-' + color)||'-1000,1000';
+    var actualTemppoints = localStorage.getItem('actualTemppoints-' + color)||'-100000,100000';
     var actualTemppointsArray = actualTemppoints.split(',');
     var displayTempcallistArray = [];
     for (var i = 1; i < actualTemppointsArray.length - 1; i++){
@@ -687,7 +696,7 @@ function updateTempcallist(color) {
 function convertSGtoPreferredUnits (color, SG) {
 var displayFermunits = localStorage.getItem('displayFermunits-' + color)||'';
     switch (displayFermunits){
-        case '' : return ( SG * 1 ).toFixed(3);
+        case '' : return ( SG * 1 ).toFixed(4);
         break;
         //0.005 added to prevent rounding to a negative 0 from sg of 1.000
         case '°P'  : return ( 0.005 - 616.868 + 1111.14 * SG - 630.272 * SG * SG + 135.997 * SG * SG * SG ).toFixed(1);
@@ -699,7 +708,7 @@ var displayFermunits = localStorage.getItem('displayFermunits-' + color)||'';
 function convertTemptoPreferredUnits (color, Temp) {
 var displayTempunits = localStorage.getItem('displayTempunits-' + color)||'°F';
     switch (displayTempunits){
-        case '°F' : return Temp.toFixed(0);
+        case '°F' : return Temp.toFixed(1);
         break;
         case '°C'  : return ((Temp - 32) * 5 / 9).toFixed(1);
     }
@@ -732,9 +741,9 @@ return calSG;
 
 function getCalTemp (color) {
 //get cal points from local storage
-var uncalTemppoints = localStorage.getItem('uncalTemppoints-' + color)||'-1000,1000';
+var uncalTemppoints = localStorage.getItem('uncalTemppoints-' + color)||'-100000,100000';
 var unCalTempPointsArray = uncalTemppoints.split(',');
-var actualTemppoints = localStorage.getItem('actualTemppoints-' + color)||'-1000,1000';
+var actualTemppoints = localStorage.getItem('actualTemppoints-' + color)||'-100000,100000';
 var actualTempPointsArray= actualTemppoints.split(',');
 //temporary array for finding correct x and y values
 var unCalTempPointsTempArray = uncalTemppoints.split(',');
@@ -770,9 +779,9 @@ localStorage.setItem('actualSGpoints-' + color,actualSGPointsArray);
 setTimeout(function(){ 
     if (checkbox.checked){
         updateSGcallist(color);
-        var deleteduncalpointToast = convertTemptoPreferredUnits(color, Number(deleteduncalpoint));
-        var deleteduncalpointToast = convertTemptoPreferredUnits(color, Number(deleteduncalpoint));
-        app.toast.create({text: 'Calibration points Deleted: ' + deleteduncalpointToast + ' (uncal.) and ' + deletedactualpoint + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
+        var deleteduncalpointToast = convertSGtoPreferredUnits(color, Number(deleteduncalpoint));
+        var deleteduncalpointToast = convertSGtoPreferredUnits(color, Number(deleteduncalpoint));
+        app.toast.create({text: 'Calibration points Deleted: ' + deleteduncalpointToast + ' (pre-cal.) and ' + deletedactualpoint + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
     }
     },300);
 }
@@ -783,9 +792,9 @@ function deleteTempCalPoint (checkbox){
     var color = selectedPoint[1];
     var index = Number(selectedPoint[2]) + 1;
     console.log(index);
-    var uncalTemppoints = localStorage.getItem('uncalTemppoints-' + color)||'-1000,1000';
+    var uncalTemppoints = localStorage.getItem('uncalTemppoints-' + color)||'-100000,100000';
     var unCalTempPointsArray = uncalTemppoints.split(',');
-    var actualTemppoints = localStorage.getItem('actualTemppoints-' + color)||'-1000,1000';
+    var actualTemppoints = localStorage.getItem('actualTemppoints-' + color)||'-100000,100000';
     var actualTempPointsArray = actualTemppoints.split(',');
     var deleteduncalpoint = unCalTempPointsArray[index];
     var deletedactualpoint = actualTempPointsArray[index];
@@ -801,7 +810,7 @@ function deleteTempCalPoint (checkbox){
             updateTempcallist(color);
             var deleteduncalpointToast = convertTemptoPreferredUnits(color, Number(deleteduncalpoint));
             var deletedactualpointToast = convertTemptoPreferredUnits(color, Number(deletedactualpoint));
-            app.toast.create({text: 'Calibration points deleted: ' + deleteduncalpointToast + ' (uncal.) and ' + deletedactualpointToast + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
+            app.toast.create({text: 'Calibration points deleted: ' + deleteduncalpointToast + ' (pre-cal.) and ' + deletedactualpointToast + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
         }
         },300);
     }
@@ -839,7 +848,7 @@ function addSGPoints (button){
     var actualSGpointsArray = actualSGpoints.split(',');
     var uncalSGpoints = localStorage.getItem('uncalSGpoints-' + color)||'-0.001,1.000,10.000';
     var uncalSGpointsArray = uncalSGpoints.split(',');
-    var actualSGpoint = String(Number(actual).toFixed(3));
+    var actualSGpoint = String(Number(actual).toFixed(4));
     //console.log(uncalSGpoint);
     //add uncal. point only if actual doesn't already exist, otherwise replace with new uncal. point
     var calSGindex = actualSGpointsArray.indexOf(actualSGpoint);
@@ -852,20 +861,20 @@ function addSGPoints (button){
         uncalSGpointsArray.push(uncalSGpoint);
         uncalSGpointsArray.sort(function(a, b){return a-b;});
         localStorage.setItem('uncalSGpoints-' + color, uncalSGpointsArray);
-        app.toast.create({text: 'Success: Set calibration ' + uncalSGpoint + ' (uncal.) to ' + actualSGpoint + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
+        app.toast.create({text: 'Success: Set calibration ' + uncalSGpoint + ' (pre-cal.) to ' + actualSGpoint + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
      } else if (calSGindex > 0 && uncalSGindex < 0){
         localStorage.setItem('actualSGpoints-' + color, actualSGpointsArray);
         uncalSGpointsArray.splice(calSGindex, 1, uncalSGpoint);
         uncalSGpointsArray.sort(function(a, b){return a-b;});
         localStorage.setItem('uncalSGpoints-' + color, uncalSGpointsArray);
-        app.toast.create({text: 'Success: Changed calibration from ' + uncalSGpoint + ' (uncal.) to ' + actualSGpoint + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
+        app.toast.create({text: 'Success: Changed calibration from ' + uncalSGpoint + ' (pre-cal.) to ' + actualSGpoint + ' (actual)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
     }
        else if (calSGindex < 0 && uncalSGindex > 0){
         localStorage.setItem('uncalSGpoints-' + color, uncalSGpointsArray);
         actualSGpointsArray.splice(uncalSGindex, 1, actualSGpoint);
         actualSGpointsArray.sort(function(a, b){return a-b;});
         localStorage.setItem('actualSGpoints-' + color, actualSGpointsArray);
-        app.toast.create({text: 'Success: Changed calibration from ' + actualSGpoint + ' (actual) to ' + uncalSGpoint + ' (uncal.)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
+        app.toast.create({text: 'Success: Changed calibration from ' + actualSGpoint + ' (actual) to ' + uncalSGpoint + ' (pre-cal.)', icon: '<i class="material-icons">done</i>', position: 'center', closeTimeout: 4000}).open();
        }
    }else{
        app.dialog.alert('Error: The calibration point ' + actual + ' is out of range or not a number. Please try again.', 'Calibration Error');
@@ -884,15 +893,15 @@ function addTempPoints (button){
     var uncalTemppoint = $$('#uncalTemp-' + color).val();
     //convert values from display units to default units if needed
     if (units == "°C"){
-        actual = ((actual * 9 / 5) + 32).toFixed(0);
-        uncalTemppoint = ((uncalTemppoint * 9 / 5) + 32).toFixed(0);
+        actual = ((actual * 9 / 5) + 32).toFixed(1);
+        uncalTemppoint = ((uncalTemppoint * 9 / 5) + 32).toFixed(1);
     }
     //console.log(actual);
-    var actualTemppoints = localStorage.getItem('actualTemppoints-' + color)||'-1000,1000';
+    var actualTemppoints = localStorage.getItem('actualTemppoints-' + color)||'-100000,100000';
     var actualTemppointsArray = actualTemppoints.split(',');
-    var uncalTemppoints = localStorage.getItem('uncalTemppoints-' + color)||'-1000,1000';
+    var uncalTemppoints = localStorage.getItem('uncalTemppoints-' + color)||'-100000,100000';
     var uncalTemppointsArray = uncalTemppoints.split(',');
-    var actualTemppoint = Number(actual).toFixed(0);
+    var actualTemppoint = Number(actual).toFixed(1);
     //console.log(uncalTemppoint);
     //add uncal. point only if actual doesn't already exist, otherwise replace with new uncal. point
     var calTempindex = actualTemppointsArray.indexOf(actualTemppoint);
@@ -1920,28 +1929,30 @@ function emailClickedCSV(fileName, color){
 
 function onResume() {
     //resume scanning, needed for Android 8+ devices
-    if ((device.platform == "Android") && (Number(device.version[0]) > 7)) {
+    if ((device.platform == "Android") && (Number(device.version) > 7)) {
         startScan();
         updateInterval = setInterval(function(){ updateBeacons(); }, 1000);
     }
-    //toggleBluetooth();
+    watchBluetoothInterval = setInterval(function(){ watchBluetooth(); }, 30000);
     scanningToast = app.toast.create({text: 'Scanning for nearby Tilts...<br>Ensure Bluetooth and Location Services are enabled and Tilt is floating.', icon: '<i class="material-icons">bluetooth_searching</i>', position: 'bottom', }).open();
     //set resumed flag to trigger logging as soon as tilts are in range
-    localStorage.setItem('inrangebeacons','NONE');
+    //localStorage.setItem('inrangebeacons','NONE');
+    //console.log('resumed');
 }
 
 function onPause() {
     //Android 8+ doesn't allow scanning to continue in background
-    if ((device.platform == "Android") && (Number(device.version[0]) > 7)) {
+    if ((device.platform == "Android") && (Number(device.version) > 7)) {
         stopScan();
         clearInterval(updateInterval);
     }
+    clearInterval(watchBluetoothInterval);
 }
 
 function watchBluetooth() {//function run every 30 seconds on Android and Fire devices
-    var inRangeBeaconsArray = localStorage.getItem('inrangebeacons').split(',');
-    if (inRangeBeaconsArray.length == 1){//no tilts in range
-            toggleBluetooth();
+     var inRangeBeaconsArray = localStorage.getItem('inrangebeacons').split(',');
+     if (inRangeBeaconsArray.length == 1){//no tilts in range
+      toggleBluetooth();
     }
 }
 
@@ -2027,29 +2038,4 @@ function restoreCalibrationPoints(color){
                 localStorage.setItem('actualTemppoints-' + color, result);
                 }
              }, function (e) { });
-}
-
-function showHelpVideo(name){
-    switch(name) {  
-        case 'sgcal':
-        var myPhotoBrowserPopupDark = app.photoBrowser.create({
-          photos : [
-            {
-                html: '<iframe src="https://www.youtube.com/embed/gpeiVhfmJ0w" frameborder="0" allow="accelerometer; autoplay;" allowfullscreen></iframe>',
-                caption: 'Calibrate in Water'
-            },
-            {
-                url: 'http://lorempixel.com/1024/1024/sports/2/',
-                caption: 'Second Caption Text'
-            },
-            {
-                url: 'http://lorempixel.com/1024/1024/sports/3/',
-            },
-          ],
-        theme: 'dark',
-        type: 'standalone'
-      });
-      myPhotoBrowserPopupDark.open();
-      break;
-    }
 }

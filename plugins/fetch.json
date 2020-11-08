@@ -15,14 +15,6 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-plugin-email-composer": {
-    "source": {
-      "type": "registry",
-      "id": "https://github.com/katzer/cordova-plugin-email-composer.git"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
   "cordova-plugin-nativestorage": {
     "source": {
       "type": "registry",
@@ -39,28 +31,12 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-plugin-inappbrowser": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-inappbrowser@3.1.0"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
   "cordova-plugin-device": {
     "source": {
       "type": "registry",
       "id": "cordova-plugin-device@*"
     },
     "is_top_level": false,
-    "variables": {}
-  },
-  "com.unarin.cordova.beacon": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-ibeacon@^3.8.1"
-    },
-    "is_top_level": true,
     "variables": {}
   },
   "cordova-plugin-android-permissions": {
@@ -75,6 +51,30 @@
     "source": {
       "type": "registry",
       "id": "cordova-plugin-whitelist@1.3.4"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-inappbrowser": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-inappbrowser@4.0.0"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "com.unarin.cordova.beacon": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-ibeacon@^3.8.1"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-email-composer": {
+    "source": {
+      "type": "registry",
+      "id": "https://github.com/katzer/cordova-plugin-email-composer.git"
     },
     "is_top_level": true,
     "variables": {}

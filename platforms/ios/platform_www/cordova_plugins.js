@@ -1,11 +1,11 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
   module.exports = [
     {
-      "id": "cordova-plugin-email-composer.EmailComposer",
-      "file": "plugins/cordova-plugin-email-composer/www/email_composer.js",
-      "pluginId": "cordova-plugin-email-composer",
+      "id": "cordova-plugin-android-permissions.Permissions",
+      "file": "plugins/cordova-plugin-android-permissions/www/permissions-dummy.js",
+      "pluginId": "cordova-plugin-android-permissions",
       "clobbers": [
-        "cordova.plugins.email"
+        "cordova.plugins.permissions"
       ]
     },
     {
@@ -220,8 +220,7 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
       "pluginId": "cordova-plugin-inappbrowser",
       "clobbers": [
-        "cordova.InAppBrowser.open",
-        "window.open"
+        "cordova.InAppBrowser.open"
       ]
     },
     {
@@ -283,24 +282,24 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "runs": true
     },
     {
-      "id": "cordova-plugin-android-permissions.Permissions",
-      "file": "plugins/cordova-plugin-android-permissions/www/permissions-dummy.js",
-      "pluginId": "cordova-plugin-android-permissions",
+      "id": "cordova-plugin-email-composer.EmailComposer",
+      "file": "plugins/cordova-plugin-email-composer/www/email_composer.js",
+      "pluginId": "cordova-plugin-email-composer",
       "clobbers": [
-        "cordova.plugins.permissions"
+        "cordova.plugins.email"
       ]
     }
   ];
   module.exports.metadata = {
-    "cordova-plugin-email-composer": "0.9.1",
+    "cordova-plugin-android-permissions": "1.0.2",
     "cordova-plugin-file": "6.0.1",
     "cordova-plugin-nativestorage": "2.3.2",
     "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-statusbar": "2.4.2",
-    "cordova-plugin-inappbrowser": "3.1.0",
+    "cordova-plugin-whitelist": "1.3.4",
+    "cordova-plugin-inappbrowser": "4.0.0",
     "cordova-plugin-device": "2.0.3",
     "com.unarin.cordova.beacon": "3.8.1",
-    "cordova-plugin-android-permissions": "1.0.2",
-    "cordova-plugin-whitelist": "1.3.4"
+    "cordova-plugin-email-composer": "0.9.2"
   };
 });

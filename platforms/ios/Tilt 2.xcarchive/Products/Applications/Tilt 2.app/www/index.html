@@ -38,7 +38,7 @@
             </div>
           </div>
           <div class="page-content">
-              <div class="block-title">Select Tilt in Range</div>
+              <div class="block-title">Select Tilt Color</div>
               <div class="list">
                   <ul>
                     <div id="settingsPanel"></div>
@@ -108,10 +108,10 @@
           </div>
         </div>
         </div>
-        <div class="card-content card-content-padding">Uncalibrated Gravity: <span id="uncaldisplayFerm+displayFermunits{{Color}}">{{uncaldisplayFerm}}</span></div>
+        <div class="card-content card-content-padding">Gravity: <span id="uncaldisplayFerm+displayFermunits{{Color}}">{{uncaldisplayFerm}}</span> (pre-calibrated)</div>
         <div id="caldisplayFerm+displayFermunits{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{caldisplayFerm}}</div>
         <div id="percentScaleSG{{Color}}" class="margin-horizontal button button-round" style="background:{{Color}};height:10px;width:0%;max-width:95%;"></div>
-        <div class="card-content card-content-padding">Uncalibrated Temperature: <span id="uncaldisplayTemp+displayTempunits{{Color}}">{{uncaldisplayTemp}}</span></div>
+        <div class="card-content card-content-padding">Temperature: <span id="uncaldisplayTemp+displayTempunits{{Color}}">{{uncaldisplayTemp}}</span> (pre-calibrated)</div>
         <div id="caldisplayTemp+displayTempunits{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{caldisplayTemp}}{{displayTempunits}}</div>
         <div id="percentScaleTemp{{Color}}" class="margin-horizontal button button-round" style="background:{{Color}};height:10px;width:0%;max-width:95%;"></div>
         <div class="card-content card-content-padding lastrec"><span id=numberSecondsAgo{{Color}}></span> seconds ago <span id=displayRSSI{{Color}}></span><br><span id=displaytimeStamp{{Color}}></span></div>
@@ -178,7 +178,7 @@
         <div class="item-title margin-horizontal padding"><strong>TILT <i class="f7-icons color-custom-{{Color}} size-15">circle_fill</i> {{Color}}</strong></div>
       </div>
     <div class="accordion-item-content">
-        <div class="block-title no-margin-top"><i class="material-icons">show_chart</i> Logging <i class="f7-icons color-custom-{{Color}} size-15">circle_fill</i></div>
+        <div class="block-title no-margin-top"><i class="material-icons">show_chart</i> Logging <i class="f7-icons color-custom-{{Color}} size-15">play_fill</i></div>
       <div class="block block-strong">
           <div class="content-block">
           <div class="content-block-inner">
@@ -304,7 +304,7 @@
      </div>
      </div>
      </div>
-     <div class="block-title"><i class="material-icons">adjust</i>SG Cal. <i class="f7-icons color-custom-{{Color}} size-15">play_fill</i><a href="javascript:showHelpVideo('sgcal')"> Video</a></div>
+     <div class="block-title"><i class="material-icons">adjust</i>SG Cal. <i class="f7-icons color-custom-{{Color}} size-15">play_fill</i></div>
           <div class="block block-strong">
             <div class="content-block">
             <div class="content-block-inner">
@@ -313,7 +313,7 @@
                     <button class="button button-round button-fill button-raised" id="tareinwater-{{Color}}-1.000" onclick="addSGPoints(this)">Calibrate in Water</button>
                 </p>
                 <p>With Known Gravity:</p>
-          <div class="item-title floating-label">Enter uncalibrated (Tilt) SG:</div>
+          <div class="item-title floating-label">Enter pre-calibrated (Tilt) SG:</div>
           <div class="item-input-wrap">
           <input type="number" id="uncalSG-{{Color}}" placeholder="Enter uncal/Tilt SG here">
           </div>
@@ -343,11 +343,11 @@
             </div>
           </div>
         </div>
-          <div class="block-title"><i class="material-icons">adjust</i>Temperature Cal.  <i class="f7-icons color-custom-{{Color}} size-15">circle_fill</i></div>
+          <div class="block-title"><i class="material-icons">adjust</i>Temp. Cal.  <i class="f7-icons color-custom-{{Color}} size-15">play_fill</i></div>
           <div class="block block-strong">
             <div class="content-block">
             <div class="content-block-inner">
-          <div class="item-title floating-label">Enter uncalibrated (Tilt) temp.:</div>
+          <div class="item-title floating-label">Enter pre-calibrated (Tilt) temp.:</div>
           <div class="item-input-wrap">
           <input type="number" id="uncalTemp-{{Color}}" placeholder="Enter uncal/Tilt temp here">
           </div>
@@ -377,7 +377,7 @@
             </div>
           </div>
         </div>
-           <div class="block-title"><i class="material-icons">straighten</i> Units  <i class="f7-icons color-custom-{{Color}} size-15">circle_fill</i></div>
+           <div class="block-title"><i class="material-icons">straighten</i> Units  <i class="f7-icons color-custom-{{Color}} size-15">play_fill</i></div>
            <div class="block block-strong">
            <div class="content-block">
               <div id="unitsradio-{{Color}}" class="list">
