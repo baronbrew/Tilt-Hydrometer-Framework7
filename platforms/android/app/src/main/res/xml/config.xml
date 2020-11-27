@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.baronbrew.tilthydrometerf7" version="1.0.30" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.baronbrew.tilthydrometerf7" version="1.0.32" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <feature name="Device">
         <param name="android-package" value="org.apache.cordova.device.Device" />
     </feature>
@@ -53,6 +53,12 @@
     <allow-navigation href="https://docs.google.com/*" />
     <allow-navigation href="https://tilthydrometer.com/*" />
     <allow-navigation href="https://*youtube.com/*" />
+    <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
+        <string>Location Services permission will allow Bluetooth scanning only while using app and will only be used to scan for nearby TILT hydrometers and read temperature and specific gravity.</string>
+    </edit-config>
+    <edit-config file="*-Info.plist" mode="merge" target="NSBluetoothAlwaysUsageDescription">
+        <string>Location Services permission will allow Bluetooth scanning only while using app and will only be used to scan for nearby TILT hydrometers and read temperature and specific gravity.</string>
+    </edit-config>
     <allow-intent href="market:*" />
     <splash density="land-ldpi" src="res/screens/android/drawable-land-ldpi-screen.png" />
     <splash density="land-mdpi" src="res/screens/android/drawable-land-mdpi-screen.png" />

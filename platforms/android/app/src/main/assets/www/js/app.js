@@ -29,7 +29,7 @@ var app  = new Framework7({
     return {
       defaultCloudURL : 'https://script.google.com/a/baronbrew.com/macros/s/AKfycbydNOcB-_3RB3c-7sOTI-ZhTnN43Ye1tt0EFvvMxTxjdbheaw/exec',
       tiltColors : ['RED', 'GREEN', 'BLACK', 'PURPLE', 'ORANGE', 'BLUE', 'YELLOW', 'PINK'],
-      appVersion : '1.0.30'
+      appVersion : '1.0.32'
     };
   },
   // App root methods
@@ -345,43 +345,8 @@ function checkFineLocationPermissionCallback(status) {
                   var beacon = pluginResult.beacons[i];
                   //add timestamp
                   beacon.timeStamp = Date.now();
-                  //assign color by UUID
-                  switch (beacon.uuid[6]) {
-                         case "1" : beacon.Color = "RED";
-                         addtoScan(beacon);
-                         updateBeacons();
-                         break;
-                         case "2" : beacon.Color = "GREEN";
-                         addtoScan(beacon);
-                         updateBeacons();
-                         break;
-                         case "3" : beacon.Color = "BLACK";
-                         addtoScan(beacon);
-                         updateBeacons();
-                         break;
-                         case "4" : beacon.Color = "PURPLE";
-                         addtoScan(beacon);
-                         updateBeacons();
-                         break;
-                         case "5" : beacon.Color = "ORANGE";
-                         addtoScan(beacon);
-                         updateBeacons();
-                         break;
-                         case "6" : beacon.Color = "BLUE";
-                         addtoScan(beacon);
-                         updateBeacons();
-                         break;
-                         case "7" : beacon.Color = "YELLOW";
-                         addtoScan(beacon);
-                         updateBeacons();
-                         break;
-                         case "8" : beacon.Color = "PINK";
-                         addtoScan(beacon);
-                         updateBeacons();
-                         break;
-                  }
                   //setup HD tilt
-                if (beacon.minor > 2000){
+                if (beacon.minor > 5000){
                     beacon.uncalTemp = beacon.major / 10;
                     localStorage.setItem('uncalTemp-' + beacon.Color, beacon.uncalTemp);
                     beacon.uncalSG = (beacon.minor / 10000).toFixed(4);
@@ -401,6 +366,27 @@ function checkFineLocationPermissionCallback(status) {
                   beacon.tempDecimals = 0;
                   beacon.sgDecimals = 3;
                 }
+                //assign color by UUID
+                switch (beacon.uuid[6]) {
+                    case "1" : beacon.Color = "RED";
+                    break;
+                    case "2" : beacon.Color = "GREEN";
+                    break;
+                    case "3" : beacon.Color = "BLACK";
+                    break;
+                    case "4" : beacon.Color = "PURPLE";
+                    break;
+                    case "5" : beacon.Color = "ORANGE";
+                    break;
+                    case "6" : beacon.Color = "BLUE";
+                    break;
+                    case "7" : beacon.Color = "YELLOW";
+                    break;
+                    case "8" : beacon.Color = "PINK";
+                    break;
+             }
+                  addtoScan(beacon);
+                  updateBeacons();
                   //set key by UUID
                   var key = beacon.uuid;
                   beacons[key] = beacon;
@@ -529,14 +515,15 @@ function checkFineLocationPermissionCallback(status) {
             var calcolor = e.currentTarget.id.split("-");
             //console.log('clicked ' + calcolor[1]);
             app.dialog.prompt('Enter actual gravity or tap "Cancel" to calibrate temperature:', 'Calibrate TILT | ' + calcolor[1], function (actual) {
-             var actualSGpoints = localStorage.getItem('actualSGpoints-' + calcolor[1])||'-0.001,1.000,10.000';
+             var actualSGpoints = localStorage.getItem('actualSGpoints-' + calcolor[1])||'-0.001,1.0000,10.000';
              var actualSGpointsArray = actualSGpoints.split(',');
-             var uncalSGpoints = localStorage.getItem('uncalSGpoints-' + calcolor[1])||'-0.001,1.000,10.000';
+             var uncalSGpoints = localStorage.getItem('uncalSGpoints-' + calcolor[1])||'-0.001,1.0000,10.000';
              var uncalSGpointsArray = uncalSGpoints.split(',');
              var actualSGpoint = String(Number(actual).toFixed(4));
              var uncalSGpoint = localStorage.getItem('uncalSG-' + calcolor[1]);
              //add uncal. point only if actual doesn't already exist, otherwise replace with new uncal. point
              var calSGindex = actualSGpointsArray.indexOf(actualSGpoint);
+             console.log(actualSGpointsArray + ", " + actualSGpoint);
              var uncalSGindex = uncalSGpointsArray.indexOf(uncalSGpoint);
              if (Number(actual) > 0.500 && Number(actual) < 2.000){
               if (calSGindex < 0 && uncalSGindex < 0){
@@ -654,9 +641,9 @@ function checkFineLocationPermissionCallback(status) {
 }
 
 function updateSGcallist(color) {
-var uncalSGpoints = localStorage.getItem('uncalSGpoints-' + color)||'-0.001,1.000,10.000';
+var uncalSGpoints = localStorage.getItem('uncalSGpoints-' + color)||'-0.001,1.0000,10.000';
 var uncalSGpointsArray = uncalSGpoints.split(',');
-var actualSGpoints = localStorage.getItem('actualSGpoints-' + color)||'-0.001,1.000,10.000';
+var actualSGpoints = localStorage.getItem('actualSGpoints-' + color)||'-0.001,1.0000,10.000';
 var actualSGpointsArray = actualSGpoints.split(',');
 var displaySGcallistArray = [];
 for (var i = 1; i < actualSGpointsArray.length - 1; i++){
@@ -723,9 +710,9 @@ function linearInterpolation (x, x0, y0, x1, y1) {
 
 function getCalFerm (color){
 //get cal points from local storage
-var uncalSGpoints = localStorage.getItem('uncalSGpoints-' + color)||'-0.001,1.000,10.000';
+var uncalSGpoints = localStorage.getItem('uncalSGpoints-' + color)||'-0.001,1.0000,10.000';
 var unCalSGPointsArray = uncalSGpoints.split(',');
-var actualSGpoints = localStorage.getItem('actualSGpoints-' + color)||'-0.001,1.000,10.000';
+var actualSGpoints = localStorage.getItem('actualSGpoints-' + color)||'-0.001,1.0000,10.000';
 var actualSGPointsArray= actualSGpoints.split(',');
 //temporary array for finding correct x and y values
 var unCalSGPointsTempArray = uncalSGpoints.split(',');
@@ -763,9 +750,9 @@ var selectedPoint = checkbox.id.split('-');
 var color = selectedPoint[1];
 var index = Number(selectedPoint[2]) + 1;
 console.log(index);
-var uncalSGpoints = localStorage.getItem('uncalSGpoints-' + color)||'-0.001,1.000,10.000';
+var uncalSGpoints = localStorage.getItem('uncalSGpoints-' + color)||'-0.001,1.0000,10.000';
 var unCalSGPointsArray = uncalSGpoints.split(',');
-var actualSGpoints = localStorage.getItem('actualSGpoints-' + color)||'-0.001,1.000,10.000';
+var actualSGpoints = localStorage.getItem('actualSGpoints-' + color)||'-0.001,1.0000,10.000';
 var actualSGPointsArray = actualSGpoints.split(',');
 var deleteduncalpoint = unCalSGPointsArray[index];
 var deletedactualpoint = actualSGPointsArray[index];
@@ -844,9 +831,9 @@ function addSGPoints (button){
         var uncalSGpoint = $$('#uncalSG-' + color).val();
     }
     //console.log(actual);
-    var actualSGpoints = localStorage.getItem('actualSGpoints-' + color)||'-0.001,1.000,10.000';
+    var actualSGpoints = localStorage.getItem('actualSGpoints-' + color)||'-0.001,1.0000,10.000';
     var actualSGpointsArray = actualSGpoints.split(',');
-    var uncalSGpoints = localStorage.getItem('uncalSGpoints-' + color)||'-0.001,1.000,10.000';
+    var uncalSGpoints = localStorage.getItem('uncalSGpoints-' + color)||'-0.001,1.0000,10.000';
     var uncalSGpointsArray = uncalSGpoints.split(',');
     var actualSGpoint = String(Number(actual).toFixed(4));
     //console.log(uncalSGpoint);

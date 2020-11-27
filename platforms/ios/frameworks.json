@@ -1,5 +1,5 @@
 {
-    "MessageUI.framework": 1,
     "CoreBluetooth.framework": 1,
-    "CoreLocation.framework": 1
+    "CoreLocation.framework": 1,
+    "MessageUI.framework": 1
 }

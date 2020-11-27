@@ -40,9 +40,9 @@
           <div class="page-content">
               <div class="block-title">Select Tilt Color</div>
               <div class="list">
-                  <ul>
+               <ul>
                     <div id="settingsPanel"></div>
-              </ul>
+               </ul>
             </div>
           </div>
         </div>
@@ -310,12 +310,12 @@
             <div class="content-block-inner">
               <p class="no-margin-top">With Water:</p>
                 <p class="round no-margin-top">
-                    <button class="button button-round button-fill button-raised" id="tareinwater-{{Color}}-1.000" onclick="addSGPoints(this)">Calibrate in Water</button>
+                    <button class="button button-round button-fill button-raised" id="tareinwater-{{Color}}-1.0000" onclick="addSGPoints(this)">Calibrate in Water</button>
                 </p>
                 <p>With Known Gravity:</p>
           <div class="item-title floating-label">Enter pre-calibrated (Tilt) SG:</div>
           <div class="item-input-wrap">
-          <input type="number" id="uncalSG-{{Color}}" placeholder="Enter uncal/Tilt SG here">
+          <input type="number" id="uncalSG-{{Color}}" placeholder="Enter pre-cal/Tilt SG here">
           </div>
           <p class="round">
               <button class="button button-round button-raised" id="getuncalibratedSGpoint-{{Color}}" onclick="getUncalibratedSGPoint(this)">Get Current SG</button>
@@ -349,7 +349,7 @@
             <div class="content-block-inner">
           <div class="item-title floating-label">Enter pre-calibrated (Tilt) temp.:</div>
           <div class="item-input-wrap">
-          <input type="number" id="uncalTemp-{{Color}}" placeholder="Enter uncal/Tilt temp here">
+          <input type="number" id="uncalTemp-{{Color}}" placeholder="Enter pre-cal/Tilt temp here">
           </div>
           <p class="round">
               <button class="button button-round button-raised" id="getuncalibratedTemppoint-{{Color}}" onclick="getUncalibratedTempPoint(this)">Get Current Temperature</button>

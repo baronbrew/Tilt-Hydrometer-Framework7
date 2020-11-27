@@ -7,10 +7,19 @@
     "files": {}
   },
   "installed_plugins": {
+    "com.unarin.cordova.beacon": {
+      "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
+    },
     "cordova-plugin-android-permissions": {
       "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
     },
+    "cordova-plugin-email-composer": {
+      "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
+    },
     "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
+    },
+    "cordova-plugin-inappbrowser": {
       "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
     },
     "cordova-plugin-nativestorage": {
@@ -23,15 +32,6 @@
       "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
     },
     "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
-    },
-    "cordova-plugin-inappbrowser": {
-      "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
-    },
-    "com.unarin.cordova.beacon": {
-      "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
-    },
-    "cordova-plugin-email-composer": {
       "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
     }
   },

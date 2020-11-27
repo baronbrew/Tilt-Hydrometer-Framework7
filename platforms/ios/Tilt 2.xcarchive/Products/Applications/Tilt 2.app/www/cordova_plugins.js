@@ -248,6 +248,14 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "runs": true
     },
     {
+      "id": "cordova-plugin-inappbrowser.inappbrowser",
+      "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+      "pluginId": "cordova-plugin-inappbrowser",
+      "clobbers": [
+        "cordova.InAppBrowser.open"
+      ]
+    },
+    {
       "id": "cordova-plugin-nativestorage.mainHandle",
       "file": "plugins/cordova-plugin-nativestorage/www/mainHandle.js",
       "pluginId": "cordova-plugin-nativestorage",
@@ -280,26 +288,18 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "clobbers": [
         "window.StatusBar"
       ]
-    },
-    {
-      "id": "cordova-plugin-inappbrowser.inappbrowser",
-      "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
-      "pluginId": "cordova-plugin-inappbrowser",
-      "clobbers": [
-        "cordova.InAppBrowser.open"
-      ]
     }
   ];
   module.exports.metadata = {
     "cordova-plugin-device": "2.0.3",
     "com.unarin.cordova.beacon": "3.8.1",
     "cordova-plugin-android-permissions": "1.0.2",
-    "cordova-plugin-email-composer": "0.9.1",
+    "cordova-plugin-email-composer": "0.9.2",
     "cordova-plugin-file": "6.0.1",
+    "cordova-plugin-inappbrowser": "4.0.0",
     "cordova-plugin-nativestorage": "2.3.2",
     "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-statusbar": "2.4.2",
-    "cordova-plugin-whitelist": "1.3.4",
-    "cordova-plugin-inappbrowser": "4.0.0"
+    "cordova-plugin-whitelist": "1.3.4"
   };
 });

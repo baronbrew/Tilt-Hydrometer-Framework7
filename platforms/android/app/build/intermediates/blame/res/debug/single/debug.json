@@ -1,35 +1,51 @@
 [
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable_notification_tile_bg.xml.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/drawable/notification_tile_bg.xml"
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/drawable/notification_tile_bg.xml"
+    },
+    {
+        "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/layout_notification_template_big_media_custom.xml.flat",
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/cf2d83e80bbcb57dc72912f32cc31377/res/layout/notification_template_big_media_custom.xml"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_notification_bg_low_normal.9.png.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/drawable-mdpi-v4/notification_bg_low_normal.9.png"
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/drawable-mdpi-v4/notification_bg_low_normal.9.png"
+    },
+    {
+        "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/layout_notification_template_big_media_narrow_custom.xml.flat",
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/cf2d83e80bbcb57dc72912f32cc31377/res/layout/notification_template_big_media_narrow_custom.xml"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/layout-v21_notification_template_custom_big.xml.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/layout-v21/notification_template_custom_big.xml"
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/layout-v21/notification_template_custom_big.xml"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable_notification_bg.xml.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/drawable/notification_bg.xml"
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/drawable/notification_bg.xml"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-land-xhdpi_screen.png.flat",
         "source": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/res/drawable-land-xhdpi/screen.png"
     },
     {
+        "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/layout_notification_template_big_media.xml.flat",
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/cf2d83e80bbcb57dc72912f32cc31377/res/layout/notification_template_big_media.xml"
+    },
+    {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_notification_bg_low_pressed.9.png.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/drawable-hdpi-v4/notification_bg_low_pressed.9.png"
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/drawable-hdpi-v4/notification_bg_low_pressed.9.png"
+    },
+    {
+        "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/layout_notification_template_media_custom.xml.flat",
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/cf2d83e80bbcb57dc72912f32cc31377/res/layout/notification_template_media_custom.xml"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/layout-v21_notification_template_icon_group.xml.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/layout-v21/notification_template_icon_group.xml"
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/layout-v21/notification_template_icon_group.xml"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable_notification_bg_low.xml.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/drawable/notification_bg_low.xml"
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/drawable/notification_bg_low.xml"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-hdpi_ic_action_remove.png.flat",
@@ -49,7 +65,7 @@
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_notification_bg_normal.9.png.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/drawable-hdpi-v4/notification_bg_normal.9.png"
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/drawable-hdpi-v4/notification_bg_normal.9.png"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-land-hdpi_screen.png.flat",
@@ -61,11 +77,15 @@
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_notification_bg_low_normal.9.png.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/drawable-xhdpi-v4/notification_bg_low_normal.9.png"
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/drawable-xhdpi-v4/notification_bg_low_normal.9.png"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_notification_bg_low_pressed.9.png.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/drawable-xhdpi-v4/notification_bg_low_pressed.9.png"
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/drawable-xhdpi-v4/notification_bg_low_pressed.9.png"
+    },
+    {
+        "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/layout_notification_media_action.xml.flat",
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/cf2d83e80bbcb57dc72912f32cc31377/res/layout/notification_media_action.xml"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_ic_action_next_item.png.flat",
@@ -73,11 +93,15 @@
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/layout-v21_notification_action_tombstone.xml.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/layout-v21/notification_action_tombstone.xml"
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/layout-v21/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/layout_notification_template_lines_media.xml.flat",
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/cf2d83e80bbcb57dc72912f32cc31377/res/layout/notification_template_lines_media.xml"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/layout_notification_action.xml.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/layout/notification_action.xml"
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/layout/notification_action.xml"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-mdpi_ic_action_previous_item.png.flat",
@@ -97,7 +121,11 @@
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_notification_bg_normal_pressed.9.png.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/drawable-hdpi-v4/notification_bg_normal_pressed.9.png"
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/drawable-hdpi-v4/notification_bg_normal_pressed.9.png"
+    },
+    {
+        "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/layout_notification_template_big_media_narrow.xml.flat",
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/cf2d83e80bbcb57dc72912f32cc31377/res/layout/notification_template_big_media_narrow.xml"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_launcher.png.flat",
@@ -105,7 +133,7 @@
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/layout_notification_action_tombstone.xml.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/layout/notification_action_tombstone.xml"
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/layout/notification_action_tombstone.xml"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-port-xxhdpi_screen.png.flat",
@@ -113,7 +141,7 @@
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_notification_bg_normal_pressed.9.png.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/drawable-mdpi-v4/notification_bg_normal_pressed.9.png"
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/drawable-mdpi-v4/notification_bg_normal_pressed.9.png"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/xml_config.xml.flat",
@@ -121,11 +149,11 @@
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/layout-v21_notification_action.xml.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/layout-v21/notification_action.xml"
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/layout-v21/notification_action.xml"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_notification_bg_low_normal.9.png.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/drawable-hdpi-v4/notification_bg_low_normal.9.png"
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/drawable-hdpi-v4/notification_bg_low_normal.9.png"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-hdpi_ic_action_previous_item.png.flat",
@@ -137,11 +165,11 @@
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/layout_notification_template_icon_group.xml.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/layout/notification_template_icon_group.xml"
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/layout/notification_template_icon_group.xml"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/layout-v16_notification_template_custom_big.xml.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/layout-v16/notification_template_custom_big.xml"
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/layout-v16/notification_template_custom_big.xml"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-land-xxhdpi_screen.png.flat",
@@ -153,19 +181,27 @@
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_notify_panel_notification_icon_bg.png.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/drawable-xhdpi-v4/notify_panel_notification_icon_bg.png"
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/drawable-xhdpi-v4/notify_panel_notification_icon_bg.png"
+    },
+    {
+        "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/layout_notification_template_media.xml.flat",
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/cf2d83e80bbcb57dc72912f32cc31377/res/layout/notification_template_media.xml"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_notification_bg_normal.9.png.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/drawable-mdpi-v4/notification_bg_normal.9.png"
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/drawable-mdpi-v4/notification_bg_normal.9.png"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_notification_bg_normal_pressed.9.png.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/drawable-xhdpi-v4/notification_bg_normal_pressed.9.png"
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/drawable-xhdpi-v4/notification_bg_normal_pressed.9.png"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ic_action_next_item.png.flat",
         "source": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/res/drawable-xxhdpi/ic_action_next_item.png"
+    },
+    {
+        "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/layout_notification_media_cancel_action.xml.flat",
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-media-compat-28.0.0.aar/cf2d83e80bbcb57dc72912f32cc31377/res/layout/notification_media_cancel_action.xml"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-land-ldpi_screen.png.flat",
@@ -185,11 +221,11 @@
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_notification_bg_normal.9.png.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/drawable-xhdpi-v4/notification_bg_normal.9.png"
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/drawable-xhdpi-v4/notification_bg_normal.9.png"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_notify_panel_notification_icon_bg.png.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/drawable-hdpi-v4/notify_panel_notification_icon_bg.png"
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/drawable-hdpi-v4/notify_panel_notification_icon_bg.png"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/xml_emailcomposer_provider_paths.xml.flat",
@@ -205,19 +241,19 @@
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/layout_notification_template_part_chronometer.xml.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/layout/notification_template_part_chronometer.xml"
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/layout/notification_template_part_chronometer.xml"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/layout_notification_template_part_time.xml.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/layout/notification_template_part_time.xml"
-    },
-    {
-        "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_notify_panel_notification_icon_bg.png.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/drawable-mdpi-v4/notify_panel_notification_icon_bg.png"
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/layout/notification_template_part_time.xml"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-port-mdpi_screen.png.flat",
         "source": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/src/main/res/drawable-port-mdpi/screen.png"
+    },
+    {
+        "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_notify_panel_notification_icon_bg.png.flat",
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/drawable-mdpi-v4/notify_panel_notification_icon_bg.png"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ic_action_previous_item.png.flat",
@@ -229,7 +265,7 @@
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-v21_notification_action_background.xml.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/drawable-v21/notification_action_background.xml"
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/drawable-v21/notification_action_background.xml"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-xhdpi_ic_action_remove.png.flat",
@@ -237,11 +273,11 @@
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_notification_bg_low_pressed.9.png.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/drawable-mdpi-v4/notification_bg_low_pressed.9.png"
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/drawable-mdpi-v4/notification_bg_low_pressed.9.png"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable_notification_icon_background.xml.flat",
-        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/6e68bf41c966197503c03fd3a69afdb9/res/drawable/notification_icon_background.xml"
+        "source": "/Users/noahneibaron/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/c589057d8b584e11675f9b1030578647/res/drawable/notification_icon_background.xml"
     },
     {
         "merged": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7/platforms/android/app/build/intermediates/res/merged/debug/drawable-land-xxxhdpi_screen.png.flat",
