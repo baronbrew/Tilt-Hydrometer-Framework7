@@ -1,23 +1,37 @@
 /* Your app styles here */
 .color-custom-RED { color: red;
 }
+.color-custom-RED•HD { color: red;
+}
 .color-custom-GREEN { color: green;
+}
+.color-custom-GREEN•HD { color: green;
 }
 .color-custom-GRAY { color: gray;
 }
 .color-custom-PURPLE { color: purple;
 }
+.color-custom-PURPLE•HD { color: purple;
+}
 .color-custom-BLACK { color: black;
+}
+.color-custom-BLACK•HD { color: black;
 }
 .color-custom-PINK { color: hotpink;
 }
-.color-custom-HD-PINK { color: hotpink;
+.color-custom-PINK•HD { color: hotpink;
 }
 .color-custom-ORANGE { color: orange;
 }
+.color-custom-ORANGE•HD { color: orange;
+}
 .color-custom-BLUE { color: blue;
 }
+.color-custom-BLUE•HD { color: blue;
+}
 .color-custom-YELLOW { color: yellow;
+}
+.color-custom-YELLOW•HD { color: yellow;
 }
 
 .size-15 { font-size: 15px }

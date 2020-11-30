@@ -9,15 +9,15 @@
         "parents": {
           "NSLocationWhenInUseUsageDescription": [
             {
-              "xml": "<string>Location Services allows Bluetooth scanning only while using app and will only be used to scan for nearby TILT hydrometers and read temperature and specific gravity.</string>",
-              "count": 2,
+              "xml": "<string>This app uses Bluetooth-based location services for scanning nearby TILT hydrometers and reading temperature and specific gravity. No other location technology will be used.</string>",
+              "count": 1,
               "mode": "merge",
               "id": "config.xml"
             }
           ],
           "NSBluetoothAlwaysUsageDescription": [
             {
-              "xml": "<string>Bluetooth used only for scanning nearby TILT hydrometers and reading temperature and specific gravity.</string>",
+              "xml": "<string>This app uses Bluetooth for scanning nearby TILT hydrometers and read temperature and specific gravity.</string>",
               "count": 1,
               "mode": "merge",
               "id": "config.xml"

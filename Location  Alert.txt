@@ -1,0 +1,10 @@
+This app uses Bluetooth for scanning nearby TILT hydrometers and read temperature and specific gravity.
+
+This app uses Bluetooth-based location services for scanning nearby TILT hydrometers and reading temperature and specific gravity. No other location technology will be used.
+
+<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>This app uses Bluetooth for scanning nearby TILT hydrometers and read temperature and specific gravity.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>This app uses Bluetooth for scanning nearby TILT hydrometers and read temperature and specific gravity.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app uses Bluetooth-based location services for scanning nearby TILT hydrometers and reading temperature and specific gravity. No other location technology will be used.</string>

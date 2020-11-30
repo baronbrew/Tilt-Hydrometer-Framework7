@@ -98,7 +98,7 @@
         <div class="card-content card-content-padding"><p class="no-margin-bottom" id="beerName{{Color}}">{{Beername}}</p><strong>TILT | {{Color}} </strong><span id="cloudStatus{{Color}}"></span> <span id="deviceStatus{{Color}}"></span></div>
         <div id="quicksettings" class="accordion-item">
         <div class="accordion-item-toggle">
-        <div <button class="margin-horizontal button button-round" style="background:{{Color}};height:30px;color:{{Color}}">Show options for {{Color}} Tilt.</button></div>
+        <div <button class="margin-horizontal button button-round" style="background:{{js 'this.Color.replace("•HD","")'}};height:30px;color:{{js 'this.Color.replace("•HD","")'}}">Show options for {{Color}} Tilt.</button></div>
         </div>
         <div class="accordion-item-content">
         <div class="margin-top segmented margin-horizontal">
@@ -110,10 +110,10 @@
         </div>
         <div class="card-content card-content-padding">Gravity: <span id="uncaldisplayFerm+displayFermunits{{Color}}">{{uncaldisplayFerm}}</span> (pre-calibrated)</div>
         <div id="caldisplayFerm+displayFermunits{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{caldisplayFerm}}</div>
-        <div id="percentScaleSG{{Color}}" class="margin-horizontal button button-round" style="background:{{Color}};height:10px;width:0%;max-width:95%;"></div>
+        <div id="percentScaleSG{{Color}}" class="margin-horizontal button button-round" style="background:{{js 'this.Color.replace("•HD","")'}};height:10px;width:0%;max-width:95%;"></div>
         <div class="card-content card-content-padding">Temperature: <span id="uncaldisplayTemp+displayTempunits{{Color}}">{{uncaldisplayTemp}}</span> (pre-calibrated)</div>
         <div id="caldisplayTemp+displayTempunits{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{caldisplayTemp}}{{displayTempunits}}</div>
-        <div id="percentScaleTemp{{Color}}" class="margin-horizontal button button-round" style="background:{{Color}};height:10px;width:0%;max-width:95%;"></div>
+        <div id="percentScaleTemp{{Color}}" class="margin-horizontal button button-round" style="background:{{js 'this.Color.replace("•HD","")'}};height:10px;width:0%;max-width:95%;"></div>
         <div class="card-content card-content-padding lastrec"><span id=numberSecondsAgo{{Color}}></span> seconds ago <span id=displayRSSI{{Color}}></span><br><span id=displaytimeStamp{{Color}}></span></div>
     </div>
     {{/each}}
@@ -332,7 +332,7 @@
                     <thead>
                       <tr>
                           <th class="numeric-cell">Delete</th>
-                        <th class="numeric-cell">Uncal/Tilt</th>
+                        <th class="numeric-cell">Pre-cal/Tilt</th>
                         <th class="numeric-cell">Actual</th>
                       </tr>
                     </thead>
@@ -366,7 +366,7 @@
                     <thead>
                       <tr>
                           <th class="numeric-cell">Delete</th>
-                        <th class="numeric-cell">Uncal/Tilt</th>
+                        <th class="numeric-cell">Pre-cal/Tilt</th>
                         <th class="numeric-cell">Actual</th>
                       </tr>
                     </thead>

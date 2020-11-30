@@ -72,10 +72,10 @@
     <allow-navigation href="https://tilthydrometer.com/*" />
     <allow-navigation href="https://*youtube.com/*" />
     <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
-        <string>Location Services allows Bluetooth scanning only while using app and will only be used to scan for nearby TILT hydrometers and read temperature and specific gravity.</string>
+        <string>This app uses Bluetooth-based location services for scanning nearby TILT hydrometers and reading temperature and specific gravity. No other location technology will be used.</string>
     </edit-config>
     <edit-config file="*-Info.plist" mode="merge" target="NSBluetoothAlwaysUsageDescription">
-        <string>Bluetooth used only for scanning nearby TILT hydrometers and reading temperature and specific gravity.</string>
+        <string>This app uses Bluetooth for scanning nearby TILT hydrometers and read temperature and specific gravity.</string>
     </edit-config>
     <splash src="/res/screens/ios/Default@2x~universal~anyany.png" />
     <preference name="AllowInlineMediaPlayback" value="false" />

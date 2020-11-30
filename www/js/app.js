@@ -29,7 +29,7 @@ var app  = new Framework7({
     return {
       defaultCloudURL : 'https://script.google.com/a/baronbrew.com/macros/s/AKfycbydNOcB-_3RB3c-7sOTI-ZhTnN43Ye1tt0EFvvMxTxjdbheaw/exec',
       tiltColors : ['RED', 'GREEN', 'BLACK', 'PURPLE', 'ORANGE', 'BLUE', 'YELLOW', 'PINK'],
-      appVersion : '1.0.32'
+      appVersion : '1.0.35'
     };
   },
   // App root methods
@@ -345,14 +345,53 @@ function checkFineLocationPermissionCallback(status) {
                   var beacon = pluginResult.beacons[i];
                   //add timestamp
                   beacon.timeStamp = Date.now();
+                  //assign color by UUID and Minor Range
+                  if (beacon.minor > 5000){
+                      beacon.hd = true;
+                  }else{
+                      beacon.hd = false;
+                  }
+                switch (beacon.uuid[6] + "-" + beacon.hd) {
+                    case "1-false" : beacon.Color = "RED";
+                    break;
+                    case "1-true" : beacon.Color = "RED•HD";
+                    break;
+                    case "2-false" : beacon.Color = "GREEN";
+                    break;
+                    case "2-true" : beacon.Color = "GREEN•HD";
+                    break;
+                    case "3-false" : beacon.Color = "BLACK";
+                    break;
+                    case "3-true" : beacon.Color = "BLACK•HD";
+                    break;
+                    case "4-false" : beacon.Color = "PURPLE";
+                    break;
+                    case "4-true" : beacon.Color = "PURPLE•HD";
+                    break;
+                    case "5-false" : beacon.Color = "ORANGE";
+                    break;
+                    case "5-true" : beacon.Color = "ORANGE•HD";
+                    break;
+                    case "6-false" : beacon.Color = "BLUE";
+                    break;
+                    case "6-true" : beacon.Color = "BLUE•HD";
+                    break;
+                    case "7-false" : beacon.Color = "YELLOW";
+                    break;
+                    case "7-true" : beacon.Color = "YELLOW•HD";
+                    break;
+                    case "8-false" : beacon.Color = "PINK";
+                    break;
+                    case "8-true" : beacon.Color = "PINK•HD";
+                    break;
+             }
                   //setup HD tilt
-                if (beacon.minor > 5000){
+                if (beacon.hd){
                     beacon.uncalTemp = beacon.major / 10;
                     localStorage.setItem('uncalTemp-' + beacon.Color, beacon.uncalTemp);
                     beacon.uncalSG = (beacon.minor / 10000).toFixed(4);
                     localStorage.setItem('uncalSG-' + beacon.Color, beacon.uncalSG);
                     localStorage.setItem('uncalTemp-' + beacon.Color, beacon.uncalTemp);
-                    beacon.hd = true;
                     beacon.tempDecimals = 1;
                     beacon.sgDecimals = 4;
                 } else {
@@ -362,33 +401,13 @@ function checkFineLocationPermissionCallback(status) {
                   beacon.uncalSG = (beacon.minor / 1000).toFixed(3);
                   localStorage.setItem('uncalSG-' + beacon.Color, beacon.uncalSG);
                   localStorage.setItem('uncalTemp-' + beacon.Color, beacon.uncalTemp);
-                  beacon.hd = false;
                   beacon.tempDecimals = 0;
                   beacon.sgDecimals = 3;
                 }
-                //assign color by UUID
-                switch (beacon.uuid[6]) {
-                    case "1" : beacon.Color = "RED";
-                    break;
-                    case "2" : beacon.Color = "GREEN";
-                    break;
-                    case "3" : beacon.Color = "BLACK";
-                    break;
-                    case "4" : beacon.Color = "PURPLE";
-                    break;
-                    case "5" : beacon.Color = "ORANGE";
-                    break;
-                    case "6" : beacon.Color = "BLUE";
-                    break;
-                    case "7" : beacon.Color = "YELLOW";
-                    break;
-                    case "8" : beacon.Color = "PINK";
-                    break;
-             }
                   addtoScan(beacon);
                   updateBeacons();
                   //set key by UUID
-                  var key = beacon.uuid;
+                  var key = beacon.uuid + beacon.hd;
                   beacons[key] = beacon;
                   //console.log(beacons);
               }
@@ -1325,7 +1344,8 @@ function postToCloudURLs (color, comment) {
             currentBeerName = currentBeerName.split(',')[0];
          }
         stopScan();//stop bt scan while using wifi
-        app.request.post(cloudURLsArray[i], encodeURI("Timepoint=" + localTimeExcel + "&SG=" + beacon.SG + "&Temp=" + beacon.Temp + "&Color=" + beacon.Color + "&Beer=" + currentBeerName + "&Comment=" + comment), function (stringData){
+        var colorLogged = beacon.Color.replace("•HD","");
+        app.request.post(cloudURLsArray[i], encodeURI("Timepoint=" + localTimeExcel + "&SG=" + beacon.SG + "&Temp=" + beacon.Temp + "&Color=" + colorLogged + "&Beer=" + currentBeerName + "&Comment=" + comment), function (stringData){
             startScan();//restart scanning
             localStorage.setItem('lastCloudLogged-' + color, Date.now());
             //try to parse data from Baron Brew Google Sheets
@@ -1810,6 +1830,7 @@ function logToDevice(color, comment){
             closeTimeout: 5000,
           });
     notificationAppendedLog.open();
+    beacon.Color = beacon.Color.replace("•HD","");
     writeToFile(CSVfileName, localTime + ',' + localTimeExcel + ',' + beacon.SG + ',' + beacon.Temp + ',' + beacon.Color + ',' + currentBeerName + ',' + comment, isAppend,'csv', color);
     writeToFile(JSONfileName, { Timestamp : localTime, Timepoint : localTimeExcel, SG : beacon.SG, Temp : beacon.Temp, Color : beacon.Color, Beer : currentBeerName, Comment : comment }, isAppend,'json', color);
     $$('#deviceStatus' + color).html('<a class="link">| share&nbsp;<i class="f7-icons size-15">share</i></a>');
@@ -1865,6 +1886,8 @@ function logToDevice(color, comment){
         NativeStorage.setItem('listOfJSONFiles', listOfJSONFilesArray, function (result) { }, function (e) { });
     }
     writeToFile(CSVfileName, 'Timestamp,Timepoint,SG,Temp,Color,Beer,Comment', isAppend,'csv', color);
+    //remove •HD tag for logging file
+    beacon.Color = beacon.Color.replace("•HD","");
     writeToFile(JSONfileName, { Timestamp : localTime, Timepoint : localTimeExcel, SG : beacon.SG, Temp : beacon.Temp, Color : beacon.Color, Beer : currentBeerName, Comment : comment }, isAppend,'json', color);
     $$('#deviceStatus' + color).html('<a class="link">| share&nbsp;<i class="f7-icons size-15">share</i></a>');
     var deviceStatusElement = document.getElementById('deviceStatus' + color);

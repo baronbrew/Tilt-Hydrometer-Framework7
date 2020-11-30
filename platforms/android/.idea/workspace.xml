@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="debug" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="AutoImportSettings">
@@ -8,45 +9,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99e8b4e1-484e-419c-bb23-978576aaae65" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Location  Alert.rtf" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../config.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android.json" beforeDir="false" afterPath="$PROJECT_DIR$/android.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/baronbrew/tilthydrometerf7/BuildConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/baronbrew/tilthydrometerf7/BuildConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/debug.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/values.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/values.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/debug.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/debug-mergeJavaRes/merge-state" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/debug-mergeJavaRes/merge-state" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/debug-mergeJniLibs/merge-state" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/debug-mergeJniLibs/merge-state" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values_values.arsc.flat" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values_values.arsc.flat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/xml_config.xml.flat" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/xml_config.xml.flat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/symbol-table-with-package/debug/package-aware-r.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/res/symbol-table-with-package/debug/package-aware-r.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/__content__.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/__content__.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/externalLibsDexMerger/debug/0/classes.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/externalLibsDexMerger/debug/0/classes.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/mergeJavaRes/debug/0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/mergeJavaRes/debug/0.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/output.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/www/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/www/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/www/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/www/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/assets/www/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/www/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/assets/www/plugins/cordova-plugin-email-composer/www/email_composer.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/www/plugins/cordova-plugin-email-composer/www/email_composer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/de/appplant/cordova/emailcomposer/EmailComposer.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/de/appplant/cordova/emailcomposer/EmailComposer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/xml/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/xml/config.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform_www/plugins/cordova-plugin-email-composer/www/email_composer.js" beforeDir="false" afterPath="$PROJECT_DIR$/platform_www/plugins/cordova-plugin-email-composer/www/email_composer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/project.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Plugins/cordova-plugin-email-composer/APPEmailComposerImpl.m" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2/Plugins/cordova-plugin-email-composer/APPEmailComposerImpl.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ios/frameworks.json" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/frameworks.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ios/platform_www/plugins/cordova-plugin-email-composer/www/email_composer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/platform_www/plugins/cordova-plugin-email-composer/www/email_composer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ios/www/plugins/cordova-plugin-email-composer/www/email_composer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/www/plugins/cordova-plugin-email-composer/www/email_composer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/plugin.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/src/android/EmailComposer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/src/android/EmailComposer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/src/ios/APPEmailComposerImpl.m" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/src/ios/APPEmailComposerImpl.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/www/email_composer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/www/email_composer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/Tilt 2" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/Tilt 2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/_CodeSignature/CodeResources" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/_CodeSignature/CodeResources" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/www/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/www/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/www/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/www/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/www/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcarchive/Products/Applications/Tilt 2.app/www/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcworkspace/xcuserdata/noahneibaron.xcuserdatad/UserInterfaceState.xcuserstate" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcworkspace/xcuserdata/noahneibaron.xcuserdatad/UserInterfaceState.xcuserstate" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/CDVLaunchScreen.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2/CDVLaunchScreen.storyboard" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Tilt 2-Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2/Tilt 2-Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2/config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/ios.json" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/ios.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/www/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/www/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/www/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/www/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/www/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/www/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../www/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../www/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../www/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../www/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../www/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../www/js/app.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,7 +52,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[HT84A1A02040]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -72,6 +70,12 @@
       </state>
     </system>
   </component>
+  <component name="GenerateSignedApkSettings">
+    <option name="KEY_STORE_PATH" value="$PROJECT_DIR$/../../../../android-keystore/signature.jks" />
+    <option name="KEY_ALIAS" value="upload" />
+    <option name="REMEMBER_PASSWORDS" value="true" />
+    <option name="BUILD_TARGET_KEY" value="apk" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
@@ -83,12 +87,17 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ApkExportedModule" value="android.app" />
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="HT84A1A02040" />
     <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-11-07T20:46:55.807Z" />
+    <property name="ExportApk.ApkPath" value="$PROJECT_DIR$/app" />
+    <property name="ExportApk.BuildVariants" value="release" />
+    <property name="ExportApk.SignV1" value="true" />
+    <property name="ExportApk.SignV2" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
   </component>
   <component name="RunManager">
     <configuration name="&lt;template&gt;" type="Applet" default="true" selected="false">
@@ -222,21 +231,25 @@
       <screen x="0" y="23" width="1280" height="742" />
     </state>
     <state x="321" y="23" key="#app/0.23.1280.742@0.23.1280.742" timestamp="1604782790857" />
-    <state width="1238" height="137" key="GridCell.Tab.0.bottom" timestamp="1604782061246">
+    <state width="1238" height="137" key="GridCell.Tab.0.bottom" timestamp="1606672117537">
       <screen x="0" y="23" width="1280" height="742" />
     </state>
-    <state width="1238" height="137" key="GridCell.Tab.0.bottom/0.23.1280.742@0.23.1280.742" timestamp="1604782061246" />
-    <state width="1238" height="137" key="GridCell.Tab.0.center" timestamp="1604782061246">
+    <state width="1238" height="137" key="GridCell.Tab.0.bottom/0.23.1280.742@0.23.1280.742" timestamp="1606672117537" />
+    <state width="1238" height="137" key="GridCell.Tab.0.center" timestamp="1606672117536">
       <screen x="0" y="23" width="1280" height="742" />
     </state>
-    <state width="1238" height="137" key="GridCell.Tab.0.center/0.23.1280.742@0.23.1280.742" timestamp="1604782061246" />
-    <state width="1238" height="137" key="GridCell.Tab.0.left" timestamp="1604782061245">
+    <state width="1238" height="137" key="GridCell.Tab.0.center/0.23.1280.742@0.23.1280.742" timestamp="1606672117536" />
+    <state width="1238" height="137" key="GridCell.Tab.0.left" timestamp="1606672117535">
       <screen x="0" y="23" width="1280" height="742" />
     </state>
-    <state width="1238" height="137" key="GridCell.Tab.0.left/0.23.1280.742@0.23.1280.742" timestamp="1604782061245" />
-    <state width="1238" height="137" key="GridCell.Tab.0.right" timestamp="1604782061246">
+    <state width="1238" height="137" key="GridCell.Tab.0.left/0.23.1280.742@0.23.1280.742" timestamp="1606672117535" />
+    <state width="1238" height="137" key="GridCell.Tab.0.right" timestamp="1606672117536">
       <screen x="0" y="23" width="1280" height="742" />
     </state>
-    <state width="1238" height="137" key="GridCell.Tab.0.right/0.23.1280.742@0.23.1280.742" timestamp="1604782061246" />
+    <state width="1238" height="137" key="GridCell.Tab.0.right/0.23.1280.742@0.23.1280.742" timestamp="1606672117536" />
+    <state x="141" y="23" key="SettingsEditor" timestamp="1606672096395">
+      <screen x="0" y="23" width="1280" height="742" />
+    </state>
+    <state x="141" y="23" key="SettingsEditor/0.23.1280.742@0.23.1280.742" timestamp="1606672096395" />
   </component>
 </project>
