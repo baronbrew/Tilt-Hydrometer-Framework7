@@ -34,7 +34,7 @@
   "devDependencies": {
     "cordova": "^10.0.0",
     "cordova-android": "^8.1.0",
-    "cordova-ios": "^6.1.1",
+    "cordova-ios": "^5.0.1",
     "cordova-plugin-device": "^2.0.3",
     "cordova-plugin-email-composer": "git+https://github.com/katzer/cordova-plugin-email-composer.git",
     "cordova-plugin-inappbrowser": "^4.0.0"
