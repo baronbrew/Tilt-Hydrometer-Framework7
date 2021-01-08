@@ -92,4 +92,7 @@
     <preference name="StatusBarStyle" value="lightcontent" />
     <preference name="Orientation" value="all" />
     <preference name="AutoHideSplashScreen" value="true" />
+    <feature name="CordovaHttpPlugin">
+        <param name="ios-package" value="CordovaHttpPlugin" />
+    </feature>
 </widget>

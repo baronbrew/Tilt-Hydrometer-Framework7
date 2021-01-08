@@ -29,7 +29,7 @@ var app  = new Framework7({
     return {
       defaultCloudURL : 'https://script.google.com/a/baronbrew.com/macros/s/AKfycbydNOcB-_3RB3c-7sOTI-ZhTnN43Ye1tt0EFvvMxTxjdbheaw/exec',
       tiltColors : ['RED', 'GREEN', 'BLACK', 'PURPLE', 'ORANGE', 'BLUE', 'YELLOW', 'PINK'],
-      appVersion : '1.0.34'
+      appVersion : '1.0.36'
     };
   },
   // App root methods
@@ -345,8 +345,8 @@ function checkFineLocationPermissionCallback(status) {
                   var beacon = pluginResult.beacons[i];
                   //add timestamp
                   beacon.timeStamp = Date.now();
-                  //assign color by UUID and Minor Range
-                  if (beacon.minor > 5000){
+                  //assign color by UUID and Minor Range. FW 1005 is HD
+                  if (beacon.minor > 5000 || beacon.minor == 1005 && beacon.major == 999){
                       beacon.hd = true;
                   }else{
                       beacon.hd = false;
@@ -1305,7 +1305,7 @@ function clearCustomCloudURL2 (button){
     notificationFull.open();
 }
 
-function postToCloudURLs (color, comment) {
+function postToCloudURLsDisabled (color, comment) {
     //get beer name from local storage in case beer name updated from prompt
     var currentBeerName = localStorage.getItem('beerName-' + color)||"Untitled";
     if (comment === undefined){
@@ -2048,4 +2048,125 @@ function restoreCalibrationPoints(color){
                 localStorage.setItem('actualTemppoints-' + color, result);
                 }
              }, function (e) { });
+}
+
+function postToCloudURLs (color, comment) {
+    //get beer name from local storage in case beer name updated from prompt
+    var currentBeerName = localStorage.getItem('beerName-' + color)||"Untitled";
+    if (comment === undefined){
+        comment = "";
+    };
+    var beacon = JSON.parse(localStorage.getItem('tiltObject-' + color));
+    var cloudURLs = localStorage.getItem('cloudurls-' + color) || app.data.defaultCloudURL + ',,';
+    var cloudURLsArray = cloudURLs.split(',');
+    var cloudURLsenabled = localStorage.getItem('cloudurlsenabled-' + color)||'1,0,0';
+    var cloudURLsenabledArray = cloudURLsenabled.split(',');
+    var inRangeBeacons = localStorage.getItem('inrangebeacons')||'NONE';
+    var inRangeBeaconsArray = inRangeBeacons.split(',');
+    var indexOfColor = inRangeBeaconsArray.indexOf(color);
+    if (cloudURLsenabled == '0,0,0' || indexOfColor < 0){
+       return;//return undefined if no cloud options checked or Tilts not in range
+       }
+       var notificationCloud = app.notification.create({
+        icon: '<i class="preloader"></i>',
+        title: 'Connecting to cloud...',
+        titleRightText: 'alert',
+        subtitle: currentBeerName.split(',')[0] + ' (' + color + ' TILT)',
+        text: 'Allow up to 30 seconds to connect.',
+        closeOnClick: true,
+        closeTimeout: 30000,
+      });
+    setTimeout(function(){ notificationCloud.open(); }, 2000); //prevents notification being overwritten by device log notification
+    for (var i = 0; i < 3; i++) {
+        if (cloudURLsenabledArray[i] == '1'){
+        //convert beacon timeStamp (UTC) to Excel formatted Timepoint (local time)
+        var timeStamp = new Date(beacon.timeStamp);
+        var localTime = timeStamp.toLocaleString();
+        var tzOffsetDays = timeStamp.getTimezoneOffset() / 60 / 24;
+        var localTimeExcel = timeStamp.valueOf() / 1000 / 60 / 60 / 24 + 25569 - tzOffsetDays;
+        //only send beer name with beer ID if using default cloud URL
+         if (i != 0){
+            currentBeerName = currentBeerName.split(',')[0];
+         }
+        stopScan();//stop bt scan while using wifi
+        var colorLogged = beacon.Color.replace("•HD","");
+        cordova.plugin.http.setDataSerializer('utf8');
+        cordova.plugin.http.setRequestTimeout(120.0);
+        cordova.plugin.http.post(
+            cloudURLsArray[i],
+            encodeURI("Timepoint=" + localTimeExcel + "&SG=" + beacon.SG + "&Temp=" + beacon.Temp + "&Color=" + colorLogged + "&Beer=" + currentBeerName + "&Comment=" + comment),
+            { "content-type" : "application/x-www-form-urlencoded; charset=utf-8" },
+            function (objectData){
+            startScan();//restart scanning
+            localStorage.setItem('lastCloudLogged-' + color, Date.now());
+            //try to parse data from Baron Brew Google Sheets
+            try {
+            var jsonData = JSON.parse(objectData.data);
+            //different notification depending on if beer name exists and data should be logged or if beer name doesn't exist and new log needs to be started
+            if (jsonData.result.indexOf("Start New Log") > -1){
+            var notificationSuccess = app.notification.create({
+                icon: '<i class="f7-icons">check</i>',
+                title: 'Ready to Start New Log',
+                titleRightText: 'alert',
+                subtitle: localTime,
+                text: jsonData.result,
+                closeOnClick: false,
+                closeTimeout: 8000,
+              });
+            notificationSuccess.open();
+            }else{
+            var notificationSuccess = app.notification.create({
+                icon: '<i class="f7-icons">check</i>',
+                title: 'Success Logging to Cloud',
+                titleRightText: 'alert',
+                subtitle: localTime,
+                text: jsonData.result,
+                closeOnClick: false,
+                closeTimeout: 8000,
+              });
+            notificationSuccess.open();
+            }
+            //set beername with returned cloud ID
+            var beerNameArray = jsonData.beername.split(",");
+            if (beerNameArray[1] !== undefined && comment != 'End of log') {
+              localStorage.setItem('beerName-' + color, jsonData.beername);
+              NativeStorage.setItem('beerName-' + color, jsonData.beername, function (result) { }, function (e) { });
+                showBeerName(color);
+                $$('#cloudStatus' + color).html('<a class="link external" href="' + jsonData.doclongurl + '" target="_system">&nbsp;<i class="material-icons size-15">cloud_done</i><span id="lastCloudLogged' + beacon.Color +'"></span></a>');
+                localStorage.setItem('docLongURL-' + color, jsonData.doclongurl);
+            }
+            }
+            //json parse error - just show "result" if not Baron Brew Google Sheets
+            catch(error){
+                var notificationSuccess = app.notification.create({
+                    icon: '<i class="f7-icons">check</i>',
+                    title: 'Success Logging to Cloud',
+                    titleRightText: 'alert',
+                    subtitle: localTime,
+                    text: jsonData.result,
+                    closeOnClick: false,
+                    closeTimeout: 8000,
+                  });
+                notificationSuccess.open();
+                $$('#cloudStatus' + beacon.Color).html('<i class="material-icons size-15">cloud_done</i><span id="lastCloudLogged' + beacon.Color +'"></span>');
+
+            }
+        }, function (errorData) {
+            startScan();//restart scanning
+            var notificationCloudError = app.notification.create({
+                icon: '<i class="f7-icons">info</i>',
+                title: 'Error Logging to Cloud',
+                titleRightText: 'alert',
+                subtitle: 'TILT | ' + color,
+                text: JSON.stringify(errorData),
+                closeTimeout: 8000,
+              });
+            notificationCloudError.open();
+            console.log(JSON.stringify(errorData));
+            $$('#cloudStatus' + beacon.Color).html('cloud error');
+
+        }
+        );
+        }
+    }
 }

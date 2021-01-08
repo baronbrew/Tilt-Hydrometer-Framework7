@@ -34,6 +34,9 @@
     "cordova-plugin-email-composer": {
       "ANDROID_SUPPORT_V4_VERSION": "28.+",
       "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
+    },
+    "cordova-plugin-advanced-http": {
+      "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
     }
   },
   "dependent_plugins": {
