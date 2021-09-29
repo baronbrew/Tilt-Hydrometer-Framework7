@@ -18,7 +18,7 @@
   "cordova-plugin-nativestorage": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-nativestorage"
+      "id": "cordova-plugin-nativestorage@^2.3.2"
     },
     "is_top_level": true,
     "variables": {}
@@ -58,7 +58,7 @@
   "cordova-plugin-inappbrowser": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-inappbrowser@4.0.0"
+      "id": "cordova-plugin-inappbrowser@^4.0.0"
     },
     "is_top_level": true,
     "variables": {}

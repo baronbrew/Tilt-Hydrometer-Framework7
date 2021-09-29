@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.baronbrew.tilthydrometerf7" version="1.0.36" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.baronbrew.tilthydrometerf7" version="1.0.37" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Tilt 2</name>
     <description>
         Generation two app for Tilt scanning and logging data.
@@ -65,7 +65,7 @@
         <string>This app uses Bluetooth-based location services for scanning nearby TILT hydrometers and reading temperature and specific gravity. No other location technology will be used.</string>
         </edit-config>
         <edit-config target="NSBluetoothAlwaysUsageDescription" file="*-Info.plist" mode="merge">
-        <string>This app uses Bluetooth for scanning nearby TILT hydrometers and read temperature and specific gravity.</string>
+        <string>This app uses Bluetooth for scanning nearby TILT hydrometers and reading temperature and specific gravity.</string>
     </edit-config>
     </platform>
     <plugin name="cordova-plugin-file" spec="~6.0.1" />
