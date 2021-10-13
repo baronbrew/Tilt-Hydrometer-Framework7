@@ -29,7 +29,7 @@ var app  = new Framework7({
     return {
       defaultCloudURL : 'https://script.google.com/a/baronbrew.com/macros/s/AKfycbydNOcB-_3RB3c-7sOTI-ZhTnN43Ye1tt0EFvvMxTxjdbheaw/exec',
       tiltColors : ['RED', 'GREEN', 'BLACK', 'PURPLE', 'ORANGE', 'BLUE', 'YELLOW', 'PINK'],
-      appVersion : '1.0.37'
+      appVersion : '1.0.38'
     };
   },
   // App root methods
@@ -204,7 +204,7 @@ function checkFineLocationPermissionCallback(status) {
 
   function startScan() {
       console.log("startScan");
-      scanningToast = app.toast.create({text: 'Scanning for nearby Tilts...<br>Ensure Bluetooth and Location Services are enabled and Tilt is floating.', icon: '<i class="material-icons">bluetooth_searching</i>', position: 'bottom', }).open();
+      scanningToast = app.toast.create({text: '<i class="material-icons">bluetooth_searching</i> Scanning for nearby TILT hydrometers.<br>Ensure Bluetooth and Location Services are enabled and TILT is floating.', position: 'bottom', closeButton: true, closeButtonText: 'close', closeButtonColor: 'red',}).open();
       // Start ranging beacons.
       for (var i in regions) {
           var beaconRegion = new locationManager.BeaconRegion(
@@ -1944,7 +1944,7 @@ function onResume() {
         updateInterval = setInterval(function(){ updateBeacons(); }, 1000);
     }
     watchBluetoothInterval = setInterval(function(){ watchBluetooth(); }, 30000);
-    scanningToast = app.toast.create({text: 'Scanning for nearby Tilts...<br>Ensure Bluetooth and Location Services are enabled and Tilt is floating.', icon: '<i class="material-icons">bluetooth_searching</i>', position: 'bottom', }).open();
+    scanningToast = app.toast.create({text: '<i class="material-icons">bluetooth_searching</i> Scanning for nearby TILT hydrometers.<br>Ensure Bluetooth and Location Services are enabled and TILT is floating.', position: 'bottom', closeButton: true, closeButtonText: 'close', closeButtonColor: 'red',}).open();
     //set resumed flag to trigger logging as soon as tilts are in range
     //localStorage.setItem('inrangebeacons','NONE');
     //console.log('resumed');

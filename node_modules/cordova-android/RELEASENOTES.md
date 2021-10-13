@@ -18,7 +18,139 @@
 # under the License.
 #
 -->
-## Release Notes for Cordova (Android) ##
+## Release Notes for Cordova (Android)
+
+### 9.1.0 (Apr 09, 2021)
+
+**Features:**
+
+* [GH-1104](https://github.com/apache/cordova-android/pull/1104) feat: support `gzip` encoding requests & use `GZIPInputStream`
+* [GH-1167](https://github.com/apache/cordova-android/pull/1167) feat: handle `intent://` scheme links with `browser_fallback_url` param
+* [GH-1179](https://github.com/apache/cordova-android/pull/1179) feat: add `repositories` support
+* [GH-1173](https://github.com/apache/cordova-android/pull/1173) feat(android-studio): display app name as project name
+* [GH-1113](https://github.com/apache/cordova-android/pull/1113) feat: `webp` support for splashscreen
+* [GH-1125](https://github.com/apache/cordova-android/pull/1125) feat(Adb): list `devices` _and_ `emulators` in one go
+
+**Fixes:**
+
+* [GH-1186](https://github.com/apache/cordova-android/pull/1186) fix: copy `repositories.gradle` to project on create
+* [GH-1184](https://github.com/apache/cordova-android/pull/1184) fix: unit-test failure
+* [GH-733](https://github.com/apache/cordova-android/pull/733) fix(splashscreen): nav & title bar showing in fullscreen mode
+* [GH-1157](https://github.com/apache/cordova-android/pull/1157) fix: restore key event handlers when DOM element is fullscreen
+* [GH-1073](https://github.com/apache/cordova-android/pull/1073) fix(android): Avoid Crash Report: ConcurrentModificationException
+* [GH-1148](https://github.com/apache/cordova-android/pull/1148) fix: add not null checks to prevent running on destroyed activity
+* [GH-1091](https://github.com/apache/cordova-android/pull/1091) fix: concurrent modification exception (#924)
+* [GH-1153](https://github.com/apache/cordova-android/pull/1153) fix: optional arch parameter
+* [GH-1136](https://github.com/apache/cordova-android/pull/1136) fix(prepare): `mapImageResources` always returning `[]`
+* [GH-1111](https://github.com/apache/cordova-android/pull/1111) fix(android): allow file access for existing behavior
+* [GH-1045](https://github.com/apache/cordova-android/pull/1045) fix: Reflect minimum required NodeJS
+* [GH-1084](https://github.com/apache/cordova-android/pull/1084) fix(prepare): fix pattern used to collect image resources
+* [GH-1014](https://github.com/apache/cordova-android/pull/1014) fix(`pluginHandlers`): properly check if path is inside another
+* [GH-1018](https://github.com/apache/cordova-android/pull/1018) fix: gradle ignore properties
+* [GH-1185](https://github.com/apache/cordova-android/pull/1185) fix(regression): Cannot read version of undefined caused by Java refactor
+* [GH-1117](https://github.com/apache/cordova-android/pull/1117) fix: allow changing min sdk version
+
+**Refactors:**
+
+* [GH-1101](https://github.com/apache/cordova-android/pull/1101) refactor: unify target resolution for devices & emulators
+* [GH-1130](https://github.com/apache/cordova-android/pull/1130) refactor: java checks
+* [GH-1099](https://github.com/apache/cordova-android/pull/1099) refactor(`ProjectBuilder`): clean up output file collection code
+* [GH-1123](https://github.com/apache/cordova-android/pull/1123) refactor: unify installation on devices & emulators
+* [GH-1102](https://github.com/apache/cordova-android/pull/1102) refactor(`check_reqs`): cleanup default Java location detection on **Windows**
+* [GH-1103](https://github.com/apache/cordova-android/pull/1103) refactor: do not kill adb on UNIX-like systems
+* [GH-1086](https://github.com/apache/cordova-android/pull/1086) refactor(retry): simplify retryPromise using modern JS
+* [GH-1085](https://github.com/apache/cordova-android/pull/1085) refactor(utils): reduce number of utils
+* [GH-1046](https://github.com/apache/cordova-android/pull/1046) refactor: Stop suppressing un-needed TruelyRandom lints
+* [GH-1016](https://github.com/apache/cordova-android/pull/1016) refactor: save `ProjectBuilder` instance in Api instance
+* [GH-1108](https://github.com/apache/cordova-android/pull/1108) refactor: remove copied Adb.install from `emulator.install`
+
+**Chores:**
+
+* [GH-1196](https://github.com/apache/cordova-android/pull/1196) chore: add missing header license
+* chore(asf): Update GitHub repo metadata
+* [GH-1183](https://github.com/apache/cordova-android/pull/1183) chore: rebuilt package-lock
+* [GH-1015](https://github.com/apache/cordova-android/pull/1015) chore: remove unnecessary stuff
+* [GH-1081](https://github.com/apache/cordova-android/pull/1081) chore(pkg): remove deprecated `no-op` field `"engineStrict"`
+* [GH-1019](https://github.com/apache/cordova-android/pull/1019) chore: remove unused `emulator.create_image` and its dependencies
+
+**Tests & CI:**
+
+* [GH-1017](https://github.com/apache/cordova-android/pull/1017) test(java): fix, improve and move clean script
+* [GH-1012](https://github.com/apache/cordova-android/pull/1012) test: fix missing stack traces in jasmine output
+* [GH-1013](https://github.com/apache/cordova-android/pull/1013) test(`pluginHandlers/common`): better setup & teardown
+* [GH-1094](https://github.com/apache/cordova-android/pull/1094) test: fix unit test failures for certain random orders
+* [GH-1094](https://github.com/apache/cordova-android/pull/1094) test: ensure single top-level describe block in test file
+* [GH-1129](https://github.com/apache/cordova-android/pull/1129) test(java): remove duplicate code in `BackButtonMultipageTest`
+* [GH-975](https://github.com/apache/cordova-android/pull/975) ci: Added Node 14.x
+
+### 9.0.0 (Jun 23, 2020)
+
+* [GH-1005](https://github.com/apache/cordova-android/pull/1005) chore: set AndroidX off by default
+* [GH-971](https://github.com/apache/cordova-android/pull/971) fix: Accept multiple mime types on file input
+* [GH-1001](https://github.com/apache/cordova-android/pull/1001) fix: support both adaptive and standard icons at the same time
+* [GH-985](https://github.com/apache/cordova-android/pull/985) fix: Plugin install fails when preview sdk is installed
+* [GH-994](https://github.com/apache/cordova-android/pull/994) chore: cleanup yaml files
+* [GH-999](https://github.com/apache/cordova-android/pull/999) chore: remove trailing spaces from Java sources
+* [GH-992](https://github.com/apache/cordova-android/pull/992) chore: update some dependencies
+* [GH-998](https://github.com/apache/cordova-android/pull/998) chore: remove trailing spaces from framework build files
+* [GH-997](https://github.com/apache/cordova-android/pull/997) chore: remove trailing spaces from project template
+* [GH-996](https://github.com/apache/cordova-android/pull/996) chore: remove trailing spaces from bat files
+* [GH-995](https://github.com/apache/cordova-android/pull/995) remove trailing spaces from markdown files
+* [GH-993](https://github.com/apache/cordova-android/pull/993) chore: update `devDependencies`
+* [GH-987](https://github.com/apache/cordova-android/pull/987) breaking: reduce combined response cutoff to 16 MB
+* [GH-988](https://github.com/apache/cordova-android/pull/988) major: Gradle 6.5 & **Android** Gradle plugin 4.0.0 updates
+* [GH-990](https://github.com/apache/cordova-android/pull/990) chore: remove trailing spaces from `app/build.gradle`
+* [GH-989](https://github.com/apache/cordova-android/pull/989) breaking: remove `legacy/build.gradle` from template
+* [GH-978](https://github.com/apache/cordova-android/pull/978) fix: `wait_for_boot` waiting forever
+* [GH-965](https://github.com/apache/cordova-android/pull/965) fix: Increased `detectArchitecture()` timeout
+* [GH-962](https://github.com/apache/cordova-android/pull/962) breaking: Bump **Android** gradle plugin to 3.6.0
+* [GH-948](https://github.com/apache/cordova-android/pull/948) feature: JVM Args flag
+* [GH-951](https://github.com/apache/cordova-android/pull/951) fix: `ANDROID_SDK_ROOT` variable
+* [GH-959](https://github.com/apache/cordova-android/pull/959) test: synced AndroidX gradle versions to the same version as the **Android** test
+* [GH-960](https://github.com/apache/cordova-android/pull/960) feat: `com.android.tools.build:gradle:3.5.3`
+* [GH-956](https://github.com/apache/cordova-android/pull/956) chore(npm): add `package-lock.json`
+* [GH-958](https://github.com/apache/cordova-android/pull/958) chore(npm): add ignore list
+* [GH-957](https://github.com/apache/cordova-android/pull/957) chore: various cleanup
+* [GH-955](https://github.com/apache/cordova-android/pull/955) chore(eslint): bump package & apply eslint fix
+* [GH-954](https://github.com/apache/cordova-android/pull/954) breaking(npm): bump packages
+* [GH-953](https://github.com/apache/cordova-android/pull/953) chore(npm): use short notation in `package.json`
+* [GH-823](https://github.com/apache/cordova-android/pull/823) fix: prevent exit fullscreen mode from closing application
+* [GH-950](https://github.com/apache/cordova-android/pull/950) fix: removed redundent logcat print
+* [GH-915](https://github.com/apache/cordova-android/pull/915) breaking: bump minSdkVersion to 22 and drop pre-Lollipop specific code
+* [GH-941](https://github.com/apache/cordova-android/pull/941) fix: GH-873 App bundle builds to obey command-line arguments
+* [GH-940](https://github.com/apache/cordova-android/pull/940) ci: drop travis & move codecov to gh-actions
+* [GH-929](https://github.com/apache/cordova-android/pull/929) chore: updated `README` to reflect what **Android** requires more accurately, which is Java 8, not anything less, not anything greater. Java 1.8.x is required.
+* [GH-937](https://github.com/apache/cordova-android/pull/937) fix: GH-935 replaced `compare-func` with native sort method
+* [GH-939](https://github.com/apache/cordova-android/pull/939) fix: test failure with shebang interpreter in `rewired` files
+* [GH-911](https://github.com/apache/cordova-android/pull/911) refactor: use es6 class
+* [GH-910](https://github.com/apache/cordova-android/pull/910) refactor (eslint): use `cordova-eslint`
+* [GH-909](https://github.com/apache/cordova-android/pull/909) chore: remove appveyor residual
+* [GH-895](https://github.com/apache/cordova-android/pull/895) feat: add github actions
+* [GH-842](https://github.com/apache/cordova-android/pull/842) refactor: remove `shelljs` dependency
+* [GH-896](https://github.com/apache/cordova-android/pull/896) feat: add Kotlin support
+* [GH-901](https://github.com/apache/cordova-android/pull/901) feat: add AndroidX support
+* [GH-849](https://github.com/apache/cordova-android/pull/849) fix: cordova requirements consider the `android-targetSdkVersion`
+* [GH-904](https://github.com/apache/cordova-android/pull/904) fix (adb): shell to return expected stdout
+* [GH-792](https://github.com/apache/cordova-android/pull/792) feat: upgrade `gradle` to 6.1 & gradle build tools to 3.5.3
+* [GH-902](https://github.com/apache/cordova-android/pull/902) chore: remove `.project` file & add `.settings` to `gitignore`
+* [GH-900](https://github.com/apache/cordova-android/pull/900) refactor: simplify `doFindLatestInstalledBuildTools`
+* [GH-751](https://github.com/apache/cordova-android/pull/751) feat: use Java package name for loading `BuildConfig`
+* [GH-898](https://github.com/apache/cordova-android/pull/898) chore: rename gradle plugin google services `preference` options
+* [GH-893](https://github.com/apache/cordova-android/pull/893) feat: add Google Services support
+* [GH-709](https://github.com/apache/cordova-android/pull/709) feat: add `version-compare` library to compare `build-tools` versions properly.
+* [GH-831](https://github.com/apache/cordova-android/pull/831) chore: ignore auto-generated eclipse buildship files
+* [GH-848](https://github.com/apache/cordova-android/pull/848) breaking: increased default target sdk to 29
+* [GH-859](https://github.com/apache/cordova-android/pull/859) breaking: removed unnecessary project name restriction
+* [GH-833](https://github.com/apache/cordova-android/pull/833) chore: drop `q` module
+* [GH-862](https://github.com/apache/cordova-android/pull/862) chore: replace `superspawn` & `child_process` with `execa`
+* [GH-860](https://github.com/apache/cordova-android/pull/860) feat: don't filter gradle's stderr anymore
+* [GH-832](https://github.com/apache/cordova-android/pull/832) chore: drop node 6 and 8 support
+* [GH-890](https://github.com/apache/cordova-android/pull/890) chore: bump version to 9.0.0-dev
+* [GH-697](https://github.com/apache/cordova-android/pull/697) chore: optimization code
+* [GH-863](https://github.com/apache/cordova-android/pull/863) chore: removed comment that serves no purpose
+* [GH-861](https://github.com/apache/cordova-android/pull/861) chore: update `jasmine` to 3.5.0
+* [GH-858](https://github.com/apache/cordova-android/pull/858) chore: modernize our one E2E test
+* [GH-854](https://github.com/apache/cordova-android/pull/854) chore: ensure to lint as many files as possible
 
 ### 8.1.0 (Sep 11, 2019)
 

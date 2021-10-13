@@ -29,7 +29,7 @@ var app  = new Framework7({
     return {
       defaultCloudURL : 'https://script.google.com/a/baronbrew.com/macros/s/AKfycbydNOcB-_3RB3c-7sOTI-ZhTnN43Ye1tt0EFvvMxTxjdbheaw/exec',
       tiltColors : ['RED', 'GREEN', 'BLACK', 'PURPLE', 'ORANGE', 'BLUE', 'YELLOW', 'PINK'],
-      appVersion : '1.0.36'
+      appVersion : '1.0.38'
     };
   },
   // App root methods
@@ -204,7 +204,7 @@ function checkFineLocationPermissionCallback(status) {
 
   function startScan() {
       console.log("startScan");
-      scanningToast = app.toast.create({text: 'Scanning for nearby Tilts...<br>Ensure Bluetooth and Location Services are enabled and Tilt is floating.', icon: '<i class="material-icons">bluetooth_searching</i>', position: 'bottom', }).open();
+      scanningToast = app.toast.create({text: '<i class="material-icons">bluetooth_searching</i> Scanning for nearby TILT hydrometers.<br>Ensure Bluetooth and Location Services are enabled and TILT is floating.', position: 'bottom', closeButton: true, closeButtonText: 'close', closeButtonColor: 'red',}).open();
       // Start ranging beacons.
       for (var i in regions) {
           var beaconRegion = new locationManager.BeaconRegion(
@@ -1944,7 +1944,7 @@ function onResume() {
         updateInterval = setInterval(function(){ updateBeacons(); }, 1000);
     }
     watchBluetoothInterval = setInterval(function(){ watchBluetooth(); }, 30000);
-    scanningToast = app.toast.create({text: 'Scanning for nearby Tilts...<br>Ensure Bluetooth and Location Services are enabled and Tilt is floating.', icon: '<i class="material-icons">bluetooth_searching</i>', position: 'bottom', }).open();
+    scanningToast = app.toast.create({text: '<i class="material-icons">bluetooth_searching</i> Scanning for nearby TILT hydrometers.<br>Ensure Bluetooth and Location Services are enabled and TILT is floating.', position: 'bottom', closeButton: true, closeButtonText: 'close', closeButtonColor: 'red',}).open();
     //set resumed flag to trigger logging as soon as tilts are in range
     //localStorage.setItem('inrangebeacons','NONE');
     //console.log('resumed');
@@ -2076,7 +2076,7 @@ function postToCloudURLs (color, comment) {
         closeOnClick: true,
         closeTimeout: 30000,
       });
-    setTimeout(function(){ notificationCloud.open(); }, 2000); //prevents notification being overwritten by device log notification
+    var notificationCloudTimeout = setTimeout(function(){ notificationCloud.open(); }, 2000); //prevents notification being overwritten by device log notification
     for (var i = 0; i < 3; i++) {
         if (cloudURLsenabledArray[i] == '1'){
         //convert beacon timeStamp (UTC) to Excel formatted Timepoint (local time)
@@ -2102,6 +2102,7 @@ function postToCloudURLs (color, comment) {
             //try to parse data from Baron Brew Google Sheets
             try {
             var jsonData = JSON.parse(objectData.data);
+            clearTimeout(notificationCloudTimeout);
             //different notification depending on if beer name exists and data should be logged or if beer name doesn't exist and new log needs to be started
             if (jsonData.result.indexOf("Start New Log") > -1){
             var notificationSuccess = app.notification.create({
@@ -2152,6 +2153,7 @@ function postToCloudURLs (color, comment) {
 
             }
         }, function (errorData) {
+            clearTimeout(notificationCloudTimeout);
             startScan();//restart scanning
             var notificationCloudError = app.notification.create({
                 icon: '<i class="f7-icons">info</i>',

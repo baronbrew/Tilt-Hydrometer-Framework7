@@ -1,1 +1,20 @@
-[{"outputType":{"type":"APK"},"apkInfo":{"type":"MAIN","splits":[],"versionCode":10036,"versionName":"1.0.36","enabled":true,"outputFile":"app-debug.apk","fullName":"debug","baseName":"debug"},"path":"app-debug.apk","properties":{}}]
+{
+  "version": 1,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.baronbrew.tilthydrometerf7",
+  "variantName": "debug",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "properties": [],
+      "versionCode": 10038,
+      "versionName": "10038",
+      "enabled": true,
+      "outputFile": "app-debug.apk"
+    }
+  ]
+}

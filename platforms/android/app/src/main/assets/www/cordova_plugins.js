@@ -59,14 +59,6 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "runs": true
     },
     {
-      "id": "cordova-plugin-android-permissions.Permissions",
-      "file": "plugins/cordova-plugin-android-permissions/www/permissions.js",
-      "pluginId": "cordova-plugin-android-permissions",
-      "clobbers": [
-        "cordova.plugins.permissions"
-      ]
-    },
-    {
       "id": "cordova-plugin-file.DirectoryEntry",
       "file": "plugins/cordova-plugin-file/www/DirectoryEntry.js",
       "pluginId": "cordova-plugin-file",
@@ -240,56 +232,6 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "runs": true
     },
     {
-      "id": "cordova-plugin-inappbrowser.inappbrowser",
-      "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
-      "pluginId": "cordova-plugin-inappbrowser",
-      "clobbers": [
-        "cordova.InAppBrowser.open"
-      ]
-    },
-    {
-      "id": "cordova-plugin-nativestorage.mainHandle",
-      "file": "plugins/cordova-plugin-nativestorage/www/mainHandle.js",
-      "pluginId": "cordova-plugin-nativestorage",
-      "clobbers": [
-        "NativeStorage"
-      ]
-    },
-    {
-      "id": "cordova-plugin-nativestorage.LocalStorageHandle",
-      "file": "plugins/cordova-plugin-nativestorage/www/LocalStorageHandle.js",
-      "pluginId": "cordova-plugin-nativestorage"
-    },
-    {
-      "id": "cordova-plugin-nativestorage.NativeStorageError",
-      "file": "plugins/cordova-plugin-nativestorage/www/NativeStorageError.js",
-      "pluginId": "cordova-plugin-nativestorage"
-    },
-    {
-      "id": "cordova-plugin-splashscreen.SplashScreen",
-      "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
-      "pluginId": "cordova-plugin-splashscreen",
-      "clobbers": [
-        "navigator.splashscreen"
-      ]
-    },
-    {
-      "id": "cordova-plugin-statusbar.statusbar",
-      "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
-      "pluginId": "cordova-plugin-statusbar",
-      "clobbers": [
-        "window.StatusBar"
-      ]
-    },
-    {
-      "id": "cordova-plugin-email-composer.EmailComposer",
-      "file": "plugins/cordova-plugin-email-composer/www/email_composer.js",
-      "pluginId": "cordova-plugin-email-composer",
-      "clobbers": [
-        "cordova.plugins.email"
-      ]
-    },
-    {
       "id": "cordova-plugin-advanced-http.cookie-handler",
       "file": "plugins/cordova-plugin-advanced-http/www/cookie-handler.js",
       "pluginId": "cordova-plugin-advanced-http"
@@ -361,19 +303,77 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "clobbers": [
         "cordova.plugin.http"
       ]
+    },
+    {
+      "id": "cordova-plugin-android-permissions.Permissions",
+      "file": "plugins/cordova-plugin-android-permissions/www/permissions.js",
+      "pluginId": "cordova-plugin-android-permissions",
+      "clobbers": [
+        "cordova.plugins.permissions"
+      ]
+    },
+    {
+      "id": "cordova-plugin-email-composer.EmailComposer",
+      "file": "plugins/cordova-plugin-email-composer/www/email_composer.js",
+      "pluginId": "cordova-plugin-email-composer",
+      "clobbers": [
+        "cordova.plugins.email"
+      ]
+    },
+    {
+      "id": "cordova-plugin-inappbrowser.inappbrowser",
+      "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+      "pluginId": "cordova-plugin-inappbrowser",
+      "clobbers": [
+        "cordova.InAppBrowser.open"
+      ]
+    },
+    {
+      "id": "cordova-plugin-nativestorage.mainHandle",
+      "file": "plugins/cordova-plugin-nativestorage/www/mainHandle.js",
+      "pluginId": "cordova-plugin-nativestorage",
+      "clobbers": [
+        "NativeStorage"
+      ]
+    },
+    {
+      "id": "cordova-plugin-nativestorage.LocalStorageHandle",
+      "file": "plugins/cordova-plugin-nativestorage/www/LocalStorageHandle.js",
+      "pluginId": "cordova-plugin-nativestorage"
+    },
+    {
+      "id": "cordova-plugin-nativestorage.NativeStorageError",
+      "file": "plugins/cordova-plugin-nativestorage/www/NativeStorageError.js",
+      "pluginId": "cordova-plugin-nativestorage"
+    },
+    {
+      "id": "cordova-plugin-splashscreen.SplashScreen",
+      "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+      "pluginId": "cordova-plugin-splashscreen",
+      "clobbers": [
+        "navigator.splashscreen"
+      ]
+    },
+    {
+      "id": "cordova-plugin-statusbar.statusbar",
+      "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
+      "pluginId": "cordova-plugin-statusbar",
+      "clobbers": [
+        "window.StatusBar"
+      ]
     }
   ];
   module.exports.metadata = {
     "cordova-plugin-device": "2.0.3",
     "com.unarin.cordova.beacon": "3.8.1",
-    "cordova-plugin-android-permissions": "1.0.2",
     "cordova-plugin-file": "6.0.1",
+    "cordova-plugin-advanced-http": "3.1.0",
+    "cordova-plugin-android-permissions": "1.0.2",
+    "cordova-plugin-email-composer": "0.9.2",
     "cordova-plugin-inappbrowser": "4.0.0",
     "cordova-plugin-nativestorage": "2.3.2",
     "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-statusbar": "2.4.2",
-    "cordova-plugin-whitelist": "1.3.4",
-    "cordova-plugin-email-composer": "0.9.2",
-    "cordova-plugin-advanced-http": "3.1.0"
+    "cordova-plugin-whitelist": "1.3.4"
   };
 });

@@ -4,8 +4,8 @@
   "displayName": "Tilt Hydrometer Framework7",
   "cordova": {
     "platforms": [
-      "android",
-      "ios"
+      "ios",
+      "android"
     ],
     "plugins": {
       "cordova-plugin-file": {},
@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "cordova": "^10.0.0",
-    "cordova-android": "^8.1.0",
+    "cordova-android": "^9.1.0",
     "cordova-ios": "^5.1.0",
     "cordova-plugin-advanced-http": "^3.1.0",
     "cordova-plugin-device": "^2.0.3",
