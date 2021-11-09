@@ -22,7 +22,7 @@
   "_resolved": "https://registry.npmjs.org/cordova-plugin-device/-/cordova-plugin-device-2.0.3.tgz",
   "_shasum": "c2b41b7efd0455dd097f89356d85bfdd5dadeb0f",
   "_spec": "cordova-plugin-device@*",
-  "_where": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7",
+  "_where": "/Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7",
   "author": {
     "name": "Apache Software Foundation"
   },

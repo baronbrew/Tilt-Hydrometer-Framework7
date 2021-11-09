@@ -446,7 +446,7 @@
                                             withTemplate:@""];
 
     NSData* data = [[NSData alloc] initWithBase64EncodedString:dataString
-                                                       options:NSDataBase64DecodingIgnoreUnknownCharacters];
+                                                       options:0];
 
     return data;
 }

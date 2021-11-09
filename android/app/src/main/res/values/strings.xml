@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Tilt 2</string>
+    <string name="title_activity_main">Tilt 2</string>
+    <string name="package_name">com.baronbrew.tilthydrometerf7</string>
+    <string name="custom_url_scheme">com.baronbrew.tilthydrometerf7</string>
+</resources>

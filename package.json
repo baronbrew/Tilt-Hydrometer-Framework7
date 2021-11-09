@@ -16,14 +16,17 @@
       "cordova-plugin-android-permissions": {},
       "cordova-plugin-whitelist": {},
       "cordova-plugin-inappbrowser": {},
+      "cordova-plugin-advanced-http": {},
       "com.unarin.cordova.beacon": {},
+      "cordova-plugin-androidx-adapter": {},
       "cordova-plugin-email-composer": {
-        "ANDROID_SUPPORT_V4_VERSION": "28.+"
-      },
-      "cordova-plugin-advanced-http": {}
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
+      }
     }
   },
   "dependencies": {
+    "@capacitor/android": "^3.3.1",
+    "@capacitor/core": "^3.3.1",
     "cordova-plugin-android-permissions": "^1.0.2",
     "cordova-plugin-file": "~6.0.1",
     "cordova-plugin-ibeacon": "^3.8.1",
@@ -31,15 +34,19 @@
     "cordova-plugin-splashscreen": "~5.0.2",
     "cordova-plugin-statusbar": "~2.4.2",
     "cordova-plugin-whitelist": "^1.3.4",
+    "jetifier": "^2.0.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@capacitor/cli": "^3.3.1",
+    "com.unarin.cordova.beacon": "git+https://github.com/baronbrew/cordova-plugin-ibeacon.git",
     "cordova": "^10.0.0",
     "cordova-android": "^9.1.0",
     "cordova-ios": "^5.1.0",
     "cordova-plugin-advanced-http": "^3.1.0",
+    "cordova-plugin-androidx-adapter": "^1.1.3",
     "cordova-plugin-device": "^2.0.3",
-    "cordova-plugin-email-composer": "git+https://github.com/katzer/cordova-plugin-email-composer.git",
+    "cordova-plugin-email-composer": "^0.9.2",
     "cordova-plugin-inappbrowser": "^4.0.0"
   }
 }

@@ -63,6 +63,14 @@
     "is_top_level": true,
     "variables": {}
   },
+  "cordova-plugin-advanced-http": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-advanced-http@^3.1.0"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
   "com.unarin.cordova.beacon": {
     "source": {
       "type": "registry",
@@ -71,20 +79,18 @@
     "is_top_level": true,
     "variables": {}
   },
+  "cordova-plugin-androidx-adapter": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-androidx-adapter"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
   "cordova-plugin-email-composer": {
     "source": {
       "type": "registry",
-      "id": "https://github.com/katzer/cordova-plugin-email-composer.git"
-    },
-    "is_top_level": true,
-    "variables": {
-      "ANDROID_SUPPORT_V4_VERSION": "28.+"
-    }
-  },
-  "cordova-plugin-advanced-http": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-advanced-http@^3.1.0"
+      "id": "cordova-plugin-email-composer"
     },
     "is_top_level": true,
     "variables": {}

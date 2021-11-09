@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <access origin="*" />
+  
+  <feature name="Permissions">
+    <param name="android-package" value="com.android.plugins.Permissions"/>
+  </feature>
+
+  <feature name="File">
+    <param name="android-package" value="org.apache.cordova.file.FileUtils"/>
+    <param name="onload" value="true"/>
+  </feature>
+
+  <feature name="LocationManager">
+    <param name="android-package" value="com.unarin.cordova.beacon.LocationManager"/>
+  </feature>
+
+  <feature name="NativeStorage">
+    <param name="android-package" value="NativeStorage"/>
+  </feature>
+
+  <feature name="StatusBar">
+    <param name="android-package" value="org.apache.cordova.statusbar.StatusBar"/>
+    <param name="onload" value="true"/>
+  </feature>
+
+  <feature name="Whitelist">
+    <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin"/>
+    <param name="onload" value="true"/>
+  </feature>
+
+  <feature name="LocationManager">
+    <param name="android-package" value="com.unarin.cordova.beacon.LocationManager"/>
+  </feature>
+
+  <feature name="CordovaHttpPlugin">
+    <param name="android-package" value="com.silkimen.cordovahttp.CordovaHttpPlugin"/>
+  </feature>
+
+  <feature name="Device">
+    <param name="android-package" value="org.apache.cordova.device.Device"/>
+  </feature>
+
+  <feature name="EmailComposer">
+    <param name="android-package" value="de.appplant.cordova.emailcomposer.EmailComposer"/>
+  </feature>
+
+  <feature name="InAppBrowser">
+    <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser"/>
+  </feature>
+
+  
+  <preference name="DisallowOverscroll" value="true" />
+  <preference name="ShowSplashScreenSpinner" value="false" />
+  <preference name="KeepRunning" value="true" />
+</widget>

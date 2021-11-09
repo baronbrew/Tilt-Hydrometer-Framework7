@@ -6,20 +6,74 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
+    <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="adc87b99-6086-4bc0-9491-337e291275a2" name="Default Changelist" comment="" />
+    <list default="true" id="adc87b99-6086-4bc0-9491-337e291275a2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-device/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-device/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android.json" beforeDir="false" afterPath="$PROJECT_DIR$/android.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/baronbrew/tilthydrometerf7/BuildConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/baronbrew/tilthydrometerf7/BuildConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/debug.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/values.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/values.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/debug.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/debug-mergeJavaRes/merge-state" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/debug-mergeJavaRes/merge-state" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values_values.arsc.flat" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values_values.arsc.flat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/xml_config.xml.flat" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/xml_config.xml.flat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/output.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/www/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/www/cordova_plugins.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/www/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/www/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/www/plugins/cordova-plugin-email-composer/www/email_composer.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/www/plugins/cordova-plugin-email-composer/www/email_composer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/unarin/cordova/beacon/LocationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/unarin/cordova/beacon/LocationManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/de/appplant/cordova/emailcomposer/EmailComposer.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/de/appplant/cordova/emailcomposer/EmailComposer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/de/appplant/cordova/emailcomposer/Provider.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/de/appplant/cordova/emailcomposer/Provider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/xml/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/xml/config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform_www/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/platform_www/cordova_plugins.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform_www/plugins/cordova-plugin-email-composer/www/email_composer.js" beforeDir="false" afterPath="$PROJECT_DIR$/platform_www/plugins/cordova-plugin-email-composer/www/email_composer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/project.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Plugins/cordova-plugin-email-composer/APPEmailComposerImpl.m" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2/Plugins/cordova-plugin-email-composer/APPEmailComposerImpl.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Tilt 2-Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2/Tilt 2-Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2/config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/frameworks.json" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/frameworks.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/ios.json" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/ios.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/platform_www/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/platform_www/cordova_plugins.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/platform_www/plugins/cordova-plugin-email-composer/www/email_composer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/platform_www/plugins/cordova-plugin-email-composer/www/email_composer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/www/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/www/cordova_plugins.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/www/plugins/cordova-plugin-email-composer/www/email_composer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/www/plugins/cordova-plugin-email-composer/www/email_composer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/android.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/android.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/plugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/src/android/EmailComposer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/src/android/EmailComposer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/src/ios/APPEmailComposerImpl.m" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/src/ios/APPEmailComposerImpl.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/www/email_composer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/www/email_composer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/fetch.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/fetch.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/ios.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/ios.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../www/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../www/js/app.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[HT84A1A02040]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -43,12 +97,33 @@
     <option name="REMEMBER_PASSWORDS" value="true" />
     <option name="BUILD_TARGET_KEY" value="apk" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
+  </component>
+  <component name="ProjectId" id="1zgywklNdeIAaXF8PmF55R77r3m" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="ApkExportedModule" value="android.app" />
     <property name="ExportApk.ApkPath" value="$PROJECT_DIR$/app" />
     <property name="ExportApk.BuildVariants" value="release" />
-    <property name="memory.settings.postsync.last.time.stamp" value="1633034266484" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="memory.settings.postsync.last.time.stamp" value="1635462595508" />
   </component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
@@ -110,10 +185,27 @@
       </method>
     </configuration>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="adc87b99-6086-4bc0-9491-337e291275a2" name="Default Changelist" comment="" />
+      <created>1634584269604</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1634584269604</updated>
+    </task>
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
