@@ -11,55 +11,50 @@ INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/pl
 	android:name
 		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:26:141-198
 manifest
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-33:12
-INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-33:12
-INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-33:12
-INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-33:12
-MERGED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:2:1-61:12
-MERGED from [:CordovaLib] /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/CordovaLib/build/intermediates/library_manifest/debug/AndroidManifest.xml:20:1-27:12
-MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/dbd7f3404e398769a436df133f9c22a0/legacy-support-v4-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/862d618c4a74a92713659a4de235cf27/legacy-support-core-ui-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [com.google.android.material:material:1.3.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/38d278193e0a5b01c1a3a6c5a79d8b65/material-1.3.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/cf23310a7a7f338e3588f4cc27ee63af/dynamicanimation-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/76797c4c057edbfa73c24afedd30b782/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/7a10db28faae4d5b332b296fac4c123c/constraintlayout-2.0.1/AndroidManifest.xml:2:1-11:12
-MERGED from [androidx.appcompat:appcompat:1.2.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/438786eb448967dbfdf15c0047da4828/appcompat-1.2.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.core:core-ktx:1.3.2] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/e1d37d34c5ddc210cd47276a0103d56c/jetified-core-ktx-1.3.2/AndroidManifest.xml:2:1-9:12
-MERGED from [androidx.media:media:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/6c105360245f769c088976d97fc5a6ce/media-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/c432e23169f832ec7b1fe6ed52802af8/jetified-viewpager2-1.0.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.fragment:fragment:1.1.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/a209c57a6cb19bd04ce6b598e5f52e3c/fragment-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.loader:loader:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/4ebe54eb21a46b11de1c8b6a98382879/loader-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.appcompat:appcompat-resources:1.2.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/2be3fcadc0b73da83db33b9a995daca0/jetified-appcompat-resources-1.2.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/ff593eb994a251d8dac437ca978af2af/drawerlayout-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/7ef444ce523fb0d0c3822d4d38507dc2/coordinatorlayout-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.transition:transition:1.2.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/13ab9557bf30072d050faaac643454eb/transition-1.2.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/bce435b8126b1f73b3c08665a9892128/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/c9ffb37adbc364f7f2414ce4a481eb9b/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/4316c9e9e14dde16bd0af0cff2b7f84d/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/6c61fe4d7cb61834524be14a3e240790/slidingpanelayout-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/e9395dd32918709b377943840f6d25d1/recyclerview-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.customview:customview:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/9da2b99caf4161acc264c5b7c456ef74/customview-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/e75985f4058d660aa5c80167b45ff8ca/swiperefreshlayout-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/e490a983018a8fe5e052ac1e6757d8cf/asynclayoutinflater-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.activity:activity:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/7dd23e79f189a19093ca0c53867bf175/jetified-activity-1.0.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.core:core:1.3.2] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/2610aeb64547baadfb952b559e979414/core-1.3.2/AndroidManifest.xml:17:1-26:12
-MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/8008323a081a55c8d30e79b17b1f2566/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/ae74097148c08bdff7bea4d1d637dc7b/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.print:print:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/1be9dbcc62c36236b61cf6fa2fd00fc3/print-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/bbc9e02901b00dc5016df21c7d21b0fe/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.cardview:cardview:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/4bc99f1b2ad8f2d66d51613c3a2c62b6/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/b5f94b08bd83bda043bbd50468125e86/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/e6bb7e01f8e83b7b07e98d45a8a1ae6f/versionedparcelable-1.1.0/AndroidManifest.xml:17:1-27:12
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/b194165e6cb6e3bf344f1f61ed4fa83f/lifecycle-livedata-2.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/367a660fa20cb00ec09dd86cb4f5513d/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/2095fef3b3cb6004da604f438865388a/core-runtime-2.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/fa7ba0e021e610e9000bbdd7922306c3/lifecycle-runtime-2.1.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/bdd8f47c13dc015102dfe68de34d5735/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/d3140ec19f76d768fe8975db7f441cb6/jetified-savedstate-1.0.0/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.annotation:annotation-experimental:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/ff6f04623f1651a6318dd47ac610e308/jetified-annotation-experimental-1.0.0/AndroidManifest.xml:17:1-24:12
-INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-33:12
-INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-33:12
-INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-33:12
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-40:12
+INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-40:12
+INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-40:12
+INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-40:12
+MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:2:1-58:12
+MERGED from [:CordovaLib] /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/CordovaLib/build/intermediates/merged_manifest/debug/AndroidManifest.xml:20:1-27:12
+MERGED from [androidx.appcompat:appcompat:1.3.1] /Users/noahneibaron/.gradle/caches/transforms-3/d291a6f185053cd23b616e4ab375bb6e/transformed/appcompat-1.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/2b0ebfa4d0b0c7972492b03fe82418c2/transformed/legacy-support-v4-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/a2fa308bad1c65f9bb78708a94614923/transformed/legacy-support-core-ui-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/4c3bc9354488d56f13f5839132d54cd6/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.fragment:fragment:1.3.6] /Users/noahneibaron/.gradle/caches/transforms-3/3cd736f8d61ffc7a977bbbb55dd20cdb/transformed/fragment-1.3.6/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.activity:activity:1.2.4] /Users/noahneibaron/.gradle/caches/transforms-3/447eaaa9276fa9c10c05f3e2d73a75d4/transformed/jetified-activity-1.2.4/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat-resources:1.3.1] /Users/noahneibaron/.gradle/caches/transforms-3/b3dfba0c8d84caf316db56b0cb31471f/transformed/jetified-appcompat-resources-1.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/11348cfdc29855f9d31894aff9c91267/transformed/drawerlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.webkit:webkit:1.4.0] /Users/noahneibaron/.gradle/caches/transforms-3/c0ad5eb08c69156c176aabfd3d5f3dda/transformed/webkit-1.4.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/b794de6ad5f6efba0f2330e519063e25/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media:media:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/68dcfcca9a8dbcfcc905bd53f75fc75f/transformed/media-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/3642b96701ab04c1f031f0f7c75e43df/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/noahneibaron/.gradle/caches/transforms-3/0282e4bfe2a8dc4cf23cba12ebd2dc06/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/noahneibaron/.gradle/caches/transforms-3/77412cb58649a6d96eb4304f534321a4/transformed/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/cf88fb46af181b9d290c82f9850245c3/transformed/coordinatorlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/62a29c11c7d3a77b1cbdbfa3747dd3e8/transformed/slidingpanelayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/315487a90537d1e781646056d3653100/transformed/customview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/34bb5a2bbfd3904b76d7a9ddaef2c31f/transformed/swiperefreshlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/e2d025b5a9b16df538a4be842a6a2716/transformed/asynclayoutinflater-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.5.0] /Users/noahneibaron/.gradle/caches/transforms-3/09314801a92bc2d84a1fe4a156efb7a9/transformed/core-1.5.0/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/a5521c58881af167d5b069529e822956/transformed/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] /Users/noahneibaron/.gradle/caches/transforms-3/77255116558eadc583e0eea51bf70141/transformed/jetified-lifecycle-viewmodel-savedstate-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.savedstate:savedstate:1.1.0] /Users/noahneibaron/.gradle/caches/transforms-3/0f27e2b45c47518274682bd7836c4664/transformed/jetified-savedstate-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] /Users/noahneibaron/.gradle/caches/transforms-3/4f5835a734d23e4da7249f2e5d86b2ec/transformed/lifecycle-runtime-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] /Users/noahneibaron/.gradle/caches/transforms-3/d7327e8661b53656fbae64cd2cd557cc/transformed/lifecycle-viewmodel-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/770770c202a69524cbd43c4855d8ebfb/transformed/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/145873a055fdb4737235e7cacc57f100/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/afbaad20496e5cd5c6f62cbf32e4be30/transformed/print-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/noahneibaron/.gradle/caches/transforms-3/d0ccf99f6dfb33e1f0d451319138c41a/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/50a2ddccf2231ef4a3da740c84e3b1ca/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/dc5dd60eb66b85bb11235fa3bda8fcd6/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] /Users/noahneibaron/.gradle/caches/transforms-3/b10f815c331321e9414e0b4e563b7225/transformed/lifecycle-livedata-core-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/noahneibaron/.gradle/caches/transforms-3/b781ca1b61e71287d48fac169c167bef/transformed/core-runtime-2.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/c8e58c3717ff7df3d2c16cac258d1505/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.annotation:annotation-experimental:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/0a3e0117253b072fc1503cbb12d940cc/transformed/jetified-annotation-experimental-1.0.0/AndroidManifest.xml:17:1-24:12
+INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-40:12
+INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-40:12
+INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-40:12
 	package
 		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:103-143
 		INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml
@@ -94,15 +89,13 @@ uses-permission#android.permission.INTERNET
 ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:4:5-67
 	android:name
 		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:4:22-64
-uses-feature#android.hardware.location
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:5:5-87
-	android:required
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:5:60-84
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:5:5-79
 	android:name
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:5:19-59
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:5:22-76
 queries
 ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:6:5-11:15
-intent
+intent#action:name:android.intent.action.SENDTO+data:scheme:mailto
 ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:7:9-10:18
 action#android.intent.action.SENDTO
 ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:8:13-67
@@ -113,19 +106,15 @@ ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platf
 	android:scheme
 		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:9:19-42
 application
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:12:5-29:19
-MERGED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:19:5-59:19
-MERGED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:19:5-59:19
-MERGED from [com.google.android.material:material:1.3.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/38d278193e0a5b01c1a3a6c5a79d8b65/material-1.3.0/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.material:material:1.3.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/38d278193e0a5b01c1a3a6c5a79d8b65/material-1.3.0/AndroidManifest.xml:22:5-20
-MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/7a10db28faae4d5b332b296fac4c123c/constraintlayout-2.0.1/AndroidManifest.xml:9:5-20
-MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/7a10db28faae4d5b332b296fac4c123c/constraintlayout-2.0.1/AndroidManifest.xml:9:5-20
-MERGED from [androidx.core:core:1.3.2] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/2610aeb64547baadfb952b559e979414/core-1.3.2/AndroidManifest.xml:24:5-89
-MERGED from [androidx.core:core:1.3.2] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/2610aeb64547baadfb952b559e979414/core-1.3.2/AndroidManifest.xml:24:5-89
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/e6bb7e01f8e83b7b07e98d45a8a1ae6f/versionedparcelable-1.1.0/AndroidManifest.xml:24:5-25:19
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/e6bb7e01f8e83b7b07e98d45a8a1ae6f/versionedparcelable-1.1.0/AndroidManifest.xml:24:5-25:19
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:12:5-37:19
+MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:20:5-56:19
+MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:20:5-56:19
+MERGED from [androidx.core:core:1.5.0] /Users/noahneibaron/.gradle/caches/transforms-3/09314801a92bc2d84a1fe4a156efb7a9/transformed/core-1.5.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.5.0] /Users/noahneibaron/.gradle/caches/transforms-3/09314801a92bc2d84a1fe4a156efb7a9/transformed/core-1.5.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/noahneibaron/.gradle/caches/transforms-3/d0ccf99f6dfb33e1f0d451319138c41a/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/noahneibaron/.gradle/caches/transforms-3/d0ccf99f6dfb33e1f0d451319138c41a/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
 	android:appComponentFactory
-		ADDED from [androidx.core:core:1.3.2] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/2610aeb64547baadfb952b559e979414/core-1.3.2/AndroidManifest.xml:24:18-86
+		ADDED from [androidx.core:core:1.5.0] /Users/noahneibaron/.gradle/caches/transforms-3/09314801a92bc2d84a1fe4a156efb7a9/transformed/core-1.5.0/AndroidManifest.xml:24:18-86
 	android:supportsRtl
 		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:12:121-147
 	android:label
@@ -143,13 +132,13 @@ ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platf
 	android:launchMode
 		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:13:198-228
 	android:windowSoftInputMode
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:13:320-362
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:13:308-350
 	android:exported
 		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:13:136-159
 	android:configChanges
 		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:13:19-135
 	android:theme
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:13:257-319
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:13:257-307
 	android:name
 		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:13:229-256
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
@@ -166,10 +155,10 @@ ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platf
 		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:16:27-74
 receiver#org.altbeacon.beacon.startup.StartupBroadcastReceiver
 ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:19:9-25:20
-MERGED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:20:9-28:20
-MERGED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:20:9-28:20
+MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:21:9-27:20
+MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:21:9-27:20
 	android:exported
-		ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:22:13-37
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:19:88-112
 	android:name
 		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:19:19-87
 intent-filter#action:name:android.intent.action.ACTION_POWER_CONNECTED+action:name:android.intent.action.ACTION_POWER_DISCONNECTED+action:name:android.intent.action.BOOT_COMPLETED
@@ -186,107 +175,147 @@ action#android.intent.action.ACTION_POWER_DISCONNECTED
 ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:23:17-90
 	android:name
 		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:23:25-87
-uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:30:5-81
+service#org.altbeacon.beacon.BeaconIntentProcessor
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:29:9-126
+MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:35:9-38:40
+MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:35:9-38:40
+	android:enabled
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:29:18-40
+	android:exported
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:29:41-65
 	android:name
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:30:22-78
-uses-permission#android.permission.ACCESS_FINE_LOCATION
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:31:5-79
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:29:66-123
+service#org.altbeacon.beacon.service.ScanJob
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:30:9-33:19
+MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:39:9-48:19
+MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:39:9-48:19
+	android:exported
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:30:18-42
+	android:permission
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:30:95-151
 	android:name
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:31:22-76
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:30:43-94
+meta-data#immediateScanJobId
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:31:13-86
+MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:42:13-44:45
+MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:42:13-44:45
+	android:value
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:31:58-83
+	android:name
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:31:24-57
+meta-data#periodicScanJobId
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:32:13-85
+MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:45:13-47:45
+MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:45:13-47:45
+	android:value
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:32:57-82
+	android:name
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:32:24-56
+service#org.altbeacon.bluetooth.BluetoothTestJob
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:34:9-36:19
+MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:49:9-55:19
+MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:49:9-55:19
+	android:exported
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:34:18-42
+	android:permission
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:34:99-155
+	android:name
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:34:43-98
+meta-data#jobId
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:35:13-74
+MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:52:13-54:46
+MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:52:13-54:46
+	android:value
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:35:45-71
+	android:name
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:35:24-44
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:32:5-80
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:38:5-80
 	android:name
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:32:22-77
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:38:22-77
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:39:5-81
+	android:name
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:39:22-78
 uses-sdk
 INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml
 INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml
 INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml
-MERGED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:6:5-8:41
-MERGED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:6:5-8:41
-MERGED from [:CordovaLib] /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/CordovaLib/build/intermediates/library_manifest/debug/AndroidManifest.xml:25:5-44
-MERGED from [:CordovaLib] /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/CordovaLib/build/intermediates/library_manifest/debug/AndroidManifest.xml:25:5-44
-MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/dbd7f3404e398769a436df133f9c22a0/legacy-support-v4-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/dbd7f3404e398769a436df133f9c22a0/legacy-support-v4-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/862d618c4a74a92713659a4de235cf27/legacy-support-core-ui-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/862d618c4a74a92713659a4de235cf27/legacy-support-core-ui-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.material:material:1.3.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/38d278193e0a5b01c1a3a6c5a79d8b65/material-1.3.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.material:material:1.3.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/38d278193e0a5b01c1a3a6c5a79d8b65/material-1.3.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/cf23310a7a7f338e3588f4cc27ee63af/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/cf23310a7a7f338e3588f4cc27ee63af/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/76797c4c057edbfa73c24afedd30b782/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/76797c4c057edbfa73c24afedd30b782/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/7a10db28faae4d5b332b296fac4c123c/constraintlayout-2.0.1/AndroidManifest.xml:5:5-7:41
-MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/7a10db28faae4d5b332b296fac4c123c/constraintlayout-2.0.1/AndroidManifest.xml:5:5-7:41
-MERGED from [androidx.appcompat:appcompat:1.2.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/438786eb448967dbfdf15c0047da4828/appcompat-1.2.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.appcompat:appcompat:1.2.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/438786eb448967dbfdf15c0047da4828/appcompat-1.2.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.core:core-ktx:1.3.2] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/e1d37d34c5ddc210cd47276a0103d56c/jetified-core-ktx-1.3.2/AndroidManifest.xml:5:5-7:41
-MERGED from [androidx.core:core-ktx:1.3.2] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/e1d37d34c5ddc210cd47276a0103d56c/jetified-core-ktx-1.3.2/AndroidManifest.xml:5:5-7:41
-MERGED from [androidx.media:media:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/6c105360245f769c088976d97fc5a6ce/media-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.media:media:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/6c105360245f769c088976d97fc5a6ce/media-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/c432e23169f832ec7b1fe6ed52802af8/jetified-viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/c432e23169f832ec7b1fe6ed52802af8/jetified-viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.fragment:fragment:1.1.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/a209c57a6cb19bd04ce6b598e5f52e3c/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.fragment:fragment:1.1.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/a209c57a6cb19bd04ce6b598e5f52e3c/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.loader:loader:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/4ebe54eb21a46b11de1c8b6a98382879/loader-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.loader:loader:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/4ebe54eb21a46b11de1c8b6a98382879/loader-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.appcompat:appcompat-resources:1.2.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/2be3fcadc0b73da83db33b9a995daca0/jetified-appcompat-resources-1.2.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.appcompat:appcompat-resources:1.2.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/2be3fcadc0b73da83db33b9a995daca0/jetified-appcompat-resources-1.2.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/ff593eb994a251d8dac437ca978af2af/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/ff593eb994a251d8dac437ca978af2af/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/7ef444ce523fb0d0c3822d4d38507dc2/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/7ef444ce523fb0d0c3822d4d38507dc2/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.transition:transition:1.2.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/13ab9557bf30072d050faaac643454eb/transition-1.2.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.transition:transition:1.2.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/13ab9557bf30072d050faaac643454eb/transition-1.2.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/bce435b8126b1f73b3c08665a9892128/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/bce435b8126b1f73b3c08665a9892128/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/c9ffb37adbc364f7f2414ce4a481eb9b/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/c9ffb37adbc364f7f2414ce4a481eb9b/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/4316c9e9e14dde16bd0af0cff2b7f84d/viewpager-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/4316c9e9e14dde16bd0af0cff2b7f84d/viewpager-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/6c61fe4d7cb61834524be14a3e240790/slidingpanelayout-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/6c61fe4d7cb61834524be14a3e240790/slidingpanelayout-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/e9395dd32918709b377943840f6d25d1/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/e9395dd32918709b377943840f6d25d1/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.customview:customview:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/9da2b99caf4161acc264c5b7c456ef74/customview-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.customview:customview:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/9da2b99caf4161acc264c5b7c456ef74/customview-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/e75985f4058d660aa5c80167b45ff8ca/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/e75985f4058d660aa5c80167b45ff8ca/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/e490a983018a8fe5e052ac1e6757d8cf/asynclayoutinflater-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/e490a983018a8fe5e052ac1e6757d8cf/asynclayoutinflater-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.activity:activity:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/7dd23e79f189a19093ca0c53867bf175/jetified-activity-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.activity:activity:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/7dd23e79f189a19093ca0c53867bf175/jetified-activity-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.core:core:1.3.2] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/2610aeb64547baadfb952b559e979414/core-1.3.2/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.core:core:1.3.2] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/2610aeb64547baadfb952b559e979414/core-1.3.2/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/8008323a081a55c8d30e79b17b1f2566/documentfile-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/8008323a081a55c8d30e79b17b1f2566/documentfile-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/ae74097148c08bdff7bea4d1d637dc7b/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/ae74097148c08bdff7bea4d1d637dc7b/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.print:print:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/1be9dbcc62c36236b61cf6fa2fd00fc3/print-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.print:print:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/1be9dbcc62c36236b61cf6fa2fd00fc3/print-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/bbc9e02901b00dc5016df21c7d21b0fe/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/bbc9e02901b00dc5016df21c7d21b0fe/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.cardview:cardview:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/4bc99f1b2ad8f2d66d51613c3a2c62b6/cardview-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.cardview:cardview:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/4bc99f1b2ad8f2d66d51613c3a2c62b6/cardview-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/b5f94b08bd83bda043bbd50468125e86/interpolator-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/b5f94b08bd83bda043bbd50468125e86/interpolator-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/e6bb7e01f8e83b7b07e98d45a8a1ae6f/versionedparcelable-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/e6bb7e01f8e83b7b07e98d45a8a1ae6f/versionedparcelable-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/b194165e6cb6e3bf344f1f61ed4fa83f/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/b194165e6cb6e3bf344f1f61ed4fa83f/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/367a660fa20cb00ec09dd86cb4f5513d/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/367a660fa20cb00ec09dd86cb4f5513d/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/2095fef3b3cb6004da604f438865388a/core-runtime-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/2095fef3b3cb6004da604f438865388a/core-runtime-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/fa7ba0e021e610e9000bbdd7922306c3/lifecycle-runtime-2.1.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/fa7ba0e021e610e9000bbdd7922306c3/lifecycle-runtime-2.1.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/bdd8f47c13dc015102dfe68de34d5735/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/bdd8f47c13dc015102dfe68de34d5735/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/d3140ec19f76d768fe8975db7f441cb6/jetified-savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/d3140ec19f76d768fe8975db7f441cb6/jetified-savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.annotation:annotation-experimental:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/ff6f04623f1651a6318dd47ac610e308/jetified-annotation-experimental-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.annotation:annotation-experimental:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/ff6f04623f1651a6318dd47ac610e308/jetified-annotation-experimental-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:7:5-9:41
+MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:7:5-9:41
+MERGED from [:CordovaLib] /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/CordovaLib/build/intermediates/merged_manifest/debug/AndroidManifest.xml:25:5-44
+MERGED from [:CordovaLib] /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/CordovaLib/build/intermediates/merged_manifest/debug/AndroidManifest.xml:25:5-44
+MERGED from [androidx.appcompat:appcompat:1.3.1] /Users/noahneibaron/.gradle/caches/transforms-3/d291a6f185053cd23b616e4ab375bb6e/transformed/appcompat-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.3.1] /Users/noahneibaron/.gradle/caches/transforms-3/d291a6f185053cd23b616e4ab375bb6e/transformed/appcompat-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/2b0ebfa4d0b0c7972492b03fe82418c2/transformed/legacy-support-v4-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/2b0ebfa4d0b0c7972492b03fe82418c2/transformed/legacy-support-v4-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/a2fa308bad1c65f9bb78708a94614923/transformed/legacy-support-core-ui-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/a2fa308bad1c65f9bb78708a94614923/transformed/legacy-support-core-ui-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/4c3bc9354488d56f13f5839132d54cd6/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/4c3bc9354488d56f13f5839132d54cd6/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.3.6] /Users/noahneibaron/.gradle/caches/transforms-3/3cd736f8d61ffc7a977bbbb55dd20cdb/transformed/fragment-1.3.6/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.3.6] /Users/noahneibaron/.gradle/caches/transforms-3/3cd736f8d61ffc7a977bbbb55dd20cdb/transformed/fragment-1.3.6/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.2.4] /Users/noahneibaron/.gradle/caches/transforms-3/447eaaa9276fa9c10c05f3e2d73a75d4/transformed/jetified-activity-1.2.4/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.2.4] /Users/noahneibaron/.gradle/caches/transforms-3/447eaaa9276fa9c10c05f3e2d73a75d4/transformed/jetified-activity-1.2.4/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.3.1] /Users/noahneibaron/.gradle/caches/transforms-3/b3dfba0c8d84caf316db56b0cb31471f/transformed/jetified-appcompat-resources-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.3.1] /Users/noahneibaron/.gradle/caches/transforms-3/b3dfba0c8d84caf316db56b0cb31471f/transformed/jetified-appcompat-resources-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/11348cfdc29855f9d31894aff9c91267/transformed/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/11348cfdc29855f9d31894aff9c91267/transformed/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.webkit:webkit:1.4.0] /Users/noahneibaron/.gradle/caches/transforms-3/c0ad5eb08c69156c176aabfd3d5f3dda/transformed/webkit-1.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.webkit:webkit:1.4.0] /Users/noahneibaron/.gradle/caches/transforms-3/c0ad5eb08c69156c176aabfd3d5f3dda/transformed/webkit-1.4.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.loader:loader:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/b794de6ad5f6efba0f2330e519063e25/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/b794de6ad5f6efba0f2330e519063e25/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/68dcfcca9a8dbcfcc905bd53f75fc75f/transformed/media-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/68dcfcca9a8dbcfcc905bd53f75fc75f/transformed/media-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/3642b96701ab04c1f031f0f7c75e43df/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/3642b96701ab04c1f031f0f7c75e43df/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/noahneibaron/.gradle/caches/transforms-3/0282e4bfe2a8dc4cf23cba12ebd2dc06/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/noahneibaron/.gradle/caches/transforms-3/0282e4bfe2a8dc4cf23cba12ebd2dc06/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/noahneibaron/.gradle/caches/transforms-3/77412cb58649a6d96eb4304f534321a4/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/noahneibaron/.gradle/caches/transforms-3/77412cb58649a6d96eb4304f534321a4/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/cf88fb46af181b9d290c82f9850245c3/transformed/coordinatorlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/cf88fb46af181b9d290c82f9850245c3/transformed/coordinatorlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/62a29c11c7d3a77b1cbdbfa3747dd3e8/transformed/slidingpanelayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/62a29c11c7d3a77b1cbdbfa3747dd3e8/transformed/slidingpanelayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/315487a90537d1e781646056d3653100/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/315487a90537d1e781646056d3653100/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/34bb5a2bbfd3904b76d7a9ddaef2c31f/transformed/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/34bb5a2bbfd3904b76d7a9ddaef2c31f/transformed/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/e2d025b5a9b16df538a4be842a6a2716/transformed/asynclayoutinflater-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/e2d025b5a9b16df538a4be842a6a2716/transformed/asynclayoutinflater-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.5.0] /Users/noahneibaron/.gradle/caches/transforms-3/09314801a92bc2d84a1fe4a156efb7a9/transformed/core-1.5.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.5.0] /Users/noahneibaron/.gradle/caches/transforms-3/09314801a92bc2d84a1fe4a156efb7a9/transformed/core-1.5.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/a5521c58881af167d5b069529e822956/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/a5521c58881af167d5b069529e822956/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] /Users/noahneibaron/.gradle/caches/transforms-3/77255116558eadc583e0eea51bf70141/transformed/jetified-lifecycle-viewmodel-savedstate-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] /Users/noahneibaron/.gradle/caches/transforms-3/77255116558eadc583e0eea51bf70141/transformed/jetified-lifecycle-viewmodel-savedstate-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.1.0] /Users/noahneibaron/.gradle/caches/transforms-3/0f27e2b45c47518274682bd7836c4664/transformed/jetified-savedstate-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.1.0] /Users/noahneibaron/.gradle/caches/transforms-3/0f27e2b45c47518274682bd7836c4664/transformed/jetified-savedstate-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] /Users/noahneibaron/.gradle/caches/transforms-3/4f5835a734d23e4da7249f2e5d86b2ec/transformed/lifecycle-runtime-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] /Users/noahneibaron/.gradle/caches/transforms-3/4f5835a734d23e4da7249f2e5d86b2ec/transformed/lifecycle-runtime-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] /Users/noahneibaron/.gradle/caches/transforms-3/d7327e8661b53656fbae64cd2cd557cc/transformed/lifecycle-viewmodel-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] /Users/noahneibaron/.gradle/caches/transforms-3/d7327e8661b53656fbae64cd2cd557cc/transformed/lifecycle-viewmodel-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/770770c202a69524cbd43c4855d8ebfb/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/770770c202a69524cbd43c4855d8ebfb/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/145873a055fdb4737235e7cacc57f100/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/145873a055fdb4737235e7cacc57f100/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/afbaad20496e5cd5c6f62cbf32e4be30/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/afbaad20496e5cd5c6f62cbf32e4be30/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/noahneibaron/.gradle/caches/transforms-3/d0ccf99f6dfb33e1f0d451319138c41a/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/noahneibaron/.gradle/caches/transforms-3/d0ccf99f6dfb33e1f0d451319138c41a/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/50a2ddccf2231ef4a3da740c84e3b1ca/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/50a2ddccf2231ef4a3da740c84e3b1ca/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/dc5dd60eb66b85bb11235fa3bda8fcd6/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/dc5dd60eb66b85bb11235fa3bda8fcd6/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] /Users/noahneibaron/.gradle/caches/transforms-3/b10f815c331321e9414e0b4e563b7225/transformed/lifecycle-livedata-core-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] /Users/noahneibaron/.gradle/caches/transforms-3/b10f815c331321e9414e0b4e563b7225/transformed/lifecycle-livedata-core-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/noahneibaron/.gradle/caches/transforms-3/b781ca1b61e71287d48fac169c167bef/transformed/core-runtime-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/noahneibaron/.gradle/caches/transforms-3/b781ca1b61e71287d48fac169c167bef/transformed/core-runtime-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/c8e58c3717ff7df3d2c16cac258d1505/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/c8e58c3717ff7df3d2c16cac258d1505/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/0a3e0117253b072fc1503cbb12d940cc/transformed/jetified-annotation-experimental-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.annotation:annotation-experimental:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/0a3e0117253b072fc1503cbb12d940cc/transformed/jetified-annotation-experimental-1.0.0/AndroidManifest.xml:20:5-22:41
 INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml
 INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml
 INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml
@@ -309,76 +338,34 @@ ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platf
 	android:name
 		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:27:24-74
 uses-permission#android.permission.BLUETOOTH
-ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:10:5-12:36
+ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:11:5-13:36
 	android:required
-		ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:12:9-33
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:13:9-33
 	android:name
-		ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:11:9-52
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:12:9-52
 uses-permission#android.permission.BLUETOOTH_ADMIN
-ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:13:5-15:36
+ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:14:5-16:36
 	android:required
-		ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:15:9-33
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:16:9-33
 	android:name
-		ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:14:9-58
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:15:9-58
 uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
-ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:16:5-81
+ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:17:5-81
 	android:name
-		ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:16:22-78
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:17:22-78
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
-ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:17:5-81
+ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:18:5-81
 	android:name
-		ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:17:22-78
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:18:22-78
 service#org.altbeacon.beacon.service.BeaconService
-ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:30:9-35:38
+ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:29:9-34:38
 	android:enabled
-		ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:32:13-35
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:31:13-35
 	android:label
-		ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:35:13-35
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:34:13-35
 	android:exported
-		ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:33:13-37
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:32:13-37
 	android:isolatedProcess
-		ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:34:13-44
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:33:13-44
 	android:name
-		ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:31:13-70
-service#org.altbeacon.beacon.BeaconIntentProcessor
-ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:36:9-39:40
-	android:enabled
-		ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:38:13-35
-	android:exported
-		ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:39:13-37
-	android:name
-		ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:37:13-70
-service#org.altbeacon.beacon.service.ScanJob
-ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:40:9-50:19
-	android:exported
-		ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:42:13-37
-	android:permission
-		ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:43:13-69
-	android:name
-		ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:41:13-64
-meta-data#immediateScanJobId
-ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:44:13-46:45
-	android:value
-		ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:46:17-42
-	android:name
-		ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:45:17-50
-meta-data#periodicScanJobId
-ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:47:13-49:45
-	android:value
-		ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:49:17-42
-	android:name
-		ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:48:17-49
-service#org.altbeacon.bluetooth.BluetoothTestJob
-ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:51:9-58:19
-	android:exported
-		ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:53:13-37
-	android:permission
-		ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:54:13-69
-	android:name
-		ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:52:13-68
-meta-data#jobId
-ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:55:13-57:46
-	android:value
-		ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:57:17-43
-	android:name
-		ADDED from [org.altbeacon:android-beacon-library:2.19.3] /Users/noahneibaron/.gradle/caches/transforms-2/files-2.1/03aa9108fd2b5efc9967befd6e4cff44/jetified-android-beacon-library-2.19.3/AndroidManifest.xml:56:17-37
+		ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:30:13-70

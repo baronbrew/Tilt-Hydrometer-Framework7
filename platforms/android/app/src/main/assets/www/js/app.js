@@ -29,7 +29,7 @@ var app  = new Framework7({
     return {
       defaultCloudURL : 'https://script.google.com/a/baronbrew.com/macros/s/AKfycbydNOcB-_3RB3c-7sOTI-ZhTnN43Ye1tt0EFvvMxTxjdbheaw/exec',
       tiltColors : ['RED', 'GREEN', 'BLACK', 'PURPLE', 'ORANGE', 'BLUE', 'YELLOW', 'PINK'],
-      appVersion : '1.0.40'
+      appVersion : '1.0.67'
     };
   },
   // App root methods
@@ -991,6 +991,8 @@ function setBeerName (button){
     var newBeerNameRaw = $$('#currentbeername-' + color).val();
     var newBeerName = newBeerNameRaw.trim();
     var validBeerName = newBeerName.replace('/', '-');
+    validBeerName = newBeerName.replace(',', '-');
+    validBeerName = newBeerName.replace('&', ' and ');
     //only update beer name if field is not empty
     if (newBeerName == "") {
         var notificationFull = app.notification.create({
@@ -2059,6 +2061,13 @@ function postToCloudURLs (color, comment) {
     var beacon = JSON.parse(localStorage.getItem('tiltObject-' + color));
     var cloudURLs = localStorage.getItem('cloudurls-' + color) || app.data.defaultCloudURL + ',,';
     var cloudURLsArray = cloudURLs.split(',');
+    //validate default cloud URL, reset if invalid
+    if (cloudURLsArray[0].includes('http')){
+        //default cloud URL has valid protocol preamble
+    }else{
+        //if invalid use the default cloud URL instead
+        cloudURLsArray[0] = app.data.defaultCloudURL;
+    }
     var cloudURLsenabled = localStorage.getItem('cloudurlsenabled-' + color)||'1,0,0';
     var cloudURLsenabledArray = cloudURLsenabled.split(',');
     var inRangeBeacons = localStorage.getItem('inrangebeacons')||'NONE';

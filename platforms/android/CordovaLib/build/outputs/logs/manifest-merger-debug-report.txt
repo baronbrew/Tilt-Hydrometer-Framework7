@@ -3,24 +3,16 @@ manifest
 ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/CordovaLib/AndroidManifest.xml:20:1-22:12
 INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/CordovaLib/AndroidManifest.xml:20:1-22:12
 INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/CordovaLib/AndroidManifest.xml:20:1-22:12
-INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/CordovaLib/AndroidManifest.xml:20:1-22:12
-INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/CordovaLib/AndroidManifest.xml:20:1-22:12
-INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/CordovaLib/AndroidManifest.xml:20:1-22:12
-INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/CordovaLib/AndroidManifest.xml:20:1-22:12
 	package
 		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/CordovaLib/AndroidManifest.xml:21:7-35
 		INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/CordovaLib/AndroidManifest.xml
 		INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/CordovaLib/AndroidManifest.xml
 	android:versionName
 		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/CordovaLib/AndroidManifest.xml:21:36-61
-		INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/CordovaLib/AndroidManifest.xml
-		INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/CordovaLib/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/CordovaLib/AndroidManifest.xml:20:11-69
 	android:versionCode
 		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/CordovaLib/AndroidManifest.xml:21:62-85
-		INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/CordovaLib/AndroidManifest.xml
-		INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/CordovaLib/AndroidManifest.xml
 uses-sdk
 INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/CordovaLib/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/CordovaLib/AndroidManifest.xml

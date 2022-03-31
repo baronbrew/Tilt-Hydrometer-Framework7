@@ -14,56 +14,330 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="adc87b99-6086-4bc0-9491-337e291275a2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../android/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/capacitor.build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/androidTest/java/com/getcapacitor/myapp/ExampleInstrumentedTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/assets/capacitor.config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/assets/capacitor.plugins.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/java/com/baronbrew/tilthydrometerf7/MainActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/drawable-land-hdpi/splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/drawable-land-mdpi/splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/drawable-land-xhdpi/splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/drawable-land-xxhdpi/splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/drawable-land-xxxhdpi/splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/drawable-port-hdpi/splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/drawable-port-mdpi/splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/drawable-port-xhdpi/splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/drawable-port-xxhdpi/splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/drawable-port-xxxhdpi/splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/drawable/splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/layout/activity_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/values/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/values/styles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/xml/config.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/main/res/xml/file_paths.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/app/src/test/java/com/getcapacitor/myapp/ExampleUnitTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/capacitor.settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../android/variables.gradle" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../config.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-device/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-device/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/.bin/create" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/android-versions/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/android-versions/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/RELEASENOTES.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/RELEASENOTES.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/VERSION" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/android_sdk_version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/android_sdk_version.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/check_reqs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/check_reqs.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/create" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/create.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/lib/create.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/Api.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/build" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/build.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/clean" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/clean.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/defaults.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/Adb.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/AndroidManifest.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/AndroidProject.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/PackageType.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/android_sdk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/build.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/builders/ProjectBuilder.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/builders/builders.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/check_reqs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/config/GradlePropertiesParser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/emulator.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/getASPath.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/install-device" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/install-device.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/install-emulator" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/install-emulator.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/list-devices" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/list-devices.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/list-emulator-images" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/list-emulator-images.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/list-started-emulators" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/list-started-emulators.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/log.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/plugin-build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/pluginHandlers.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/prepare.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/retry.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/run.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/start-emulator" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/lib/start-emulator.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/log.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/loggingHelper.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/run" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/run.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/cordova/version.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/Activity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/app/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/assets/www/cordova.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/assets/www/css/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/assets/www/img/cordova.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/assets/www/img/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/assets/www/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/assets/www/js/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/drawable-land-hdpi/screen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/drawable-land-ldpi/screen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/drawable-land-mdpi/screen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/drawable-land-xhdpi/screen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/drawable-land-xxhdpi/screen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/drawable-land-xxxhdpi/screen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/drawable-port-hdpi/screen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/drawable-port-ldpi/screen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/drawable-port-mdpi/screen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/drawable-port-xhdpi/screen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/drawable-port-xxhdpi/screen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/drawable-port-xxxhdpi/screen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/mipmap-hdpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/mipmap-hdpi-v26/ic_launcher_background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/mipmap-hdpi-v26/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/mipmap-ldpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/mipmap-ldpi-v26/ic_launcher_background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/mipmap-ldpi-v26/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/mipmap-ldpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/mipmap-mdpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/mipmap-mdpi-v26/ic_launcher_background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/mipmap-mdpi-v26/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/mipmap-xhdpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/mipmap-xhdpi-v26/ic_launcher_background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/mipmap-xhdpi-v26/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/mipmap-xxhdpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/mipmap-xxhdpi-v26/ic_launcher_background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/mipmap-xxhdpi-v26/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/mipmap-xxxhdpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/mipmap-xxxhdpi-v26/ic_launcher_background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/mipmap-xxxhdpi-v26/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/res/xml/config.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/templates/project/wrapper.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/update" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/bin/update.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/cordova-js-src/android/nativeapiprovider.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/cordova-js-src/android/promptbasednativeapi.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/cordova-js-src/exec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/cordova-js-src/platform.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/cordova-js-src/plugin/android/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/ant.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/cordova.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/cordova.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/project.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/ConfigXmlParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/ConfigXmlParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CordovaActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CordovaActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CordovaInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CordovaInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CordovaInterfaceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CordovaInterfaceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CordovaPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CordovaPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CordovaWebView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CordovaWebView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CordovaWebViewImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CordovaWebViewImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/PermissionHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/PermissionHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/PluginEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/PluginEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/PluginManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/PluginManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/Whitelist.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/engine/SystemWebViewClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/engine/SystemWebViewClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/engine/SystemWebViewEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/engine/SystemWebViewEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-whitelist/CONTRIBUTING.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-whitelist/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-whitelist/NOTICE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-whitelist/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-whitelist/RELEASENOTES.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-whitelist/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-whitelist/plugin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-whitelist/src/android/WhitelistPlugin.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-whitelist/tests/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-whitelist/tests/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-whitelist/tests/plugin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-whitelist/tests/scripts/remove-access.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-whitelist/tests/src/android/WhitelistAPI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-whitelist/tests/tests.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-whitelist/tests/www/whitelist.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/build/generated/source/buildConfig/debug/org/apache/cordova/BuildConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/build/generated/source/buildConfig/debug/org/apache/cordova/BuildConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CordovaLib/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/cordova.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/cordova.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/project.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/ConfigXmlParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/ConfigXmlParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CordovaActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CordovaActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CordovaInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CordovaInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CordovaInterfaceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CordovaInterfaceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CordovaPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CordovaPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CordovaWebView.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CordovaWebView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CordovaWebViewImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CordovaWebViewImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/PermissionHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/PermissionHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/PluginEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/PluginEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/PluginManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/PluginManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/Whitelist.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/engine/SystemWebViewClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/engine/SystemWebViewClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/engine/SystemWebViewEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/engine/SystemWebViewEngine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android.json" beforeDir="false" afterPath="$PROJECT_DIR$/android.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/baronbrew/tilthydrometerf7/BuildConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/baronbrew/tilthydrometerf7/BuildConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/debug.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/values.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/values.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/debug.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/debug.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/values.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/debug.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/debug-mergeJavaRes/merge-state" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/debug-mergeJavaRes/merge-state" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugAssets/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugAssets/merger.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values_values.arsc.flat" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values_values.arsc.flat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/xml_config.xml.flat" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/xml_config.xml.flat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/xml_emailcomposer_provider_paths.xml.flat" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/xml_emailcomposer_provider_paths.xml.flat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/output.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/output.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/www/cordova-js-src/android/nativeapiprovider.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/www/cordova-js-src/android/promptbasednativeapi.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/www/cordova-js-src/exec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/www/cordova-js-src/platform.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/www/cordova-js-src/plugin/android/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/www/cordova.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/www/cordova.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/assets/www/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/www/cordova_plugins.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/assets/www/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/www/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/assets/www/plugins/cordova-plugin-email-composer/www/email_composer.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/www/plugins/cordova-plugin-email-composer/www/email_composer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/unarin/cordova/beacon/LocationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/unarin/cordova/beacon/LocationManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/de/appplant/cordova/emailcomposer/EmailComposer.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/de/appplant/cordova/emailcomposer/EmailComposer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/de/appplant/cordova/emailcomposer/Provider.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/de/appplant/cordova/emailcomposer/Provider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/org/apache/cordova/whitelist/WhitelistPlugin.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/xml/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/xml/config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/Api.js" beforeDir="false" afterPath="$PROJECT_DIR$/cordova/Api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/android_sdk_version" beforeDir="false" afterPath="$PROJECT_DIR$/cordova/android_sdk_version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/android_sdk_version.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/build" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/build.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/check_reqs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/check_reqs.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/clean" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/clean.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/lib/Adb.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/lib/AndroidManifest.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/lib/AndroidProject.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/lib/android_sdk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/lib/build.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/lib/builders/builders.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/lib/check_reqs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/lib/emulator.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/lib/getASPath.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/lib/install-device" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/lib/install-device.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/lib/install-emulator" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/lib/install-emulator.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/lib/list-devices" beforeDir="false" afterPath="$PROJECT_DIR$/cordova/lib/list-devices" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/lib/list-devices.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/lib/list-emulator-images" beforeDir="false" afterPath="$PROJECT_DIR$/cordova/lib/list-emulator-images" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/lib/list-emulator-images.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/lib/list-started-emulators" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/lib/list-started-emulators.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/lib/log.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/lib/plugin-build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/lib/pluginHandlers.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/lib/prepare.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/lib/retry.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/lib/run.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/lib/start-emulator" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/lib/start-emulator.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/log.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/loggingHelper.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/run" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/run.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cordova/version.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform_www/cordova-js-src/android/nativeapiprovider.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform_www/cordova-js-src/android/promptbasednativeapi.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform_www/cordova-js-src/exec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform_www/cordova-js-src/platform.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform_www/cordova-js-src/plugin/android/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform_www/cordova.js" beforeDir="false" afterPath="$PROJECT_DIR$/platform_www/cordova.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platform_www/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/platform_www/cordova_plugins.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform_www/plugins/cordova-plugin-email-composer/www/email_composer.js" beforeDir="false" afterPath="$PROJECT_DIR$/platform_www/plugins/cordova-plugin-email-composer/www/email_composer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/project.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Plugins/cordova-plugin-email-composer/APPEmailComposerImpl.m" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2/Plugins/cordova-plugin-email-composer/APPEmailComposerImpl.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Tilt 2-Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2/Tilt 2-Info.plist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2/config.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ios/frameworks.json" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/frameworks.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ios/ios.json" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/ios.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ios/platform_www/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/platform_www/cordova_plugins.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ios/platform_www/plugins/cordova-plugin-email-composer/www/email_composer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/platform_www/plugins/cordova-plugin-email-composer/www/email_composer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ios/www/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/www/cordova_plugins.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ios/www/plugins/cordova-plugin-email-composer/www/email_composer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/www/plugins/cordova-plugin-email-composer/www/email_composer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../plugins/android.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/android.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-device/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/plugin.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/src/android/EmailComposer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/src/android/EmailComposer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/src/ios/APPEmailComposerImpl.m" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/src/ios/APPEmailComposerImpl.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/www/email_composer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/www/email_composer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/CONTRIBUTING.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/NOTICE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/RELEASENOTES.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/plugin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-whitelist/src/android/WhitelistPlugin.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../plugins/fetch.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/fetch.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../plugins/ios.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/ios.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../www/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../www/js/app.js" afterDir="false" />
@@ -73,7 +347,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[HT84A1A02040]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[92JX1WW89]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -84,7 +358,12 @@
       <state>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Tilt 2" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -92,6 +371,7 @@
     </system>
   </component>
   <component name="GenerateSignedApkSettings">
+    <option name="EXPORT_PRIVATE_KEY" value="false" />
     <option name="KEY_STORE_PATH" value="$PROJECT_DIR$/../../../../android-keystore/signature.jks" />
     <option name="KEY_ALIAS" value="upload" />
     <option name="REMEMBER_PASSWORDS" value="true" />
@@ -108,9 +388,6 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
-  <component name="ProblemsViewState">
-    <option name="selectedIndex" value="1" />
-  </component>
   <component name="ProjectId" id="1zgywklNdeIAaXF8PmF55R77r3m" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -118,16 +395,21 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="ApkExportedModule" value="android.app" />
+    <property name="ApkExportedModule" value="Tilt_2.app" />
+    <property name="BundleExportedModule" value="Tilt_2.app" />
     <property name="ExportApk.ApkPath" value="$PROJECT_DIR$/app" />
     <property name="ExportApk.BuildVariants" value="release" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
+    <property name="cidr.known.project.marker" value="true" />
+    <property name="com.intellij.openapi.externalSystem.service.settings.ExternalSystemGroupConfigurable" value="ALL" />
     <property name="memory.settings.postsync.last.time.stamp" value="1635462595508" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
   </component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
-      <module name="android.app" />
+      <module name="Tilt_2.app" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
       <option name="DEPLOY_AS_INSTANT" value="false" />
@@ -142,6 +424,7 @@
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
       <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
       <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="INSPECTION_WITHOUT_ACTIVITY_RESTART" value="false" />
       <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
       <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
       <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
@@ -172,7 +455,7 @@
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
         <option name="STARTUP_PROFILING_ENABLED" value="false" />
         <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
-        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Java/Kotlin Method Sample (legacy)" />
         <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
         <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
       </Profilers>

@@ -371,7 +371,6 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-nativestorage": "2.3.2",
     "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-statusbar": "2.4.2",
-    "cordova-plugin-whitelist": "1.3.4",
     "cordova-plugin-device": "2.0.3",
     "com.unarin.cordova.beacon": "3.8.1",
     "cordova-plugin-androidx-adapter": "1.1.3",
