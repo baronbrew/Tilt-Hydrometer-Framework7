@@ -1,20 +1,20 @@
 -- Merging decision tree log ---
 provider#de.appplant.cordova.emailcomposer.Provider
-INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:26:9-28:20
+INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:28:9-30:20
 	android:grantUriPermissions
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:26:106-140
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:28:106-140
 	android:authorities
 		INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:26:19-80
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:28:19-80
 	android:exported
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:26:81-105
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:28:81-105
 	android:name
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:26:141-198
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:28:141-198
 manifest
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-40:12
-INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-40:12
-INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-40:12
-INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-40:12
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-42:12
+INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-42:12
+INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-42:12
+INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-42:12
 MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:2:1-58:12
 MERGED from [:CordovaLib] /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/CordovaLib/build/intermediates/merged_manifest/debug/AndroidManifest.xml:20:1-27:12
 MERGED from [androidx.appcompat:appcompat:1.3.1] /Users/noahneibaron/.gradle/caches/transforms-3/d291a6f185053cd23b616e4ab375bb6e/transformed/appcompat-1.3.1/AndroidManifest.xml:17:1-24:12
@@ -52,9 +52,9 @@ MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] /Users/noahneibar
 MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/noahneibaron/.gradle/caches/transforms-3/b781ca1b61e71287d48fac169c167bef/transformed/core-runtime-2.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/c8e58c3717ff7df3d2c16cac258d1505/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.annotation:annotation-experimental:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/0a3e0117253b072fc1503cbb12d940cc/transformed/jetified-annotation-experimental-1.0.0/AndroidManifest.xml:17:1-24:12
-INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-40:12
-INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-40:12
-INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-40:12
+INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-42:12
+INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-42:12
+INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:1-42:12
 	package
 		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:103-143
 		INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml
@@ -93,20 +93,32 @@ uses-permission#android.permission.ACCESS_FINE_LOCATION
 ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:5:5-79
 	android:name
 		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:5:22-76
-queries
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:6:5-11:15
-intent#action:name:android.intent.action.SENDTO+data:scheme:mailto
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:7:9-10:18
-action#android.intent.action.SENDTO
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:8:13-67
+uses-feature#android.hardware.location
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:6:5-87
+	android:required
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:6:60-84
 	android:name
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:8:21-64
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:6:19-59
+uses-feature#android.hardware.location.gps
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:7:5-91
+	android:required
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:7:64-88
+	android:name
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:7:19-63
+queries
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:8:5-13:15
+intent#action:name:android.intent.action.SENDTO+data:scheme:mailto
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:9:9-12:18
+action#android.intent.action.SENDTO
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:10:13-67
+	android:name
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:10:21-64
 data
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:9:13-45
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:11:13-45
 	android:scheme
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:9:19-42
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:11:19-42
 application
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:12:5-37:19
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:14:5-39:19
 MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:20:5-56:19
 MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:20:5-56:19
 MERGED from [androidx.core:core:1.5.0] /Users/noahneibaron/.gradle/caches/transforms-3/09314801a92bc2d84a1fe4a156efb7a9/transformed/core-1.5.0/AndroidManifest.xml:24:5-89
@@ -116,132 +128,131 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/noah
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.5.0] /Users/noahneibaron/.gradle/caches/transforms-3/09314801a92bc2d84a1fe4a156efb7a9/transformed/core-1.5.0/AndroidManifest.xml:24:18-86
 	android:supportsRtl
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:12:121-147
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:14:121-147
 	android:label
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:12:88-120
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:14:88-120
 	android:hardwareAccelerated
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:12:18-52
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:14:18-52
 	android:icon
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:12:53-87
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:14:53-87
 	android:usesCleartextTraffic
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:12:148-183
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:14:148-183
 activity#com.baronbrew.tilthydrometerf7.MainActivity
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:13:9-18:20
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:15:9-20:20
 	android:label
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:13:160-197
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:15:160-197
 	android:launchMode
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:13:198-228
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:15:198-228
 	android:windowSoftInputMode
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:13:308-350
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:15:308-350
 	android:exported
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:13:136-159
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:15:136-159
 	android:configChanges
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:13:19-135
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:15:19-135
 	android:theme
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:13:257-307
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:15:257-307
 	android:name
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:13:229-256
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:15:229-256
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:14:13-17:29
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:16:13-19:29
 	android:label
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:14:28-65
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:16:28-65
 action#android.intent.action.MAIN
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:15:17-69
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:17:17-69
 	android:name
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:15:25-66
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:17:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:16:17-77
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:18:17-77
 	android:name
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:16:27-74
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:18:27-74
 receiver#org.altbeacon.beacon.startup.StartupBroadcastReceiver
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:19:9-25:20
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:21:9-27:20
 MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:21:9-27:20
 MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:21:9-27:20
 	android:exported
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:19:88-112
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:21:19-43
 	android:name
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:19:19-87
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:21:44-112
 intent-filter#action:name:android.intent.action.ACTION_POWER_CONNECTED+action:name:android.intent.action.ACTION_POWER_DISCONNECTED+action:name:android.intent.action.BOOT_COMPLETED
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:20:13-24:29
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:22:13-26:29
 action#android.intent.action.BOOT_COMPLETED
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:21:17-79
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:23:17-79
 	android:name
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:21:25-76
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:23:25-76
 action#android.intent.action.ACTION_POWER_CONNECTED
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:22:17-87
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:24:17-87
 	android:name
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:22:25-84
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:24:25-84
 action#android.intent.action.ACTION_POWER_DISCONNECTED
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:23:17-90
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:25:17-90
 	android:name
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:23:25-87
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:25:25-87
 service#org.altbeacon.beacon.BeaconIntentProcessor
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:29:9-126
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:31:9-126
 MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:35:9-38:40
 MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:35:9-38:40
 	android:enabled
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:29:18-40
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:31:18-40
 	android:exported
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:29:41-65
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:31:41-65
 	android:name
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:29:66-123
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:31:66-123
 service#org.altbeacon.beacon.service.ScanJob
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:30:9-33:19
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:32:9-35:19
 MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:39:9-48:19
 MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:39:9-48:19
 	android:exported
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:30:18-42
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:32:18-42
 	android:permission
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:30:95-151
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:32:95-151
 	android:name
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:30:43-94
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:32:43-94
 meta-data#immediateScanJobId
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:31:13-86
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:33:13-86
 MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:42:13-44:45
 MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:42:13-44:45
 	android:value
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:31:58-83
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:33:58-83
 	android:name
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:31:24-57
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:33:24-57
 meta-data#periodicScanJobId
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:32:13-85
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:34:13-85
 MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:45:13-47:45
 MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:45:13-47:45
 	android:value
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:32:57-82
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:34:57-82
 	android:name
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:32:24-56
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:34:24-56
 service#org.altbeacon.bluetooth.BluetoothTestJob
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:34:9-36:19
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:36:9-38:19
 MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:49:9-55:19
 MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:49:9-55:19
 	android:exported
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:34:18-42
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:36:18-42
 	android:permission
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:34:99-155
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:36:99-155
 	android:name
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:34:43-98
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:36:43-98
 meta-data#jobId
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:35:13-74
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:37:13-74
 MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:52:13-54:46
 MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:52:13-54:46
 	android:value
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:35:45-71
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:37:45-71
 	android:name
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:35:24-44
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:37:24-44
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:38:5-80
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:40:5-80
 	android:name
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:38:22-77
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:40:22-77
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:39:5-81
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:41:5-81
 	android:name
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:39:22-78
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:41:22-78
 uses-sdk
 INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml
 INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml
-INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml
 MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:7:5-9:41
 MERGED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:7:5-9:41
 MERGED from [:CordovaLib] /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/CordovaLib/build/intermediates/merged_manifest/debug/AndroidManifest.xml:25:5-44
@@ -318,11 +329,6 @@ MERGED from [androidx.annotation:annotation-experimental:1.0.0] /Users/noahneiba
 MERGED from [androidx.annotation:annotation-experimental:1.0.0] /Users/noahneibaron/.gradle/caches/transforms-3/0a3e0117253b072fc1503cbb12d940cc/transformed/jetified-annotation-experimental-1.0.0/AndroidManifest.xml:20:5-22:41
 INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml
 INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml
-INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml
-	android:maxSdkVersion
-		INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml
 	android:targetSdkVersion
 		INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml
 		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml
@@ -332,11 +338,11 @@ INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/pl
 		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml
 meta-data#android.support.FILE_PROVIDER_PATHS
-ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:27:13-130
+ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:29:13-130
 	android:resource
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:27:75-127
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:29:75-127
 	android:name
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:27:24-74
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:29:24-74
 uses-permission#android.permission.BLUETOOTH
 ADDED from [org.altbeacon:android-beacon-library:2.16.1] /Users/noahneibaron/.gradle/caches/transforms-3/aa21464e4f5ea8ae3cbb1e9e50f6e6cd/transformed/jetified-android-beacon-library-2.16.1/AndroidManifest.xml:11:5-13:36
 	android:required
