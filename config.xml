@@ -17,36 +17,35 @@
     <content src="index.html" />
     <allow-navigation href="https://docs.google.com/*" />
     <allow-navigation href="https://tilthydrometer.com/*" />
-    <allow-navigation href="https://*youtube.com/*" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="KeepRunning" value="true" />
     <platform name="android">
-    <preference name="android-minSdkVersion" value="19" />
-       <preference name="android-targetSdkVersion" value="30" />
-       <preference name="android-maxSdkVersion" value="31" />
+        <preference name="android-compileSdkVersion" value="32" />
+        <preference name="android-minSdkVersion" value="21" />
+        <preference name="android-targetSdkVersion" value="32" />
+        <preference name="android-maxSdkVersion" value="31" />
         <preference name="AndroidXEnabled" value="true" />
-        <preference name="com.unarin.cordova.beacon.android.altbeacon.RequestBtPermission" value="false" />
+        <preference name="com.unarin.cordova.beacon.android.altbeacon.RequestBtPermission" value="no" />
         <preference name="com.unarin.cordova.beacon.android.altbeacon.ForegroundScanPeriod" value="1500" />
         <preference name="com.unarin.cordova.beacon.android.altbeacon.ForegroundBetweenScanPeriod" value="500" />
         <preference name="StatusBarOverlaysWebView" value="false" />
         <preference name="StatusBarBackgroundColor" value="#000000" />
         <preference name="StatusBarStyle" value="lightcontent" />
         <preference name="Orientation" value="default" />
-        <preference name="SplashMaintainAspectRatio" value="true" />
         <allow-intent href="market:*" />
-        <splash density="land-ldpi" src="res/screens/android/drawable-land-ldpi-screen.png" />
-        <splash density="land-mdpi" src="res/screens/android/drawable-land-mdpi-screen.png" />
-        <splash density="land-hdpi" src="res/screens/android/drawable-land-hdpi-screen.png" />
-        <splash density="land-xhdpi" src="res/screens/android/drawable-land-xhdpi-screen.png" />
-        <splash density="land-xxhdpi" src="res/screens/android/drawable-land-xxhdpi-screen.png" />
-        <splash density="land-xxxhdpi" src="res/screens/android/drawable-land-xxxhdpi-screen.png" />
-        <splash density="port-ldpi" src="res/screens/android/drawable-port-ldpi-screen.png" />
-        <splash density="port-mdpi" src="res/screens/android/drawable-port-mdpi-screen.png" />
-        <splash density="port-hdpi" src="res/screens/android/drawable-port-hdpi-screen.png" />
-        <splash density="port-xhdpi" src="res/screens/android/drawable-port-xhdpi-screen.png" />
-        <splash density="port-xxhdpi" src="res/screens/android/drawable-port-xxhdpi-screen.png" />
-        <splash density="port-xxxhdpi" src="res/screens/android/drawable-port-xxxhdpi-screen.png" />
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/screens/android/drawable-land-ldpi-screen.png" />
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/screens/android/drawable-land-mdpi-screen.png" />
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/screens/android/drawable-land-hdpi-screen.png" />
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/screens/android/drawable-land-xhdpi-screen.png" />
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/screens/android/drawable-land-xxhdpi-screen.png" />
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/screens/android/drawable-land-xxxhdpi-screen.png" />
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/screens/android/drawable-port-ldpi-screen.png" />
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/screens/android/drawable-port-mdpi-screen.png" />
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/screens/android/drawable-port-hdpi-screen.png" />
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/screens/android/drawable-port-xhdpi-screen.png" />
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/screens/android/drawable-port-xxhdpi-screen.png" />
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/screens/android/drawable-port-xxxhdpi-screen.png" />
         <icon density="ldpi" src="res/icons/android/mipmap-ldpi/ic_launcher.png" />
         <icon density="mdpi" src="res/icons/android/mipmap-mdpi/ic_launcher.png" />
         <icon density="hdpi" src="res/icons/android/mipmap-hdpi/ic_launcher.png" />
@@ -62,15 +61,14 @@
         <preference name="Orientation" value="all" />
         <preference name="AutoHideSplashScreen" value="true" />
         <preference name="BackupWebStorage" value="none" />
-        <edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
-        <string>This app uses Bluetooth-based location services for scanning nearby TILT hydrometers and reading temperature and specific gravity. No other location technology will be used.</string>
+        <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
+            <string>This app uses Bluetooth-based location services for scanning nearby TILT hydrometers and reading temperature and specific gravity. No other location technology will be used.</string>
         </edit-config>
-        <edit-config target="NSBluetoothAlwaysUsageDescription" file="*-Info.plist" mode="merge">
-        <string>This app uses Bluetooth for scanning nearby TILT hydrometers and reading temperature and specific gravity.</string>
-    </edit-config>
+        <edit-config file="*-Info.plist" mode="merge" target="NSBluetoothAlwaysUsageDescription">
+            <string>This app uses Bluetooth for scanning nearby TILT hydrometers and reading temperature and specific gravity.</string>
+        </edit-config>
     </platform>
     <plugin name="cordova-plugin-file" spec="~6.0.1" />
     <plugin name="cordova-plugin-nativestorage" spec="^2.3.2" />
     <plugin name="cordova-plugin-statusbar" spec="~2.4.2" />
-    <plugin name="cordova-plugin-splashscreen" spec="~5.0.2" />
 </widget>

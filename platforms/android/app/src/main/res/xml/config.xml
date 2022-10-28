@@ -1,11 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.baronbrew.tilthydrometerf7" version="1.0.80" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <feature name="Device">
-        <param name="android-package" value="org.apache.cordova.device.Device" />
-    </feature>
-    <feature name="LocationManager">
-        <param name="android-package" value="com.unarin.cordova.beacon.LocationManager" />
-    </feature>
     <feature name="File">
         <param name="android-package" value="org.apache.cordova.file.FileUtils" />
         <param name="onload" value="true" />
@@ -14,22 +8,24 @@
     <feature name="CordovaHttpPlugin">
         <param name="android-package" value="com.silkimen.cordovahttp.CordovaHttpPlugin" />
     </feature>
-    <feature name="Permissions">
-        <param name="android-package" value="com.android.plugins.Permissions" />
-    </feature>
     <feature name="InAppBrowser">
         <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
     </feature>
     <feature name="NativeStorage">
         <param name="android-package" value="NativeStorage" />
     </feature>
-    <feature name="SplashScreen">
-        <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
-        <param name="onload" value="true" />
-    </feature>
     <feature name="StatusBar">
         <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
         <param name="onload" value="true" />
+    </feature>
+    <feature name="Device">
+        <param name="android-package" value="org.apache.cordova.device.Device" />
+    </feature>
+    <feature name="LocationManager">
+        <param name="android-package" value="com.unarin.cordova.beacon.LocationManager" />
+    </feature>
+    <feature name="Permissions">
+        <param name="android-package" value="com.android.plugins.Permissions" />
     </feature>
     <feature name="EmailComposer">
         <param name="android-package" value="de.appplant.cordova.emailcomposer.EmailComposer" />
@@ -51,20 +47,7 @@
     <content src="index.html" />
     <allow-navigation href="https://docs.google.com/*" />
     <allow-navigation href="https://tilthydrometer.com/*" />
-    <allow-navigation href="https://*youtube.com/*" />
     <allow-intent href="market:*" />
-    <splash density="land-ldpi" src="res/screens/android/drawable-land-ldpi-screen.png" />
-    <splash density="land-mdpi" src="res/screens/android/drawable-land-mdpi-screen.png" />
-    <splash density="land-hdpi" src="res/screens/android/drawable-land-hdpi-screen.png" />
-    <splash density="land-xhdpi" src="res/screens/android/drawable-land-xhdpi-screen.png" />
-    <splash density="land-xxhdpi" src="res/screens/android/drawable-land-xxhdpi-screen.png" />
-    <splash density="land-xxxhdpi" src="res/screens/android/drawable-land-xxxhdpi-screen.png" />
-    <splash density="port-ldpi" src="res/screens/android/drawable-port-ldpi-screen.png" />
-    <splash density="port-mdpi" src="res/screens/android/drawable-port-mdpi-screen.png" />
-    <splash density="port-hdpi" src="res/screens/android/drawable-port-hdpi-screen.png" />
-    <splash density="port-xhdpi" src="res/screens/android/drawable-port-xhdpi-screen.png" />
-    <splash density="port-xxhdpi" src="res/screens/android/drawable-port-xxhdpi-screen.png" />
-    <splash density="port-xxxhdpi" src="res/screens/android/drawable-port-xxxhdpi-screen.png" />
     <icon density="ldpi" src="res/icons/android/mipmap-ldpi/ic_launcher.png" />
     <icon density="mdpi" src="res/icons/android/mipmap-mdpi/ic_launcher.png" />
     <icon density="hdpi" src="res/icons/android/mipmap-hdpi/ic_launcher.png" />
@@ -75,16 +58,17 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="KeepRunning" value="true" />
-    <preference name="android-minSdkVersion" value="19" />
-    <preference name="android-targetSdkVersion" value="30" />
+    <preference name="android-compileSdkVersion" value="32" />
+    <preference name="android-minSdkVersion" value="21" />
+    <preference name="android-targetSdkVersion" value="32" />
     <preference name="android-maxSdkVersion" value="31" />
     <preference name="AndroidXEnabled" value="true" />
-    <preference name="com.unarin.cordova.beacon.android.altbeacon.RequestBtPermission" value="false" />
+    <preference name="com.unarin.cordova.beacon.android.altbeacon.RequestBtPermission" value="no" />
     <preference name="com.unarin.cordova.beacon.android.altbeacon.ForegroundScanPeriod" value="1500" />
     <preference name="com.unarin.cordova.beacon.android.altbeacon.ForegroundBetweenScanPeriod" value="500" />
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#000000" />
     <preference name="StatusBarStyle" value="lightcontent" />
     <preference name="Orientation" value="default" />
-    <preference name="SplashMaintainAspectRatio" value="true" />
+    <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/screens/android/drawable-port-xxxhdpi-screen.png" />
 </widget>

@@ -90,7 +90,7 @@ $$(document).on('deviceready', function() {
           if (device.platform == 'Android' || device.platform == 'amazon-fireos'){
           watchBluetoothInterval = setInterval(function(){ watchBluetooth(); }, 30000);//check if tilts are connected every 30 seconds, toggle bluetooth if not
           permissions = cordova.plugins.permissions;
-          permissions.checkPermission(permissions.BLUETOOTH, checkBluetoothPermissionCallback, null);
+          permissions.checkPermission(permissions.BLUETOOTH_SCAN, checkBluetoothPermissionCallback, null);
           permissions.checkPermission(permissions.ACCESS_FINE_LOCATION, checkFineLocationPermissionCallback, null);
           //permissions.checkPermission(permissions.ACCESS_COARSE_LOCATION, checkCoarseLocationPermissionCallback, null);
           }
@@ -115,11 +115,11 @@ $$(document).on('deviceready', function() {
   function checkBluetoothPermissionCallback(status) {
       if (!status.hasPermission) {
           var errorCallback = function () {
-              console.warn('BLUETOOTH permission is not turned on');
+              console.warn('BLUETOOTH_SCAN permission is not turned on');
           }
 
           permissions.requestPermission(
-              permissions.BLUETOOTH,
+              permissions.BLUETOOTH_SCAN,
               function (status) {
                   if (!status.hasPermission) errorCallback();
               },

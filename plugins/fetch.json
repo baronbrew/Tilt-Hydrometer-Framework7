@@ -7,14 +7,6 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-plugin-splashscreen": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-splashscreen@~5.0.2"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
   "cordova-plugin-nativestorage": {
     "source": {
       "type": "registry",
@@ -39,14 +31,6 @@
     "is_top_level": false,
     "variables": {}
   },
-  "cordova-plugin-android-permissions": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-android-permissions"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
   "cordova-plugin-inappbrowser": {
     "source": {
       "type": "registry",
@@ -63,22 +47,6 @@
     "is_top_level": true,
     "variables": {}
   },
-  "com.unarin.cordova.beacon": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-ibeacon@^3.8.1"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
-  "cordova-plugin-androidx-adapter": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-androidx-adapter@^1.1.3"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
   "cordova-plugin-email-composer": {
     "source": {
       "type": "registry",
@@ -88,5 +56,21 @@
     "variables": {
       "ANDROID_SUPPORT_V4_VERSION": "27.+"
     }
+  },
+  "com.unarin.cordova.beacon": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-ibeacon@^3.8.1"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-android-permissions": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-android-permissions@1.1.4"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }

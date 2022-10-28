@@ -184,9 +184,12 @@ android {
         versionCode cdvVersionCode ?: new BigInteger("" + privateHelpers.extractIntFromManifest("versionCode"))
         applicationId privateHelpers.extractStringFromManifest("package")
 
-        minSdkVersion 19
-        targetSdkVersion 30
-        compileSdkVersion 30
+        minSdkVersion cordovaConfig.MIN_SDK_VERSION
+        if (cordovaConfig.MAX_SDK_VERSION != null) {
+            maxSdkVersion cordovaConfig.MAX_SDK_VERSION
+        }
+        targetSdkVersion cordovaConfig.SDK_VERSION
+        compileSdkVersion cordovaConfig.COMPILE_SDK_VERSION
     }
 
     lintOptions {
@@ -244,8 +247,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     if (cdvReleaseSigningPropertiesFile) {
@@ -285,6 +288,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: '*.jar')
     implementation "androidx.appcompat:appcompat:${cordovaConfig.ANDROIDX_APP_COMPAT_VERSION}"
+    implementation "androidx.core:core-splashscreen:${cordovaConfig.ANDROIDX_CORE_SPLASHSCREEN_VERSION}"
 
     if (cordovaConfig.IS_GRADLE_PLUGIN_KOTLIN_ENABLED) {
         implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${cordovaConfig.KOTLIN_VERSION}"
@@ -294,6 +298,7 @@ dependencies {
     implementation(project(path: ":CordovaLib"))
     implementation "androidx.legacy:legacy-support-core-utils:1.0.0"
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
+    implementation "com.android.support:support-core-utils:26+"
     // SUB-PROJECT DEPENDENCIES END
 }
 

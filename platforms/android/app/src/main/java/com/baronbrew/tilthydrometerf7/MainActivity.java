@@ -20,6 +20,7 @@
 package com.baronbrew.tilthydrometerf7;
 
 import android.os.Bundle;
+
 import org.apache.cordova.*;
 
 public class MainActivity extends CordovaActivity

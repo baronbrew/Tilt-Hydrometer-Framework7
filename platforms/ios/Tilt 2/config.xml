@@ -33,10 +33,6 @@
     <feature name="NativeStorage">
         <param name="ios-package" value="NativeStorage" />
     </feature>
-    <feature name="SplashScreen">
-        <param name="ios-package" value="CDVSplashScreen" />
-        <param name="onload" value="true" />
-    </feature>
     <feature name="StatusBar">
         <param name="ios-package" value="CDVStatusBar" />
         <param name="onload" value="true" />
@@ -86,13 +82,13 @@
     <preference name="StatusBarStyle" value="lightcontent" />
     <preference name="Orientation" value="all" />
     <preference name="AutoHideSplashScreen" value="true" />
+    <feature name="EmailComposer">
+        <param name="ios-package" value="APPEmailComposer" />
+    </feature>
     <feature name="Device">
         <param name="ios-package" value="CDVDevice" />
     </feature>
     <feature name="LocationManager">
         <param name="ios-package" value="CDVLocationManager" />
-    </feature>
-    <feature name="EmailComposer">
-        <param name="ios-package" value="APPEmailComposer" />
     </feature>
 </widget>
