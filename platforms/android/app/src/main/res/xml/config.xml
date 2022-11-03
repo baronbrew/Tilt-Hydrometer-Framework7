@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.baronbrew.tilthydrometerf7" version="1.0.80" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.baronbrew.tilthydrometerf7" version="1.0.85" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <feature name="File">
         <param name="android-package" value="org.apache.cordova.file.FileUtils" />
         <param name="onload" value="true" />
@@ -61,7 +61,7 @@
     <preference name="android-compileSdkVersion" value="32" />
     <preference name="android-minSdkVersion" value="21" />
     <preference name="android-targetSdkVersion" value="32" />
-    <preference name="android-maxSdkVersion" value="31" />
+    <preference name="android-maxSdkVersion" value="33" />
     <preference name="AndroidXEnabled" value="true" />
     <preference name="com.unarin.cordova.beacon.android.altbeacon.RequestBtPermission" value="no" />
     <preference name="com.unarin.cordova.beacon.android.altbeacon.ForegroundScanPeriod" value="1500" />
@@ -70,5 +70,8 @@
     <preference name="StatusBarBackgroundColor" value="#000000" />
     <preference name="StatusBarStyle" value="lightcontent" />
     <preference name="Orientation" value="default" />
-    <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/screens/android/drawable-port-xxxhdpi-screen.png" />
+    <preference name="FadeSplashScreen" value="true" />
+    <preference name="AndroidWindowSplashScreenIconBackgroundColor" value="#8f8f8f" />
+    <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/screens/android/drawable-xxxhdpi-screen.png" />
+    <preference name="AndroidWindowSplashScreenBackground" value="#8f8f8f" />
 </widget>
