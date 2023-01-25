@@ -29,7 +29,7 @@ var app  = new Framework7({
     return {
       defaultCloudURL : 'https://script.google.com/a/baronbrew.com/macros/s/AKfycbydNOcB-_3RB3c-7sOTI-ZhTnN43Ye1tt0EFvvMxTxjdbheaw/exec',
       tiltColors : ['RED', 'GREEN', 'BLACK', 'PURPLE', 'ORANGE', 'BLUE', 'YELLOW', 'PINK'],
-      appVersion : '1.0.37'
+      appVersion : '1.0.88'
     };
   },
   // App root methods
@@ -90,7 +90,7 @@ $$(document).on('deviceready', function() {
           if (device.platform == 'Android' || device.platform == 'amazon-fireos'){
           watchBluetoothInterval = setInterval(function(){ watchBluetooth(); }, 30000);//check if tilts are connected every 30 seconds, toggle bluetooth if not
           permissions = cordova.plugins.permissions;
-          permissions.checkPermission(permissions.BLUETOOTH, checkBluetoothPermissionCallback, null);
+          permissions.checkPermission(permissions.BLUETOOTH_SCAN, checkBluetoothPermissionCallback, null);
           permissions.checkPermission(permissions.ACCESS_FINE_LOCATION, checkFineLocationPermissionCallback, null);
           //permissions.checkPermission(permissions.ACCESS_COARSE_LOCATION, checkCoarseLocationPermissionCallback, null);
           }
@@ -115,11 +115,11 @@ $$(document).on('deviceready', function() {
   function checkBluetoothPermissionCallback(status) {
       if (!status.hasPermission) {
           var errorCallback = function () {
-              console.warn('BLUETOOTH permission is not turned on');
+              console.warn('BLUETOOTH_SCAN permission is not turned on');
           }
 
           permissions.requestPermission(
-              permissions.BLUETOOTH,
+              permissions.BLUETOOTH_SCAN,
               function (status) {
                   if (!status.hasPermission) errorCallback();
               },
@@ -204,7 +204,7 @@ function checkFineLocationPermissionCallback(status) {
 
   function startScan() {
       console.log("startScan");
-      scanningToast = app.toast.create({text: 'Scanning for nearby Tilts...<br>Ensure Bluetooth and Location Services are enabled and Tilt is floating.', icon: '<i class="material-icons">bluetooth_searching</i>', position: 'bottom', }).open();
+      scanningToast = app.toast.create({text: '<i class="material-icons">bluetooth_searching</i> Scanning for nearby TILT hydrometers.<br>Ensure Bluetooth and Location Services are enabled and TILT is floating.', position: 'bottom', closeButton: true, closeButtonText: 'close', closeButtonColor: 'red',}).open();
       // Start ranging beacons.
       for (var i in regions) {
           var beaconRegion = new locationManager.BeaconRegion(
@@ -345,8 +345,8 @@ function checkFineLocationPermissionCallback(status) {
                   var beacon = pluginResult.beacons[i];
                   //add timestamp
                   beacon.timeStamp = Date.now();
-                  //assign color by UUID and Minor Range. FW 1005 is HD
-                  if (beacon.minor > 5000 || beacon.minor == 1005 && beacon.major == 999){
+                  //assign color by UUID and Minor Range. FW 1005 and 1006 is HD
+                  if (beacon.minor > 5000 || beacon.minor == 1005 && beacon.major == 999 || beacon.minor == 1006 && beacon.major == 999){
                       beacon.hd = true;
                   }else{
                       beacon.hd = false;
@@ -991,6 +991,8 @@ function setBeerName (button){
     var newBeerNameRaw = $$('#currentbeername-' + color).val();
     var newBeerName = newBeerNameRaw.trim();
     var validBeerName = newBeerName.replace('/', '-');
+    validBeerName = newBeerName.replace(',', '-');
+    validBeerName = newBeerName.replace('&', ' and ');
     //only update beer name if field is not empty
     if (newBeerName == "") {
         var notificationFull = app.notification.create({
@@ -1944,7 +1946,7 @@ function onResume() {
         updateInterval = setInterval(function(){ updateBeacons(); }, 1000);
     }
     watchBluetoothInterval = setInterval(function(){ watchBluetooth(); }, 30000);
-    scanningToast = app.toast.create({text: 'Scanning for nearby Tilts...<br>Ensure Bluetooth and Location Services are enabled and Tilt is floating.', icon: '<i class="material-icons">bluetooth_searching</i>', position: 'bottom', }).open();
+    scanningToast = app.toast.create({text: '<i class="material-icons">bluetooth_searching</i> Scanning for nearby TILT hydrometers.<br>Ensure Bluetooth and Location Services are enabled and TILT is floating.', position: 'bottom', closeButton: true, closeButtonText: 'close', closeButtonColor: 'red',}).open();
     //set resumed flag to trigger logging as soon as tilts are in range
     //localStorage.setItem('inrangebeacons','NONE');
     //console.log('resumed');
@@ -2059,6 +2061,13 @@ function postToCloudURLs (color, comment) {
     var beacon = JSON.parse(localStorage.getItem('tiltObject-' + color));
     var cloudURLs = localStorage.getItem('cloudurls-' + color) || app.data.defaultCloudURL + ',,';
     var cloudURLsArray = cloudURLs.split(',');
+    //validate default cloud URL, reset if invalid
+    if (cloudURLsArray[0].includes('http')){
+        //default cloud URL has valid protocol preamble
+    }else{
+        //if invalid use the default cloud URL instead
+        cloudURLsArray[0] = app.data.defaultCloudURL;
+    }
     var cloudURLsenabled = localStorage.getItem('cloudurlsenabled-' + color)||'1,0,0';
     var cloudURLsenabledArray = cloudURLsenabled.split(',');
     var inRangeBeacons = localStorage.getItem('inrangebeacons')||'NONE';

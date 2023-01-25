@@ -4,8 +4,8 @@
   "displayName": "Tilt Hydrometer Framework7",
   "cordova": {
     "platforms": [
-      "ios",
-      "android"
+      "android",
+      "ios"
     ],
     "plugins": {
       "cordova-plugin-file": {},
@@ -36,7 +36,7 @@
     "com.unarin.cordova.beacon": "git+https://github.com/baronbrew/cordova-plugin-ibeacon.git#v3.x",
     "cordova": "^10.0.0",
     "cordova-android": "^11.0.0",
-    "cordova-ios": "^5.1.0",
+    "cordova-ios": "^5.1.1",
     "cordova-plugin-advanced-http": "^3.1.0",
     "cordova-plugin-android-permissions": "^1.1.4",
     "cordova-plugin-device": "^2.1.0",
