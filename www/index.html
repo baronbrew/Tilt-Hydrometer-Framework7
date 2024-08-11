@@ -25,7 +25,7 @@
   <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
-  <div id="app">
+  <div id="app" class="color-theme-black">
     <!-- Status bar overlay for fullscreen mode-->
     <div class="statusbar"></div>
     <!-- Left panel with cover effect-->
@@ -76,7 +76,7 @@
                 <i class="icon f7-icons color-gray">gear_fill</i>
               </a>
             </div>
-            <div class="title sliding">Tilt Hydrometer</div>
+            <div class="title sliding">Tilt Pico</div>
             <div class="right">
               <a href="#" class="link icon-only panel-open" data-panel="right">
                 <i class="icon f7-icons color-gray">folder</i>
@@ -86,6 +86,10 @@
         </div>
         <!-- Scrollable page content-->
         <div class="page-content">
+          <p class="segmented">
+            <button id="connect" class="col button button-outline color-gray">CONNECT TO TILT PICO</button>
+            <button id="wifi" class="col button button-outline color-gray open-prompt">CONNECT TILT PICO TO WIFI</button>
+          </p>
         <div id="tiltCard" class="tiltCard row no-gap"></div>
         </div>
       </div>
@@ -94,11 +98,11 @@
   <!-- template7 templates -->
   <script id="displaytemplate" type="text/template7">
     {{#each this}}
-    <div id="tiltcard-{{Color}}" class="card card-outline elevation-12 col-100 tablet-45 no-gap">
+    <div id="tiltcard-{{Color}}" class="card card-outline elevation-12 col-100 tablet-40 desktop-30  no-gap">
         <div class="card-content card-content-padding"><p class="no-margin-bottom" id="beerName{{Color}}">{{Beername}}</p><strong>TILT | {{Color}} </strong><span id="cloudStatus{{Color}}"></span> <span id="deviceStatus{{Color}}"></span></div>
         <div id="quicksettings" class="accordion-item">
         <div class="accordion-item-toggle">
-        <div <button class="margin-horizontal button button-round button-fill" style="background:{{js 'this.Color.replace("•HD","")'}};height:30px;color:{{js 'this.Color.replace("•HD","")'}}">Show options for {{Color}} Tilt.</button></div>
+        <div <button class="margin-horizontal button button-round button-fill" style="background:{{js 'this.Color.split(/[•-]/)[0]'}};height:30px;color:{{js 'this.Color.split(/[•-]/)[0]'}}">Show options for {{Color}} Tilt.</button></div>
         </div>
         <div class="accordion-item-content">
         <div class="margin-top segmented margin-horizontal">
@@ -110,10 +114,10 @@
         </div>
         <div class="card-content card-content-padding">Gravity: <span id="uncaldisplayFerm+displayFermunits{{Color}}">{{uncaldisplayFerm}}</span> (pre-calibrated)</div>
         <div id="caldisplayFerm+displayFermunits{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{caldisplayFerm}}</div>
-        <div id="percentScaleSG{{Color}}" class="margin-horizontal button button-round" style="background:{{js 'this.Color.replace("•HD","")'}};height:10px;width:0%;max-width:95%;"></div>
+        <div id="percentScaleSG{{Color}}" class="margin-horizontal button button-round" style="background:{{js 'this.Color.split(/[•-]/)[0]'}};height:10px;width:0%;max-width:95%;"></div>
         <div class="card-content card-content-padding">Temperature: <span id="uncaldisplayTemp+displayTempunits{{Color}}">{{uncaldisplayTemp}}</span> (pre-calibrated)</div>
         <div id="caldisplayTemp+displayTempunits{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{caldisplayTemp}}{{displayTempunits}}</div>
-        <div id="percentScaleTemp{{Color}}" class="margin-horizontal button button-round" style="background:{{js 'this.Color.replace("•HD","")'}};height:10px;width:0%;max-width:95%;"></div>
+        <div id="percentScaleTemp{{Color}}" class="margin-horizontal button button-round" style="background:{{js 'this.Color.split(/[•-]/)[0]'}};height:10px;width:0%;max-width:95%;"></div>
         <div class="card-content card-content-padding lastrec"><span id=numberSecondsAgo{{Color}}></span> seconds ago <span id=displayRSSI{{Color}}></span><br><span id=displaytimeStamp{{Color}}></span></div>
     </div>
     {{/each}}
@@ -175,10 +179,10 @@
   {{#each this}}
   <li class="accordion-item" id="accordion-{{Color}}">
       <div class="accordion-item-toggle">
-        <div class="item-title margin-horizontal padding"><strong>TILT <i class="f7-icons color-custom-{{Color}} size-15">circle_fill</i> {{Color}}</strong></div>
+        <div class="item-title margin-horizontal padding"><strong>TILT <i class="f7-icons color-custom-{{js 'this.Color.split(/[•-]/)[0]'}} size-15">circle_fill</i> {{Color}}</strong></div>
       </div>
     <div class="accordion-item-content">
-        <div class="block-title no-margin-top"><i class="material-icons">show_chart</i> Logging <i class="f7-icons color-custom-{{Color}} size-15">play_fill</i></div>
+        <div class="block-title no-margin-top"><i class="material-icons">show_chart</i> Logging <i class="f7-icons color-custom-{{js 'this.Color.split(/[•-]/)[0]'}} size-15">play_fill</i></div>
       <div class="block block-strong">
           <div class="content-block">
           <div class="content-block-inner">
@@ -425,9 +429,6 @@
 </li>
 {{/each}}
 </script>
-
-  <!-- Cordova -->
-  <script type="text/javascript" src="cordova.js"></script>
 
   <!-- Framework7 library -->
   <script type="text/javascript" src="framework7/js/framework7.min.js"></script>

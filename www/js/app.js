@@ -27,7 +27,7 @@ var app  = new Framework7({
   // App root data
   data: function () {
     return {
-      defaultCloudURL : 'https://script.google.com/a/baronbrew.com/macros/s/AKfycbydNOcB-_3RB3c-7sOTI-ZhTnN43Ye1tt0EFvvMxTxjdbheaw/exec',
+      defaultCloudURL : 'https://script.google.com/a/baronbrew.com/macros/s/AKfycbxNznAqo4-omN0btiOXUFGKRXjhoaGZwMF02PW4EiN3e7R3Gg/exec',
       tiltColors : ['RED', 'GREEN', 'BLACK', 'PURPLE', 'ORANGE', 'BLUE', 'YELLOW', 'PINK'],
       appVersion : '1.0.88'
     };
@@ -37,6 +37,12 @@ var app  = new Framework7({
     helloWorld: function () {
       app.dialog.alert('Hello World!');
     },
+  },
+  on: {
+    // each object key means same name event handler
+    pageInit: function (page) {
+      appInit()
+    }
   },
   // App routes
   routes: routes,
@@ -69,32 +75,77 @@ var permissions;
 //Interval Timers
 var watchBluetoothInterval;
 
-// Handle Cordova Device Ready Event
-$$(document).on('deviceready', function() {
-  console.log("Device is ready!");
-  document.addEventListener("resume", onResume, false);
-  document.addEventListener("pause", onPause, false);
-          //restore settings if needed
-          app.data.tiltColors.forEach(restoreLoggingSettings);
-          app.data.tiltColors.forEach(restoreCalibrationPoints);
-          app.data.tiltColors.forEach(restorePreferredUnits);
-          // Specify a shortcut for the location manager holding the iBeacon functions.
-          window.locationManager = cordova.plugins.locationManager;
-          // Start tracking beacons
-          initScan();
-          //detect orientation change for fixing status bar if needed 
-          window.addEventListener('orientationchange', doOnOrientationChange);
-          //detect when app is opened from background
-          console.log(device);
-          setTimeout(function() { navigator.splashscreen.hide(); }, 100);
-          if (device.platform == 'Android' || device.platform == 'amazon-fireos'){
-          watchBluetoothInterval = setInterval(function(){ watchBluetooth(); }, 30000);//check if tilts are connected every 30 seconds, toggle bluetooth if not
-          permissions = cordova.plugins.permissions;
-          permissions.checkPermission(permissions.BLUETOOTH_SCAN, checkBluetoothPermissionCallback, null);
-          permissions.checkPermission(permissions.ACCESS_FINE_LOCATION, checkFineLocationPermissionCallback, null);
-          //permissions.checkPermission(permissions.ACCESS_COARSE_LOCATION, checkCoarseLocationPermissionCallback, null);
-          }
-});
+let stdInInterval;
+let globalPort;
+async function appInit() {
+    const connectButton = document.getElementById("connect");
+    connectButton.addEventListener('click', async() => {
+    const filter = { usbVendorId: 0x2E8A };
+    const port = await navigator.serial.requestPort({ filters: [filter] });
+    globalPort = port;
+    await port.open({ baudRate: 9600 });
+    stdInInterval = setInterval(function() {
+        writeToPort("asyncio.run(tiltscanner('','','','','',1100))\r", port);
+     }, 1120);
+    const textDecoder = new TextDecoderStream();
+    const readableStreamClosed = port.readable.pipeTo(textDecoder.writable);
+    const reader = textDecoder.readable.getReader();
+    // Listen to data coming from the serial device.
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) {
+        reader.releaseLock();
+        break;
+      }
+      //console.log(value);
+      // value is a string.
+      if (value.substring(0, 4) == 'a495' && value.indexOf('.') > 0){
+        let tiltscanArray = value.split(',');
+        for (let i = 2; i < tiltscanArray.length; i++) {
+                tiltscanArray[i] = Number(tiltscanArray[i]);
+                }
+         tiltscanArray[0] = tiltscanArray[0].substring(0, 8) + '-' + tiltscanArray[0].substring(8, 12) + '-' + tiltscanArray[0].substring(12, 16) + '-' + tiltscanArray[0].substring(16, 20) + '-' + tiltscanArray[0].substring(21, 32);
+         //console.log(tiltscanArray);
+         initScan(tiltscanArray);
+      }
+
+    }
+    //await port.close();
+        
+    });
+    let ssid = 'default_ssid';
+    let password = 'default_pass'
+    $$('.open-prompt').on('click', function () {
+        app.dialog.prompt('Enter your WiFi SSID', 'SSID',
+        function (ssid_entry) {
+        ssid = ssid_entry;
+        app.dialog.prompt('Enter your WiFi password for ' + ssid, 'Password',
+        function (password_entry) {
+        password = password_entry;
+        console.log("saveWiFi('" + ssid + "','" + password + "')\r");
+        console.log(globalPort);
+        writeToPort("saveWiFi('" + ssid + "','" + password + "')\r", globalPort);
+    },
+        function (ssid) {console.log('cancelled')});},
+        function (ssid) {console.log('cancelled')});});
+
+
+        
+
+    }
+
+async function writeToPort(data, port) {
+    const textEncoder = new TextEncoderStream();
+    const writableStreamClosed = textEncoder.readable.pipeTo(port.writable);
+    const writer = textEncoder.writable.getWriter();
+    await writer.write(data);
+    console.log(data);
+    writer.close();
+    await writableStreamClosed;
+    // Allow the serial port to be closed later.
+    writer.releaseLock();
+
+}
 
   // Specify your beacon 128bit UUIDs here.
   var regions = [
@@ -206,15 +257,7 @@ function checkFineLocationPermissionCallback(status) {
       console.log("startScan");
       scanningToast = app.toast.create({text: '<i class="material-icons">bluetooth_searching</i> Scanning for nearby TILT hydrometers.<br>Ensure Bluetooth and Location Services are enabled and TILT is floating.', position: 'bottom', closeButton: true, closeButtonText: 'close', closeButtonColor: 'red',}).open();
       // Start ranging beacons.
-      for (var i in regions) {
-          var beaconRegion = new locationManager.BeaconRegion(
-              i,
-              regions[i].uuid);
-             //console.log(beaconRegion);
-          // Start ranging.
-          locationManager.startRangingBeaconsInRegion(beaconRegion);
         }
-  }
 
   function stopScan() {
     // Stop ranging beacons.
@@ -233,34 +276,34 @@ function checkFineLocationPermissionCallback(status) {
     var displayfermunits = localStorage.getItem('displayFermunits-' + color)||"";
     if (displaytempunits == "°F" && displayfermunits == "") {
         localStorage.setItem('displayTempunits-' + color,"°C");
-        NativeStorage.setItem('displayTempunits-' + color, "°C", function (result) { }, function (e) { });
+        //NativeStorage.setItem('displayTempunits-' + color, "°C", function (result) { }, function (e) { });
         localStorage.setItem('displayFermunits-' + color,"");
-        NativeStorage.setItem('displayFermunits-' + color, "", function (result) { }, function (e) { });
+        //NativeStorage.setItem('displayFermunits-' + color, "", function (result) { }, function (e) { });
         //update radio buttons
         $$("input[name=gravityRadio-" + color + "][value='SG']").prop("checked",true);
         $$("input[name=temperatureRadio-" + color + "][value='°C']").prop("checked",true);
     }
     if (displaytempunits == "°C" && displayfermunits == "") {
         localStorage.setItem('displayTempunits-' + color,"°C");
-        NativeStorage.setItem('displayTempunits-' + color, "°C", function (result) { }, function (e) { });
+        //NativeStorage.setItem('displayTempunits-' + color, "°C", function (result) { }, function (e) { });
         localStorage.setItem('displayFermunits-' + color,"°P");
-        NativeStorage.setItem('displayFermunits-' + color, "°P", function (result) { }, function (e) { });
+        //NativeStorage.setItem('displayFermunits-' + color, "°P", function (result) { }, function (e) { });
         $$("input[name=gravityRadio-" + color + "][value='°P']").prop("checked",true);
         $$("input[name=temperatureRadio-" + color + "][value='°C']").prop("checked",true);
     }
     if (displaytempunits == "°C" && displayfermunits == "°P") {
         localStorage.setItem('displayTempunits-' + color,"°F");
-        NativeStorage.setItem('displayTempunits-' + color, "°F", function (result) { }, function (e) { });
+        //NativeStorage.setItem('displayTempunits-' + color, "°F", function (result) { }, function (e) { });
         localStorage.setItem('displayFermunits-' + color,"°P");
-        NativeStorage.setItem('displayFermunits-' + color, "°P", function (result) { }, function (e) { });
+        //NativeStorage.setItem('displayFermunits-' + color, "°P", function (result) { }, function (e) { });
         $$("input[name=gravityRadio-" + color + "][value='°P']").prop("checked",true);
         $$("input[name=temperatureRadio-" + color + "][value='°F']").prop("checked",true);
     }
     if (displaytempunits == "°F" && displayfermunits == "°P") {
         localStorage.setItem('displayTempunits-' + color,"°F");
-        NativeStorage.setItem('displayTempunits-' + color, "°F", function (result) { }, function (e) { });
+        //NativeStorage.setItem('displayTempunits-' + color, "°F", function (result) { }, function (e) { });
         localStorage.setItem('displayFermunits-' + color,"");
-        NativeStorage.setItem('displayFermunits-' + color, "", function (result) { }, function (e) { });
+        //NativeStorage.setItem('displayFermunits-' + color, "", function (result) { }, function (e) { });
         $$("input[name=gravityRadio-" + color + "][value='SG']").prop("checked",true);
         $$("input[name=temperatureRadio-" + color + "][value='°F']").prop("checked",true);
     }
@@ -281,6 +324,7 @@ function checkFineLocationPermissionCallback(status) {
     
 //adds color specific attributes
   function addtoScan(beacon){
+    //console.log(beacon);
     //tilt found, close scanning for tilts message
     scanningToast.close();
     //add time since last update
@@ -304,22 +348,14 @@ function checkFineLocationPermissionCallback(status) {
         beacon.loggingTimer = (Date.now() - lastCloudLogged) / 1000 / 60;//min since last logged
         if (Number(cloudInterval) <= beacon.loggingTimer){
         setTimeout(function(){ 
-            postToCloudURLs(beacon.Color);
-            logToDevice(beacon.Color);
+            //postToCloudURLs(beacon.Color);
+            //logToDevice(beacon.Color);
         },4000);
         localStorage.setItem('loggingTimer-' + beacon.Color, Date.now());//reset timer
     };
         }
     //add beer name
     beacon.Beername = localStorage.getItem('beerName-' + beacon.Color);
-    if (beacon.Beername === null){
-        NativeStorage.getItem('beerName-' + beacon.Color, function (result) { 
-            if(result !== undefined){
-            localStorage.setItem('beerName-' + beacon.Color, result);
-            }
-         }, function (e) { });
-         setTimeout(function(){beacon.Beername = localStorage.getItem('beerName-' + beacon.Color)||'Untitled';},250);
-    }
     //add calibrated SG and Temp (F) for cloud posting
     beacon.SG = getCalFerm(beacon.Color).toFixed(4);
     beacon.Temp = getCalTemp(beacon.Color).toFixed(1);
@@ -332,57 +368,52 @@ function checkFineLocationPermissionCallback(status) {
     }    
 }
 
-  function initScan() {
-      // The delegate object holds the iBeacon callback functions
-      // specified below.
-      delegate = new locationManager.Delegate();
-      console.log('initScan');
-      // Called continuously when ranging beacons.
-      delegate.didRangeBeaconsInRegion = function (pluginResult) {
-          if (pluginResult.beacons.length > 0) {
-              for (var i in pluginResult.beacons) {
-                  // Insert beacon into table of found beacons.
-                  var beacon = pluginResult.beacons[i];
+  function initScan(scanResult) {
+          if (scanResult.length == 6) {
+            //create beacon object
+                  const names = ['uuid','mac','major','minor','battw','rssi'];
+                  let beacon = names.reduce((a, v, i) => ({ ...a, [v]: scanResult[i]}), {});
+                  //console.log(beacon.mac);
                   //add timestamp
                   beacon.timeStamp = Date.now();
                   //assign color by UUID and Minor Range. FW 1005 and 1006 is HD
-                  if (beacon.minor > 5000 || beacon.minor == 1005 && beacon.major == 999 || beacon.minor == 1006 && beacon.major == 999){
+                  if (Number(beacon.minor) > 5000 || beacon.minor == 1005 && beacon.major == 999 || beacon.minor == 1006 && beacon.major == 999){
                       beacon.hd = true;
                   }else{
                       beacon.hd = false;
                   }
                 switch (beacon.uuid[6] + "-" + beacon.hd) {
-                    case "1-false" : beacon.Color = "RED";
+                    case "1-false" : beacon.Color = "RED-" + beacon.mac[8] + beacon.mac[9] + beacon.mac[10] + beacon.mac[11];
                     break;
-                    case "1-true" : beacon.Color = "RED•HD";
+                    case "1-true" : beacon.Color = "RED•HD-" + beacon.mac[8] + beacon.mac[9] + beacon.mac[10] + beacon.mac[11];
                     break;
-                    case "2-false" : beacon.Color = "GREEN";
+                    case "2-false" : beacon.Color = "GREEN-" + beacon.mac[8] + beacon.mac[9] + beacon.mac[10] + beacon.mac[11];
                     break;
-                    case "2-true" : beacon.Color = "GREEN•HD";
+                    case "2-true" : beacon.Color = "GREEN•HD-" + beacon.mac[8] + beacon.mac[9] + beacon.mac[10] + beacon.mac[11];
                     break;
-                    case "3-false" : beacon.Color = "BLACK";
+                    case "3-false" : beacon.Color = "BLACK-" + beacon.mac[8] + beacon.mac[9] + beacon.mac[10] + beacon.mac[11];
                     break;
-                    case "3-true" : beacon.Color = "BLACK•HD";
+                    case "3-true" : beacon.Color = "BLACK•HD-" + beacon.mac[8] + beacon.mac[9] + beacon.mac[10] + beacon.mac[11];
                     break;
-                    case "4-false" : beacon.Color = "PURPLE";
+                    case "4-false" : beacon.Color = "PURPLE-" + beacon.mac[8] + beacon.mac[9] + beacon.mac[10] + beacon.mac[11];
                     break;
-                    case "4-true" : beacon.Color = "PURPLE•HD";
+                    case "4-true" : beacon.Color = "PURPLE•HD-" + beacon.mac[8] + beacon.mac[9] + beacon.mac[10] + beacon.mac[11];
                     break;
-                    case "5-false" : beacon.Color = "ORANGE";
+                    case "5-false" : beacon.Color = "ORANGE-" + beacon.mac[8] + beacon.mac[9] + beacon.mac[10] + beacon.mac[11];
                     break;
-                    case "5-true" : beacon.Color = "ORANGE•HD";
+                    case "5-true" : beacon.Color = "ORANGE•HD-" + beacon.mac[8] + beacon.mac[9] + beacon.mac[10] + beacon.mac[11];
                     break;
-                    case "6-false" : beacon.Color = "BLUE";
+                    case "6-false" : beacon.Color = "BLUE-" + beacon.mac[8] + beacon.mac[9] + beacon.mac[10] + beacon.mac[11];
                     break;
-                    case "6-true" : beacon.Color = "BLUE•HD";
+                    case "6-true" : beacon.Color = "BLUE•HD-" + beacon.mac[8] + beacon.mac[9] + beacon.mac[10] + beacon.mac[11];
                     break;
-                    case "7-false" : beacon.Color = "YELLOW";
+                    case "7-false" : beacon.Color = "YELLOW-" + beacon.mac[8] + beacon.mac[9] + beacon.mac[10] + beacon.mac[11];
                     break;
-                    case "7-true" : beacon.Color = "YELLOW•HD";
+                    case "7-true" : beacon.Color = "YELLOW•HD-" + beacon.mac[8] + beacon.mac[9] + beacon.mac[10] + beacon.mac[11];
                     break;
-                    case "8-false" : beacon.Color = "PINK";
+                    case "8-false" : beacon.Color = "PINK-" + beacon.mac[8] + beacon.mac[9] + beacon.mac[10] + beacon.mac[11];
                     break;
-                    case "8-true" : beacon.Color = "PINK•HD";
+                    case "8-true" : beacon.Color = "PINK•HD-" + beacon.mac[8] + beacon.mac[9] + beacon.mac[10] + beacon.mac[11];
                     break;
              }
                   //setup HD tilt
@@ -405,31 +436,19 @@ function checkFineLocationPermissionCallback(status) {
                   beacon.sgDecimals = 3;
                 }
                   addtoScan(beacon);
-                  updateBeacons();
-                  //set key by UUID
-                  var key = beacon.uuid + beacon.hd;
-                  beacons[key] = beacon;
+                  beacons[beacon.Color] = beacon;
                   //console.log(beacons);
+                  updateBeacons();
+                  
               }
-          }
-          if (pluginResult.region.identifier == 0){//update display after each scan period regardless if Beacon found
-              updateBeacons();
-          }
       };
 
-      // Set the delegate object to use.
-      locationManager.setDelegate(delegate);
-
-      // Request permission from user to access location info.
-      // This is needed on iOS 8.
-      locationManager.requestWhenInUseAuthorization();
       startScan();
       //update beacons even if nothing scanned
       updateInterval = setInterval(function(){ 
           updateBeacons();
         }, 1000);
         
-  }
     //populate list of logging files
     var listOfCSVFiles = localStorage.getItem('listOfCSVFiles')||false;//set to false if no csv files exist
     if (listOfCSVFiles){//only create list of csv files exist
@@ -675,8 +694,8 @@ var displaySGcallistObject = {};
 displaySGcallistObject.SGcalpoints = displaySGcallistArray;
 $$('#sgcallisttemplate-' + color).html(compiledsgcallistTemplate(displaySGcallistObject));
 //save updated calibration points to native storage
-NativeStorage.setItem('uncalSGpoints-' + color, uncalSGpoints, function (result) { }, function (e) { });
-NativeStorage.setItem('actualSGpoints-' + color, actualSGpoints, function (result) { }, function (e) { });
+//NativeStorage.setItem('uncalSGpoints-' + color, uncalSGpoints, function (result) { }, function (e) { });
+//NativeStorage.setItem('actualSGpoints-' + color, actualSGpoints, function (result) { }, function (e) { });
 };
 
 function updateTempcallist(color) {
@@ -695,8 +714,8 @@ function updateTempcallist(color) {
     displayTempcallistObject.Tempcalpoints = displayTempcallistArray;
     $$('#tempcallisttemplate-' + color).html(compiledtempcallistTemplate(displayTempcallistObject));
     //save updated calibration points to native storage
-    NativeStorage.setItem('uncalTemppoints-' + color, uncalTemppoints, function (result) { }, function (e) { });
-    NativeStorage.setItem('actualTemppoints-' + color, actualTemppoints, function (result) { }, function (e) { });
+    //NativeStorage.setItem('uncalTemppoints-' + color, uncalTemppoints, function (result) { }, function (e) { });
+    //NativeStorage.setItem('actualTemppoints-' + color, actualTemppoints, function (result) { }, function (e) { });
     };
 
 function convertSGtoPreferredUnits (color, SG) {
@@ -985,7 +1004,7 @@ function clearBeerName (button){
 
 function setBeerName (button){
     var clickedButton = button.id.split('-');
-    var color = clickedButton[1];
+    var color = clickedButton[1] + '-' + clickedButton[2];
     var currentBeerName = localStorage.getItem('beerName-' + color)||"Untitled";
     var currentBeerNameArray = currentBeerName.split(',');
     var newBeerNameRaw = $$('#currentbeername-' + color).val();
@@ -1028,7 +1047,7 @@ function setBeerName (button){
           });
         notificationFull.open();
         localStorage.setItem('beerName-' + color, validBeerName);
-        NativeStorage.setItem('beerName-' + color, validBeerName, function (result) { }, function (e) { });
+        //NativeStorage.setItem('beerName-' + color, validBeerName, function (result) { }, function (e) { });
         showBeerName(color);
     }
 }
@@ -1062,7 +1081,7 @@ function toggleDeviceLogging (color) {
                 deviceLoggingEnabled = '0';
                 localStorage.setItem('deviceLoggingEnabled-' + color, deviceLoggingEnabled);
             }
-          NativeStorage.setItem('deviceLoggingEnabled-' + color, deviceLoggingEnabled, function (result) { }, function (e) { });
+          //NativeStorage.setItem('deviceLoggingEnabled-' + color, deviceLoggingEnabled, function (result) { }, function (e) { });
           }
         }
       })
@@ -1096,7 +1115,7 @@ function toggleDefaultCloudURL (color) {
                 cloudURLsenabledArray[0] = '0';
                 localStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray);
             }
-            NativeStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray, function (result) { }, function (e) { });
+            //NativeStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray, function (result) { }, function (e) { });
           }
         }
       })
@@ -1123,7 +1142,7 @@ function setDefaultCloudURL (button){
     var newDefaultCloudURLRaw = $$('#defaultCloudURL-' + color).val();
     var newDefaultCloudURL = newDefaultCloudURLRaw.trim();
     localStorage.setItem('cloudurls-' + color, newDefaultCloudURL + ',' + customCloudURLsArray[1] + ',' + customCloudURLsArray[2]);
-    NativeStorage.setItem('cloudurls-' + color, newDefaultCloudURL + ',' + customCloudURLsArray[1] + ',' + customCloudURLsArray[2], function (result) { }, function (e) { });
+    //NativeStorage.setItem('cloudurls-' + color, newDefaultCloudURL + ',' + customCloudURLsArray[1] + ',' + customCloudURLsArray[2], function (result) { }, function (e) { });
     var notificationFull = app.notification.create({
         icon: '<i class="f7-icons">check</i>',
         title: 'New Default Cloud URL Saved',
@@ -1172,7 +1191,7 @@ function toggleCustomCloudURL1 (color) {
                 cloudURLsenabledArray[1] = '0';
                 localStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray);
             }
-            NativeStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray, function (result) { }, function (e) { });
+            //NativeStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray, function (result) { }, function (e) { });
           }
         }
       })
@@ -1219,7 +1238,7 @@ function clearCustomCloudURL1 (button){
     var newCustomCloudURL1 = '';
     $$('#customCloudURL1-' + color).val('');
     localStorage.setItem('cloudurls-' + color, customCloudURLsArray[0] + ',' + newCustomCloudURL1 + ',' + customCloudURLsArray[2]);
-    NativeStorage.setItem('cloudurls-' + color, customCloudURLsArray[0] + ',' + newCustomCloudURL1 + ',' + customCloudURLsArray[2], function (result) { }, function (e) { });
+    //NativeStorage.setItem('cloudurls-' + color, customCloudURLsArray[0] + ',' + newCustomCloudURL1 + ',' + customCloudURLsArray[2], function (result) { }, function (e) { });
     var notificationFull = app.notification.create({
         icon: '<i class="f7-icons">info</i>',
         title: 'Custom Cloud URL 1 Cleared',
@@ -1249,7 +1268,7 @@ function toggleCustomCloudURL2 (color) {
                 cloudURLsenabledArray[2] = '0';
                 localStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray);
             }
-            NativeStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray, function (result) { }, function (e) { });
+            //NativeStorage.setItem('cloudurlsenabled-' + color, cloudURLsenabledArray, function (result) { }, function (e) { });
           }
         }
       })
@@ -1276,7 +1295,7 @@ function setCustomCloudURL2 (button){
     var newCustomCloudURL2Raw = $$('#customCloudURL2-' + color).val();
     var newCustomCloudURL2 = newCustomCloudURL2Raw.trim();
     localStorage.setItem('cloudurls-' + color, customCloudURLsArray[0] + ',' + customCloudURLsArray[1] + ',' + newCustomCloudURL2);
-    NativeStorage.setItem('cloudurls-' + color, customCloudURLsArray[0] + ',' + customCloudURLsArray[1] + ',' + newCustomCloudURL2, function (result) { }, function (e) { });
+    //NativeStorage.setItem('cloudurls-' + color, customCloudURLsArray[0] + ',' + customCloudURLsArray[1] + ',' + newCustomCloudURL2, function (result) { }, function (e) { });
     var notificationFull = app.notification.create({
         icon: '<i class="f7-icons">check</i>',
         title: 'Custom Cloud URL 2 Saved',
@@ -1345,7 +1364,7 @@ function postToCloudURLsDisabled (color, comment) {
          if (i != 0){
             currentBeerName = currentBeerName.split(',')[0];
          }
-        stopScan();//stop bt scan while using wifi
+        //stopScan();//stop bt scan while using wifi
         var colorLogged = beacon.Color.replace("•HD","");
         app.request.post(cloudURLsArray[i], encodeURI("Timepoint=" + localTimeExcel + "&SG=" + beacon.SG + "&Temp=" + beacon.Temp + "&Color=" + colorLogged + "&Beer=" + currentBeerName + "&Comment=" + comment), function (stringData){
             startScan();//restart scanning
@@ -1381,7 +1400,7 @@ function postToCloudURLsDisabled (color, comment) {
             var beerNameArray = jsonData.beername.split(",");
             if (beerNameArray[1] !== undefined && comment != 'End of log') {
               localStorage.setItem('beerName-' + color, jsonData.beername);
-              NativeStorage.setItem('beerName-' + color, jsonData.beername, function (result) { }, function (e) { });
+              //NativeStorage.setItem('beerName-' + color, jsonData.beername, function (result) { }, function (e) { });
                 showBeerName(color);
                 $$('#cloudStatus' + color).html('<a class="link external" href="' + jsonData.doclongurl + '" target="_system">&nbsp;<i class="material-icons size-15">cloud_done</i><span id="lastCloudLogged' + beacon.Color +'"></span></a>');
                 localStorage.setItem('docLongURL-' + color, jsonData.doclongurl);
@@ -1430,7 +1449,7 @@ function cloudIntervalStepper (color) {
             change: function () {
             var cloudInterval = stepper.getValue();
             localStorage.setItem('cloudInterval-' + color, cloudInterval);
-            NativeStorage.setItem('cloudInterval-' + color, cloudInterval, function (result) { }, function (e) { });
+            //NativeStorage.setItem('cloudInterval-' + color, cloudInterval, function (result) { }, function (e) { });
             if (cloudInterval == 15){
                 app.toast.create({text: 'Set to minimum logging interval.', icon: '<i class="material-icons">check</i>', position: 'center', closeTimeout: 2000}).open();
             }
@@ -1444,7 +1463,7 @@ function clearEmail (button){
     var clickedButton = button.id.split('-');
     var color = clickedButton[1];
     localStorage.setItem('emailAddress-' + color,'');
-    NativeStorage.setItem('emailAddress-' + color, '', function (result) { }, function (e) { });
+    //NativeStorage.setItem('emailAddress-' + color, '', function (result) { }, function (e) { });
     //$$('#emailAddress-' + color).val('');
     showEmail(color);
 }
@@ -1452,7 +1471,7 @@ function clearEmail (button){
 
 function setEmail (button){
     var clickedButton = button.id.split('-');
-    var color = clickedButton[1];
+    var color = clickedButton[1] + '-' + clickedButton[2];
     var newEmailOriginal = $$('#emailAddress-' + color).val();
     var newEmail = newEmailOriginal.trim();
     if (ValidateEmail(newEmail)){
@@ -1466,7 +1485,7 @@ function setEmail (button){
     });
     notificationEmailOK.open();
     localStorage.setItem('emailAddress-' + color, newEmail);
-    NativeStorage.setItem('emailAddress-' + color, newEmail, function (result) { }, function (e) { });
+    //NativeStorage.setItem('emailAddress-' + color, newEmail, function (result) { }, function (e) { });
     showEmail(color);
     }else{
         var notificationEmailBad = app.notification.create({
@@ -1507,7 +1526,7 @@ function ValidateEmail(email) {
 
 function startLogging(button) {
     var clickedButton = button.id.split('-');
-    var color = clickedButton[1];
+    var color = clickedButton[1] + '-' + clickedButton[2];
     var beerName = localStorage.getItem('beerName-' + color)||'Untitled';
     var beerNameArray = beerName.split(',');
     var email = localStorage.getItem('emailAddress-' + color)||$$('#emailAddress-' + color).val();
@@ -1515,7 +1534,7 @@ function startLogging(button) {
         email = '@';
     };
     var emailValid = ValidateEmail(email);
-    var cloudURLsEnabled = localStorage.getItem('cloudurlsenabled-' + color);
+    var cloudURLsEnabled = localStorage.getItem('cloudurlsenabled-' + color)||'1,0,0';
     var cloudURLsEnabledArray = cloudURLsEnabled.split(',');
     //check if device logging in progress
     var deviceLoggingJSONFileName = localStorage.getItem('localJSONfileName-' + color)||'not logging';
@@ -1855,7 +1874,7 @@ function logToDevice(color, comment){
     notificationNewLog.open();
     //set CSV filename
     localStorage.setItem('localCSVfileName-' + color, CSVfileName);
-    NativeStorage.setItem('localCSVfileName-' + color, CSVfileName, function (result) { }, function (e) { });
+    //NativeStorage.setItem('localCSVfileName-' + color, CSVfileName, function (result) { }, function (e) { });
     //add to list of CSV files
     var listOfCSVFiles = localStorage.getItem('listOfCSVFiles')||'';
     var listOfCSVFilesArray = listOfCSVFiles.split(',');
@@ -1866,14 +1885,14 @@ function logToDevice(color, comment){
             listOfCSVFilesArray.pop();
         }
     localStorage.setItem('listOfCSVFiles',listOfCSVFilesArray);
-    NativeStorage.setItem('listOfCSVFiles', listOfCSVFilesArray, function (result) { }, function (e) { });
+    //NativeStorage.setItem('listOfCSVFiles', listOfCSVFilesArray, function (result) { }, function (e) { });
     }
     //update file list
     var displayhtml = compiledfilelistTemplate(listOfCSVFilesArray);
     $$('#fileList').html(displayhtml);
     //set JSON file name
     localStorage.setItem('localJSONfileName-' + color, JSONfileName);
-    NativeStorage.setItem('localJSONfileName-' + color, JSONfileName, function (result) { }, function (e) { });
+    //NativeStorage.setItem('localJSONfileName-' + color, JSONfileName, function (result) { }, function (e) { });
     //add to list of JSON files
     var listOfJSONFiles = localStorage.getItem('listOfJSONFiles')||'';
     var listOfJSONFilesArray = listOfJSONFiles.split(',');
@@ -1885,7 +1904,7 @@ function logToDevice(color, comment){
             listOfJSONFilesArray.pop();
         }
         localStorage.setItem('listOfJSONFiles', listOfJSONFilesArray);
-        NativeStorage.setItem('listOfJSONFiles', listOfJSONFilesArray, function (result) { }, function (e) { });
+        //NativeStorage.setItem('listOfJSONFiles', listOfJSONFilesArray, function (result) { }, function (e) { });
     }
     writeToFile(CSVfileName, 'Timestamp,Timepoint,SG,Temp,Color,Beer,Comment', isAppend,'csv', color);
     //remove •HD tag for logging file
@@ -1968,97 +1987,17 @@ function watchBluetooth() {//function run every 30 seconds on Android and Fire d
     }
 }
 
-function restoreLoggingSettings(color){
-    NativeStorage.getItem('cloudurls-' + color, function (result) { 
-        if(result !== undefined){
-        localStorage.setItem('cloudurls-' + color, result);
-        }
-     }, function (e) { });
-    NativeStorage.getItem('cloudurlsenabled-' + color, function (result) { 
-        if(result !== undefined){
-        localStorage.setItem('cloudurlsenabled-' + color, result);
-        }
-     }, function (e) { });
-    NativeStorage.getItem('emailAddress-' + color, function (result) { 
-        if(result !== undefined){
-        localStorage.setItem('emailAddress-' + color, result);
-        }
-     }, function (e) { });
-    NativeStorage.getItem('cloudInterval-' + color, function (result) { 
-        if(result !== undefined){
-        localStorage.setItem('cloudInterval-' + color, result);
-        }
-     }, function (e) { });
-    NativeStorage.getItem('deviceLoggingEnabled-' + color, function (result) { 
-        if(result !== undefined){
-        localStorage.setItem('deviceLoggingEnabled-' + color, result);
-        }
-     }, function (e) { });
-    NativeStorage.getItem('localCSVfileName-' + color, function (result) { 
-        if(result !== undefined){
-        localStorage.setItem('localCSVfileName-' + color, result);
-        }
-     }, function (e) { });
-    NativeStorage.getItem('localJSONfileName-' + color, function (result) { 
-        if(result !== undefined){
-        localStorage.setItem('localJSONfileName-' + color, result);
-        }
-     }, function (e) { });
-    NativeStorage.getItem('listOfCSVFiles', function (result) { 
-        if(result !== undefined){
-        localStorage.setItem('listOfCSVFiles', result);
-        }
-     }, function (e) { });
-    NativeStorage.getItem('listOfJSONFiles', function (result) { 
-        if(result !== undefined){
-        localStorage.setItem('listOfJSONFiles', result);
-        }
-     }, function (e) { });
-}
-
-function restorePreferredUnits(color){
-    NativeStorage.getItem('displayTempunits-' + color, function (result) { 
-        if(result !== undefined){
-        localStorage.setItem('displayTempunits-' + color, result);
-        }
-     }, function (e) { });
-    NativeStorage.getItem('displayFermunits-' + color, function (result) { 
-        if(result !== undefined){
-        localStorage.setItem('displayFermunits-' + color, result);
-        }
-     }, function (e) { });
-}
-
-function restoreCalibrationPoints(color){
-            NativeStorage.getItem('uncalSGpoints-' + color, function (result) { 
-                if(result !== undefined){
-                localStorage.setItem('uncalSGpoints-' + color, result);
-                }
-             }, function (e) { });
-            NativeStorage.getItem('actualSGpoints-' + color, function (result) { 
-                if(result !== undefined){
-                localStorage.setItem('actualSGpoints-' + color, result);
-                }
-             }, function (e) { });
-            NativeStorage.getItem('uncalTemppoints-' + color, function (result) { 
-                if(result !== undefined){
-                localStorage.setItem('uncalTemppoints-' + color, result);
-                }
-             }, function (e) { });
-            NativeStorage.getItem('actualTemppoints-' + color, function (result) { 
-                if(result !== undefined){
-                localStorage.setItem('actualTemppoints-' + color, result);
-                }
-             }, function (e) { });
-}
-
 function postToCloudURLs (color, comment) {
     //get beer name from local storage in case beer name updated from prompt
     var currentBeerName = localStorage.getItem('beerName-' + color)||"Untitled";
+    //console.log(beacons[color]);
     if (comment === undefined){
         comment = "";
     };
-    var beacon = JSON.parse(localStorage.getItem('tiltObject-' + color));
+    if (comment.indexOf("@") > -1){
+        var isEmail = 'true';} 
+     else {
+        var isEmail = 'false';}
     var cloudURLs = localStorage.getItem('cloudurls-' + color) || app.data.defaultCloudURL + ',,';
     var cloudURLsArray = cloudURLs.split(',');
     //validate default cloud URL, reset if invalid
@@ -2089,19 +2028,19 @@ function postToCloudURLs (color, comment) {
     for (var i = 0; i < 3; i++) {
         if (cloudURLsenabledArray[i] == '1'){
         //convert beacon timeStamp (UTC) to Excel formatted Timepoint (local time)
-        var timeStamp = new Date(beacon.timeStamp);
+       /*  var timeStamp = new Date.now();
         var localTime = timeStamp.toLocaleString();
         var tzOffsetDays = timeStamp.getTimezoneOffset() / 60 / 24;
-        var localTimeExcel = timeStamp.valueOf() / 1000 / 60 / 60 / 24 + 25569 - tzOffsetDays;
+        var localTimeExcel = timeStamp.valueOf() / 1000 / 60 / 60 / 24 + 25569 - tzOffsetDays; */
         //only send beer name with beer ID if using default cloud URL
          if (i != 0){
             currentBeerName = currentBeerName.split(',')[0];
          }
-        stopScan();//stop bt scan while using wifi
-        var colorLogged = beacon.Color.replace("•HD","");
-        cordova.plugin.http.setDataSerializer('utf8');
-        cordova.plugin.http.setRequestTimeout(120.0);
-        cordova.plugin.http.post(
+        //stopScan();//stop bt scan while using wifi
+        clearInterval(stdInInterval);
+        writeToPort("saveLogConfig('" + color + "','" + beacons[color].mac + "','" + currentBeerName + "','" + comment + "','" + isEmail + "','" + cloudURLsArray[i] + "')\r", globalPort);
+        setTimeout(function(){ stdInInterval = setInterval(function() { writeToPort("asyncio.run(tiltscanner('','','','','',1100))\r", globalPort); }, 1120) }, 10000) ;
+/*         cordova.plugin.http.post(
             cloudURLsArray[i],
             encodeURI("Timepoint=" + localTimeExcel + "&SG=" + beacon.SG + "&Temp=" + beacon.Temp + "&Color=" + colorLogged + "&Beer=" + currentBeerName + "&Comment=" + comment),
             { "content-type" : "application/x-www-form-urlencoded; charset=utf-8" },
@@ -2140,7 +2079,7 @@ function postToCloudURLs (color, comment) {
             var beerNameArray = jsonData.beername.split(",");
             if (beerNameArray[1] !== undefined && comment != 'End of log') {
               localStorage.setItem('beerName-' + color, jsonData.beername);
-              NativeStorage.setItem('beerName-' + color, jsonData.beername, function (result) { }, function (e) { });
+              //NativeStorage.setItem('beerName-' + color, jsonData.beername, function (result) { }, function (e) { });
                 showBeerName(color);
                 $$('#cloudStatus' + color).html('<a class="link external" href="' + jsonData.doclongurl + '" target="_system">&nbsp;<i class="material-icons size-15">cloud_done</i><span id="lastCloudLogged' + beacon.Color +'"></span></a>');
                 localStorage.setItem('docLongURL-' + color, jsonData.doclongurl);
@@ -2177,7 +2116,7 @@ function postToCloudURLs (color, comment) {
             $$('#cloudStatus' + beacon.Color).html('cloud error');
 
         }
-        );
+        ); */
         }
     }
 }
