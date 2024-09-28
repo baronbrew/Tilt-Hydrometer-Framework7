@@ -4,8 +4,8 @@
   "displayName": "Tilt Hydrometer Framework7",
   "cordova": {
     "platforms": [
-      "android",
-      "ios"
+      "ios",
+      "android"
     ],
     "plugins": {
       "cordova-plugin-file": {},
@@ -14,11 +14,9 @@
       "cordova-plugin-ibeacon": {},
       "cordova-plugin-inappbrowser": {},
       "cordova-plugin-advanced-http": {},
-      "cordova-plugin-email-composer": {
-        "ANDROID_SUPPORT_V4_VERSION": "27.+"
-      },
       "com.unarin.cordova.beacon": {},
-      "cordova-plugin-android-permissions": {}
+      "cordova-plugin-android-permissions": {},
+      "cordova-plugin-email-composer": {}
     }
   },
   "dependencies": {
@@ -35,12 +33,12 @@
     "@capacitor/cli": "^3.3.1",
     "com.unarin.cordova.beacon": "git+https://github.com/baronbrew/cordova-plugin-ibeacon.git#v3.x",
     "cordova": "^10.0.0",
-    "cordova-android": "^11.0.0",
+    "cordova-android": "^13.0.0",
     "cordova-ios": "^5.1.1",
     "cordova-plugin-advanced-http": "^3.1.0",
     "cordova-plugin-android-permissions": "^1.1.4",
     "cordova-plugin-device": "^2.1.0",
-    "cordova-plugin-email-composer": "^0.9.2",
+    "cordova-plugin-email-composer": "^0.10.1",
     "cordova-plugin-inappbrowser": "^4.0.0"
   }
 }

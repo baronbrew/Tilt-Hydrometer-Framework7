@@ -34,6 +34,44 @@
 .color-custom-YELLOW•HD { color: yellow;
 }
 
+.button-border { border: 2px solid gray 
+}
+
+.button-style-RED { background: red;         
+}
+.button-style-RED•HD { background: red;
+}
+.button-style-GREEN { background: green;
+}
+.button-style-GREEN•HD { background: green;
+}
+.button-style-GRAY { background: gray;
+}
+.button-style-PURPLE { background: purple;
+}
+.button-style-PURPLE•HD { background: purple;
+}
+.button-style-BLACK { background: black;
+}
+.button-style-BLACK•HD { background: black;
+}
+.button-style-PINK { background: hotpink;
+}
+.button-style-PINK•HD { background: hotpink;
+}
+.button-style-ORANGE { background: orange;
+}
+.button-style-ORANGE•HD { background: orange;
+}
+.button-style-BLUE { background: blue;
+}
+.button-style-BLUE•HD { background: blue;
+}
+.button-style-YELLOW { background: yellow;
+}
+.button-style-YELLOW•HD { background: yellow;
+}
+
 .size-15 { font-size: 15px }
 
 div.sg-temp {

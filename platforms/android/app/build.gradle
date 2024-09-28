@@ -21,7 +21,11 @@ apply plugin: 'com.android.application'
 
 if (cordovaConfig.IS_GRADLE_PLUGIN_KOTLIN_ENABLED) {
     apply plugin: 'kotlin-android'
-    apply plugin: 'kotlin-android-extensions'
+
+    if(!cdvHelpers.isVersionGreaterThanEqual(cordovaConfig.KOTLIN_VERSION, '1.8.0')) {
+        println "Kotlin version < 1.8.0 detected. Applying kotlin-android-extensions plugin."
+        apply plugin: 'kotlin-android-extensions'
+    }
 }
 
 buildscript {
@@ -180,9 +184,15 @@ task cdvPrintProps {
 }
 
 android {
+    namespace cordovaConfig.PACKAGE_NAMESPACE
+
+    buildFeatures {
+        buildConfig true
+    }
+
     defaultConfig {
         versionCode cdvVersionCode ?: new BigInteger("" + privateHelpers.extractIntFromManifest("versionCode"))
-        applicationId privateHelpers.extractStringFromManifest("package")
+        applicationId cordovaConfig.PACKAGE_NAMESPACE
 
         minSdkVersion cordovaConfig.MIN_SDK_VERSION
         if (cordovaConfig.MAX_SDK_VERSION != null) {
@@ -247,8 +257,39 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaLanguageVersion.of(cordovaConfig.JAVA_SOURCE_COMPATIBILITY)
+        targetCompatibility JavaLanguageVersion.of(cordovaConfig.JAVA_TARGET_COMPATIBILITY)
+    }
+
+    if (cordovaConfig.IS_GRADLE_PLUGIN_KOTLIN_ENABLED) {
+        if (cordovaConfig.KOTLIN_JVM_TARGET == null) {
+            // If the value is null, fallback to JAVA_TARGET_COMPATIBILITY,
+            // as they generally should be equal
+            def javaTarget = JavaLanguageVersion.of(cordovaConfig.JAVA_TARGET_COMPATIBILITY)
+
+            // check if javaTarget is <= 8; if so, we need to prefix it with "1."
+            // Starting with 9 and later, the value can be used as is.
+            if (javaTarget.compareTo(JavaLanguageVersion.of(8)) <= 0) {
+                javaTarget = "1." + javaTarget
+            }
+
+            cordovaConfig.KOTLIN_JVM_TARGET = javaTarget
+        }
+
+        // Similar to above, check if kotlin target is <= 8, if so prefix it.
+        // This allows the user to use consistent set of values in config.xml
+        // Rather than having to be aware whether the "1."" prefix is needed.
+        // This check is only done if the value isn't already prefixed with 1.
+        if (
+            !cordovaConfig.KOTLIN_JVM_TARGET.startsWith("1.") &&
+            JavaLanguageVersion.of(cordovaConfig.KOTLIN_JVM_TARGET).compareTo(JavaLanguageVersion.of(8)) <= 0
+        ) {
+            cordovaConfig.KOTLIN_JVM_TARGET = "1." + cordovaConfig.KOTLIN_JVM_TARGET
+        }
+
+        kotlinOptions {
+            jvmTarget = cordovaConfig.KOTLIN_JVM_TARGET
+        }
     }
 
     if (cdvReleaseSigningPropertiesFile) {
@@ -296,8 +337,6 @@ dependencies {
 
     // SUB-PROJECT DEPENDENCIES START
     implementation(project(path: ":CordovaLib"))
-    implementation "androidx.legacy:legacy-support-core-utils:1.0.0"
-    implementation "androidx.legacy:legacy-support-v4:1.0.0"
     implementation "com.android.support:support-core-utils:26+"
     // SUB-PROJECT DEPENDENCIES END
 }
@@ -344,4 +383,8 @@ if (hasProperty('postBuildExtras')) {
 
 if (cordovaConfig.IS_GRADLE_PLUGIN_GOOGLE_SERVICES_ENABLED) {
     apply plugin: 'com.google.gms.google-services'
+}
+
+configurations.implementation {
+    exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'
 }

@@ -9,6 +9,14 @@
         "parents": {
           "/*": [
             {
+              "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"LocationManager\"><param name=\"android-package\" value=\"com.unarin.cordova.beacon.LocationManager\" /></feature>",
+              "count": 1
+            },
+            {
               "xml": "<feature name=\"File\"><param name=\"android-package\" value=\"org.apache.cordova.file.FileUtils\" /><param name=\"onload\" value=\"true\" /></feature>",
               "count": 1
             },
@@ -18,6 +26,10 @@
             },
             {
               "xml": "<feature name=\"CordovaHttpPlugin\"><param name=\"android-package\" value=\"com.silkimen.cordovahttp.CordovaHttpPlugin\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"Permissions\"><param name=\"android-package\" value=\"com.android.plugins.Permissions\" /></feature>",
               "count": 1
             },
             {
@@ -31,18 +43,6 @@
             {
               "xml": "<feature name=\"StatusBar\"><param name=\"android-package\" value=\"org.apache.cordova.statusbar.StatusBar\" /><param name=\"onload\" value=\"true\" /></feature>",
               "count": 1
-            },
-            {
-              "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
-              "count": 1
-            },
-            {
-              "xml": "<feature name=\"LocationManager\"><param name=\"android-package\" value=\"com.unarin.cordova.beacon.LocationManager\" /></feature>",
-              "count": 1
-            },
-            {
-              "xml": "<feature name=\"Permissions\"><param name=\"android-package\" value=\"com.android.plugins.Permissions\" /></feature>",
-              "count": 1
             }
           ]
         }
@@ -51,11 +51,11 @@
         "parents": {
           "/manifest": [
             {
-              "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
+              "xml": "<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />",
               "count": 1
             },
             {
-              "xml": "<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />",
+              "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
               "count": 1
             }
           ],
@@ -70,6 +70,12 @@
               "xml": "<provider android:authorities=\"${applicationId}.emailcomposer.provider\" android:exported=\"false\" android:grantUriPermissions=\"true\" android:name=\"de.appplant.cordova.emailcomposer.Provider\"><meta-data android:name=\"android.support.FILE_PROVIDER_PATHS\" android:resource=\"@xml/emailcomposer_provider_paths\" /></provider>",
               "count": 1
             }
+          ],
+          "/manifest/queries": [
+            {
+              "xml": "<intent><action android:name=\"android.intent.action.SENDTO\" /><data android:scheme=\"mailto\" /></intent>",
+              "count": 1
+            }
           ]
         }
       },
@@ -79,6 +85,10 @@
             {
               "xml": "<feature name=\"EmailComposer\"><param name=\"android-package\" value=\"de.appplant.cordova.emailcomposer.EmailComposer\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<preference name=\"AndroidXEnabled\" value=\"true\" />",
+              "count": 1
             }
           ]
         }
@@ -86,14 +96,19 @@
     }
   },
   "installed_plugins": {
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
+    },
+    "com.unarin.cordova.beacon": {
+      "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
+    },
     "cordova-plugin-file": {
       "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
     },
     "cordova-plugin-advanced-http": {
       "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
     },
-    "cordova-plugin-email-composer": {
-      "ANDROID_SUPPORT_V4_VERSION": "27.+",
+    "cordova-plugin-android-permissions": {
       "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
     },
     "cordova-plugin-inappbrowser": {
@@ -105,18 +120,70 @@
     "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
     },
-    "cordova-plugin-device": {
-      "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
-    },
-    "com.unarin.cordova.beacon": {
-      "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
-    },
-    "cordova-plugin-android-permissions": {
+    "cordova-plugin-email-composer": {
       "PACKAGE_NAME": "com.baronbrew.tilthydrometerf7"
     }
   },
   "dependent_plugins": {},
   "modules": [
+    {
+      "id": "cordova-plugin-device.device",
+      "file": "plugins/cordova-plugin-device/www/device.js",
+      "pluginId": "cordova-plugin-device",
+      "clobbers": [
+        "device"
+      ]
+    },
+    {
+      "id": "com.unarin.cordova.beacon.underscorejs",
+      "file": "plugins/com.unarin.cordova.beacon/www/lib/underscore-min-1.6.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "runs": true
+    },
+    {
+      "id": "com.unarin.cordova.beacon.Q",
+      "file": "plugins/com.unarin.cordova.beacon/www/lib/q.min.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "runs": true
+    },
+    {
+      "id": "com.unarin.cordova.beacon.LocationManager",
+      "file": "plugins/com.unarin.cordova.beacon/www/LocationManager.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "merges": [
+        "cordova.plugins"
+      ]
+    },
+    {
+      "id": "com.unarin.cordova.beacon.Delegate",
+      "file": "plugins/com.unarin.cordova.beacon/www/Delegate.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "runs": true
+    },
+    {
+      "id": "com.unarin.cordova.beacon.Region",
+      "file": "plugins/com.unarin.cordova.beacon/www/model/Region.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "runs": true
+    },
+    {
+      "id": "com.unarin.cordova.beacon.Regions",
+      "file": "plugins/com.unarin.cordova.beacon/www/Regions.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "runs": true
+    },
+    {
+      "id": "com.unarin.cordova.beacon.CircularRegion",
+      "file": "plugins/com.unarin.cordova.beacon/www/model/CircularRegion.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "runs": true
+    },
+    {
+      "id": "com.unarin.cordova.beacon.BeaconRegion",
+      "file": "plugins/com.unarin.cordova.beacon/www/model/BeaconRegion.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "runs": true
+    },
     {
       "id": "cordova-plugin-file.DirectoryEntry",
       "file": "plugins/cordova-plugin-file/www/DirectoryEntry.js",
@@ -364,11 +431,11 @@
       ]
     },
     {
-      "id": "cordova-plugin-email-composer.EmailComposer",
-      "file": "plugins/cordova-plugin-email-composer/www/email_composer.js",
-      "pluginId": "cordova-plugin-email-composer",
+      "id": "cordova-plugin-android-permissions.Permissions",
+      "file": "plugins/cordova-plugin-android-permissions/www/permissions.js",
+      "pluginId": "cordova-plugin-android-permissions",
       "clobbers": [
-        "cordova.plugins.email"
+        "cordova.plugins.permissions"
       ]
     },
     {
@@ -406,81 +473,23 @@
       ]
     },
     {
-      "id": "cordova-plugin-device.device",
-      "file": "plugins/cordova-plugin-device/www/device.js",
-      "pluginId": "cordova-plugin-device",
+      "id": "cordova-plugin-email-composer.EmailComposer",
+      "file": "plugins/cordova-plugin-email-composer/www/email_composer.js",
+      "pluginId": "cordova-plugin-email-composer",
       "clobbers": [
-        "device"
-      ]
-    },
-    {
-      "id": "com.unarin.cordova.beacon.underscorejs",
-      "file": "plugins/com.unarin.cordova.beacon/www/lib/underscore-min-1.6.js",
-      "pluginId": "com.unarin.cordova.beacon",
-      "runs": true
-    },
-    {
-      "id": "com.unarin.cordova.beacon.Q",
-      "file": "plugins/com.unarin.cordova.beacon/www/lib/q.min.js",
-      "pluginId": "com.unarin.cordova.beacon",
-      "runs": true
-    },
-    {
-      "id": "com.unarin.cordova.beacon.LocationManager",
-      "file": "plugins/com.unarin.cordova.beacon/www/LocationManager.js",
-      "pluginId": "com.unarin.cordova.beacon",
-      "merges": [
-        "cordova.plugins"
-      ]
-    },
-    {
-      "id": "com.unarin.cordova.beacon.Delegate",
-      "file": "plugins/com.unarin.cordova.beacon/www/Delegate.js",
-      "pluginId": "com.unarin.cordova.beacon",
-      "runs": true
-    },
-    {
-      "id": "com.unarin.cordova.beacon.Region",
-      "file": "plugins/com.unarin.cordova.beacon/www/model/Region.js",
-      "pluginId": "com.unarin.cordova.beacon",
-      "runs": true
-    },
-    {
-      "id": "com.unarin.cordova.beacon.Regions",
-      "file": "plugins/com.unarin.cordova.beacon/www/Regions.js",
-      "pluginId": "com.unarin.cordova.beacon",
-      "runs": true
-    },
-    {
-      "id": "com.unarin.cordova.beacon.CircularRegion",
-      "file": "plugins/com.unarin.cordova.beacon/www/model/CircularRegion.js",
-      "pluginId": "com.unarin.cordova.beacon",
-      "runs": true
-    },
-    {
-      "id": "com.unarin.cordova.beacon.BeaconRegion",
-      "file": "plugins/com.unarin.cordova.beacon/www/model/BeaconRegion.js",
-      "pluginId": "com.unarin.cordova.beacon",
-      "runs": true
-    },
-    {
-      "id": "cordova-plugin-android-permissions.Permissions",
-      "file": "plugins/cordova-plugin-android-permissions/www/permissions.js",
-      "pluginId": "cordova-plugin-android-permissions",
-      "clobbers": [
-        "cordova.plugins.permissions"
+        "cordova.plugins.email"
       ]
     }
   ],
   "plugin_metadata": {
+    "cordova-plugin-device": "2.1.0",
+    "com.unarin.cordova.beacon": "3.8.1",
     "cordova-plugin-file": "6.0.1",
     "cordova-plugin-advanced-http": "3.1.0",
-    "cordova-plugin-email-composer": "0.9.2",
+    "cordova-plugin-android-permissions": "1.1.4",
     "cordova-plugin-inappbrowser": "4.0.0",
     "cordova-plugin-nativestorage": "2.3.2",
     "cordova-plugin-statusbar": "2.4.2",
-    "cordova-plugin-device": "2.1.0",
-    "com.unarin.cordova.beacon": "3.8.1",
-    "cordova-plugin-android-permissions": "1.1.4"
+    "cordova-plugin-email-composer": "0.10.1"
   }
 }

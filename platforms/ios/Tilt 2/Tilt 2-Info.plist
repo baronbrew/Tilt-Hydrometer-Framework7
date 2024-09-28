@@ -17,11 +17,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.88</string>
+	<string>1.0.93</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.88</string>
+	<string>1.0.93</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMainNibFile</key>
@@ -71,6 +71,8 @@
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>mailto</string>
+		<string>googlegmail</string>
+		<string>ms-outlook</string>
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app uses Bluetooth-based location services for scanning nearby TILT hydrometers and reading temperature and specific gravity. No other location technology will be used.</string>

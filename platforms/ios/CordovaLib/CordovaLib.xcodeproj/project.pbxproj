@@ -585,6 +585,7 @@
 		1DEB921F08733DC00010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				PUBLIC_HEADERS_FOLDER_PATH = include/Cordova;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -593,6 +594,7 @@
 		1DEB922008733DC00010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				PUBLIC_HEADERS_FOLDER_PATH = include/Cordova;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

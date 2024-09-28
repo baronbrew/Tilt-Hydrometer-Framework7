@@ -5,65 +5,295 @@
       <config />
     </shared>
   </component>
-  <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
-  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="adc87b99-6086-4bc0-9491-337e291275a2" name="Default Changelist" comment="">
+    <list default="true" id="20649c0e-f5ee-46a5-8713-d6b887632341" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../../config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../config.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/@netflix/nerror/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/@netflix/nerror/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/@nodelib/fs.scandir/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/@nodelib/fs.scandir/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/@nodelib/fs.stat/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/@nodelib/fs.stat/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/@nodelib/fs.walk/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/@nodelib/fs.walk/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/abbrev/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/abbrev/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/android-versions/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/android-versions/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/android-versions/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/android-versions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/android-versions/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/android-versions/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/android-versions/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/android-versions/tests/index.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/android-versions/tests/index.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/ansi/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/ansi/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/assert-plus/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/assert-plus/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/at-least-node/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/at-least-node/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/balanced-match/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/balanced-match/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/big-integer/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/big-integer/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/brace-expansion/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/brace-expansion/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/braces/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/braces/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/braces/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/braces/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/braces/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/braces/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/braces/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/braces/lib/compile.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/braces/lib/compile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/braces/lib/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/braces/lib/constants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/braces/lib/expand.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/braces/lib/expand.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/braces/lib/parse.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/braces/lib/parse.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/braces/lib/stringify.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/braces/lib/stringify.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/braces/lib/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/braces/lib/utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/braces/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/braces/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/concat-map/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/concat-map/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/RELEASENOTES.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/RELEASENOTES.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/cordova.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/cordova.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/project.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/BuildHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/BuildHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/ConfigXmlParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/ConfigXmlParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CordovaActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CordovaActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CordovaClientCertRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CordovaClientCertRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CordovaDialogsHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CordovaDialogsHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CordovaHttpAuthHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CordovaHttpAuthHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CordovaInterfaceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CordovaInterfaceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CordovaPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CordovaPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CordovaWebView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CordovaWebView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CordovaWebViewImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CordovaWebViewImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CoreAndroid.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/CoreAndroid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/NativeToJsMessageQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/NativeToJsMessageQueue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/PluginManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/PluginManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/engine/SystemCookieManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/engine/SystemCookieManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/engine/SystemExposedJsApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/engine/SystemExposedJsApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/engine/SystemWebChromeClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/engine/SystemWebChromeClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/engine/SystemWebViewClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/engine/SystemWebViewClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/engine/SystemWebViewEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/framework/src/org/apache/cordova/engine/SystemWebViewEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-android/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-android/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-android-permissions/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-android-permissions/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-device/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-device/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-file/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-file/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-ibeacon/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-ibeacon/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-inappbrowser/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-nativestorage/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-nativestorage/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cordova-plugin-statusbar/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cordova-plugin-statusbar/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/cross-spawn/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/cross-spawn/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/dedent/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/dedent/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/elementtree/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/elementtree/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/endent/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/endent/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/extsprintf/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/extsprintf/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/managers/tasks.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/managers/tasks.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/managers/tasks.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/managers/tasks.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/async.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/async.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/async.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/async.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/filters/deep.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/filters/deep.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/filters/deep.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/filters/deep.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/filters/entry.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/filters/entry.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/filters/entry.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/filters/entry.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/filters/error.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/filters/error.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/filters/error.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/filters/error.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/matchers/matcher.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/matchers/matcher.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/matchers/matcher.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/matchers/matcher.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/matchers/partial.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/matchers/partial.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/matchers/partial.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/matchers/partial.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/provider.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/provider.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/stream.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/stream.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/stream.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/stream.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/sync.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/sync.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/sync.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/sync.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/transformers/entry.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/transformers/entry.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/transformers/entry.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/providers/transformers/entry.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/readers/reader.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/readers/reader.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/readers/reader.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/readers/reader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/readers/stream.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/readers/stream.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/readers/stream.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/readers/stream.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/readers/sync.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/readers/sync.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/readers/sync.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/readers/sync.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/settings.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/settings.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/settings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/types/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/types/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/types/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/types/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/array.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/array.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/array.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/array.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/errno.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/errno.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/errno.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/errno.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/fs.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/fs.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/fs.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/fs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/path.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/path.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/path.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/path.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/pattern.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/pattern.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/pattern.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/pattern.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/stream.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/stream.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/stream.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/stream.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/string.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/string.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/string.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/out/utils/string.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-glob/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-glob/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fast-json-parse/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fast-json-parse/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fastq/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fastq/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fill-range/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fill-range/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fill-range/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fill-range/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/fs.realpath/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/fs.realpath/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/glob-parent/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/glob-parent/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/glob-parent/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/glob-parent/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/glob/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/glob/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/graceful-fs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/graceful-fs/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/inflight/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/inflight/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/inherits/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/inherits/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-extglob/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/is-extglob/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-glob/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/is-glob/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-glob/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/is-glob/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-glob/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/is-glob/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-number/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/is-number/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/is-obj/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/is-obj/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/isexe/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/isexe/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/lodash/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/lodash/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/merge2/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/merge2/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/micromatch/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/micromatch/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/micromatch/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/micromatch/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/micromatch/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/micromatch/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/micromatch/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/minimatch/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/minimatch/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/nice-try/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/nice-try/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/nopt/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/nopt/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/objectorarray/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/objectorarray/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/once/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/once/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/os-homedir/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/os-homedir/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/os-tmpdir/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/os-tmpdir/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/osenv/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/osenv/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/p-finally/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/p-finally/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/p-try/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/p-try/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/path-is-absolute/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/path-is-absolute/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/path-key/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/path-key/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/picomatch/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/picomatch/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/picomatch/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/picomatch/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/picomatch/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/picomatch/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/picomatch/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/picomatch/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/picomatch/lib/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/picomatch/lib/constants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/picomatch/lib/parse.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/picomatch/lib/parse.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/picomatch/lib/picomatch.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/picomatch/lib/picomatch.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/picomatch/lib/scan.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/picomatch/lib/scan.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/picomatch/lib/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/picomatch/lib/utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/picomatch/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/picomatch/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/pify/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/pify/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/properties-parser/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/properties-parser/README.markdown" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/properties-parser/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/properties-parser/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/properties-parser/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/properties-parser/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/properties-parser/test/test-cases.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/properties-parser/test/test-cases.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/properties-parser/test/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/properties-parser/test/test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/q/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/q/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/read-chunk/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/read-chunk/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/reusify/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/reusify/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/run-parallel/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/run-parallel/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/sax/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/sax/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/semver/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/semver/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/shebang-command/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/shebang-command/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/shebang-regex/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/shebang-regex/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.codepointat/LICENSE-MIT.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.codepointat/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.codepointat/codepointat.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/string.prototype.codepointat/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/to-regex-range/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/to-regex-range/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/underscore/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/underscore/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/which/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/which/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/with-open-file/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/with-open-file/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../node_modules/wrappy/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../node_modules/wrappy/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/build/generated/source/buildConfig/debug/org/apache/cordova/BuildConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/cordova.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/cordova.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/project.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/BuildHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/BuildHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/ConfigXmlParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/ConfigXmlParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CordovaActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CordovaActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CordovaClientCertRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CordovaClientCertRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CordovaDialogsHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CordovaDialogsHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CordovaHttpAuthHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CordovaHttpAuthHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CordovaInterfaceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CordovaInterfaceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CordovaPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CordovaPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CordovaWebView.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CordovaWebView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CordovaWebViewImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CordovaWebViewImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CoreAndroid.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/CoreAndroid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/NativeToJsMessageQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/NativeToJsMessageQueue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/PluginManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/PluginManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/engine/SystemCookieManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/engine/SystemCookieManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/engine/SystemExposedJsApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/engine/SystemExposedJsApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/engine/SystemWebChromeClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/engine/SystemWebChromeClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/engine/SystemWebViewClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/engine/SystemWebViewClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/engine/SystemWebViewEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/CordovaLib/src/org/apache/cordova/engine/SystemWebViewEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android.json" beforeDir="false" afterPath="$PROJECT_DIR$/android.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/baronbrew/tilthydrometerf7/BuildConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/baronbrew/tilthydrometerf7/BuildConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/debug-mergeJavaRes/merge-state" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/debug-mergeJavaRes/merge-state" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugAssets/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugAssets/merger.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/www/cordova.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/www/cordova.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/www/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/www/cordova_plugins.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/www/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/www/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/www/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/www/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/assets/www/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/www/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/www/plugins/cordova-plugin-email-composer/www/email_composer.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/www/plugins/cordova-plugin-email-composer/www/email_composer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/www/plugins/cordova-plugin-splashscreen/www/splashscreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/unarin/cordova/beacon/LocationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/unarin/cordova/beacon/LocationManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/de/appplant/cordova/emailcomposer/EmailComposer.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/de/appplant/cordova/emailcomposer/EmailComposer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/de/appplant/cordova/emailcomposer/Impl.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/de/appplant/cordova/emailcomposer/Impl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/xml/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/xml/config.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../res/screens/android/drawable-land-hdpi-screen.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../res/screens/android/drawable-land-ldpi-screen.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../res/screens/android/drawable-land-mdpi-screen.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../res/screens/android/drawable-land-xhdpi-screen.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../res/screens/android/drawable-land-xxhdpi-screen.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../res/screens/android/drawable-land-xxxhdpi-screen.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../res/screens/android/drawable-port-hdpi-screen.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../res/screens/android/drawable-port-ldpi-screen.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../res/screens/android/drawable-port-mdpi-screen.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../res/screens/android/drawable-port-xhdpi-screen.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../res/screens/android/drawable-port-xxhdpi-screen.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../res/screens/android/drawable-port-xxxhdpi-screen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform_www/cordova.js" beforeDir="false" afterPath="$PROJECT_DIR$/platform_www/cordova.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform_www/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/platform_www/cordova_plugins.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform_www/plugins/cordova-plugin-email-composer/www/email_composer.js" beforeDir="false" afterPath="$PROJECT_DIR$/platform_www/plugins/cordova-plugin-email-composer/www/email_composer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform_www/plugins/cordova-plugin-splashscreen/www/splashscreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/project.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wrapper.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Plugins/cordova-plugin-email-composer/APPEmailComposerImpl.m" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2/Plugins/cordova-plugin-email-composer/APPEmailComposerImpl.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Tilt 2-Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2/Tilt 2-Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2/config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/ios.json" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/ios.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/platform_www/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/platform_www/cordova_plugins.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/platform_www/plugins/cordova-plugin-email-composer/www/email_composer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/platform_www/plugins/cordova-plugin-email-composer/www/email_composer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/www/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/www/cordova_plugins.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/www/plugins/cordova-plugin-email-composer/www/email_composer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/www/plugins/cordova-plugin-email-composer/www/email_composer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/android.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/android.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/com.unarin.cordova.beacon/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/com.unarin.cordova.beacon/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/plugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/src/android/EmailComposer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/src/android/EmailComposer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/src/android/Impl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/src/android/Impl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/src/android/Provider.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/src/android/Provider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/src/ios/APPEmailComposerImpl.m" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/src/ios/APPEmailComposerImpl.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/www/email_composer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/cordova-plugin-email-composer/www/email_composer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/fetch.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/fetch.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../plugins/ios.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/ios.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../www/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../www/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../www/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../www/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../www/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../www/js/app.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/noahneibaron/.android/avd/Nexus_4_API_22.avd]" />
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=PhysicalDevice, isTemplate=false, identifier=serial=1A151FDF6007JG)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
   </component>
-  <component name="ExternalProjectsManager">
-    <system id="GRADLE">
-      <state>
-        <projects_view>
-          <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Tilt 2" type="f1a62948:ProjectNode" />
-              </path>
-            </expand>
-            <select />
-          </tree_state>
-        </projects_view>
-      </state>
-    </system>
-  </component>
   <component name="GenerateSignedApkSettings">
-    <option name="EXPORT_PRIVATE_KEY" value="false" />
     <option name="KEY_STORE_PATH" value="$PROJECT_DIR$/../../../../android-keystore/signature.jks" />
     <option name="KEY_ALIAS" value="upload" />
     <option name="REMEMBER_PASSWORDS" value="true" />
@@ -72,49 +302,35 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="GitSEFilterConfiguration">
-    <file-type-list>
-      <filtered-out-file-type name="LOCAL_BRANCH" />
-      <filtered-out-file-type name="REMOTE_BRANCH" />
-      <filtered-out-file-type name="TAG" />
-      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
-    </file-type-list>
-  </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
-  <component name="ProjectId" id="1zgywklNdeIAaXF8PmF55R77r3m" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="2l1WIxBcvy5XNlE9aIY0nBhAQE4" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="AnalyzeApkAction.lastApkPath" value="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" />
-    <property name="ApkExportedModule" value="Tilt_2.app" />
-    <property name="BundleExportedModule" value="Tilt_2.app" />
-    <property name="ExportApk.ApkPath" value="$PROJECT_DIR$/app" />
-    <property name="ExportApk.BuildVariants" value="release" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
-    <property name="cidr.known.project.marker" value="true" />
-    <property name="com.intellij.openapi.externalSystem.service.settings.ExternalSystemGroupConfigurable" value="ALL" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="memory.settings.postsync.last.time.stamp" value="1635462595508" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.17" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
-  </component>
-  <component name="PsdUISettings">
-    <option name="LAST_EDITED_BUILD_TYPE" value="release" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Android App.app.executor": "Run",
+    "ApkExportedModule": "Tilt_2.app",
+    "ExportApk.ApkPathForTilt_2.app": "/Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "kotlin-language-version-configured": "true"
+  },
+  "keyToStringList": {
+    "ExportApk.BuildVariants": [
+      "release"
+    ]
+  }
+}]]></component>
   <component name="RunManager">
-    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="Tilt_2.app.main" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
@@ -129,7 +345,6 @@
       <option name="MODE" value="default_activity" />
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
-      <option name="INSPECTION_WITHOUT_ACTIVITY_RESTART" value="false" />
       <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
       <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
       <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
@@ -140,6 +355,8 @@
         <option name="WORKING_DIR" value="" />
         <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
         <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
       </Auto>
       <Hybrid>
         <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
@@ -147,14 +364,21 @@
         <option name="WORKING_DIR" value="" />
         <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
         <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
       </Hybrid>
-      <Java />
+      <Java>
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Java>
       <Native>
         <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
         <option name="SHOW_STATIC_VARS" value="true" />
         <option name="WORKING_DIR" value="" />
         <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
         <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
       </Native>
       <Profilers>
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
@@ -163,7 +387,6 @@
         <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Java/Kotlin Method Sample (legacy)" />
         <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
         <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
-        <option name="PROFILING_MODE" value="NOT_SET" />
       </Profilers>
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
@@ -177,23 +400,12 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="adc87b99-6086-4bc0-9491-337e291275a2" name="Default Changelist" comment="" />
-      <created>1634584269604</created>
+      <changelist id="20649c0e-f5ee-46a5-8713-d6b887632341" name="Changes" comment="" />
+      <created>1724347986374</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1634584269604</updated>
+      <updated>1724347986374</updated>
     </task>
     <servers />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
 </project>

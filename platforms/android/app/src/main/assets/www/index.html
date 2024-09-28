@@ -98,22 +98,22 @@
         <div class="card-content card-content-padding"><p class="no-margin-bottom" id="beerName{{Color}}">{{Beername}}</p><strong>TILT | {{Color}} </strong><span id="cloudStatus{{Color}}"></span> <span id="deviceStatus{{Color}}"></span></div>
         <div id="quicksettings" class="accordion-item">
         <div class="accordion-item-toggle">
-        <div <button class="margin-horizontal button button-round" style="background:{{js 'this.Color.replace("•HD","")'}};height:30px;color:{{js 'this.Color.replace("•HD","")'}}">Show options for {{Color}} Tilt.</button></div>
+        <div <button class="margin-horizontal button button-round button-style-{{Color}}" style="height:30px;"></button></div>
         </div>
         <div class="accordion-item-content">
         <div class="margin-top segmented margin-horizontal">
-            <button id="calprompt-{{Color}}" class="button col button-round"><i class="material-icons">adjust</i>CAL</button>
-            <button id="logprompt-{{Color}}" class="button col button-round"><i class="material-icons">show_chart</i> LOG</button>
-            <button id="unitstoggle-{{Color}}" class="button col button-round"><i class="material-icons">straighten</i>UNITS</button>
+            <button id="calprompt-{{Color}}" class="button col button-round button-fill color-black"><i class="material-icons">adjust</i>CAL</button>
+            <button id="logprompt-{{Color}}" class="button col button-round button-fill color-black"><i class="material-icons">show_chart</i> LOG</button>
+            <button id="unitstoggle-{{Color}}" class="button col button-round button-fill color-black"><i class="material-icons">straighten</i>UNITS</button>
           </div>
         </div>
         </div>
         <div class="card-content card-content-padding">Gravity: <span id="uncaldisplayFerm+displayFermunits{{Color}}">{{uncaldisplayFerm}}</span> (pre-calibrated)</div>
         <div id="caldisplayFerm+displayFermunits{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{caldisplayFerm}}</div>
-        <div id="percentScaleSG{{Color}}" class="margin-horizontal button button-round" style="background:{{js 'this.Color.replace("•HD","")'}};height:10px;width:0%;max-width:95%;"></div>
+        <div id="percentScaleSG{{Color}}" class="margin-horizontal button button-round button-style-{{Color}}" style="height:10px;width:0%;max-width:95%;"></div>
         <div class="card-content card-content-padding">Temperature: <span id="uncaldisplayTemp+displayTempunits{{Color}}">{{uncaldisplayTemp}}</span> (pre-calibrated)</div>
         <div id="caldisplayTemp+displayTempunits{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{caldisplayTemp}}{{displayTempunits}}</div>
-        <div id="percentScaleTemp{{Color}}" class="margin-horizontal button button-round" style="background:{{js 'this.Color.replace("•HD","")'}};height:10px;width:0%;max-width:95%;"></div>
+        <div id="percentScaleTemp{{Color}}" class="margin-horizontal button button-round button-style-{{Color}}" style="height:10px;width:0%;max-width:95%;"></div>
         <div class="card-content card-content-padding lastrec"><span id=numberSecondsAgo{{Color}}></span> seconds ago <span id=displayRSSI{{Color}}></span><br><span id=displaytimeStamp{{Color}}></span></div>
     </div>
     {{/each}}
@@ -397,6 +397,41 @@
                         <i class="icon icon-radio"></i>
                         <div class="item-inner">
                           <div class="item-title">Plato</div>
+                        </div>
+                      </label>
+                    </li>
+                    <li>
+                      <label class="item-radio item-content">
+                        <input type="radio" name="gravityRadio-{{Color}}" value="°Bx"/>
+                        <i class="icon icon-radio"></i>
+                        <div class="item-inner">
+                          <div class="item-title">Brix</div>
+                        </div>
+                      </label>
+                    </li>
+                    <li>
+                      <label class="item-radio item-content">
+                        <input type="radio" name="gravityRadio-{{Color}}" value="%ABV"/>
+                        <i class="icon icon-radio"></i>
+                        <div class="item-inner">
+                          <a href="#" data-popover=".ABV-popover" class="popover-open">ABV for spirits <i class="f7-icons size-15">info</i><div class="item-title"></div></a>
+                            <div class="popover ABV-popover">
+                            <div class="popover-inner padding">
+                            <span><i class="f7-icons size-15">info</i> For use with "TILT Spirits" proof and tralle hydrometer. Accurate when measured at 68°F/20°C.</span>
+                            </div>
+                        </div>
+                      </label>
+                    </li>
+                    <li>
+                      <label class="item-radio item-content">
+                        <input type="radio" name="gravityRadio-{{Color}}" value="%ABV*"/>
+                        <i class="icon icon-radio"></i>
+                        <div class="item-inner">
+                          <a href="#" data-popover=".ABVt-popover" class="popover-open">ABV* for spirits *temperature compensated <i class="f7-icons size-15">info</i><div class="item-title"></div></a>
+                            <div class="popover ABVt-popover">
+                            <div class="popover-inner padding">
+                            <span><i class="f7-icons size-15">info</i> For use with "TILT Spirits" proof and tralle hydrometer. Uses temperature compensation to improve accuracy above or below 68°F/20°C.</span>
+                            </div>
                         </div>
                       </label>
                     </li>

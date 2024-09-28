@@ -1,6 +1,64 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
   module.exports = [
     {
+      "id": "cordova-plugin-device.device",
+      "file": "plugins/cordova-plugin-device/www/device.js",
+      "pluginId": "cordova-plugin-device",
+      "clobbers": [
+        "device"
+      ]
+    },
+    {
+      "id": "com.unarin.cordova.beacon.underscorejs",
+      "file": "plugins/com.unarin.cordova.beacon/www/lib/underscore-min-1.6.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "runs": true
+    },
+    {
+      "id": "com.unarin.cordova.beacon.Q",
+      "file": "plugins/com.unarin.cordova.beacon/www/lib/q.min.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "runs": true
+    },
+    {
+      "id": "com.unarin.cordova.beacon.LocationManager",
+      "file": "plugins/com.unarin.cordova.beacon/www/LocationManager.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "merges": [
+        "cordova.plugins"
+      ]
+    },
+    {
+      "id": "com.unarin.cordova.beacon.Delegate",
+      "file": "plugins/com.unarin.cordova.beacon/www/Delegate.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "runs": true
+    },
+    {
+      "id": "com.unarin.cordova.beacon.Region",
+      "file": "plugins/com.unarin.cordova.beacon/www/model/Region.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "runs": true
+    },
+    {
+      "id": "com.unarin.cordova.beacon.Regions",
+      "file": "plugins/com.unarin.cordova.beacon/www/Regions.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "runs": true
+    },
+    {
+      "id": "com.unarin.cordova.beacon.CircularRegion",
+      "file": "plugins/com.unarin.cordova.beacon/www/model/CircularRegion.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "runs": true
+    },
+    {
+      "id": "com.unarin.cordova.beacon.BeaconRegion",
+      "file": "plugins/com.unarin.cordova.beacon/www/model/BeaconRegion.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "runs": true
+    },
+    {
       "id": "cordova-plugin-file.DirectoryEntry",
       "file": "plugins/cordova-plugin-file/www/DirectoryEntry.js",
       "pluginId": "cordova-plugin-file",
@@ -247,11 +305,11 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       ]
     },
     {
-      "id": "cordova-plugin-email-composer.EmailComposer",
-      "file": "plugins/cordova-plugin-email-composer/www/email_composer.js",
-      "pluginId": "cordova-plugin-email-composer",
+      "id": "cordova-plugin-android-permissions.Permissions",
+      "file": "plugins/cordova-plugin-android-permissions/www/permissions.js",
+      "pluginId": "cordova-plugin-android-permissions",
       "clobbers": [
-        "cordova.plugins.email"
+        "cordova.plugins.permissions"
       ]
     },
     {
@@ -289,81 +347,23 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       ]
     },
     {
-      "id": "cordova-plugin-device.device",
-      "file": "plugins/cordova-plugin-device/www/device.js",
-      "pluginId": "cordova-plugin-device",
+      "id": "cordova-plugin-email-composer.EmailComposer",
+      "file": "plugins/cordova-plugin-email-composer/www/email_composer.js",
+      "pluginId": "cordova-plugin-email-composer",
       "clobbers": [
-        "device"
-      ]
-    },
-    {
-      "id": "com.unarin.cordova.beacon.underscorejs",
-      "file": "plugins/com.unarin.cordova.beacon/www/lib/underscore-min-1.6.js",
-      "pluginId": "com.unarin.cordova.beacon",
-      "runs": true
-    },
-    {
-      "id": "com.unarin.cordova.beacon.Q",
-      "file": "plugins/com.unarin.cordova.beacon/www/lib/q.min.js",
-      "pluginId": "com.unarin.cordova.beacon",
-      "runs": true
-    },
-    {
-      "id": "com.unarin.cordova.beacon.LocationManager",
-      "file": "plugins/com.unarin.cordova.beacon/www/LocationManager.js",
-      "pluginId": "com.unarin.cordova.beacon",
-      "merges": [
-        "cordova.plugins"
-      ]
-    },
-    {
-      "id": "com.unarin.cordova.beacon.Delegate",
-      "file": "plugins/com.unarin.cordova.beacon/www/Delegate.js",
-      "pluginId": "com.unarin.cordova.beacon",
-      "runs": true
-    },
-    {
-      "id": "com.unarin.cordova.beacon.Region",
-      "file": "plugins/com.unarin.cordova.beacon/www/model/Region.js",
-      "pluginId": "com.unarin.cordova.beacon",
-      "runs": true
-    },
-    {
-      "id": "com.unarin.cordova.beacon.Regions",
-      "file": "plugins/com.unarin.cordova.beacon/www/Regions.js",
-      "pluginId": "com.unarin.cordova.beacon",
-      "runs": true
-    },
-    {
-      "id": "com.unarin.cordova.beacon.CircularRegion",
-      "file": "plugins/com.unarin.cordova.beacon/www/model/CircularRegion.js",
-      "pluginId": "com.unarin.cordova.beacon",
-      "runs": true
-    },
-    {
-      "id": "com.unarin.cordova.beacon.BeaconRegion",
-      "file": "plugins/com.unarin.cordova.beacon/www/model/BeaconRegion.js",
-      "pluginId": "com.unarin.cordova.beacon",
-      "runs": true
-    },
-    {
-      "id": "cordova-plugin-android-permissions.Permissions",
-      "file": "plugins/cordova-plugin-android-permissions/www/permissions.js",
-      "pluginId": "cordova-plugin-android-permissions",
-      "clobbers": [
-        "cordova.plugins.permissions"
+        "cordova.plugins.email"
       ]
     }
   ];
   module.exports.metadata = {
+    "cordova-plugin-device": "2.1.0",
+    "com.unarin.cordova.beacon": "3.8.1",
     "cordova-plugin-file": "6.0.1",
     "cordova-plugin-advanced-http": "3.1.0",
-    "cordova-plugin-email-composer": "0.9.2",
+    "cordova-plugin-android-permissions": "1.1.4",
     "cordova-plugin-inappbrowser": "4.0.0",
     "cordova-plugin-nativestorage": "2.3.2",
     "cordova-plugin-statusbar": "2.4.2",
-    "cordova-plugin-device": "2.1.0",
-    "com.unarin.cordova.beacon": "3.8.1",
-    "cordova-plugin-android-permissions": "1.1.4"
+    "cordova-plugin-email-composer": "0.10.1"
   };
 });

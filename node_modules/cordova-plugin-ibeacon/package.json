@@ -1,65 +1,7 @@
 {
-  "_args": [
-    [
-      {
-        "raw": "cordova-plugin-ibeacon@3.8",
-        "scope": null,
-        "escapedName": "cordova-plugin-ibeacon",
-        "name": "cordova-plugin-ibeacon",
-        "rawSpec": "3.8",
-        "spec": ">=3.8.0 <3.9.0",
-        "type": "range"
-      },
-      "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7"
-    ]
-  ],
-  "_from": "cordova-plugin-ibeacon@>=3.8.0 <3.9.0",
-  "_hasShrinkwrap": false,
-  "_id": "cordova-plugin-ibeacon@3.8.1",
-  "_inCache": true,
-  "_location": "/cordova-plugin-ibeacon",
-  "_nodeVersion": "11.10.1",
-  "_npmOperationalInternal": {
-    "host": "s3://npm-registry-packages",
-    "tmp": "tmp/cordova-plugin-ibeacon_3.8.1_1557690883624_0.3613701423627378"
-  },
-  "_npmUser": {
-    "name": "petermetz",
-    "email": "npm@unarin.com"
-  },
-  "_npmVersion": "6.7.0",
-  "_phantomChildren": {},
-  "_requested": {
-    "raw": "cordova-plugin-ibeacon@3.8",
-    "scope": null,
-    "escapedName": "cordova-plugin-ibeacon",
-    "name": "cordova-plugin-ibeacon",
-    "rawSpec": "3.8",
-    "spec": ">=3.8.0 <3.9.0",
-    "type": "range"
-  },
-  "_requiredBy": [
-    "#USER",
-    "/"
-  ],
-  "_resolved": "https://registry.npmjs.org/cordova-plugin-ibeacon/-/cordova-plugin-ibeacon-3.8.1.tgz",
-  "_shasum": "c2f0efd1f53c0e85b40d97852539b89b39826ad3",
-  "_shrinkwrap": null,
-  "_spec": "cordova-plugin-ibeacon@3.8",
-  "_where": "/Users/noahneibaron/Documents/phonegap-tilt-hydrometer/Tilt Hydrometer Framework7",
-  "author": {
-    "name": "Peter Metz",
-    "email": "peter.metz@unarin.com",
-    "url": "Somogyvari"
-  },
-  "bugs": {
-    "url": "https://github.com/petermetz/cordova-plugin-ibeacon/issues"
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
+  "name": "cordova-plugin-ibeacon",
+  "version": "3.8.1",
+  "description": "Proximity Beacon Monitoring and Transmission Plugin (supporting iBeacons)",
   "cordova": {
     "id": "com.unarin.cordova.beacon",
     "platforms": [
@@ -67,28 +9,9 @@
       "android"
     ]
   },
-  "dependencies": {},
-  "description": "Proximity Beacon Monitoring and Transmission Plugin (supporting iBeacons)",
-  "devDependencies": {
-    "@commitlint/cli": "^7.6.1",
-    "@commitlint/config-conventional": "^7.0.1",
-    "husky": "^2.2.0"
-  },
-  "directories": {},
-  "dist": {
-    "integrity": "sha512-tWA8eSDTrkVZsJYtBl6svKcCYwjLEVU4RPbTRtsnnn+1eBMqFwXsxWJsOd6o8q4s8RdU7WRTJyv6KoAsP+fX/A==",
-    "shasum": "c2f0efd1f53c0e85b40d97852539b89b39826ad3",
-    "tarball": "https://registry.npmjs.org/cordova-plugin-ibeacon/-/cordova-plugin-ibeacon-3.8.1.tgz",
-    "fileCount": 45,
-    "unpackedSize": 379276,
-    "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJc2HoECRA9TVsSAnZWagAA/wUP+gNxL8FCterQxMb1qQsA\neaPpj3MaAC4i5Jeq8fmAeSryJf32H5lBpU+lTlqGvaHC5tK9D9exyZoW0ydk\n7PjGcOX8Sf88GJ8CoJ11QeY/bpkTjeV3VP6y9IF/X4lIwD7uiunawFl77jlU\nYpOlsQFkOg4SYK47CigYr3UEJ7m66kuXz/priQH47Rj3xjatZ1PKeVY6hZ7r\narPYalDMe6Rz1YQUEd9cF6L8K0gD+4LwDOPz9Hhg1xcV0MmOewVnPkywe2QW\nWnr/kJfJnpCPgMLTmNbNcgGsR55z4Sfe/sge0SM+vug3p06YhOlVmsCjctBZ\nVB4GpTInnR245ccPLIX9EqKb8YgIBXg0kboLu7NOZqjazLhUOEglpANWomis\nSYqlsOpATlMudy3MtTNXsFJd2tsNGeRT9uXqQJaxJLchBk3sUIvTX6DrS06t\nlY9XH3ZHJiYLdgCncL9YltEmCt60Qs7Sp5SdKp8azrz3xbzM9/84gQdfoKAp\nCBQ2kAMcTqAdADkSXMf3AmolRgbjBo+HktjKPTos4246YJWLIpKGTOqxxrT/\ncCRTgxvg1dZc+wP1ch8in4NhuwCm+gXg3cokzrBgARPIjvBbLeA6QhxfKpMq\nGLtvmBvVJAajd8GOl5T2gKu2WuB93AhYw4dj4HEGXD/sna5Cwc3QYLkUed7w\n9LDz\r\n=09Gm\r\n-----END PGP SIGNATURE-----\r\n"
-  },
-  "gitHead": "bc6d0c7f690c9f62d03e23aef537856f86c4fa71",
-  "homepage": "https://github.com/petermetz/cordova-plugin-ibeacon",
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/petermetz/cordova-plugin-ibeacon.git"
   },
   "keywords": [
     "cordova",
@@ -100,19 +23,25 @@
     "cordova-ios",
     "cordova-android"
   ],
-  "license": "Apache 2.0",
-  "maintainers": [
-    {
-      "name": "petermetz",
-      "email": "npm-cordova-plugin-ibeacon@unarin.com"
-    }
-  ],
-  "name": "cordova-plugin-ibeacon",
-  "optionalDependencies": {},
-  "readme": "ERROR: No README data found!",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/petermetz/cordova-plugin-ibeacon.git"
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   },
-  "version": "3.8.1"
+  "author": "Peter Metz (Somogyvari) <peter.metz@unarin.com>",
+  "license": "Apache 2.0",
+  "bugs": {
+    "url": "https://github.com/petermetz/cordova-plugin-ibeacon/issues"
+  },
+  "homepage": "https://github.com/petermetz/cordova-plugin-ibeacon",
+  "devDependencies": {
+    "@commitlint/cli": "^7.6.1",
+    "@commitlint/config-conventional": "^7.0.1",
+    "husky": "^2.2.0"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }  
+  }
 }
