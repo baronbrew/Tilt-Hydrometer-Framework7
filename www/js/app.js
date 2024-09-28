@@ -346,6 +346,7 @@ function checkFineLocationPermissionCallback(status) {
       // Called continuously when ranging beacons.
       delegate.didRangeBeaconsInRegion = function (pluginResult) {
           if (pluginResult.beacons.length > 0) {
+            //console.log(pluginResult.beacons);
               for (var i in pluginResult.beacons) {
                   // Insert beacon into table of found beacons.
                   var beacon = pluginResult.beacons[i];

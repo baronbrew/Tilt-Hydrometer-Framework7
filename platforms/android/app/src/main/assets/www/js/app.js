@@ -29,7 +29,11 @@ var app  = new Framework7({
     return {
       defaultCloudURL : 'https://script.google.com/a/baronbrew.com/macros/s/AKfycbydNOcB-_3RB3c-7sOTI-ZhTnN43Ye1tt0EFvvMxTxjdbheaw/exec',
       tiltColors : ['RED', 'GREEN', 'BLACK', 'PURPLE', 'ORANGE', 'BLUE', 'YELLOW', 'PINK'],
+<<<<<<< Updated upstream
       appVersion : '1.0.90'
+=======
+      appVersion : '1.0.88'
+>>>>>>> Stashed changes
     };
   },
   // App root methods
@@ -346,13 +350,19 @@ function checkFineLocationPermissionCallback(status) {
       // Called continuously when ranging beacons.
       delegate.didRangeBeaconsInRegion = function (pluginResult) {
           if (pluginResult.beacons.length > 0) {
+            //console.log(pluginResult.beacons);
               for (var i in pluginResult.beacons) {
                   // Insert beacon into table of found beacons.
                   var beacon = pluginResult.beacons[i];
                   //add timestamp
                   beacon.timeStamp = Date.now();
+<<<<<<< Updated upstream
                   //assign color by UUID and Minor Range. FW 1005, 1006, 1007 is HD
                   if (beacon.minor > 5000 || beacon.minor == 1005 && beacon.major == 999 || beacon.minor == 1006 && beacon.major == 999 || beacon.minor == 1007 && beacon.major == 999){
+=======
+                  //assign color by UUID and Minor Range. FW 1005 and 1006 is HD
+                  if (beacon.minor > 5000 || beacon.minor == 1005 && beacon.major == 999 || beacon.minor == 1006 && beacon.major == 999){
+>>>>>>> Stashed changes
                       beacon.hd = true;
                   }else{
                       beacon.hd = false;
