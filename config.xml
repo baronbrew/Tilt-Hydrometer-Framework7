@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.baronbrew.tilthydrometerf7" version="1.0.93" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Tilt 2</name>
+<widget id="com.tilthydrometer.tilt3" version="1.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Tilt 3</name>
     <description>
         Generation two app for Tilt scanning and logging data.
     </description>
@@ -21,17 +21,10 @@
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="KeepRunning" value="true" />
     <platform name="android">
-<<<<<<< Updated upstream
         <preference name="android-compileSdkVersion" value="34" />
         <preference name="android-minSdkVersion" value="21" />
         <preference name="android-targetSdkVersion" value="34" />
         <preference name="android-maxSdkVersion" value="35" />
-=======
-        <preference name="android-compileSdkVersion" value="33" />
-        <preference name="android-minSdkVersion" value="21" />
-        <preference name="android-targetSdkVersion" value="33" />
-        <preference name="android-maxSdkVersion" value="34" />
->>>>>>> Stashed changes
         <preference name="AndroidXEnabled" value="true" />
         <preference name="com.unarin.cordova.beacon.android.altbeacon.RequestBtPermission" value="no" />
         <preference name="com.unarin.cordova.beacon.android.altbeacon.ForegroundScanPeriod" value="1500" />
@@ -53,6 +46,7 @@
         <icon density="xxxhdpi" src="res/icons/android/mipmap-xxxhdpi/ic_launcher.png" />
     </platform>
     <platform name="ios">
+        <preference name="deployment-target" value="12.0" />
         <splash src="/res/screens/ios/Default@2x~universal~anyany.png" />
         <preference name="StatusBarOverlaysWebView" value="false" />
         <preference name="StatusBarBackgroundColor" value="#000000" />

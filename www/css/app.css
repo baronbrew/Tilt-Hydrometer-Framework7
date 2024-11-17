@@ -1,4 +1,6 @@
 /* Your app styles here */
+body { background-color: black; }
+
 .color-custom-RED { color: red;
 }
 .color-custom-RED•HD { color: red;
@@ -34,7 +36,8 @@
 .color-custom-YELLOW•HD { color: yellow;
 }
 
-.button-border { border: 2px solid gray 
+.button-border { 
+    border: 2px solid gray;
 }
 
 .button-style-RED { background: red;         
