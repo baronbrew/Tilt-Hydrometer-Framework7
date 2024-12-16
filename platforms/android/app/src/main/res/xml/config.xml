@@ -1,35 +1,31 @@
 <?xml version='1.0' encoding='utf-8'?>
-<<<<<<< Updated upstream
-<widget id="com.baronbrew.tilthydrometerf7" version="1.0.90" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.baronbrew.tilthydrometerf7" version="1.0.93" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <feature name="Device">
         <param name="android-package" value="org.apache.cordova.device.Device" />
     </feature>
-    <feature name="LocationManager">
-        <param name="android-package" value="com.unarin.cordova.beacon.LocationManager" />
-    </feature>
-=======
-<widget id="com.baronbrew.tilthydrometerf7" version="1.0.88" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
->>>>>>> Stashed changes
     <feature name="File">
         <param name="android-package" value="org.apache.cordova.file.FileUtils" />
         <param name="onload" value="true" />
     </feature>
     <allow-navigation href="cdvfile:*" />
-    <feature name="CordovaHttpPlugin">
-        <param name="android-package" value="com.silkimen.cordovahttp.CordovaHttpPlugin" />
-    </feature>
-    <feature name="Permissions">
-        <param name="android-package" value="com.android.plugins.Permissions" />
-    </feature>
-    <feature name="InAppBrowser">
-        <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
-    </feature>
     <feature name="NativeStorage">
         <param name="android-package" value="NativeStorage" />
     </feature>
     <feature name="StatusBar">
         <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
         <param name="onload" value="true" />
+    </feature>
+    <feature name="InAppBrowser">
+        <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
+    </feature>
+    <feature name="CordovaHttpPlugin">
+        <param name="android-package" value="com.silkimen.cordovahttp.CordovaHttpPlugin" />
+    </feature>
+    <feature name="LocationManager">
+        <param name="android-package" value="com.unarin.cordova.beacon.LocationManager" />
+    </feature>
+    <feature name="Permissions">
+        <param name="android-package" value="com.android.plugins.Permissions" />
     </feature>
     <feature name="EmailComposer">
         <param name="android-package" value="de.appplant.cordova.emailcomposer.EmailComposer" />
@@ -62,17 +58,13 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="KeepRunning" value="true" />
-<<<<<<< Updated upstream
+    <preference name="GradlePluginKotlinVersion" value="1.9.24" />
+    <preference name="GradleVersion" value="8.7" />
+    <preference name="android-buildToolsVersion" value="34.0.0" />
+    <preference name="AndroidGradlePluginVersion" value="8.3.0" />
     <preference name="android-compileSdkVersion" value="34" />
-    <preference name="android-minSdkVersion" value="21" />
+    <preference name="android-minSdkVersion" value="24" />
     <preference name="android-targetSdkVersion" value="34" />
-    <preference name="android-maxSdkVersion" value="35" />
-=======
-    <preference name="android-compileSdkVersion" value="33" />
-    <preference name="android-minSdkVersion" value="21" />
-    <preference name="android-targetSdkVersion" value="33" />
-    <preference name="android-maxSdkVersion" value="34" />
->>>>>>> Stashed changes
     <preference name="AndroidXEnabled" value="true" />
     <preference name="com.unarin.cordova.beacon.android.altbeacon.RequestBtPermission" value="no" />
     <preference name="com.unarin.cordova.beacon.android.altbeacon.ForegroundScanPeriod" value="1500" />

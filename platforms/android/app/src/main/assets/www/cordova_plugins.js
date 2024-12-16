@@ -9,56 +9,6 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       ]
     },
     {
-      "id": "com.unarin.cordova.beacon.underscorejs",
-      "file": "plugins/com.unarin.cordova.beacon/www/lib/underscore-min-1.6.js",
-      "pluginId": "com.unarin.cordova.beacon",
-      "runs": true
-    },
-    {
-      "id": "com.unarin.cordova.beacon.Q",
-      "file": "plugins/com.unarin.cordova.beacon/www/lib/q.min.js",
-      "pluginId": "com.unarin.cordova.beacon",
-      "runs": true
-    },
-    {
-      "id": "com.unarin.cordova.beacon.LocationManager",
-      "file": "plugins/com.unarin.cordova.beacon/www/LocationManager.js",
-      "pluginId": "com.unarin.cordova.beacon",
-      "merges": [
-        "cordova.plugins"
-      ]
-    },
-    {
-      "id": "com.unarin.cordova.beacon.Delegate",
-      "file": "plugins/com.unarin.cordova.beacon/www/Delegate.js",
-      "pluginId": "com.unarin.cordova.beacon",
-      "runs": true
-    },
-    {
-      "id": "com.unarin.cordova.beacon.Region",
-      "file": "plugins/com.unarin.cordova.beacon/www/model/Region.js",
-      "pluginId": "com.unarin.cordova.beacon",
-      "runs": true
-    },
-    {
-      "id": "com.unarin.cordova.beacon.Regions",
-      "file": "plugins/com.unarin.cordova.beacon/www/Regions.js",
-      "pluginId": "com.unarin.cordova.beacon",
-      "runs": true
-    },
-    {
-      "id": "com.unarin.cordova.beacon.CircularRegion",
-      "file": "plugins/com.unarin.cordova.beacon/www/model/CircularRegion.js",
-      "pluginId": "com.unarin.cordova.beacon",
-      "runs": true
-    },
-    {
-      "id": "com.unarin.cordova.beacon.BeaconRegion",
-      "file": "plugins/com.unarin.cordova.beacon/www/model/BeaconRegion.js",
-      "pluginId": "com.unarin.cordova.beacon",
-      "runs": true
-    },
-    {
       "id": "cordova-plugin-file.DirectoryEntry",
       "file": "plugins/cordova-plugin-file/www/DirectoryEntry.js",
       "pluginId": "cordova-plugin-file",
@@ -232,6 +182,40 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "runs": true
     },
     {
+      "id": "cordova-plugin-nativestorage.mainHandle",
+      "file": "plugins/cordova-plugin-nativestorage/www/mainHandle.js",
+      "pluginId": "cordova-plugin-nativestorage",
+      "clobbers": [
+        "NativeStorage"
+      ]
+    },
+    {
+      "id": "cordova-plugin-nativestorage.LocalStorageHandle",
+      "file": "plugins/cordova-plugin-nativestorage/www/LocalStorageHandle.js",
+      "pluginId": "cordova-plugin-nativestorage"
+    },
+    {
+      "id": "cordova-plugin-nativestorage.NativeStorageError",
+      "file": "plugins/cordova-plugin-nativestorage/www/NativeStorageError.js",
+      "pluginId": "cordova-plugin-nativestorage"
+    },
+    {
+      "id": "cordova-plugin-statusbar.statusbar",
+      "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
+      "pluginId": "cordova-plugin-statusbar",
+      "clobbers": [
+        "window.StatusBar"
+      ]
+    },
+    {
+      "id": "cordova-plugin-inappbrowser.inappbrowser",
+      "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+      "pluginId": "cordova-plugin-inappbrowser",
+      "clobbers": [
+        "cordova.InAppBrowser.open"
+      ]
+    },
+    {
       "id": "cordova-plugin-advanced-http.cookie-handler",
       "file": "plugins/cordova-plugin-advanced-http/www/cookie-handler.js",
       "pluginId": "cordova-plugin-advanced-http"
@@ -305,45 +289,61 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       ]
     },
     {
+      "id": "com.unarin.cordova.beacon.underscorejs",
+      "file": "plugins/com.unarin.cordova.beacon/www/lib/underscore-min-1.6.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "runs": true
+    },
+    {
+      "id": "com.unarin.cordova.beacon.Q",
+      "file": "plugins/com.unarin.cordova.beacon/www/lib/q.min.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "runs": true
+    },
+    {
+      "id": "com.unarin.cordova.beacon.LocationManager",
+      "file": "plugins/com.unarin.cordova.beacon/www/LocationManager.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "merges": [
+        "cordova.plugins"
+      ]
+    },
+    {
+      "id": "com.unarin.cordova.beacon.Delegate",
+      "file": "plugins/com.unarin.cordova.beacon/www/Delegate.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "runs": true
+    },
+    {
+      "id": "com.unarin.cordova.beacon.Region",
+      "file": "plugins/com.unarin.cordova.beacon/www/model/Region.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "runs": true
+    },
+    {
+      "id": "com.unarin.cordova.beacon.Regions",
+      "file": "plugins/com.unarin.cordova.beacon/www/Regions.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "runs": true
+    },
+    {
+      "id": "com.unarin.cordova.beacon.CircularRegion",
+      "file": "plugins/com.unarin.cordova.beacon/www/model/CircularRegion.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "runs": true
+    },
+    {
+      "id": "com.unarin.cordova.beacon.BeaconRegion",
+      "file": "plugins/com.unarin.cordova.beacon/www/model/BeaconRegion.js",
+      "pluginId": "com.unarin.cordova.beacon",
+      "runs": true
+    },
+    {
       "id": "cordova-plugin-android-permissions.Permissions",
       "file": "plugins/cordova-plugin-android-permissions/www/permissions.js",
       "pluginId": "cordova-plugin-android-permissions",
       "clobbers": [
         "cordova.plugins.permissions"
-      ]
-    },
-    {
-      "id": "cordova-plugin-inappbrowser.inappbrowser",
-      "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
-      "pluginId": "cordova-plugin-inappbrowser",
-      "clobbers": [
-        "cordova.InAppBrowser.open"
-      ]
-    },
-    {
-      "id": "cordova-plugin-nativestorage.mainHandle",
-      "file": "plugins/cordova-plugin-nativestorage/www/mainHandle.js",
-      "pluginId": "cordova-plugin-nativestorage",
-      "clobbers": [
-        "NativeStorage"
-      ]
-    },
-    {
-      "id": "cordova-plugin-nativestorage.LocalStorageHandle",
-      "file": "plugins/cordova-plugin-nativestorage/www/LocalStorageHandle.js",
-      "pluginId": "cordova-plugin-nativestorage"
-    },
-    {
-      "id": "cordova-plugin-nativestorage.NativeStorageError",
-      "file": "plugins/cordova-plugin-nativestorage/www/NativeStorageError.js",
-      "pluginId": "cordova-plugin-nativestorage"
-    },
-    {
-      "id": "cordova-plugin-statusbar.statusbar",
-      "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
-      "pluginId": "cordova-plugin-statusbar",
-      "clobbers": [
-        "window.StatusBar"
       ]
     },
     {
@@ -357,13 +357,13 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
   ];
   module.exports.metadata = {
     "cordova-plugin-device": "2.1.0",
-    "com.unarin.cordova.beacon": "3.8.1",
     "cordova-plugin-file": "6.0.1",
-    "cordova-plugin-advanced-http": "3.1.0",
-    "cordova-plugin-android-permissions": "1.1.4",
-    "cordova-plugin-inappbrowser": "4.0.0",
     "cordova-plugin-nativestorage": "2.3.2",
     "cordova-plugin-statusbar": "2.4.2",
+    "cordova-plugin-inappbrowser": "4.0.0",
+    "cordova-plugin-advanced-http": "3.1.0",
+    "com.unarin.cordova.beacon": "3.8.1",
+    "cordova-plugin-android-permissions": "1.1.4",
     "cordova-plugin-email-composer": "0.10.1"
   };
 });

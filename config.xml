@@ -21,17 +21,13 @@
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="KeepRunning" value="true" />
     <platform name="android">
-<<<<<<< Updated upstream
+        <preference name="GradlePluginKotlinVersion" value="1.9.24"/>
+        <preference name="GradleVersion" value="8.7"/>
+        <preference name="android-buildToolsVersion" value="34.0.0"/>
+        <preference name="AndroidGradlePluginVersion" value="8.3.0"/>
         <preference name="android-compileSdkVersion" value="34" />
-        <preference name="android-minSdkVersion" value="21" />
+        <preference name="android-minSdkVersion" value="24" />
         <preference name="android-targetSdkVersion" value="34" />
-        <preference name="android-maxSdkVersion" value="35" />
-=======
-        <preference name="android-compileSdkVersion" value="33" />
-        <preference name="android-minSdkVersion" value="21" />
-        <preference name="android-targetSdkVersion" value="33" />
-        <preference name="android-maxSdkVersion" value="34" />
->>>>>>> Stashed changes
         <preference name="AndroidXEnabled" value="true" />
         <preference name="com.unarin.cordova.beacon.android.altbeacon.RequestBtPermission" value="no" />
         <preference name="com.unarin.cordova.beacon.android.altbeacon.ForegroundScanPeriod" value="1500" />

@@ -34,8 +34,10 @@
 .color-custom-YELLOW•HD { color: yellow;
 }
 
+.button-border { border: 2px solid gray 
+}
 
-.button-style-RED { background: red;
+.button-style-RED { background: red;         
 }
 .button-style-RED•HD { background: red;
 }

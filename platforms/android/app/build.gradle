@@ -330,7 +330,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: '*.jar')
     implementation "androidx.appcompat:appcompat:${cordovaConfig.ANDROIDX_APP_COMPAT_VERSION}"
     implementation "androidx.core:core-splashscreen:${cordovaConfig.ANDROIDX_CORE_SPLASHSCREEN_VERSION}"
-
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
     if (cordovaConfig.IS_GRADLE_PLUGIN_KOTLIN_ENABLED) {
         implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${cordovaConfig.KOTLIN_VERSION}"
     }
@@ -383,8 +383,4 @@ if (hasProperty('postBuildExtras')) {
 
 if (cordovaConfig.IS_GRADLE_PLUGIN_GOOGLE_SERVICES_ENABLED) {
     apply plugin: 'com.google.gms.google-services'
-}
-
-configurations.implementation {
-    exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'
 }
