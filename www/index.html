@@ -38,12 +38,18 @@
             </div>
           </div>
           <div class="page-content">
-              <div class="block-title">Select Tilt Color</div>
+              <div class="block-title">Select Tilt</div>
               <div class="list">
                <ul>
                     <div id="settingsPanel"></div>
                </ul>
             </div>
+            <div class="block-title">Select Tilt Pico</div>
+            <div class="list">
+            <ul>
+              <div id="picoPanel"></div>
+         </ul>
+        </div>
           </div>
         </div>
       </div>
@@ -68,6 +74,9 @@
     <div class="view view-main view-init ios-edges theme-dark">
       <!-- Page, data-name contains page name which can be used in callbacks -->
       <div class="page  color-theme-gray" data-name="home">
+        <div id="picoFAB" class="fab fab-right-bottom" hidden>
+          <button class="button button-fill button-round color-green open-pico-wifi-prompt"><i class="f7-icons size-15">info</i> CONNECT TILT PICO</button>
+        </div>
         <!-- Top Navbar -->
         <div class="navbar">
           <div class="navbar-inner bg-color-black">
@@ -95,10 +104,10 @@
   <script id="displaytemplate" type="text/template7">
     {{#each this}}
     <div id="tiltcard-{{Color}}" class="card card-outline elevation-12 col-100 tablet-45 no-gap">
-        <div class="card-content card-content-padding"><p class="no-margin-bottom" id="beerName{{Color}}">{{Beername}}</p><strong>TILT | {{Color}} </strong><span id="cloudStatus{{Color}}"></span> <span id="deviceStatus{{Color}}"></span></div>
+        <div class="card-content card-content-padding"><p class="no-margin-bottom" id="beerName{{Color}}">{{Beername}}</p><strong>TILT | {{Color}} </strong><span id="cloudStatus{{Color}}"></span> <span id="deviceStatus{{Color}}"></span> <span id="tiltpicosync-{{Color}}"></span></div>
         <div id="quicksettings" class="accordion-item">
         <div class="accordion-item-toggle">
-        <button class="margin-horizontal button-border button-style-{{Color}}" style="height:30px;width:90%;"></button>
+        <button class="button col margin-horizontal button-round button-style-{{Color}}" style="height:30px;width:90%;"></button>
         </div>
         <div class="accordion-item-content">
         <div class="margin-top segmented margin-horizontal">
@@ -170,6 +179,23 @@
     </tr>
     {{/each}}
   </script>
+
+<script id="picotemplate" type="text/template7">
+  {{#each tiltPico}}
+  <li class="accordion-item" id="accordion-{{ip_address}}">
+    <div class="accordion-item-toggle">
+      <div class="item-title margin-horizontal padding"><strong>TILT PICO: </strong>{{ip_address}}</div>
+    </div>
+    <div class="accordion-item-content">
+      <div class="block">
+        <p class="row">
+        <button id="disconnect-{{ip_address}}" class="col button button-fill color-red" onclick="resetPico(this)">Disconnect Wifi</button>
+      </p>
+    </div>
+      </div>
+</li>
+  {{/each}}
+</script>
 
   <script id="settingstemplate" type="text/template7">
   {{#each this}}
