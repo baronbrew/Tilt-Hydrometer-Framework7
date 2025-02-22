@@ -425,16 +425,51 @@ function checkFineLocationPermissionCallback(status) {
                     var LANprefix = uint16ToIp(beacon.major, beacon.minor).split('.',1);
                     if (LANprefix[0] == '192' || LANprefix[0] == '172' || LANprefix[0] == '10'){
                          picoFabVisible = false;
+                         setTimeout(function(){
                          var tiltPicoIPAddr = uint16ToIp(beacon.major, beacon.minor);
                          if (tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == tiltPicoIPAddr) == -1){
-                          app.dialog.alert('IP Address: ' + tiltPicoIPAddr, "Tilt Pico Connected to WiFi")
+                            var foundBeacons = localStorage.getItem('foundbeacons').split(',');
+                            if (foundBeacons[0] == 'NONE'){
+                                foundBeacons.shift();
+                            }
+                            app.dialog.confirm('Connect Tilt Pico to paired Tilt hydrometers? (' + foundBeacons.join(', ') + ')', 'Tilt Pico Connected to WiFi (' + tiltPicoIPAddr + ')', function (){
+                            for (foundBeacon in foundBeacons){
+                                var cloudsEnabled = localStorage.getItem('cloudurlsenabled-' + foundBeacons[foundBeacon])||'1,0,0';
+                                var cloudURLs = localStorage.getItem('cloudurls-' + foundBeacons[foundBeacon])||app.data.defaultCloudURL;
+                                var cloudURLsArr = cloudURLs.split(',');
+                                for (let i = 0; i < cloudsEnabled.split(',').length; i++){
+                                    if (cloudsEnabled[i] == 0){
+                                        cloudURLsArr[i] = ''
+                                    }
+                                }
+                                cloudURLs = cloudURLsArr.join(',');
+                                //console.log(cloudURLs);
+                                var cloudInterval = localStorage.getItem('cloudInterval-' + foundBeacons[foundBeacon])||'15';
+                                const now = new Date();
+                                const offsetSeconds = now.getTimezoneOffset() * 60; // Returns offset in seconds
+                                var foundBeaconColor = foundBeacons[foundBeacon]
+                                console.log(foundBeaconColor.replace('•','-'))
+                                getPicoData(tiltPicoIPAddr + 
+                                '/sync?beername=' + beacons[foundBeacons[foundBeacon]].Beername +
+                                '&color=' + foundBeaconColor.replace('•','-') + 
+                                '&tilttempcal=' + localStorage.getItem('uncalTemppoints-' + foundBeacons[foundBeacon]) +
+                                '&actualtempcal=' + localStorage.getItem('actualTemppoints-' + foundBeacons[foundBeacon]) +
+                                '&tiltSGcal=' + localStorage.getItem('uncalSGpoints-' + foundBeacons[foundBeacon]) +
+                                '&actualSGcal=' + localStorage.getItem('actualSGpoints-' + foundBeacons[foundBeacon]) +
+                                '&cloudurls=' +  cloudURLs +
+                                '&cloudinterval=' + cloudInterval + 
+                                '&timezoneoffsetsec=' + offsetSeconds);
+                        }
+                         }, function(){
+                            app.dialog.alert('Connect each Tilt hydrometer to Tilt Pico by tapping the TILT PICO button in the top right of each Tilt displayed.', 'Tilt Hydrometers Not Connected')
+                         })
                           tiltPicos.tiltPico.unshift({ 'ip_address': tiltPicoIPAddr });
                           updatePicoList();
                           picoFabVisible = false;
                           //getPicoData(tiltPicoIPAddr);
                           //console.log(tiltPicos);
-                          break
                          }
+                         }, 2000);
                          }
                     break
                   }
@@ -597,7 +632,7 @@ function checkFineLocationPermissionCallback(status) {
         const now = new Date();
         const offsetSeconds = now.getTimezoneOffset() * 60; // Returns offset in seconds
         //if Tilt Pico connected, add sync button to card
-        $$('#tiltpicosync-' + foundBeaconsArray[i]).html('<a id="tiltpicosync-' + foundBeaconsArray[i] + '"' + 'class="link">|&nbsp;SYNC&nbsp;TILT&nbsp;PICO</a>');
+        $$('#tiltpicosync-' + foundBeaconsArray[i]).html('<a id="tiltpicosync-' + foundBeaconsArray[i] + '"' + 'class="link">|&nbsp;TILT&nbsp;PICO</a>');
         document.getElementById('tiltpicosync-' + foundBeaconsArray[i]).addEventListener('click', function(e) {
             var colorClicked =  e.target.id.split('-')[1];
             var cloudsEnabled = localStorage.getItem('cloudurlsenabled-' + colorClicked)||'1,0,0';
@@ -2480,7 +2515,8 @@ var wifiConnProgress = 0;
         }
         if (wifiConnProgress === 100) {
           clearInterval(interval);
-          wifiDialog.close();
+          setTimeout(function(){
+            wifiDialog.close();}, 5000)
           picoFabVisible = false;
 
         }
@@ -2547,6 +2583,7 @@ var wifiConnProgress = 0;
         if (response.status == '200'){
             try {
                 response.data = JSON.parse(response.data);
+
                 // prints test
                 console.log(response.data);
               } catch(e) {
@@ -2554,7 +2591,7 @@ var wifiConnProgress = 0;
               }
         }
       }, function(response) {
-        app.dialog.alert('Unable to connect to Tilt Pico: ' + tiltPicoIP, 'To manually reset WiFi, press the reset button.');
+        app.dialog.alert('Unable to connect to Tilt Pico: ' + tiltPicoIP, 'Check Tilt Pico WiFi connection. To manually reset WiFi, press the reset (R) button.');
         console.error(response.error);
         var indexIP = tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == tiltPicoIP);
         if (indexIP > -1){
