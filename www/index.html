@@ -104,10 +104,10 @@
   <script id="displaytemplate" type="text/template7">
     {{#each this}}
     <div id="tiltcard-{{Color}}" class="card card-outline elevation-12 col-100 tablet-45 no-gap">
-        <div class="card-content card-content-padding"><p class="no-margin-bottom" id="beerName{{Color}}">{{Beername}}</p><strong>TILT | {{Color}} </strong><span id="cloudStatus{{Color}}"></span> <span id="deviceStatus{{Color}}"></span> <span id="tiltpicosync-{{Color}}"></span></div>
+        <div class="card-content card-content-padding"><p class="no-margin-bottom" id="beerName{{Color}}">{{Beername}}</p><strong>TILT | {{js 'this.Color.split("_")[0] + " " + this.mac.replace("unknown","").toUpperCase().substring(8,12)'}} </strong><span id="cloudStatus{{Color}}"></span> <span id="deviceStatus{{Color}}"></span> <span id="tiltpicosync-{{Color}}"></span></div>
         <div id="quicksettings" class="accordion-item">
         <div class="accordion-item-toggle">
-        <button class="button col margin-horizontal button-round button-style-{{Color}}" style="height:30px;width:90%;"></button>
+        <button class="button col margin-horizontal button-round button-style-{{js 'this.Color.replace("_","•").split("•")[0]'}}" style="height:30px;width:90%;"></button>
         </div>
         <div class="accordion-item-content">
         <div class="margin-top segmented margin-horizontal">
@@ -119,10 +119,10 @@
         </div>
         <div class="card-content card-content-padding">Gravity: <span id="uncaldisplayFerm+displayFermunits{{Color}}">{{uncaldisplayFerm}}</span> (pre-calibrated)</div>
         <div id="caldisplayFerm+displayFermunits{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{caldisplayFerm}}</div>
-        <div id="percentScaleSG{{Color}}" class="margin-horizontal button-border button-style-{{Color}}" style="height:10px;width:0%;max-width:95%;"></div>
+        <div id="percentScaleSG{{Color}}" class="margin-horizontal button-border button-style-{{js 'this.Color.replace("_","•").split("•")[0]'}}" style="height:10px;width:0%;max-width:95%;"></div>
         <div class="card-content card-content-padding">Temperature: <span id="uncaldisplayTemp+displayTempunits{{Color}}">{{uncaldisplayTemp}}</span> (pre-calibrated)</div>
         <div id="caldisplayTemp+displayTempunits{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{caldisplayTemp}}{{displayTempunits}}</div>
-        <div id="percentScaleTemp{{Color}}" class="margin-horizontal button-border button-style-{{Color}}" style="height:10px;width:0%;max-width:95%;"></div>
+        <div id="percentScaleTemp{{Color}}" class="margin-horizontal button-border button-style-{{js 'this.Color.replace("_","•").split("•")[0]'}}" style="height:10px;width:0%;max-width:95%;"></div>
         <div class="card-content card-content-padding lastrec"><span id=numberSecondsAgo{{Color}}></span> seconds ago <span id=displayRSSI{{Color}}></span><br><span id=displaytimeStamp{{Color}}></span></div>
     </div>
     {{/each}}
@@ -188,6 +188,28 @@
     </div>
     <div class="accordion-item-content">
       <div class="block">
+        <div class="item-inner">
+        <div class="block-title no-margin-top"><i class="f7-icons">filter</i> General Settings</div>
+        </div>
+        <p class="margin-top"><label class="toggle" id="macToggle-{{js 'this.ip_address.replaceAll(".","x")'}}">
+          <input type="checkbox" unchecked>
+          <span class="toggle-icon"></span>
+          </label><a onclick="macToggle('{{ip_address}}')"> Use for Tilt scanning</a>
+          <p><a href="#" data-popover=".mac-popover" class="popover-open"><i class="f7-icons size-15">info</i> More information...</a></p>
+        <div class="popover mac-popover">
+            <div class="popover-inner padding">
+                <span><i class="f7-icons size-15">info</i> Tilt scanning will be done on Tilt Pico. Allows use of multiple Tilt hydrometers of the same color by using the unique MAC address of each Tilt.</span>
+            </div>
+          </div>
+       </p>
+       <p class="no-margin-top"><label class="toggle" id="picoCloudToggle-{{js 'this.ip_address.replaceAll(".","x")'}}">
+        <input type="checkbox" checked>
+        <span class="toggle-icon"></span>
+        </label><a onclick="picoCloudToggle('{{ip_address}}')"> Use for cloud logging</a>
+     </p>
+     <div class="item-inner">
+     <div class="block-title no-margin-top"><i class="f7-icons">close</i> Reset and Disconnect</div>
+     </div>
         <p class="row">
         <button id="disconnect-{{ip_address}}" class="col button button-fill color-red" onclick="resetPico(this)">Disconnect Wifi</button>
       </p>
@@ -201,10 +223,10 @@
   {{#each this}}
   <li class="accordion-item" id="accordion-{{Color}}">
       <div class="accordion-item-toggle">
-        <div class="item-title margin-horizontal padding"><strong>TILT <i class="f7-icons color-custom-{{Color}} size-15">circle_fill</i> {{Color}}</strong></div>
+        <div class="item-title margin-horizontal padding"><strong>TILT <i class="f7-icons color-custom-{{js 'this.Color.replace("_","•").split("•")[0]'}} size-15">circle_fill</i> {{js 'this.Color.split("_")[0] + " " + this.mac.replace("unknown","").toUpperCase().substring(8,12)'}}</strong></div>
       </div>
     <div class="accordion-item-content">
-        <div class="block-title no-margin-top"><i class="material-icons">show_chart</i> Logging <i class="f7-icons color-custom-{{Color}} size-15">play_fill</i></div>
+        <div class="block-title no-margin-top"><i class="material-icons">show_chart</i> Logging <i class="f7-icons color-custom-{{js 'this.Color.replace("_","•").split("•")[0]'}} size-15">play_fill</i></div>
       <div class="block block-strong">
           <div class="content-block">
           <div class="content-block-inner">
@@ -330,7 +352,7 @@
      </div>
      </div>
      </div>
-     <div class="block-title"><i class="material-icons">adjust</i>SG Cal. <i class="f7-icons color-custom-{{Color}} size-15">play_fill</i></div>
+     <div class="block-title"><i class="material-icons">adjust</i>SG Cal. <i class="f7-icons color-custom-{{js 'this.Color.replace("_","•").split("•")[0]'}} size-15">play_fill</i></div>
           <div class="block block-strong">
             <div class="content-block">
             <div class="content-block-inner">
@@ -369,7 +391,7 @@
             </div>
           </div>
         </div>
-          <div class="block-title"><i class="material-icons">adjust</i>Temp. Cal.  <i class="f7-icons color-custom-{{Color}} size-15">play_fill</i></div>
+          <div class="block-title"><i class="material-icons">adjust</i>Temp. Cal.  <i class="f7-icons color-custom-{{js 'this.Color.replace("_","•").split("•")[0]'}} size-15">play_fill</i></div>
           <div class="block block-strong">
             <div class="content-block">
             <div class="content-block-inner">
@@ -403,7 +425,7 @@
             </div>
           </div>
         </div>
-           <div class="block-title"><i class="material-icons">straighten</i> Units  <i class="f7-icons color-custom-{{Color}} size-15">play_fill</i></div>
+           <div class="block-title"><i class="material-icons">straighten</i> Units  <i class="f7-icons color-custom-{{js 'this.Color.replace("_","•").split("•")[0]'}} size-15">play_fill</i></div>
            <div class="block block-strong">
            <div class="content-block">
               <div id="unitsradio-{{Color}}" class="list">

@@ -122,8 +122,13 @@ $$(document).on('deviceready', function() {
 
   // Dictionary of Tilts.
   var beacons = {};
+  //track new beacon updates
+  var inrangebeaconsUpdated = false;
   // Array of Tilt Picos.
   var tiltPicos = { tiltPico : [] };
+  //controls switch to use pico and surpress device scans
+  var usePicoOnly = false;
+  var waitingForPico = false;
   //SSID and password for Pico
   var picoSSID = '';
   var picoPassword = '';
@@ -329,14 +334,6 @@ function checkFineLocationPermissionCallback(status) {
     //set displayed time stamp
     var date = new Date(beacon.timeStamp);
     beacon.displaytimeStamp = date.toLocaleString();
-    //update list of in range beacons
-    var inRangeBeacons = localStorage.getItem('inrangebeacons')||'NONE';
-    var inRangeBeaconsArray = inRangeBeacons.split(',');
-    var indexOfColor = inRangeBeaconsArray.indexOf(beacon.Color);
-        if (indexOfColor < 0){//check if new Tilt color in range
-        inRangeBeaconsArray.push(beacon.Color);
-        localStorage.setItem('inrangebeacons',inRangeBeaconsArray);
-        }else{ //if no new Tilt color in range, check interval to log to cloud or device
         var cloudInterval = localStorage.getItem('cloudInterval-' + beacon.Color)||15;
         var lastCloudLogged = Number(localStorage.getItem('loggingTimer-' + beacon.Color))||Date.now() - (30 * 60 * 1000);
         beacon.loggingTimer = (Date.now() - lastCloudLogged) / 1000 / 60;//min since last logged
@@ -347,7 +344,6 @@ function checkFineLocationPermissionCallback(status) {
         },4000);
         localStorage.setItem('loggingTimer-' + beacon.Color, Date.now());//reset timer
     };
-        }
     //add beer name
     beacon.Beername = localStorage.getItem('beerName-' + beacon.Color);
     if (beacon.Beername === null){
@@ -370,13 +366,35 @@ function checkFineLocationPermissionCallback(status) {
     }    
 }
 
+
   function initScan() {
       // The delegate object holds the iBeacon callback functions
       // specified below.
       delegate = new locationManager.Delegate();
       console.log('initScan');
       // Called continuously when ranging beacons.
+      var picoBeacons = [];
       delegate.didRangeBeaconsInRegion = function (pluginResult) {
+      if (usePicoOnly && pluginResult.region.identifier == 8 && !waitingForPico){
+        waitingForPico = true;
+        if (tiltPicos.tiltPico[0].ip_address !== undefined) {
+        fetchJSONData(tiltPicos.tiltPico[0].ip_address)
+        .then(data => {
+        picoBeacons = data;
+        waitingForPico = false;
+        })
+        .catch(error => {
+        waitingForPico = false;
+        console.error("Error fetching data:", error);
+        });
+        if (pluginResult.beacons[0] !== undefined) {
+            picoBeacons.push(pluginResult.beacons[0]);
+        }
+        pluginResult.beacons = picoBeacons;
+        //console.log(pluginResult.beacons);
+        }
+        }
+        //console.log(pluginResult);
           if (pluginResult.beacons.length > 0) {
             //console.log(pluginResult.beacons);
               for (var i in pluginResult.beacons) {
@@ -418,23 +436,25 @@ function checkFineLocationPermissionCallback(status) {
                             app.dialog.alert('Tilt Pico not connected to WiFi.', 'Tilt Pico WiFi Connection Error');
                             picoSSID = 'SSID_password_incorrect_wifi';
                         }
-                        break
+                        break;
                     }
                   else if (beacon.uuid == 'a495bc02-c5b1-4b44-b512-1370f02d74de'){
-                    var LANprefix = uint16ToIp(beacon.major, beacon.minor).split('.',1);
+                    var LANprefix = uint16ToIp(beacon.major, beacon.minor).split('.');
                     if (LANprefix[0] == '192' || LANprefix[0] == '172' || LANprefix[0] == '10'){
                          picoFabVisible = false;
-                         setTimeout(function(){
                          var tiltPicoIPAddr = uint16ToIp(beacon.major, beacon.minor);
-                         if (tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == tiltPicoIPAddr) == -1){
-                            var foundBeacons = localStorage.getItem('foundbeacons').split(',');
-                            if (foundBeacons[0] == 'NONE'){
-                                foundBeacons.shift();
+                         toggleUseMac(tiltPicoIPAddr);
+                         toggleUsePico(tiltPicoIPAddr);
+                         if (tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == tiltPicoIPAddr) == -1 || inrangebeaconsUpdated){
+                            console.log(tiltPicos.tiltPico);
+                            var inRangeBeacons = localStorage.getItem('inrangebeacons').split(',');
+                            if (inRangeBeacons[0] == 'NONE'){
+                                inRangeBeacons.shift();
                             }
-                            app.dialog.confirm('Would you like to connect your Tilt Pico to your paired Tilt hydrometers? (' + foundBeacons.join(', ') + ')', 'Tilt Pico Connected to WiFi (IP Address: ' + tiltPicoIPAddr + ')', function (){
-                            for (foundBeacon in foundBeacons){
-                                var cloudsEnabled = localStorage.getItem('cloudurlsenabled-' + foundBeacons[foundBeacon])||'1,0,0';
-                                var cloudURLs = localStorage.getItem('cloudurls-' + foundBeacons[foundBeacon])||app.data.defaultCloudURL;
+                            app.dialog.confirm('Would you like to connect your Tilt Pico to your Tilt hydrometers currently in range? (' + inRangeBeacons.join(', ') + ')', 'Tilt Pico Connected to WiFi with IP Address: ' + tiltPicoIPAddr, function (){
+                            for (inRangeBeacon in inRangeBeacons){
+                                var cloudsEnabled = localStorage.getItem('cloudurlsenabled-' + inRangeBeacons[inRangeBeacon])||'1,0,0';
+                                var cloudURLs = localStorage.getItem('cloudurls-' + inRangeBeacons[inRangeBeacon])||app.data.defaultCloudURL;
                                 var cloudURLsArr = cloudURLs.split(',');
                                 for (let i = 0; i < cloudsEnabled.split(',').length; i++){
                                     if (cloudsEnabled[i] == 0){
@@ -443,33 +463,38 @@ function checkFineLocationPermissionCallback(status) {
                                 }
                                 cloudURLs = cloudURLsArr.join(',');
                                 //console.log(cloudURLs);
-                                var cloudInterval = localStorage.getItem('cloudInterval-' + foundBeacons[foundBeacon])||'15';
+                                var cloudInterval = localStorage.getItem('cloudInterval-' + inRangeBeacons[inRangeBeacon])||'15';
                                 const now = new Date();
                                 const offsetSeconds = now.getTimezoneOffset() * 60; // Returns offset in seconds
-                                var foundBeaconColor = foundBeacons[foundBeacon]
+                                var foundBeaconColor = inRangeBeacons[inRangeBeacon]
                                 getPicoData(tiltPicoIPAddr + 
-                                '/sync?beername=' + beacons[foundBeacons[foundBeacon]].Beername +
-                                '&color=' + foundBeaconColor.replace('•','-') + 
-                                '&tilttempcal=' + localStorage.getItem('uncalTemppoints-' + foundBeacons[foundBeacon]) +
-                                '&actualtempcal=' + localStorage.getItem('actualTemppoints-' + foundBeacons[foundBeacon]) +
-                                '&tiltSGcal=' + localStorage.getItem('uncalSGpoints-' + foundBeacons[foundBeacon]) +
-                                '&actualSGcal=' + localStorage.getItem('actualSGpoints-' + foundBeacons[foundBeacon]) +
+                                '/sync?beername=' + beacons[inRangeBeacons[inRangeBeacon]].Beername +
+                                '&color=' + foundBeaconColor.replace('•','-').replace('•','_') + 
+                                '&tilttempcal=' + localStorage.getItem('uncalTemppoints-' + inRangeBeacons[inRangeBeacon]) +
+                                '&actualtempcal=' + localStorage.getItem('actualTemppoints-' + inRangeBeacons[inRangeBeacon]) +
+                                '&tiltSGcal=' + localStorage.getItem('uncalSGpoints-' + inRangeBeacons[inRangeBeacon]) +
+                                '&actualSGcal=' + localStorage.getItem('actualSGpoints-' + inRangeBeacons[inRangeBeacon]) +
                                 '&cloudurls=' +  cloudURLs +
                                 '&cloudinterval=' + cloudInterval + 
-                                '&timezoneoffsetsec=' + offsetSeconds, foundBeacons[foundBeacon]);
+                                '&timezoneoffsetsec=' + offsetSeconds, inRangeBeacons[inRangeBeacon]);
                         }
                          }, function(){
-                            app.dialog.alert('Connect each Tilt hydrometer to Tilt Pico by tapping "TILT PICO" located on the top of each Tilt display.', 'Tilt Hydrometers Not Connected')
+                            app.dialog.alert('To start cloud logging on Tilt Pico, connect each Tilt hydrometer by tapping the "TILT PICO" link located on the top of each Tilt display.', 'Tilt Hydrometers Pending Connection')
                          })
-                          tiltPicos.tiltPico.unshift({ 'ip_address': tiltPicoIPAddr });
-                          updatePicoList();
+                          if (tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == tiltPicoIPAddr) == -1){
+                            tiltPicos.tiltPico.unshift({ 'ip_address': tiltPicoIPAddr, 'enable_logging' : true,  'enable_scanning' : true});
+                            updatePicoList();
+                          }
+
                           //getPicoData(tiltPicoIPAddr);
                           //console.log(tiltPicos);
+                          inrangebeaconsUpdated = false;
                          }
-                         }, 2000);
                          }
-                    break
+                    break;
                   }
+                   //console.log(inrangebeaconsUpdated);
+                  //console.log(beacon);
                   //add timestamp
                   beacon.timeStamp = Date.now();
                   //assign color by UUID and Minor Range. FW 1005, 1006, 1007 is HD
@@ -512,6 +537,55 @@ function checkFineLocationPermissionCallback(status) {
                     case "8-true" : beacon.Color = "PINK•HD";
                     break;
              }
+             if (beacon.mac != undefined){
+                beacon.Color = beacon.Color + '_' + beacon.mac;
+             }
+             else{
+                beacon.mac = 'unknown';
+             }
+                //update list of in range beacons
+                var inRangeBeacons = localStorage.getItem('inrangebeacons')||'NONE';
+                var inRangeBeaconsArray = inRangeBeacons.split(',');
+                var indexOfColor = inRangeBeaconsArray.indexOf(beacon.Color);
+                if (indexOfColor < 0){//check if new Tilt color in range
+                    inRangeBeaconsArray.push(beacon.Color);
+                    if (beacon.mac != 'unknown'){//beacon from Pico, so remove beacon from phone
+                        var beaconColorArray = beacon.Color.replace('_','•').split('•');
+                        beaconColorArray.pop();
+                        var phoneBeaconIndex = inRangeBeaconsArray.indexOf(beaconColorArray.join('•'));
+                        if (phoneBeaconIndex > -1){
+                            inRangeBeaconsArray.splice(phoneBeaconIndex, 1);
+                        };
+                    }else{//beacon from phone so check if already beacon from Pico before adding to inrangebeacons
+                        inRangeBeaconsArray.pop();
+                        var duplicateBeaconColor = inRangeBeaconsArray.find(arrayelement => arrayelement.includes(beacon.Color));
+                        if (duplicateBeaconColor !== undefined){
+                            $$('#tiltcard-' + beacon.Color).hide();
+                            $$('#accordion-' + beacon.Color).hide();
+                            //copy settings to pico beacon if they are set to default (don't overwrite)
+                            if (localStorage.getItem('beerName-' + duplicateBeaconColor) == 'Untitled' || localStorage.getItem('beerName-' + duplicateBeaconColor) === null){
+                            localStorage.setItem('beerName-' + duplicateBeaconColor, localStorage.getItem('beerName-' + beacon.Color)||'Untitled');
+                            }
+                            if (localStorage.getItem('actualSGpoints-' + duplicateBeaconColor) == '-0.001,10.000' || localStorage.getItem('actualSGpoints-' + duplicateBeaconColor) === null){
+                            localStorage.setItem('actualSGpoints-' + duplicateBeaconColor, localStorage.getItem('actualSGpoints-' + beacon.Color)||'-0.001,10.000');
+                            localStorage.setItem('uncalSGpoints-' + duplicateBeaconColor, localStorage.getItem('uncalSGpoints-' + beacon.Color)||'-0.001,10.000');
+                            }
+                            if (localStorage.getItem('actualTemppoints-' + duplicateBeaconColor) == '-100000,100000' || localStorage.getItem('actualTemppoints-' + duplicateBeaconColor) === null){
+                                localStorage.setItem('actualTemppoints-' + duplicateBeaconColor, localStorage.getItem('actualTemppoints-' + beacon.Color)||'-100000,100000');
+                                localStorage.setItem('uncalTemppoints-' + duplicateBeaconColor, localStorage.getItem('uncalTemppoints-' + beacon.Color)||'-100000,100000');
+                                }
+
+                            break;//stop processing beacon if pico beacon already exists
+                            }
+                        else{
+                            inRangeBeaconsArray.push(beacon.Color);
+
+                        }
+                    }
+                    console.log(inRangeBeaconsArray);
+                    localStorage.setItem('inrangebeacons',inRangeBeaconsArray);
+                    inrangebeaconsUpdated = true;
+                }
                   //setup HD tilt
                 if (beacon.hd){
                     beacon.uncalTemp = beacon.major / 10;
@@ -568,7 +642,6 @@ function checkFineLocationPermissionCallback(status) {
     //reset list of found beacons
     localStorage.setItem('foundbeacons','NONE');
     localStorage.setItem('inrangebeacons','NONE');
-    
     //set blutooth toggled state
     bluetoothToggled = false;
 
@@ -629,7 +702,7 @@ function checkFineLocationPermissionCallback(status) {
         const now = new Date();
         const offsetSeconds = now.getTimezoneOffset() * 60; // Returns offset in seconds
         //if Tilt Pico connected, add sync button to card
-        $$('#tiltpicosync-' + foundBeaconsArray[i]).html('<a id="tiltpicosync-' + foundBeaconsArray[i] + '"' + ' class="link">|&nbsp;<i class="icon f7-icons color-custom-YELLOW size-15">bolt_fill</i>&nbsp;TILT PICO</a>');
+        $$('#tiltpicosync-' + foundBeaconsArray[i]).html('<a id="tiltpicosync-' + foundBeaconsArray[i] + '"' + ' class="link">|&nbsp;<i class="icon f7-icons size-15">bolt_fill</i>&nbsp;TILT PICO</a>');
         document.getElementById('tiltpicosync-' + foundBeaconsArray[i]).addEventListener('click', function(e) {
             var colorClicked =  e.target.id.split('-')[1];
             var cloudsEnabled = localStorage.getItem('cloudurlsenabled-' + colorClicked)||'1,0,0';
@@ -643,9 +716,9 @@ function checkFineLocationPermissionCallback(status) {
             cloudURLs = cloudURLsArr.join(',');
             console.log(cloudURLs);
             var cloudInterval = localStorage.getItem('cloudInterval-' + colorClicked)||'15';
-            getPicoData(tiltPicos.tiltPico[0].ip_address + 
+            fetchJSONData(tiltPicos.tiltPico[0].ip_address + 
              '/sync?beername=' + beacons[colorClicked].Beername +
-             '&color=' + colorClicked.replace('•','-') + 
+             '&color=' + colorClicked.replace('•','-').replace('•','_') +
              '&tilttempcal=' + localStorage.getItem('uncalTemppoints-' + colorClicked) +
              '&actualtempcal=' + localStorage.getItem('actualTemppoints-' + colorClicked) +
              '&tiltSGcal=' + localStorage.getItem('uncalSGpoints-' + colorClicked) +
@@ -789,13 +862,16 @@ function checkFineLocationPermissionCallback(status) {
     //get time since last cloud logged
     beacon.lastCloudLogged = ((Date.now() - localStorage.getItem('lastCloudLogged-' + beacon.Color)) / 1000 / 60).toFixed(0);
     //disconnect if no scans within 2 minutes
-    if (Number(beacon.numberSecondsAgo) > 120){
+    if (Number(beacon.numberSecondsAgo) > 120 || (beacon.mac != 'unknown' && !usePicoOnly)){
         $$('#tiltcard-' + beacon.Color).hide();
-        //$$('#accordion-' + beacon.Color).hide();
+        if (beacon.mac != 'unknown' && !usePicoOnly){
+        $$('#accordion-' + beacon.Color).hide();
+        }
         var indexOfColor = inRangeBeaconsArray.indexOf(beacon.Color);
      if (indexOfColor > -1){
         inRangeBeaconsArray.splice(indexOfColor, 1);
         localStorage.setItem('inrangebeacons',inRangeBeaconsArray);
+        inrangebeaconsUpdated = true;
         }
     }
 
@@ -1205,6 +1281,42 @@ function showBeerName (color){
     }
     //set beer name on tilt card
     $$('#beerName' + color).html(beerNameArray[0]);
+}
+
+function toggleUseMac (ip_address){
+    var toggle = app.toggle.create({
+        el: '#macToggle-' + ip_address.replaceAll('.','x'),
+        on: {
+          change: function () {
+            var macToggleEnabled = localStorage.getItem('macToggleEnabled-' + ip_address)||'0';
+            if (toggle.checked){
+                macToggleEnabled = '1';
+                localStorage.setItem('macToggleEnabled-' + ip_address, macToggleEnabled);
+                usePicoOnly = true;
+            }
+            if (!toggle.checked){
+                macToggleEnabled = '0';
+                localStorage.setItem('macToggleEnabled-' + ip_address, macToggleEnabled);
+                usePicoOnly = false;
+                localStorage.setItem('inrangebeacons', 'NONE');
+                
+            }
+          NativeStorage.setItem('macToggleEnabled-' + ip_address, macToggleEnabled, function (result) { }, function (e) { });
+          }
+        }
+      })
+    var macToggleEnabled = localStorage.getItem('macToggleEnabled-' + ip_address)||'0';
+    if (macToggleEnabled == '1' && !toggle.checked){
+            toggle.toggle();
+    }
+    else if (macToggleEnabled == '0' && toggle.checked){
+        toggle.toggle();
+     }
+}
+
+function macToggle(ip_address) {
+    var toggle = app.toggle.get('#macToggle-' + ip_address.replaceAll('.','x'));
+    toggle.toggle();
 }
 
 function toggleDeviceLogging (color) {
@@ -2212,6 +2324,14 @@ function restoreCalibrationPoints(color){
              }, function (e) { });
 }
 
+function restorePicoSettings(ip_address){
+    NativeStorage.getItem('macToggleEnabled-' + ip_address, function (result) { 
+        if(result !== undefined){
+        localStorage.getItem('macToggleEnabled-' + ip_address)||'0'
+        }
+     }, function (e) { });
+}
+
 function postToCloudURLs (color, comment) {
     //get beer name from local storage in case beer name updated from prompt
     var currentBeerName = localStorage.getItem('beerName-' + color)||"Untitled";
@@ -2258,7 +2378,7 @@ function postToCloudURLs (color, comment) {
             currentBeerName = currentBeerName.split(',')[0];
          }
         stopScan();//stop bt scan while using wifi
-        var colorLogged = beacon.Color.replace("•HD","");
+        var colorLogged = beacon.Color.replace("•HD","").replace("_",":").toUpperCase();
         cordova.plugin.http.setDataSerializer('utf8');
         cordova.plugin.http.setRequestTimeout(120.0);
         cordova.plugin.http.post(
@@ -2498,7 +2618,7 @@ var wifiConnProgress = 0;
   $$('.open-pico-wifi-prompt').on('click', function () {
     picoFabVisible = false
     toggleVisibility('picoFAB', 'none');
-    app.dialog.login('Enter WiFi name and password below. Note: Supports only 2.4ghz WiFi.', 'Connect Nearby Tilt Pico to WiFi', function (picoSSID_input, picoPassword_input) {
+    app.dialog.login('Enter WiFi name and password below. Note: Supports only 2.4ghz WiFi.', 'Connect Tilt Pico to WiFi', function (picoSSID_input, picoPassword_input) {
     picoSSID = picoSSID_input;
     picoPassword = picoPassword_input;
     stringToHex(picoSSID, 'a495bc00-');
@@ -2530,11 +2650,13 @@ var wifiConnProgress = 0;
   });
 
   function resetPico(button){
-    picoFabVisible = true
-    toggleVisibility('picoFAB', 'block');
     var clickedButton = button.id.split('-');
     var tiltPicoIP = clickedButton[1];
-    cordova.plugin.http.get('http://' + tiltPicoIP + '/reset?', {}, {}, 
+    const options = {
+        method: 'get',
+        timeout: 15
+      };
+    cordova.plugin.http.sendRequest('http://' + tiltPicoIP + '/reset?', options, 
         function(response) {
         if (response.status == '200'){
         var indexIP = tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == tiltPicoIP);
@@ -2542,7 +2664,7 @@ var wifiConnProgress = 0;
             setTimeout(function() { 
                 tiltPicos.tiltPico.splice(indexIP,1);
                 updatePicoList();
-                }, 2000)
+                }, 3000)
         }
         console.log(response.status);
         }
@@ -2554,10 +2676,7 @@ var wifiConnProgress = 0;
             setTimeout(function() { 
                 tiltPicos.tiltPico.splice(indexIP,1);
                 updatePicoList();
-                }, 2000)
-            
-            tiltPicos.tiltPico.splice(indexIP,1);
-            updatePicoList();
+                }, 3000)
         }
       });
   }
@@ -2575,32 +2694,93 @@ var wifiConnProgress = 0;
     $$('#picoPanel').html(picohtml);
   }
 
+  
   function getPicoData(tiltPicoIP, tiltColor = ''){
     cordova.plugin.http.get('http://' + tiltPicoIP, {}, {}, 
         function(response) {
+            console.log(response.status);
         if (response.status == '200'){
             try {
-                response.data = JSON.parse(response.data);
+                response = JSON.parse(response.data)
                 if (tiltColor == ''){
-                    console.log('Not a Tilt specific update request')
+                    console.log('Not a Tilt specific update request');
+                    return response;
                 }else{
-                    app.dialog.alert('Settings for your ' + tiltColor + ' Tilt transferred successfully to your Tilt Pico and these will be used going forward for cloud logging. Tilt Pico will now attempt to log a new data point...','Tilt Pico Connected to TILT | ' + tiltColor)
+                    app.dialog.alert('Settings for your ' + tiltColor + ' Tilt transferred successfully to your Tilt Pico and these will be used going forward for cloud logging.','TILT | ' + tiltColor + ' Settings Transferred to Tilt Pico')
                 }
-                // prints test
-                console.log(response.data);
               } catch(e) {
                 console.error('JSON parsing error');
               }
-              return
         }
       }, function(response) {
-        app.dialog.alert('Unable to connect your ' + tiltColor + 'Tilt to your Tilt Pico. Check WiFi connection. To manually reset WiFi, press the reset (R) button on the Tilt Pico.');
+        app.dialog.alert('Unable to connect your ' + tiltColor + ' Tilt to your Tilt Pico. Make sure your Tilt is on and in range and check your WiFi connection on your Tilt Pico. To manually reset the connection and settings, press the reset (R) button on the Tilt Pico.', 'Unable to Connect');
         console.error(response.error);
         var indexIP = tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == tiltPicoIP);
         if (indexIP > -1){
-            tiltPicos.tiltPico.splice(indexIP,1);
-            updatePicoList();
+            setTimeout(function() { 
+                tiltPicos.tiltPico.splice(indexIP,1);
+                updatePicoList();
+                }, 3000)
+                
         }
         
       });
   }
+
+  function fetchJSONData(tiltPicoIP) {
+    //console.log(tiltPicoIP);
+    return new Promise((resolve, reject) => {
+        cordova.plugin.http.get('http://' + tiltPicoIP, {}, {}, 
+            function(response) {
+                resolve(response);
+            }, 
+            function(response) {
+                console.error(response.error);
+                waitingForPico = false;
+                return
+          })})
+          .then(response => {
+            if (response.status != 200) {
+              waitingForPico = false;
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            waitingForPico = false;
+            return JSON.parse(response.data); // Parse the JSON response
+          });
+      };
+
+      function copySettings(fromColor, toColor){
+        beacons[toColor].Beername = beacons[fromColor].Beername;
+      }
+
+      function toggleUsePico(ip_address){
+        var toggle = app.toggle.create({
+            el: '#picoCloudToggle-' + ip_address.replaceAll('.','x'),
+            on: {
+              change: function () {
+                var picoCloudToggleEnabled = localStorage.getItem('picoCloudToggleEnabled-' + ip_address)||'0';
+                if (toggle.checked){
+                    picoCloudToggleEnabled = '1';
+                    localStorage.setItem('picoCloudToggleEnabled-' + ip_address, picoCloudToggleEnabled);
+                }
+                if (!toggle.checked){
+                    picoCloudToggleEnabled = '0';
+                    localStorage.setItem('picoCloudToggleEnabled-' + ip_address, picoCloudToggleEnabled);
+                }
+              NativeStorage.setItem('picoCloudToggleEnabled-' + ip_address, picoCloudToggleEnabled, function (result) { }, function (e) { });
+              }
+            }
+          })
+        var picoCloudToggleEnabled = localStorage.getItem('picoCloudToggleEnabled-' + ip_address)||'0';
+        if (picoCloudToggleEnabled == '1' && !toggle.checked){
+                toggle.toggle();
+        }
+        else if (picoCloudToggleEnabled == '0' && toggle.checked){
+            toggle.toggle();
+         }
+    }
+    
+    function picoCloudToggle(ip_address) {
+        var toggle = app.toggle.get('#picoCloudToggle-' + ip_address.replaceAll('.','x'));
+        toggle.toggle();
+    }
