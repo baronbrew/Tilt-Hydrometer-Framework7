@@ -104,7 +104,7 @@
   <script id="displaytemplate" type="text/template7">
     {{#each this}}
     <div id="tiltcard-{{Color}}" class="card card-outline elevation-12 col-100 tablet-45 no-gap">
-        <div class="card-content card-content-padding"><p class="no-margin-bottom" id="beerName{{Color}}">{{Beername}}</p><strong>TILT | {{js 'this.Color.split("_")[0] + " " + this.mac.replace("unknown","").toUpperCase().substring(8,12)'}} </strong><span id="cloudStatus{{Color}}"></span> <span id="deviceStatus{{Color}}"></span> <span id="tiltpicosync-{{Color}}"></span></div>
+        <div class="card-content card-content-padding"><p class="no-margin-bottom" id="beerName{{Color}}">{{Beername}}</p><strong>TILT | {{js 'this.Color.split("_")[0] + " " + this.mac.replace("unknown","").toUpperCase().substring(8,12)'}} </strong><span id="cloudStatus{{Color}}"></span> <span id="deviceStatus{{Color}}"></span> <span id="tiltpicosync-{{this.Color}}"></span></div>
         <div id="quicksettings" class="accordion-item">
         <div class="accordion-item-toggle">
         <button class="button col margin-horizontal button-round button-style-{{js 'this.Color.replace("_","•").split("•")[0]'}}" style="height:30px;width:90%;"></button>

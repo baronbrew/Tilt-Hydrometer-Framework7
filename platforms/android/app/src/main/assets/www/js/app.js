@@ -714,11 +714,12 @@ function checkFineLocationPermissionCallback(status) {
                 }
             }
             cloudURLs = cloudURLsArr.join(',');
-            console.log(cloudURLs);
+            //console.log(cloudURLs);
+            console.log(colorClicked.replace('•','-'));
             var cloudInterval = localStorage.getItem('cloudInterval-' + colorClicked)||'15';
             fetchJSONData(tiltPicos.tiltPico[0].ip_address + 
              '/sync?beername=' + beacons[colorClicked].Beername +
-             '&color=' + colorClicked.replace('•','-').replace('•','_') +
+             '&color=' + colorClicked.replace('•','-') +
              '&tilttempcal=' + localStorage.getItem('uncalTemppoints-' + colorClicked) +
              '&actualtempcal=' + localStorage.getItem('actualTemppoints-' + colorClicked) +
              '&tiltSGcal=' + localStorage.getItem('uncalSGpoints-' + colorClicked) +
