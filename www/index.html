@@ -150,6 +150,21 @@
   </div>
   </script>
 
+  <script id="picologginglisttemplate" type="text/template7">
+    {{#each pico_logging_tilts}}
+    <tr>
+        <td class="checkbox-cell">
+          <label class="checkbox">
+            <input type="checkbox" checked id="pico_logging_tilts-{{js 'this.ip_address.replaceAll(".","x")'}}-{{@index}}" onchange="delete_pico_logging_tilts('{{ip_address}}', '{{pico_logging_color}}_{{pico_logging_mac}}')">
+            <i class="f7-icons"></i>
+          </label>
+        </td>
+        <td class="item-content">{{pico_logging_color}}<i class="f7-icons color-custom-{{js 'this.pico_logging_color.replace("_","•").split("•")[0]'}} size-12">circle_fill</i></td>
+        <td class="item-content">{{js 'this.pico_logging_mac.replace("unknown", "").toUpperCase()'}}</td>
+    </tr>
+    {{/each}}
+  </script>
+
   <script id="sgcallisttemplate" type="text/template7">
     {{#each SGcalpoints}}
     <tr>
@@ -182,14 +197,14 @@
 
 <script id="picotemplate" type="text/template7">
   {{#each tiltPico}}
-  <li class="accordion-item" id="accordion-{{ip_address}}">
+  <li class="accordion-item" id="accordion-{{js 'this.ip_address.replaceAll(".", "x")'}}">
     <div class="accordion-item-toggle">
       <div class="item-title margin-horizontal padding"><strong>TILT PICO: </strong>{{text}}</div>
     </div>
     <div class="accordion-item-content">
       <div class="block">
         <div class="item-inner">
-        <div class="block-title no-margin-top"><i class="f7-icons">filter</i> General Settings</div>
+        <div class="block-title no-margin-top"><i class="material-icons">bluetooth</i> Tilt Scanning</div>
         </div>
         <p class="margin-top"><label class="toggle" id="macToggle-{{js 'this.ip_address.replaceAll(".","x")'}}">
           <input type="checkbox" unchecked>
@@ -198,20 +213,38 @@
           <p><a href="#" data-popover=".mac-popover" class="popover-open"><i class="f7-icons size-15">info</i> More information...</a></p>
         <div class="popover mac-popover">
             <div class="popover-inner padding">
-                <span><i class="f7-icons size-15">info</i> Tilt scanning will be done on Tilt Pico. Allows use of multiple Tilt hydrometers of the same color by using the unique MAC address of each Tilt.</span>
+                <span><i class="f7-icons size-15">info</i> Tilt Bluetooth scanning will be done on Tilt Pico. Allows use of multiple Tilt hydrometers of the same color by using the unique MAC address of each Tilt.</span>
             </div>
           </div>
        </p>
-       <p class="no-margin-top"><label class="toggle" id="picoCloudToggle-{{js 'this.ip_address.replaceAll(".","x")'}}">
-        <input type="checkbox" checked>
-        <span class="toggle-icon"></span>
-        </label><a onclick="picoCloudToggle('{{ip_address}}')"> Use for cloud logging</a>
-     </p>
+     <div class="item-inner">
+      <div class="block-title no-margin-top"><i class="material-icons">cloud_done</i> Cloud Logging</div>
+      </div>
+     <div class="data-table">
+      <table>
+          <thead>
+            <tr>
+                <th class="table-head-label"></th>
+              <th class="table-head-label">Select Tilt to stop logging</th>
+              <th class="table-head-label"></th>
+            </tr>
+          </thead>
+          <tbody id="picologginglisttemplate-{{js 'this.ip_address.replaceAll(".", "x")'}}">
+          </tbody>
+       </table>
+      </div>
+      <p><a href="#" data-popover=".tplogging-popover" class="popover-open"><i class="f7-icons size-15">info</i> More information...</a></p>
+        <div class="popover tplogging-popover">
+            <div class="popover-inner padding">
+                <span><i class="f7-icons size-15">info</i> Tilt Pico will log to the cloud for the Tilt hydrometers listed above. To enable cloud logging for Tilt hydrometers not listed here, tap the "TILT PICO" link on the main app screen.</span>
+            </div>
+          </div>
+       </p>
      <div class="item-inner">
      <div class="block-title no-margin-top"><i class="f7-icons">close</i> Reset and Disconnect</div>
      </div>
         <p class="row">
-        <button id="disconnect-{{ip_address}}" class="col button button-fill color-red" onclick="resetPico(this)">Disconnect Wifi</button>
+        <button id="disconnect-{{js 'this.ip_address.replaceAll(".", "x")'}}" class="col button button-fill color-red" onclick="resetPico(this)">Disconnect Wifi</button>
       </p>
     </div>
       </div>
