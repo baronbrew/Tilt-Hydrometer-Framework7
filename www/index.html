@@ -155,7 +155,7 @@
     <tr>
         <td class="checkbox-cell">
           <label class="checkbox">
-            <input type="checkbox" checked id="pico_logging_tilts-{{js 'this.ip_address.replaceAll(".","x")'}}-{{@index}}" onchange="delete_pico_logging_tilts('{{ip_address}}', '{{pico_logging_color}}_{{pico_logging_mac}}')">
+            <input type="checkbox" id="pico_logging_tilts-{{js 'this.ip_address.replaceAll(".","x")'}}-{{pico_logging_color}}_{{pico_logging_mac}}" onchange="update_status_pico_logging_tilts('{{ip_address}}', '{{pico_logging_color}}_{{pico_logging_mac}}')">
             <i class="f7-icons"></i>
           </label>
         </td>
@@ -224,8 +224,8 @@
       <table>
           <thead>
             <tr>
-                <th class="table-head-label"></th>
-              <th class="table-head-label">Select Tilt to stop logging</th>
+                <th class="table-head-label">Status</th>
+              <th class="table-head-label"></th>
               <th class="table-head-label"></th>
             </tr>
           </thead>
@@ -236,12 +236,12 @@
       <p><a href="#" data-popover=".tplogging-popover" class="popover-open"><i class="f7-icons size-15">info</i> More information...</a></p>
         <div class="popover tplogging-popover">
             <div class="popover-inner padding">
-                <span><i class="f7-icons size-15">info</i> Tilt Pico will log to the cloud for the Tilt hydrometers listed above. To enable cloud logging for Tilt hydrometers not listed here, tap the "TILT PICO" link on the main app screen.</span>
+                <span><i class="f7-icons size-15">info</i> Tilt Pico will log to the cloud for the Tilt hydrometers selected above. Select a Tilt hydrometer above to start/stop cloud logging on the Tilt Pico.</span>
             </div>
           </div>
        </p>
      <div class="item-inner">
-     <div class="block-title no-margin-top"><i class="f7-icons">close</i> Reset and Disconnect</div>
+     <div class="block-title no-margin-top"><i class="f7-icons size-15">keyboard_fill</i> Device ({{ip_address}})</div>
      </div>
         <p class="row">
         <button id="disconnect-{{js 'this.ip_address.replaceAll(".", "x")'}}" class="col button button-fill color-red" onclick="resetPico(this)">Disconnect Wifi</button>
