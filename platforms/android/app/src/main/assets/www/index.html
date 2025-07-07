@@ -218,33 +218,38 @@
           </div>
        </p>
      <div class="item-inner">
-      <div class="block-title no-margin-top"><i class="material-icons">cloud_done</i> Cloud Logging</div>
+      <div class="block-title no-margin-top"><i class="material-icons">cloud</i> Cloud Logging</div>
       </div>
      <div class="data-table">
       <table>
           <thead>
             <tr>
-                <th class="table-head-label">Status</th>
-              <th class="table-head-label"></th>
-              <th class="table-head-label"></th>
+              <div class="item-inner">
+              <div class="chip">
+                <div class="chip-label" id="picoStatus-{{js 'this.ip_address.replaceAll(".","x")'}}">Status:</div>
+              </div>
+            </div>
             </tr>
           </thead>
           <tbody id="picologginglisttemplate-{{js 'this.ip_address.replaceAll(".", "x")'}}">
           </tbody>
        </table>
       </div>
+        <p class="row">
+          <button id="removepicologgingtilt-{{js 'this.ip_address.replaceAll(".", "x")'}}" class="col button button-fill" onclick="remove_tilts_from_pico(this)">Remove All from List</button>
+        </p>
       <p><a href="#" data-popover=".tplogging-popover" class="popover-open"><i class="f7-icons size-15">info</i> More information...</a></p>
         <div class="popover tplogging-popover">
             <div class="popover-inner padding">
-                <span><i class="f7-icons size-15">info</i> Tilt Pico will log to the cloud for the Tilt hydrometers selected above. Select a Tilt hydrometer above to start/stop cloud logging on the Tilt Pico.</span>
+                <span><i class="f7-icons size-15">info</i> Tilt Pico will log to the cloud for the Tilt hydrometers indicated above. Tap the check box to make cloud logging active or inactive. To add a new Tilt hydrometer to the list, tap the TILT PICO link shown on each Tilt readout.</span>
             </div>
           </div>
        </p>
      <div class="item-inner">
-     <div class="block-title no-margin-top"><i class="f7-icons size-15">keyboard_fill</i> Device ({{ip_address}})</div>
+     <div class="block-title no-margin-top"><i class="f7-icons size-15">keyboard_fill</i> Tilt Pico WiFi Connection<br><br>IP Address: {{ip_address}}</div>
      </div>
         <p class="row">
-        <button id="disconnect-{{js 'this.ip_address.replaceAll(".", "x")'}}" class="col button button-fill color-red" onclick="resetPico(this)">Disconnect Wifi</button>
+        <button id="disconnect-{{js 'this.ip_address.replaceAll(".", "x")'}}" class="col button button-fill" onclick="resetPico(this)">Disconnect {{text}}</button>
       </p>
     </div>
       </div>
