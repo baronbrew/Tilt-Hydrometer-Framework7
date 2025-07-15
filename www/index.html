@@ -38,13 +38,20 @@
             </div>
           </div>
           <div class="page-content">
-              <div class="block-title">Select Tilt</div>
+              <div class="block-title">Select Tilt Hydrometer</div>
               <div class="list">
                <ul>
                     <div id="settingsPanel"></div>
                </ul>
             </div>
-            <div class="block-title">Select Tilt Pico</div>
+            <div class="block-title">Select Tilt Pico
+              <p><a href="#" data-popover=".tiltpico-popover" class="popover-open"><i class="f7-icons size-15">info</i> More information...</a></p>
+              <div class="popover tiltpico-popover">
+                  <div class="popover-inner padding">
+                      <span><i class="f7-icons size-15">info</i> TILT Pico is a BLUETOOTH to WIFI adapter based on the RASPBERRY PI PICO W that connects to this app for easy configuration and features remote continuous logging of all your TILT hydrometers without needing another device nearby. It supports cloud logging of multiple sensors at once and transmits the data remotely to this app via GOOGLE SHEETS default cloud service and supports 3rd party cloud services as well. For more information visit: <a class="link external" target="_system" href="https://tilthydrometer.com/pages/tilt-pico">tilthydrometer.com/pages/tilt-pico</a></span>
+                  </div>
+                </div>
+            </div>
             <div class="list">
             <ul>
               <div id="picoPanel"></div>
@@ -96,6 +103,7 @@
         <!-- Scrollable page content-->
         <div class="page-content">
         <div id="tiltCard" class="tiltCard row no-gap"></div>
+        <div id="tiltcardGS" class="tiltcardGS row no-gap"></div>
         </div>
       </div>
     </div>
@@ -123,7 +131,24 @@
         <div class="card-content card-content-padding">Temperature: <span id="uncaldisplayTemp+displayTempunits{{Color}}">{{uncaldisplayTemp}}</span> (pre-calibrated)</div>
         <div id="caldisplayTemp+displayTempunits{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{caldisplayTemp}}{{displayTempunits}}</div>
         <div id="percentScaleTemp{{Color}}" class="margin-horizontal button-border button-style-{{js 'this.Color.replace("_","•").split("•")[0]'}}" style="height:10px;width:0%;max-width:95%;"></div>
-        <div class="card-content card-content-padding lastrec"><span id=numberSecondsAgo{{Color}}></span> seconds ago <span id=displayRSSI{{Color}}></span><br><span id=displaytimeStamp{{Color}}></span></div>
+        <div class="card-content card-content-padding lastrec"><span id=numberSecondsAgo{{Color}}></span> s ago <span id=displayRSSI{{Color}}></span><br><span id=displaytimeStamp{{Color}}></span></div>
+    </div>
+    {{/each}}
+      
+  </script>
+
+  <script id="displaytemplateGS" type="text/template7">
+    {{#each this}}
+    <div id="tiltcardGS-{{Colormac}}" class="card card-outline elevation-12 col-100 tablet-45 no-gap">
+        <div class="card-content card-content-padding"><p class="no-margin-bottom">{{Beername}}</p><strong>TILT | {{js 'this.Colormac.replace("_"," ")'}}</strong> <a class="link external" href="{{Cloudlink}}" target="_system">&nbsp;<i class="material-icons size-15">cloud</i>&nbsp;&nbsp;{{Timeago}}&nbsp;{{Timeagounits}}</a></div>
+        <button class="button col margin-horizontal button-round button-style-{{js 'this.Color.replace("_","•").split("•")[0]'}}" style="height:30px;width:90%;"></button>
+        <div class="card-content card-content-padding">{{Gravitytype}}:</div>
+        <div id="SG{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{SG}}<small>{{SGunits}}</small></div>
+        <div id="percentScaleSG{{Color}}" class="margin-horizontal button-border button-style-{{js 'this.Color.replace("_","•").split("•")[0]'}}" style="height:10px;width:{{SGscale}}%;max-width:95%;"></div>
+        <div class="card-content card-content-padding">Temperature:</div>
+        <div id="Temp{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{Temp}}<small>{{Tempunits}}</small></div>
+        <div id="percentScaleTemp{{Color}}" class="margin-horizontal button-border button-style-{{js 'this.Color.replace("_","•").split("•")[0]'}}" style="height:10px;width:{{Tempscale}}%;max-width:95%;"></div>
+        <div class="card-content card-content-padding lastrec">{{Timeago}} {{Timeagounits}} ago (via GOOGLE SHEETS)<br>{{Timestamp}}</div>
     </div>
     {{/each}}
       

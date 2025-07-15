@@ -57,6 +57,9 @@ var mainView = app.views.create('.view-main', {
 var displayTemplate = $$('#displaytemplate').html();
 var compileddisplayTemplate = Template7.compile(displayTemplate);
 
+var displayTemplateGS = $$('#displaytemplateGS').html();
+var compileddisplayTemplateGS = Template7.compile(displayTemplateGS);
+
 var filelistTemplate = $$('#filelisttemplate').html();
 var compiledfilelistTemplate = Template7.compile(filelistTemplate);
 
@@ -85,6 +88,8 @@ var watchBluetoothInterval;
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
   console.log("Device is ready!");
+  getGoogleSheetsData('Report!A1:G2');
+  setInterval(function(){ getGoogleSheetsData('Report!A1:G2');}, 60000);
   document.addEventListener("resume", onResume, false);
   document.addEventListener("pause", onPause, false);
           //restore settings if needed
@@ -126,6 +131,8 @@ $$(document).on('deviceready', function() {
 
   // Dictionary of Tilts.
   var beacons = {};
+  // Dictionary of Tilts on GS
+  var GStilts = {};
   //track new beacon updates
   var inrangebeaconsUpdated = false;
   // Array of Tilt Picos.
@@ -260,7 +267,8 @@ function checkFineLocationPermissionCallback(status) {
           // Start ranging.
           locationManager.startRangingBeaconsInRegion(beaconRegion);
         }
-  }
+        
+    }
 
   function stopScan() {
     // Stop ranging beacons.
@@ -370,8 +378,13 @@ function checkFineLocationPermissionCallback(status) {
     if (beacon.rssi == 0){
         beacon.displayRSSI = localStorage.getItem('prevRSSI-' + beacon.Color)||""
     }else{
-        beacon.displayRSSI = beacon.rssi + " dBm";
-        localStorage.setItem('prevRSSI-' + beacon.Color,beacon.displayRSSI);
+        if (beacon.mac == 'unknown'){
+            beacon.displayRSSI = '(via ' + device.manufacturer + ' ' + device.model + ') ' + beacon.rssi + ' dBm' ;
+            localStorage.setItem('prevRSSI-' + beacon.Color,beacon.displayRSSI);
+        }else{
+            beacon.displayRSSI = beacon.rssi + " dBm (via TILT PICO)";
+            localStorage.setItem('prevRSSI-' + beacon.Color,beacon.displayRSSI);
+        }
     }   
     //add Tilt Pico indicators
     if (tiltPicos.tiltPico.length > 0){
@@ -389,16 +402,18 @@ function checkFineLocationPermissionCallback(status) {
       // Called continuously when ranging beacons.
       var picoBeacons = [];
       delegate.didRangeBeaconsInRegion = function (pluginResult) {
-      if (usePicoOnly && pluginResult.region.identifier == 8 && !waitingForPico && !stopPicoScanRequests){
+      if (usePicoOnly && tiltPicos.tiltPico.length > 0 && pluginResult.region.identifier == 8 && !waitingForPico && !stopPicoScanRequests){
         waitingForPico = true;
-        if (tiltPicos.tiltPico[0].ip_address !== undefined) {
-        fetchJSONData(tiltPicos.tiltPico[0].ip_address)
+        tiltPicos.tiltPico.forEach((pico, index) => {
+        if (pico.ip_address !== undefined) {
+        fetchJSONData(pico.ip_address)
         .then(data => {
         picoBeacons = data;
         waitingForPico = false;
         })
         .catch(error => {
         console.error("Error fetching data:", error);
+        macToggle(pico.ip_address);
         picoBeacons = [];
         });
         if (pluginResult.beacons[0] !== undefined) {
@@ -407,6 +422,7 @@ function checkFineLocationPermissionCallback(status) {
         pluginResult.beacons = picoBeacons;
         //console.log(pluginResult.beacons);
         }
+        });
         }
         //console.log(pluginResult);
           if (pluginResult.beacons.length > 0) {
@@ -584,6 +600,8 @@ function checkFineLocationPermissionCallback(status) {
              else{
                 beacon.mac = 'unknown';
              }
+             //remove Tilt from Google Sheets if found in scan
+             $$('#tiltcardGS-' + beacon.Color).remove();
              //update list of in range beacons
                 var inRangeBeacons = localStorage.getItem('inrangebeacons')||'NONE';
                 var inRangeBeaconsArray = inRangeBeacons.split(',');
@@ -926,7 +944,7 @@ function checkFineLocationPermissionCallback(status) {
     var cloudLoggingInterval = localStorage.getItem('cloudInterval-' + beacon.Color)||'15';
     //console.log(beacon.Color, beacon.lastCloudLogged, cloudLoggingInterval, localStorage.getItem('inrangebeacons').split(',').includes(beacon.Color));
     if (localStorage.getItem('inrangebeacons').split(',').includes(beacon.Color) && localStorage.getItem('picoStatus-' + beacon.Color) == 'color-green'){
-    if (Number(beacon.lastCloudLogged) >= Number(cloudLoggingInterval)){
+    if (Number(beacon.lastCloudLogged) > Number(cloudLoggingInterval)){
         if (tiltPicos.tiltPico.length > 0){
         for (const device of tiltPicos.tiltPico) {
             if (device.pico_logging_tilts.includes(beacon.Color)){
@@ -1367,12 +1385,23 @@ function toggleUseMac (ip_address){
             if (toggle.checked){
                 macToggleEnabled = '1';
                 localStorage.setItem('macToggleEnabled-' + ip_address, macToggleEnabled);
+                let indexIP = tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == ip_address);
+                tiltPicos.tiltPico[indexIP].enable_scanning = true;
                 usePicoOnly = true;
             }
-            if (!toggle.checked){
+            else if (!toggle.checked){
                 macToggleEnabled = '0';
                 localStorage.setItem('macToggleEnabled-' + ip_address, macToggleEnabled);
-                usePicoOnly = false;
+                let indexIP = tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == ip_address);
+                tiltPicos.tiltPico[indexIP].enable_scanning = false;
+                for (const pico of tiltPicos.tiltPico){
+                    if (pico.enable_scanning == true){
+                        usePicoOnly = true;
+                        break
+                    }else{
+                        usePicoOnly = false;
+                    }
+                }
                 localStorage.setItem('inrangebeacons', 'NONE');
                 
             }
@@ -2513,6 +2542,10 @@ function postToCloudURLs (color, comment, picoRequestString = 'none') {
                 showBeerName(color);
                 $$('#cloudStatus' + color).html('<a class="link external" href="' + jsonData.doclongurl + '" target="_system">&nbsp;<i class="material-icons size-15">cloud_done</i><span id="lastCloudLogged' + color +'"></span></a>');
                 localStorage.setItem('docLongURL-' + color, jsonData.doclongurl);
+                var gsLogURLs = JSON.parse(localStorage.getItem('gsLogURLs')||'{}');
+                gsLogURLs[color] = jsonData.doclongurl;
+                localStorage.setItem('gsLogURLs', JSON.stringify(gsLogURLs));
+                //console.log(localStorage.getItem('gsLogURLs'));
             }
             }
             //json parse error - just show "result" if not Baron Brew Google Sheets
@@ -3207,3 +3240,85 @@ async function importAesKey(rawKeyString) {
         }, 40000);
         }
     }
+
+    function getGoogleSheetsData(range){
+        var gsLogURLs = localStorage.getItem('gsLogURLs')||'{}';
+        let inRangeBeacons = localStorage.getItem('inrangebeacons')||'NONE';
+        Object.entries(JSON.parse(gsLogURLs)).forEach(([key, value]) => {
+            //console.log(key, value);
+         if (inRangeBeacons.split(',').includes(key)){
+            delete GStilts[key];
+            //console.log(GStilts);
+        }else{
+            if (usePicoOnly){
+                return;
+            }
+            //console.log(key, inRangeBeacons.split(',').includes(key));
+            let regex = /\/d\/([a-zA-Z0-9_-]+)(?:\/edit|\/view|\/pubhtml|\/spreadsheets)?/;
+            let gsLogURLSheetID = value.match(regex);
+            //console.log(gsLogURLSheetID[1]);
+            let APIURL = 'https://sheets.googleapis.com/v4/spreadsheets/' + gsLogURLSheetID[1] + '/values/' + range + '?valueRenderOption=UNFORMATTED_VALUE&key=AIzaSyCCxP61MTSIzeesfUxP27s3ojDADYIcW_s';
+            //console.log(APIURL);
+            return new Promise((resolve, reject) => {
+            cordova.plugin.http.get(APIURL, {}, {}, 
+                function(response) {
+                    resolve(response);
+                }, 
+                function(response) {
+                    reject(new Error(response.error));
+              })})
+              .then(response => {
+                if (response.status != 200) {
+                  throw new Error(`HTTP error! Status: ${response.status}`);
+                }else{
+                    var result = JSON.parse(response.data);
+                    if (range = 'Report!A1:G2' && result.values[0][1] == ''){
+                    //console.log(result);
+                    let now = new Date();
+                    let offsetMilliseconds = now.getTimezoneOffset() * 60 * 1000;
+                    let jsMilliseconds = ((result.values[1][2] - 25569) * 24 * 60 * 60 * 1000) + offsetMilliseconds;
+                    let newDate = new Date(jsMilliseconds);
+                    let timeStamp = newDate.toLocaleString();
+                    let timeAgo = (Date.now() - jsMilliseconds) / 1000 / 60 ;
+                    let timeAgoUnits = 'min';
+                    //console.log(timeAgo);
+                    if (timeAgo > 120){
+                        timeAgo /= 60;
+                        timeAgoUnits = 'hrs';
+                    }
+                    if (timeAgo > 48 ){
+                        timeAgo /= 24;
+                        timeAgoUnits = 'days';
+                    }
+                    let tempUnits = result.values[0][4].replace('Temp (','').replace(')','');
+                    let tempScale = 0;
+                    if (tempUnits == '°F'){
+                        tempScale = (result.values[1][4] / 185) * 100;
+                    }else if (tempUnits == '°C'){
+                        tempScale = ((result.values[1][4] + 17.8) / 85) * 100;
+                    }
+                    let sG = result.values[1][3];
+                    let gravityType = 'Specific Gravity @ 60°F / 15.6°C';
+                    let sgUnits = result.values[0][3].replace('% Sugar (','').replace(')','');
+                    let sgScale = 0;
+                    if (sgUnits == '°P' || sgUnits == '°Bx'){
+                        sgScale = (result.values[1][3] / 28.1) * 100;
+                        gravityType = 'Percent Sucrose (equiv.) @ 20°C / 68°F';
+                        sG = result.values[1][3].toFixed(2);
+                    }else if (sgUnits == 'SG'){
+                        sgUnits = '';
+                        sgScale = ((result.values[1][3] - 0.990) / 0.130) * 100;
+                        sG = result.values[1][3].toFixed(4);
+                    }
+                    GStilts[key] = {Colormac : key, Cloudlink : value, Color : result.values[1][5].replace(':','_'), SG : sG, Gravitytype : gravityType, SGscale: sgScale, SGunits : sgUnits, Temp : result.values[1][4].toFixed(1), Tempscale : tempScale, Tempunits : result.values[0][4].replace('Temp (','').replace(')',''), Beername : result.values[1][6], Timestamp : timeStamp, Timeago : timeAgo.toFixed(0), Timeagounits : timeAgoUnits };
+                    //console.log(GStilts);
+                    var displayhtml = compileddisplayTemplateGS(GStilts);
+                    $$('#tiltcardGS').html(displayhtml);
+                    }
+                    
+
+                }
+            });
+         }
+        });
+}
