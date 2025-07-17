@@ -8,9 +8,10 @@ var app  = new Framework7({
   name: 'Tilt Hydrometer', // App name
   theme: 'auto', // Automatic theme detection
   statusbar: {
-      overlay: false,
+      overlay: true,
       iosOverlaysWebView: false,
-      enabled: false,//disable for android
+      enabled: false,
+      setBackgroundColor : 'black',
       iosTextColor: 'white',
       iosBackgroundColor: 'black',
   },
@@ -30,7 +31,7 @@ var app  = new Framework7({
       CORRECT_AES_KEY_STRING : 'MJUBlkVI59Qx47Rz',
       defaultCloudURL : 'https://script.google.com/a/baronbrew.com/macros/s/AKfycbydNOcB-_3RB3c-7sOTI-ZhTnN43Ye1tt0EFvvMxTxjdbheaw/exec',
       tiltColors : ['RED', 'GREEN', 'BLACK', 'PURPLE', 'ORANGE', 'BLUE', 'YELLOW', 'PINK'],
-      appVersion : '1.0.94'
+      appVersion : '1.0.96'
     };
   },
   dialog: {
@@ -88,6 +89,7 @@ var watchBluetoothInterval;
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
   console.log("Device is ready!");
+  app.statusbar.setBackgroundColor('#000000');
   getGoogleSheetsData('Report!A1:G2');
   setInterval(function(){ getGoogleSheetsData('Report!A1:G2');}, 60000);
   document.addEventListener("resume", onResume, false);
@@ -147,7 +149,8 @@ $$(document).on('deviceready', function() {
   var picoName = '';
   var picoFabVisible = false;
   var picoFabVisibleTimeout = null;
-  var successDialog = undefined;
+  var wifiDialog = null;
+  var successDialog = null;
 
 
   function checkBluetoothPermissionCallback(status) {
@@ -234,19 +237,19 @@ function checkFineLocationPermissionCallback(status) {
   function doOnOrientationChange() {
     switch(window.orientation) {  
       case -90:
-        app.statusbar.hide();
+        app.statusbar.setBackgroundColor('#000000');
         $$('.card').css('max-width','45%');
         $$('.card').css('font-size','80%');
         $$('.navbar').css('display','none');
         break;
       case 90:
-        app.statusbar.hide();
+        app.statusbar.setBackgroundColor('#000000');
         $$('.card').css('max-width','45%');
         $$('.card').css('font-size','80%');
         $$('.navbar').css('display','none');
         break;
       default:
-        app.statusbar.show();
+        app.statusbar.setBackgroundColor('#000000');
         $$('.card').css('max-width','100%');
         $$('.card').css('font-size','100%');
         $$('.navbar').css('display','block');
@@ -382,7 +385,7 @@ function checkFineLocationPermissionCallback(status) {
             beacon.displayRSSI = '(via ' + device.manufacturer + ' ' + device.model + ') ' + beacon.rssi + ' dBm' ;
             localStorage.setItem('prevRSSI-' + beacon.Color,beacon.displayRSSI);
         }else{
-            beacon.displayRSSI = beacon.rssi + " dBm (via TILT PICO)";
+            beacon.displayRSSI = '(via TILT PICO) ' + beacon.rssi + " dBm";
             localStorage.setItem('prevRSSI-' + beacon.Color,beacon.displayRSSI);
         }
     }   
@@ -413,7 +416,6 @@ function checkFineLocationPermissionCallback(status) {
         })
         .catch(error => {
         console.error("Error fetching data:", error);
-        macToggle(pico.ip_address);
         picoBeacons = [];
         });
         if (pluginResult.beacons[0] !== undefined) {
@@ -440,8 +442,10 @@ function checkFineLocationPermissionCallback(status) {
                   if (beacon.uuid == 'a495bc02-c5b1-4b44-b512-1370f02d74de' && beacon.rssi > -60 && beacon.major == 999 && beacon.minor == 999){
                         scanningToast.close();
                         console.log('found Tilt Pico waiting for WiFi connection with RSSI ' + beacon.rssi);
-                        picoFabVisible = true;
-                        toggleVisibility('picoFAB', 'block');
+                        if (wifiDialog == null){
+                            picoFabVisible = true;
+                            toggleVisibility('picoFAB', 'block');
+                        }
                         if (picoFabVisibleTimeout === null){
                             picoFabVisibleTimeout = setTimeout(function() {
                             picoFabVisible = false;}, 15000);
@@ -622,7 +626,7 @@ function checkFineLocationPermissionCallback(status) {
                             $$('#tiltcard-' + beacon.Color).hide();
                             $$('#accordion-' + beacon.Color).hide();
                             //copy settings to pico beacon if they are set to default (don't overwrite)
-                            if (localStorage.getItem('beerName-' + duplicateBeaconColor) == 'Untitled' || localStorage.getItem('beerName-' + duplicateBeaconColor) === null){
+                            /*if (localStorage.getItem('beerName-' + duplicateBeaconColor) == 'Untitled' || localStorage.getItem('beerName-' + duplicateBeaconColor) === null){
                             localStorage.setItem('beerName-' + duplicateBeaconColor, localStorage.getItem('beerName-' + beacon.Color)||'Untitled');
                             }
                             if (localStorage.getItem('actualSGpoints-' + duplicateBeaconColor) == '-0.001,10.000' || localStorage.getItem('actualSGpoints-' + duplicateBeaconColor) === null){
@@ -635,7 +639,7 @@ function checkFineLocationPermissionCallback(status) {
                                 }
                             if (localStorage.getItem('docLongURL-' + duplicateBeaconColor) === null){
                             localStorage.setItem('docLongURL-' + duplicateBeaconColor, localStorage.getItem('docLongURL-' + beacon.Color)||null);
-                            }
+                            }*/
                             break;//stop processing beacon if pico beacon already exists
                             }
                         else{
@@ -2740,6 +2744,7 @@ var wifiConnProgress = 0;
   $$('.open-pico-wifi-prompt').on('click', function () {
     picoFabVisible = false
     toggleVisibility('picoFAB', 'none');
+    wifiDialog = {};
     app.dialog.prompt('', 'Enter a unique name for your Tilt Pico:', function (picoName_input){
         picoName = picoName_input;
         app.dialog.prompt('', 'Enter WiFi name:', function (picoSSID_input){
@@ -2764,32 +2769,24 @@ var wifiConnProgress = 0;
                     }
                     if (wifiConnProgress === 100) {
                       clearInterval(interval);
-                      setTimeout(function(){
-                        if (successDialog !== undefined){
-                            wifiDialog.close();
-                            successDialog = undefined;
-                        }else {
-                            setTimeout(function(){ 
-                                if (wifiDialog !== undefined) {
-                                    wifiDialog.close();
-                                }
-                            }, 10000);
-                    }
-                    }, 5000);
+                      wifiDialog.close();
+                      wifiDialog = null;
+                      if (successDialog == null || successDialog.destroyed){
+                        app.dialog.progress('Connecting to WiFi...');
+                        setTimeout(function () {
+                            app.dialog.close();
+                            if(picoFabVisible){
+                                app.dialog.alert('Check name, password, and make sure you are within 5 feet to the Tilt Pico and try again.','Wifi Connection Failed');
+                            }
+                                }, 15000);
+                      }
                       picoFabVisible = false;
                     }
                   }, 300)
-                setTimeout(function () {
-                    if (wifiDialog !== undefined) {
-                        wifiDialog.close();
-                    }
-                  }, 35000);
-
-                });
-            });
-        });
+                },function(){wifiDialog = null;});
+            },function(){wifiDialog = null;});
+        }, function(){wifiDialog = null;});
     });
-
   function resetPico(button){
     var clickedButton = button.id.split('-');
     var tiltPicoIP = clickedButton[1].replaceAll('x', '.');
@@ -3298,12 +3295,12 @@ async function importAesKey(rawKeyString) {
                         tempScale = ((result.values[1][4] + 17.8) / 85) * 100;
                     }
                     let sG = result.values[1][3];
-                    let gravityType = 'Specific Gravity @ 60°F / 15.6°C';
+                    let gravityType = 'Specific Gravity (60°F / 15.6°C)';
                     let sgUnits = result.values[0][3].replace('% Sugar (','').replace(')','');
                     let sgScale = 0;
                     if (sgUnits == '°P' || sgUnits == '°Bx'){
                         sgScale = (result.values[1][3] / 28.1) * 100;
-                        gravityType = 'Percent Sucrose (equiv.) @ 20°C / 68°F';
+                        gravityType = 'Percent Sugar (@ 20°C / 68°F)';
                         sG = result.values[1][3].toFixed(2);
                     }else if (sgUnits == 'SG'){
                         sgUnits = '';

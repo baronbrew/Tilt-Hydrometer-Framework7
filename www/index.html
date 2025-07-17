@@ -261,7 +261,7 @@
        </table>
       </div>
         <p class="row">
-          <button id="removepicologgingtilt-{{js 'this.ip_address.replaceAll(".", "x")'}}" class="col button button-fill" onclick="remove_tilts_from_pico(this)">Remove All from List</button>
+          <button id="removepicologgingtilt-{{js 'this.ip_address.replaceAll(".", "x")'}}" class="col button button-outline color-red" onclick="remove_tilts_from_pico(this)">Remove All from List</button>
         </p>
       <p><a href="#" data-popover=".tplogging-popover" class="popover-open"><i class="f7-icons size-15">info</i> More information...</a></p>
         <div class="popover tplogging-popover">
@@ -274,7 +274,7 @@
      <div class="block-title no-margin-top"><i class="f7-icons size-15">keyboard_fill</i> Tilt Pico WiFi Connection<br><br>IP Address: {{ip_address}}</div>
      </div>
         <p class="row">
-        <button id="disconnect-{{js 'this.ip_address.replaceAll(".", "x")'}}" class="col button button-fill" onclick="resetPico(this)">Disconnect {{text}}</button>
+        <button id="disconnect-{{js 'this.ip_address.replaceAll(".", "x")'}}" class="col button button-outline color-red" onclick="resetPico(this)">Disconnect {{text}}</button>
       </p>
     </div>
       </div>
@@ -517,15 +517,6 @@
                         <i class="icon icon-radio"></i>
                         <div class="item-inner">
                           <div class="item-title">Brix</div>
-                        </div>
-                      </label>
-                    </li>
-                    <li>
-                      <label class="item-radio item-content">
-                        <input type="radio" name="gravityRadio-{{Color}}" value="%alc/vol"/>
-                        <i class="icon icon-radio"></i>
-                        <div class="item-inner">
-                          <div class="item-title">Calculated alcohol by volume for beer or wine</div>
                         </div>
                       </label>
                     </li>
