@@ -8,7 +8,7 @@ var app  = new Framework7({
   name: 'Tilt Hydrometer', // App name
   theme: 'auto', // Automatic theme detection
   statusbar: {
-      overlay: true,
+      overlay: false,
       iosOverlaysWebView: false,
       enabled: false,
       setBackgroundColor : 'black',
@@ -31,7 +31,7 @@ var app  = new Framework7({
       CORRECT_AES_KEY_STRING : 'MJUBlkVI59Qx47Rz',
       defaultCloudURL : 'https://script.google.com/a/baronbrew.com/macros/s/AKfycbydNOcB-_3RB3c-7sOTI-ZhTnN43Ye1tt0EFvvMxTxjdbheaw/exec',
       tiltColors : ['RED', 'GREEN', 'BLACK', 'PURPLE', 'ORANGE', 'BLUE', 'YELLOW', 'PINK'],
-      appVersion : '1.0.96'
+      appVersion : '1.0.97'
     };
   },
   dialog: {
@@ -100,8 +100,6 @@ $$(document).on('deviceready', function() {
           app.data.tiltColors.forEach(restorePreferredUnits);
           // Specify a shortcut for the location manager holding the iBeacon functions.
           window.locationManager = cordova.plugins.locationManager;
-          // Start tracking beacons
-          initScan();
           //detect orientation change for fixing status bar if needed 
           window.addEventListener('orientationchange', doOnOrientationChange);
           //detect when app is opened from background
@@ -110,10 +108,12 @@ $$(document).on('deviceready', function() {
           if (device.platform == 'Android' || device.platform == 'amazon-fireos'){
           watchBluetoothInterval = setInterval(function(){ watchBluetooth(); }, 30000);//check if tilts are connected every 30 seconds, toggle bluetooth if not
           permissions = cordova.plugins.permissions;
-          permissions.checkPermission(permissions.BLUETOOTH_SCAN, checkBluetoothPermissionCallback, null);
           permissions.checkPermission(permissions.BLUETOOTH_ADVERTISE, checkBluetoothAdvertisePermissionCallback, null);
-          permissions.checkPermission(permissions.ACCESS_FINE_LOCATION, checkFineLocationPermissionCallback, null);
+          setTimeout(function() { permissions.checkPermission(permissions.ACCESS_FINE_LOCATION, checkFineLocationPermissionCallback, null); }, 2000);
+          setTimeout(function() { permissions.checkPermission(permissions.ACCESS_FINE_LOCATION, checkFineLocationPermissionCallback, null); }, 6000);
           //permissions.checkPermission(permissions.ACCESS_COARSE_LOCATION, checkCoarseLocationPermissionCallback, null);
+          // Start tracking beacons
+          initScan();
           }
 });
 
@@ -199,6 +199,7 @@ $$(document).on('deviceready', function() {
 }
 
 function checkFineLocationPermissionCallback(status) {
+    permissions.checkPermission(permissions.BLUETOOTH_SCAN, checkBluetoothPermissionCallback, null);
     if (!status.hasPermission) {
         var errorCallback = function () {
             console.warn('ACCESS_FINE_LOCATION permission is not turned on');
@@ -728,12 +729,33 @@ function checkFineLocationPermissionCallback(status) {
     beacon.displayFermunits = localStorage.getItem('displayFermunits-' + beacon.Color)||"";
     switch (beacon.displayFermunits) {
         case "" : 
-        beacon.uncaldisplayFerm = beacon.uncalSG;
-        beacon.caldisplayFerm = (getCalFerm(beacon.Color)).toFixed(beacon.sgDecimals);
+            beacon.uncaldisplayFerm = beacon.uncalSG;
+            beacon.caldisplayFerm = (getCalFerm(beacon.Color)).toFixed(beacon.sgDecimals);
+        break;
+        case '°UP/°OP':
+            if (Number(convertSGtoPreferredUnits(beacon.Color, getCalFerm(beacon.Color))) > 0) {
+                beacon.displayFermunits = '°O.P.';
+                beacon.uncaldisplayFerm = convertSGtoPreferredUnits(beacon.Color, beacon.uncalSG);
+                beacon.caldisplayFerm = convertSGtoPreferredUnits(beacon.Color, getCalFerm(beacon.Color));
+            } else if (Number(convertSGtoPreferredUnits(beacon.Color, getCalFerm(beacon.Color))) == 0){
+                beacon.displayFermunits = '';
+                beacon.caldisplayFerm = '100 Proof';
+                if (Number(convertSGtoPreferredUnits(beacon.Color, beacon.uncalSG)) != 0) {
+                    beacon.displayFermunits = '';
+                    beacon.uncaldisplayFerm = Number(convertSGtoPreferredUnits(beacon.Color, beacon.uncalSG));
+                }
+                beacon.uncaldisplayFerm = (Number(convertSGtoPreferredUnits(beacon.Color, beacon.uncalSG))).toFixed(0);
+            } else{
+                beacon.displayFermunits = '°U.P.';
+                beacon.uncaldisplayFerm = (Number(convertSGtoPreferredUnits(beacon.Color, beacon.uncalSG)) * -1).toFixed(1);
+                beacon.caldisplayFerm = (Number(convertSGtoPreferredUnits(beacon.Color, getCalFerm(beacon.Color))) * -1).toFixed(1);
+            }
         break;
         default : 
-        beacon.uncaldisplayFerm = convertSGtoPreferredUnits(beacon.Color, beacon.uncalSG);
-        beacon.caldisplayFerm = convertSGtoPreferredUnits(beacon.Color, getCalFerm(beacon.Color));
+            beacon.uncaldisplayFerm = convertSGtoPreferredUnits(beacon.Color, beacon.uncalSG);
+            beacon.caldisplayFerm = convertSGtoPreferredUnits(beacon.Color, getCalFerm(beacon.Color));
+
+            //console.log(beacon.caldisplayFerm);
     }
     //setup tilt cards (generate new card once for each Tilt found)
     var foundBeacons = localStorage.getItem('foundbeacons');
@@ -1041,6 +1063,7 @@ var displayFermunits = localStorage.getItem('displayFermunits-' + color)||'';
         case '°Bx'  : return ((((((182.4601 * SG) - 775.6821) * SG) + 1262.7794) * SG) - 669.5622).toFixed(1);
         case '%ABV'  : return convertSGtoABV(color, SG, false);
         case '%ABV*' : return convertSGtoABV(color, SG, true);
+        case '°UP/°OP' : return convertSGtoOPUP(color, SG, false);
     }
 }
 
@@ -2600,6 +2623,20 @@ function convertSGtoABV (color, SG, isTComp){
     var densityIndex = densityArray.indexOf(SG)-1;
     return ((1000 - densityIndex) / 10).toFixed(1)||SG;
     }
+
+    function convertSGtoOPUP (color, SG, isTComp){
+        SG = Number(SG);
+        if (isTComp){
+            var Temp = getCalTemp(color);
+            SG = -0.0003996 * (68-Temp) + SG;
+        }
+        var densityArray = [0.78934,0.78987,0.79038,0.79087,0.79137,0.79188,0.79237,0.79287,0.79336,0.79384,0.79432,0.79481,0.79529,0.79577,0.79625,0.79672,0.79717,0.79764,0.79809,0.79855,0.79901,0.79945,0.79991,0.80035,0.80079,0.80122,0.80165,0.80208,0.80252,0.80294,0.80336,0.80379,0.80421,0.80462,0.80505,0.80546,0.80586,0.80627,0.80668,0.80709,0.80749,0.80790,0.80830,0.80869,0.80910,0.80949,0.80988,0.81027,0.81067,0.81105,0.81145,0.81183,0.81222,0.81260,0.81299,0.81337,0.81375,0.81413,0.81451,0.81488,0.81526,0.81563,0.81601,0.81638,0.81675,0.81711,0.81748,0.81784,0.81821,0.81856,0.81893,0.81929,0.81964,0.82000,0.82035,0.82071,0.82106,0.82141,0.82177,0.82212,0.82246,0.82281,0.82315,0.82350,0.82384,0.82419,0.82453,0.82488,0.82522,0.82556,0.82590,0.82625,0.82658,0.82692,0.82726,0.82759,0.82792,0.82826,0.82859,0.82893,0.82925,0.82958,0.82991,0.83024,0.83056,0.83089,0.83121,0.83154,0.83186,0.83219,0.83251,0.83282,0.83315,0.83347,0.83379,0.83410,0.83442,0.83473,0.83505,0.83537,0.83569,0.83601,0.83632,0.83663,0.83694,0.83725,0.83756,0.83787,0.83818,0.83850,0.83881,0.83912,0.83942,0.83973,0.84004,0.84035,0.84065,0.84095,0.84126,0.84157,0.84188,0.84217,0.84248,0.84278,0.84308,0.84339,0.84369,0.84399,0.84429,0.84459,0.84489,0.84520,0.84549,0.84579,0.84608,0.84639,0.84668,0.84698,0.84727,0.84757,0.84787,0.84815,0.84844,0.84874,0.84903,0.84932,0.84962,0.84991,0.85020,0.85049,0.85077,0.85106,0.85136,0.85164,0.85192,0.85222,0.85250,0.85278,0.85307,0.85336,0.85364,0.85393,0.85422,0.85450,0.85478,0.85506,0.85536,0.85564,0.85592,0.85620,0.85649,0.85677,0.85705,0.85733,0.85761,0.85789,0.85818,0.85846,0.85873,0.85901,0.85929,0.85957,0.85984,0.86012,0.86041,0.86069,0.86096,0.86124,0.86151,0.86179,0.86206,0.86234,0.86261,0.86289,0.86316,0.86336,0.86356,0.86399,0.86426,0.86453,0.86481,0.86508,0.86535,0.86562,0.86590,0.86617,0.86644,0.86671,0.86697,0.86724,0.86751,0.86778,0.86805,0.86832,0.86859,0.86885,0.86912,0.86939,0.86966,0.86992,0.87019,0.87045,0.87071,0.87098,0.87125,0.87151,0.87177,0.87204,0.87230,0.87256,0.87282,0.87308,0.87335,0.87360,0.87387,0.87412,0.87439,0.87465,0.87491,0.87516,0.87542,0.87569,0.87594,0.87620,0.87646,0.87672,0.87697,0.87724,0.87749,0.87775,0.87801,0.87826,0.87852,0.87878,0.87903,0.87929,0.87954,0.87980,0.88005,0.88031,0.88056,0.88081,0.88107,0.88132,0.88158,0.88183,0.88208,0.88233,0.88258,0.88284,0.88309,0.88334,0.88359,0.88384,0.88409,0.88434,0.88458,0.88484,0.88509,0.88533,0.88559,0.88583,0.88608,0.88632,0.88658,0.88682,0.88707,0.88732,0.88756,0.88781,0.88805,0.88830,0.88855,0.88879,0.88903,0.88928,0.88952,0.88977,0.89001,0.89025,0.89050,0.89074,0.89098,0.89122,0.89147,0.89171,0.89195,0.89219,0.89243,0.89268,0.89292,0.89315,0.89339,0.89363,0.89387,0.89411,0.89435,0.89459,0.89483,0.89507,0.89531,0.89555,0.89578,0.89602,0.89626,0.89649,0.89672,0.89696,0.89720,0.89743,0.89767,0.89791,0.89814,0.89837,0.89861,0.89884,0.89908,0.89931,0.89954,0.89977,0.90001,0.90025,0.90048,0.90071,0.90094,0.90117,0.90141,0.90163,0.90187,0.90210,0.90234,0.90256,0.90279,0.90303,0.90326,0.90348,0.90371,0.90395,0.90417,0.90440,0.90463,0.90486,0.90509,0.90532,0.90554,0.90577,0.90599,0.90622,0.90646,0.90668,0.90691,0.90713,0.90736,0.90758,0.90781,0.90803,0.90826,0.90848,0.90871,0.90893,0.90916,0.90938,0.90960,0.90982,0.91005,0.91027,0.91050,0.91072,0.91094,0.91116,0.91138,0.91160,0.91183,0.91206,0.91227,0.91249,0.91271,0.91293,0.91315,0.91337,0.91358,0.91381,0.91403,0.91424,0.91446,0.91467,0.91489,0.91510,0.91532,0.91554,0.91575,0.91597,0.91618,0.91639,0.91661,0.91682,0.91704,0.91725,0.91747,0.91768,0.91789,0.91810,0.91831,0.91852,0.91874,0.91895,0.91915,0.91937,0.91958,0.91979,0.91999,0.92021,0.92042,0.92063,0.92084,0.92105,0.92126,0.92147,0.92167,0.92188,0.92209,0.92229,0.92250,0.92271,0.92291,0.92312,0.92332,0.92353,0.92373,0.92394,0.92415,0.92435,0.92455,0.92476,0.92496,0.92517,0.92537,0.92556,0.92577,0.92597,0.92617,0.92637,0.92658,0.92678,0.92699,0.92719,0.92739,0.92759,0.92778,0.92798,0.92818,0.92839,0.92859,0.92879,0.92898,0.92918,0.92938,0.92958,0.92977,0.92997,0.93017,0.93036,0.93056,0.93076,0.93095,0.93116,0.93136,0.93154,0.93174,0.93194,0.93213,0.93232,0.93251,0.93270,0.93290,0.93308,0.93328,0.93347,0.93366,0.93385,0.93404,0.93423,0.93441,0.93461,0.93479,0.93498,0.93516,0.93536,0.93554,0.93573,0.93591,0.93610,0.93629,0.93647,0.93666,0.93684,0.93703,0.93721,0.93739,0.93758,0.93776,0.93794,0.93813,0.93831,0.93849,0.93867,0.93885,0.93903,0.93922,0.93940,0.93957,0.93975,0.93993,0.94011,0.94028,0.94046,0.94064,0.94081,0.94099,0.94117,0.94135,0.94152,0.94169,0.94187,0.94205,0.94222,0.94239,0.94256,0.94274,0.94291,0.94308,0.94325,0.94342,0.94359,0.94376,0.94393,0.94410,0.94427,0.94443,0.94460,0.94477,0.94494,0.94510,0.94527,0.94544,0.94560,0.94577,0.94594,0.94610,0.94627,0.94643,0.94659,0.94676,0.94692,0.94708,0.94725,0.94741,0.94757,0.94773,0.94789,0.94805,0.94821,0.94837,0.94853,0.94869,0.94885,0.94901,0.94917,0.94933,0.94949,0.94964,0.94980,0.94996,0.95011,0.95027,0.95043,0.95058,0.95074,0.95089,0.95104,0.95120,0.95135,0.95151,0.95166,0.95181,0.95196,0.95211,0.95227,0.95242,0.95257,0.95272,0.95287,0.95301,0.95316,0.95331,0.95346,0.95360,0.95375,0.95390,0.95405,0.95419,0.95434,0.95449,0.95463,0.95478,0.95492,0.95506,0.95521,0.95535,0.95549,0.95563,0.95577,0.95591,0.95605,0.95619,0.95634,0.95648,0.95662,0.95676,0.95689,0.95703,0.95717,0.95731,0.95745,0.95758,0.95771,0.95785,0.95799,0.95812,0.95826,0.95839,0.95852,0.95866,0.95880,0.95893,0.95906,0.95920,0.95932,0.95945,0.95958,0.95972,0.95985,0.95998,0.96011,0.96024,0.96036,0.96049,0.96062,0.96075,0.96087,0.96100,0.96112,0.96125,0.96138,0.96150,0.96163,0.96175,0.96187,0.96199,0.96212,0.96224,0.96236,0.96249,0.96261,0.96273,0.96285,0.96297,0.96310,0.96322,0.96334,0.96346,0.96358,0.96369,0.96381,0.96393,0.96406,0.96418,0.96430,0.96442,0.96454,0.96465,0.96477,0.96489,0.96501,0.96513,0.96525,0.96536,0.96548,0.96559,0.96571,0.96583,0.96595,0.96606,0.96618,0.96630,0.96641,0.96653,0.96664,0.96676,0.96687,0.96699,0.96710,0.96722,0.96733,0.96744,0.96756,0.96767,0.96778,0.96789,0.96801,0.96812,0.96823,0.96835,0.96846,0.96857,0.96869,0.96880,0.96891,0.96902,0.96913,0.96925,0.96936,0.96947,0.96958,0.96970,0.96980,0.96991,0.97002,0.97013,0.97025,0.97036,0.97047,0.97057,0.97068,0.97079,0.97090,0.97102,0.97113,0.97123,0.97134,0.97145,0.97156,0.97167,0.97178,0.97188,0.97199,0.97210,0.97221,0.97232,0.97242,0.97253,0.97264,0.97275,0.97285,0.97295,0.97306,0.97317,0.97328,0.97339,0.97349,0.97359,0.97370,0.97381,0.97391,0.97402,0.97412,0.97423,0.97433,0.97444,0.97454,0.97464,0.97474,0.97485,0.97496,0.97507,0.97517,0.97527,0.97538,0.97548,0.97559,0.97570,0.97581,0.97591,0.97602,0.97613,0.97624,0.97634,0.97645,0.97657,0.97667,0.97678,0.97689,0.97699,0.97710,0.97721,0.97732,0.97742,0.97753,0.97764,0.97775,0.97786,0.97797,0.97808,0.97819,0.97830,0.97841,0.97852,0.97863,0.97875,0.97886,0.97897,0.97908,0.97919,0.97930,0.97942,0.97953,0.97964,0.97975,0.97987,0.97998,0.98009,0.98020,0.98031,0.98043,0.98054,0.98066,0.98077,0.98089,0.98100,0.98111,0.98122,0.98133,0.98145,0.98156,0.98168,0.98180,0.98191,0.98203,0.98214,0.98226,0.98238,0.98250,0.98261,0.98273,0.98285,0.98296,0.98308,0.98320,0.98332,0.98344,0.98356,0.98367,0.98379,0.98391,0.98404,0.98416,0.98428,0.98440,0.98452,0.98463,0.98476,0.98488,0.98500,0.98512,0.98524,0.98536,0.98549,0.98560,0.98572,0.98584,0.98596,0.98608,0.98620,0.98633,0.98645,0.98658,0.98670,0.98682,0.98694,0.98706,0.98719,0.98731,0.98744,0.98756,0.98769,0.98781,0.98794,0.98806,0.98819,0.98832,0.98845,0.98857,0.98870,0.98882,0.98895,0.98908,0.98921,0.98934,0.98947,0.98960,0.98973,0.98986,0.98999,0.99013,0.99026,0.99040,0.99052,0.99066,0.99080,0.99093,0.99106,0.99120,0.99133,0.99147,0.99161,0.99174,0.99188,0.99201,0.99215,0.99229,0.99243,0.99257,0.99271,0.99285,0.99299,0.99313,0.99327,0.99341,0.99355,0.99370,0.99384,0.99398,0.99413,0.99427,0.99442,0.99456,0.99470,0.99485,0.99499,0.99513,0.99528,0.99543,0.99557,0.99572,0.99587,0.99601,0.99616,0.99631,0.99645,0.99660,0.99675,0.99690,0.99704,0.99719,0.99734,0.99749,0.99763,0.99778,0.99793,0.99808,0.99823]
+        densityArray.push(SG);
+        densityArray.sort();
+        var densityIndex = densityArray.indexOf(SG)-1;
+        var upop = ((((1000 - densityIndex) / 10) * 1.7513) - 100).toFixed(1);
+        return upop||SG;
+        }
     
     function advertise_iBeacon (uuid, minor, major){
         console.log(uuid);// = 'a495bb10-c5b1-4b44-b512-1370f02d74de';

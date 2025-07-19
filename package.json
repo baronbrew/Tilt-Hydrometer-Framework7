@@ -33,7 +33,7 @@
     "@capacitor/cli": "^3.3.1",
     "com.unarin.cordova.beacon": "git+https://github.com/baronbrew/cordova-plugin-ibeacon.git#v3.x",
     "cordova": "^10.0.0",
-    "cordova-android": "^13.0.0",
+    "cordova-android": "^14.0.1",
     "cordova-ios": "^5.1.1",
     "cordova-plugin-advanced-http": "^3.1.0",
     "cordova-plugin-android-permissions": "^1.1.4",

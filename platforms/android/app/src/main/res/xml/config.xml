@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.baronbrew.tilthydrometerf7" version="1.0.96" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.baronbrew.tilthydrometerf7" version="1.0.97" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <feature name="Device">
         <param name="android-package" value="org.apache.cordova.device.Device" />
     </feature>
@@ -59,18 +59,20 @@
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="KeepRunning" value="true" />
     <preference name="GradlePluginKotlinVersion" value="1.9.24" />
-    <preference name="GradleVersion" value="8.7" />
+    <preference name="GradleVersion" value="8.13" />
     <preference name="android-buildToolsVersion" value="35.0.0" />
-    <preference name="AndroidGradlePluginVersion" value="8.3.0" />
+    <preference name="AndroidGradlePluginVersion" value="8.7.3" />
     <preference name="android-compileSdkVersion" value="35" />
     <preference name="android-minSdkVersion" value="24" />
     <preference name="android-targetSdkVersion" value="35" />
     <preference name="AndroidXEnabled" value="true" />
-    <preference name="com.unarin.cordova.beacon.android.altbeacon.EnableLocationPermissionAlert" value="false" />
+    <preference name="AndroidXAppCompatVersion" value="1.7.0" />
+    <preference name="AndroidXWebKitVersion 1.12.1" value="1.7.0" />
+    <preference name="GradlePluginGoogleServicesVersion 4.4.2" value="1.7.0" />
     <preference name="com.unarin.cordova.beacon.android.altbeacon.RequestBtPermission" value="no" />
     <preference name="com.unarin.cordova.beacon.android.altbeacon.ForegroundScanPeriod" value="1500" />
     <preference name="com.unarin.cordova.beacon.android.altbeacon.ForegroundBetweenScanPeriod" value="500" />
-    <preference name="StatusBarOverlaysWebView" value="true" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#000000" />
     <preference name="StatusBarStyle" value="darkcontent" />
     <preference name="Orientation" value="default" />
