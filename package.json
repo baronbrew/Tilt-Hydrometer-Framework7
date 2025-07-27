@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@capacitor/cli": "^3.3.1",
-    "com.unarin.cordova.beacon": "git+https://github.com/baronbrew/cordova-plugin-ibeacon.git#v3.x",
+    "com.unarin.cordova.beacon": "github:baronbrew/cordova-plugin-ibeacon",
     "cordova": "^10.0.0",
     "cordova-android": "^14.0.1",
     "cordova-ios": "^5.1.1",

@@ -22,7 +22,6 @@
 		32FCED7CEFA147068D69F214 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF968466ACB46A8A567EB0B /* MessageUI.framework */; };
 		34D5EFE975F14FA08E8EE3EC /* CDVWKInAppBrowserUIDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1746F5990943D78214E767 /* CDVWKInAppBrowserUIDelegate.m */; };
 		35B450458EEA491ABB2CA2CE /* LMLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BD442F5A6A7412A8B1F7D85 /* LMLogger.m */; };
-		38132C46B6334B7081149578 /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = D009998E1C8D44E7B19EF41E /* CDVDevice.m */; };
 		3972EB73D1C143E3A26E43BC /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CE565254BD42B18725615B /* AFURLResponseSerialization.m */; };
 		4A1EF765CCD04E2E8BABEE0A /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B1C0BF8F7A746BDA9AE8FD5 /* AFSecurityPolicy.m */; };
 		4FD1BBB33F6C41BCBCF92E05 /* CDVStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AD11CD4C514B0EB453A610 /* CDVStatusBar.m */; };
@@ -107,7 +106,6 @@
 		40A63F0D449349359F5B07E7 /* AppDelegate+CDVLocationManager.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = "AppDelegate+CDVLocationManager.m"; path = "com.unarin.cordova.beacon/AppDelegate+CDVLocationManager.m"; sourceTree = "<group>"; };
 		41D25B904D98476DA8E89004 /* TextResponseSerializer.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = TextResponseSerializer.h; path = "cordova-plugin-advanced-http/TextResponseSerializer.h"; sourceTree = "<group>"; };
 		5082E803D87F4F92B046576D /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = AFURLRequestSerialization.h; path = "cordova-plugin-advanced-http/AFURLRequestSerialization.h"; sourceTree = "<group>"; };
-		5307748F56434DBA8A054116 /* CDVDevice.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVDevice.h; path = "cordova-plugin-device/CDVDevice.h"; sourceTree = "<group>"; };
 		549124B3E7DE4A94BA627E96 /* LMLogger.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = LMLogger.h; path = com.unarin.cordova.beacon/LMLogger.h; sourceTree = "<group>"; };
 		5BF3B733E1084A85B4B978B8 /* TextRequestSerializer.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = TextRequestSerializer.m; path = "cordova-plugin-advanced-http/TextRequestSerializer.m"; sourceTree = "<group>"; };
 		6009F0F56916407C92EDC921 /* CordovaHttpPlugin.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CordovaHttpPlugin.h; path = "cordova-plugin-advanced-http/CordovaHttpPlugin.h"; sourceTree = "<group>"; };
@@ -139,7 +137,6 @@
 		C4404DDFD8C044F9A86F0BE5 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = AFNetworkReachabilityManager.h; path = "cordova-plugin-advanced-http/AFNetworkReachabilityManager.h"; sourceTree = "<group>"; };
 		C5A98ED8AB5949B7B6FACA1D /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = AFHTTPSessionManager.h; path = "cordova-plugin-advanced-http/AFHTTPSessionManager.h"; sourceTree = "<group>"; };
 		C76045D567AE4AF9B19BB4DE /* SystemConfiguration.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		D009998E1C8D44E7B19EF41E /* CDVDevice.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVDevice.m; path = "cordova-plugin-device/CDVDevice.m"; sourceTree = "<group>"; };
 		D099598348F649A2BB3A598F /* CoreBluetooth.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		D1430014FD5C40F1A891287B /* CDVWKInAppBrowser.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVWKInAppBrowser.h; path = "cordova-plugin-inappbrowser/CDVWKInAppBrowser.h"; sourceTree = "<group>"; };
 		D6DCBCDB8F30406C9F50E790 /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = AFNetworkReachabilityManager.m; path = "cordova-plugin-advanced-http/AFNetworkReachabilityManager.m"; sourceTree = "<group>"; };
@@ -267,8 +264,6 @@
 		307C750510C5A3420062BCA9 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
-				D009998E1C8D44E7B19EF41E /* CDVDevice.m */,
-				5307748F56434DBA8A054116 /* CDVDevice.h */,
 				DFA37B7CCC494BF9AED095C1 /* CDVLocationManager.m */,
 				40A63F0D449349359F5B07E7 /* AppDelegate+CDVLocationManager.m */,
 				1BD442F5A6A7412A8B1F7D85 /* LMLogger.m */,
@@ -452,7 +447,6 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
-				38132C46B6334B7081149578 /* CDVDevice.m in Sources */,
 				700FF39D7BE2479694779E09 /* CDVLocationManager.m in Sources */,
 				8036626687E14884A3DCECA6 /* AppDelegate+CDVLocationManager.m in Sources */,
 				35B450458EEA491ABB2CA2CE /* LMLogger.m in Sources */,

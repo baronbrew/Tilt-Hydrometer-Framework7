@@ -71,6 +71,7 @@
             </div>
           </div>
           <div class="page-content">
+            <div class="list" id="picofileList"></div>
             <div class="list" id="fileList"></div>
           </div>
         </div>
@@ -140,8 +141,8 @@
   <script id="displaytemplateGS" type="text/template7">
     {{#each this}}
     <div id="tiltcardGS-{{Colormac}}" class="card card-outline elevation-12 col-100 tablet-45 no-gap">
-        <div class="card-content card-content-padding"><p class="no-margin-bottom">{{Beername}}</p><strong>TILT | {{js 'this.Colormac.replace("_"," ")'}}</strong> <a class="link external" href="{{Cloudlink}}" target="_system">&nbsp;<i class="material-icons size-15">cloud</i>&nbsp;&nbsp;{{Timeago}}&nbsp;{{Timeagounits}}</a></div>
-        <button class="button col margin-horizontal button-round button-style-{{js 'this.Color.replace("_","•").split("•")[0]'}}" style="height:30px;width:90%;"></button>
+        <div class="card-content card-content-padding"><p class="no-margin-bottom">{{Beername}}</p><strong>TILT | {{js 'this.Colormac.replace("_"," ").toUpperCase()'}}</strong> <a class="link external" href="{{Cloudlink}}" target="_system">&nbsp;<i class="material-icons size-15">cloud</i>&nbsp;&nbsp;{{Timeago}}&nbsp;{{Timeagounits}}</a></div>
+        <button id="removeGScard-{{Colormac}}" class="button col margin-horizontal button-round button-style-{{js 'this.Color.replace("_","•").split("•")[0]'}}" style="height:30px;width:90%;"></button>
         <div class="card-content card-content-padding">{{Gravitytype}}:</div>
         <div id="SG{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{SG}}<small>{{SGunits}}</small></div>
         <div id="percentScaleSG{{Color}}" class="margin-horizontal button-border button-style-{{js 'this.Color.replace("_","•").split("•")[0]'}}" style="height:10px;width:{{SGscale}}%;max-width:95%;"></div>
@@ -156,7 +157,9 @@
 
  <script id="filelisttemplate" type="text/template7">
   <div class="list media-list">
+    <div class="list-group">
           <ul>
+            <li class="list-group-title">DEVICE LOGS</li>
   {{#each this}}
             <li>
                 <a onclick="emailClickedCSV('{{this}}', '{{js "this.match('RED|GREEN|BLACK|PURPLE|ORANGE|BLUE|PINK|YELLOW')[0]"}}')" class="item-link item-content">
@@ -173,7 +176,32 @@
   {{/each}}
    </ul>
   </div>
+</div>
   </script>
+
+  <script id="picofilelisttemplate" type="text/template7">
+    <div class="list media-list">
+      <div class="list-group">
+            <ul>
+              <li class="list-group-title">TILT PICO LOGS</li>
+      {{#each tiltPico}}
+              <li>
+                  <a onclick="fetchJSONData('{{ip_address}}/log.csv')" class="item-link item-content">
+                      <div class="item-inner">
+                          <div class="item-title-row">
+                          <div class="item-title">{{text}}-log.csv</div>
+                          <div class="item-after"><i class="f7-icons">share</i></div>
+            </div>
+            <div class="item-subtitle">http://{{ip_address}}/log.csv</div>
+            <div class="item-text">(tap to download and email)</div>
+          </div>
+        </a>
+      </li>
+    {{/each}}
+     </ul>
+    </div>
+  </div>
+    </script>
 
   <script id="picologginglisttemplate" type="text/template7">
     {{#each pico_logging_tilts}}
@@ -229,21 +257,21 @@
     <div class="accordion-item-content">
       <div class="block">
         <div class="item-inner">
-        <div class="block-title no-margin-top"><i class="material-icons">bluetooth</i> Tilt Scanning</div>
+        <div class="block-title no-margin-top"><i class="material-icons">bluetooth</i> Device Scanning Mode</div>
         </div>
         <p class="margin-top"><label class="toggle" id="macToggle-{{js 'this.ip_address.replaceAll(".","x")'}}">
           <input type="checkbox" unchecked>
           <span class="toggle-icon"></span>
-          </label><a onclick="macToggle('{{ip_address}}')"> Use for Tilt scanning</a>
+          </label><a onclick="macToggle('{{ip_address}}')"><span id="macToggleLabel-{{js 'this.ip_address.replaceAll(".","x")'}}"></span></a>
           <p><a href="#" data-popover=".mac-popover" class="popover-open"><i class="f7-icons size-15">info</i> More information...</a></p>
         <div class="popover mac-popover">
             <div class="popover-inner padding">
-                <span><i class="f7-icons size-15">info</i> Tilt Bluetooth scanning will be done on Tilt Pico. Allows use of multiple Tilt hydrometers of the same color by using the unique MAC address of each Tilt.</span>
+                <span><i class="f7-icons size-15">info</i> Enables viewing Tilt hydrometers as seen from your Tilt Pico instead of your device. Enable this setting when you need to check Tilt Pico Bluetooth connection or have multiple Tilt hydrometers of the same color and want to identify by their MAC address.</span>
             </div>
           </div>
        </p>
      <div class="item-inner">
-      <div class="block-title no-margin-top"><i class="material-icons">cloud</i> Cloud Logging</div>
+      <div class="block-title no-margin-top"><i class="material-icons">cloud</i> Cloud Logging Info</div>
       </div>
      <div class="data-table">
       <table>
@@ -251,7 +279,7 @@
             <tr>
               <div class="item-inner">
               <div class="chip">
-                <div class="chip-label" id="picoStatus-{{js 'this.ip_address.replaceAll(".","x")'}}">Status:</div>
+                <div class="chip-label" id="picoStatus-{{js 'this.ip_address.replaceAll(".","x")'}}"><i class="f7-icons size-15">info</i> </div>
               </div>
             </div>
             </tr>
@@ -270,8 +298,14 @@
             </div>
           </div>
        </p>
+       <div class="item-inner">
+        <div class="block-title no-margin-top"><i class="f7-icons">drawer_fill</i> Device Logging Info</div>
+        </div>
+      <div class="item-inner">
+        <p>Download device log:<br><a class="link external" href="http://{{ip_address}}/log.csv" target="_system">http://{{ip_address}}/log.csv</a></p>
+      </div>
      <div class="item-inner">
-     <div class="block-title no-margin-top"><i class="f7-icons size-15">keyboard_fill</i> Tilt Pico WiFi Connection<br><br>IP Address: {{ip_address}}</div>
+     <div class="block-title no-margin-top"><i class="f7-icons size-15">keyboard_fill</i> Tilt Pico Local Network<br><br>IP Address: {{ip_address}}</div>
      </div>
         <p class="row">
         <button id="disconnect-{{js 'this.ip_address.replaceAll(".", "x")'}}" class="col button button-outline color-red" onclick="resetPico(this)">Disconnect {{text}}</button>
