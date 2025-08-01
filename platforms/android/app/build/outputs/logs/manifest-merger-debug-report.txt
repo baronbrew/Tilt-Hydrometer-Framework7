@@ -53,15 +53,15 @@ MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/noahneibaron/.grad
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/noahneibaron/.gradle/caches/8.13/transforms/36c288d822d7c9865774a6f7adf8d424/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
 MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/noahneibaron/.gradle/caches/8.13/transforms/3f47f3aa03c8c03de42f458f5fd2260a/transformed/core-runtime-2.2.0/AndroidManifest.xml:17:1-22:12
 	package
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:103-143
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:102-142
 		INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml
 	android:versionName
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:74-102
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:74-101
 		INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml
 	android:hardwareAccelerated
 		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:11-45
 	xmlns:android
-		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:144-202
+		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:143-201
 	android:versionCode
 		ADDED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml:2:46-73
 		INJECTED from /Users/noahneibaron/Documents/GitHub/Tilt-Hydrometer-Framework7/platforms/android/app/src/main/AndroidManifest.xml

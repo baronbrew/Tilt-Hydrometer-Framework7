@@ -11,26 +11,11 @@
   <component name="ChangeListManager">
     <list default="true" id="20649c0e-f5ee-46a5-8713-d6b887632341" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../../config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../config.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android.json" beforeDir="false" afterPath="$PROJECT_DIR$/android.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/baronbrew/tilthydrometerf7/BuildConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/baronbrew/tilthydrometerf7/BuildConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/assets/www/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/www/cordova_plugins.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/assets/www/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/www/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/assets/www/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/www/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/unarin/cordova/beacon/LocationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/unarin/cordova/beacon/LocationManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/xml/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/xml/config.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform_www/cordova_plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/platform_www/cordova_plugins.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/Tilt 2.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Plugins/cordova-plugin-device/CDVDevice.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ios/Tilt 2/Plugins/cordova-plugin-device/CDVDevice.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ios/platform_www/plugins/cordova-plugin-device/www/device.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ios/www/plugins/cordova-plugin-device/www/device.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../plugins/android.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../plugins/android.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../www/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../www/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../www/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../www/js/app.js" afterDir="false" />
     </list>

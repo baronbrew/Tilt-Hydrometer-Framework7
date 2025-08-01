@@ -31,7 +31,7 @@ var app  = new Framework7({
       CORRECT_AES_KEY_STRING : 'MJUBlkVI59Qx47Rz',
       defaultCloudURL : 'https://script.google.com/a/baronbrew.com/macros/s/AKfycbydNOcB-_3RB3c-7sOTI-ZhTnN43Ye1tt0EFvvMxTxjdbheaw/exec',
       tiltColors : ['RED', 'GREEN', 'BLACK', 'PURPLE', 'ORANGE', 'BLUE', 'YELLOW', 'PINK'],
-      appVersion : '1.0.99'
+      appVersion : '1.1.0'
     };
   },
   dialog: {
@@ -494,7 +494,7 @@ function checkFineLocationPermissionCallback(status) {
                                 inRangeBeacons.shift();
                             }
                           if (tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == tiltPicoIPAddr) == -1){
-                            var tiltPicoElement = JSON.parse(localStorage.getItem('tiltPicoIPAddr-' + tiltPicoIPAddr))||{'ip_address': tiltPicoIPAddr, 'text' : 'Untitled ' + tiltPicoIPAddr.split('.')[3], 'enable_scanning' : false, 'pico_logging_tilts' : [], 'pico_device_logging' : false};
+                            var tiltPicoElement = JSON.parse(localStorage.getItem('tiltPicoIPAddr-' + tiltPicoIPAddr))||{'ip_address': tiltPicoIPAddr, 'text' : 'Untitled ' + tiltPicoIPAddr.split('.')[3], 'enable_scanning' : false, 'pico_logging_tilts' : [], 'pico_device_logging' : false, 'pico_device_logging_tilts' : localStorage.getItem('deviceloggingtilts-' + tiltPicoIPAddr)};
                             tiltPicos.tiltPico.unshift(tiltPicoElement);
                             if (picoName == ''){
                                 tiltPicos.tiltPico[0]['text'] = tiltPicoElement['text'];
@@ -517,7 +517,7 @@ function checkFineLocationPermissionCallback(status) {
                                 //console.log(inRangeColors);
                                 tiltPicos.tiltPico[0]['pico_logging_tilts'] = inRangeColors;
                                 localStorage.setItem('tiltPicoIPAddr-' + tiltPicoIPAddr, JSON.stringify(tiltPicos.tiltPico[0]));
-                                updatePicoLoggingList(tiltPicoIPAddr)
+                                updatePicoLoggingList(tiltPicoIPAddr);
                                 const now = new Date();
                                 const offsetSeconds = now.getTimezoneOffset() * 60; // Returns offset in seconds
                                 for (let i = 0; i < inRangeColors.length; i++){
@@ -791,9 +791,9 @@ function checkFineLocationPermissionCallback(status) {
         var docLongURL = localStorage.getItem('docLongURL-' + foundBeaconsArray[i])||null;
         //console.log(beacon.Color, docLongURL);
         if (docLongURL === null || docLongURL == 'null'){
-            $$('#cloudStatus' + foundBeaconsArray[i]).html('');
+            $$('.cloudStatus' + foundBeaconsArray[i]).html('');
         }else{
-            $$('#cloudStatus' + foundBeaconsArray[i]).html('<a class="link external" href="' + docLongURL + '" target="_system">&nbsp;<i class="material-icons size-15">cloud</i><span id="lastCloudLogged' + foundBeaconsArray[i] +'"></span></a>');
+            $$('.cloudStatus' + foundBeaconsArray[i]).html('<a class="link external" href="' + docLongURL + '" target="_system">&nbsp;<i class="material-icons size-15">cloud</i><span class="lastCloudLogged' + foundBeaconsArray[i] +'"></span></a>');
             }
         const now = new Date();
         const offsetSeconds = now.getTimezoneOffset() * 60; // Returns offset in seconds
@@ -1003,7 +1003,7 @@ function checkFineLocationPermissionCallback(status) {
     //initialize display units
     //update data fields in Tilt card template
     $$('#beerName' + beacon.Color).html(beacon.Beername.split(',')[0]);
-    $$('#lastCloudLogged' + beacon.Color).html(beacon.lastCloudLogged + ' min');
+    $$('.lastCloudLogged' + beacon.Color).html(beacon.lastCloudLogged + ' min');
     $$('#uncalSG' + beacon.Color).html(beacon.uncalSG);
     $$('#uncaldisplayFerm+displayFermunits' + beacon.Color).html(String(beacon.uncaldisplayFerm) + beacon.displayFermunits);
     $$('#caldisplayFerm+displayFermunits' + beacon.Color).html(String(beacon.caldisplayFerm) + '<small>' + beacon.displayFermunits + '</small>');
@@ -1340,7 +1340,7 @@ function clearBeerName (button){
     localStorage.setItem('beerName-' + color, 'Untitled');
     localStorage.setItem('localJSONfileName-' + color, 'not logging');
     localStorage.setItem('localCSVfileName-' + color, 'not logging');
-    $$('#cloudStatus' + color).html('');
+    $$('.cloudStatus' + color).html('');
     $$('#deviceStatus' + color).html('');
     showBeerName(color);
 }
@@ -1801,7 +1801,7 @@ function postToCloudURLsDisabled (color, comment) {
               localStorage.setItem('beerName-' + color, jsonData.beername);
               NativeStorage.setItem('beerName-' + color, jsonData.beername, function (result) { }, function (e) { });
                 showBeerName(color);
-                $$('#cloudStatus' + color).html('<a class="link external" href="' + jsonData.doclongurl + '" target="_system">&nbsp;<i class="material-icons size-15">cloud_done</i><span id="lastCloudLogged' + beacon.Color +'"></span></a>');
+                $$('.cloudStatus' + color).html('<a class="link external" href="' + jsonData.doclongurl + '" target="_system">&nbsp;<i class="material-icons size-15">cloud_done</i><span class="lastCloudLogged' + beacon.Color +'"></span></a>');
                 localStorage.setItem('docLongURL-' + color, jsonData.doclongurl);
             }
             }
@@ -1817,7 +1817,7 @@ function postToCloudURLsDisabled (color, comment) {
                     closeTimeout: 8000,
                   });
                 notificationSuccess.open();
-                $$('#cloudStatus' + beacon.Color).html('<i class="material-icons size-15">cloud_done</i><span id="lastCloudLogged' + beacon.Color +'"></span>');
+                $$('.cloudStatus' + beacon.Color).html('<i class="material-icons size-15">cloud_done</i><span class="lastCloudLogged' + beacon.Color +'"></span>');
 
             }
         }, function (errorData) {
@@ -1831,7 +1831,7 @@ function postToCloudURLsDisabled (color, comment) {
                 closeTimeout: 5000,
               });
             notificationCloudError.open();
-            $$('#cloudStatus' + beacon.Color).html('cloud error');
+            $$('.cloudStatus' + beacon.Color).html('cloud error');
 
         },
         'text'
@@ -2055,13 +2055,14 @@ function endLog(button) {
     //end log unless user cancels within 5 seconds
     var cancelE = setTimeout(function() { 
             localStorage.setItem('beerName-' + color, 'Untitled');
+            localStorage.removeItem('docLongURL-' + color);
             showBeerName(color);
             postToCloudURLs(color, "End of log");
             localStorage.setItem('localJSONfileName-' + color, 'not logging');
             localStorage.setItem('localCSVfileName-' + color, 'not logging');
             $$('#deviceStatus' + color).html('');
             $$('#beername-' + color).val('');
-            $$('#cloudStatus' + color).html('');
+            $$('.cloudStatus' + color).html('');
             }, 5000);
             notificationLogEnded.on('click', 
             function() { 
@@ -2569,7 +2570,7 @@ function postToCloudURLs (color, comment, picoRequestString = 'none') {
               if (picoRequestString != 'none'){
                 var updatedString = picoRequestString.replace(/beername=.*?&/,'beername=' + jsonData.beername + '&');
                 console.log(updatedString, color, 'got beername, transferring to pico');
-                app.dialog.progress('Connecting to TILT PICO<br>To confirm cloud log started, verify: <i class="icon f7-icons color-gray">bolt_fill</i> <i class="icon f7-icons color-gray">arrow_right</i> <i class="icon f7-icons color-green">bolt_fill</i>');
+                app.dialog.progress('Connecting to TILT PICO<br>Check main app screen to confirm logging active:<br><i class="icon f7-icons color-gray">bolt_fill</i> <i class="icon f7-icons color-gray">arrow_right</i> <i class="icon f7-icons color-green">bolt_fill</i>');
                 setTimeout(function () {app.dialog.close();}, 10000);
                 setTimeout(function(){ fetchJSONData(updatedString, color);}, 3000);//update Tilt Pico after starting log in app and getting beer name to log to
                 setTimeout(function(){ fetchJSONData(updatedString.split('/')[0] + '/lastlogged');}, 13000);
@@ -2584,7 +2585,7 @@ function postToCloudURLs (color, comment, picoRequestString = 'none') {
               }
               NativeStorage.setItem('beerName-' + color, jsonData.beername, function (result) { }, function (e) { });
                 showBeerName(color);
-                $$('#cloudStatus' + color).html('<a class="link external" href="' + jsonData.doclongurl + '" target="_system">&nbsp;<i class="material-icons size-15">cloud_done</i><span id="lastCloudLogged' + color +'"></span></a>');
+                $$('.cloudStatus' + color).html('<a class="link external" href="' + jsonData.doclongurl + '" target="_system">&nbsp;<i class="material-icons size-15">cloud_done</i><span class="lastCloudLogged' + color +'"></span></a>');
                 localStorage.setItem('docLongURL-' + color, jsonData.doclongurl);
                 var gsLogURLs = JSON.parse(localStorage.getItem('gsLogURLs')||'{}');
                 gsLogURLs[color] = jsonData.doclongurl;
@@ -2604,7 +2605,7 @@ function postToCloudURLs (color, comment, picoRequestString = 'none') {
                     closeTimeout: 8000,
                   });
                 notificationSuccess.open();
-                $$('#cloudStatus' + beacon.Color).html('<i class="material-icons size-15">cloud_done</i><span id="lastCloudLogged' + beacon.Color +'"></span>');
+                $$('.cloudStatus' + beacon.Color).html('<i class="material-icons size-15">cloud_done</i><span class="lastCloudLogged' + beacon.Color +'"></span>');
 
             }
         }, function (errorData) {
@@ -2620,7 +2621,7 @@ function postToCloudURLs (color, comment, picoRequestString = 'none') {
               });
             notificationCloudError.open();
             console.log(JSON.stringify(errorData));
-            $$('#cloudStatus' + beacon.Color).html('cloud error');
+            $$('.cloudStatus' + beacon.Color).html('cloud error');
 
         }
         );
@@ -2707,7 +2708,7 @@ function convertSGtoABV (color, SG, isTComp){
             wifiConnProgress = 100;
         }//finished sending password, start scanning again
         console.log('done advertising');
-    },5000)
+    },8000)
     }
 
 //functions for converting WiFi name and password to transmittable iBeacons
@@ -2751,7 +2752,7 @@ function insertDashes(str) {
       } else {
         clearInterval(intervalId);
       }
-    }, 6000);
+    }, 9000);
   }
   
   //takes a character string, converts it to hex encoding then transmits it as one or more iBeacons.
@@ -2885,13 +2886,13 @@ var wifiConnProgress = 0;
     var picohtml = compiledpicoTemplate(tiltPicos);
     $$('#picoPanel').html(picohtml);
     for (const tiltPico of tiltPicos.tiltPico){
-    toggleUseMac(tiltPico.ip_address);
-    updatePicoLoggingList(tiltPico.ip_address);
-    fetchJSONData(tiltPico.ip_address + '/lastlogged');
-    if (tiltPico.pico_device_logging){
-        var picodevicedisplayhtml = compiledpicofilelistTemplate(tiltPicos);
-        $$('#picofileList').html(picodevicedisplayhtml);
-     }
+        toggleUseMac(tiltPico.ip_address);
+        updatePicoLoggingList(tiltPico.ip_address);
+        fetchJSONData(tiltPico.ip_address + '/lastlogged');
+        if (tiltPico.pico_device_logging){
+            var picodevicedisplayhtml = compiledpicofilelistTemplate(tiltPicos);
+            $$('#picofileList').html(picodevicedisplayhtml);
+        }
     }
   }
 
@@ -2931,7 +2932,7 @@ var wifiConnProgress = 0;
                 var tiltPicoIndex = tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == tiltPicoIP.split('/')[0]);   
                 var fileName = tiltPicos.tiltPico[tiltPicoIndex].text + '-log.csv';
                 writeToFile(fileName, response.data, false, 'csv', tiltPicoIP.split('/')[0]);
-                emailClickedPicoCSV(fileName);
+                setTimeout(function(){ emailClickedPicoCSV(fileName); }, 200);
                 return
             }
             var result = JSON.parse(response.data);
@@ -2945,7 +2946,49 @@ var wifiConnProgress = 0;
                 var tiltPicoIndex = tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == tiltPicoIP.split('/')[0]);
                 app.dialog.alert(result.result, 'Tilt Pico: <strong>' + tiltPicos.tiltPico[tiltPicoIndex].text + '</strong>');
                 localStorage.setItem('picoStatus-' + tiltPicoIP.split('?')[1].split('=')[1].replace('-','•'), 'color-gray');
+                localStorage.setItem('deviceloggingtilts-' + tiltPicos.tiltPico[tiltPicoIndex].ip_address, '');
+                tiltPicos.tiltPico[tiltPicoIndex].pico_device_logging_tilts = '';
+                $$('#pico_device_logging_tilts-' + tiltPicoIP.split('/')[0].replaceAll('.','x')).html('');
                 return;
+            }
+            if (tiltPicoIP.includes('remove_log_file')){
+                var tiltPicoIndex = tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == tiltPicoIP.split('/')[0]);
+                app.dialog.alert(result.result, 'Tilt Pico: <strong>' + tiltPicos.tiltPico[tiltPicoIndex].text + '</strong>');
+                return;
+            }
+            if (tiltPicoIP.includes('logLocally=true')){
+                let tiltPicoIndex = tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == tiltPicoIP.split('/')[0]);
+                if (result.status.includes('success: found target color')){
+                    app.dialog.alert(result.status + ' and started device logging.', 'Tilt Pico: <strong>' + tiltPicos.tiltPico[tiltPicoIndex].text + '</strong><br>Device Logging Started');
+                    let deviceLoggingTilts = localStorage.getItem('deviceloggingtilts-' + tiltPicos.tiltPico[tiltPicoIndex].ip_address)||'NONE';
+                    deviceLoggingTilts = deviceLoggingTilts.split(',');
+                    let tiltColor = result.status.split(' ')[4];
+                    tiltColor = tiltColor.replace('-','•');
+                    if (localStorage.getItem('inrangebeacons').includes(tiltColor) && !deviceLoggingTilts.includes(tiltColor)){
+                        if (deviceLoggingTilts[0] == 'NONE'){
+                            deviceLoggingTilts[0] = tiltColor;
+                        }else{
+                            deviceLoggingTilts.push(tiltColor);
+                            //console.log(tiltColor);
+                        }
+                        //console.log(tiltPicos.tiltPico[tiltPicoIndex].pico_device_logging_tilts, deviceLoggingTilts.join(', '));
+                        tiltPicos.tiltPico[tiltPicoIndex].pico_device_logging_tilts = deviceLoggingTilts.join('<br>').toUpperCase();
+                        localStorage.setItem('deviceloggingtilts-' + tiltPicos.tiltPico[tiltPicoIndex].ip_address, deviceLoggingTilts.join());
+                        $$('#pico_device_logging_tilts-' + tiltPicoIP.split('/')[0].replaceAll('.','x')).html('<strong>' + deviceLoggingTilts.join('<br>').replace('_', ' ').toUpperCase() + '</strong>');
+                    }
+                }
+                return;
+            }
+            if (tiltPicoIP.includes('logLocally=false')){
+                    let tiltPicoIndex = tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == tiltPicoIP.split('/')[0]);
+                    let deviceLoggingTilts = localStorage.getItem('deviceloggingtilts-' + tiltPicos.tiltPico[tiltPicoIndex].ip_address)||'NONE';
+                    deviceLoggingTilts = deviceLoggingTilts.split(',');
+                    const updatedDeviceLoggingTilts = deviceLoggingTilts.filter(colorRemoved => colorRemoved !== color);
+                    console.log(updatedDeviceLoggingTilts);
+                    tiltPicos.tiltPico[tiltPicoIndex].pico_device_logging_tilts = updatedDeviceLoggingTilts.join('<br>').toUpperCase();
+                    localStorage.setItem('deviceloggingtilts-' + tiltPicos.tiltPico[tiltPicoIndex].ip_address, updatedDeviceLoggingTilts.join());
+                    $$('#pico_device_logging_tilts-' + tiltPicoIP.split('/')[0].replaceAll('.','x')).html('<strong>' + updatedDeviceLoggingTilts.join('<br>').replace('_', ' ').toUpperCase() + '</strong>');
+                    return;
             }
             //console.log(tiltPicoIP);
           if (tiltPicoIP.split('/')[tiltPicoIP.split('/').length - 1] == 'lastlogged'){
@@ -2975,7 +3018,7 @@ var wifiConnProgress = 0;
                     }else{
                         localStorage.setItem('lastCloudLogged-' + tiltColor, String(value * 1000));
                         if (localStorage.getItem('picoStatus-' + tiltColor) == 'color-green'){
-                            console.log('break ' + tiltColor);
+                            //console.log('break ' + tiltColor);
                         }else{
                         localStorage.setItem('picoStatus-' + tiltColor, 'color-green');
           
@@ -3031,12 +3074,13 @@ var wifiConnProgress = 0;
                 }else if (thirdPartyCloudURLs.split(',')[1] != '' || thirdPartyCloudURLs.split(',')[2] != '') {
                     //$$('#cloudStatus' + tiltColor).html('<i class="material-icons size-15">cloud</i><span id="lastCloudLogged' + tiltColor +'"></span>');
                 }else {
-                    $$('#cloudStatus' + tiltColor).html('');
+                    $$('.cloudStatus' + tiltColor).html('');
                 }
             }
              }
                 updatePicoLoggingList(tiltPicoIP.split('/')[0]);
              }
+             //console.log(JSON.parse(response.data));
             return JSON.parse(response.data); // Parse the JSON response
           });
       };
@@ -3069,7 +3113,12 @@ var wifiConnProgress = 0;
             var picoTiltListArrayObject = {};
             picoTiltListArrayObject.pico_logging_tilts = picoTiltListArray;
             $$('#picologginglisttemplate-' + ip_address.replaceAll('.','x')).html(compiledpicologginglisttemplate(picoTiltListArrayObject));
+            let deviceLoggingTilts = localStorage.getItem('deviceloggingtilts-' + ip_address);
+            if (deviceLoggingTilts !== null){
+            $$('#pico_device_logging_tilts-' + ip_address.replaceAll('.','x')).html('<strong>' + deviceLoggingTilts.replaceAll(',','<br>').replaceAll('_', ' ').toUpperCase() + '</strong>');
+            }
             for (var i = 0; i < pico_logging_tilts.length; i++){
+                let tiltColor = pico_logging_tilts[i];
                 if (localStorage.getItem('picoStatus-' + pico_logging_tilts[i]) == 'color-green'){
                     var mac = '_unknown';
                     if (pico_logging_tilts[i].split('_').length == 2){
@@ -3078,7 +3127,12 @@ var wifiConnProgress = 0;
                     //console.log('pico_logging_tilts-' + ip_address.replaceAll('.','x') + '-' + pico_logging_tilts[i] + mac);
                     document.getElementById('pico_logging_tilts-' + ip_address.replaceAll('.','x') + '-' + pico_logging_tilts[i] + mac).checked = true;
                 }
-
+                var docLongURL = localStorage.getItem('docLongURL-' + tiltColor);
+                if (docLongURL === null || docLongURL == 'null'){
+                    $$('.cloudStatus' + tiltColor).html('');
+                }else{
+                    $$('.cloudStatus' + tiltColor).html('<a class="link external" href="' + docLongURL + '" target="_system">&nbsp;<i class="material-icons size-15">cloud</i><span class="lastCloudLogged' + tiltColor +'"></span></a>');
+                        }
             }
             
     }
@@ -3147,7 +3201,8 @@ var wifiConnProgress = 0;
                     '&actualSGcal=' + localStorage.getItem('actualSGpoints-' + color) +
                     '&cloudurls=' +  cloudURLs +
                     '&cloudinterval=' + cloudInterval + 
-                    '&timezoneoffsetsec=' + offsetSeconds;
+                    '&timezoneoffsetsec=' + offsetSeconds +
+                    '&logLocally=false';
             fetchJSONData(requestString, color);
             setTimeout(function(){ fetchJSONData(ip_addr + '/lastlogged'); }, 10000);
             setTimeout(function(){ fetchJSONData(ip_addr + '/lastlogged'); }, 20000);
@@ -3177,7 +3232,7 @@ var wifiConnProgress = 0;
             //localStorage.setItem('picoStatus-' + colorClicked, 'color-green');
             var cloudURLsSaved = localStorage.getItem('cloudurls-' + colorClicked)||',,';
             cloudURLsSaved = cloudURLsSaved.split(',');
-            app.dialog.confirm('Would you like to setup this Tilt Pico for <strong>cloud logging</strong>?', 'TILT | ' + colorClicked.split('_')[0] + '<br>' + `${colorClicked.split('_')[1] ?? ''}` + '<br>TILT PICO Cloud Logging<br> - Google Sheets' + `<br> - ${cloudURLsSaved[1].split('/')[2] ?? ''}` + `<br> - ${cloudURLsSaved[2].split('/')[2] ?? ''}`, 
+            app.dialog.confirm('Would you like to setup this Tilt Pico for <strong>cloud logging</strong>?', 'TILT | ' + colorClicked.split('_')[0] + '<br>' + `${colorClicked.split('_')[1] ?? ''}` + '<br>TILT PICO Cloud Logging<br>&nbsp;&nbsp;<i class="icon f7-icons size-15 color-gray">cloud_upload_fill</i> Google Sheets' + `<br>&nbsp;&nbsp;<i class="icon f7-icons size-15 color-gray">cloud_upload_fill</i> ${cloudURLsSaved[1].split('/')[2] ?? ''}` + `<br>&nbsp;&nbsp;<i class="icon f7-icons size-15 color-gray">cloud_upload_fill</i> ${cloudURLsSaved[2].split('/')[2] ?? ''}`, 
                 function () {
                     stopPicoScanRequests = true;
                     if (colorClicked.split('_').length == 2){
@@ -3218,13 +3273,16 @@ var wifiConnProgress = 0;
                      setTimeout(function(){ fetchJSONData(ip_address + '/lastlogged');
                      }, 40000);//start checking on status
 
-                })
+                },
+            function(){
+                fetchJSONData(ip_address + '/lastlogged');
+            })
 
                 });
         }else{
             var cloudURLsSaved = localStorage.getItem('cloudurls-' + colorClicked)||',,';
             cloudURLsSaved = cloudURLsSaved.split(',');
-            app.dialog.confirm('Would you like to set up a NEW <strong>cloud log</strong>?', 'TILT | ' + colorClicked.split('_')[0] + '<br>' + `${colorClicked.split('_')[1] ?? ''}` + '<br>TILT PICO Cloud Logging<br> - Google Sheets' + `<br> - ${cloudURLsSaved[1].split('/')[2] ?? ''}` + `<br> - ${cloudURLsSaved[2].split('/')[2] ?? ''}`, 
+            app.dialog.confirm('Would you like to set up a NEW <strong>cloud log</strong>?', 'TILT | ' + colorClicked.split('_')[0] + '<br>' + `${colorClicked.split('_')[1] ?? ''}` + '<br>TILT PICO Cloud Logging<br>&nbsp;&nbsp;<i class="icon f7-icons size-15 color-gray">cloud_upload_fill</i> Google Sheets' + `<br>&nbsp;&nbsp;<i class="icon f7-icons size-15 color-gray">cloud_upload_fill</i> ${cloudURLsSaved[1].split('/')[2] ?? ''}` + `<br>&nbsp;&nbsp;<i class="icon f7-icons size-15 color-gray">cloud_upload_fill</i> ${cloudURLsSaved[2].split('/')[2] ?? ''}`, 
                 function () { 
                     app.dialog.prompt('', 'Enter a beer name:',
                         function (beerName) {
@@ -3277,7 +3335,11 @@ var wifiConnProgress = 0;
                                      }, 40000);//start checking on status
                                     });
                                 }
-                                    });
+                                    },
+                                    function(){
+                                        fetchJSONData(ip_address + '/lastlogged');
+                                    }
+                                );
                                 
                             });
     }
@@ -3416,14 +3478,72 @@ async function importAesKey(rawKeyString) {
         }
     }
 
+function add_tilts_to_pico(button){
+    var clickedButton = button.id.split('-');
+    var tiltPicoIPAddr = clickedButton[1].replaceAll('x', '.');
+    updatePicoLoggingList(tiltPicoIPAddr);
+    var inRangeColors = localStorage.getItem('inrangebeacons').split(',');
+    if (inRangeColors[0] == 'NONE'){
+        inRangeColors.shift();
+    }
+    var tiltPicoIndex = tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == tiltPicoIPAddr);
+    if (tiltPicoIndex > -1){
+        const now = new Date();
+        const offsetSeconds = now.getTimezoneOffset() * 60; // Returns offset in seconds
+        stopPicoScanRequests = true;
+        for (let i = 0; i < inRangeColors.length; i++){
+          setTimeout(function(){
+            if (!tiltPicos.tiltPico[tiltPicoIndex]['pico_logging_tilts'].includes(inRangeColors[i])){
+                tiltPicos.tiltPico[tiltPicoIndex]['pico_logging_tilts'].push(inRangeColors[i]);
+                localStorage.setItem('tiltPicoIPAddr-' + tiltPicoIPAddr, JSON.stringify(tiltPicos.tiltPico[tiltPicoIndex]));
+                updatePicoLoggingList(tiltPicoIPAddr);
+            }
+            var cloudsEnabled = localStorage.getItem('cloudurlsenabled-' + inRangeColors[i])||'1,0,0';
+            var cloudURLs = localStorage.getItem('cloudurls-' + inRangeColors[i])||app.data.defaultCloudURL;
+            var cloudURLsArr = cloudURLs.split(',');
+            for (let i2 = 0; i2 < cloudsEnabled.split(',').length; i2++){
+                if (cloudsEnabled[i2] == 0){
+                    cloudURLsArr[i2] = ''
+                }
+            }
+            cloudURLs = cloudURLsArr.join(',');
+            var cloudInterval = localStorage.getItem('cloudInterval-' + inRangeColors[i])||'15';
+            let logLocally = 'false';
+            if (tiltPicos.tiltPico[tiltPicoIndex].pico_device_logging_tilts.split('<BR>').includes(inRangeColors[i])){
+                logLocally = 'true';
+                console.log('logLocally', logLocally, inRangeColors[i]);
+            }
+            //console.log(tiltPicoIPAddr);
+            fetchJSONData(tiltPicoIPAddr + 
+                '/sync?beername=' + encodeURIComponent(beacons[inRangeColors[i]].Beername) +
+                '&color=' + inRangeColors[i].replace('•','-') +
+                '&mac=' + beacons[inRangeColors[i]].mac +
+                '&tilttempcal=' + localStorage.getItem('uncalTemppoints-' + inRangeColors[i]) +
+                '&actualtempcal=' + localStorage.getItem('actualTemppoints-' + inRangeColors[i]) +
+                '&tiltSGcal=' + localStorage.getItem('uncalSGpoints-' + inRangeColors[i]) +
+                '&actualSGcal=' + localStorage.getItem('actualSGpoints-' + inRangeColors[i]) +
+                '&cloudurls=' +  cloudURLs +
+                '&cloudinterval=' + cloudInterval + 
+                '&timezoneoffsetsec=' + String(offsetSeconds) +
+                '&logLocally=' + logLocally, inRangeColors[i]);
+            if (i == inRangeColors.length - 1){
+                stopPicoScanRequests = false;
+                setTimeout(function(){ fetchJSONData(tiltPicoIPAddr + '/lastlogged');
+                }, 1000);
+            }
+            }, i * 1000);        
+        }
+    }
+}
+
     function getGoogleSheetsData(range){
         var gsLogURLs = localStorage.getItem('gsLogURLs')||'{}';
         let inRangeBeacons = localStorage.getItem('inrangebeacons')||'NONE';
         Object.entries(JSON.parse(gsLogURLs)).forEach(([key, value]) => {
             //console.log(key, value);
          if (inRangeBeacons.split(',').includes(key)){
+               //console.log(GStilts);
             delete GStilts[key];
-            //console.log(GStilts);
         }else{
             if (usePicoOnly){
                 return;
@@ -3485,6 +3605,7 @@ async function importAesKey(rawKeyString) {
                         sgScale = ((result.values[1][3] - 0.990) / 0.130) * 100;
                         sG = result.values[1][3].toFixed(4);
                     }
+                    GStilts[key] = {Colormac : key, Cloudlink : value, Color : result.values[1][5].replace(':','_'), SG : sG, Gravitytype : gravityType, SGscale: sgScale, SGunits : sgUnits, Temp : result.values[1][4].toFixed(1), Tempscale : tempScale, Tempunits : result.values[0][4].replace('Temp (','').replace(')',''), Beername : result.values[1][6], Timestamp : timeStamp, Timeago : timeAgo.toFixed(0), Timeagounits : timeAgoUnits };
                     //console.log(GStilts);
                     var displayhtml = compileddisplayTemplateGS(GStilts);
                     $$('#tiltcardGS').html(displayhtml);
@@ -3517,4 +3638,24 @@ function emailClickedPicoCSV(fileName){
         body: '<p>Attached CSV file can be viewed in Excel, Google Sheets, and directly in web browsers. Or use our Google Sheets template (https://docs.google.com/spreadsheets/d/1owuNOn25IHQ1Ck8pBgAEGkOifIBA7YhVc5JpE9Tlb1c/edit?usp=sharing) to import your CSV data into a pre-formatted spreadsheet. Works with laptop/desktop version of Google Sheets.</p>',
         isHtml: true,
         attachments : filePathAndName });
+}
+
+function rename_pico(button){
+    var clickedButton = button.id.split('-');
+    var tiltPicoIPAddr = clickedButton[1].replaceAll('x', '.');
+    var tiltPicoIndex = tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == tiltPicoIPAddr);
+    if (tiltPicoIndex > -1){
+        app.dialog.prompt('Enter a new name for<br><strong>' + tiltPicos.tiltPico[tiltPicoIndex].text + '</strong>', 'Rename TILT PICO', function(newName){
+            console.log(newName);
+            tiltPicos.tiltPico[tiltPicoIndex].text = newName;
+            localStorage.setItem('tiltPicoIPAddr-' + tiltPicoIPAddr, JSON.stringify(tiltPicos.tiltPico[tiltPicoIndex]));
+            updatePicoList();
+        });
+    }
+}
+
+function remove_pico_log(button){
+    var clickedButton = button.id.split('-');
+    var tiltPicoIPAddr = clickedButton[1].replaceAll('x', '.');
+    fetchJSONData(tiltPicoIPAddr + '/remove_log_file');
 }

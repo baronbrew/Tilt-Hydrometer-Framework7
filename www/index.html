@@ -113,7 +113,7 @@
   <script id="displaytemplate" type="text/template7">
     {{#each this}}
     <div id="tiltcard-{{Color}}" class="card card-outline elevation-12 col-100 tablet-45 no-gap">
-        <div class="card-content card-content-padding"><p class="no-margin-bottom" id="beerName{{Color}}">{{Beername}}</p><strong>TILT | {{js 'this.Color.split("_")[0] + " " + this.mac.replace("unknown","").toUpperCase().substring(8,12)'}} </strong><span id="cloudStatus{{Color}}"></span> <span id="deviceStatus{{Color}}"></span> <span id="tiltpicosync-{{Color}}"></span></div>
+        <div class="card-content card-content-padding"><p class="no-margin-bottom" id="beerName{{Color}}">{{Beername}}</p><strong>TILT | {{js 'this.Color.split("_")[0] + " " + this.mac.replace("unknown","").toUpperCase().substring(8,12)'}} </strong><span class="cloudStatus{{Color}}"></span> <span id="deviceStatus{{Color}}"></span> <span id="tiltpicosync-{{Color}}"></span></div>
         <div id="quicksettings" class="accordion-item">
         <div class="accordion-item-toggle">
         <button class="button col margin-horizontal button-round button-style-{{js 'this.Color.replace("_","•").split("•")[0]'}}" style="height:30px;width:90%;"></button>
@@ -212,8 +212,8 @@
             <i class="f7-icons"></i>
           </label>
         </td>
-        <td class="item-content">{{pico_logging_color}}<i class="f7-icons color-custom-{{js 'this.pico_logging_color.replace("_","•").split("•")[0]'}} size-12">cloud_fill</i></td>
-        <td class="item-content">{{js 'this.pico_logging_mac.replace("unknown", "").toUpperCase()'}}</td>
+        <td class="item-content">{{pico_logging_color}} {{js 'this.pico_logging_mac.replace("unknown", "").toUpperCase().substring(8,12)'}} <i class="f7-icons color-custom-{{js 'this.pico_logging_color.replace("_","•").split("•")[0]'}} size-12">circle_fill</i></td>
+        <td class="item-content"><span class="cloudStatus{{pico_logging_color}}{{js '("_" + this.pico_logging_mac).replace("_unknown", "")'}}"></span></td>
     </tr>
     {{/each}}
   </script>
@@ -271,7 +271,7 @@
           </div>
        </p>
      <div class="item-inner">
-      <div class="block-title no-margin-top"><i class="material-icons">cloud</i> Cloud Logging Info</div>
+      <div class="block-title no-margin-top"><i class="material-icons">show_chart</i> Tilt Pico Logging</div>
       </div>
      <div class="data-table">
       <table>
@@ -288,25 +288,35 @@
           </tbody>
        </table>
       </div>
-        <p class="row">
-          <button id="removepicologgingtilt-{{js 'this.ip_address.replaceAll(".", "x")'}}" class="col button button-outline color-red" onclick="remove_tilts_from_pico(this)">Remove All from List</button>
-        </p>
-      <p><a href="#" data-popover=".tplogging-popover" class="popover-open"><i class="f7-icons size-15">info</i> More information...</a></p>
-        <div class="popover tplogging-popover">
-            <div class="popover-inner padding">
-                <span><i class="f7-icons size-15">info</i> Tilt Pico will log to the cloud for the Tilt hydrometers indicated above. Tap the check box to make cloud logging active or inactive. To add a new Tilt hydrometer to the list, tap the TILT PICO link shown on each Tilt readout.</span>
-            </div>
-          </div>
-       </p>
-       <div class="item-inner">
-        <div class="block-title no-margin-top"><i class="f7-icons">drawer_fill</i> Device Logging Info</div>
-        </div>
       <div class="item-inner">
-        <p>Download device log:<br><a class="link external" href="http://{{ip_address}}/log.csv" target="_system">http://{{ip_address}}/log.csv</a></p>
+        <div class="block">
+          <p>Logging to {{text}} for Tilt:</p>
+          <p class="row" id="pico_device_logging_tilts-{{js 'this.ip_address.replaceAll(".", "x")'}}">(none)</p>
+        <p class="row"><a class="link external" href="http://{{ip_address}}/log.csv" target="_system"><i class="icon f7-icons">download_round_fill</i>&nbsp;&nbsp;DEVICE LOG</a></p>
       </div>
+    </div>
+      <p class="row">
+        <button id="addpicologgingtilt-{{js 'this.ip_address.replaceAll(".", "x")'}}" class="col button button-fill button-big" onclick="add_tilts_to_pico(this)">Scan for Tilts</button>
+      </p>
+      <p><a href="#" data-popover=".tplogging-popover" class="popover-open"><i class="f7-icons size-15">info</i> More information...</a></p>
+      <div class="popover tplogging-popover">
+          <div class="popover-inner padding">
+              <span><i class="f7-icons size-15">info</i> Tilt Pico will log to the cloud and/or local device for the Tilt hydrometers scanned and selected above. After scanning for Tilts, tap the check box to make cloud and/or device logging active or inactive.</span>
+          </div>
+        </div>
+     </p>
+        <p class="row">
+          <button id="removepicologgingtilt-{{js 'this.ip_address.replaceAll(".", "x")'}}" class="col button button-outline color-red" onclick="remove_tilts_from_pico(this)">Clear Logging List</button>
+        </p>
+        <p class="row">
+          <button id="delete_pico_log-{{js 'this.ip_address.replaceAll(".", "x")'}}" class="col button button-outline color-red" onclick="remove_pico_log(this)">Delete Device log</button>
+        </p>
      <div class="item-inner">
-     <div class="block-title no-margin-top"><i class="f7-icons size-15">keyboard_fill</i> Tilt Pico Local Network<br><br>IP Address: {{ip_address}}</div>
+     <div class="block-title no-margin-top"><i class="f7-icons size-15">keyboard_fill</i> Tilt Pico Device Settings<br><br>IP Address: {{ip_address}}</div>
      </div>
+     <p class="row">
+     <button id="renamepico-{{js 'this.ip_address.replaceAll(".", "x")'}}" class="col button button-big button-fill color-gray" onclick="rename_pico(this)">Rename Tilt Pico</button>
+    </p>
         <p class="row">
         <button id="disconnect-{{js 'this.ip_address.replaceAll(".", "x")'}}" class="col button button-outline color-red" onclick="resetPico(this)">Disconnect {{text}}</button>
       </p>
