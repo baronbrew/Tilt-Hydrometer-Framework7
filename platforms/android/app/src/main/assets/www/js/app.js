@@ -2708,7 +2708,7 @@ function convertSGtoABV (color, SG, isTComp){
             wifiConnProgress = 100;
         }//finished sending password, start scanning again
         console.log('done advertising');
-    },8000)
+    },5000)
     }
 
 //functions for converting WiFi name and password to transmittable iBeacons
@@ -2752,7 +2752,7 @@ function insertDashes(str) {
       } else {
         clearInterval(intervalId);
       }
-    }, 9000);
+    }, 6000);
   }
   
   //takes a character string, converts it to hex encoding then transmits it as one or more iBeacons.
