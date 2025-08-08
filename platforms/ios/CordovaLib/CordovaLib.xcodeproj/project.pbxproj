@@ -599,7 +599,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_MODULE_VERIFIER = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PUBLIC_HEADERS_FOLDER_PATH = include/Cordova;
@@ -611,7 +610,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_MODULE_VERIFIER = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PUBLIC_HEADERS_FOLDER_PATH = include/Cordova;

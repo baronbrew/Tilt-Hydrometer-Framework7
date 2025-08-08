@@ -38,12 +38,25 @@
             </div>
           </div>
           <div class="page-content">
-              <div class="block-title">Select Tilt Color</div>
+              <div class="block-title">Select Tilt Hydrometer</div>
               <div class="list">
                <ul>
                     <div id="settingsPanel"></div>
                </ul>
             </div>
+            <div class="block-title">Select Tilt Pico
+              <p><a href="#" data-popover=".tiltpico-popover" class="popover-open"><i class="f7-icons size-15">info</i> More information...</a></p>
+              <div class="popover tiltpico-popover">
+                  <div class="popover-inner padding">
+                      <span><i class="f7-icons size-15">info</i> TILT Pico is a BLUETOOTH to WIFI adapter based on the RASPBERRY PI PICO W that connects to this app for easy configuration and features remote continuous logging of all your TILT hydrometers without needing another device nearby. It supports cloud logging of multiple sensors at once and transmits the data remotely to this app via GOOGLE SHEETS default cloud service and supports 3rd party cloud services as well. For more information visit: <a class="link external" target="_system" href="https://tilthydrometer.com/pages/tilt-pico">tilthydrometer.com/pages/tilt-pico</a></span>
+                  </div>
+                </div>
+            </div>
+            <div class="list">
+            <ul>
+              <div id="picoPanel"></div>
+         </ul>
+        </div>
           </div>
         </div>
       </div>
@@ -58,6 +71,7 @@
             </div>
           </div>
           <div class="page-content">
+            <div class="list" id="picofileList"></div>
             <div class="list" id="fileList"></div>
           </div>
         </div>
@@ -68,6 +82,9 @@
     <div class="view view-main view-init ios-edges theme-dark">
       <!-- Page, data-name contains page name which can be used in callbacks -->
       <div class="page  color-theme-gray" data-name="home">
+        <div id="picoFAB" class="fab fab-right-bottom" hidden>
+          <button class="button button-fill button-round color-green open-pico-wifi-prompt"><i class="f7-icons size-15">info</i> CONNECT TILT PICO</button>
+        </div>
         <!-- Top Navbar -->
         <div class="navbar">
           <div class="navbar-inner bg-color-black">
@@ -76,7 +93,7 @@
                 <i class="icon f7-icons color-gray">gear_fill</i>
               </a>
             </div>
-            <div class="title sliding">Tilt Hydrometer | TILT 3</div>
+            <div class="title sliding">Tilt Hydrometer</div>
             <div class="right">
               <a href="#" class="link icon-only panel-open" data-panel="right">
                 <i class="icon f7-icons color-gray">folder</i>
@@ -87,6 +104,7 @@
         <!-- Scrollable page content-->
         <div class="page-content">
         <div id="tiltCard" class="tiltCard row no-gap"></div>
+        <div id="tiltcardGS" class="tiltcardGS row no-gap"></div>
         </div>
       </div>
     </div>
@@ -95,10 +113,10 @@
   <script id="displaytemplate" type="text/template7">
     {{#each this}}
     <div id="tiltcard-{{Color}}" class="card card-outline elevation-12 col-100 tablet-45 no-gap">
-        <div class="card-content card-content-padding"><p class="no-margin-bottom" id="beerName{{Color}}">{{Beername}}</p><strong>TILT | {{Color}} </strong><span id="cloudStatus{{Color}}"></span> <span id="deviceStatus{{Color}}"></span></div>
+        <div class="card-content card-content-padding"><p class="no-margin-bottom" id="beerName{{Color}}">{{Beername}}</p><strong>TILT | {{js 'this.Color.split("_")[0] + " " + this.mac.replace("unknown","").toUpperCase().substring(8,12)'}} </strong><span class="cloudStatus{{Color}}"></span> <span id="deviceStatus{{Color}}"></span> <span id="tiltpicosync-{{Color}}"></span></div>
         <div id="quicksettings" class="accordion-item">
-        <div class="accordion-item-toggle margin-horizontal">
-        <button class="button button-round button-style-{{Color}}" style="height:30px;"></button>
+        <div class="accordion-item-toggle">
+        <button class="button col margin-horizontal button-round button-style-{{js 'this.Color.replace("_","•").split("•")[0]'}}" style="height:30px;width:90%;"></button>
         </div>
         <div class="accordion-item-content">
         <div class="margin-top segmented margin-horizontal">
@@ -110,11 +128,28 @@
         </div>
         <div class="card-content card-content-padding">Gravity: <span id="uncaldisplayFerm+displayFermunits{{Color}}">{{uncaldisplayFerm}}</span> (pre-calibrated)</div>
         <div id="caldisplayFerm+displayFermunits{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{caldisplayFerm}}</div>
-        <div id="percentScaleSG{{Color}}" class="margin-horizontal button-border button-style-{{Color}}" style="height:10px;width:0%;max-width:95%;"></div>
+        <div id="percentScaleSG{{Color}}" class="margin-horizontal button-border button-style-{{js 'this.Color.replace("_","•").split("•")[0]'}}" style="height:10px;width:0%;max-width:95%;"></div>
         <div class="card-content card-content-padding">Temperature: <span id="uncaldisplayTemp+displayTempunits{{Color}}">{{uncaldisplayTemp}}</span> (pre-calibrated)</div>
         <div id="caldisplayTemp+displayTempunits{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{caldisplayTemp}}{{displayTempunits}}</div>
-        <div id="percentScaleTemp{{Color}}" class="margin-horizontal button-border button-style-{{Color}}" style="height:10px;width:0%;max-width:95%;"></div>
-        <div class="card-content card-content-padding lastrec"><span id=numberSecondsAgo{{Color}}></span> seconds ago <span id=displayRSSI{{Color}}></span><br><span id=displaytimeStamp{{Color}}></span></div>
+        <div id="percentScaleTemp{{Color}}" class="margin-horizontal button-border button-style-{{js 'this.Color.replace("_","•").split("•")[0]'}}" style="height:10px;width:0%;max-width:95%;"></div>
+        <div class="card-content card-content-padding lastrec"><span id=numberSecondsAgo{{Color}}></span> s ago <span id=displayRSSI{{Color}}></span><br><span id=displaytimeStamp{{Color}}></span></div>
+    </div>
+    {{/each}}
+      
+  </script>
+
+  <script id="displaytemplateGS" type="text/template7">
+    {{#each this}}
+    <div id="tiltcardGS-{{Colormac}}" class="card card-outline elevation-12 col-100 tablet-45 no-gap">
+        <div class="card-content card-content-padding"><p class="no-margin-bottom">{{Beername}}</p><strong>TILT | {{js 'this.Colormac.replace("_"," ").toUpperCase()'}}</strong> <a class="link external" href="{{Cloudlink}}" target="_system">&nbsp;<i class="material-icons size-15">cloud</i>&nbsp;&nbsp;{{Timeago}}&nbsp;{{Timeagounits}}</a></div>
+        <button id="removeGScard-{{Colormac}}" class="button col margin-horizontal button-round button-style-{{js 'this.Color.replace("_","•").split("•")[0]'}}" style="height:30px;width:90%;"></button>
+        <div class="card-content card-content-padding">{{Gravitytype}}:</div>
+        <div id="SG{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{SG}}<small>{{SGunits}}</small></div>
+        <div id="percentScaleSG{{Color}}" class="margin-horizontal button-border button-style-{{js 'this.Color.replace("_","•").split("•")[0]'}}" style="height:10px;width:{{SGscale}}%;max-width:95%;"></div>
+        <div class="card-content card-content-padding">Temperature:</div>
+        <div id="Temp{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{Temp}}<small>{{Tempunits}}</small></div>
+        <div id="percentScaleTemp{{Color}}" class="margin-horizontal button-border button-style-{{js 'this.Color.replace("_","•").split("•")[0]'}}" style="height:10px;width:{{Tempscale}}%;max-width:95%;"></div>
+        <div class="card-content card-content-padding lastrec">{{Timeago}} {{Timeagounits}} ago (via GOOGLE SHEETS)<br>{{Timestamp}}</div>
     </div>
     {{/each}}
       
@@ -122,7 +157,9 @@
 
  <script id="filelisttemplate" type="text/template7">
   <div class="list media-list">
+    <div class="list-group">
           <ul>
+            <li class="list-group-title">DEVICE LOGS</li>
   {{#each this}}
             <li>
                 <a onclick="emailClickedCSV('{{this}}', '{{js "this.match('RED|GREEN|BLACK|PURPLE|ORANGE|BLUE|PINK|YELLOW')[0]"}}')" class="item-link item-content">
@@ -139,6 +176,46 @@
   {{/each}}
    </ul>
   </div>
+</div>
+  </script>
+
+  <script id="picofilelisttemplate" type="text/template7">
+    <div class="list media-list">
+      <div class="list-group">
+            <ul>
+              <li class="list-group-title">TILT PICO LOGS</li>
+      {{#each tiltPico}}
+              <li>
+                  <a onclick="fetchJSONData('{{ip_address}}/log.csv')" class="item-link item-content">
+                      <div class="item-inner">
+                          <div class="item-title-row">
+                          <div class="item-title">{{text}}-log.csv</div>
+                          <div class="item-after"><i class="f7-icons">share</i></div>
+            </div>
+            <div class="item-subtitle">http://{{ip_address}}/log.csv</div>
+            <div class="item-text">(tap to download and email)</div>
+          </div>
+        </a>
+      </li>
+    {{/each}}
+     </ul>
+    </div>
+  </div>
+    </script>
+
+  <script id="picologginglisttemplate" type="text/template7">
+    {{#each pico_logging_tilts}}
+    <tr>
+        <td class="checkbox-cell">
+          <label class="checkbox">
+            <input type="checkbox" id="pico_logging_tilts-{{js 'this.ip_address.replaceAll(".","x")'}}-{{pico_logging_color}}_{{pico_logging_mac}}" onchange="update_status_pico_logging_tilts('{{ip_address}}', '{{pico_logging_color}}_{{pico_logging_mac}}')">
+            <i class="f7-icons"></i>
+          </label>
+        </td>
+        <td class="item-content">{{pico_logging_color}} {{js 'this.pico_logging_mac.replace("unknown", "").toUpperCase().substring(8,12)'}} <i class="f7-icons color-custom-{{js 'this.pico_logging_color.replace("_","•").split("•")[0]'}} size-12">circle_fill</i></td>
+        <td class="item-content"><span class="cloudStatus{{pico_logging_color}}{{js '("_" + this.pico_logging_mac).replace("_unknown", "")'}}"></span></td>
+    </tr>
+    {{/each}}
   </script>
 
   <script id="sgcallisttemplate" type="text/template7">
@@ -171,14 +248,92 @@
     {{/each}}
   </script>
 
+<script id="picotemplate" type="text/template7">
+  {{#each tiltPico}}
+  <li class="accordion-item" id="accordion-{{js 'this.ip_address.replaceAll(".", "x")'}}">
+    <div class="accordion-item-toggle">
+      <div class="item-title margin-horizontal padding"><strong>TILT PICO: </strong>{{text}}</div>
+    </div>
+    <div class="accordion-item-content">
+      <div class="block">
+        <div class="item-inner">
+        <div class="block-title no-margin-top"><i class="material-icons">bluetooth</i> Scanning Mode</div>
+        </div>
+        <p class="margin-top"><label class="toggle" id="macToggle-{{js 'this.ip_address.replaceAll(".","x")'}}">
+          <input type="checkbox" unchecked>
+          <span class="toggle-icon"></span>
+          </label><a onclick="macToggle('{{ip_address}}')"><span id="macToggleLabel-{{js 'this.ip_address.replaceAll(".","x")'}}"></span></a>
+          <p><a href="#" data-popover=".mac-popover" class="popover-open"><i class="f7-icons size-15">info</i> More information...</a></p>
+        <div class="popover mac-popover">
+            <div class="popover-inner padding">
+                <span><i class="f7-icons size-15">info</i> Enables viewing Tilt hydrometers as seen from your Tilt Pico instead of your device. Enable this setting when you need to check Tilt Pico Bluetooth connection or have multiple Tilt hydrometers of the same color and want to identify by their MAC address.</span>
+            </div>
+          </div>
+       </p>
+     <div class="item-inner">
+      <div class="block-title no-margin-top"><i class="material-icons">show_chart</i> Tilt Pico Logging</div>
+      </div>
+     <div class="data-table">
+      <table>
+          <thead>
+            <tr>
+              <div class="item-inner">
+              <div class="chip">
+                <div class="chip-label" id="picoStatus-{{js 'this.ip_address.replaceAll(".","x")'}}"><i class="f7-icons size-15">info</i> </div>
+              </div>
+            </div>
+            </tr>
+          </thead>
+          <tbody id="picologginglisttemplate-{{js 'this.ip_address.replaceAll(".", "x")'}}">
+          </tbody>
+       </table>
+      </div>
+      <div class="item-inner">
+        <div class="block">
+          <p>Logging to {{text}} for Tilt:</p>
+          <p class="row" id="pico_device_logging_tilts-{{js 'this.ip_address.replaceAll(".", "x")'}}">(none)</p>
+        <p class="row"><a class="link external" href="http://{{ip_address}}/log.csv" target="_system"><i class="icon f7-icons">download_round_fill</i>&nbsp;&nbsp;DEVICE LOG</a></p>
+      </div>
+    </div>
+      <p class="row">
+        <button id="addpicologgingtilt-{{js 'this.ip_address.replaceAll(".", "x")'}}" class="col button button-fill button-big" onclick="add_tilts_to_pico(this)">Scan for Tilts</button>
+      </p>
+      <p><a href="#" data-popover=".tplogging-popover" class="popover-open"><i class="f7-icons size-15">info</i> More information...</a></p>
+      <div class="popover tplogging-popover">
+          <div class="popover-inner padding">
+              <span><i class="f7-icons size-15">info</i> Tilt Pico will log to the cloud and/or local device for the Tilt hydrometers scanned and selected above. After scanning for Tilts, tap the check box to make cloud and/or device logging active or inactive.</span>
+          </div>
+        </div>
+     </p>
+        <p class="row">
+          <button id="removepicologgingtilt-{{js 'this.ip_address.replaceAll(".", "x")'}}" class="col button button-outline color-red" onclick="remove_tilts_from_pico(this)">Clear Logging List</button>
+        </p>
+        <p class="row">
+          <button id="delete_pico_log-{{js 'this.ip_address.replaceAll(".", "x")'}}" class="col button button-outline color-red" onclick="remove_pico_log(this)">Delete Device log</button>
+        </p>
+     <div class="item-inner">
+     <div class="block-title no-margin-top"><i class="f7-icons size-15">keyboard_fill</i> Tilt Pico Device Settings<br><br>IP Address: {{ip_address}}</div>
+     </div>
+     <p class="row">
+     <button id="renamepico-{{js 'this.ip_address.replaceAll(".", "x")'}}" class="col button button-big button-fill color-gray" onclick="rename_pico(this)">Rename Tilt Pico</button>
+    </p>
+        <p class="row">
+        <button id="disconnect-{{js 'this.ip_address.replaceAll(".", "x")'}}" class="col button button-outline color-red" onclick="resetPico(this)">Disconnect {{text}}</button>
+      </p>
+    </div>
+      </div>
+</li>
+  {{/each}}
+</script>
+
   <script id="settingstemplate" type="text/template7">
   {{#each this}}
   <li class="accordion-item" id="accordion-{{Color}}">
       <div class="accordion-item-toggle">
-        <div class="item-title margin-horizontal padding"><strong>TILT <i class="f7-icons color-custom-{{Color}} size-15">circle_fill</i> {{Color}}</strong></div>
+        <div class="item-title margin-horizontal padding"><strong>TILT <i class="f7-icons color-custom-{{js 'this.Color.replace("_","•").split("•")[0]'}} size-15">circle_fill</i> {{js 'this.Color.split("_")[0] + " " + this.mac.replace("unknown","").toUpperCase().substring(8,12)'}}</strong></div>
       </div>
     <div class="accordion-item-content">
-        <div class="block-title no-margin-top"><i class="material-icons">show_chart</i> Logging <i class="f7-icons color-custom-{{Color}} size-15">play_fill</i></div>
+        <div class="block-title no-margin-top"><i class="material-icons">show_chart</i> Logging <i class="f7-icons color-custom-{{js 'this.Color.replace("_","•").split("•")[0]'}} size-15">play_fill</i></div>
       <div class="block block-strong">
           <div class="content-block">
           <div class="content-block-inner">
@@ -304,7 +459,7 @@
      </div>
      </div>
      </div>
-     <div class="block-title"><i class="material-icons">adjust</i>SG Cal. <i class="f7-icons color-custom-{{Color}} size-15">play_fill</i></div>
+     <div class="block-title"><i class="material-icons">adjust</i>SG Cal. <i class="f7-icons color-custom-{{js 'this.Color.replace("_","•").split("•")[0]'}} size-15">play_fill</i></div>
           <div class="block block-strong">
             <div class="content-block">
             <div class="content-block-inner">
@@ -343,7 +498,7 @@
             </div>
           </div>
         </div>
-          <div class="block-title"><i class="material-icons">adjust</i>Temp. Cal.  <i class="f7-icons color-custom-{{Color}} size-15">play_fill</i></div>
+          <div class="block-title"><i class="material-icons">adjust</i>Temp. Cal.  <i class="f7-icons color-custom-{{js 'this.Color.replace("_","•").split("•")[0]'}} size-15">play_fill</i></div>
           <div class="block block-strong">
             <div class="content-block">
             <div class="content-block-inner">
@@ -377,7 +532,7 @@
             </div>
           </div>
         </div>
-           <div class="block-title"><i class="material-icons">straighten</i> Units  <i class="f7-icons color-custom-{{Color}} size-15">play_fill</i></div>
+           <div class="block-title"><i class="material-icons">straighten</i> Units  <i class="f7-icons color-custom-{{js 'this.Color.replace("_","•").split("•")[0]'}} size-15">play_fill</i></div>
            <div class="block block-strong">
            <div class="content-block">
               <div id="unitsradio-{{Color}}" class="list">
@@ -431,6 +586,19 @@
                             <div class="popover ABVt-popover">
                             <div class="popover-inner padding">
                             <span><i class="f7-icons size-15">info</i> For use with "TILT Spirits" proof and tralle hydrometer. Uses temperature compensation to improve accuracy above or below 68°F/20°C.</span>
+                            </div>
+                        </div>
+                      </label>
+                    </li>
+                    <li>
+                      <label class="item-radio item-content">
+                        <input type="radio" name="gravityRadio-{{Color}}" value="°UP/°OP"/>
+                        <i class="icon icon-radio"></i>
+                        <div class="item-inner">
+                          <a href="#" data-popover=".OPUP-popover" class="popover-open">over proof / under proof for spirits <i class="f7-icons size-15">info</i><div class="item-title"></div></a>
+                            <div class="popover OPUP-popover">
+                            <div class="popover-inner padding">
+                            <span><i class="f7-icons size-15">info</i> For use with "TILT Spirits" proof and tralle hydrometer. Converts %ABV at 68°F/20°C to degrees over proof (°O.P.) or under proof (°U.P.) using the British proofing standard of 57.1% abv is 100 proof.</span>
                             </div>
                         </div>
                       </label>
