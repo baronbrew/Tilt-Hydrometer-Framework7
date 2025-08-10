@@ -1,6 +1,4 @@
 /* Your app styles here */
-body { background-color: black; }
-
 .color-custom-RED { color: red;
 }
 .color-custom-RED•HD { color: red;
@@ -36,8 +34,7 @@ body { background-color: black; }
 .color-custom-YELLOW•HD { color: yellow;
 }
 
-.button-border { 
-    border: 2px solid gray;
+.button-border { border: 2px solid gray 
 }
 
 .button-style-RED { background: red;         
@@ -76,6 +73,7 @@ body { background-color: black; }
 }
 
 .size-15 { font-size: 15px }
+.size-12 { font-size: 12px }
 
 div.sg-temp {
     font-size: 500%;
