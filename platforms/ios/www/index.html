@@ -142,7 +142,7 @@
     {{#each this}}
     <div id="tiltcardGS-{{Colormac}}" class="card card-outline elevation-12 col-100 tablet-45 no-gap">
         <div class="card-content card-content-padding"><p class="no-margin-bottom">{{Beername}}</p><strong>TILT | {{js 'this.Colormac.replace("_"," ").toUpperCase()'}}</strong> <a class="link external" href="{{Cloudlink}}" target="_blank">&nbsp;<i class="material-icons size-15">cloud</i>&nbsp;&nbsp;{{Timeago}}&nbsp;{{Timeagounits}}</a></div>
-        <button id="removeGScard-{{Colormac}}" class="button col margin-horizontal button-round button-style-{{js 'this.Color.replace("_","•").split("•")[0]'}}" style="height:30px;width:90%;"><i class="icon material-icons">cloud</i>via Cloud&nbsp;<i class="icon f7-icons">close</i>&nbsp;remove</button>
+        <button id="removeGScard-{{Colormac}}" class="button col margin-horizontal button-round button-style-{{js 'this.Color.replace("_","•").split("•")[0]'}}" style="height:30px;width:90%;"><i class="icon material-icons">cloud</i></button>
         <div class="card-content card-content-padding">{{Gravitytype}}:</div>
         <div id="SG{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{SG}}<small>{{SGunits}}</small></div>
         <div id="percentScaleSG{{Color}}" class="margin-horizontal button-border button-style-{{js 'this.Color.replace("_","•").split("•")[0]'}}" style="height:10px;width:{{SGscale}}%;max-width:95%;"></div>

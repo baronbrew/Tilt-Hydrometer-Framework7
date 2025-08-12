@@ -512,6 +512,7 @@ function checkFineLocationPermissionCallback(status) {
                         if (picoSSID != '' && picoPassword != ''){
                             picoSSID = '';
                             picoPassword = '';
+                            picoFabVisible = false;
                             successDialog = app.dialog.confirm('Current Tilt hydrometers already cloud logging will now be transferred to the Tilt Pico. To start a new cloud log or to verify logging already started, tap the link:<br><i class="icon f7-icons size-15">bolt_fill</i>&nbsp;<strong>TILT&nbsp;PICO</strong><br>located on each Tilt readout.', 'Success!<br>Tilt Pico: <strong>' + picoName +'</strong><br>now connected to WiFi.', 
                                 function(){
                                 stopPicoScanRequests = true;
@@ -2838,7 +2839,7 @@ var wifiConnProgress = 0;
                             if(picoFabVisible){
                                 app.dialog.alert('Check name, password, and make sure you are within 5 feet to the Tilt Pico and try again.','Wifi Connection Failed');
                             }
-                                }, 15000);
+                                }, 20000);
                       }
                       picoFabVisible = false;
                     }
@@ -2929,8 +2930,6 @@ var wifiConnProgress = 0;
               waitingForPico = false;
               localStorage.setItem('picoStatus-' + color, 'color-red');
               throw new Error(`HTTP error! Status: ${response.status}`);
-            }else{
-                picoError = 0;
             }
             waitingForPico = false;
             if(tiltPicoIP.includes('log.csv')){
