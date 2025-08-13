@@ -141,7 +141,7 @@
   <script id="displaytemplateGS" type="text/template7">
     {{#each this}}
     <div id="tiltcardGS-{{Colormac}}" class="card card-outline elevation-12 col-100 tablet-45 no-gap">
-        <div class="card-content card-content-padding"><p class="no-margin-bottom">{{Beername}}</p><strong>TILT | {{js 'this.Colormac.replace("_"," ").toUpperCase()'}}</strong> <a class="link external" href="{{Cloudlink}}" target="_blank">&nbsp;<i class="material-icons size-15">cloud</i>&nbsp;&nbsp;{{Timeago}}&nbsp;{{Timeagounits}}</a></div>
+        <div class="card-content card-content-padding"><p class="no-margin-bottom">{{Beername}}</p><strong>TILT | {{js 'this.Colormac.replace("_"," ").toUpperCase()'}}</strong> <a class="link external" href="{{Cloudlink}}" target="_self">&nbsp;<i class="material-icons size-15">cloud</i>&nbsp;&nbsp;{{Timeago}}&nbsp;{{Timeagounits}}</a></div>
         <button id="removeGScard-{{Colormac}}" class="button col margin-horizontal button-round button-style-{{js 'this.Color.replace("_","•").split("•")[0]'}}" style="height:30px;width:90%;"><i class="icon material-icons">cloud</i></button>
         <div class="card-content card-content-padding">{{Gravitytype}}:</div>
         <div id="SG{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{SG}}<small>{{SGunits}}</small></div>
@@ -279,9 +279,12 @@
             <tr>
               <div class="item-inner">
               <div class="chip">
-                <div class="chip-label" id="picoStatus-{{js 'this.ip_address.replaceAll(".","x")'}}"><i class="f7-icons size-15">info</i> </div>
+                <span class="chip-label" id="picoStatus-{{js 'this.ip_address.replaceAll(".","x")'}}"></span></p>
               </div>
             </div>
+            </tr>
+            <tr>
+            <p class="row"><a href="#" id="refreshLastLogged-{{js 'this.ip_address.replaceAll(".","x")'}}"><i class="icon f7-icons">refresh</i>&nbsp;REFRESH LOGGING STATUS</a></p>
             </tr>
           </thead>
           <tbody id="picologginglisttemplate-{{js 'this.ip_address.replaceAll(".", "x")'}}">
@@ -290,9 +293,9 @@
       </div>
       <div class="item-inner">
         <div class="block">
-          <p>Logging .csv file to Tilt Pico: {{text}} for TILT(s):</p>
+          <p><strong>Local Device Logging</strong></p>
           <p class="row" id="pico_device_logging_tilts-{{js 'this.ip_address.replaceAll(".", "x")'}}">(none)</p>
-        <p class="row"><a class="link external" href="http://{{ip_address}}/log.csv" target="_self"><i class="icon f7-icons">download_round_fill</i>&nbsp;DOWNLOAD</a><a class="link external" href="http://{{ip_address}}/log.csv" target="_blank"><i class="icon f7-icons">document_fill</i>&nbsp;VIEW</a></p>
+        <p class="row"><a class="link external" href="http://{{ip_address}}/log.csv" target="_self"><i class="icon f7-icons">download_round_fill</i>&nbsp;DOWNLOAD</a>&nbsp;&nbsp;<a class="link external" href="http://{{ip_address}}/log.csv" target="_blank"><i class="icon f7-icons">document_fill</i>&nbsp;VIEW</a></p>
       </div>
     </div>
       <p class="row">
