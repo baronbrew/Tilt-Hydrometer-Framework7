@@ -31,7 +31,7 @@ var app  = new Framework7({
       CORRECT_AES_KEY_STRING : 'MJUBlkVI59Qx47Rz',
       defaultCloudURL : 'https://script.google.com/a/baronbrew.com/macros/s/AKfycbydNOcB-_3RB3c-7sOTI-ZhTnN43Ye1tt0EFvvMxTxjdbheaw/exec',
       tiltColors : ['RED', 'GREEN', 'BLACK', 'PURPLE', 'ORANGE', 'BLUE', 'YELLOW', 'PINK'],
-      appVersion : '1.1.4'
+      appVersion : '1.1.5'
     };
   },
   dialog: {
@@ -2624,7 +2624,7 @@ function postToCloudURLs (color, comment, picoRequestString = 'none') {
                     closeTimeout: 8000,
                   });
                 notificationSuccess.open();
-                $$('.cloudStatus' + beacon.Color).html('<i class="material-icons size-15">cloud_done</i><span class="lastCloudLogged' + beacon.Color +'"></span>');
+                $$('.cloudStatus' + beacon.Color).html('<i class="material-icons size-15">cloud_done</i>&nbsp;<span class="lastCloudLogged' + beacon.Color +'"></span>');
 
             }
         }, function (errorData) {
@@ -3280,15 +3280,34 @@ var wifiConnProgress = 0;
                        }
                     $$('#picoStatus-' + ip_addr_x).html('<div class="chip-label"><i class="icon f7-icons color-green">play_round_fill</i> ' + colorClicked.split('_')[0] + ' ' + tiltMacLast4 + ' Starting...</div>');
                     fetchJSONData(requestString, colorClicked);
-                    localStorage.setItem('cloudurlsenabled-' + colorClicked, '0,0,0');//disable app logging so only Tilt Pico logs to the cloud
                     setTimeout(function(){ 
                         fetchJSONData(ip_address + '/lastlogged');
                         stopPicoScanRequests = false;
+                        console.log(localStorage.getItem('picoStatus-' + colorClicked));
+                        if (localStorage.getItem('picoStatus-' + colorClicked) == 'color-green'){
+                            app.toggle.get('#toggleDefaultCloudURL-' + colorClicked).checked = false;
+                            app.toggle.get('#toggleCustomCloudURL1-' + colorClicked).checked = false;
+                            app.toggle.get('#toggleCustomCloudURL2-' + colorClicked).checked = false;
+                        }
                      }, 10000);//start checking on status
-                     setTimeout(function(){ fetchJSONData(ip_address + '/lastlogged');
+                     setTimeout(function(){ 
+                        fetchJSONData(ip_address + '/lastlogged');
+                        console.log(localStorage.getItem('picoStatus-' + colorClicked));
+                        if (localStorage.getItem('picoStatus-' + colorClicked) == 'color-green'){
+                            app.toggle.get('#toggleDefaultCloudURL-' + colorClicked).checked = false;
+                            app.toggle.get('#toggleCustomCloudURL1-' + colorClicked).checked = false;
+                            app.toggle.get('#toggleCustomCloudURL2-' + colorClicked).checked = false;
+                        }
                      }, 20000);//start checking on status
-                     setTimeout(function(){ fetchJSONData(ip_address + '/lastlogged');
-                     }, 40000);//start checking on status
+                     setTimeout(function(){ 
+                        fetchJSONData(ip_address + '/lastlogged');
+                        console.log(localStorage.getItem('picoStatus-' + colorClicked));
+                        if (localStorage.getItem('picoStatus-' + colorClicked) == 'color-green'){
+                            app.toggle.get('#toggleDefaultCloudURL-' + colorClicked).checked = false;
+                            app.toggle.get('#toggleCustomCloudURL1-' + colorClicked).checked = false;
+                            app.toggle.get('#toggleCustomCloudURL2-' + colorClicked).checked = false;
+                        }
+                     }, 35000);//start checking on status
                 }, function(){
                     app.dialog.confirm('Would you like to setup<br><strong>device logging</strong>?', 'TILT | ' + colorClicked.split('_')[0] + '<br>' + `${colorClicked.split('_')[1] ?? ''}` + '<br>TILT PICO Local Device Logging', 
                     function () {
