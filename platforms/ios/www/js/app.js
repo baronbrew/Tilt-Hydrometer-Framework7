@@ -418,7 +418,17 @@ function checkFineLocationPermissionCallback(status) {
         if (pico.ip_address !== undefined) {
         fetchJSONData(pico.ip_address)
         .then(data => {
-        picoBeacons = data;
+        const uniqueIds = new Set();
+        picoBeacons = data.filter(uniqueBeacon => {
+            if (uniqueIds.has(uniqueBeacon.mac)){
+                return false;
+            }else{
+                uniqueIds.add(uniqueBeacon.mac);
+                return true;
+            }
+        });
+        //picoBeacons = data;
+        console.log(picoBeacons);
         waitingForPico = false;
         })
         .catch(error => {
@@ -571,6 +581,9 @@ function checkFineLocationPermissionCallback(status) {
                   //console.log(beacon);
                   //add timestamp
                   beacon.timeStamp = Date.now();
+                  if (beacon.timestamp !== undefined){
+                    beacon.timeStamp = beacon.timestamp * 1000;
+                  }
                   //assign color by UUID and Minor Range. FW 1005, 1006, 1007 is HD
                   if (beacon.minor > 5000 || beacon.minor == 1005 && beacon.major == 999 || beacon.minor == 1006 && beacon.major == 999 || beacon.minor == 1007 && beacon.major == 999){
                       beacon.hd = true;
@@ -3105,7 +3118,7 @@ var wifiConnProgress = 0;
              }
                 updatePicoLoggingList(tiltPicoIP.split('/')[0]);
              }
-             //console.log(JSON.parse(response.data));
+            //console.log(JSON.parse(response.data));
             return JSON.parse(response.data); // Parse the JSON response
           });
       };
