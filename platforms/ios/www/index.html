@@ -141,7 +141,7 @@
   <script id="displaytemplateGS" type="text/template7">
     {{#each this}}
     <div id="tiltcardGS-{{Colormac}}" class="card card-outline elevation-12 col-100 tablet-45 no-gap">
-        <div class="card-content card-content-padding"><p class="no-margin-bottom">{{Beername}}</p><strong>TILT | {{js 'this.Colormac.replace("_"," ").toUpperCase()'}}</strong> <a class="link external" href="{{Cloudlink}}" target="_self">&nbsp;<i class="material-icons size-15">cloud</i>&nbsp;&nbsp;{{Timeago}}&nbsp;{{Timeagounits}}</a></div>
+        <div class="card-content card-content-padding"><p class="no-margin-bottom">{{Beername}}</p><strong>TILT | {{js 'this.Colormac.replace("_"," ").toUpperCase()'}}</strong> <a class="link external" href="{{Cloudlink}}" target="_system">&nbsp;<i class="material-icons size-15">cloud</i>&nbsp;&nbsp;{{Timeago}}&nbsp;{{Timeagounits}}</a></div>
         <button id="removeGScard-{{Colormac}}" class="button col margin-horizontal button-round button-style-{{js 'this.Color.replace("_","•").split("•")[0]'}}" style="height:30px;width:90%;"><i class="icon material-icons">cloud</i></button>
         <div class="card-content card-content-padding">{{Gravitytype}}:</div>
         <div id="SG{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{SG}}<small>{{SGunits}}</small></div>
@@ -252,7 +252,7 @@
   {{#each tiltPico}}
   <li class="accordion-item" id="accordion-{{js 'this.ip_address.replaceAll(".", "x")'}}">
     <div class="accordion-item-toggle">
-      <div class="item-title margin-horizontal padding"><strong>TILT PICO: </strong>{{text}}</div>
+      <div class="item-title margin-horizontal padding"><span id="picoConnStatus-{{js 'this.ip_address.replaceAll(".", "x")'}}"><i class="icon f7-icons size-15 color-gray">circle</i>&nbsp</span><strong>TILT PICO: </strong>{{text}}</div>
     </div>
     <div class="accordion-item-content">
       <div class="block">
@@ -279,7 +279,7 @@
             <tr>
               <div class="item-inner">
               <div class="chip">
-                <span class="chip-label" id="picoStatus-{{js 'this.ip_address.replaceAll(".","x")'}}"></span></p>
+                <span class="chip-label" id="picoStatus-{{js 'this.ip_address.replaceAll(".","x")'}}">Waiting for update...</span></p>
               </div>
             </div>
             </tr>
