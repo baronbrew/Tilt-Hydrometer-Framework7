@@ -1,88 +1,26 @@
-<?xml version='1.0' encoding='utf-8'?>
-<<<<<<< Updated upstream
-<widget id="com.baronbrew.tilthydrometerf7" version="1.0.90" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <feature name="Device">
-        <param name="android-package" value="org.apache.cordova.device.Device" />
-    </feature>
-    <feature name="LocationManager">
-        <param name="android-package" value="com.unarin.cordova.beacon.LocationManager" />
-    </feature>
-=======
-<widget id="com.baronbrew.tilthydrometerf7" version="1.0.88" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
->>>>>>> Stashed changes
-    <feature name="File">
-        <param name="android-package" value="org.apache.cordova.file.FileUtils" />
-        <param name="onload" value="true" />
-    </feature>
-    <allow-navigation href="cdvfile:*" />
-    <feature name="CordovaHttpPlugin">
-        <param name="android-package" value="com.silkimen.cordovahttp.CordovaHttpPlugin" />
-    </feature>
-    <feature name="Permissions">
-        <param name="android-package" value="com.android.plugins.Permissions" />
-    </feature>
-    <feature name="InAppBrowser">
-        <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
-    </feature>
-    <feature name="NativeStorage">
-        <param name="android-package" value="NativeStorage" />
-    </feature>
-    <feature name="StatusBar">
-        <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
-        <param name="onload" value="true" />
-    </feature>
-    <feature name="EmailComposer">
-        <param name="android-package" value="de.appplant.cordova.emailcomposer.EmailComposer" />
-    </feature>
-    <name>Tilt 2</name>
-    <description>
-        Generation two app for Tilt scanning and logging data.
-    </description>
-    <author email="noah@baronbrew.com" href="http://www.tilthydrometer.com">
-        Baron Brew Equipment
-    </author>
-    <access origin="*" />
-    <allow-intent href="http://*/*" />
-    <allow-intent href="https://*/*" />
-    <allow-intent href="tel:*" />
-    <allow-intent href="sms:*" />
-    <allow-intent href="mailto:*" />
-    <allow-intent href="geo:*" />
-    <content src="index.html" />
-    <allow-navigation href="https://docs.google.com/*" />
-    <allow-navigation href="https://tilthydrometer.com/*" />
-    <allow-intent href="market:*" />
-    <icon density="ldpi" src="res/icons/android/mipmap-ldpi/ic_launcher.png" />
-    <icon density="mdpi" src="res/icons/android/mipmap-mdpi/ic_launcher.png" />
-    <icon density="hdpi" src="res/icons/android/mipmap-hdpi/ic_launcher.png" />
-    <icon density="xhdpi" src="res/icons/android/mipmap-xhdpi/ic_launcher.png" />
-    <icon density="xxhdpi" src="res/icons/android/mipmap-xxhdpi/ic_launcher.png" />
-    <icon density="xxxhdpi" src="res/icons/android/mipmap-xxxhdpi/ic_launcher.png" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+-->
+<widget xmlns     = "http://www.w3.org/ns/widgets"
+        id        = "io.cordova.helloCordova"
+        version   = "2.0.0">
+
+    <!-- Preferences for Android -->
     <preference name="loglevel" value="DEBUG" />
-    <preference name="DisallowOverscroll" value="true" />
-    <preference name="ShowSplashScreenSpinner" value="false" />
-    <preference name="KeepRunning" value="true" />
-<<<<<<< Updated upstream
-    <preference name="android-compileSdkVersion" value="34" />
-    <preference name="android-minSdkVersion" value="21" />
-    <preference name="android-targetSdkVersion" value="34" />
-    <preference name="android-maxSdkVersion" value="35" />
-=======
-    <preference name="android-compileSdkVersion" value="33" />
-    <preference name="android-minSdkVersion" value="21" />
-    <preference name="android-targetSdkVersion" value="33" />
-    <preference name="android-maxSdkVersion" value="34" />
->>>>>>> Stashed changes
-    <preference name="AndroidXEnabled" value="true" />
-    <preference name="com.unarin.cordova.beacon.android.altbeacon.RequestBtPermission" value="no" />
-    <preference name="com.unarin.cordova.beacon.android.altbeacon.ForegroundScanPeriod" value="1500" />
-    <preference name="com.unarin.cordova.beacon.android.altbeacon.ForegroundBetweenScanPeriod" value="500" />
-    <preference name="StatusBarOverlaysWebView" value="false" />
-    <preference name="StatusBarBackgroundColor" value="#000000" />
-    <preference name="StatusBarStyle" value="lightcontent" />
-    <preference name="Orientation" value="default" />
-    <preference name="FadeSplashScreen" value="true" />
-    <preference name="AndroidWindowSplashScreenIconBackgroundColor" value="#8f8f8f" />
-    <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/screens/android/drawable-xxxhdpi-screen.png" />
-    <preference name="AndroidWindowSplashScreenBackground" value="#8f8f8f" />
 </widget>

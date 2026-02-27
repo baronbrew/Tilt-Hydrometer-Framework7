@@ -113,7 +113,7 @@
   <script id="displaytemplate" type="text/template7">
     {{#each this}}
     <div id="tiltcard-{{Color}}" class="card card-outline elevation-12 col-100 tablet-45 no-gap">
-        <div class="card-content card-content-padding"><p class="no-margin-bottom" id="beerName{{Color}}">{{Beername}}</p><strong>TILT | {{js 'this.Color.split("_")[0] + " " + this.mac.replace("unknown","").toUpperCase().substring(8,12)'}} </strong><span class="cloudStatus{{Color}}"></span> <span id="deviceStatus{{Color}}"></span> <span id="tiltpicosync-{{Color}}"></span></div>
+        <div class="card-content card-content-padding"><p class="no-margin-bottom" id="beerName{{Color}}">{{Beername}}</p><strong>TILT | {{js 'this.Color.split("_")[0] + " " + this.mac.replace("unknown","").toUpperCase().substring(8,12)'}} </strong><span id="tiltpicosync-{{Color}}"></span> <span class="cloudStatus{{Color}}"></span> <span id="deviceStatus{{Color}}"></span></div>
         <div id="quicksettings" class="accordion-item">
         <div class="accordion-item-toggle">
         <button class="button col margin-horizontal button-round button-style-{{js 'this.Color.replace("_","•").split("•")[0]'}}" style="height:30px;width:90%;"></button>
@@ -141,7 +141,8 @@
   <script id="displaytemplateGS" type="text/template7">
     {{#each this}}
     <div id="tiltcardGS-{{Colormac}}" class="card card-outline elevation-12 col-100 tablet-45 no-gap">
-        <div class="card-content card-content-padding"><p class="no-margin-bottom">{{Beername}}</p><strong>TILT | {{js 'this.Colormac.replace("_"," ").toUpperCase()'}}</strong> <a class="link external" href="{{Cloudlink}}" target="_system">&nbsp;<i class="material-icons size-15">cloud</i>&nbsp;&nbsp;{{Timeago}}&nbsp;{{Timeagounits}}</a></div>
+        <div class="text-align-center color-custom-GRAY"><small>LAST CLOUD DATA BELOW (TO HIDE, TAP THE COLOR BAR)</small></div>
+        <div class="card-content card-content-padding"><p class="no-margin-bottom">{{Beername}}</p><strong>TILT | {{js 'this.Colormac.replace("_"," ").toUpperCase()'}}</strong> <a class="link external" href="{{Cloudlink}}" target="_self">&nbsp;<i class="material-icons size-15">cloud</i>&nbsp;&nbsp;{{Timeago}}&nbsp;{{Timeagounits}}</a></div>
         <button id="removeGScard-{{Colormac}}" class="button col margin-horizontal button-round button-style-{{js 'this.Color.replace("_","•").split("•")[0]'}}" style="height:30px;width:90%;"><i class="icon material-icons">cloud</i></button>
         <div class="card-content card-content-padding">{{Gravitytype}}:</div>
         <div id="SG{{Color}}" class="card-content card-content-padding no-padding-top sg-temp">{{SG}}<small>{{SGunits}}</small></div>
@@ -161,7 +162,8 @@
           <ul>
             <li class="list-group-title">DEVICE LOGS</li>
   {{#each this}}
-            <li>
+            <li class="swipeout" id="fileswipeout-{{@index}}">
+              <div class="swipeout-content item-content">
                 <a onclick="emailClickedCSV('{{this}}', '{{js "this.match('RED|GREEN|BLACK|PURPLE|ORANGE|BLUE|PINK|YELLOW')[0]"}}')" class="item-link item-content">
                     <div class="item-inner">
                         <div class="item-title-row">
@@ -172,6 +174,10 @@
           <div class="item-text">CSV File: {{this}}</div>
         </div>
       </a>
+    </div>
+    <div class="swipeout-actions-right">
+      <a href="#" class="swipeout-delete">Delete</a>
+    </div>
     </li>
   {{/each}}
    </ul>
@@ -259,14 +265,18 @@
         <div class="item-inner">
         <div class="block-title no-margin-top"><i class="material-icons">bluetooth</i> Scanning Mode</div>
         </div>
-        <p class="margin-top"><label class="toggle" id="macToggle-{{js 'this.ip_address.replaceAll(".","x")'}}">
+        <p class="margin-top text-align-center">
+          <a onclick="macToggle('{{ip_address}}')">Scanning <span id="macToggleLabel-{{js 'this.ip_address.replaceAll(".","x")'}}"></span></a>
+          <br>
+          <br>
+          <label class="toggle" id="macToggle-{{js 'this.ip_address.replaceAll(".","x")'}}">
           <input type="checkbox" unchecked>
           <span class="toggle-icon"></span>
-          </label><a onclick="macToggle('{{ip_address}}')"><span id="macToggleLabel-{{js 'this.ip_address.replaceAll(".","x")'}}"></span></a>
+          </label>
           <p><a href="#" data-popover=".mac-popover" class="popover-open"><i class="f7-icons size-15">info</i> More information...</a></p>
         <div class="popover mac-popover">
             <div class="popover-inner padding">
-                <span><i class="f7-icons size-15">info</i> Enables viewing Tilt hydrometers as seen from your Tilt Pico instead of your device. Enable this setting when you need to check Tilt Pico Bluetooth connection or have multiple Tilt hydrometers of the same color and want to identify by their MAC address.</span>
+                <span><i class="f7-icons size-15">info</i> Enables viewing Tilt hydrometers as seen from your Tilt Pico instead of this phone/tablet. Enable this setting when you need to check Tilt Pico Bluetooth connection or have multiple Tilt hydrometers of the same color and want to identify by their unique MAC address.</span>
             </div>
           </div>
        </p>
@@ -293,7 +303,7 @@
       </div>
       <div class="item-inner">
         <div class="block">
-          <p><strong>Local Device Logging</strong></p>
+          <p><strong>Local logging to CSV file:</strong></p>
           <p class="row" id="pico_device_logging_tilts-{{js 'this.ip_address.replaceAll(".", "x")'}}">(none)</p>
         <p class="row"><a class="link external" href="http://{{ip_address}}/log.csv" target="_self"><i class="icon f7-icons">download_round_fill</i>&nbsp;DOWNLOAD</a>&nbsp;&nbsp;<a class="link external" href="http://{{ip_address}}/log.csv" target="_blank"><i class="icon f7-icons">document_fill</i>&nbsp;VIEW</a></p>
       </div>
@@ -315,7 +325,7 @@
           <button id="delete_pico_log-{{js 'this.ip_address.replaceAll(".", "x")'}}" class="col button button-outline color-red" onclick="remove_pico_log(this)">Delete Device log</button>
         </p>
      <div class="item-inner">
-     <div class="block-title no-margin-top"><i class="f7-icons size-15">keyboard_fill</i> Device Settings<br><br>IP Address: {{ip_address}}</div>
+     <div class="block-title no-margin-top"><i class="f7-icons size-15">keyboard_fill</i> Device Settings<br><br>IP Address: <strong>{{ip_address}}</strong><br>Tilt Pico Version: <strong>{{tilt_pico_version}}</strong></div>
      </div>
      <p class="row">
      <button id="renamepico-{{js 'this.ip_address.replaceAll(".", "x")'}}" class="col button button-big button-fill color-gray" onclick="rename_pico(this)">Rename Tilt Pico</button>
