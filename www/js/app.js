@@ -351,12 +351,11 @@ function checkFineLocationPermissionCallback(status) {
   if (displayFermUnits == 'SG'){//remove pseudo-units
       displayFermUnits = '';
   }
-  //console.log(displayFermUnits);
-  localStorage.setItem('displayFermunits-' + color, displayFermUnits);
-  NativeStorage.setItem('displayTempunits-' + color, "°C", function (result) { }, function (e) { });
   var displayTempUnits = $$(("input[type='radio'][name='temperatureRadio-" + color + "']:checked")).val();
+  localStorage.setItem('displayFermunits-' + color, displayFermUnits);
   localStorage.setItem('displayTempunits-' + color, displayTempUnits);
-  NativeStorage.setItem('displayFermunits-' + color, "", function (result) { }, function (e) { });
+  NativeStorage.setItem('displayFermunits-' + color, displayFermUnits, function (result) { }, function (e) { });
+  NativeStorage.setItem('displayTempunits-' + color, displayTempUnits, function (result) { }, function (e) { });
   updateSGcallist(color);
   updateTempcallist(color);
   }
