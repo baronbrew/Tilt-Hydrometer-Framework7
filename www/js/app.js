@@ -3769,7 +3769,7 @@ function add_tilts_to_pico(button){
             let regex = /\/d\/([a-zA-Z0-9_-]+)(?:\/edit|\/view|\/pubhtml|\/spreadsheets)?/;
             let gsLogURLSheetID = value.match(regex);
             //console.log(gsLogURLSheetID[1]);
-            let APIURL = 'https://sheets.googleapis.com/v4/spreadsheets/' + gsLogURLSheetID[1] + '/values/' + range + '?valueRenderOption=UNFORMATTED_VALUE&key=AIzaSyCCxP61MTSIzeesfUxP27s3ojDADYIcW_s';
+            let APIURL = 'https://sheets.googleapis.com/v4/spreadsheets/' + gsLogURLSheetID[1] + '/values/' + range + '?valueRenderOption=UNFORMATTED_VALUE&key=' + window.SECRETS.GOOGLE_SHEETS_API_KEY;
             //console.log(APIURL);
             return new Promise((resolve, reject) => {
             cordova.plugin.http.get(APIURL, {}, {}, 
