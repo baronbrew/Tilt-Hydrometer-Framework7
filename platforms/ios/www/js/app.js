@@ -31,7 +31,7 @@ var app  = new Framework7({
       CORRECT_AES_KEY_STRING : 'MJUBlkVI59Qx47Rz',
       defaultCloudURL : 'https://script.google.com/a/baronbrew.com/macros/s/AKfycbydNOcB-_3RB3c-7sOTI-ZhTnN43Ye1tt0EFvvMxTxjdbheaw/exec',
       tiltColors : ['RED', 'GREEN', 'BLACK', 'PURPLE', 'ORANGE', 'BLUE', 'YELLOW', 'PINK'],
-      appVersion : '1.1.12'
+      appVersion : '1.1.14'
     };
   },
   dialog: {
@@ -351,12 +351,11 @@ function checkFineLocationPermissionCallback(status) {
   if (displayFermUnits == 'SG'){//remove pseudo-units
       displayFermUnits = '';
   }
-  //console.log(displayFermUnits);
-  localStorage.setItem('displayFermunits-' + color, displayFermUnits);
-  NativeStorage.setItem('displayTempunits-' + color, "°C", function (result) { }, function (e) { });
   var displayTempUnits = $$(("input[type='radio'][name='temperatureRadio-" + color + "']:checked")).val();
+  localStorage.setItem('displayFermunits-' + color, displayFermUnits);
   localStorage.setItem('displayTempunits-' + color, displayTempUnits);
-  NativeStorage.setItem('displayFermunits-' + color, "", function (result) { }, function (e) { });
+  NativeStorage.setItem('displayFermunits-' + color, displayFermUnits, function (result) { }, function (e) { });
+  NativeStorage.setItem('displayTempunits-' + color, displayTempUnits, function (result) { }, function (e) { });
   updateSGcallist(color);
   updateTempcallist(color);
   }
@@ -3770,7 +3769,7 @@ function add_tilts_to_pico(button){
             let regex = /\/d\/([a-zA-Z0-9_-]+)(?:\/edit|\/view|\/pubhtml|\/spreadsheets)?/;
             let gsLogURLSheetID = value.match(regex);
             //console.log(gsLogURLSheetID[1]);
-            let APIURL = 'https://sheets.googleapis.com/v4/spreadsheets/' + gsLogURLSheetID[1] + '/values/' + range + '?valueRenderOption=UNFORMATTED_VALUE&key=AIzaSyCCxP61MTSIzeesfUxP27s3ojDADYIcW_s';
+            let APIURL = 'https://sheets.googleapis.com/v4/spreadsheets/' + gsLogURLSheetID[1] + '/values/' + range + '?valueRenderOption=UNFORMATTED_VALUE&key=' + window.SECRETS.GOOGLE_SHEETS_API_KEY;
             //console.log(APIURL);
             return new Promise((resolve, reject) => {
             cordova.plugin.http.get(APIURL, {}, {}, 
