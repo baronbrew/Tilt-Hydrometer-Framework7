@@ -498,7 +498,7 @@ function checkFineLocationPermissionCallback(status) {
                             picoFabVisible = true;
                         }
                         if (picoSSID != 'SSID_password_incorrect_ntp'){
-                            app.dialog.alert('Timeout connecting to time setting service (NTP). Try reconnecting Tilt Pico to Wifi.', 'Tilt Pico Time Syncing Error');
+                            app.dialog.alert('The online time setting service was not available. Make sure WiFi router is connected to the internet and try again.', 'Could not set time for Tilt Pico');
                             picoSSID = 'SSID_password_incorrect_ntp';
                         }
                         break
@@ -511,7 +511,7 @@ function checkFineLocationPermissionCallback(status) {
 
                         }
                         if (picoSSID != 'SSID_password_incorrect_wifi'){
-                            app.dialog.alert('Tilt Pico not connected to WiFi.', 'Tilt Pico WiFi Connection Error');
+                            app.dialog.alert('To change to a new Wifi name or password, press the reset button on the Tilt Pico. Otherwise Tilt Pico will try to reconnect with the last successful name and password.', 'Tilt Pico Reconnecting to WiFi');
                             picoSSID = 'SSID_password_incorrect_wifi';
                         }
                         break;
