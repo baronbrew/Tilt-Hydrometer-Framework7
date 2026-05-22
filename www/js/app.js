@@ -1502,6 +1502,7 @@ function toggleUseMac (ip_address){
                 let indexIP = tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == ip_address);
                 tiltPicos.tiltPico[indexIP].enable_scanning = true;
                 usePicoOnly = true;
+                waitingForPico = false;
                 $$('#macToggleLabel-' + ip_address.replaceAll('.','x')).html(' via TILT PICO');
             }
             else if (!toggle.checked){
@@ -2659,6 +2660,14 @@ function postToCloudURLs (color, comment, picoRequestString = 'none') {
         //only send beer name with beer ID if using default cloud URL
          if (i != 0){
             currentBeerName = currentBeerName.split(',')[0];
+         }
+         if (i == 0 && comment.includes('@')){
+            var gunits = beacon.displayFermunits.replace('°P','Plato').replace('°Bx','Brix');
+            if (gunits == ""){
+                gunits = "SG";
+            }
+            var tunits = beacon.displayTempunits.replace('°F','Fahrenheit').replace('°C','Celsius');
+            comment = `{"email" : "${comment}", "template" : "${beacon.gsTemplate ?? 'B1'}", "gunits" : "${gunits}", "tunits" : "${tunits}", "Comment" : ""}`;
          }
         stopScan();//stop bt scan while using wifi
         var colorLogged = beacon.Color.replace("•HD","").replace("_",":").toUpperCase();

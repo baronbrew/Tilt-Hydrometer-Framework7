@@ -31,7 +31,7 @@ var app  = new Framework7({
       CORRECT_AES_KEY_STRING : 'MJUBlkVI59Qx47Rz',
       defaultCloudURL : 'https://script.google.com/a/baronbrew.com/macros/s/AKfycbydNOcB-_3RB3c-7sOTI-ZhTnN43Ye1tt0EFvvMxTxjdbheaw/exec',
       tiltColors : ['RED', 'GREEN', 'BLACK', 'PURPLE', 'ORANGE', 'BLUE', 'YELLOW', 'PINK'],
-      appVersion : '1.1.13'
+      appVersion : '1.1.15'
     };
   },
   dialog: {
@@ -351,12 +351,11 @@ function checkFineLocationPermissionCallback(status) {
   if (displayFermUnits == 'SG'){//remove pseudo-units
       displayFermUnits = '';
   }
-  //console.log(displayFermUnits);
-  localStorage.setItem('displayFermunits-' + color, displayFermUnits);
-  NativeStorage.setItem('displayTempunits-' + color, "°C", function (result) { }, function (e) { });
   var displayTempUnits = $$(("input[type='radio'][name='temperatureRadio-" + color + "']:checked")).val();
+  localStorage.setItem('displayFermunits-' + color, displayFermUnits);
   localStorage.setItem('displayTempunits-' + color, displayTempUnits);
-  NativeStorage.setItem('displayFermunits-' + color, "", function (result) { }, function (e) { });
+  NativeStorage.setItem('displayFermunits-' + color, displayFermUnits, function (result) { }, function (e) { });
+  NativeStorage.setItem('displayTempunits-' + color, displayTempUnits, function (result) { }, function (e) { });
   updateSGcallist(color);
   updateTempcallist(color);
   }
@@ -499,7 +498,7 @@ function checkFineLocationPermissionCallback(status) {
                             picoFabVisible = true;
                         }
                         if (picoSSID != 'SSID_password_incorrect_ntp'){
-                            app.dialog.alert('Timeout connecting to time setting service (NTP). Try reconnecting Tilt Pico to Wifi.', 'Tilt Pico Time Syncing Error');
+                            app.dialog.alert('The online time setting service was not available. Make sure WiFi router is connected to the internet and try again.', 'Could not set time for Tilt Pico');
                             picoSSID = 'SSID_password_incorrect_ntp';
                         }
                         break
@@ -512,7 +511,7 @@ function checkFineLocationPermissionCallback(status) {
 
                         }
                         if (picoSSID != 'SSID_password_incorrect_wifi'){
-                            app.dialog.alert('Tilt Pico not connected to WiFi.', 'Tilt Pico WiFi Connection Error');
+                            app.dialog.alert('To change to a new Wifi name or password, press the reset button on the Tilt Pico. Otherwise Tilt Pico will try to reconnect with the last successful name and password.', 'Tilt Pico Reconnecting to WiFi');
                             picoSSID = 'SSID_password_incorrect_wifi';
                         }
                         break;
@@ -1503,6 +1502,7 @@ function toggleUseMac (ip_address){
                 let indexIP = tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == ip_address);
                 tiltPicos.tiltPico[indexIP].enable_scanning = true;
                 usePicoOnly = true;
+                waitingForPico = false;
                 $$('#macToggleLabel-' + ip_address.replaceAll('.','x')).html(' via TILT PICO');
             }
             else if (!toggle.checked){
@@ -2661,6 +2661,14 @@ function postToCloudURLs (color, comment, picoRequestString = 'none') {
          if (i != 0){
             currentBeerName = currentBeerName.split(',')[0];
          }
+         if (i == 0 && comment.includes('@')){
+            var gunits = beacon.displayFermunits.replace('°P','Plato').replace('°Bx','Brix');
+            if (gunits == ""){
+                gunits = "SG";
+            }
+            var tunits = beacon.displayTempunits.replace('°F','Fahrenheit').replace('°C','Celsius');
+            comment = `{"email" : "${comment}", "template" : "${beacon.gsTemplate ?? 'B1'}", "gunits" : "${gunits}", "tunits" : "${tunits}", "Comment" : ""}`;
+         }
         stopScan();//stop bt scan while using wifi
         var colorLogged = beacon.Color.replace("•HD","").replace("_",":").toUpperCase();
         cordova.plugin.http.setDataSerializer('utf8');
@@ -3770,7 +3778,7 @@ function add_tilts_to_pico(button){
             let regex = /\/d\/([a-zA-Z0-9_-]+)(?:\/edit|\/view|\/pubhtml|\/spreadsheets)?/;
             let gsLogURLSheetID = value.match(regex);
             //console.log(gsLogURLSheetID[1]);
-            let APIURL = 'https://sheets.googleapis.com/v4/spreadsheets/' + gsLogURLSheetID[1] + '/values/' + range + '?valueRenderOption=UNFORMATTED_VALUE&key=AIzaSyCCxP61MTSIzeesfUxP27s3ojDADYIcW_s';
+            let APIURL = 'https://sheets.googleapis.com/v4/spreadsheets/' + gsLogURLSheetID[1] + '/values/' + range + '?valueRenderOption=UNFORMATTED_VALUE&key=' + window.SECRETS.GOOGLE_SHEETS_API_KEY;
             //console.log(APIURL);
             return new Promise((resolve, reject) => {
             cordova.plugin.http.get(APIURL, {}, {}, 
