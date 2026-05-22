@@ -498,7 +498,7 @@ function checkFineLocationPermissionCallback(status) {
                             picoFabVisible = true;
                         }
                         if (picoSSID != 'SSID_password_incorrect_ntp'){
-                            app.dialog.alert('Timeout connecting to time setting service (NTP). Try reconnecting Tilt Pico to Wifi.', 'Tilt Pico Time Syncing Error');
+                            app.dialog.alert('The online time setting service was not available. Make sure WiFi router is connected to the internet and try again.', 'Could not set time for Tilt Pico');
                             picoSSID = 'SSID_password_incorrect_ntp';
                         }
                         break
@@ -511,7 +511,7 @@ function checkFineLocationPermissionCallback(status) {
 
                         }
                         if (picoSSID != 'SSID_password_incorrect_wifi'){
-                            app.dialog.alert('Tilt Pico not connected to WiFi.', 'Tilt Pico WiFi Connection Error');
+                            app.dialog.alert('To change to a new Wifi name or password, press the reset button on the Tilt Pico. Otherwise Tilt Pico will try to reconnect with the last successful name and password.', 'Tilt Pico Reconnecting to WiFi');
                             picoSSID = 'SSID_password_incorrect_wifi';
                         }
                         break;
@@ -1502,6 +1502,7 @@ function toggleUseMac (ip_address){
                 let indexIP = tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == ip_address);
                 tiltPicos.tiltPico[indexIP].enable_scanning = true;
                 usePicoOnly = true;
+                waitingForPico = false;
                 $$('#macToggleLabel-' + ip_address.replaceAll('.','x')).html(' via TILT PICO');
             }
             else if (!toggle.checked){
@@ -2659,6 +2660,14 @@ function postToCloudURLs (color, comment, picoRequestString = 'none') {
         //only send beer name with beer ID if using default cloud URL
          if (i != 0){
             currentBeerName = currentBeerName.split(',')[0];
+         }
+         if (i == 0 && comment.includes('@')){
+            var gunits = beacon.displayFermunits.replace('°P','Plato').replace('°Bx','Brix');
+            if (gunits == ""){
+                gunits = "SG";
+            }
+            var tunits = beacon.displayTempunits.replace('°F','Fahrenheit').replace('°C','Celsius');
+            comment = `{"email" : "${comment}", "template" : "${beacon.gsTemplate ?? 'B1'}", "gunits" : "${gunits}", "tunits" : "${tunits}", "Comment" : ""}`;
          }
         stopScan();//stop bt scan while using wifi
         var colorLogged = beacon.Color.replace("•HD","").replace("_",":").toUpperCase();
