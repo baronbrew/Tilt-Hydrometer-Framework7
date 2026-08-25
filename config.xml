@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.baronbrew.tilthydrometerf7" version="1.1.15" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.baronbrew.tilthydrometerf7" version="1.1.15" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Tilt 2</name>
     <description>
         Generation two app for Tilt scanning and logging data. Now supports Tilt Pico Bluetooth to WiFi adapter.
@@ -21,17 +21,35 @@
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="KeepRunning" value="true" />
     <platform name="android">
-        <preference name="GradlePluginKotlinVersion" value="1.9.24"/>
-        <preference name="GradleVersion" value="8.13"/>
-        <preference name="android-buildToolsVersion" value="35.0.0"/>
-        <preference name="AndroidGradlePluginVersion" value="8.7.3"/>
-        <preference name="android-compileSdkVersion" value="35" />
+        <!-- Pinned to cordova-android 15.1's tested defaults. These exist so that if Android
+             Studio's AGP Upgrade Assistant (or anything else) edits the generated build files,
+             the next `cordova prepare` resets them to known-good values. cordova-android 15.1
+             is NOT Gradle 9 compatible - do not accept Studio's offer to upgrade. To move
+             these deliberately, change them here, not in platforms/android/. -->
+        <preference name="GradleVersion" value="8.14.2" />
+        <preference name="AndroidGradlePluginVersion" value="8.10.1" />
+        <preference name="GradlePluginKotlinVersion" value="2.1.21" />
+        <preference name="android-buildToolsVersion" value="36.0.0" />
+        <preference name="AndroidXAppCompatVersion" value="1.7.1" />
+        <preference name="AndroidXWebKitVersion" value="1.14.0" />
         <preference name="android-minSdkVersion" value="24" />
-        <preference name="android-targetSdkVersion" value="35" />
+        <preference name="android-targetSdkVersion" value="36" />
         <preference name="AndroidXEnabled" value="true" />
-        <preference name="AndroidXAppCompatVersion" value="1.7.0" />
-        <preference name="AndroidXWebKitVersion 1.12.1" value="1.7.0" />
-        <preference name="GradlePluginGoogleServicesVersion 4.4.2" value="1.7.0" />
+        <preference name="BackgroundColor" value="#000000" />
+        <!-- These were previously hand-edited into the generated AndroidManifest.xml and were
+             lost when the platform was regenerated. Declared here so they survive a rebuild. -->
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+            <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+            <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+            <uses-feature android:name="android.hardware.bluetooth" android:required="false" />
+            <uses-feature android:name="android.hardware.bluetooth_le" android:required="false" />
+            <uses-feature android:name="android.hardware.location" android:required="false" />
+            <uses-feature android:name="android.hardware.location.gps" android:required="false" />
+        </config-file>
+        <edit-config file="AndroidManifest.xml" target="/manifest/application" mode="merge">
+            <application android:usesCleartextTraffic="true" />
+        </edit-config>
         <preference name="com.unarin.cordova.beacon.android.altbeacon.EnableLocationPermissionAlert" value="false" />
         <preference name="com.unarin.cordova.beacon.android.altbeacon.RequestBtPermission" value="false" />
         <preference name="com.unarin.cordova.beacon.android.altbeacon.ForegroundScanPeriod" value="1500" />
