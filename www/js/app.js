@@ -1896,12 +1896,15 @@ function postToCloudURLsDisabled (color, comment) {
             }
             //json parse error - just show "result" if not Baron Brew Google Sheets
             catch(error){
+                //jsonData is undefined here - the JSON.parse that would assign it is what threw.
+                //Show the raw response body instead, and log it so the real payload is visible.
+                console.log('cloud log parse error:', error && error.message, '| raw response:', stringData);
                 var notificationSuccess = app.notification.create({
                     icon: '<i class="f7-icons">check</i>',
                     title: 'Success Logging to Cloud',
                     titleRightText: 'alert',
                     subtitle: localTime,
-                    text: jsonData.result,
+                    text: stringData,
                     closeOnClick: false,
                     closeTimeout: 8000,
                   });
@@ -2065,7 +2068,7 @@ function startLogging(button) {
                 notificationLogStarted.open();
                 setTimeout(function(){
                     logToDevice(color);
-                    postToCloudURLs(color, email);
+                    postToCloudURLs(color, email, 'none', true);
                     //console.log(email);
                 },3000);
         } else {
@@ -2086,7 +2089,7 @@ function startLogging(button) {
         var cancelT = setTimeout(function() { 
             localStorage.setItem('emailAddress-' + color, '');
             showEmail(color);
-            postToCloudURLs(color,'@');
+            postToCloudURLs(color, '@', 'none', true);
             logToDevice(color, 'start new local log');
             app.preloader.show();
             setTimeout(function() {app.preloader.hide();}, 3000);
@@ -2102,14 +2105,14 @@ function startLogging(button) {
         var validBeerName = newBeerName.replace('/', '-');
         localStorage.setItem('beerName-' + color, validBeerName);
         showBeerName(color);
-        postToCloudURLs(color, email);
+        postToCloudURLs(color, email, 'none', true);
         //comments starts device log
         logToDevice(color, 'start new local log');
         app.preloader.show();
         setTimeout(function() {app.preloader.hide();}, 3000);
     });
     } else {
-        postToCloudURLs(color, email);
+        postToCloudURLs(color, email, 'none', true);
         logToDevice(color, 'start new local log');
         app.preloader.show();
         setTimeout(function() {app.preloader.hide();}, 3000);
@@ -2616,7 +2619,10 @@ function restorePicoSettings(){
 
 }
 
-function postToCloudURLs (color, comment, picoRequestString = 'none') {
+//isNewLog must be passed explicitly by the "start a new log" call sites. It is NOT inferred
+//from the comment text - a user comment such as "tasting @ 5pm" contains an '@' and used to
+//be misread as an email, wrapping it in the JSON payload and losing the actual comment.
+function postToCloudURLs (color, comment, picoRequestString = 'none', isNewLog = false) {
     //get beer name from local storage in case beer name updated from prompt
     var currentBeerName = localStorage.getItem('beerName-' + color)||"Untitled";
     if (comment === undefined){
@@ -2661,13 +2667,35 @@ function postToCloudURLs (color, comment, picoRequestString = 'none') {
          if (i != 0){
             currentBeerName = currentBeerName.split(',')[0];
          }
-         if (i == 0 && comment.includes('@')){
-            var gunits = beacon.displayFermunits.replace('°P','Plato').replace('°Bx','Brix');
-            if (gunits == ""){
-                gunits = "SG";
+         //Per-URL comment payload. Do NOT reassign `comment` here - it is function scoped,
+         //so overwriting it on i==0 leaked the JSON blob into the plain comment sent to
+         //cloud URLs 2 and 3 on the following iterations.
+         var commentForURL = comment;
+         if (i == 0 && isNewLog){
+            //gunits must be exactly one of SG / Plato / Brix. Anything else the units
+            //picker can produce (%ABV, %ABV*, °UP/°OP -> °O.P. / °U.P.) falls back to SG.
+            var gunits;
+            switch (beacon.displayFermunits) {
+                case '°P':
+                    gunits = 'Plato';
+                    break;
+                case '°Bx':
+                    gunits = 'Brix';
+                    break;
+                default:
+                    gunits = 'SG';
+                    break;
             }
-            var tunits = beacon.displayTempunits.replace('°F','Fahrenheit').replace('°C','Celsius');
-            comment = `{"email" : "${comment}", "template" : "${beacon.gsTemplate ?? 'B1'}", "gunits" : "${gunits}", "tunits" : "${tunits}", "Comment" : ""}`;
+            var tunits = beacon.displayTempunits === '°C' ? 'Celsius' : 'Fahrenheit';
+            //JSON.stringify rather than a template literal so quotes, backslashes and other
+            //special characters in the email are escaped and the script can always parse it.
+            commentForURL = JSON.stringify({
+                email: comment,
+                template: beacon.gsTemplate ?? 'B1',
+                gunits: gunits,
+                tunits: tunits,
+                Comment: ""
+            });
          }
         stopScan();//stop bt scan while using wifi
         var colorLogged = beacon.Color.replace("•HD","").replace("_",":").toUpperCase();
@@ -2675,7 +2703,15 @@ function postToCloudURLs (color, comment, picoRequestString = 'none') {
         cordova.plugin.http.setRequestTimeout(120.0);
         cordova.plugin.http.post(
             cloudURLsArray[i],
-            encodeURI("Timepoint=" + localTimeExcel + "&SG=" + beacon.SG + "&Temp=" + beacon.Temp + "&Color=" + colorLogged + "&Beer=" + currentBeerName + "&Comment=" + comment),
+            //encodeURIComponent per value, NOT encodeURI over the whole body. encodeURI
+            //leaves & = + # unescaped, so any of those inside a value (an email, a beer
+            //name, the JSON comment) split or truncated the field server-side.
+            "Timepoint=" + encodeURIComponent(localTimeExcel) +
+            "&SG=" + encodeURIComponent(beacon.SG) +
+            "&Temp=" + encodeURIComponent(beacon.Temp) +
+            "&Color=" + encodeURIComponent(colorLogged) +
+            "&Beer=" + encodeURIComponent(currentBeerName) +
+            "&Comment=" + encodeURIComponent(commentForURL),
             { "content-type" : "application/x-www-form-urlencoded; charset=utf-8" },
             function (objectData){
             startScan();//restart scanning
@@ -2750,12 +2786,15 @@ function postToCloudURLs (color, comment, picoRequestString = 'none') {
             }
             //json parse error - just show "result" if not Baron Brew Google Sheets
             catch(error){
+                //jsonData is undefined here - the JSON.parse that would assign it is what threw.
+                //Show the raw response body instead, and log it so the real payload is visible.
+                console.log('cloud log parse error:', error && error.message, '| raw response:', objectData.data);
                 var notificationSuccess = app.notification.create({
                     icon: '<i class="f7-icons">check</i>',
                     title: 'Success Logging to Cloud',
                     titleRightText: 'alert',
                     subtitle: localTime,
-                    text: jsonData.result,
+                    text: objectData.data,
                     closeOnClick: false,
                     closeTimeout: 8000,
                   });
@@ -2766,6 +2805,31 @@ function postToCloudURLs (color, comment, picoRequestString = 'none') {
         }, function (errorData) {
             clearTimeout(notificationCloudTimeout);
             startScan();//restart scanning
+            console.log(JSON.stringify(errorData));
+            //Apps Script runs doPost first, then 302s to a short-lived
+            //script.googleusercontent.com/macros/echo URL that serves the response body.
+            //A 404 on that second hop means the row was almost certainly written but we
+            //never got to read the confirmation. Treat it as logged-but-unconfirmed so the
+            //user does not re-log and create a duplicate row.
+            var echoUrl = String(errorData && errorData.url || '');
+            var unconfirmed = errorData && errorData.status === 404 &&
+                              echoUrl.indexOf('script.googleusercontent.com') > -1;
+            if (unconfirmed){
+                //mark as logged for rate-limiting purposes - the data most likely landed
+                localStorage.setItem('lastCloudLogged-' + color, Date.now());
+                var notificationCloudUnconfirmed = app.notification.create({
+                    icon: '<i class="f7-icons">exclamationmark_triangle</i>',
+                    title: 'Logged - Confirmation Not Received',
+                    titleRightText: 'alert',
+                    subtitle: 'TILT | ' + color,
+                    text: 'Your reading was most likely saved to the cloud, but Google did not return a confirmation. Check the sheet before logging again - re-logging may create a duplicate row.',
+                    closeOnClick: false,
+                    closeTimeout: 12000,
+                  });
+                notificationCloudUnconfirmed.open();
+                $$('.cloudStatus' + beacon.Color).html('<i class="material-icons size-15">cloud_queue</i>&nbsp;<span class="lastCloudLogged' + beacon.Color +'"></span>');
+                return;
+            }
             var notificationCloudError = app.notification.create({
                 icon: '<i class="f7-icons">info</i>',
                 title: 'Error Logging to Cloud',
@@ -2775,7 +2839,6 @@ function postToCloudURLs (color, comment, picoRequestString = 'none') {
                 closeTimeout: 8000,
               });
             notificationCloudError.open();
-            console.log(JSON.stringify(errorData));
             $$('.cloudStatus' + beacon.Color).html('cloud error');
 
         }
@@ -3519,7 +3582,7 @@ var wifiConnProgress = 0;
                                     }
                                     localStorage.setItem('cloudurlsenabled-' + colorClicked, '1,0,0')
                                     //console.log(requestString, 'sending to posttocloudurls')
-                                    postToCloudURLs(colorClicked, email, requestString);
+                                    postToCloudURLs(colorClicked, email, requestString, true);
                                     localStorage.setItem('cloudurlsenabled-' + colorClicked, '0,0,0');//disable app logging so only Tilt Pico logs to the cloud
                                 },)},)}, function(){
                                     app.dialog.confirm('Would you like to setup<br><strong>device logging</strong>?', 'TILT | ' + colorClicked.split('_')[0] + '<br>' + `${colorClicked.split('_')[1] ?? ''}` + '<br>TILT PICO local device logging', 
