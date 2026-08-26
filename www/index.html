@@ -113,12 +113,12 @@
   <script id="displaytemplate" type="text/template7">
     {{#each this}}
     <div id="tiltcard-{{Color}}" class="card card-outline elevation-12 col-100 tablet-45 no-gap">
-      <div class="card-content card-content-padding">
-        <div class = "row no-gap">
+        <div class="card-content card-content-padding">
+        <div class = "row no-margin-bottom">
         <div class="col-80" id="beerName{{Color}}">{{Beername}}</div>
         <div class="col-20" id="deviceStatus{{Color}}"></div>
-      </div>
-        <div class="card-content card-content-padding"><p class="no-margin-bottom" id="beerName{{Color}}">{{Beername}}</p><strong>TILT | {{js 'this.Color.split("_")[0] + " " + this.mac.replace("unknown","").toUpperCase().substring(8,12)'}} </strong><span id="tiltpicosync-{{Color}}"></span> <span class="cloudStatus{{Color}}"></span></div>
+        </div>
+        <strong>TILT | {{js 'this.Color.split("_")[0] + " " + this.mac.replace("unknown","").toUpperCase().substring(8,12)'}} </strong><span id="tiltpicosync-{{Color}}"></span> <span class="cloudStatus{{Color}}"></span></div>
         <div id="quicksettings" class="accordion-item">
         <div class="accordion-item-toggle">
         <button class="button col margin-horizontal button-round button-style-{{js 'this.Color.replace("_","•").split("•")[0]'}}" style="height:30px;width:90%;"></button>
@@ -167,7 +167,7 @@
           <ul>
             <li class="list-group-title">DEVICE LOGS</li>
   {{#each this}}
-            <li class="swipeout" id="fileswipeout-{{@index}}">
+            <li class="swipeout" id="fileswipeout-{{@index}}" data-csvfile="{{this}}">
               <div class="swipeout-content item-content">
                 <a onclick="emailClickedCSV('{{this}}', '{{js "this.match('RED|GREEN|BLACK|PURPLE|ORANGE|BLUE|PINK|YELLOW')[0]"}}')" class="item-link item-content">
                     <div class="item-inner">
