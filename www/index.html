@@ -73,6 +73,7 @@
           <div class="page-content">
             <div class="list" id="picofileList"></div>
             <div class="list" id="fileList"></div>
+            <div class="list" id="cloudfileList"></div>
           </div>
         </div>
       </div>
@@ -182,6 +183,35 @@
     </div>
     <div class="swipeout-actions-right">
       <a href="#" class="swipeout-delete">Delete</a>
+    </div>
+    </li>
+  {{/each}}
+   </ul>
+  </div>
+</div>
+  </script>
+
+  <script id="cloudfilelisttemplate" type="text/template7">
+  <div class="list media-list">
+    <div class="list-group">
+          <ul>
+            <li class="list-group-title">CLOUD LOGS</li>
+  {{#each this}}
+            <li class="swipeout" data-cloudurl="{{url}}">
+              <div class="swipeout-content item-content">
+                <a href="{{url}}" target="_system" class="link external item-link item-content">
+                    <div class="item-inner">
+                        <div class="item-title-row">
+                        <div class="item-title">{{beername}}</div>
+                        <div class="item-after"><i class="material-icons">cloud</i></div>
+          </div>
+          <div class="item-subtitle">({{color}} TILT)</div>
+          <div class="item-text">Google Sheet started {{started}}</div>
+        </div>
+      </a>
+    </div>
+    <div class="swipeout-actions-right">
+      <a href="#" class="swipeout-delete">Delete Link</a>
     </div>
     </li>
   {{/each}}
