@@ -155,6 +155,9 @@ $$(document).on('deviceready', function() {
   var beacons = {};
   // Dictionary of Tilts on GS
   var GStilts = {};
+  //A cloud (Google Sheets) Tilt card disappears once its sheet has gone this long without a
+  //new reading. Matches the age the card itself already reports via Timeago/Timeagounits.
+  var GS_CARD_STALE_AFTER_MS = 7 * 24 * 60 * 60 * 1000;//one week
   //track new beacon updates
   var inrangebeaconsUpdated = false;
   // Array of Tilt Picos.
@@ -4010,6 +4013,16 @@ function add_tilts_to_pico(button){
                     let jsMilliseconds = ((result.values[1][2] - 25569) * 24 * 60 * 60 * 1000) + offsetMilliseconds;
                     let newDate = new Date(jsMilliseconds);
                     let timeStamp = newDate.toLocaleString();
+                    //Drop cloud cards whose sheet has not had a new reading in over a week.
+                    //GStilts persists between polls, so the key has to be deleted - simply
+                    //skipping the assignment would leave an earlier card rendering forever.
+                    //The gsLogURLs entry is deliberately left alone, so the card returns on
+                    //its own if logging resumes.
+                    if ((Date.now() - jsMilliseconds) > GS_CARD_STALE_AFTER_MS){
+                        delete GStilts[key];
+                        $$('#tiltcardGS').html(compileddisplayTemplateGS(GStilts));
+                        return;
+                    }
                     let timeAgo = (Date.now() - jsMilliseconds) / 1000 / 60 ;
                     let timeAgoUnits = 'min';
                     //console.log(timeAgo);
