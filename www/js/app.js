@@ -2,6 +2,8 @@
 var $$ = Dom7;
 
 // Framework7 App main instance
+//guards the one-time app.on('swipeoutDeleted') binding in initScan(), which runs more than once
+var deviceLogSwipeBound = false;
 var app  = new Framework7({
   root: '#app', // App root element
   id: 'com.tilthydrometer.tilt3', // App bundle ID
@@ -761,16 +763,45 @@ function checkFineLocationPermissionCallback(status) {
     var listOfCSVFilesArray = listOfCSVFiles.split(',');
     var displayhtml = compiledfilelistTemplate(listOfCSVFilesArray);
     $$('#fileList').html(displayhtml);
-    for (let i = 0 ; i < listOfCSVFilesArray.length; i++) {
-        $$('#fileswipeout-' + i).on('swipeout:deleted', function() {
-            var files = localStorage.getItem('listOfCSVFiles');
-            var filesArray = files.split(',');
-            filesArray.splice(i, 1);
+    };
+    //Bind ONCE at the app level, outside the "do any files exist" check above.
+    //logToDevice re-renders #fileList on every new log and every append, which replaces the
+    //<li> nodes. Handlers bound to those elements die with them, so the swipe would animate
+    //the row away while nothing updated storage or deleted the file - and the next append
+    //re-added the name to listOfCSVFiles, making the log reappear with all its old data.
+    //app.on survives re-renders; the filename comes off the element's data-csvfile attribute.
+    //initScan() runs more than once, so guard against stacking duplicate handlers.
+    if (!deviceLogSwipeBound){
+    deviceLogSwipeBound = true;
+    app.on('swipeoutDeleted', function (swipeoutEl) {
+        var csvFileName = swipeoutEl && swipeoutEl.getAttribute && swipeoutEl.getAttribute('data-csvfile');
+        if (!csvFileName){
+            return;//some other swipeout list (e.g. Tilt Pico logs), not a device log row
+        }
+        //device logging writes a matching .json alongside every .csv
+        var jsonFileName = csvFileName.replace(/\.csv$/, '.json');
+        //Splice by name, never by index: the rendered order and the stored array can differ.
+        var filesArray = (localStorage.getItem('listOfCSVFiles')||'').split(',');
+        var csvIdx = filesArray.indexOf(csvFileName);
+        if (csvIdx > -1){
+            filesArray.splice(csvIdx, 1);
+        }
             localStorage.setItem('listOfCSVFiles', filesArray);
             NativeStorage.setItem('listOfCSVFiles', filesArray, function (result) { }, function (e) { });
+        var jsonArray = (localStorage.getItem('listOfJSONFiles')||'').split(',');
+        var jsonIdx = jsonArray.indexOf(jsonFileName);
+        if (jsonIdx > -1){
+            jsonArray.splice(jsonIdx, 1);
+        }
+        localStorage.setItem('listOfJSONFiles', jsonArray);
+        NativeStorage.setItem('listOfJSONFiles', jsonArray, function (result) { }, function (e) { });
+        //stop logging to the deleted files before removing them, or the next append recreates them
+        clearActiveLogIfDeleted(csvFileName);
+        clearActiveLogIfDeleted(jsonFileName);
+        deleteFileFromDevice(csvFileName);
+        deleteFileFromDevice(jsonFileName);
         });
     }
-    };
 
     //reset list of found beacons
     localStorage.setItem('foundbeacons','NONE');
@@ -2231,6 +2262,40 @@ function writeToFile(fileName, data, isAppend, fileType, color) {
         }, errorHandler.bind(null, fileName));
     }
 
+//Remove a device log file from the filesystem. Swiping a log away used to only drop the
+//name out of listOfCSVFiles, so the file itself stayed on the device forever.
+function deleteFileFromDevice(fileName) {
+    if (!fileName) { return; }
+    window.resolveLocalFileSystemURL(cordova.file.dataDirectory + fileName, function (fileEntry) {
+        fileEntry.remove(function () {
+            console.log('deleted device log file: ' + fileName);
+        }, function (e) {
+            console.log('failed to delete device log file: ' + fileName + ' code: ' + (e && e.code));
+        });
+    }, function (e) {
+        //already gone - nothing to remove
+        console.log('device log file not found: ' + fileName + ' code: ' + (e && e.code));
+    });
+}
+
+//If a deleted file is still the active log for some Tilt, stop logging to it. Otherwise the
+//next append recreates it via getFile({create:true}) and the deleted log reappears.
+function clearActiveLogIfDeleted(fileName) {
+    if (!fileName) { return; }
+    var keys = [];
+    for (var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i);
+        if (key && (key.indexOf('localCSVfileName-') === 0 || key.indexOf('localJSONfileName-') === 0)
+            && localStorage.getItem(key) === fileName) {
+            keys.push(key);
+        }
+    }
+    keys.forEach(function (key) {
+        localStorage.setItem(key, 'not logging');
+        NativeStorage.setItem(key, 'not logging', function (result) { }, function (e) { });
+    });
+}
+
 function readFromFile(fileName, cb, fileType) {
         var errorHandler = function (fileName, e) {  
             var msg = '';
@@ -2414,9 +2479,15 @@ function logToDevice(color, comment){
         localStorage.setItem('listOfJSONFiles', listOfJSONFilesArray);
         NativeStorage.setItem('listOfJSONFiles', listOfJSONFilesArray, function (result) { }, function (e) { });
     }
-    writeToFile(CSVfileName, 'Timestamp,Timepoint,SG,Temp,Color,Beer,Comment', isAppend,'csv', color);
     //remove •HD tag for logging file
     beacon.Color = beacon.Color.replace("•HD","");
+    //Write the header AND the first data row in a single write. Previously only the header
+    //was written here, so a new CSV log lost its first reading (the JSON log kept it).
+    //These cannot be two writeToFile calls: writeToFile is fully async with no completion
+    //callback, so the appending writer could capture fileWriter.length before the header
+    //write landed and clobber it.
+    writeToFile(CSVfileName, 'Timestamp,Timepoint,SG,Temp,Color,Beer,Comment' + '\n' +
+        localTime + ',' + localTimeExcel + ',' + beacon.SG + ',' + beacon.Temp + ',' + beacon.Color + ',' + currentBeerName + ',' + comment, isAppend,'csv', color);
     writeToFile(JSONfileName, { Timestamp : localTime, Timepoint : localTimeExcel, SG : beacon.SG, Temp : beacon.Temp, Color : beacon.Color, Beer : currentBeerName, Comment : comment }, isAppend,'json', color);
     $$('#deviceStatus' + color).html('<a class="link">&nbsp;<i class="f7-icons size-15">share</i>&nbsp;share</a>');
     var deviceStatusElement = document.getElementById('deviceStatus' + color);

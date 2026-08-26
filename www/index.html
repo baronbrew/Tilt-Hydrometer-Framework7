@@ -114,7 +114,7 @@
     {{#each this}}
     <div id="tiltcard-{{Color}}" class="card card-outline elevation-12 col-100 tablet-45 no-gap">
         <div class="card-content card-content-padding">
-        <div class = "row no-gap">
+        <div class = "row no-margin-bottom">
         <div class="col-80" id="beerName{{Color}}">{{Beername}}</div>
         <div class="col-20" id="deviceStatus{{Color}}"></div>
         </div>
@@ -167,7 +167,7 @@
           <ul>
             <li class="list-group-title">DEVICE LOGS</li>
   {{#each this}}
-            <li class="swipeout" id="fileswipeout-{{@index}}">
+            <li class="swipeout" id="fileswipeout-{{@index}}" data-csvfile="{{this}}">
               <div class="swipeout-content item-content">
                 <a onclick="emailClickedCSV('{{this}}', '{{js "this.match('RED|GREEN|BLACK|PURPLE|ORANGE|BLUE|PINK|YELLOW')[0]"}}')" class="item-link item-content">
                     <div class="item-inner">
