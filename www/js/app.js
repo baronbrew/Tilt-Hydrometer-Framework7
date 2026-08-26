@@ -779,6 +779,35 @@ function checkFineLocationPermissionCallback(status) {
     //initScan() runs more than once, so guard against stacking duplicate handlers.
     if (!deviceLogSwipeBound){
     deviceLogSwipeBound = true;
+    //Permanently hide a cloud (Google Sheets) Tilt card. Delegated off #tiltcardGS, which
+    //persists while its contents are re-rendered, and bound once - the old code re-bound a
+    //click handler on every poll, so several confirm dialogs could stack on one card.
+    $$('#tiltcardGS').on('click', 'button[data-gskey]', function (e) {
+        var btn = (this && this.getAttribute) ? this
+                : (e.target && e.target.closest ? e.target.closest('button[data-gskey]') : null);
+        var tiltColorGS = btn && btn.getAttribute('data-gskey');
+        if (!tiltColorGS){
+            return;
+        }
+        app.dialog.confirm('', 'Remove<br>TILT | ' + tiltColorGS + '<br>via Google Sheets?', function(){
+            //Re-read gsLogURLs from storage. The old handler closed over the snapshot taken
+            //when the poll started, so removing a second card wrote back a map still holding
+            //the first one - resurrecting a card that had already been removed.
+            var gsLogURLsObj = {};
+            try {
+                gsLogURLsObj = JSON.parse(localStorage.getItem('gsLogURLs')||'{}');
+            } catch (err) {
+                gsLogURLsObj = {};
+            }
+            delete gsLogURLsObj[tiltColorGS];
+            localStorage.setItem('gsLogURLs', JSON.stringify(gsLogURLsObj));
+            NativeStorage.setItem('gsLogURLs', JSON.stringify(gsLogURLsObj), function (result) { }, function (e) { });
+            //GStilts is module scoped and every render draws the whole object, so the key has
+            //to go too. Removing only the DOM node let the next card's render bring it back.
+            delete GStilts[tiltColorGS];
+            $$('#tiltcardGS').html(compileddisplayTemplateGS(GStilts));
+        });
+    });
     app.on('swipeoutDeleted', function (swipeoutEl) {
         //Cloud log rows: drop the entry from our list only. The Google Sheet itself stays in
         //Drive - a Sheets API key cannot delete files, that needs the Drive API with OAuth.
@@ -4058,18 +4087,6 @@ function add_tilts_to_pico(button){
                     //console.log(GStilts);
                     var displayhtml = compileddisplayTemplateGS(GStilts);
                     $$('#tiltcardGS').html(displayhtml);
-                    setTimeout(function() { $$('#removeGScard-' + key).on('click', function (e) {
-                        var tiltColorGS = e.currentTarget.id.split("-")[1];
-                        app.dialog.confirm('', 'Remove<br>TILT | ' + tiltColorGS + '<br>via Google Sheets?', function(){
-                            var gsLogURLsObj = JSON.parse(gsLogURLs);
-                            delete gsLogURLsObj[tiltColorGS];
-                            localStorage.setItem('gsLogURLs', JSON.stringify(gsLogURLsObj));
-                            NativeStorage.setItem('gsLogURLs', JSON.stringify(gsLogURLsObj), function (result) { }, function (e) { });
-                            $$('#tiltcardGS-' + tiltColorGS).remove();
-                        }
-                        );
-                      });
-                    }, 500);
                     }
                     
                 }
