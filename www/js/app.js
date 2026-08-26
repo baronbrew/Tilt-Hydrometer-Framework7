@@ -69,6 +69,9 @@ var compiledfilelistTemplate = Template7.compile(filelistTemplate);
 var picofilelistTemplate = $$('#picofilelisttemplate').html();
 var compiledpicofilelistTemplate = Template7.compile(picofilelistTemplate);
 
+var cloudfilelistTemplate = $$('#cloudfilelisttemplate').html();
+var compiledcloudfilelistTemplate = Template7.compile(cloudfilelistTemplate);
+
 var sgcallistTemplate = $$('#sgcallisttemplate').html();
 var compiledsgcallistTemplate = Template7.compile(sgcallistTemplate);
 
@@ -774,6 +777,15 @@ function checkFineLocationPermissionCallback(status) {
     if (!deviceLogSwipeBound){
     deviceLogSwipeBound = true;
     app.on('swipeoutDeleted', function (swipeoutEl) {
+        //Cloud log rows: drop the entry from our list only. The Google Sheet itself stays in
+        //Drive - a Sheets API key cannot delete files, that needs the Drive API with OAuth.
+        var cloudUrl = swipeoutEl && swipeoutEl.getAttribute && swipeoutEl.getAttribute('data-cloudurl');
+        if (cloudUrl){
+            saveCloudLogList(getCloudLogList().filter(function (entry) {
+                return !entry || entry.url !== cloudUrl;
+            }));
+            return;
+        }
         var csvFileName = swipeoutEl && swipeoutEl.getAttribute && swipeoutEl.getAttribute('data-csvfile');
         if (!csvFileName){
             return;//some other swipeout list (e.g. Tilt Pico logs), not a device log row
@@ -2262,6 +2274,61 @@ function writeToFile(fileName, data, isAppend, fileType, color) {
         }, errorHandler.bind(null, fileName));
     }
 
+//Cloud logs are kept as a JSON array in listOfCloudLogs, newest first:
+//  [{ url, beername, color, started }, ...]
+//gsLogURLs only ever held the CURRENT sheet per colour and was overwritten on every new
+//log, so it could not be used as a history. Entries are keyed by url so repeat appends to
+//the same sheet update the existing row instead of stacking duplicates.
+function getCloudLogList() {
+    try {
+        var parsed = JSON.parse(localStorage.getItem('listOfCloudLogs') || '[]');
+        return Array.isArray(parsed) ? parsed : [];
+    } catch (e) {
+        return [];
+    }
+}
+
+function saveCloudLogList(list) {
+    var asText = JSON.stringify(list);
+    localStorage.setItem('listOfCloudLogs', asText);
+    NativeStorage.setItem('listOfCloudLogs', asText, function (result) { }, function (e) { });
+    renderCloudLogList();
+}
+
+function recordCloudLog(url, beername, color) {
+    if (!url) { return; }
+    var list = getCloudLogList();
+    //beer name arrives as "Name,id" from the script - keep just the name for display
+    var displayName = String(beername || 'Untitled').split(',')[0];
+    var existing = list.findIndex(function (entry) { return entry && entry.url === url; });
+    if (existing > -1) {
+        //same sheet logged again - refresh the name in case the beer was renamed
+        if (list[existing].beername === displayName && list[existing].color === color) {
+            return;//nothing changed, skip the write and re-render
+        }
+        list[existing].beername = displayName;
+        list[existing].color = color;
+        saveCloudLogList(list);
+        return;
+    }
+    list.unshift({
+        url: url,
+        beername: displayName,
+        color: color,
+        started: new Date().toLocaleDateString()
+    });
+    saveCloudLogList(list);
+}
+
+function renderCloudLogList() {
+    var list = getCloudLogList();
+    if (!list.length) {
+        $$('#cloudfileList').html('');
+        return;
+    }
+    $$('#cloudfileList').html(compiledcloudfilelistTemplate(list));
+}
+
 //Remove a device log file from the filesystem. Swiping a log away used to only drop the
 //name out of listOfCSVFiles, so the file itself stayed on the device forever.
 function deleteFileFromDevice(fileName) {
@@ -2678,6 +2745,12 @@ function restorePicoSettings(){
 
         }
      }, function (e) { });
+     NativeStorage.getItem('listOfCloudLogs', function (result){
+        if(result !== undefined){
+            localStorage.setItem('listOfCloudLogs', result);
+        }
+        renderCloudLogList();
+     }, function (e) { renderCloudLogList(); });
      NativeStorage.getItem('gsLogURLs', function (result){
         if(result !== undefined){
             localStorage.setItem('gsLogURLs', result);
@@ -2853,6 +2926,9 @@ function postToCloudURLs (color, comment, picoRequestString = 'none', isNewLog =
                 localStorage.setItem('gsLogURLs', JSON.stringify(gsLogURLs));
                 NativeStorage.setItem('gsLogURLs', JSON.stringify(gsLogURLs), function (result) { }, function (e) { });
                 //console.log(localStorage.getItem('gsLogURLs'));
+                //keep a running history of cloud logs for the file list (gsLogURLs is
+                //overwritten per colour, so it cannot serve as the history itself)
+                recordCloudLog(jsonData.doclongurl, jsonData.beername, color);
             }
             }
             //json parse error - just show "result" if not Baron Brew Google Sheets
