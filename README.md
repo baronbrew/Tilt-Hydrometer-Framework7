@@ -1,29 +1,178 @@
-# Framework7 PhoneGap Application 
+# Tilt Hydrometer App
 
-> [Framework7](http://www.idangero.us/framework7) is a Mobile UI framework that can be used to build hybrid apps with PhoneGap. This template allows you to get started using Framework7 
-  quickly. 
-  
-  For a more extensive Framework7 sample, see the [one included in their Github project](https://github.com/nolimits4web/Framework7/tree/master/dist)
-  or the [demo apps on their website](http://www.idangero.us/framework7/apps/#.VpQCc5MrKjQ).
-    
-  Also, for an intro to Framework7, check out [this post on the PhoneGap blog](http://phonegap.com/blog/2015/11/30/framework7/).   
+Cordova + [Framework7](http://www.idangero.us/framework7) app for scanning Tilt hydrometers
+over Bluetooth, logging readings to the device and to Google Sheets, and configuring the
+Tilt Pico WiFi bridge.
 
+## Branch layout
 
-## Usage
-    
-### PhoneGap CLI
+Android and iOS are maintained on separate branches because they ship as **different apps**
+with different bundle IDs, and Cordova's `config.xml` allows only one `<widget id>` and one
+`<name>`.
 
-    $ phonegap create my-app --template phonegap-template-framework7
+| | `Tilt-2-Android` | `master` / `android-fixes-to-master` |
+|---|---|---|
+| Ships as | Tilt 2 (Google Play) | Tilt 3 (App Store) |
+| Bundle ID | `com.baronbrew.tilthydrometerf7` | `com.tilthydrometer.tilt3` |
+| Platform | Android, targetSdk 36, minSdk 24 | iOS, deployment target 13.0 |
+| cordova-android | ^15.1.0 | ^13.0.0 |
+| cordova-ios | (unused) | ^8.1.1 |
 
-### Cordova CLI
+The legacy **Tilt 2** iOS app remains on the App Store for iOS 9–12 users; Tilt 3 requires
+iOS 13+.
 
-    $ cordova create my-app --template phonegap-template-framework7
-    
-### Desktop
+Application code under `www/` is shared. Develop a `www/` change on one branch, then port it
+with:
 
-In your browser, open the file:
+```bash
+git cherry-pick -X ignore-all-space <commit>
+```
 
-    /www/index.html
+`-X ignore-all-space` is required — whitespace has drifted between the branches. Keep
+platform work (`config.xml` platform blocks, plugin versions, icons) on its own branch only.
 
+## Prerequisites
 
-  
+**All platforms**
+
+- Node.js `^20.17.0` or `>=22.9.0` (required by Cordova 13; 22.6 and earlier will fail)
+
+**Android**
+
+- Android SDK Platform 36 and Build-Tools 36.0.0 (`sdkmanager "platforms;android-36" "build-tools;36.0.0"`)
+- JDK 17
+- Android Studio **Meerkat Feature Drop (2024.3.2)** or newer, if building in the IDE
+
+**iOS**
+
+- Xcode 15+ (tested on 16.4)
+- CocoaPods **1.16+** (tested on 1.17.0). Cordova's check is stricter than the CocoaPods
+  release notes suggest — 1.10 is rejected. Upgrade with `sudo gem install cocoapods`.
+- A UTF-8 locale, or CocoaPods fails with a `unicode_normalize` error:
+  ```bash
+  export LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
+  ```
+
+## Setup
+
+```bash
+git clone https://github.com/baronbrew/Tilt-Hydrometer-Framework7.git
+cd Tilt-Hydrometer-Framework7
+git checkout Tilt-2-Android      # or android-fixes-to-master for iOS
+
+npm install
+
+cp www/js/secrets.example.js www/js/secrets.js
+# edit www/js/secrets.js and set your real Google Sheets API key
+
+cordova platform add android     # or: cordova platform add ios
+```
+
+### `secrets.js` is required
+
+`www/js/secrets.js` holds the Google Sheets API key and is **gitignored**, so it is absent
+from every fresh clone. Copy the example file and fill in a real key.
+
+The app no longer dies without it — cloud Tilt cards are skipped and Bluetooth scanning keeps
+working — but Google Sheets sync will not function until the key is set.
+
+> Note: the key ships inside the app bundle and can be extracted from any released build.
+> Keeping it out of git is not a security control. Restrict the key in Google Cloud Console
+> to the Sheets API and to your app's package name plus signing certificate.
+
+### `platforms/`, `plugins/` and `node_modules/` are not tracked
+
+They are generated. A fresh clone must run `npm install` and `cordova platform add`.
+
+**After switching branches, always run `npm install`.** The branches pin different Cordova
+versions against one shared `node_modules`, so without it you will build with the wrong one.
+You may also need to re-add the platform.
+
+## Building
+
+### Android
+
+```bash
+cordova build android                 # debug
+cordova run android --device
+```
+
+For a signed release, build in Android Studio — but note **Android Studio does not run
+`cordova prepare`**. It builds from `platforms/android/app/src/main/assets/www/`, so any edit
+to `www/` must be prepared first or you will ship stale web assets:
+
+```bash
+cordova prepare android
+```
+
+Decline Android Studio's **AGP Upgrade Assistant**. cordova-android 15.1 is not Gradle 9
+compatible, and the Gradle/AGP/Kotlin versions are pinned in `config.xml` deliberately. To
+change them, edit `config.xml` — not the generated files under `platforms/`.
+
+Bump `version` in `config.xml` before each release; Play rejects an unchanged `versionCode`.
+
+**Pre-release check.** Several regressions have come from the generated manifest silently
+losing entries — a missing `emailcomposer` provider shipped once and broke CSV email
+attachments in production. All three of these must be present:
+
+```bash
+cordova prepare android
+M=platforms/android/app/src/main/AndroidManifest.xml
+for k in 'emailcomposer.*provider' 'BLUETOOTH_SCAN' 'usesCleartextTraffic'; do
+  printf '%-26s %s\n' "$k" "$(grep -qE "$k" "$M" && echo OK || echo MISSING)"
+done
+```
+
+They live in `config.xml` (as `<config-file>` / `<edit-config>`) precisely so they survive
+platform regeneration. Do not hand-edit the generated manifest — those edits are lost.
+
+### iOS
+
+```bash
+export LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
+cordova build ios --emulator
+cordova build ios --device --buildConfig=build.json
+```
+
+`build.json` holds the development team and enables automatic provisioning. It contains no
+secrets. Install and launch on a connected device with:
+
+```bash
+xcrun devicectl device install app --device <UDID> "platforms/ios/build/Debug-iphoneos/Tilt 3.ipa"
+xcrun devicectl device process launch --device <UDID> --console com.tilthydrometer.tilt3
+```
+
+cordova-ios 8 always names the Xcode project and target **`App`**, regardless of the app name
+in `config.xml`.
+
+If you change `deployment-target`, you must **remove and re-add the platform**. The value is
+baked into the generated `platforms/ios/packages/cordova-ios-plugins/Package.swift` at
+platform-add time and is not refreshed by `cordova prepare`; a stale value fails the build
+with `invalid macCatalyst version`.
+
+## Debugging
+
+Android logs the app's `console.log` to logcat:
+
+```bash
+adb logcat | grep -i "chromium.*CONSOLE"
+```
+
+**iOS does not.** App-level `console.log` never reaches the device console — `xcrun devicectl
+... --console` shows only native plugin output. Use **Safari → Develop → \<device\> → Tilt 3**
+to see JavaScript logs and errors. A silent JS exception in the `deviceready` handler will
+stop Bluetooth scanning with no other symptom.
+
+## Plugin notes
+
+- **`com.unarin.cordova.beacon`** — the beacon plugin is the fork at
+  [baronbrew/cordova-plugin-ibeacon](https://github.com/baronbrew/cordova-plugin-ibeacon)
+  (branch `v3.x`), which carries fixes for Gradle 8 / cordova-android 15 and for
+  cordova-ios 7/8. Do not switch to the upstream npm package.
+- **`hooks/ios-add-uikit-import.js`** — cordova-ios 7/8 removed the global prefix header that
+  used to import UIKit everywhere. Some plugins still assume it exists, so this
+  `before_compile` hook re-adds the import. It is idempotent and required for the iOS build.
+
+## Credits
+
+Built on the [Framework7](http://www.idangero.us/framework7) PhoneGap template.
