@@ -50,6 +50,10 @@
              that some plugins still assume. See hooks/ios-add-uikit-import.js -->
         <hook type="before_compile" src="hooks/ios-add-uikit-import.js" />
         <preference name="deployment-target" value="13.0" />
+        <!-- Single 1024x1024 app icon. cordova-ios 8 uses one source image for the whole
+             AppIcon.appiconset; declaring it here means it survives platform regeneration,
+             which the previous setup (icons living inside the tracked Xcode project) did not. -->
+        <icon src="AppIcons/AppIcon.appiconset/1024.png" />
         <splash src="/res/screens/ios/Default@2x~universal~anyany.png" />
         <preference name="StatusBarOverlaysWebView" value="false" />
         <preference name="StatusBarBackgroundColor" value="#000000" />
