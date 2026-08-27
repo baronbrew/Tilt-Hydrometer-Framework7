@@ -63,12 +63,12 @@
         <preference name="AndroidWindowSplashScreenIconBackgroundColor" value="#8f8f8f" />
         <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/screens/android/drawable-xxxhdpi-screen.png" />
         <preference name="AndroidWindowSplashScreenBackground" value="#8f8f8f" />
-        <icon density="ldpi" src="res/icons/android/mipmap-ldpi/ic_launcher.png" />
-        <icon density="mdpi" src="res/icons/android/mipmap-mdpi/ic_launcher.png" />
-        <icon density="hdpi" src="res/icons/android/mipmap-hdpi/ic_launcher.png" />
-        <icon density="xhdpi" src="res/icons/android/mipmap-xhdpi/ic_launcher.png" />
-        <icon density="xxhdpi" src="res/icons/android/mipmap-xxhdpi/ic_launcher.png" />
-        <icon density="xxxhdpi" src="res/icons/android/mipmap-xxxhdpi/ic_launcher.png" />
+        <icon density="ldpi" src="res/icons/android/mipmap-ldpi/ic_launcher.png" background="res/icons/android/mipmap-ldpi/ic_launcher_background.png" foreground="res/icons/android/mipmap-ldpi/ic_launcher_foreground.png" />
+        <icon density="mdpi" src="res/icons/android/mipmap-mdpi/ic_launcher.png" background="res/icons/android/mipmap-mdpi/ic_launcher_background.png" foreground="res/icons/android/mipmap-mdpi/ic_launcher_foreground.png" />
+        <icon density="hdpi" src="res/icons/android/mipmap-hdpi/ic_launcher.png" background="res/icons/android/mipmap-hdpi/ic_launcher_background.png" foreground="res/icons/android/mipmap-hdpi/ic_launcher_foreground.png" />
+        <icon density="xhdpi" src="res/icons/android/mipmap-xhdpi/ic_launcher.png" background="res/icons/android/mipmap-xhdpi/ic_launcher_background.png" foreground="res/icons/android/mipmap-xhdpi/ic_launcher_foreground.png" />
+        <icon density="xxhdpi" src="res/icons/android/mipmap-xxhdpi/ic_launcher.png" background="res/icons/android/mipmap-xxhdpi/ic_launcher_background.png" foreground="res/icons/android/mipmap-xxhdpi/ic_launcher_foreground.png" />
+        <icon density="xxxhdpi" src="res/icons/android/mipmap-xxxhdpi/ic_launcher.png" background="res/icons/android/mipmap-xxxhdpi/ic_launcher_background.png" foreground="res/icons/android/mipmap-xxxhdpi/ic_launcher_foreground.png" />
     </platform>
     <platform name="ios">
         <splash src="/res/screens/ios/Default@2x~universal~anyany.png" />
