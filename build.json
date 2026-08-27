@@ -1,0 +1,16 @@
+{
+  "ios": {
+    "debug": {
+      "codeSignIdentity": "Apple Development",
+      "developmentTeam": "YS8PZRE64N",
+      "packageType": "development",
+      "automaticProvisioning": true
+    },
+    "release": {
+      "codeSignIdentity": "Apple Distribution",
+      "developmentTeam": "YS8PZRE64N",
+      "packageType": "app-store",
+      "automaticProvisioning": true
+    }
+  }
+}

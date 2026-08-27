@@ -46,6 +46,9 @@
         <icon density="xxxhdpi" src="res/icons/android/mipmap-xxxhdpi/ic_launcher.png" />
     </platform>
     <platform name="ios">
+        <!-- cordova-ios 7/8 dropped the global prefix header; re-adds the UIKit import
+             that some plugins still assume. See hooks/ios-add-uikit-import.js -->
+        <hook type="before_compile" src="hooks/ios-add-uikit-import.js" />
         <preference name="deployment-target" value="13.0" />
         <splash src="/res/screens/ios/Default@2x~universal~anyany.png" />
         <preference name="StatusBarOverlaysWebView" value="false" />
