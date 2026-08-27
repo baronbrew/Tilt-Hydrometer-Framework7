@@ -2,3 +2,4 @@
 /plugins
 node_modules
 www/js/secrets.js
+.DS_Store
