@@ -4074,6 +4074,20 @@ function add_tilts_to_pico(button){
     }
 
     function getGoogleSheetsData(range){
+        //The Sheets API key lives in www/js/secrets.js, which is gitignored. When that file is
+        //absent (a fresh clone, a git worktree, a CI checkout) window.SECRETS is undefined and
+        //reading the key threw right here. This runs inside the deviceready handler, so the
+        //exception aborted everything after it - including initScan/startScan - and the app
+        //launched looking normal but never scanned for Tilts. Degrade to "no cloud cards"
+        //instead of taking Bluetooth scanning down with it.
+        var sheetsApiKey = (window.SECRETS && window.SECRETS.GOOGLE_SHEETS_API_KEY) || '';
+        if (!sheetsApiKey){
+            if (!getGoogleSheetsData.missingKeyWarned){
+                getGoogleSheetsData.missingKeyWarned = true;
+                console.log('www/js/secrets.js missing or GOOGLE_SHEETS_API_KEY empty - cloud Tilt cards disabled, scanning unaffected');
+            }
+            return;
+        }
         var gsLogURLs = localStorage.getItem('gsLogURLs')||'{}';
         let inRangeBeacons = localStorage.getItem('inrangebeacons')||'NONE';
         Object.entries(JSON.parse(gsLogURLs)).forEach(([key, value]) => {
@@ -4089,7 +4103,7 @@ function add_tilts_to_pico(button){
             let regex = /\/d\/([a-zA-Z0-9_-]+)(?:\/edit|\/view|\/pubhtml|\/spreadsheets)?/;
             let gsLogURLSheetID = value.match(regex);
             //console.log(gsLogURLSheetID[1]);
-            let APIURL = 'https://sheets.googleapis.com/v4/spreadsheets/' + gsLogURLSheetID[1] + '/values/' + range + '?valueRenderOption=UNFORMATTED_VALUE&key=' + window.SECRETS.GOOGLE_SHEETS_API_KEY;
+            let APIURL = 'https://sheets.googleapis.com/v4/spreadsheets/' + gsLogURLSheetID[1] + '/values/' + range + '?valueRenderOption=UNFORMATTED_VALUE&key=' + sheetsApiKey;
             //console.log(APIURL);
             return new Promise((resolve, reject) => {
             cordova.plugin.http.get(APIURL, {}, {}, 
