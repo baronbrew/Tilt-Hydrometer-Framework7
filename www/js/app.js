@@ -537,7 +537,7 @@ function checkFineLocationPermissionCallback(status) {
                                 fetchJSONData(tiltPicoIPAddr + '/lastlogged');
                             }
                           if (tiltPicoIndex == -1){
-                            var tiltPicoElement = JSON.parse(localStorage.getItem('tiltPicoIPAddr-' + tiltPicoIPAddr))||{'ip_address': tiltPicoIPAddr, 'text' : 'Untitled ' + tiltPicoIPAddr.split('.')[3], 'enable_scanning' : false, 'pico_logging_tilts' : [], 'pico_device_logging' : false, 'pico_device_logging_tilts' : localStorage.getItem('deviceloggingtilts-' + tiltPicoIPAddr) ?? '', 'pico_inrange' : true, 'tilt_pico_version' : 0};
+                            var tiltPicoElement = JSON.parse(localStorage.getItem('tiltPicoIPAddr-' + tiltPicoIPAddr))||{'ip_address': tiltPicoIPAddr, 'text' : 'Untitled ' + tiltPicoIPAddr.split('.')[3], 'enable_scanning' : false, 'pico_logging_tilts' : [], 'pico_device_logging' : false, 'pico_device_logging_tilts' : localStorage.getItem('deviceloggingtilts-' + tiltPicoIPAddr) ?? '', 'pico_inrange' : true, 'tilt_pico_version' : 0, 'tilt_pico_mac' : '00:00:00:00:00:00'};
                             tiltPicos.tiltPico.unshift(tiltPicoElement);
                             tiltPicos.tiltPico[0].pico_inrange = true;
                             if (picoName == ''){
@@ -3352,13 +3352,26 @@ var wifiConnProgress = 0;
             }
             }
             if (tiltPicoIP.includes('info')){
-                var tiltPicoIndex = tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == tiltPicoIP.split('/')[0]);
+                var tiltPicoIPOnly = tiltPicoIP.split('/')[0];
+                var tiltPicoIndex = tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == tiltPicoIPOnly);
+                if (tiltPicoIndex == -1){
+                    return;//Pico is no longer in the list (removed while the request was in flight)
+                }
+                if (result.tilt_pico_mac_address){
+                    tiltPicos.tiltPico[tiltPicoIndex].tilt_pico_mac = result.tilt_pico_mac_address;
+                    //the MAC is the only stable identity - fold in any entry left behind by a
+                    //previous IP for this same Pico
+                    tiltPicoIndex = mergePicosByMac(tiltPicoIndex);
+                }
                 if (result.tilt_pico_version > 0){
                     tiltPicos.tiltPico[tiltPicoIndex].tilt_pico_version = result.tilt_pico_version;
-                    NativeStorage.setItem('tiltPicos', JSON.stringify(tiltPicos));
-                    localStorage.setItem('tiltPicoIPAddr-' + tiltPicoIP.split('/')[0], JSON.stringify(tiltPicos.tiltPico[tiltPicoIndex]));
-                    return;
                 }
+                //Persist regardless of the version. Previously both writes lived inside the
+                //version branch, so a Pico reporting version 0 (or omitting the field) had its
+                //MAC set in memory only and lost it on restart.
+                NativeStorage.setItem('tiltPicos', JSON.stringify(tiltPicos));
+                localStorage.setItem('tiltPicoIPAddr-' + tiltPicos.tiltPico[tiltPicoIndex].ip_address, JSON.stringify(tiltPicos.tiltPico[tiltPicoIndex]));
+                return;
             }
             if (tiltPicoIP.includes('remove_config_file')){
                 var tiltPicoIndex = tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == tiltPicoIP.split('/')[0]);
@@ -4003,6 +4016,62 @@ function add_tilts_to_pico(button){
         }
     }
 }
+
+    //Tilt Picos are keyed by ip_address, but a router reboot can hand the same physical Pico
+    //a new IP, which shows up as a second entry. The MAC is stable, so once /info reports it
+    //fold any other entry with the same MAC into the live one: keep the user's configuration
+    //from the older record, adopt the current IP. Returns the live entry's index, which can
+    //move when earlier duplicates are spliced out.
+    function mergePicosByMac(liveIndex){
+        var live = tiltPicos.tiltPico[liveIndex];
+        var mac = live && live.tilt_pico_mac;
+        //Never merge on an unknown MAC - every un-identified Pico would collapse into one.
+        if (!mac || mac === '00:00:00:00:00:00'){
+            return liveIndex;
+        }
+        var duplicates = [];
+        tiltPicos.tiltPico.forEach(function (pico, i) {
+            if (i !== liveIndex && pico && pico.tilt_pico_mac === mac){
+                duplicates.push(i);
+            }
+        });
+        if (!duplicates.length){
+            return liveIndex;
+        }
+        //The older record holds the user's setup (name, logging config); the live record holds
+        //the current IP. If more than one stale entry exists the first is used as the source.
+        var old = tiltPicos.tiltPico[duplicates[0]];
+        var merged = Object.assign({}, old, {
+            ip_address : live.ip_address,
+            pico_inrange : true,
+            tilt_pico_mac : mac,
+            tilt_pico_version : live.tilt_pico_version || old.tilt_pico_version
+        });
+        //a name the user gave the live entry wins over the old one
+        if (live.text && live.text.indexOf('Untitled ') !== 0){
+            merged.text = live.text;
+        }
+        duplicates.forEach(function (i) {
+            var dupe = tiltPicos.tiltPico[i];
+            console.log('merging Tilt Pico ' + dupe.ip_address + ' into ' + live.ip_address + ' (mac ' + mac + ')');
+            localStorage.removeItem('tiltPicoIPAddr-' + dupe.ip_address);
+        });
+        //splice highest index first so the earlier indexes stay valid
+        duplicates.sort(function (a, b) { return b - a; }).forEach(function (i) {
+            tiltPicos.tiltPico.splice(i, 1);
+        });
+        var newIndex = tiltPicos.tiltPico.findIndex(function (p) { return p && p.ip_address === live.ip_address; });
+        if (newIndex === -1){
+            tiltPicos.tiltPico.unshift(merged);
+            newIndex = 0;
+        }else{
+            tiltPicos.tiltPico[newIndex] = merged;
+        }
+        localStorage.setItem('tiltPicoIPAddr-' + merged.ip_address, JSON.stringify(merged));
+        NativeStorage.setItem('tiltPicos', JSON.stringify(tiltPicos));
+        updatePicoList();
+        return newIndex;
+    }
 
     function getGoogleSheetsData(range){
         var gsLogURLs = localStorage.getItem('gsLogURLs')||'{}';
