@@ -1888,125 +1888,6 @@ function clearCustomCloudURL2 (button){
     localStorage.setItem('picoStatus-' + color, 'color-yellow');
 }
 
-function postToCloudURLsDisabled (color, comment) {
-    //get beer name from local storage in case beer name updated from prompt
-    var currentBeerName = localStorage.getItem('beerName-' + color)||"Untitled";
-    if (comment === undefined){
-        comment = "";
-    };
-    var beacon = JSON.parse(localStorage.getItem('tiltObject-' + color));
-    var cloudURLs = localStorage.getItem('cloudurls-' + color) || app.data.defaultCloudURL + ',,';
-    var cloudURLsArray = cloudURLs.split(',');
-    var cloudURLsenabled = localStorage.getItem('cloudurlsenabled-' + color)||'1,0,0';
-    var cloudURLsenabledArray = cloudURLsenabled.split(',');
-    var inRangeBeacons = localStorage.getItem('inrangebeacons')||'NONE';
-    var inRangeBeaconsArray = inRangeBeacons.split(',');
-    var indexOfColor = inRangeBeaconsArray.indexOf(color);
-    if (cloudURLsenabled == '0,0,0' || indexOfColor < 0){
-       return;//return undefined if no cloud options checked or Tilts not in range
-       }
-       var notificationCloud = app.notification.create({
-        icon: '<i class="preloader"></i>',
-        title: 'Connecting to cloud...',
-        titleRightText: 'alert',
-        subtitle: currentBeerName.split(',')[0] + ' (' + color + ' TILT)',
-        text: 'Allow up to 30 seconds to connect.',
-        closeOnClick: true,
-        closeTimeout: 30000,
-      });
-    setTimeout(function(){ notificationCloud.open(); }, 1000); //prevents notification being overwritten by device log notification
-    for (var i = 0; i < 3; i++) {
-        if (cloudURLsenabledArray[i] == '1'){
-        //convert beacon timeStamp (UTC) to Excel formatted Timepoint (local time)
-        var timeStamp = new Date(beacon.timeStamp);
-        var localTime = timeStamp.toLocaleString();
-        var tzOffsetDays = timeStamp.getTimezoneOffset() / 60 / 24;
-        var localTimeExcel = timeStamp.valueOf() / 1000 / 60 / 60 / 24 + 25569 - tzOffsetDays;
-        //only send beer name with beer ID if using default cloud URL
-         if (i != 0){
-            currentBeerName = currentBeerName.split(',')[0];
-         }
-        stopScan();//stop bt scan while using wifi
-        var colorLogged = beacon.Color.replace("•HD","");
-        app.request.post(cloudURLsArray[i], encodeURI("Timepoint=" + localTimeExcel + "&SG=" + beacon.SG + "&Temp=" + beacon.Temp + "&Color=" + colorLogged + "&Beer=" + currentBeerName + "&Comment=" + comment), function (stringData){
-            startScan();//restart scanning
-            localStorage.setItem('lastCloudLogged-' + color, Date.now());
-            //try to parse data from Baron Brew Google Sheets
-            try {
-            var jsonData = JSON.parse(stringData);
-            //different notification depending on if beer name exists and data should be logged or if beer name doesn't exist and new log needs to be started
-            if (jsonData.result.indexOf("Start New Log") > -1){
-            var notificationSuccess = app.notification.create({
-                icon: '<i class="f7-icons">check</i>',
-                title: 'Ready to Start New Log',
-                titleRightText: 'alert',
-                subtitle: localTime,
-                text: jsonData.result,
-                closeOnClick: false,
-                closeTimeout: 8000,
-              });
-            notificationSuccess.open();
-            }else{
-            var notificationSuccess = app.notification.create({
-                icon: '<i class="f7-icons">check</i>',
-                title: 'Success Logging to Cloud',
-                titleRightText: 'alert',
-                subtitle: localTime,
-                text: jsonData.result,
-                closeOnClick: true,
-                closeTimeout: 10000,
-              });
-            notificationSuccess.open();
-            }
-            //set beername with returned cloud ID
-            var beerNameArray = jsonData.beername.split(",");
-            if (beerNameArray[1] !== undefined && comment != 'End of log') {
-              localStorage.setItem('beerName-' + color, jsonData.beername);
-              NativeStorage.setItem('beerName-' + color, jsonData.beername, function (result) { }, function (e) { });
-                showBeerName(color);
-                $$('.cloudStatus' + color).html('<a class="link external" href="' + jsonData.doclongurl + '" target="_system">&nbsp;<i class="material-icons size-15">cloud_done</i><span class="lastCloudLogged' + beacon.Color +'"></span></a>');
-                localStorage.setItem('docLongURL-' + color, jsonData.doclongurl);
-                
-            }
-            }
-            //json parse error - just show "result" if not Baron Brew Google Sheets
-            catch(error){
-                //jsonData is undefined here - the JSON.parse that would assign it is what threw.
-                //Show the raw response body instead, and log it so the real payload is visible.
-                console.log('cloud log parse error:', error && error.message, '| raw response:', stringData);
-                var notificationSuccess = app.notification.create({
-                    icon: '<i class="f7-icons">check</i>',
-                    title: 'Success Logging to Cloud',
-                    titleRightText: 'alert',
-                    subtitle: localTime,
-                    text: stringData,
-                    closeOnClick: false,
-                    closeTimeout: 8000,
-                  });
-                notificationSuccess.open();
-                $$('.cloudStatus' + beacon.Color).html('<i class="material-icons size-15">cloud_done</i><span class="lastCloudLogged' + beacon.Color +'"></span>');
-
-            }
-        }, function (errorData) {
-            startScan();//restart scanning
-            var notificationCloudError = app.notification.create({
-                icon: '<i class="f7-icons">info</i>',
-                title: 'Error Logging to Cloud',
-                titleRightText: 'alert',
-                subtitle: 'TILT | ' + color,
-                text: 'Check WiFi or Internet connection.',
-                closeTimeout: 5000,
-              });
-            notificationCloudError.open();
-            $$('.cloudStatus' + beacon.Color).html('cloud error');
-
-        },
-        'text'
-        );
-        }
-    }
-}
-
 function cloudIntervalStepper (color) {
     var cloudIntervalCurrent = localStorage.getItem('cloudInterval-' + color)||'15';
     var stepper = app.stepper.create({
@@ -2795,12 +2676,49 @@ function restorePicoSettings(){
 
 }
 
+//Apps Script commits ALL of its work - the beer entry, the new spreadsheet and the
+//notification email - before it produces a response. So a lost or timed-out response does
+//NOT mean nothing happened: it usually means the sheet already exists and we simply never
+//got to read its name and URL. That is why a blind retry is dangerous and why the duplicate
+//beer names show up in the Sheets list - the user gets no confirmation, taps "Start New Log"
+//again, and the script happily builds a second sheet.
+//
+//logId is the fix: the same id is sent for every attempt at one new log, so the Apps Script
+//can look it up and return the EXISTING sheet instead of creating another. Until that
+//lookup is deployed server-side, leave CLOUD_RETRY_ENABLED false - an automatic retry
+//against a script that ignores logId would manufacture the exact duplicate it is meant to
+//prevent. Flip it to true once the script dedupes; no other change is needed here.
+var CLOUD_RETRY_ENABLED = false;
+
+//Stable id for one "start a new log" attempt. Reused for 3 minutes per Tilt so it covers
+//both the app's own retry and the user tapping "Start New Log" again after getting no
+//feedback - the two sources of duplicate sheets. Cleared as soon as an attempt is
+//confirmed, so a deliberate new log afterwards always gets a fresh id.
+function getNewLogId (color) {
+    var NEW_LOG_ID_REUSE_MS = 3 * 60 * 1000;
+    var stored = localStorage.getItem('newLogId-' + color);
+    if (stored){
+        var parts = stored.split('|');
+        if (Date.now() - Number(parts[1]) < NEW_LOG_ID_REUSE_MS){
+            return parts[0];
+        }
+    }
+    var id = color + '-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 8);
+    localStorage.setItem('newLogId-' + color, id + '|' + Date.now());
+    return id;
+}
+
 //isNewLog must be passed explicitly by the "start a new log" call sites. It is NOT inferred
 //from the comment text - a user comment such as "tasting @ 5pm" contains an '@' and used to
 //be misread as an email, wrapping it in the JSON payload and losing the actual comment.
 function postToCloudURLs (color, comment, picoRequestString = 'none', isNewLog = false) {
     //get beer name from local storage in case beer name updated from prompt
     var currentBeerName = localStorage.getItem('beerName-' + color)||"Untitled";
+    var logId = isNewLog ? getNewLogId(color) : '';
+    //The retry re-sends the default URL only. These are captured on the i==0 pass because
+    //everything in this function is `var` scoped - without the capture a later loop
+    //iteration for custom URL 2 or 3 would overwrite them before the retry fires.
+    var retryURL = '', retryBody = '', newLogRetryUsed = false;
     if (comment === undefined){
         comment = "";
     };
@@ -2822,14 +2740,18 @@ function postToCloudURLs (color, comment, picoRequestString = 'none', isNewLog =
     if (cloudURLsenabled == '0,0,0' || indexOfColor < 0){
        return;//return undefined if no cloud options checked or Tilts not in range
        }
+       //Stays up until the request actually resolves - no closeTimeout, no closeOnClick.
+       //It used to auto-close after 30s while the request ran on for up to 120s, leaving
+       //90 seconds with nothing on screen. Users concluded it had failed, tapped
+       //"Start New Log" again, and got a second sheet and a second email.
        var notificationCloud = app.notification.create({
         icon: '<i class="preloader"></i>',
         title: 'Connecting to cloud...',
         titleRightText: 'alert',
         subtitle: currentBeerName.split(',')[0] + ' (' + color + ' TILT)',
-        text: 'Allow up to 30 seconds to connect.',
-        closeOnClick: true,
-        closeTimeout: 30000,
+        text: isNewLog ? 'Starting a new log - this can take up to 30 seconds. Please do not tap "Start New Log" again.'
+                       : 'Allow up to 20 seconds to connect.',
+        closeOnClick: false,
       });
     var notificationCloudTimeout = setTimeout(function(){ notificationCloud.open(); }, 2000); //prevents notification being overwritten by device log notification
     for (var i = 0; i < 3; i++) {
@@ -2875,23 +2797,44 @@ function postToCloudURLs (color, comment, picoRequestString = 'none', isNewLog =
          }
         stopScan();//stop bt scan while using wifi
         var colorLogged = beacon.Color.replace("•HD","").replace("_",":").toUpperCase();
-        cordova.plugin.http.setDataSerializer('utf8');
-        cordova.plugin.http.setRequestTimeout(120.0);
-        cordova.plugin.http.post(
-            cloudURLsArray[i],
-            //encodeURIComponent per value, NOT encodeURI over the whole body. encodeURI
-            //leaves & = + # unescaped, so any of those inside a value (an email, a beer
-            //name, the JSON comment) split or truncated the field server-side.
-            "Timepoint=" + encodeURIComponent(localTimeExcel) +
+        //encodeURIComponent per value, NOT encodeURI over the whole body. encodeURI
+        //leaves & = + # unescaped, so any of those inside a value (an email, a beer
+        //name, the JSON comment) split or truncated the field server-side.
+        var requestBody = "Timepoint=" + encodeURIComponent(localTimeExcel) +
             "&SG=" + encodeURIComponent(beacon.SG) +
             "&Temp=" + encodeURIComponent(beacon.Temp) +
             "&Color=" + encodeURIComponent(colorLogged) +
             "&Beer=" + encodeURIComponent(currentBeerName) +
-            "&Comment=" + encodeURIComponent(commentForURL),
+            "&Comment=" + encodeURIComponent(commentForURL);
+        //logId goes to the default Baron Brew URL only - custom webhooks have no use for
+        //it, and a script that does not know the field just ignores it.
+        if (i == 0 && isNewLog){
+            requestBody += "&logId=" + encodeURIComponent(logId);
+            retryURL = cloudURLsArray[i];
+            retryBody = requestBody;
+        }
+        //url/body/isDefaultURL are parameters rather than closure reads so the retry
+        //always re-sends the default URL's payload, never a later iteration's.
+        var sendCloudPost = function (url, body, isDefaultURL) {
+        cordova.plugin.http.setDataSerializer('utf8');
+        //A new log is the slow case - doPost creates the spreadsheet, writes the headers
+        //and sends the email before it answers - so it gets 30s. A routine append is just
+        //a row and gets 20s; past that a reply essentially never arrives, and waiting
+        //longer only widens the window where the user sits with no feedback. Both are
+        //client-side give-up points, not server limits: the script keeps running.
+        //setRequestTimeout is GLOBAL plugin state, so it is restored in both callbacks.
+        cordova.plugin.http.setRequestTimeout(isNewLog ? 30.0 : 20.0);
+        cordova.plugin.http.post(
+            url,
+            body,
             { "content-type" : "application/x-www-form-urlencoded; charset=utf-8" },
             function (objectData){
+            cordova.plugin.http.setRequestTimeout(15.0);//restore the global default set at startup
+            notificationCloud.close();//the request resolved - take the spinner down
             startScan();//restart scanning
             localStorage.setItem('lastCloudLogged-' + color, Date.now());
+            //confirmed - a later "start a new log" is a real new log and needs its own id
+            if (isNewLog){ localStorage.removeItem('newLogId-' + color); }
             //try to parse data from Baron Brew Google Sheets
             try {
             var jsonData = JSON.parse(objectData.data);
@@ -2982,9 +2925,33 @@ function postToCloudURLs (color, comment, picoRequestString = 'none', isNewLog =
 
             }
         }, function (errorData) {
+            cordova.plugin.http.setRequestTimeout(15.0);//restore the global default set at startup
+            notificationCloud.close();//the request resolved - take the spinner down
             clearTimeout(notificationCloudTimeout);
             startScan();//restart scanning
             console.log(JSON.stringify(errorData));
+            //One retry, new-log + default URL only. A routine append is not retried: the
+            //next auto-log picks it up 15 minutes later, whereas a duplicate row is
+            //permanent. A failed new log has no such recovery - nothing can be logged at
+            //all until the user starts over - so it is worth one more attempt.
+            //Gated on CLOUD_RETRY_ENABLED: see the note above this function. Until the
+            //Apps Script dedupes on logId, retrying a request whose side effects already
+            //committed is how you get two sheets, not one.
+            if (CLOUD_RETRY_ENABLED && isNewLog && isDefaultURL && !newLogRetryUsed && retryURL){
+                newLogRetryUsed = true;
+                stopScan();//wifi again - do not scan over the retry
+                notificationCloud = app.notification.create({
+                    icon: '<i class="preloader"></i>',
+                    title: 'Taking Longer Than Usual',
+                    titleRightText: 'alert',
+                    subtitle: currentBeerName.split(',')[0] + ' (' + color + ' TILT)',
+                    text: 'Google has not answered yet. Trying once more - please do not tap "Start New Log" again.',
+                    closeOnClick: false,
+                  });
+                notificationCloud.open();
+                sendCloudPost(retryURL, retryBody, true);
+                return;
+            }
             //Apps Script runs doPost first, then 302s to a short-lived
             //script.googleusercontent.com/macros/echo URL that serves the response body.
             //A 404 on that second hop means the row was almost certainly written but we
@@ -2993,8 +2960,28 @@ function postToCloudURLs (color, comment, picoRequestString = 'none', isNewLog =
             var echoUrl = String(errorData && errorData.url || '');
             var unconfirmed = errorData && errorData.status === 404 &&
                               echoUrl.indexOf('script.googleusercontent.com') > -1;
+            if (unconfirmed && isNewLog){
+                //FATAL when starting a new log. The response body carries jsonData.beername
+                //(name plus serial) and doclongurl, and without them beerName-, gsLogURLs and
+                //the cloud status link are never set - the log did not start, and nothing can
+                //be logged until the user starts one. Do NOT write lastCloudLogged here: that
+                //marks the Tilt as logged for rate-limiting and leaves it stuck.
+                var notificationNewLogFailed = app.notification.create({
+                    icon: '<i class="f7-icons">exclamationmark_triangle</i>',
+                    title: 'New Log Did Not Start',
+                    titleRightText: 'alert',
+                    subtitle: 'TILT | ' + color,
+                    text: 'Google did not confirm the new log, so it was not started. A sheet may still have been created - check your email for the link before tapping "Start New Log" again, or you will end up with a second sheet.',
+                    closeOnClick: false,
+                    closeTimeout: 20000,
+                  });
+                notificationNewLogFailed.open();
+                $$('.cloudStatus' + beacon.Color).html('cloud error');
+                return;
+            }
             if (unconfirmed){
-                //mark as logged for rate-limiting purposes - the data most likely landed
+                //Routine append only. The row almost certainly landed and the response body
+                //is not needed, so treat it as logged and discourage a duplicate row.
                 localStorage.setItem('lastCloudLogged-' + color, Date.now());
                 var notificationCloudUnconfirmed = app.notification.create({
                     icon: '<i class="f7-icons">exclamationmark_triangle</i>',
@@ -3022,6 +3009,8 @@ function postToCloudURLs (color, comment, picoRequestString = 'none', isNewLog =
 
         }
         );
+        };
+        sendCloudPost(cloudURLsArray[i], requestBody, i == 0);
         }
     }
 }
