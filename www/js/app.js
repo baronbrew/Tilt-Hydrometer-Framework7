@@ -2683,12 +2683,14 @@ function restorePicoSettings(){
 //beer names show up in the Sheets list - the user gets no confirmation, taps "Start New Log"
 //again, and the script happily builds a second sheet.
 //
-//logId is the fix: the same id is sent for every attempt at one new log, so the Apps Script
-//can look it up and return the EXISTING sheet instead of creating another. Until that
-//lookup is deployed server-side, leave CLOUD_RETRY_ENABLED false - an automatic retry
-//against a script that ignores logId would manufacture the exact duplicate it is meant to
-//prevent. Flip it to true once the script dedupes; no other change is needed here.
-var CLOUD_RETRY_ENABLED = false;
+//logId is what makes retrying safe: the same id is sent for every attempt at one new log,
+//so the Apps Script can look it up and return the EXISTING sheet instead of building
+//another. A new log that gets no answer is retried once, in the error callback below.
+//
+//THIS DEPENDS ON THE SERVER. An Apps Script that ignores logId treats the retry as a
+//second request and creates a second sheet and a second email - the exact duplicate the
+//retry exists to prevent. If that dedupe is ever removed from the script, remove the
+//retry here too.
 
 //Stable id for one "start a new log" attempt. Reused for 3 minutes per Tilt so it covers
 //both the app's own retry and the user tapping "Start New Log" again after getting no
@@ -2749,7 +2751,7 @@ function postToCloudURLs (color, comment, picoRequestString = 'none', isNewLog =
         title: 'Connecting to cloud...',
         titleRightText: 'alert',
         subtitle: currentBeerName.split(',')[0] + ' (' + color + ' TILT)',
-        text: isNewLog ? 'Starting a new log - this can take up to 30 seconds. Please do not tap "Start New Log" again.'
+        text: isNewLog ? 'Starting a new log - this can take up to 25 seconds. Please do not tap the "Start New Log" button again.'
                        : 'Allow up to 20 seconds to connect.',
         closeOnClick: false,
       });
@@ -2818,12 +2820,16 @@ function postToCloudURLs (color, comment, picoRequestString = 'none', isNewLog =
         var sendCloudPost = function (url, body, isDefaultURL) {
         cordova.plugin.http.setDataSerializer('utf8');
         //A new log is the slow case - doPost creates the spreadsheet, writes the headers
-        //and sends the email before it answers - so it gets 30s. A routine append is just
+        //and sends the email before it answers - so it gets 25s. A routine append is just
         //a row and gets 20s; past that a reply essentially never arrives, and waiting
         //longer only widens the window where the user sits with no feedback. Both are
         //client-side give-up points, not server limits: the script keeps running.
+        //25s is a deliberate compromise: a new log fails twice before the user is told to
+        //start over, so every second here costs two. The measured server floor is around
+        //18s in production, so this leaves roughly 7s of headroom - enough for an ordinary
+        //slow run, not enough to sit through a hopeless one twice.
         //setRequestTimeout is GLOBAL plugin state, so it is restored in both callbacks.
-        cordova.plugin.http.setRequestTimeout(isNewLog ? 30.0 : 20.0);
+        cordova.plugin.http.setRequestTimeout(isNewLog ? 25.0 : 20.0);
         cordova.plugin.http.post(
             url,
             body,
@@ -2930,44 +2936,48 @@ function postToCloudURLs (color, comment, picoRequestString = 'none', isNewLog =
             clearTimeout(notificationCloudTimeout);
             startScan();//restart scanning
             console.log(JSON.stringify(errorData));
-            //One retry, new-log + default URL only. A routine append is not retried: the
-            //next auto-log picks it up 15 minutes later, whereas a duplicate row is
-            //permanent. A failed new log has no such recovery - nothing can be logged at
-            //all until the user starts over - so it is worth one more attempt.
-            //Gated on CLOUD_RETRY_ENABLED: see the note above this function. Until the
-            //Apps Script dedupes on logId, retrying a request whose side effects already
-            //committed is how you get two sheets, not one.
-            if (CLOUD_RETRY_ENABLED && isNewLog && isDefaultURL && !newLogRetryUsed && retryURL){
-                newLogRetryUsed = true;
-                stopScan();//wifi again - do not scan over the retry
-                notificationCloud = app.notification.create({
-                    icon: '<i class="preloader"></i>',
-                    title: 'Taking Longer Than Usual',
-                    titleRightText: 'alert',
-                    subtitle: currentBeerName.split(',')[0] + ' (' + color + ' TILT)',
-                    text: 'Google has not answered yet. Trying once more - please do not tap "Start New Log" again.',
-                    closeOnClick: false,
-                  });
-                notificationCloud.open();
-                sendCloudPost(retryURL, retryBody, true);
-                return;
-            }
-            //ANY failure is fatal when starting a new log, not just the echo-URL 404 handled
-            //below. The response body carries jsonData.beername (name plus serial) and
-            //doclongurl; without them beerName-, gsLogURLs and the cloud status link are never
-            //set, so the log did not start and nothing can be logged until the user starts one.
-            //Why the reason does not matter: a timeout (status -4), an unresolvable host (-3)
-            //and a 404 on the echo URL all leave the app in that same state. This used to be
-            //gated on the 404 alone, so the common case - no response inside the timeout -
-            //fell through to the generic handler and showed the user a raw JSON dump.
-            //Do NOT write lastCloudLogged here: that marks the Tilt as logged for
-            //rate-limiting and leaves it stuck.
-            if (isNewLog){
+            //A new log that fails gets one more attempt, then a message. These were two
+            //separate top-level branches, which made them look like different kinds of
+            //failure - they are the first and second failure of the same request.
+            //
+            //The reason for the failure is deliberately not examined. A timeout (status -4),
+            //an unresolved host (-3) and a 404 on the echo URL all leave the app without
+            //jsonData.beername and doclongurl, so beerName-, gsLogURLs and the cloud status
+            //link are never set: the log did not start, and nothing can be logged until the
+            //user starts one. The cause changes nothing about what happens next.
+            //
+            //A routine append is NOT retried. The next auto-log picks up a missed reading 15
+            //minutes later, whereas a duplicate row is permanent, so the trade runs the other
+            //way round. A failed new log has no such recovery.
+            //
+            //isDefaultURL gates the whole block: only the Baron Brew URL returns the beer
+            //name and sheet URL, so custom URL 2 or 3 failing says nothing about whether the
+            //log started, and belongs with the generic handler further down.
+            if (isNewLog && isDefaultURL){
+                if (!newLogRetryUsed && retryURL){
+                    //First failure. Resend the same body, carrying the same logId, so the
+                    //script can recognise a repeat of one attempt, not a new request.
+                    newLogRetryUsed = true;
+                    stopScan();//wifi again - do not scan over the retry
+                    notificationCloud = app.notification.create({
+                        icon: '<i class="preloader"></i>',
+                        title: 'Taking Longer Than Usual',
+                        titleRightText: 'alert',
+                        subtitle: currentBeerName.split(',')[0] + ' (' + color + ' TILT)',
+                        text: 'The cloud logging server (Google Sheets) did not respond. Trying once more - please do not tap the "Start New Log" button again.',
+                        closeOnClick: false,
+                      });
+                    notificationCloud.open();
+                    sendCloudPost(retryURL, retryBody, true);
+                    return;
+                }
+                //Second failure. Do NOT write lastCloudLogged here: that marks the Tilt as
+                //logged for rate-limiting and leaves it stuck.
                 var notificationNewLogFailed = app.notification.create({
-                    icon: '<i class="f7-icons">exclamationmark_triangle</i>',
+                    icon: '<i class="f7-icons">info</i>',
                     title: 'Error Starting New Log',
                     titleRightText: 'alert',
-                    subtitle: 'TILT | ' + color,
+                    subtitle: currentBeerName.split(',')[0] + ' (' + color + ' TILT)',
                     text: 'The cloud logging server (Google Sheets) did not respond. Tap the "Start New Log" button to try again.',
                     closeOnClick: false,
                     closeTimeout: 20000,
@@ -2990,10 +3000,10 @@ function postToCloudURLs (color, comment, picoRequestString = 'none', isNewLog =
                 //is not needed, so treat it as logged and discourage a duplicate row.
                 localStorage.setItem('lastCloudLogged-' + color, Date.now());
                 var notificationCloudUnconfirmed = app.notification.create({
-                    icon: '<i class="f7-icons">exclamationmark_triangle</i>',
+                    icon: '<i class="f7-icons">info</i>',
                     title: 'Logged - Confirmation Not Received',
                     titleRightText: 'alert',
-                    subtitle: 'TILT | ' + color,
+                    subtitle: currentBeerName.split(',')[0] + ' (' + color + ' TILT)',
                     text: 'Your reading was most likely saved to the cloud, but Google did not return a confirmation. Check the sheet before logging again - re-logging may create a duplicate row.',
                     closeOnClick: false,
                     closeTimeout: 12000,
@@ -3006,7 +3016,7 @@ function postToCloudURLs (color, comment, picoRequestString = 'none', isNewLog =
                 icon: '<i class="f7-icons">info</i>',
                 title: 'Error Logging to Cloud',
                 titleRightText: 'alert',
-                subtitle: 'TILT | ' + color,
+                subtitle: currentBeerName.split(',')[0] + ' (' + color + ' TILT)',
                 text: JSON.stringify(errorData),
                 closeTimeout: 8000,
               });
