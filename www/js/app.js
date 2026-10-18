@@ -2957,20 +2957,20 @@ function postToCloudURLs (color, comment, picoRequestString = 'none', isNewLog =
                 if (!newLogRetryUsed && retryURL){
                     //First failure. Resend the same body, carrying the same logId, so the
                     //script can recognise a repeat of one attempt, not a new request.
-                newLogRetryUsed = true;
-                stopScan();//wifi again - do not scan over the retry
-                notificationCloud = app.notification.create({
-                    icon: '<i class="preloader"></i>',
-                    title: 'Taking Longer Than Usual',
-                    titleRightText: 'alert',
-                    subtitle: currentBeerName.split(',')[0] + ' (' + color + ' TILT)',
+                    newLogRetryUsed = true;
+                    stopScan();//wifi again - do not scan over the retry
+                    notificationCloud = app.notification.create({
+                        icon: '<i class="preloader"></i>',
+                        title: 'Taking Longer Than Usual',
+                        titleRightText: 'alert',
+                        subtitle: currentBeerName.split(',')[0] + ' (' + color + ' TILT)',
                         text: 'The cloud logging server (Google Sheets) did not respond. Trying once more - please do not tap the "Start New Log" button again.',
-                    closeOnClick: false,
-                  });
-                notificationCloud.open();
-                sendCloudPost(retryURL, retryBody, true);
-                return;
-            }
+                        closeOnClick: false,
+                      });
+                    notificationCloud.open();
+                    sendCloudPost(retryURL, retryBody, true);
+                    return;
+                }
                 //Second failure. Do NOT write lastCloudLogged here: that marks the Tilt as
                 //logged for rate-limiting and leaves it stuck.
                 var notificationNewLogFailed = app.notification.create({
