@@ -2952,26 +2952,23 @@ function postToCloudURLs (color, comment, picoRequestString = 'none', isNewLog =
                 sendCloudPost(retryURL, retryBody, true);
                 return;
             }
-            //Apps Script runs doPost first, then 302s to a short-lived
-            //script.googleusercontent.com/macros/echo URL that serves the response body.
-            //A 404 on that second hop means the row was almost certainly written but we
-            //never got to read the confirmation. Treat it as logged-but-unconfirmed so the
-            //user does not re-log and create a duplicate row.
-            var echoUrl = String(errorData && errorData.url || '');
-            var unconfirmed = errorData && errorData.status === 404 &&
-                              echoUrl.indexOf('script.googleusercontent.com') > -1;
-            if (unconfirmed && isNewLog){
-                //FATAL when starting a new log. The response body carries jsonData.beername
-                //(name plus serial) and doclongurl, and without them beerName-, gsLogURLs and
-                //the cloud status link are never set - the log did not start, and nothing can
-                //be logged until the user starts one. Do NOT write lastCloudLogged here: that
-                //marks the Tilt as logged for rate-limiting and leaves it stuck.
+            //ANY failure is fatal when starting a new log, not just the echo-URL 404 handled
+            //below. The response body carries jsonData.beername (name plus serial) and
+            //doclongurl; without them beerName-, gsLogURLs and the cloud status link are never
+            //set, so the log did not start and nothing can be logged until the user starts one.
+            //Why the reason does not matter: a timeout (status -4), an unresolvable host (-3)
+            //and a 404 on the echo URL all leave the app in that same state. This used to be
+            //gated on the 404 alone, so the common case - no response inside the timeout -
+            //fell through to the generic handler and showed the user a raw JSON dump.
+            //Do NOT write lastCloudLogged here: that marks the Tilt as logged for
+            //rate-limiting and leaves it stuck.
+            if (isNewLog){
                 var notificationNewLogFailed = app.notification.create({
                     icon: '<i class="f7-icons">exclamationmark_triangle</i>',
-                    title: 'New Log Did Not Start',
+                    title: 'Error Starting New Log',
                     titleRightText: 'alert',
                     subtitle: 'TILT | ' + color,
-                    text: 'Google did not confirm the new log, so it was not started. A sheet may still have been created - check your email for the link before tapping "Start New Log" again, or you will end up with a second sheet.',
+                    text: 'The cloud logging server (Google Sheets) did not respond. Tap the "Start New Log" button to try again.',
                     closeOnClick: false,
                     closeTimeout: 20000,
                   });
@@ -2979,6 +2976,15 @@ function postToCloudURLs (color, comment, picoRequestString = 'none', isNewLog =
                 $$('.cloudStatus' + beacon.Color).html('cloud error');
                 return;
             }
+            //Routine appends only, from here down. Apps Script runs doPost first, then 302s
+            //to a short-lived script.googleusercontent.com/macros/echo URL that serves the
+            //response body. A 404 on that second hop means the row was almost certainly
+            //written but we never got to read the confirmation. A timeout is genuinely
+            //ambiguous by comparison - the row may or may not have landed - so it is left to
+            //the generic handler rather than claiming the reading was saved.
+            var echoUrl = String(errorData && errorData.url || '');
+            var unconfirmed = errorData && errorData.status === 404 &&
+                              echoUrl.indexOf('script.googleusercontent.com') > -1;
             if (unconfirmed){
                 //Routine append only. The row almost certainly landed and the response body
                 //is not needed, so treat it as logged and discourage a duplicate row.
