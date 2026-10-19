@@ -158,6 +158,25 @@ $$(document).on('deviceready', function() {
   //A cloud (Google Sheets) Tilt card disappears once its sheet has gone this long without a
   //new reading. Matches the age the card itself already reports via Timeago/Timeagounits.
   var GS_CARD_STALE_AFTER_MS = 7 * 24 * 60 * 60 * 1000;//one week
+
+  //WKWebView keeps localStorage in SQLite with a write-ahead log, and every setItem is a
+  //transaction appending a page-sized frame to it. updateBeacons runs once a second, and it
+  //used to write tiltObject- and lastUpdate- on every pass, per Tilt - roughly 8 KB/second,
+  //0.7 GB a day - even though only one value per key is ever kept. SQLite only truncates the
+  //WAL when it gets a quiet moment to checkpoint, and a write every second never gives it
+  //one: a test iPhone reached a 19 GB WAL behind a 4 KB database. Android is unaffected, its
+  //WebView stores localStorage in LevelDB, which compacts.
+  //Throttled to once every 30s. Pass force=true where the stored value genuinely has to be
+  //current: before a cloud or device log reads it back, and when the app is backgrounded.
+  var PERSIST_BEACON_MIN_MS = 30 * 1000;
+  var lastBeaconPersist = {};
+  function persistBeacon(beacon, force) {
+      if (!beacon || !beacon.Color) return;
+      var now = Date.now();
+      if (!force && (now - (lastBeaconPersist[beacon.Color] || 0)) < PERSIST_BEACON_MIN_MS) return;
+      lastBeaconPersist[beacon.Color] = now;
+      localStorage.setItem('tiltObject-' + beacon.Color, JSON.stringify(beacon));
+  }
   //track new beacon updates
   var inrangebeaconsUpdated = false;
   // Array of Tilt Picos.
@@ -372,8 +391,6 @@ function checkFineLocationPermissionCallback(status) {
   function addtoScan(beacon){
     //tilt found, close scanning for tilts message
     scanningToast.close();
-    //add time since last update
-    beacon.lastUpdate = localStorage.getItem('lastUpdate-' + beacon.Color)||beacon.timeStamp;
     //make sure tilt card is visible
     $$('#tiltcard-' + beacon.Color).show();
     $$('#accordion-' + beacon.Color).show();
@@ -385,6 +402,9 @@ function checkFineLocationPermissionCallback(status) {
         beacon.loggingTimer = (Date.now() - lastCloudLogged) / 1000 / 60;//min since last logged
         if (Number(cloudInterval) <= beacon.loggingTimer){
         setTimeout(function(){ 
+            //both of these read tiltObject- back out of localStorage, so force a write
+            //first - otherwise they could log a reading up to 30 seconds old
+            persistBeacon(beacon, true);
             postToCloudURLs(beacon.Color);
             logToDevice(beacon.Color);
         },4000);
@@ -1119,7 +1139,8 @@ function checkFineLocationPermissionCallback(status) {
     beacon.Beername = localStorage.getItem('beerName-' + beacon.Color)||'Untitled';
     //update timer for last scan recieved
     beacon.numberSecondsAgo = ((currentTime - beacon.timeStamp) / 1000).toFixed(1);
-    localStorage.setItem('lastUpdate-' + beacon.Color,beacon.timeStamp);
+    //lastUpdate- used to be written here every second. Its only reader assigned it to
+    //beacon.lastUpdate, which nothing - no code, no template - ever used.
     //get time since last cloud logged
     beacon.lastCloudLogged = ((Date.now() - localStorage.getItem('lastCloudLogged-' + beacon.Color)) / 1000 / 60).toFixed(0);
     var cloudLoggingInterval = localStorage.getItem('cloudInterval-' + beacon.Color)||'15';
@@ -1168,8 +1189,8 @@ function checkFineLocationPermissionCallback(status) {
     $$('#displaytimeStamp' + beacon.Color).html(beacon.displaytimeStamp + ' v' + app.data.appVersion);
     $$('#percentScaleSG' + beacon.Color).css('width', String((beacon.uncalSG - 0.980) / (1.150 - 0.980) * 100) + "%");
     $$('#percentScaleTemp' + beacon.Color).css('width', String((beacon.uncalTemp - 0) / (185 - 0) * 100) + "%");
-    //update Tilt objects
-    localStorage.setItem('tiltObject-' + beacon.Color,JSON.stringify(beacon));
+    //update Tilt objects - throttled, see persistBeacon
+    persistBeacon(beacon);
     };
 }
 
@@ -2531,6 +2552,11 @@ function onResume() {
 }
 
 function onPause() {
+    //Flush the throttled writes: the app may be killed while backgrounded, and whatever
+    //persistBeacon last skipped would otherwise be lost.
+    for (var pauseKey in beacons) {
+        persistBeacon(beacons[pauseKey], true);
+    }
     //Android 8+ doesn't allow scanning to continue in background
     if ((device.platform == "Android") && (Number(device.version) > 7)) {
         stopScan();
