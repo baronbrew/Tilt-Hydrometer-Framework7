@@ -159,6 +159,34 @@ $$(document).on('deviceready', function() {
   //new reading. Matches the age the card itself already reports via Timeago/Timeagounits.
   var GS_CARD_STALE_AFTER_MS = 7 * 24 * 60 * 60 * 1000;//one week
 
+  //Opening the sheet from the cloud icon: '_system' on Android, '_self' on iOS. The only
+  //per-platform value in the markup below, so it lives in one place.
+  var CLOUD_LINK_TARGET = '_system';
+
+  //Wraps cloud status markup in a link to the sheet whenever the app knows one.
+  //Only the success path used to render a link. The error, unconfirmed and
+  //unparseable-response paths rendered a bare icon or the plain words "cloud error", so a
+  //timeout, an error, or a cloud URL whose reply is not Baron Brew JSON left the user with
+  //no way to open a sheet whose address the app already had. Worse, postToCloudURLs loops
+  //over all three cloud URLs: the Google pass rendered the link and a 3rd party pass
+  //immediately overwrote it with an unlinked icon.
+  //The URL comes from docLongURL- first, then the gsLogURLs map, which is what the startup
+  //restore renders from - so either source is enough to keep the icon tappable.
+  function cloudStatusLink(color, inner) {
+      var docLongURL = localStorage.getItem('docLongURL-' + color);
+      if (!docLongURL || docLongURL == 'null'){
+          try {
+              docLongURL = (JSON.parse(localStorage.getItem('gsLogURLs')||'{}'))[color] || '';
+          } catch (e) {
+              docLongURL = '';
+          }
+      }
+      if (!docLongURL || docLongURL == 'null'){
+          return inner;//nothing to link to - e.g. a 3rd party URL only, never logged to Google
+      }
+      return '<a class="link external" href="' + docLongURL + '" target="' + CLOUD_LINK_TARGET + '">' + inner + '</a>';
+  }
+
   //WKWebView keeps localStorage in SQLite with a write-ahead log, and every setItem is a
   //transaction appending a page-sized frame to it. updateBeacons runs once a second, and it
   //used to write tiltObject- and lastUpdate- on every pass, per Tilt - roughly 8 KB/second,
@@ -1490,8 +1518,34 @@ function clearBeerName (button){
     var localCSVfileName = localStorage.getItem('localCSVfileName-' + color)||'not logging';
     localStorage.setItem('localJSONfileName-' + color, 'not logging');
     localStorage.setItem('localCSVfileName-' + color, 'not logging');
-    //warn user that about deleting name with associated cloud ID or if device logging is in progress
-    if (Number(currentBeerNameArray[1] > 0) || localCSVfileName != 'not logging' || localJSONfileName != 'not logging' ){
+    //Cloud logging in progress: clearing the name has to end the log properly. The path
+    //below only wiped the local name and file names, leaving docLongURL- and the gsLogURLs
+    //entry in NativeStorage, so the cloud icon came back on the next launch. Its undo
+    //cannot restore state removed from NativeStorage either, so this confirms instead.
+    if (Number(currentBeerNameArray[1]) > 0){
+        app.dialog.confirm(
+            'Clearing the name ends the current cloud log for <strong>' + currentBeerNameArray[0] + '</strong>. You can still access the Google Sheet or local CSV file by tapping the folder icon on the main app screen.',
+            'End log and clear name?<br>TILT | ' + color,
+            function () {
+                performEndLog(color);
+                var notificationCleared = app.notification.create({
+                    icon: '<i class="f7-icons">info</i>',
+                    title: 'Log Ended and Name Cleared',
+                    titleRightText: 'alert',
+                    subtitle: currentBeerName.split(',')[0] + ' (' + color + ' TILT)',
+                    text: 'Cloud and device logging stopped for this TILT.',
+                    closeTimeout: 5000,
+                    closeOnClick: true,
+                  });
+                notificationCleared.open();
+                offerToStopPicoLogging(color);
+            });
+        return;
+    }
+    //No cloud log - just a local name and/or a device log. Unchanged, undo included: there
+    //is no NativeStorage cloud state to remove, so an undo can genuinely put it back.
+    //Note the original condition read Number(x > 0), i.e. Number() around the comparison.
+    if (localCSVfileName != 'not logging' || localJSONfileName != 'not logging' ){
         var notificationFull = app.notification.create({
             icon: '<i class="f7-icons">check</i>',
             title: 'Name and Cloud ID Cleared',
@@ -1527,9 +1581,11 @@ function setBeerName (button){
     var currentBeerNameArray = currentBeerName.split(',');
     var newBeerNameRaw = $$('#currentbeername-' + color).val();
     var newBeerName = newBeerNameRaw.trim();
-    var validBeerName = newBeerName.replace('/', '-');
-    validBeerName = newBeerName.replace(',', '-');
-    validBeerName = newBeerName.replace('&', ' and ');
+    //Each of these used to re-read newBeerName rather than chain, so only the last
+    //replace survived and '/' and ',' were never removed. A comma is what separates the
+    //name from its cloud ID, so one typed into a name corrupted the "name,serial" parsing
+    //on both the app and the script side. Chained, and global - a second comma was kept.
+    var validBeerName = newBeerName.replace(/\//g, '-').replace(/,/g, '-').replace(/&/g, ' and ');
     //only update beer name if field is not empty
     if (newBeerName == "") {
         var notificationFull = app.notification.create({
@@ -1544,15 +1600,29 @@ function setBeerName (button){
         localStorage.setItem('picoStatus-' + color, 'color-yellow');
         //warn if name has an associated cloud ID
     } else if (Number(currentBeerNameArray[1]) > 0) {
-        var notificationFull = app.notification.create({
-            icon: '<i class="f7-icons">info</i>',
-            title: 'Error Saving Name',
-            titleRightText: 'alert',
-            subtitle: 'Cloud logging in progress.',
-            text: 'Please clear name before saving new name.',
-            closeTimeout: 5000,
-          });
-        notificationFull.open();
+        //Cloud logging is in progress under the old name. This used to refuse outright and
+        //tell the user to clear the name first, leaving them to go and find End Log. End
+        //the log properly, then save the new name.
+        app.dialog.confirm(
+            'Saving a new name ends the current cloud log for <strong>' + currentBeerNameArray[0] + '</strong>. You can still access the Google Sheet or local CSV file by tapping the folder icon on the main app screen. Be sure to tap the "Start New Log" button to begin a new cloud log under the new name.',
+            'End log and rename?<br>TILT | ' + color,
+            function () {
+                performEndLog(color);
+                localStorage.setItem('picoStatus-' + color, 'color-yellow');
+                localStorage.setItem('beerName-' + color, validBeerName);
+                NativeStorage.setItem('beerName-' + color, validBeerName, function (result) { }, function (e) { });
+                showBeerName(color);
+                var notificationRenamed = app.notification.create({
+                    icon: '<i class="f7-icons">check</i>',
+                    title: 'Log Ended and Name Saved',
+                    titleRightText: 'alert',
+                    subtitle: 'Beer name for TILT | ' + color + ' saved as ' + validBeerName,
+                    text: 'Tap "Start New Log" to start cloud logging under this name.',
+                    closeTimeout: 5000,
+                  });
+                notificationRenamed.open();
+                offerToStopPicoLogging(color);
+            });
         }
         //don't warn if beer name doesn't have a cloud id associated
       else {
@@ -2107,37 +2177,110 @@ function logOnce(button) {
     })
 }
 
+//Clears everything that can put the cloud icon back on a Tilt card. Ending a log used to
+//remove only the localStorage copy of docLongURL-, which is not enough: TWO separate paths
+//restore the icon when the app next starts. restoreLoggingSettings reads docLongURL- back
+//out of NativeStorage into localStorage, and the gsLogURLs map is read from NativeStorage
+//and rendered directly for every colour it contains. So the icon came back after a force
+//close even though the log had been ended.
+function clearCloudLogState(color) {
+    localStorage.removeItem('docLongURL-' + color);
+    NativeStorage.remove('docLongURL-' + color, function () { }, function (e) { });
+    //the "N min" text inside the icon
+    localStorage.removeItem('lastCloudLogged-' + color);
+    //Drop this colour from the current-sheet map in both storages. Re-read it rather than
+    //closing over an earlier snapshot - the same reason the cloud-log-list delete does.
+    var gsLogURLs;
+    try {
+        gsLogURLs = JSON.parse(localStorage.getItem('gsLogURLs')||'{}');
+    } catch (e) {
+        gsLogURLs = {};
+    }
+    delete gsLogURLs[color];
+    localStorage.setItem('gsLogURLs', JSON.stringify(gsLogURLs));
+    NativeStorage.setItem('gsLogURLs', JSON.stringify(gsLogURLs), function (result) { }, function (e) { });
+}
+
+//Confirm first, then commit immediately.
+//This used to happen five seconds AFTER the tap, inside a setTimeout that a "Tap to Undo"
+//notification could cancel. Nothing was written when the button was pressed, so ending a
+//log and force-closing the app inside that window killed the timer and ended nothing at
+//all: the beer name kept its serial, docLongURL- and gsLogURLs survived, and the cloud
+//icon was back on the next launch. Dismissing the notification by tapping it did the same,
+//since closeOnClick fired the handler that cancelled the timer.
+//A confirmation before a destructive action is both safer and simpler than undoing one
+//after the fact - there is no deferred state to lose.
+//The end-log sequence. Shared by the End Log button and by the beer name Save and Clear
+//buttons, because all three end a cloud log and none of them can do it by just forgetting
+//the name: the cloud icon is restored from NativeStorage on the next launch unless
+//clearCloudLogState runs.
+function performEndLog(color) {
+    localStorage.setItem('beerName-' + color, 'Untitled');
+    //NativeStorage too: it still held "Name,12345", and the beer name is the cloud log's
+    //identity. It is only read back when localStorage is empty, so it would have
+    //resurrected the finished log after a reinstall.
+    NativeStorage.setItem('beerName-' + color, 'Untitled', function (result) { }, function (e) { });
+    clearCloudLogState(color);
+    showBeerName(color);
+    postToCloudURLs(color, "End of log");
+    localStorage.setItem('localJSONfileName-' + color, 'not logging');
+    localStorage.setItem('localCSVfileName-' + color, 'not logging');
+    $$('#deviceStatus' + color).html('');
+    $$('.cloudStatus' + color).html('');
+}
+
+//A Tilt Pico can be cloud logging the same Tilt independently. Ending a log in the app
+//does not touch the Pico, so it would carry on logging to a sheet the app has just
+//forgotten about. Offer to stop it too.
+//Only in-range Picos are offered: stopping one needs a request over WiFi, so asking about
+//an unreachable Pico would only produce a failure.
+function offerToStopPicoLogging(color) {
+    var picosLogging = [];
+    for (var p = 0; p < tiltPicos.tiltPico.length; p++) {
+        var pico = tiltPicos.tiltPico[p];
+        if (!pico.pico_inrange || !pico.pico_logging_tilts) continue;
+        for (var e = 0; e < pico.pico_logging_tilts.length; e++) {
+            var entry = pico.pico_logging_tilts[e];
+            //entries are "COLOR" or "COLOR_MAC", so compare the colour part only
+            if (entry && String(entry).split('_')[0] == color) {
+                picosLogging.push({ip: pico.ip_address, name: pico.text, entry: String(entry)});
+            }
+        }
+    }
+    if (picosLogging.length == 0) return;
+    var picoNames = picosLogging.map(function (item) { return item.name; }).join(', ');
+    app.dialog.confirm(
+        'This TILT is also being cloud logged by TILT PICO: <strong>' + picoNames + '</strong>. Stop the Pico logging it as well?',
+        'Stop Pico logging?<br>TILT | ' + color,
+        function () {
+            picosLogging.forEach(function (item) {
+                stopPicoLoggingTilt(item.ip, item.entry);
+            });
+        });
+}
+
 function endLog(button) {
     var clickedButton = button.id.split('-');
     var color = clickedButton[1];
     var currentBeerName = localStorage.getItem('beerName-' + color)||"Untitled";
     var currentBeerNameArray = currentBeerName.split(',');
-    var notificationLogEnded = app.notification.create({
-        icon: '<i class="f7-icons">info</i>',
-        title: 'Success Ending Log',
-        titleRightText: 'alert',
-        subtitle: 'Logging completed for ' + currentBeerNameArray[0] + ' (' + color + ' TILT)',
-        text: 'Tap to Undo',
-        closeTimeout: 5000,
-        closeOnClick: true,
-      });
-    notificationLogEnded.open();
-    //end log unless user cancels within 5 seconds
-    var cancelE = setTimeout(function() { 
-            localStorage.setItem('beerName-' + color, 'Untitled');
-            localStorage.removeItem('docLongURL-' + color);
-            showBeerName(color);
-            postToCloudURLs(color, "End of log");
-            localStorage.setItem('localJSONfileName-' + color, 'not logging');
-            localStorage.setItem('localCSVfileName-' + color, 'not logging');
-            $$('#deviceStatus' + color).html('');
-            $$('#beername-' + color).val('');
-            $$('.cloudStatus' + color).html('');
-            }, 5000);
-            notificationLogEnded.on('click', 
-            function() { 
-               clearTimeout(cancelE);
-            });
+    app.dialog.confirm(
+        'Ending the log resets cloud and device logging for this TILT. You can still access the Google Sheet log file and/or local device file on the phone by tapping the folder icon on the main screen.',
+        'End log for ' + currentBeerNameArray[0] + '?<br>TILT | ' + color,
+        function () {
+            performEndLog(color);
+            var notificationLogEnded = app.notification.create({
+                icon: '<i class="f7-icons">info</i>',
+                title: 'Log Ended',
+                titleRightText: 'alert',
+                subtitle: currentBeerNameArray[0] + ' (' + color + ' TILT)',
+                text: 'Cloud and device logging stopped for this TILT.',
+                closeTimeout: 5000,
+                closeOnClick: true,
+              });
+            notificationLogEnded.open();
+            offerToStopPicoLogging(color);
+        });
 }
 
 function writeToFile(fileName, data, isAppend, fileType, color) {
@@ -2864,7 +3007,11 @@ function postToCloudURLs (color, comment, picoRequestString = 'none', isNewLog =
             cordova.plugin.http.setRequestTimeout(15.0);//restore the global default set at startup
             notificationCloud.close();//the request resolved - take the spinner down
             startScan();//restart scanning
-            localStorage.setItem('lastCloudLogged-' + color, Date.now());
+            //"End of log" is not a reading. Stamping it as one re-created the value
+            //clearCloudLogState had just removed, moments after the log ended.
+            if (comment != 'End of log'){
+                localStorage.setItem('lastCloudLogged-' + color, Date.now());
+            }
             //confirmed - a later "start a new log" is a real new log and needs its own id
             if (isNewLog){ localStorage.removeItem('newLogId-' + color); }
             //try to parse data from Baron Brew Google Sheets
@@ -2953,7 +3100,7 @@ function postToCloudURLs (color, comment, picoRequestString = 'none', isNewLog =
                     closeTimeout: 8000,
                   });
                 notificationSuccess.open();
-                $$('.cloudStatus' + beacon.Color).html('<i class="material-icons size-15">cloud_done</i>&nbsp;<span class="lastCloudLogged' + beacon.Color +'"></span>');
+                $$('.cloudStatus' + beacon.Color).html(cloudStatusLink(beacon.Color, '&nbsp;<i class="material-icons size-15">cloud_done</i><span class="lastCloudLogged' + beacon.Color +'"></span>'));
 
             }
         }, function (errorData) {
@@ -3009,7 +3156,7 @@ function postToCloudURLs (color, comment, picoRequestString = 'none', isNewLog =
                     closeTimeout: 20000,
                   });
                 notificationNewLogFailed.open();
-                $$('.cloudStatus' + beacon.Color).html('cloud error');
+                $$('.cloudStatus' + beacon.Color).html(cloudStatusLink(beacon.Color, '&nbsp;cloud error'));
                 return;
             }
             //Routine appends only, from here down. Apps Script runs doPost first, then 302s
@@ -3035,7 +3182,7 @@ function postToCloudURLs (color, comment, picoRequestString = 'none', isNewLog =
                     closeTimeout: 12000,
                   });
                 notificationCloudUnconfirmed.open();
-                $$('.cloudStatus' + beacon.Color).html('<i class="material-icons size-15">cloud_queue</i>&nbsp;<span class="lastCloudLogged' + beacon.Color +'"></span>');
+                $$('.cloudStatus' + beacon.Color).html(cloudStatusLink(beacon.Color, '&nbsp;<i class="material-icons size-15">cloud_queue</i><span class="lastCloudLogged' + beacon.Color +'"></span>'));
                 return;
             }
             var notificationCloudError = app.notification.create({
@@ -3047,7 +3194,7 @@ function postToCloudURLs (color, comment, picoRequestString = 'none', isNewLog =
                 closeTimeout: 8000,
               });
             notificationCloudError.open();
-            $$('.cloudStatus' + beacon.Color).html('cloud error');
+            $$('.cloudStatus' + beacon.Color).html(cloudStatusLink(beacon.Color, '&nbsp;cloud error'));
 
         }
         );
@@ -3631,6 +3778,123 @@ var wifiConnProgress = 0;
         updatePicoLoggingList(ip_addr)
     }
 
+    //Turns off the app's own cloud logging for one Tilt - UI toggles and stored value
+    //together - so the app and a Pico cannot both log the same Tilt to the same sheet.
+    //Unchecking a toggle fires its change handler, which is what normally persists
+    //cloudurlsenabled, but those toggles only exist once that Tilt's settings have been
+    //rendered. So the value is written here directly rather than relying on them, and the
+    //toggles are guarded in case they have not been created yet.
+    function disableAppCloudLogging(color) {
+        var colorOnly = String(color).split('_')[0];
+        ['toggleDefaultCloudURL-', 'toggleCustomCloudURL1-', 'toggleCustomCloudURL2-'].forEach(function (prefix) {
+            var toggle = app.toggle.get('#' + prefix + colorOnly);
+            if (toggle) {
+                toggle.checked = false;
+            }
+        });
+        localStorage.setItem('cloudurlsenabled-' + colorOnly, '0,0,0');
+        NativeStorage.setItem('cloudurlsenabled-' + colorOnly, '0,0,0', function (result) { }, function (e) { });
+    }
+
+    //Watches one Pico until it confirms it is logging one Tilt.
+    //Starting a log used to fire three fixed setTimeouts - 10s, 15s, 20s - and then stop,
+    //so a Pico that needed longer than 20 seconds was never checked again. The ongoing
+    //poll in updateBeacons cannot rescue it either: that one is gated on the status already
+    //being 'color-green', which is exactly what has not happened yet.
+    //This polls until the status goes green and then stops - the fixed timeouts all fired
+    //regardless, so the Pico was still being polled after it had already succeeded. If
+    //nothing is confirmed within PICO_WATCH_TIMEOUT_MS it reports a failure rather than
+    //leaving the chip on "Starting..." for good.
+    //Keyed by Pico and Tilt, and self-replacing: starting twice cannot stack two schedules,
+    //which the old setTimeouts had no way to prevent since nothing held their handles.
+    var PICO_WATCH_TIMEOUT_MS = 120000;//2 minutes
+    var picoWatchers = {};
+    function watchPicoLogging(ip_address, color) {
+        var key = ip_address + '|' + color;
+        if (picoWatchers[key]) {
+            clearTimeout(picoWatchers[key].timer);
+        }
+        var colorOnly = String(color).split('_')[0];
+        var watcher = { started: Date.now(), delay: 3000, timer: null };
+        picoWatchers[key] = watcher;
+        function picoIsLogging() {
+            //The response handler keys picoStatus- off the colour the PICO reports, which
+            //may or may not carry the _MAC suffix the caller passed. Accept either rather
+            //than assume the two spellings agree - a mismatch would poll until it timed
+            //out on a Pico that was logging perfectly well.
+            return localStorage.getItem('picoStatus-' + color) == 'color-green' ||
+                   localStorage.getItem('picoStatus-' + colorOnly) == 'color-green';
+        }
+        function check() {
+            if (picoIsLogging()) {
+                delete picoWatchers[key];
+                return;
+            }
+            if (Date.now() - watcher.started > PICO_WATCH_TIMEOUT_MS) {
+                delete picoWatchers[key];
+                localStorage.setItem('picoStatus-' + color, 'color-red');
+                var tiltMacLast4 = String(color).split('_').length == 2
+                    ? String(color).split('_')[1].substring(8,12).toUpperCase() : '';
+                $$('#picoStatus-' + ip_address.replaceAll('.','x')).html('<div class="chip-label">' + colorOnly + ' ' + tiltMacLast4 + ' not logging <i class="icon f7-icons color-red">close</i></div>');
+                var notificationPicoTimeout = app.notification.create({
+                    icon: '<i class="f7-icons">exclamationmark_triangle</i>',
+                    title: 'TILT PICO Did Not Confirm Logging',
+                    titleRightText: 'alert',
+                    subtitle: 'TILT | ' + colorOnly,
+                    text: 'No confirmation after 2 minutes. Check the TILT PICO is powered on and on the same WiFi network as this phone, then try again.',
+                    closeOnClick: false,
+                    closeTimeout: 15000,
+                  });
+                notificationPicoTimeout.open();
+                return;
+            }
+            fetchJSONData(ip_address + '/lastlogged');
+            //often early, then settle, so a slow Pico is asked regularly but not hammered
+            watcher.delay = Math.min(watcher.delay + 2000, 10000);
+            watcher.timer = setTimeout(check, watcher.delay);
+        }
+        //the Pico needs a moment to act on the /sync before the first ask
+        watcher.timer = setTimeout(check, watcher.delay);
+    }
+
+    //Tells one Pico to stop cloud logging one Tilt, by re-syncing it with its cloud URLs
+    //cleared. Lifted out of the settings checkbox handler unchanged so that ending a log
+    //can do the same thing without a checkbox to drive it.
+    //entry is a pico_logging_tilts entry: "COLOR" or "COLOR_MAC".
+    function stopPicoLoggingTilt (ip_addr, entry) {
+            var colorArray = entry.split('_');
+            var color = entry.replace("_unknown","");
+            localStorage.setItem('picoStatus-' + color, 'color-gray');
+            if (color.split('_').length == 2){
+                var tiltMacLast4 = color.split('_')[1].substring(8,12).toUpperCase();
+               }else{
+                var tiltMacLast4 = '';
+               }
+            $$('#picoStatus-' + ip_addr.replaceAll('.','x')).html('<div class="chip-label"><i class="icon f7-icons color-red">close_round_fill</i> ' + color.split('_')[0] + ' ' + tiltMacLast4 + ' Stopping...</div>');
+
+            const now = new Date();
+            const offsetSeconds = now.getTimezoneOffset() * 60; // Returns offset in seconds
+            var cloudURLs = ',,';//removing cloudurls saved in Tilt Pico
+            var cloudInterval = localStorage.getItem('cloudInterval-' + color)||'15';
+            var requestString = ip_addr + 
+                    '/sync?beername=' + encodeURIComponent(localStorage.getItem('beerName-' + color)) +
+                    '&color=' + color.replace('•','-') +
+                    '&mac=' + colorArray[1] +
+                    '&tilttempcal=' + localStorage.getItem('uncalTemppoints-' + color) +
+                    '&actualtempcal=' + localStorage.getItem('actualTemppoints-' + color) +
+                    '&tiltSGcal=' + localStorage.getItem('uncalSGpoints-' + color) +
+                    '&actualSGcal=' + localStorage.getItem('actualSGpoints-' + color) +
+                    '&cloudurls=' +  cloudURLs +
+                    '&cloudinterval=' + cloudInterval + 
+                    '&timezoneoffsetsec=' + offsetSeconds +
+                    '&logLocally=false';
+            fetchJSONData(requestString, color);
+            setTimeout(function(){ fetchJSONData(ip_addr + '/lastlogged'); }, 10000);
+            setTimeout(function(){ fetchJSONData(ip_addr + '/lastlogged'); }, 20000);
+            setTimeout(function(){ fetchJSONData(ip_addr + '/lastlogged'); }, 40000);
+            fetchJSONData(ip_addr + '/info');
+    }
+
     function update_status_pico_logging_tilts (ip_addr, color){//updates Tilt to list of Tilts for Pico to log to
         //console.log([ip_addr, color]);
         var colorArray = color.split('_');
@@ -3662,35 +3926,7 @@ var wifiConnProgress = 0;
         app.dialog.confirm('Would you like to stop logging?', 'Stop Logging<br>TILT | ' + colorArray[0] + '<br>' + `${colorArray[1]?.replace('unknown','') ?? ''}`, 
         function () {
             //document.getElementById('pico_logging_tilts-' + ip_addr_x + '-' + colorArray.join('_')).checked = false;
-            localStorage.setItem('picoStatus-' + color, 'color-gray');
-            if (color.split('_').length == 2){
-                var tiltMacLast4 = color.split('_')[1].substring(8,12).toUpperCase();
-               }else{
-                var tiltMacLast4 = '';
-               }
-            $$('#picoStatus-' + ip_addr.replaceAll('.','x')).html('<div class="chip-label"><i class="icon f7-icons color-red">close_round_fill</i> ' + color.split('_')[0] + ' ' + tiltMacLast4 + ' Stopping...</div>');
-
-            const now = new Date();
-            const offsetSeconds = now.getTimezoneOffset() * 60; // Returns offset in seconds
-            var cloudURLs = ',,';//removing cloudurls saved in Tilt Pico
-            var cloudInterval = localStorage.getItem('cloudInterval-' + color)||'15';
-            var requestString = ip_addr + 
-                    '/sync?beername=' + encodeURIComponent(localStorage.getItem('beerName-' + color)) +
-                    '&color=' + color.replace('•','-') +
-                    '&mac=' + colorArray[1] +
-                    '&tilttempcal=' + localStorage.getItem('uncalTemppoints-' + color) +
-                    '&actualtempcal=' + localStorage.getItem('actualTemppoints-' + color) +
-                    '&tiltSGcal=' + localStorage.getItem('uncalSGpoints-' + color) +
-                    '&actualSGcal=' + localStorage.getItem('actualSGpoints-' + color) +
-                    '&cloudurls=' +  cloudURLs +
-                    '&cloudinterval=' + cloudInterval + 
-                    '&timezoneoffsetsec=' + offsetSeconds +
-                    '&logLocally=false';
-            fetchJSONData(requestString, color);
-            setTimeout(function(){ fetchJSONData(ip_addr + '/lastlogged'); }, 10000);
-            setTimeout(function(){ fetchJSONData(ip_addr + '/lastlogged'); }, 20000);
-            setTimeout(function(){ fetchJSONData(ip_addr + '/lastlogged'); }, 40000);
-            fetchJSONData(ip_addr + '/info');
+            stopPicoLoggingTilt(ip_addr, colorArray.join('_'));
      },
      function() {
         console.log('cancelled');
@@ -3725,38 +3961,21 @@ var wifiConnProgress = 0;
                         var tiltMacLast4 = '';
                        }
                     $$('#picoStatus-' + ip_addr_x).html('<div class="chip-label"><i class="icon f7-icons color-green">play_round_fill</i> ' + colorClicked.split('_')[0] + ' ' + tiltMacLast4 + ' Starting...</div>');
+                    //Hand cloud logging over to the Pico the moment the user agrees to it.
+                    //This used to happen only inside the three status checks below, each
+                    //gated on picoStatus already being 'color-green' - so a Pico that took
+                    //longer than 35 seconds to confirm left the app logging as well and the
+                    //sheet got duplicate rows. The Pico is being asked to log either way,
+                    //so there is nothing to wait for.
+                    disableAppCloudLogging(colorClicked);
                     fetchJSONData(requestString, colorClicked);
-                    setTimeout(function(){ 
-                        fetchJSONData(ip_address + '/lastlogged');
-                        fetchJSONData(ip_address + '/info');
-                        stopPicoScanRequests = false;
-                        console.log(localStorage.getItem('picoStatus-' + colorClicked));
-                        if (localStorage.getItem('picoStatus-' + colorClicked) == 'color-green'){
-                            app.toggle.get('#toggleDefaultCloudURL-' + colorClicked).checked = false;
-                            app.toggle.get('#toggleCustomCloudURL1-' + colorClicked).checked = false;
-                            app.toggle.get('#toggleCustomCloudURL2-' + colorClicked).checked = false;
-                        }
-                     }, 10000);//start checking on status
-                     setTimeout(function(){ 
-                        fetchJSONData(ip_address + '/lastlogged');
-                        fetchJSONData(ip_address + '/info');
-                        console.log(localStorage.getItem('picoStatus-' + colorClicked));
-                        if (localStorage.getItem('picoStatus-' + colorClicked) == 'color-green'){
-                            app.toggle.get('#toggleDefaultCloudURL-' + colorClicked).checked = false;
-                            app.toggle.get('#toggleCustomCloudURL1-' + colorClicked).checked = false;
-                            app.toggle.get('#toggleCustomCloudURL2-' + colorClicked).checked = false;
-                        }
-                     }, 20000);//start checking on status
-                     setTimeout(function(){ 
-                        fetchJSONData(ip_address + '/lastlogged');
-                        fetchJSONData(ip_address + '/info');
-                        console.log(localStorage.getItem('picoStatus-' + colorClicked));
-                        if (localStorage.getItem('picoStatus-' + colorClicked) == 'color-green'){
-                            app.toggle.get('#toggleDefaultCloudURL-' + colorClicked).checked = false;
-                            app.toggle.get('#toggleCustomCloudURL1-' + colorClicked).checked = false;
-                            app.toggle.get('#toggleCustomCloudURL2-' + colorClicked).checked = false;
-                        }
-                     }, 35000);//start checking on status
+                    fetchJSONData(ip_address + '/info');
+                    //replaces the 10s/20s/35s checks those three timeouts were doing: the
+                    //poller keeps asking until the Pico confirms, and reports a failure if
+                    //it never does
+                    watchPicoLogging(ip_address, colorClicked);
+                    //the scan pause only needs to outlast the sync request itself
+                    setTimeout(function(){ stopPicoScanRequests = false; }, 10000);
                 }, function(){
                     app.dialog.confirm('Would you like to setup<br><strong>device logging</strong>?', 'TILT | ' + colorClicked.split('_')[0] + '<br>' + `${colorClicked.split('_')[1] ?? ''}` + '<br>TILT PICO Local Device Logging', 
                     function () {
@@ -3771,13 +3990,7 @@ var wifiConnProgress = 0;
                     localStorage.setItem('tiltPicoIPAddr-' + ip_address, JSON.stringify(tiltPicoElement));
                     tiltPicos.tiltPico[tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == ip_address)].pico_device_logging = true;
                     NativeStorage.setItem('tiltPicos', JSON.stringify(tiltPicos));
-                    setTimeout(function(){
-                        fetchJSONData(ip_address + '/lastlogged');
-                     }, 10000);//start checking on status
-                     setTimeout(function(){ fetchJSONData(ip_address + '/lastlogged');
-                     }, 15000);//start checking on status
-                     setTimeout(function(){ fetchJSONData(ip_address + '/lastlogged');
-                     }, 20000);//start checking on status
+                     watchPicoLogging(ip_address, colorClicked);
                      fetchJSONData(requestString + '&logLocally=true', colorClicked);
                      fetchJSONData(ip_address + '/info');
                 },
@@ -3834,14 +4047,8 @@ var wifiConnProgress = 0;
                                     }}
                                     console.log(updatedString + '&logLocally=true')
                                     fetchJSONData(updatedString + '&logLocally=true', colorClicked);
-                                    setTimeout(function(){ 
-                                        fetchJSONData(ip_address + '/lastlogged');
-                                        fetchJSONData(ip_address + '/info');
-                                     }, 10000);//start checking on status
-                                     setTimeout(function(){ fetchJSONData(ip_address + '/lastlogged');
-                                     }, 15000);//start checking on status
-                                     setTimeout(function(){ fetchJSONData(ip_address + '/lastlogged');
-                                     }, 20000);//start checking on status
+                                    fetchJSONData(ip_address + '/info');
+                                    watchPicoLogging(ip_address, colorClicked);
                                     });
                                 }
                                     },
