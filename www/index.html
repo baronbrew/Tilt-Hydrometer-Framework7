@@ -119,7 +119,7 @@
         <div class="col-80" id="beerName{{Color}}">{{Beername}}</div>
         <div class="col-20" id="deviceStatus{{Color}}"></div>
         </div>
-        <strong>TILT | {{js 'this.Color.split("_")[0] + " " + this.mac.replace("unknown","").toUpperCase().substring(8,12)'}} </strong><span id="tiltpicosync-{{Color}}"></span> <span class="cloudStatus{{Color}}"></span></div>
+        <strong>TILT | {{js 'this.Color.split("_")[0] + " " + (this.displayMac || "")'}} </strong><span id="tiltpicosync-{{Color}}"></span> <span class="cloudStatus{{Color}}"></span></div>
         <div id="quicksettings" class="accordion-item">
         <div class="accordion-item-toggle">
         <button class="button col margin-horizontal button-round button-style-{{js 'this.Color.replace("_","•").split("•")[0]'}}" style="height:30px;width:90%;"></button>
@@ -301,7 +301,7 @@
         <div class="block-title no-margin-top"><i class="material-icons">bluetooth</i> Scanning Mode</div>
         </div>
         <p class="margin-top text-align-center">
-          <a onclick="macToggle('{{ip_address}}')">Scanning <span id="macToggleLabel-{{js 'this.ip_address.replaceAll(".","x")'}}"></span></a>
+          <a onclick="macToggle('{{ip_address}}')"><span id="macToggleLabel-{{js 'this.ip_address.replaceAll(".","x")'}}"></span></a>
           <br>
           <br>
           <label class="toggle" id="macToggle-{{js 'this.ip_address.replaceAll(".","x")'}}">
@@ -311,10 +311,39 @@
           <p><a href="#" data-popover=".mac-popover" class="popover-open"><i class="f7-icons size-15">info</i> More information...</a></p>
         <div class="popover mac-popover">
             <div class="popover-inner padding">
-                <span><i class="f7-icons size-15">info</i> Enables viewing Tilt hydrometers as seen from your Tilt Pico instead of this phone/tablet. Enable this setting when you need to check Tilt Pico Bluetooth connection or have multiple Tilt hydrometers of the same color and want to identify by their unique MAC address.</span>
+                <span><i class="f7-icons size-15">info</i> Enables increased wireless range by combining Tilt scans from both the Tilt App (this device) and your Tilt Pico. The app chooses which one based on best signal strength. Use this mode for scanning for Tilts in stainless steel when your Pico is next to your fermenter.</span>
             </div>
           </div>
        </p>
+       <!-- Two sibling elements, shown and hidden together by showMacIdsRow(). The toggle
+            is centred to match Scanning Mode above; the information link is deliberately a
+            separate element OUTSIDE that centred block, because a Framework7 popover is
+            anchored to whatever opens it - a centred link opened the popover in the middle
+            of the screen, which no amount of text-align on the popover could fix.
+            Shown only while this Pico is scanning: identifying Tilts by MAC address is
+            pointless without a Pico to read the addresses, and showing it unconditionally
+            is what led users to enable it without meaning to.
+            Note neither <p> contains another <p> - nesting them makes the parser close the
+            outer one early, which previously let the link escape the hidden container. -->
+       <p class="margin-top text-align-center" id="macIdsRow-{{js 'this.ip_address.replaceAll(".","x")'}}" style="display:none">
+          <a onclick="macIdsToggle('{{ip_address}}')">Identify Tilts by MAC address</a>
+          <br>
+          <br>
+          <label class="toggle" id="macIdsToggle-{{js 'this.ip_address.replaceAll(".","x")'}}">
+          <input type="checkbox" unchecked>
+          <span class="toggle-icon"></span>
+          </label>
+       </p>
+       <p id="macIdsInfo-{{js 'this.ip_address.replaceAll(".","x")'}}" style="display:none"><a href="#" data-popover=".macids-popover" class="popover-open"><i class="f7-icons size-15">info</i> More information...</a></p>
+       <!-- Left outside the hideable row on purpose: this is only the popover's content,
+            opened by selector, and nesting it inside a positioned container risks it being
+            clipped. It is unreachable while the row is hidden anyway, since the only thing
+            that opens it is the link above. -->
+        <div class="popover macids-popover">
+            <div class="popover-inner padding">
+                <span><i class="f7-icons size-15">info</i> Use this mode if you have more than one Tilt hydrometer of the same color. Each Tilt is then listed by its unique MAC address, which only the Tilt Pico can read. Leave this off unless you need it: turning it on gives every Tilt a new identity, so beer names, calibration and logging settings start fresh.</span>
+            </div>
+          </div>
      <div class="item-inner">
       <div class="block-title no-margin-top"><i class="material-icons">show_chart</i> Tilt Pico Logging</div>
       </div>
@@ -360,7 +389,7 @@
           <button id="delete_pico_log-{{js 'this.ip_address.replaceAll(".", "x")'}}" class="col button button-outline color-red" onclick="remove_pico_log(this)">Delete Device log</button>
         </p>
      <div class="item-inner">
-     <div class="block-title no-margin-top"><i class="f7-icons size-15">keyboard_fill</i> Device Settings<br><br>IP Address: <strong>{{ip_address}}</strong><br>MAC: <strong>{{tilt_pico_mac}}</strong><br>Tilt Pico Version: <strong>{{tilt_pico_version}}</strong></div>
+     <div class="block-title no-margin-top"><i class="f7-icons size-15">keyboard_fill</i> Device Settings<br><br>IP Addr: <strong>{{ip_address}}</strong><br>MAC: <strong>{{tilt_pico_mac}}</strong><br>Tilt Pico Version: <strong>{{tilt_pico_version}}</strong></div>
      </div>
      <p class="row">
      <button id="renamepico-{{js 'this.ip_address.replaceAll(".", "x")'}}" class="col button button-big button-fill color-gray" onclick="rename_pico(this)">Rename Tilt Pico</button>
@@ -378,7 +407,7 @@
   {{#each this}}
   <li class="accordion-item" id="accordion-{{Color}}">
       <div class="accordion-item-toggle">
-        <div class="item-title margin-horizontal padding"><strong>TILT <i class="f7-icons color-custom-{{js 'this.Color.replace("_","•").split("•")[0]'}} size-15">circle_fill</i> {{js 'this.Color.split("_")[0] + " " + this.mac.replace("unknown","").toUpperCase().substring(8,12)'}}</strong></div>
+        <div class="item-title margin-horizontal padding"><strong>TILT <i class="f7-icons color-custom-{{js 'this.Color.replace("_","•").split("•")[0]'}} size-15">circle_fill</i> {{js 'this.Color.split("_")[0] + " " + (this.displayMac || "")'}}</strong></div>
       </div>
     <div class="accordion-item-content">
         <div class="block-title no-margin-top"><i class="material-icons">show_chart</i> Logging <i class="f7-icons color-custom-{{js 'this.Color.replace("_","•").split("•")[0]'}} size-15">play_fill</i></div>

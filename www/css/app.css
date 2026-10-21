@@ -86,6 +86,11 @@ div.lastrec {
     font-family: "Courier New", Courier, monospace;
     text-align: center;
     font-size: smaller;
+    /* The seconds counter and RSSI are padded to a fixed character count so this line
+       keeps a constant width between scans. The font is monospace, so equal counts line
+       up exactly - but HTML collapses runs of spaces, which silently threw the padding
+       away. pre-wrap keeps it and still allows wrapping on a narrow screen. */
+    white-space: pre-wrap;
 }
 .statusbar {
     background: black;

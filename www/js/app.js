@@ -98,6 +98,8 @@ var watchBluetoothInterval;
 $$(document).on('deviceready', function() {
         console.log("Device is ready!");
         app.statusbar.setBackgroundColor('#000000');
+        //before any scanning, so the first beacon processed already sees the right setting
+        migrateMacIdsSetting();
         getGoogleSheetsData('Report!A1:G2');
         setInterval(function(){ getGoogleSheetsData('Report!A1:G2');}, 60000);
         document.addEventListener("resume", onResume, false);
@@ -211,6 +213,45 @@ $$(document).on('deviceready', function() {
   var tiltPicos = { tiltPico : [] };
   //controls switch to use pico and surpress device scans
   var usePicoOnly = false;
+
+  //Scanning via a Pico and identifying Tilts by MAC address used to be one setting. Turning
+  //on Pico scanning therefore also renamed every Tilt from "RED•HD" to "RED•HD_a1b2c3...",
+  //which users enabled without meaning to and then could not make sense of. They are now
+  //two settings: Pico scanning stays per-Pico, and MAC IDs are a single global value,
+  //because beacon.Color is the app's primary key for beer names, calibration, cloud URLs
+  //and logs - letting it differ per Pico would give one physical Tilt two identities.
+  function macIdsEnabled() {
+      return localStorage.getItem('macIdsEnabled') == '1';
+  }
+
+  //One-time migration. Anyone already scanning via a Pico has all of their per-Tilt state
+  //keyed by "COLOR_MAC", so default the new setting from the old one rather than orphaning
+  //it. Only users who have never enabled Pico scanning start with MAC IDs off.
+  function migrateMacIdsSetting() {
+      if (localStorage.getItem('macIdsEnabled') !== null) return;
+      var enabled = '0';
+      for (var i = 0; i < localStorage.length; i++) {
+          var key = localStorage.key(i);
+          if (key && key.indexOf('macToggleEnabled-') === 0 && localStorage.getItem(key) == '1') {
+              enabled = '1';
+              break;
+          }
+      }
+      localStorage.setItem('macIdsEnabled', enabled);
+      NativeStorage.setItem('macIdsEnabled', enabled, function (result) { }, function (e) { });
+  }
+
+  //The MAC for a Tilt, wherever it happens to be available. With MAC IDs on, the colour
+  //carries it as a "_MAC" suffix; with them off the colour is plain, so it has to come from
+  //the live beacon instead. 'unknown' is what the phone's own iBeacon scan reports and what
+  //the Pico expects when there is no MAC to give.
+  function macForColor(color) {
+      var parts = String(color).split('_');
+      if (parts.length > 1 && parts[1] && parts[1] != 'unknown') return parts[1];
+      if (beacons[color] && beacons[color].mac && beacons[color].mac != 'unknown') return beacons[color].mac;
+      if (beacons[parts[0]] && beacons[parts[0]].mac) return beacons[parts[0]].mac;
+      return 'unknown';
+  }
   var waitingForPico = false;
   var stopPicoScanRequests = false;
   //SSID and password for Pico
@@ -222,7 +263,58 @@ $$(document).on('deviceready', function() {
   var wifiDialog = null;
   var successDialog = null;
   //pico error flags
-  var picoError = 1;
+  //Deciding whether a Pico that did not answer is actually a WiFi problem.
+  //A Pico busy writing a reading simply does not reply for a few seconds, and over HTTP
+  //that is indistinguishable from the phone being on a different network or from a router
+  //that blocks device-to-device traffic - all three look like a timeout. What separates
+  //them is history: if this phone has reached this Pico over WiFi before, the network
+  //plainly permits it, so silence now is the Pico being busy and the warning is wrong.
+  //This also replaces a single global counter. picoError was shared by every Pico, so
+  //failures from one could raise the warning about another, and it was never reset on a
+  //success, so the warning armed and disarmed almost at random.
+  var PICO_WIFI_WARN_AFTER_FAILURES = 3;
+  //Deliberately in memory only, reset by every app launch. It was persisted for a day at
+  //first, so that relaunching while a Pico was mid-reading would not produce the warning -
+  //but that also meant switching WiFi off and restarting produced no warning either,
+  //because yesterday's success still counted. Restarting the app is exactly what someone
+  //does when it looks like nothing is connecting, so that is when the warning is wanted
+  //most. A fresh launch therefore starts with no reachability history and can warn again.
+  var picoWifiState = {};
+
+  function picoWifiStateFor(ip) {
+      if (!picoWifiState[ip]) {
+          picoWifiState[ip] = { failures: 0, warned: false, reachedThisSession: false };
+      }
+      return picoWifiState[ip];
+  }
+
+  //a Pico answered over WiFi: the network works, so forget the failures
+  function notePicoReachable(ip) {
+      var state = picoWifiStateFor(ip);
+      state.failures = 0;
+      state.warned = false;
+      state.reachedThisSession = true;
+  }
+
+  //a Pico came back into Bluetooth range: start counting failures again
+  function armPicoWifiWarning(ip) {
+      picoWifiStateFor(ip).failures = 0;
+  }
+
+  //true only when failing to reach this Pico really does look like a network problem
+  function shouldWarnPicoWifi(ip, picoIndex) {
+      var state = picoWifiStateFor(ip);
+      state.failures++;
+      //reached since this launch, so the network allows it - a busy Pico, not an
+      //unreachable one
+      if (state.reachedThisSession) return false;
+      if (state.failures < PICO_WIFI_WARN_AFTER_FAILURES) return false;
+      //nothing to say about a Pico that is not even in Bluetooth range
+      if (picoIndex < 0 || !tiltPicos.tiltPico[picoIndex] || !tiltPicos.tiltPico[picoIndex].pico_inrange) return false;
+      if (state.warned) return false;//once per run of failures, not once per request
+      state.warned = true;
+      return true;
+  }
   //last logged counter
   var lastLoggedChecker = 1;
 
@@ -416,6 +508,77 @@ function checkFineLocationPermissionCallback(status) {
   }
     
 //adds color specific attributes
+  //"(via TILT APP) " and "(via TILT PICO)" are both 15 characters, and the RSSI is padded
+  //to 4 - it runs from "0" to "-100" - so the whole line is a constant width. Relies on
+  //div.lastrec being monospace with white-space: pre-wrap; see the note in app.css.
+  //With MAC IDs off, a Tilt seen by both this phone and a Pico lands on the SAME key, and
+  //beacons[key] was an unconditional overwrite - so whichever reading arrived last won and
+  //the card flickered between "(via TILT APP)" and "(via TILT PICO)" with the seconds
+  //counter jumping back and forth.
+  //Preferring the freshest reading does not fix it: the one that just arrived is always the
+  //freshest, which is the behaviour above. So one source owns a Tilt at a time, and the
+  //goal is for that to be whichever has the better link to it.
+  //
+  //Ownership changes for exactly two reasons:
+  //  1. the owner has gone quiet - the other source takes over after SOURCE_SWITCH_AFTER_MS
+  //  2. the other source is clearly stronger - by RSSI_SWITCH_MARGIN_DB of smoothed signal,
+  //     and no more often than SOURCE_DWELL_MS, so a couple of dB of noise cannot flip it
+  //
+  //Signal is smoothed with a running average rather than compared raw, because RSSI swings
+  //several dB between consecutive readings of a stationary Tilt.
+  //Staleness is measured by ARRIVAL time, not beacon.timeStamp: a Pico reading carries the
+  //Pico's own clock, so comparing embedded timestamps would let clock skew pick the winner,
+  //and a Pico running minutes ahead would starve the phone's readings permanently.
+  var SOURCE_SWITCH_AFTER_MS = 15000;//owner has stopped reporting
+  var SOURCE_DWELL_MS = 30000;//minimum time between signal-based handovers
+  var RSSI_SWITCH_MARGIN_DB = 8;//how much stronger the challenger has to be
+  var RSSI_SMOOTHING = 0.3;//weight of each new reading in the running average
+  var beaconSource = {};
+
+  function acceptBeaconReading(key, beacon) {
+      var source = (beacon.mac && beacon.mac != 'unknown') ? 'pico' : 'app';
+      var now = Date.now();
+      if (!beaconSource[key]) {
+          beaconSource[key] = { owner: source, lastSwitch: now, seen: {} };
+      }
+      var state = beaconSource[key];
+      //Track every source, including the one not currently owning the Tilt - its signal is
+      //what decides whether it should take over. rssi 0 is iOS reporting "no value", so it
+      //is recorded as an arrival but left out of the average.
+      var seen = state.seen[source] || (state.seen[source] = { lastArrival: 0, avgRssi: null });
+      seen.lastArrival = now;
+      var rssi = Number(beacon.rssi);
+      if (rssi !== 0 && !isNaN(rssi)) {
+          seen.avgRssi = (seen.avgRssi === null) ? rssi
+              : (seen.avgRssi * (1 - RSSI_SMOOTHING)) + (rssi * RSSI_SMOOTHING);
+      }
+      if (state.owner == source) {
+          return true;
+      }
+      var owner = state.seen[state.owner];
+      //owner has gone quiet - take over regardless of signal
+      if (!owner || (now - owner.lastArrival) > SOURCE_SWITCH_AFTER_MS) {
+          state.owner = source;
+          state.lastSwitch = now;
+          return true;
+      }
+      //owner is still reporting: only hand over for a clearly better signal, and not so
+      //often that the two can trade the Tilt back and forth
+      if (seen.avgRssi !== null && owner.avgRssi !== null &&
+          (now - state.lastSwitch) > SOURCE_DWELL_MS &&
+          seen.avgRssi > (owner.avgRssi + RSSI_SWITCH_MARGIN_DB)) {
+          state.owner = source;
+          state.lastSwitch = now;
+          return true;
+      }
+      return false;
+  }
+
+  function rssiLabel(beacon) {
+      var source = (beacon.mac == 'unknown') ? '(via TILT APP) ' : '(via TILT PICO)';
+      return source + ' ' + String(beacon.rssi).padStart(4) + ' dBm';
+  }
+
   function addtoScan(beacon){
     //tilt found, close scanning for tilts message
     scanningToast.close();
@@ -453,15 +616,13 @@ function checkFineLocationPermissionCallback(status) {
     beacon.Temp = getCalTemp(beacon.Color).toFixed(1);
     //handle null RSSI values from iOS by using previous value if value is "0"
     if (beacon.rssi == 0){
-        beacon.displayRSSI = localStorage.getItem('prevRSSI-' + beacon.Color)||'(via ' + device.manufacturer + ' ' + device.model.match(/\D+/)[0] + ') ' + beacon.rssi + ' dBm' ;
+        //This fallback used to build the string from device.manufacturer and
+        //device.model, which was its own source of jumping - and it is the iOS path,
+        //since that is what reports rssi 0.
+        beacon.displayRSSI = localStorage.getItem('prevRSSI-' + beacon.Color)||rssiLabel(beacon);
     }else{
-        if (beacon.mac == 'unknown'){
-            beacon.displayRSSI = '(via ' + device.manufacturer + ' ' + device.model.match(/\D+/)[0] + ') ' + beacon.rssi + ' dBm' ;
+        beacon.displayRSSI = rssiLabel(beacon);
             localStorage.setItem('prevRSSI-' + beacon.Color,beacon.displayRSSI);
-        }else{
-            beacon.displayRSSI = '(via TILT PICO) ' + beacon.rssi + " dBm";
-            localStorage.setItem('prevRSSI-' + beacon.Color,beacon.displayRSSI);
-        }
     }   
     //add Tilt Pico indicators
     if (tiltPicos.tiltPico.length > 0){
@@ -674,7 +835,7 @@ function checkFineLocationPermissionCallback(status) {
                           //make sure Tilt Picos is backed up
                           NativeStorage.setItem('tiltPicos', JSON.stringify(tiltPicos));
                           //enable error checking if Pico is in range but not connectable over wifi
-                          picoError = -1;
+                          armPicoWifiWarning(tiltPicos.tiltPico[tiltPicoIndex].ip_address);
                          }else{
                             tiltPicos.tiltPico[tiltPicoIndex].pico_inrange = true;
                         }
@@ -728,12 +889,20 @@ function checkFineLocationPermissionCallback(status) {
                     case "8-true" : beacon.Color = "PINK•HD";
                     break;
              }
-             if (beacon.mac != undefined){
-                beacon.Color = beacon.Color + '_' + beacon.mac;
-             }
-             else{
+             if (beacon.mac == undefined){
                 beacon.mac = 'unknown';
              }
+             //beacon.mac is kept either way - the Pico needs the real address to identify a
+             //Tilt - but it only becomes part of the identity when MAC IDs are enabled.
+             else if (macIdsEnabled()){
+                beacon.Color = beacon.Color + '_' + beacon.mac;
+             }
+             //Display only. The card and settings titles used to take the last 4 of
+             //beacon.mac directly, so the address stayed on screen with MAC IDs switched
+             //off - beacon.mac is still the real one, it just is not part of the identity
+             //any more. Blank unless the setting is on.
+             beacon.displayMac = (macIdsEnabled() && beacon.mac != 'unknown')
+                 ? String(beacon.mac).toUpperCase().substring(8,12) : '';
              //remove Tilt from Google Sheets if found in scan
              $$('#tiltcardGS-' + beacon.Color).remove();
              //update list of in range beacons
@@ -785,10 +954,14 @@ function checkFineLocationPermissionCallback(status) {
                   beacon.tempDecimals = 0;
                   beacon.sgDecimals = 3;
                 }
-                  addtoScan(beacon);
-                  updateBeacons();
                   //set key by UUID
                   var key = beacon.Color;
+                  //ignore the source that is not currently following this Tilt
+                  if (!acceptBeaconReading(key, beacon)) {
+                      continue;
+                  }
+                  addtoScan(beacon);
+                  updateBeacons();
                   beacons[key] = beacon;
                   //console.log(beacons);
               }
@@ -1212,7 +1385,13 @@ function checkFineLocationPermissionCallback(status) {
     $$('#uncalTemp' + beacon.Color).html(beacon.uncalTemp);
     $$('#uncaldisplayTemp+displayTempunits' + beacon.Color).html(String(beacon.uncaldisplayTemp) + beacon.displayTempunits);
     $$('#caldisplayTemp+displayTempunits' + beacon.Color).html(String(beacon.caldisplayTemp) + '<small>' + beacon.displayTempunits + '</small>');
-    $$('#numberSecondsAgo' + beacon.Color).html(beacon.numberSecondsAgo);
+    //Fixed width so the line stops changing length as the count climbs: three places
+    //before the decimal, one after - "  1.1", " 12.5", "123.4". Space padded, which only
+    //holds up because div.lastrec is monospace and now sets white-space: pre-wrap; without
+    //that, HTML collapses the padding and the line jumps again.
+    //numberSecondsAgo itself is left unpadded: it is compared numerically against 120 just
+    //above.
+    $$('#numberSecondsAgo' + beacon.Color).html(String(beacon.numberSecondsAgo).padStart(5));
     $$('#displayRSSI' + beacon.Color).html(beacon.displayRSSI);
     $$('#displaytimeStamp' + beacon.Color).html(beacon.displaytimeStamp + ' v' + app.data.appVersion);
     $$('#percentScaleSG' + beacon.Color).css('width', String((beacon.uncalSG - 0.980) / (1.150 - 0.980) * 100) + "%");
@@ -1656,6 +1835,83 @@ function showBeerName (color){
     $$('#beerName' + color).html(beerNameArray[0]);
 }
 
+//Forgets every Tilt identity that only a Pico could have produced: anything carrying a
+//MAC suffix, and anything whose reading came from a Pico rather than this phone's own
+//iBeacon scan (phone readings have mac == 'unknown').
+//updateBeacons already hides a stale card, but hiding is not enough - `beacons` and
+//foundbeacons keep the entry, and the card list is re-rendered from those whenever a new
+//Tilt appears, which brought the cards straight back. They have to be dropped, not hidden.
+//Called when Pico scanning is switched off, and whenever the MAC ID setting changes, since
+//both mean the identities in hand can no longer be produced.
+function forgetPicoBeacons() {
+    var removed = [];
+    for (var key in beacons) {
+        var isMacId = String(key).indexOf('_') > -1;
+        var fromPico = beacons[key] && beacons[key].mac && beacons[key].mac != 'unknown';
+        if (isMacId || fromPico) {
+            removed.push(key);
+            delete beacons[key];
+        }
+    }
+    //No early return when nothing was removed: the card and settings titles include
+    //beacon.displayMac, so they have to be redrawn whenever the MAC setting changes even
+    //if there were no Pico-sourced identities to forget.
+    //Reset rather than filter. The card list and the settings panel are both rendered in
+    //one pass, and only when addtoScan sees a colour that is not yet in foundbeacons -
+    //filtering out just the removed names left the surviving ones in place, so that branch
+    //never ran again and the old markup stayed on screen. 'NONE' is the sentinel the card
+    //loops already expect at index 0, so the next Tilt detected rebuilds everything and
+    //re-binds its handlers.
+    localStorage.setItem('foundbeacons', 'NONE');
+    NativeStorage.setItem('foundbeacons', ['NONE'], function (result) { }, function (e) { });
+    localStorage.setItem('inrangebeacons', 'NONE');
+    //Redraw now from the cleaned list so the stale entries go immediately instead of
+    //lingering until the next scan. Removing #tiltcard-/#accordion- by id was not enough:
+    //the settings panel has its own markup per Tilt, which stayed behind.
+    $$('#tiltCard').html(compileddisplayTemplate(beacons));
+    $$('#settingsPanel').html(compiledsettingsTemplate(beacons));
+    removed.forEach(function (key) {
+        //per-Tilt state keyed by the identity that no longer exists
+        localStorage.removeItem('tiltObject-' + key);
+    });
+}
+
+//The MAC ID row only makes sense while this Pico is scanning, so its visibility follows
+//that toggle. Dom7 no-ops on a missing element, so this is safe before the panel renders.
+function showMacIdsRow (ip_address, show) {
+    var ip_addr_x = ip_address.replaceAll('.','x');
+    $$('#macIdsRow-' + ip_addr_x).css('display', show ? '' : 'none');
+    //The information link is a separate sibling rather than part of the row above, so it
+    //can stay left aligned - its popover is anchored to it, and a centred link opened the
+    //popover mid-screen. Both halves therefore have to be toggled here.
+    $$('#macIdsInfo-' + ip_addr_x).css('display', show ? '' : 'none');
+}
+
+//Creates and syncs this Pico's MAC ID toggle. The element is per Pico so the ids stay
+//unique across the repeated settings template, but every one of them reads and writes the
+//same global 'macIdsEnabled' - see the note on macIdsEnabled().
+function toggleMacIds (ip_address) {
+    var toggle = app.toggle.create({
+        el: '#macIdsToggle-' + ip_address.replaceAll('.','x'),
+        on: {
+          change: function () {
+            var enabled = toggle.checked ? '1' : '0';
+            localStorage.setItem('macIdsEnabled', enabled);
+            NativeStorage.setItem('macIdsEnabled', enabled, function (result) { }, function (e) { });
+            //Every Tilt's identity changes with this setting, so the old ones have to be
+            //forgotten - otherwise "RED•HD" and "RED•HD_a1b2c3" would both count as present
+            //and the cards would double up.
+            forgetPicoBeacons();
+            localStorage.setItem('inrangebeacons', 'NONE');
+            waitingForPico = false;
+          }
+        }
+      })
+    if (toggle.checked != macIdsEnabled()){
+        toggle.toggle();
+    }
+}
+
 function toggleUseMac (ip_address){
     var toggle = app.toggle.create({
         el: '#macToggle-' + ip_address.replaceAll('.','x'),
@@ -1669,7 +1925,8 @@ function toggleUseMac (ip_address){
                 tiltPicos.tiltPico[indexIP].enable_scanning = true;
                 usePicoOnly = true;
                 waitingForPico = false;
-                $$('#macToggleLabel-' + ip_address.replaceAll('.','x')).html(' via TILT PICO');
+                $$('#macToggleLabel-' + ip_address.replaceAll('.','x')).html(' via TILT PICO + TILT APP');
+                showMacIdsRow(ip_address, true);
             }
             else if (!toggle.checked){
                 macToggleEnabled = '0';
@@ -1684,7 +1941,13 @@ function toggleUseMac (ip_address){
                         usePicoOnly = false;
                     }
                 }
-                $$('#macToggleLabel-' + ip_address.replaceAll('.','x')).html(' via ' + device.manufacturer + ' ' + device.model.match(/\D+/)[0]);
+                $$('#macToggleLabel-' + ip_address.replaceAll('.','x')).html(' via TILT APP');
+                showMacIdsRow(ip_address, false);
+                //No Pico is scanning any more, so nothing can refresh a Pico-sourced Tilt.
+                //Drop them rather than leaving hidden cards that a re-render resurrects.
+                if (!usePicoOnly){
+                    forgetPicoBeacons();
+                }
                 localStorage.setItem('inrangebeacons', 'NONE');
                 
             }
@@ -1695,22 +1958,31 @@ function toggleUseMac (ip_address){
     var macToggleEnabled = localStorage.getItem('macToggleEnabled-' + ip_address)||'0';
     if (macToggleEnabled == '1'){
         //console.log(macToggleEnabled);
-        $$('#macToggleLabel-' + ip_address.replaceAll('.','x')).html(' via TILT PICO');
+        $$('#macToggleLabel-' + ip_address.replaceAll('.','x')).html(' via TILT PICO + TILT APP');
         if (!toggle.checked)
             toggle.toggle();    
     }
     else if (macToggleEnabled == '0'){
         //console.log(macToggleEnabled);
-        $$('#macToggleLabel-' + ip_address.replaceAll('.','x')).html(' via ' + device.manufacturer + ' ' + device.model.match(/\D+/)[0]);
+        $$('#macToggleLabel-' + ip_address.replaceAll('.','x')).html(' via TILT APP');
         if (toggle.checked){
             toggle.toggle();
      }
     }
+    toggleMacIds(ip_address);
+    showMacIdsRow(ip_address, macToggleEnabled == '1');
 }
 
 function macToggle(ip_address) {
     var toggle = app.toggle.get('#macToggle-' + ip_address.replaceAll('.','x'));
     toggle.toggle();
+}
+
+function macIdsToggle(ip_address) {
+    var toggle = app.toggle.get('#macIdsToggle-' + ip_address.replaceAll('.','x'));
+    if (toggle) {
+        toggle.toggle();
+    }
 }
 
 function toggleDeviceLogging (color) {
@@ -3494,8 +3766,7 @@ var wifiConnProgress = 0;
                 console.log("waiting for pico false");
                 waitingForPico = false;
                 let tiltPicoIndex = tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == tiltPicoIP.split('/')[0]);
-                picoError ++;
-                if (picoError == 1 && tiltPicos.tiltPico[tiltPicoIndex].pico_inrange){
+                if (shouldWarnPicoWifi(tiltPicoIP.split('/')[0], tiltPicoIndex)){
                     app.dialog.alert('Make sure the ' + device.manufacturer + ' phone or tablet you are using is connected to the same WiFi network as your Tilt Pico and it is also not a guest network. You may also need to accept permissions for local network access.','<i class="icon f7-icons color-red">close_round_fill</i> Unable to find Tilt Pico: <strong>' + tiltPicos.tiltPico[tiltPicoIndex].text + '</strong> on the WiFi network');
                 }
                 localStorage.setItem('picoStatus-' + color, 'color-red');
@@ -3504,8 +3775,12 @@ var wifiConnProgress = 0;
           })})
           .then(response => {
             if (response.status != 200) {
-              picoError ++;
-              if (picoError == 1 && tiltPicos.tiltPico[tiltPicoIndex].pico_inrange){
+              //tiltPicoIndex used to be read here, but it is declared with let inside the
+              //OTHER callback. In this .then it resolved to the var hoisted from further
+              //down, i.e. undefined, so tiltPicos.tiltPico[undefined].pico_inrange threw
+              //and this warning never actually appeared.
+              var failedPicoIndex = tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == tiltPicoIP.split('/')[0]);
+              if (shouldWarnPicoWifi(tiltPicoIP.split('/')[0], failedPicoIndex)){
                 app.dialog.alert('Make sure the ' + device.manufacturer + ' phone or tablet you are using is connected to the same WiFi network as your Tilt Pico and it is also not a guest network.','<i class="icon f7-icons color-red">close_round_fill</i> Tilt Pico: <strong>' + tiltPicos.tiltPico[tiltPicoIndex].text + '</strong> Not on the same WiFi network');
                 }
               $$('#picoConnStatus-' + tiltPicoIP.split('/')[0].replaceAll('.','x')).html('<i class="icon f7-icons size-15 color-red">close_round_fill</i>&nbsp');
@@ -3514,6 +3789,9 @@ var wifiConnProgress = 0;
               throw new Error(`HTTP error! Status: ${response.status}`);
             }
             $$('#picoConnStatus-' + tiltPicoIP.split('/')[0].replaceAll('.','x')).html('<i class="icon f7-icons size-15 color-green">check_round_fill</i>&nbsp');
+            //this Pico is reachable over WiFi - remember it, so a later non-answer while it
+            //is busy logging is not mistaken for a network problem
+            notePicoReachable(tiltPicoIP.split('/')[0]);
             waitingForPico = false;
             if(tiltPicoIP.includes('log.csv')){
                 var tiltPicoIndex = tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == tiltPicoIP.split('/')[0]);   
@@ -3879,7 +4157,7 @@ var wifiConnProgress = 0;
             var requestString = ip_addr + 
                     '/sync?beername=' + encodeURIComponent(localStorage.getItem('beerName-' + color)) +
                     '&color=' + color.replace('•','-') +
-                    '&mac=' + colorArray[1] +
+                    '&mac=' + macForColor(color) +
                     '&tilttempcal=' + localStorage.getItem('uncalTemppoints-' + color) +
                     '&actualtempcal=' + localStorage.getItem('actualTemppoints-' + color) +
                     '&tiltSGcal=' + localStorage.getItem('uncalSGpoints-' + color) +
@@ -3910,7 +4188,7 @@ var wifiConnProgress = 0;
             var requestString = ip_addr + 
                     '/sync?beername=' + encodeURIComponent(localStorage.getItem('beerName-' + color)) +
                     '&color=' + color.replace('•','-') +
-                    '&mac=' + colorArray[1] +
+                    '&mac=' + macForColor(color) +
                     '&tilttempcal=' + localStorage.getItem('uncalTemppoints-' + color) +
                     '&actualtempcal=' + localStorage.getItem('actualTemppoints-' + color) +
                     '&tiltSGcal=' + localStorage.getItem('uncalSGpoints-' + color) +
