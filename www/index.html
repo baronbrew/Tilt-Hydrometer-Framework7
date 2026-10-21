@@ -227,6 +227,13 @@
               <li class="list-group-title">TILT PICO LOGS</li>
       {{#each tiltPico}}
               <li>
+                <!-- The extra item-content wrapper matches DEVICE LOGS and CLOUD LOGS,
+                     whose rows are <li class="swipeout"> > div.swipeout-content.item-content
+                     > a.item-link.item-content. item-content is what supplies Framework7's
+                     left padding, so having it once here left these rows sitting a level
+                     shallower than the other two sections. Plain item-content rather than
+                     swipeout-content: these rows have no swipe action to reveal. -->
+                <div class="item-content">
                   <a onclick="fetchJSONData('{{ip_address}}/log.csv')" class="item-link item-content">
                       <div class="item-inner">
                           <div class="item-title-row">
@@ -237,6 +244,7 @@
             <div class="item-text">(tap to download and email)</div>
           </div>
         </a>
+                </div>
       </li>
     {{/each}}
      </ul>
