@@ -163,7 +163,8 @@ $$(document).on('deviceready', function() {
 
   //Opening the sheet from the cloud icon: '_system' on Android, '_self' on iOS. The only
   //per-platform value in the markup below, so it lives in one place.
-  var CLOUD_LINK_TARGET = '_system';
+  //iOS value - do not cherry-pick this line back to the Android branch.
+  var CLOUD_LINK_TARGET = '_self';
 
   //Wraps cloud status markup in a link to the sheet whenever the app knows one.
   //Only the success path used to render a link. The error, unconfirmed and
