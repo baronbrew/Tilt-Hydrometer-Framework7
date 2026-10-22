@@ -199,7 +199,16 @@ $$(document).on('deviceready', function() {
   //WebView stores localStorage in LevelDB, which compacts.
   //Throttled to once every 30s. Pass force=true where the stored value genuinely has to be
   //current: before a cloud or device log reads it back, and when the app is backgrounded.
-  var PERSIST_BEACON_MIN_MS = 30 * 1000;
+  //Measured on two iPhones after the first fix: WebKit does NOT checkpoint the WAL when it
+  //passes a size threshold - one went to 4.5 MB with the database untouched for 30
+  //minutes. It folds the WAL back in at lifecycle events (launch, and the WebView being
+  //recycled in the background). So ANY steady write rate grows the WAL for as long as the
+  //app stays in the foreground, which a phone left as a dedicated logger can do for weeks.
+  //A 30 second throttle still came to ~150 KB a minute with three Tilts. The readers now
+  //use the live object (currentBeacon), so this is only a backup for after a relaunch:
+  //written when the app is paused, plus this slow safety net in case it is killed
+  //without being paused.
+  var PERSIST_BEACON_MIN_MS = 15 * 60 * 1000;
   var lastBeaconPersist = {};
   function persistBeacon(beacon, force) {
       if (!beacon || !beacon.Color) return;
@@ -207,6 +216,74 @@ $$(document).on('deviceready', function() {
       if (!force && (now - (lastBeaconPersist[beacon.Color] || 0)) < PERSIST_BEACON_MIN_MS) return;
       lastBeaconPersist[beacon.Color] = now;
       localStorage.setItem('tiltObject-' + beacon.Color, JSON.stringify(beacon));
+  }
+
+  //The same WAL problem, the part the change above missed. uncalSG- and uncalTemp- were
+  //written to localStorage on EVERY detection - three writes each time, one a straight
+  //duplicate - from both the phone and any Pico. With those still running, an iPhone's
+  //WAL went 4+ hours without a single checkpoint and was back to 163 MB in an afternoon.
+  //Every reader wants the live value, so it lives in memory and localStorage only gets a
+  //copy every 30s, enough for a relaunch to show a last-known reading before the first
+  //scan. Stored as strings because that is what localStorage handed back, and the
+  //calibration code compares them against string arrays with indexOf.
+  //Same reasoning as PERSIST_BEACON_MIN_MS: readers use memory, this is a relaunch backup.
+  var RAW_PERSIST_MIN_MS = 15 * 60 * 1000;
+  var rawReadings = {};
+  function setRawReading(color, uncalSG, uncalTemp) {
+      var reading = rawReadings[color] || (rawReadings[color] = { persisted: 0 });
+      reading.uncalSG = String(uncalSG);
+      reading.uncalTemp = String(uncalTemp);
+      var now = Date.now();
+      if (now - reading.persisted >= RAW_PERSIST_MIN_MS) {
+          reading.persisted = now;
+          localStorage.setItem('uncalSG-' + color, reading.uncalSG);
+          localStorage.setItem('uncalTemp-' + color, reading.uncalTemp);
+      }
+  }
+  function getUncalSG(color) {
+      return (rawReadings[color] && rawReadings[color].uncalSG !== undefined)
+          ? rawReadings[color].uncalSG : localStorage.getItem('uncalSG-' + color);
+  }
+  function getUncalTemp(color) {
+      return (rawReadings[color] && rawReadings[color].uncalTemp !== undefined)
+          ? rawReadings[color].uncalTemp : localStorage.getItem('uncalTemp-' + color);
+  }
+
+  //The Tilt's current state, for code that records or sends a reading. It used to come
+  //straight from localStorage, and that was the only reason tiltObject- had to be rewritten
+  //every few seconds - rewrites that grew the WebKit WAL. The live object in `beacons` is
+  //always current; localStorage is now just the backup for after a relaunch, when a Tilt
+  //has not been scanned yet.
+  //Returned as a COPY, exactly as JSON.parse used to: logToDevice edits beacon.Color, and
+  //doing that to the live object would corrupt the key it is stored under.
+  function currentBeacon(color) {
+      if (beacons[color]) {
+          return JSON.parse(JSON.stringify(beacons[color]));
+      }
+      return JSON.parse(localStorage.getItem('tiltObject-' + color));
+  }
+
+  //Writes the in-memory raw readings to localStorage now. Called when the app is paused,
+  //so a relaunch has the latest values without a write on every detection.
+  function flushRawReadings() {
+      for (var rawColor in rawReadings) {
+          var reading = rawReadings[rawColor];
+          if (reading.uncalSG !== undefined) {
+              localStorage.setItem('uncalSG-' + rawColor, reading.uncalSG);
+              localStorage.setItem('uncalTemp-' + rawColor, reading.uncalTemp);
+              reading.persisted = Date.now();
+          }
+      }
+  }
+
+  //Skips a write when the stored value is already the same. Reading localStorage does not
+  //touch the WAL; writing does, even when nothing changes. Used for the Pico status keys,
+  //which polling rewrote with the same value over and over - fetchJSONData alone wrote
+  //picoStatus-not_specified, a key nothing reads, on every request.
+  function setItemIfChanged(key, value) {
+      if (localStorage.getItem(key) !== String(value)) {
+          localStorage.setItem(key, value);
+      }
   }
   //track new beacon updates
   var inrangebeaconsUpdated = false;
@@ -575,10 +652,25 @@ function checkFineLocationPermissionCallback(status) {
       return false;
   }
 
-  function rssiLabel(beacon) {
+  //rssi lets a caller substitute a remembered value for a reading that has none; the
+  //source label always comes from the beacon in hand.
+  function rssiLabel(beacon, rssi) {
       var source = (beacon.mac == 'unknown') ? '(via TILT APP) ' : '(via TILT PICO)';
-      return source + ' ' + String(beacon.rssi).padStart(4) + ' dBm';
+      var value = (rssi === undefined || rssi === null) ? beacon.rssi : rssi;
+      return source + ' ' + String(value).padStart(4) + ' dBm';
   }
+
+  //Last real RSSI per Tilt AND per source, for readings that arrive without one. iOS
+  //reports rssi 0 for "no value", often for the phone's own scan.
+  //This used to be the localStorage key prevRSSI-<color> holding the whole formatted label,
+  //source included. When the last reading with a value had come from the Pico, it said
+  //"(via TILT PICO)" - and because the phone's iOS readings keep arriving as 0, nothing ever
+  //replaced it, so cards the phone was scanning still claimed the Pico. Remembering the
+  //number per source keeps the label honest.
+  //In memory rather than localStorage: it was a write on every detection, the same kind
+  //that grew the WebKit WAL to 19 GB. After a relaunch it is simply empty, and the first
+  //real reading fills it.
+  var lastRssi = {};
 
   function addtoScan(beacon){
     //tilt found, close scanning for tilts message
@@ -594,9 +686,7 @@ function checkFineLocationPermissionCallback(status) {
         beacon.loggingTimer = (Date.now() - lastCloudLogged) / 1000 / 60;//min since last logged
         if (Number(cloudInterval) <= beacon.loggingTimer){
         setTimeout(function(){ 
-            //both of these read tiltObject- back out of localStorage, so force a write
-            //first - otherwise they could log a reading up to 30 seconds old
-            persistBeacon(beacon, true);
+            //no save needed first: both read the live object through currentBeacon
             postToCloudURLs(beacon.Color);
             logToDevice(beacon.Color);
         },4000);
@@ -615,16 +705,14 @@ function checkFineLocationPermissionCallback(status) {
     //add calibrated SG and Temp (F) for cloud posting
     beacon.SG = getCalFerm(beacon.Color).toFixed(4);
     beacon.Temp = getCalTemp(beacon.Color).toFixed(1);
-    //handle null RSSI values from iOS by using previous value if value is "0"
+    //handle null RSSI values from iOS by using the last real value from the same source
+    var rssiKey = beacon.Color + '|' + ((beacon.mac == 'unknown') ? 'app' : 'pico');
     if (beacon.rssi == 0){
-        //This fallback used to build the string from device.manufacturer and
-        //device.model, which was its own source of jumping - and it is the iOS path,
-        //since that is what reports rssi 0.
-        beacon.displayRSSI = localStorage.getItem('prevRSSI-' + beacon.Color)||rssiLabel(beacon);
+        beacon.displayRSSI = rssiLabel(beacon, lastRssi[rssiKey]);
     }else{
+        lastRssi[rssiKey] = beacon.rssi;
         beacon.displayRSSI = rssiLabel(beacon);
-            localStorage.setItem('prevRSSI-' + beacon.Color,beacon.displayRSSI);
-    }   
+    }
     //add Tilt Pico indicators
     if (tiltPicos.tiltPico.length > 0){
         beacon.picoStatus = localStorage.getItem('picoStatus-' + beacon.Color)||'color-gray';
@@ -939,19 +1027,15 @@ function checkFineLocationPermissionCallback(status) {
                   //setup HD tilt
                 if (beacon.hd){
                     beacon.uncalTemp = beacon.major / 10;
-                    localStorage.setItem('uncalTemp-' + beacon.Color, beacon.uncalTemp);
                     beacon.uncalSG = (beacon.minor / 10000).toFixed(4);
-                    localStorage.setItem('uncalSG-' + beacon.Color, beacon.uncalSG);
-                    localStorage.setItem('uncalTemp-' + beacon.Color, beacon.uncalTemp);
+                    setRawReading(beacon.Color, beacon.uncalSG, beacon.uncalTemp);
                     beacon.tempDecimals = 1;
                     beacon.sgDecimals = 4;
                 } else {
                 //setup SD tilt
                   beacon.uncalTemp = beacon.major;
-                  localStorage.setItem('uncalTemp-' + beacon.Color, beacon.uncalTemp);
                   beacon.uncalSG = (beacon.minor / 1000).toFixed(3);
-                  localStorage.setItem('uncalSG-' + beacon.Color, beacon.uncalSG);
-                  localStorage.setItem('uncalTemp-' + beacon.Color, beacon.uncalTemp);
+                  setRawReading(beacon.Color, beacon.uncalSG, beacon.uncalTemp);
                   beacon.tempDecimals = 0;
                   beacon.sgDecimals = 3;
                 }
@@ -1254,7 +1338,7 @@ function checkFineLocationPermissionCallback(status) {
              var uncalSGpoints = localStorage.getItem('uncalSGpoints-' + calcolor[1])||'-0.001,1.0000,10.000';
              var uncalSGpointsArray = uncalSGpoints.split(',');
              var actualSGpoint = String(Number(actual).toFixed(4));
-             var uncalSGpoint = localStorage.getItem('uncalSG-' + calcolor[1]);
+             var uncalSGpoint = getUncalSG(calcolor[1]);
              //add uncal. point only if actual doesn't already exist, otherwise replace with new uncal. point
              var calSGindex = actualSGpointsArray.indexOf(actualSGpoint);
              console.log(actualSGpointsArray + ", " + actualSGpoint);
@@ -1287,14 +1371,14 @@ function checkFineLocationPermissionCallback(status) {
             }
             //update list of calibration points in settings
             updateSGcallist(calcolor[1]);
-            localStorage.setItem('picoStatus-' + calcolor[1], 'color-yellow');
+            setItemIfChanged('picoStatus-' + calcolor[1], 'color-yellow');
             }, function () {
                 app.dialog.prompt('Enter actual temperature:', 'Calibrate '+ calcolor[1], function (actualTemp){
                var actualTemppoints = localStorage.getItem('actualTemppoints-' + calcolor[1])||'-100000,100000';
                var actualTemppointsArray = actualTemppoints.split(',');
                var uncalTemppoints = localStorage.getItem('uncalTemppoints-' + calcolor[1])||'-100000,100000';
                var uncalTemppointsArray = uncalTemppoints.split(',');
-               var uncalTemppoint = localStorage.getItem('uncalTemp-' + calcolor[1]);
+               var uncalTemppoint = getUncalTemp(calcolor[1]);
                if (localStorage.getItem('displayTempunits-' + calcolor[1]) == "°C") {
                     var actualTemppointToast = Number(actualTemp).toFixed(1);
                     var uncalTemppointToast = ((Number(uncalTemppoint) - 32 ) * 5 / 9).toFixed(1);
@@ -1327,7 +1411,7 @@ function checkFineLocationPermissionCallback(status) {
                 app.dialog.alert('The calibration point "' + actualTempToast + '" is out of range or not a number. Please try again.', 'Calibration Error');
             }
             updateTempcallist(calcolor[1]);
-            localStorage.setItem('picoStatus-' + calcolor[1], 'color-yellow');
+            setItemIfChanged('picoStatus-' + calcolor[1], 'color-yellow');
                 });
                 });
             });
@@ -1479,7 +1563,7 @@ var actualSGpoints = localStorage.getItem('actualSGpoints-' + color)||'-0.001,1.
 var actualSGPointsArray= actualSGpoints.split(',');
 //temporary array for finding correct x and y values
 var unCalSGPointsTempArray = uncalSGpoints.split(',');
-var SG = localStorage.getItem('uncalSG-' + color);
+var SG = getUncalSG(color);
 //add current value to calibration point list
 unCalSGPointsTempArray.push(SG);
 //sort list lowest to highest
@@ -1497,7 +1581,7 @@ var actualTemppoints = localStorage.getItem('actualTemppoints-' + color)||'-1000
 var actualTempPointsArray= actualTemppoints.split(',');
 //temporary array for finding correct x and y values
 var unCalTempPointsTempArray = uncalTemppoints.split(',');
-var Temp = localStorage.getItem('uncalTemp-' + color);
+var Temp = getUncalTemp(color);
 //add current value to calibration point list
 unCalTempPointsTempArray.push(Temp);
 //sort list lowest to highest
@@ -1568,13 +1652,13 @@ function deleteTempCalPoint (checkbox){
 function getUncalibratedSGPoint (button){
     var clickedButton = button.id.split('-');
     var color = clickedButton[1];
-    $$('#uncalSG-' + color).val(localStorage.getItem('uncalSG-' + color));
+    $$('#uncalSG-' + color).val(getUncalSG(color));
 }
 
 function getUncalibratedTempPoint (button){
     var clickedButton = button.id.split('-');
     var color = clickedButton[1];
-    var uncalTemp = localStorage.getItem('uncalTemp-' + color);
+    var uncalTemp = getUncalTemp(color);
     var units = localStorage.getItem('displayTempunits-' + color);
     if (units == "°C"){
         uncalTemp = ((uncalTemp - 32) * 5 / 9).toFixed(1);
@@ -1588,7 +1672,7 @@ function addSGPoints (button){
     //handle quick cal / tare in water
     if (clickedButton[2] != undefined){
         var actual = Number(clickedButton[2]);
-        var uncalSGpoint = localStorage.getItem('uncalSG-' + color);
+        var uncalSGpoint = getUncalSG(color);
     }else{
         var actual = $$('#actualSG-' + color).val();
         var uncalSGpoint = $$('#uncalSG-' + color).val();
@@ -1736,7 +1820,7 @@ function clearBeerName (button){
             closeOnClick: true,
           });
         notificationFull.open();
-        localStorage.setItem('picoStatus-' + color, 'color-yellow');
+        setItemIfChanged('picoStatus-' + color, 'color-yellow');
         notificationFull.on('click', 
          function() { 
              //restore beername and cloud file name if user cancels deletion
@@ -1777,7 +1861,7 @@ function setBeerName (button){
             closeTimeout: 5000,
           });
         notificationFull.open();
-        localStorage.setItem('picoStatus-' + color, 'color-yellow');
+        setItemIfChanged('picoStatus-' + color, 'color-yellow');
         //warn if name has an associated cloud ID
     } else if (Number(currentBeerNameArray[1]) > 0) {
         //Cloud logging is in progress under the old name. This used to refuse outright and
@@ -1788,7 +1872,7 @@ function setBeerName (button){
             'End log and rename?<br>TILT | ' + color,
             function () {
                 performEndLog(color);
-                localStorage.setItem('picoStatus-' + color, 'color-yellow');
+                setItemIfChanged('picoStatus-' + color, 'color-yellow');
                 localStorage.setItem('beerName-' + color, validBeerName);
                 NativeStorage.setItem('beerName-' + color, validBeerName, function (result) { }, function (e) { });
                 showBeerName(color);
@@ -1815,7 +1899,7 @@ function setBeerName (button){
             closeTimeout: 5000,
           });
         notificationFull.open();
-        localStorage.setItem('picoStatus-' + color, 'color-yellow');
+        setItemIfChanged('picoStatus-' + color, 'color-yellow');
         localStorage.setItem('beerName-' + color, validBeerName);
         NativeStorage.setItem('beerName-' + color, validBeerName, function (result) { }, function (e) { });
         showBeerName(color);
@@ -2072,7 +2156,7 @@ function setDefaultCloudURL (button){
         closeTimeout: 5000,
       });
     notificationFull.open();
-    localStorage.setItem('picoStatus-' + color, 'color-yellow');
+    setItemIfChanged('picoStatus-' + color, 'color-yellow');
 }
 
 function clearDefaultCloudURL (button){
@@ -2093,7 +2177,7 @@ function clearDefaultCloudURL (button){
         closeTimeout: 5000,
       });
     notificationFull.open();
-    localStorage.setItem('picoStatus-' + color, 'color-yellow');
+    setItemIfChanged('picoStatus-' + color, 'color-yellow');
 }
 
 function toggleCustomCloudURL1 (color) {
@@ -2150,7 +2234,7 @@ function setCustomCloudURL1 (button){
         closeTimeout: 5000,
       });
     notificationFull.open();
-    localStorage.setItem('picoStatus-' + color, 'color-yellow');
+    setItemIfChanged('picoStatus-' + color, 'color-yellow');
 }
 
 function clearCustomCloudURL1 (button){
@@ -2171,7 +2255,7 @@ function clearCustomCloudURL1 (button){
         closeTimeout: 5000,
       });
     notificationFull.open();
-    localStorage.setItem('picoStatus-' + color, 'color-yellow');
+    setItemIfChanged('picoStatus-' + color, 'color-yellow');
 }
 
 
@@ -2229,7 +2313,7 @@ function setCustomCloudURL2 (button){
         closeTimeout: 5000,
       });
     notificationFull.open();
-    localStorage.setItem('picoStatus-' + color, 'color-yellow');
+    setItemIfChanged('picoStatus-' + color, 'color-yellow');
 }
 
 function clearCustomCloudURL2 (button){
@@ -2249,7 +2333,7 @@ function clearCustomCloudURL2 (button){
         closeTimeout: 5000,
       });
     notificationFull.open();
-    localStorage.setItem('picoStatus-' + color, 'color-yellow');
+    setItemIfChanged('picoStatus-' + color, 'color-yellow');
 }
 
 function cloudIntervalStepper (color) {
@@ -2258,7 +2342,7 @@ function cloudIntervalStepper (color) {
         el: '#cloudStepper-' + color,
         on : {
             change: function () {
-            localStorage.setItem('picoStatus-' + color, 'color-yellow');
+            setItemIfChanged('picoStatus-' + color, 'color-yellow');
             var cloudInterval = stepper.getValue();
             localStorage.setItem('cloudInterval-' + color, cloudInterval);
             NativeStorage.setItem('cloudInterval-' + color, cloudInterval, function (result) { }, function (e) { });
@@ -2807,7 +2891,7 @@ function logToDevice(color, comment){
     else if (comment === undefined){
         comment = '';
    }
-    var beacon = JSON.parse(localStorage.getItem('tiltObject-' + color));
+    var beacon = currentBeacon(color);
     var timeStamp = new Date(beacon.timeStamp);
     var localTime = timeStamp.toLocaleDateString() + ' ' + timeStamp.toLocaleTimeString();
     var tzOffsetDays = timeStamp.getTimezoneOffset() / 60 / 24;
@@ -2930,7 +3014,7 @@ function emailCurrentCSV(color){
     var email = localStorage.getItem('emailAddress-' + color)||'';
     var currentBeerName = localStorage.getItem('beerName-' + color);
     var currentBeerNameArray = currentBeerName.split(',');
-    var beacon = JSON.parse(localStorage.getItem('tiltObject-' + color));
+    var beacon = currentBeacon(color);
     cordova.plugins.email.open({
         to: email,
         subject: 'Tilt Hydrometer Log for ' + currentBeerNameArray[0] + ' (' + color + ' TILT)',
@@ -2973,6 +3057,7 @@ function onPause() {
     for (var pauseKey in beacons) {
         persistBeacon(beacons[pauseKey], true);
     }
+    flushRawReadings();
     //Android 8+ doesn't allow scanning to continue in background
     if ((device.platform == "Android") && (Number(device.version) > 7)) {
         stopScan();
@@ -3166,7 +3251,7 @@ function postToCloudURLs (color, comment, picoRequestString = 'none', isNewLog =
     if (comment === undefined){
         comment = "";
     };
-    var beacon = JSON.parse(localStorage.getItem('tiltObject-' + color));
+    var beacon = currentBeacon(color);
     var cloudURLs = localStorage.getItem('cloudurls-' + color) || app.data.defaultCloudURL + ',,';
     var cloudURLsArray = cloudURLs.split(',');
     //validate default cloud URL, reset if invalid
@@ -3757,7 +3842,7 @@ var wifiConnProgress = 0;
 
   function fetchJSONData(tiltPicoIP, color = 'not_specified') {
     //console.log(tiltPicoIP);
-    localStorage.setItem('picoStatus-' + color, 'color-gray');
+    setItemIfChanged('picoStatus-' + color, 'color-gray');
     return new Promise((resolve, reject) => {
         cordova.plugin.http.get('http://' + tiltPicoIP, {}, {}, 
             function(response) {
@@ -3770,7 +3855,7 @@ var wifiConnProgress = 0;
                 if (shouldWarnPicoWifi(tiltPicoIP.split('/')[0], tiltPicoIndex)){
                     app.dialog.alert('Make sure the ' + device.manufacturer + ' phone or tablet you are using is connected to the same WiFi network as your Tilt Pico and it is also not a guest network. You may also need to accept permissions for local network access.','<i class="icon f7-icons color-red">close_round_fill</i> Unable to find Tilt Pico: <strong>' + tiltPicos.tiltPico[tiltPicoIndex].text + '</strong> on the WiFi network');
                 }
-                localStorage.setItem('picoStatus-' + color, 'color-red');
+                setItemIfChanged('picoStatus-' + color, 'color-red');
                 $$('#picoConnStatus-' + tiltPicoIP.split('/')[0].replaceAll('.','x')).html('<i class="icon f7-icons size-15 color-red">close_round_fill</i>&nbsp');
                 reject(new Error(response.error));
           })})
@@ -3786,7 +3871,7 @@ var wifiConnProgress = 0;
                 }
               $$('#picoConnStatus-' + tiltPicoIP.split('/')[0].replaceAll('.','x')).html('<i class="icon f7-icons size-15 color-red">close_round_fill</i>&nbsp');
               waitingForPico = false;
-              localStorage.setItem('picoStatus-' + color, 'color-red');
+              setItemIfChanged('picoStatus-' + color, 'color-red');
               throw new Error(`HTTP error! Status: ${response.status}`);
             }
             $$('#picoConnStatus-' + tiltPicoIP.split('/')[0].replaceAll('.','x')).html('<i class="icon f7-icons size-15 color-green">check_round_fill</i>&nbsp');
@@ -3827,18 +3912,18 @@ var wifiConnProgress = 0;
                 //version branch, so a Pico reporting version 0 (or omitting the field) had its
                 //MAC set in memory only and lost it on restart.
                 NativeStorage.setItem('tiltPicos', JSON.stringify(tiltPicos));
-                localStorage.setItem('tiltPicoIPAddr-' + tiltPicos.tiltPico[tiltPicoIndex].ip_address, JSON.stringify(tiltPicos.tiltPico[tiltPicoIndex]));
+                setItemIfChanged('tiltPicoIPAddr-' + tiltPicos.tiltPico[tiltPicoIndex].ip_address, JSON.stringify(tiltPicos.tiltPico[tiltPicoIndex]));
                 return;
             }
             if (tiltPicoIP.includes('remove_config_file')){
                 var tiltPicoIndex = tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == tiltPicoIP.split('/')[0]);
                 app.dialog.alert(result.result, 'Tilt Pico: <strong>' + tiltPicos.tiltPico[tiltPicoIndex].text + '</strong>');
-                localStorage.setItem('picoStatus-' + tiltPicoIP.split('?')[1].split('=')[1].replace('-','•'), 'color-gray');
-                localStorage.setItem('deviceloggingtilts-' + tiltPicos.tiltPico[tiltPicoIndex].ip_address, '');
+                setItemIfChanged('picoStatus-' + tiltPicoIP.split('?')[1].split('=')[1].replace('-','•'), 'color-gray');
+                setItemIfChanged('deviceloggingtilts-' + tiltPicos.tiltPico[tiltPicoIndex].ip_address, '');
                 tiltPicos.tiltPico[tiltPicoIndex].pico_device_logging_tilts = '';
                 tiltPicos.tiltPico[tiltPicoIndex].pico_device_logging = false;
                 NativeStorage.setItem('tiltPicos', JSON.stringify(tiltPicos));
-                localStorage.setItem('tiltPicoIPAddr-' + tiltPicoIP.split('/')[0], JSON.stringify(tiltPicos.tiltPico[tiltPicoIndex]));
+                setItemIfChanged('tiltPicoIPAddr-' + tiltPicoIP.split('/')[0], JSON.stringify(tiltPicos.tiltPico[tiltPicoIndex]));
                 $$('#pico_device_logging_tilts-' + tiltPicoIP.split('/')[0].replaceAll('.','x')).html('');
                 return;
             }
@@ -3868,9 +3953,9 @@ var wifiConnProgress = 0;
                         }
                         //console.log(tiltPicos.tiltPico[tiltPicoIndex].pico_device_logging_tilts, deviceLoggingTilts.join(', '));
                         tiltPicos.tiltPico[tiltPicoIndex].pico_device_logging_tilts = deviceLoggingTilts.join('<br>').toUpperCase();
-                        localStorage.setItem('deviceloggingtilts-' + tiltPicos.tiltPico[tiltPicoIndex].ip_address, deviceLoggingTilts.join());
+                        setItemIfChanged('deviceloggingtilts-' + tiltPicos.tiltPico[tiltPicoIndex].ip_address, deviceLoggingTilts.join());
                         //console.log(tiltPicos.tiltPico[tiltPicoIndex]);
-                        localStorage.setItem('tiltPicoIPAddr-' + tiltPicoIP.split('/')[0], JSON.stringify(tiltPicos.tiltPico[tiltPicoIndex]));
+                        setItemIfChanged('tiltPicoIPAddr-' + tiltPicoIP.split('/')[0], JSON.stringify(tiltPicos.tiltPico[tiltPicoIndex]));
                         NativeStorage.setItem('tiltPicos', JSON.stringify(tiltPicos));
                         $$('#pico_device_logging_tilts-' + tiltPicoIP.split('/')[0].replaceAll('.','x')).html('<small>' + deviceLoggingTilts.join('<br>').replace('_', ' ').toUpperCase() + '</small>');
                         var picodevicedisplayhtml = compiledpicofilelistTemplate(tiltPicos);
@@ -3889,8 +3974,8 @@ var wifiConnProgress = 0;
                     if (tiltPicos.tiltPico[tiltPicoIndex].pico_device_logging_tilts.replace('<br>','') == ''){
                         tiltPicos.tiltPico[tiltPicoIndex].pico_device_logging = false;
                     }
-                    localStorage.setItem('deviceloggingtilts-' + tiltPicos.tiltPico[tiltPicoIndex].ip_address, updatedDeviceLoggingTilts.join());
-                    localStorage.setItem('tiltPicoIPAddr-' + tiltPicoIP.split('/')[0], JSON.stringify(tiltPicos.tiltPico[tiltPicoIndex]));
+                    setItemIfChanged('deviceloggingtilts-' + tiltPicos.tiltPico[tiltPicoIndex].ip_address, updatedDeviceLoggingTilts.join());
+                    setItemIfChanged('tiltPicoIPAddr-' + tiltPicoIP.split('/')[0], JSON.stringify(tiltPicos.tiltPico[tiltPicoIndex]));
                     NativeStorage.setItem('tiltPicos', JSON.stringify(tiltPicos));
                     $$('#pico_device_logging_tilts-' + tiltPicoIP.split('/')[0].replaceAll('.','x')).html('<small>' + updatedDeviceLoggingTilts.join('<br>').replace('_', ' ').toUpperCase() + '</small>');
                     var picodevicedisplayhtml = compiledpicofilelistTemplate(tiltPicos);
@@ -3918,16 +4003,16 @@ var wifiConnProgress = 0;
                         if (localStorage.getItem('picoStatus-' + tiltColor) == 'color-yellow'){
                             break;
                         }
-                        localStorage.setItem('picoStatus-' + tiltColor, 'color-yellow');
+                        setItemIfChanged('picoStatus-' + tiltColor, 'color-yellow');
                         $$('#picoStatus-' + tiltPicoIP.split('/')[0].replaceAll('.','x')).html('<div class="chip-label">' + tiltColor.split('_')[0] + ' ' + tiltMacLast4 + ' not logging <i class="icon f7-icons color-red">close</i></div>');
                         //console.log(tiltColor + ' logging still pending attempt, stopping checks');
                         break;
                     }else{
-                        localStorage.setItem('lastCloudLogged-' + tiltColor, String(value * 1000));
+                        setItemIfChanged('lastCloudLogged-' + tiltColor, String(value * 1000));
                         if (localStorage.getItem('picoStatus-' + tiltColor) == 'color-green'){
                              lastLoggedChecker = -60;//check again in 60 seconds
                         }else{
-                            localStorage.setItem('picoStatus-' + tiltColor, 'color-green');
+                            setItemIfChanged('picoStatus-' + tiltColor, 'color-green');
                             lastLoggedChecker = -60;//check again in 60 seconds
                             $$('#picoStatus-' + tiltPicoIP.split('/')[0].replaceAll('.','x')).html('<div class="chip-label">' + tiltColor.split('_')[0] + ' ' + tiltMacLast4 + ' logging <i class="icon f7-icons color-green">check</i></div>');
                         }
@@ -3939,14 +4024,14 @@ var wifiConnProgress = 0;
                     if (localStorage.getItem('picoStatus-' + tiltColor) == 'color-yellow'){
                         break;
                     }
-                    localStorage.setItem('picoStatus-' + tiltColor, 'color-yellow');
+                    setItemIfChanged('picoStatus-' + tiltColor, 'color-yellow');
                     $$('#picoStatus-' + tiltPicoIP.split('/')[0].replaceAll('.','x')).html('<div class="chip-label">' + tiltColor.split('_')[0] + ' ' + tiltMacLast4 + ' not logging <i class="icon f7-icons color-red">close</i></div>');
                     //console.log(tiltColor + ' logging paused, stopping checks');
                     break;
                     }else if (value) {
                     if (localStorage.getItem('picoStatus-' + tiltColor) == 'color-green'){
                     }else{
-                    localStorage.setItem('picoStatus-' + tiltColor, 'color-green');
+                    setItemIfChanged('picoStatus-' + tiltColor, 'color-green');
                     $$('#picoStatus-' + tiltPicoIP.split('/')[0].replaceAll('.','x')).html('<div class="chip-label">' + tiltColor.split('_')[0] + ' ' + tiltMacLast4 + ' logging <i class="icon f7-icons color-green">check</i></div>');
                     }
                     }
@@ -3960,14 +4045,14 @@ var wifiConnProgress = 0;
                         if (localStorage.getItem('picoStatus-' + tiltColor) == 'color-yellow'){
                             break;
                         }
-                        localStorage.setItem('picoStatus-' + tiltColor, 'color-yellow');
+                        setItemIfChanged('picoStatus-' + tiltColor, 'color-yellow');
                         //console.log(tiltColor + ' logging success result not confirmed, stopping checks');
                         $$('#picoStatus-' + tiltPicoIP.split('/')[0].replaceAll('.','x')).html('<div class="chip-label">' + tiltColor.split('_')[0] + ' ' + tiltMacLast4 + ' logging unverified <i class="icon f7-icons color-red">close</i></div>');
                         break;
                     }else if (picoResult == 'success' && savedCloudURLs.includes(cloudURL)){
                         if (localStorage.getItem('picoStatus-' + tiltColor) == 'color-green'){
                         }else{
-                        localStorage.setItem('picoStatus-' + tiltColor, 'color-green');
+                        setItemIfChanged('picoStatus-' + tiltColor, 'color-green');
                         $$('#picoStatus-' + tiltPicoIP.split('/')[0].replaceAll('.','x')).html('<div class="chip-label">' + tiltColor.split('_')[0] + ' ' + tiltMacLast4 + ' logging <i class="icon f7-icons color-green">check</i></div>');
                         }
                     }
@@ -4111,7 +4196,7 @@ var wifiConnProgress = 0;
             }
             if (Date.now() - watcher.started > PICO_WATCH_TIMEOUT_MS) {
                 delete picoWatchers[key];
-                localStorage.setItem('picoStatus-' + color, 'color-red');
+                setItemIfChanged('picoStatus-' + color, 'color-red');
                 var tiltMacLast4 = String(color).split('_').length == 2
                     ? String(color).split('_')[1].substring(8,12).toUpperCase() : '';
                 $$('#picoStatus-' + ip_address.replaceAll('.','x')).html('<div class="chip-label">' + colorOnly + ' ' + tiltMacLast4 + ' not logging <i class="icon f7-icons color-red">close</i></div>');
@@ -4143,7 +4228,7 @@ var wifiConnProgress = 0;
     function stopPicoLoggingTilt (ip_addr, entry) {
             var colorArray = entry.split('_');
             var color = entry.replace("_unknown","");
-            localStorage.setItem('picoStatus-' + color, 'color-gray');
+            setItemIfChanged('picoStatus-' + color, 'color-gray');
             if (color.split('_').length == 2){
                 var tiltMacLast4 = color.split('_')[1].substring(8,12).toUpperCase();
                }else{
@@ -4224,11 +4309,11 @@ var wifiConnProgress = 0;
             modColor += '_unknown';
         }
         document.getElementById('pico_logging_tilts-' + ip_addr_x + '-' + modColor).checked = false;
-        localStorage.setItem('picoStatus-' + colorClicked, 'color-gray');
+        setItemIfChanged('picoStatus-' + colorClicked, 'color-gray');
         var beerName = localStorage.getItem('beerName-' + colorClicked)||'Untitled';
         var beerNameArray = beerName.split(',');
         if (!isNaN(parseFloat(beerNameArray[beerNameArray.length - 1])) && beerNameArray.length > 1){
-            //localStorage.setItem('picoStatus-' + colorClicked, 'color-green');
+            //setItemIfChanged('picoStatus-' + colorClicked, 'color-green');
             var cloudURLsSaved = localStorage.getItem('cloudurls-' + colorClicked)||',,';
             cloudURLsSaved = cloudURLsSaved.split(',');
             app.dialog.confirm('Would you like to setup this Tilt Pico for <strong>cloud logging</strong>?', 'TILT | ' + colorClicked.split('_')[0] + '<br>' + `${colorClicked.split('_')[1] ?? ''}` + '<br>TILT PICO Cloud Logging<br>&nbsp;&nbsp;<i class="icon material-icons size-15 color-gray">cloud_done</i> Google Sheets' + `<br>&nbsp;&nbsp;<i class="icon material-icons size-15 color-gray">cloud_done</i> ${cloudURLsSaved[1].split('/')[2] ?? ''}` + `<br>&nbsp;&nbsp;<i class="icon material-icons size-15 color-gray">cloud_done</i> ${cloudURLsSaved[2].split('/')[2] ?? ''}`, 
@@ -4455,7 +4540,7 @@ async function importAesKey(rawKeyString) {
             tiltPicoElement.pico_logging_tilts.splice(0, 1);
             localStorage.setItem('tiltPicoIPAddr-' + tiltPicoIP, JSON.stringify(tiltPicoElement));
             NativeStorage.setItem('tiltPicos', JSON.stringify(tiltPicos));
-            localStorage.setItem('picoStatus-' + pico_logging_tilt, 'color-gray');
+            setItemIfChanged('picoStatus-' + pico_logging_tilt, 'color-gray');
             console.log(foundTiltPico.ip_address + '/remove_config_file?color=' + pico_logging_tilt.replace('•','-'));
             fetchJSONData(foundTiltPico.ip_address + '/remove_config_file?color=' + pico_logging_tilt.replace('•','-'));
             updatePicoLoggingList(foundTiltPico.ip_address);
