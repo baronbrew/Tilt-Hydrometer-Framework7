@@ -100,6 +100,7 @@ $$(document).on('deviceready', function() {
         app.statusbar.setBackgroundColor('#000000');
         //before any scanning, so the first beacon processed already sees the right setting
         migrateMacIdsSetting();
+        checkPicoFirmwareLatest();
         getGoogleSheetsData('Report!A1:G2');
         setInterval(function(){ getGoogleSheetsData('Report!A1:G2');}, 60000);
         document.addEventListener("resume", onResume, false);
@@ -190,6 +191,75 @@ $$(document).on('deviceready', function() {
           return inner;//nothing to link to - e.g. a 3rd party URL only, never logged to Google
       }
       return '<a class="link external" href="' + docLongURL + '" target="' + CLOUD_LINK_TARGET + '">' + inner + '</a>';
+  }
+
+  //Tilt Pico firmware update check. Each Pico reports its firmware as tilt_pico_version (e.g.
+  //1009) from /info. The latest release is published as latest.json in the public Tilt-Pico-2
+  //repo: {"tilt_pico_version": 1009}. To announce new firmware, bump that number and push -
+  //no app update needed. UPDATE AVAILABLE always opens the firmware product page below.
+  var PICO_FIRMWARE_LATEST_URL = 'https://raw.githubusercontent.com/baronbrew/Tilt-Pico-2/main/latest.json';
+  var PICO_FIRMWARE_PAGE_URL = 'https://tilthydrometer.com/products/tilt-pico-firmware';
+  var PICO_FIRMWARE_CHECK_EVERY_MS = 12 * 60 * 60 * 1000;
+
+  //{tilt_pico_version, checked} from the last successful check, or null
+  function picoFirmwareLatest(){
+      try {
+          return JSON.parse(localStorage.getItem('picoFirmwareLatest') || 'null');
+      } catch (e) {
+          return null;
+      }
+  }
+
+  //Fetches latest.json at most every 12 hours (on launch and resume). A failed or malformed
+  //fetch keeps the previous answer, so being offline never hides a known update.
+  function checkPicoFirmwareLatest(force){
+      var cached = picoFirmwareLatest();
+      if (!force && cached && (Date.now() - cached.checked) < PICO_FIRMWARE_CHECK_EVERY_MS){
+          return;
+      }
+      cordova.plugin.http.get(PICO_FIRMWARE_LATEST_URL, {}, {}, function(response){
+          var latest;
+          try {
+              latest = JSON.parse(response.data);
+          } catch (e) {
+              return;
+          }
+          var version = parseInt(latest && latest.tilt_pico_version, 10);
+          if (!(version > 0)){
+              return;
+          }
+          localStorage.setItem('picoFirmwareLatest', JSON.stringify({tilt_pico_version: version, checked: Date.now()}));
+          refreshPicoFirmwareStatus();
+      }, function(response){
+          console.log('Tilt Pico firmware check failed: ' + response.status);
+      });
+  }
+
+  //Markup shown after "Tilt Pico Ver: NNNN" in a Pico's Device Settings: a green check when
+  //up to date, otherwise an UPDATE AVAILABLE link on the next line
+  function picoFirmwareStatusHtml(picoVersion){
+      var latest = picoFirmwareLatest();
+      var current = parseInt(picoVersion, 10);
+      if (!latest || !(current > 0)){
+          return '';//no answer yet, or the Pico hasn't reported its version
+      }
+      if (current >= latest.tilt_pico_version){
+          return ' <i class="f7-icons size-15 color-green">check</i>';
+      }
+      return '<br><a class="link external" href="#" onclick="openPicoFirmwarePage(); return false;">UPDATE AVAILABLE</a>';
+  }
+
+  //In-app browser on both platforms ('_blank'), regardless of CLOUD_LINK_TARGET
+  function openPicoFirmwarePage(){
+      cordova.InAppBrowser.open(PICO_FIRMWARE_PAGE_URL, '_blank', 'location=yes');
+  }
+
+  //Fills each Pico's status span. Called after the Pico list renders, when a Pico's /info
+  //arrives, and when a firmware check completes - none of which re-render the list.
+  function refreshPicoFirmwareStatus(){
+      for (const tiltPico of tiltPicos.tiltPico){
+          $$('#picoFirmwareStatus-' + tiltPico.ip_address.replaceAll('.','x')).html(picoFirmwareStatusHtml(tiltPico.tilt_pico_version));
+      }
   }
 
   //WKWebView keeps localStorage in SQLite with a write-ahead log, and every setItem is a
@@ -3059,6 +3129,7 @@ function emailClickedCSV(fileName, color){
 }
 
 function onResume() {
+    checkPicoFirmwareLatest();//no-op unless the last check is over 12 hours old
     //resume scanning, needed for Android 8+ devices
     if ((device.platform == "Android") && (Number(device.version) > 7)) {
         startScan();
@@ -3852,6 +3923,7 @@ var wifiConnProgress = 0;
             $$('#picofileList').html(picodevicedisplayhtml);
         }
     }
+    refreshPicoFirmwareStatus();
   }
 
   function fetchJSONData(tiltPicoIP, color = 'not_specified') {
@@ -3921,6 +3993,9 @@ var wifiConnProgress = 0;
                 }
                 if (result.tilt_pico_version > 0){
                     tiltPicos.tiltPico[tiltPicoIndex].tilt_pico_version = result.tilt_pico_version;
+                    //the template only renders the version when the list is redrawn
+                    $$('#picoVersion-' + tiltPicos.tiltPico[tiltPicoIndex].ip_address.replaceAll('.','x')).html(String(parseInt(result.tilt_pico_version, 10)));
+                    refreshPicoFirmwareStatus();
                 }
                 //Persist regardless of the version. Previously both writes lived inside the
                 //version branch, so a Pico reporting version 0 (or omitting the field) had its
