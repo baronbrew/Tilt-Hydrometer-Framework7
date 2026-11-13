@@ -126,8 +126,10 @@ $$(document).on('deviceready', function() {
           console.log(device);
           setTimeout(function() { 
             navigator.splashscreen.hide();
-            app.statusbar.hide();
-            app.statusbar.show();
+            //No statusbar hide()/show() here. iOS kills a long-suspended app's web content
+            //process and Cordova reloads the page, so this runs again on return; the plugin's
+            //show() then read the status bar height (deprecated statusBarFrame) before iOS had
+            //redrawn it, got 0, and left the page sitting up under the status bar.
            }, 100);
           if (device.platform == 'Android' || device.platform == 'amazon-fireos'){
           watchBluetoothInterval = setInterval(function(){ watchBluetooth(); }, 30000);//check if tilts are connected every 30 seconds, toggle bluetooth if not
