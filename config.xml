@@ -47,7 +47,10 @@
     </platform>
     <platform name="ios">
         <!-- cordova-ios 7/8 dropped the global prefix header; re-adds the UIKit import
-             that some plugins still assume. See hooks/ios-add-uikit-import.js -->
+             that some plugins still assume. See hooks/ios-add-uikit-import.js
+             after_prepare too: archiving in Xcode runs no Cordova hooks, so a platform set up
+             with `cordova platform add` / `cordova prepare` (no compile) failed to archive. -->
+        <hook type="after_prepare" src="hooks/ios-add-uikit-import.js" />
         <hook type="before_compile" src="hooks/ios-add-uikit-import.js" />
         <preference name="deployment-target" value="13.0" />
         <!-- Single 1024x1024 app icon. cordova-ios 8 uses one source image for the whole
