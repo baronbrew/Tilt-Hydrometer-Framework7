@@ -481,8 +481,13 @@ $$(document).on('deviceready', function() {
       state.warned = true;
       return true;
   }
-  //last logged counter
-  var lastLoggedChecker = 1;
+  //When a Pico-logged Tilt is overdue (minutes since last cloud log > its interval), the
+  //once-a-second update loop asks that Pico for /lastlogged. This used to be gated by one shared
+  //counter that only the reply pushed back to -60, so while a Pico didn't answer (busy, out of
+  //WiFi range, timing out) it was asked every second - per overdue Tilt. Now it's at most once
+  //per Pico per minute, timed from the request, answered or not.
+  var LAST_LOGGED_POLL_EVERY_MS = 60 * 1000;
+  var lastLoggedPolledAt = {};//ip_address -> Date.now() of the last /lastlogged request
 
 
   function checkBluetoothPermissionCallback(status) {
@@ -1523,15 +1528,14 @@ function checkFineLocationPermissionCallback(status) {
     if (Number(beacon.lastCloudLogged) > Number(cloudLoggingInterval)){
         if (tiltPicos.tiltPico.length > 0){
         for (const device of tiltPicos.tiltPico) {
-            if (device.pico_logging_tilts.includes(beacon.Color) && device.pico_inrange && lastLoggedChecker > 0){
-                //console.log(lastLoggedChecker, 'line 1041', device.ip_address + '/lastlogged');
+            if (device.pico_logging_tilts.includes(beacon.Color) && device.pico_inrange &&
+                Date.now() - (lastLoggedPolledAt[device.ip_address] || 0) >= LAST_LOGGED_POLL_EVERY_MS){
+                lastLoggedPolledAt[device.ip_address] = Date.now();
                 fetchJSONData(device.ip_address + '/lastlogged');
                 fetchJSONData(device.ip_address + '/info');
-                lastLoggedChecker = 0;
             }
 
         }
-        lastLoggedChecker++;
         }}
     }
     //disconnect if no scans within 2 minutes
@@ -4188,11 +4192,9 @@ var wifiConnProgress = 0;
                         break;
                     }else{
                         setItemIfChanged('lastCloudLogged-' + tiltColor, String(value * 1000));
-                        if (localStorage.getItem('picoStatus-' + tiltColor) == 'color-green'){
-                             lastLoggedChecker = -60;//check again in 60 seconds
-                        }else{
+                        //the next check is paced by lastLoggedPolledAt in updateBeacons
+                        if (localStorage.getItem('picoStatus-' + tiltColor) != 'color-green'){
                             setItemIfChanged('picoStatus-' + tiltColor, 'color-green');
-                            lastLoggedChecker = -60;//check again in 60 seconds
                             $$('#picoStatus-' + tiltPicoIP.split('/')[0].replaceAll('.','x')).html('<div class="chip-label">' + tiltColor.split('_')[0] + ' ' + tiltMacLast4 + ' logging <i class="icon f7-icons color-green">check</i></div>');
                         }
 
