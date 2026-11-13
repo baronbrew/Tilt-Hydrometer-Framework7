@@ -3095,37 +3095,104 @@ function logToDevice(color, comment){
  }
 }
 
-function emailCurrentCSV(color){
-    var filePathAndName = cordova.file.dataDirectory + localStorage.getItem('localCSVfileName-' + color);
-    //fix for android
+//The CSV logs (phone and Pico, same columns: Timestamp,Timepoint,SG,Temp,Color,Beer,Comment)
+//use '.' decimals and ',' separators. European Excel (e.g. German) expects ';' or tabs between
+//columns and ',' as the decimal mark, so a CSV opens as one column and 1.050 reads as 1050.
+//Every log email therefore also attaches a .tsv copy with tabs and decimal commas.
+var LOG_EU_NOTE = '<p>The .tsv file is the same log for European versions of Excel (tab-separated, decimal commas).</p>';
+
+function csvToEuropeanTsv(csvText){
+    var lines = String(csvText).split(/\r?\n/);
+    var out = lines.map(function (line){
+        if (line === ''){
+            return line;
+        }
+        var fields = line.split(',');
+        //comments aren't sanitized - anything past the 7th column is part of the comment
+        if (fields.length > 7){
+            fields = fields.slice(0, 6).concat([fields.slice(6).join(',')]);
+        }
+        //Timepoint, SG and Temp only; the Timestamp may contain dots (e.g. 12.11.2026)
+        for (var i = 1; i <= 3 && i < fields.length; i++){
+            if (/^-?\d+(\.\d+)?$/.test(fields[i])){
+                fields[i] = fields[i].replace('.', ',');
+            }
+        }
+        return fields.map(function (f){ return f.replace(/\t/g, ' '); }).join('\t');
+    });
+    //BOM so Excel reads the file as UTF-8 (umlauts in beer names and comments)
+    return '\uFEFF' + out.join('\n');
+}
+
+function logAttachmentPath(fileName){
     if (device.platform == 'Android' || device.platform == 'amazon-fireos'){
-        filePathAndName = 'app://files/' + localStorage.getItem('localCSVfileName-' + color);
+        return 'app://files/' + fileName;//fix for android
     }
+    return cordova.file.dataDirectory + fileName;
+}
+
+//Writes "<name>.tsv" next to the CSV, then opens the email with both attached. Any file error
+//falls back to the CSV alone, so sharing never gets worse than it was.
+function emailLogWithTsv(csvFileName, mailOptions){
+    var tsvFileName = csvFileName.replace(/\.csv$/i, '') + '.tsv';
+    var openWith = function (attachments){
+        mailOptions.attachments = attachments;
+        cordova.plugins.email.open(mailOptions);
+    };
+    var csvOnly = function (e){
+        console.log('TSV copy failed, sending CSV only: ' + (e && e.code));
+        openWith([logAttachmentPath(csvFileName)]);
+    };
+    window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dir){
+        dir.getFile(csvFileName, {}, function (csvEntry){
+            csvEntry.file(function (file){
+                var reader = new FileReader();
+                reader.onerror = csvOnly;
+                reader.onloadend = function (){
+                    var tsv = csvToEuropeanTsv(reader.result);
+                    dir.getFile(tsvFileName, { create: true }, function (tsvEntry){
+                        tsvEntry.createWriter(function (writer){
+                            var truncated = false;
+                            writer.onerror = csvOnly;
+                            //truncate first: an older, longer .tsv would otherwise keep its tail
+                            writer.onwriteend = function (){
+                                if (!truncated){
+                                    truncated = true;
+                                    writer.write(new Blob([tsv], { type: 'text/tab-separated-values' }));
+                                }else{
+                                    openWith([logAttachmentPath(csvFileName), logAttachmentPath(tsvFileName)]);
+                                }
+                            };
+                            writer.truncate(0);
+                        }, csvOnly);
+                    }, csvOnly);
+                };
+                reader.readAsText(file);
+            }, csvOnly);
+        }, csvOnly);
+    }, csvOnly);
+}
+
+function emailCurrentCSV(color){
+    var csvFileName = localStorage.getItem('localCSVfileName-' + color);
     var email = localStorage.getItem('emailAddress-' + color)||'';
     var currentBeerName = localStorage.getItem('beerName-' + color);
     var currentBeerNameArray = currentBeerName.split(',');
     var beacon = currentBeacon(color);
-    cordova.plugins.email.open({
+    emailLogWithTsv(csvFileName, {
         to: email,
         subject: 'Tilt Hydrometer Log for ' + currentBeerNameArray[0] + ' (' + color + ' TILT)',
-        body: '<p>Attached CSV file can be viewed in Excel, Google Sheets, and directly in web browsers.</p><h2>Last Reading</h2><h3>Gravity: ' + String(beacon.caldisplayFerm) + beacon.displayFermunits + '</h3><h3> Temperature: ' + String(beacon.uncaldisplayTemp) + beacon.displayTempunits + '</h3><h3>' + beacon.displaytimeStamp + '</h3><p>You may also view the data directly in the cloud if cloud logging was enabled: <a href="' + localStorage.getItem('docLongURL-' + color) + '">' + localStorage.getItem('docLongURL-' + color) + '</a> Or use our Google Sheets template (https://docs.google.com/spreadsheets/d/1owuNOn25IHQ1Ck8pBgAEGkOifIBA7YhVc5JpE9Tlb1c/edit?usp=sharing) to import your CSV data into a pre-formatted spreadsheet. Works only with the laptop/desktop version of Google Sheets.</p>',
-        isHtml: true,
-        attachments : filePathAndName });
+        body: '<p>Attached CSV file can be viewed in Excel, Google Sheets, and directly in web browsers.</p>' + LOG_EU_NOTE + '<h2>Last Reading</h2><h3>Gravity: ' + String(beacon.caldisplayFerm) + beacon.displayFermunits + '</h3><h3> Temperature: ' + String(beacon.uncaldisplayTemp) + beacon.displayTempunits + '</h3><h3>' + beacon.displaytimeStamp + '</h3><p>You may also view the data directly in the cloud if cloud logging was enabled: <a href="' + localStorage.getItem('docLongURL-' + color) + '">' + localStorage.getItem('docLongURL-' + color) + '</a> Or use our Google Sheets template (https://docs.google.com/spreadsheets/d/1owuNOn25IHQ1Ck8pBgAEGkOifIBA7YhVc5JpE9Tlb1c/edit?usp=sharing) to import your CSV data into a pre-formatted spreadsheet. Works only with the laptop/desktop version of Google Sheets.</p>',
+        isHtml: true });
 }
 
 function emailClickedCSV(fileName, color){
-    var filePathAndName = cordova.file.dataDirectory + fileName;
-    //fix for android
-    if (device.platform == 'Android' || device.platform == 'amazon-fireos'){
-        filePathAndName = 'app://files/' + fileName;
-        }
     var email = localStorage.getItem('emailAddress-' + color)||'';
-    cordova.plugins.email.open({
+    emailLogWithTsv(fileName, {
         to: email,
         subject: fileName,
-        body: '<p>Attached CSV file can be viewed in Excel, Google Sheets, and directly in web browsers. Or use our Google Sheets template (https://docs.google.com/spreadsheets/d/1owuNOn25IHQ1Ck8pBgAEGkOifIBA7YhVc5JpE9Tlb1c/edit?usp=sharing) to import your CSV data into a pre-formatted spreadsheet. Works with laptop/desktop version of Google Sheets.</p>',
-        isHtml: true,
-        attachments : filePathAndName });
+        body: '<p>Attached CSV file can be viewed in Excel, Google Sheets, and directly in web browsers. Or use our Google Sheets template (https://docs.google.com/spreadsheets/d/1owuNOn25IHQ1Ck8pBgAEGkOifIBA7YhVc5JpE9Tlb1c/edit?usp=sharing) to import your CSV data into a pre-formatted spreadsheet. Works with laptop/desktop version of Google Sheets.</p>' + LOG_EU_NOTE,
+        isHtml: true });
 }
 
 function onResume() {
@@ -4870,17 +4937,11 @@ function add_tilts_to_pico(button){
 }
 
 function emailClickedPicoCSV(fileName){
-    var filePathAndName = cordova.file.dataDirectory + fileName;
-    //fix for android
-    if (device.platform == 'Android' || device.platform == 'amazon-fireos'){
-        filePathAndName = 'app://files/' + fileName;
-        }
-    cordova.plugins.email.open({
+    emailLogWithTsv(fileName, {
         to: '',
         subject: 'Tilt Pico: ' + fileName,
-        body: '<p>Attached CSV file can be viewed in Excel, Google Sheets, and directly in web browsers. Or use our Google Sheets template (https://docs.google.com/spreadsheets/d/1owuNOn25IHQ1Ck8pBgAEGkOifIBA7YhVc5JpE9Tlb1c/edit?usp=sharing) to import your CSV data into a pre-formatted spreadsheet. Works with laptop/desktop version of Google Sheets.</p>',
-        isHtml: true,
-        attachments : filePathAndName });
+        body: '<p>Attached CSV file can be viewed in Excel, Google Sheets, and directly in web browsers. Or use our Google Sheets template (https://docs.google.com/spreadsheets/d/1owuNOn25IHQ1Ck8pBgAEGkOifIBA7YhVc5JpE9Tlb1c/edit?usp=sharing) to import your CSV data into a pre-formatted spreadsheet. Works with laptop/desktop version of Google Sheets.</p>' + LOG_EU_NOTE,
+        isHtml: true });
 }
 
 function rename_pico(button){
