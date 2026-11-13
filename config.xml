@@ -58,6 +58,11 @@
         <preference name="StatusBarOverlaysWebView" value="false" />
         <preference name="StatusBarBackgroundColor" value="#000000" />
         <preference name="StatusBarStyle" value="lightcontent" />
+        <!-- The view behind the web view. Unset, cordova-ios 8 uses systemBackgroundColor
+             (white in light mode), and cordova-plugin-statusbar sizes its black strip from
+             the deprecated UIApplication.statusBarFrame; on iOS 27.2 that left a white bar at
+             the top. Black here means any gap the plugin leaves is black too. -->
+        <preference name="BackgroundColor" value="#000000" />
         <preference name="Orientation" value="all" />
         <preference name="AutoHideSplashScreen" value="true" />
         <preference name="BackupWebStorage" value="none" />
