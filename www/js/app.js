@@ -880,7 +880,7 @@ function checkFineLocationPermissionCallback(status) {
                                 for (let i = 0; i < inRangeColors.length; i++){
                                   setTimeout(function(){
                                     var cloudsEnabled = localStorage.getItem('cloudurlsenabled-' + inRangeColors[i])||'1,0,0';
-                                    var cloudURLs = localStorage.getItem('cloudurls-' + inRangeColors[i])||app.data.defaultCloudURL;
+                                    var cloudURLs = cloudURLsFor(inRangeColors[i]);
                                     var cloudURLsArr = cloudURLs.split(',');
                                     for (let i2 = 0; i2 < cloudsEnabled.split(',').length; i2++){
                                         if (cloudsEnabled[i2] == 0){
@@ -1253,7 +1253,7 @@ function checkFineLocationPermissionCallback(status) {
          document.getElementById('tiltpicosync-' + foundBeaconsArray[i]).addEventListener('click', function(e) {
             var colorClicked =  e.target.id.split('-')[1];
             //beacons[colorClicked].picoStatus = 'color-yellow';
-            var cloudURLs = localStorage.getItem('cloudurls-' + colorClicked)||app.data.defaultCloudURL;
+            var cloudURLs = cloudURLsFor(colorClicked);
             var cloudInterval = localStorage.getItem('cloudInterval-' + colorClicked)||'15';
             var mac = '';
             if (colorClicked.split('_').length == 2){
@@ -2140,13 +2140,31 @@ function defaultToggle (color) {
     toggle.toggle();
 }
 
+//The stored 'cloudurls-<color>' string ("default,custom1,custom2") with the first URL repaired:
+//anything without http in that slot means the original default. The settings field is shown
+//empty while the default is in use, so tapping Save on it used to store a blank first URL,
+//which phone logging tolerated but a Pico sync passed straight through.
+function cloudURLsFor(color){
+    var urlsArray = (localStorage.getItem('cloudurls-' + color) || app.data.defaultCloudURL + ',,').split(',');
+    if (!String(urlsArray[0] || '').includes('http')){
+        urlsArray[0] = app.data.defaultCloudURL;
+    }
+    while (urlsArray.length < 3){ urlsArray.push(''); }
+    return urlsArray.join(',');
+}
+
 function setDefaultCloudURL (button){
     var clickedButton = button.id.split('-');
     var color = clickedButton[1];
-    var customCloudURLs = localStorage.getItem('cloudurls-' + color) || app.data.defaultCloudURL + ',,';
-    var customCloudURLsArray = customCloudURLs.split(',');
     var newDefaultCloudURLRaw = $$('#defaultCloudURL-' + color).val();
     var newDefaultCloudURL = newDefaultCloudURLRaw.trim();
+    //an empty (or non-URL) field means "use the original default" - same as Clear
+    if (!newDefaultCloudURL.includes('http')){
+        clearDefaultCloudURL(button);
+        return;
+    }
+    var customCloudURLs = cloudURLsFor(color);
+    var customCloudURLsArray = customCloudURLs.split(',');
     localStorage.setItem('cloudurls-' + color, newDefaultCloudURL + ',' + customCloudURLsArray[1] + ',' + customCloudURLsArray[2]);
     NativeStorage.setItem('cloudurls-' + color, newDefaultCloudURL + ',' + customCloudURLsArray[1] + ',' + customCloudURLsArray[2], function (result) { }, function (e) { });
     var notificationFull = app.notification.create({
@@ -3254,15 +3272,9 @@ function postToCloudURLs (color, comment, picoRequestString = 'none', isNewLog =
         comment = "";
     };
     var beacon = currentBeacon(color);
-    var cloudURLs = localStorage.getItem('cloudurls-' + color) || app.data.defaultCloudURL + ',,';
+    //first URL already falls back to the original default if blank or invalid
+    var cloudURLs = cloudURLsFor(color);
     var cloudURLsArray = cloudURLs.split(',');
-    //validate default cloud URL, reset if invalid
-    if (cloudURLsArray[0].includes('http')){
-        //default cloud URL has valid protocol preamble
-    }else{
-        //if invalid use the default cloud URL instead
-        cloudURLsArray[0] = app.data.defaultCloudURL;
-    }
     var cloudURLsenabled = localStorage.getItem('cloudurlsenabled-' + color)||'1,0,0';
     var cloudURLsenabledArray = cloudURLsenabled.split(',');
     var inRangeBeacons = localStorage.getItem('inrangebeacons')||'NONE';
@@ -4041,7 +4053,7 @@ var wifiConnProgress = 0;
                     var cloudURL = key.split(' ')[1];
                     var picoResult = value.split(' ')[0];
                     //console.log(cloudURL, picoResult);
-                    var savedCloudURLs = localStorage.getItem('cloudurls-' + tiltColor)||app.data.defaultCloudURL;
+                    var savedCloudURLs = cloudURLsFor(tiltColor);
                     if (picoResult != 'success' && savedCloudURLs.includes(cloudURL)){
                         app.dialog.alert('The cloud URL:<br><strong>' + cloudURL.substring(0, 25) + '...</strong><br>' + 'responded with<br><strong>' + picoResult + '</strong>', 'Tilt Pico Cloud Error');
                         if (localStorage.getItem('picoStatus-' + tiltColor) == 'color-yellow'){
@@ -4271,7 +4283,7 @@ var wifiConnProgress = 0;
         if (picoLogCheckboxElement.checked){
             const now = new Date();
             const offsetSeconds = now.getTimezoneOffset() * 60; // Returns offset in seconds
-            var cloudURLs = localStorage.getItem('cloudurls-' + color)||app.data.defaultCloudURL;
+            var cloudURLs = cloudURLsFor(color);
             var cloudInterval = localStorage.getItem('cloudInterval-' + color)||'15';
             var requestString = ip_addr + 
                     '/sync?beername=' + encodeURIComponent(localStorage.getItem('beerName-' + color)) +
@@ -4584,7 +4596,7 @@ function add_tilts_to_pico(button){
                 updatePicoLoggingList(tiltPicoIPAddr);
             }
             var cloudsEnabled = localStorage.getItem('cloudurlsenabled-' + inRangeColors[i])||'1,0,0';
-            var cloudURLs = localStorage.getItem('cloudurls-' + inRangeColors[i])||app.data.defaultCloudURL;
+            var cloudURLs = cloudURLsFor(inRangeColors[i]);
             var cloudURLsArr = cloudURLs.split(',');
             for (let i2 = 0; i2 < cloudsEnabled.split(',').length; i2++){
                 if (cloudsEnabled[i2] == 0){
