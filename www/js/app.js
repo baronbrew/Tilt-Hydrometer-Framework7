@@ -254,6 +254,22 @@ $$(document).on('deviceready', function() {
       cordova.InAppBrowser.open(PICO_FIRMWARE_PAGE_URL, '_blank', 'location=yes');
   }
 
+  //The Pico keeps one settings record per Tilt and every /sync replaces it, so a sync that
+  //omits logLocally=true switches local (device) logging off - and the reply handler drops the
+  //Tilt from the app's device-logging list too. Every sync that isn't stopping logging sends
+  //this instead, so starting a cloud log (or a card sync) keeps a running local log going.
+  function picoLogsLocally(ip_addr, color){
+      var picoIndex = tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == ip_addr);
+      if (picoIndex == -1){
+          return 'false';
+      }
+      var localTilts = String(tiltPicos.tiltPico[picoIndex].pico_device_logging_tilts || '').toUpperCase().split('<BR>');
+      return localTilts.includes(String(color).toUpperCase()) ? 'true' : 'false';
+  }
+  //'ip|color' of local-log starts the user just confirmed; only those get the "started device
+  //logging" alert, not syncs that merely keep an existing local log running
+  var picoLocalStartPending = {};
+
   //Fills each Pico's status span. Called after the Pico list renders, when a Pico's /info
   //arrives, and when a firmware check completes - none of which re-render the list.
   function refreshPicoFirmwareStatus(){
@@ -973,8 +989,8 @@ function checkFineLocationPermissionCallback(status) {
                                         '&actualSGcal=' + localStorage.getItem('actualSGpoints-' + inRangeColors[i]) +
                                         '&cloudurls=' +  cloudURLs +
                                         '&cloudinterval=' + cloudInterval + 
-                                        '&timezoneoffsetsec=' + offsetSeconds, inRangeColors[i]) +
-                                        '&logLocally=false';
+                                        '&timezoneoffsetsec=' + offsetSeconds +
+                                        '&logLocally=' + picoLogsLocally(tiltPicoIPAddr, inRangeColors[i]), inRangeColors[i]);
                                     if (i == inRangeColors.length - 1){
                                         stopPicoScanRequests = false;
                                     }
@@ -1344,7 +1360,7 @@ function checkFineLocationPermissionCallback(status) {
                     '&cloudurls=' +  cloudURLs +
                     '&cloudinterval=' + cloudInterval + 
                     '&timezoneoffsetsec=' + String(offsetSeconds) +
-                    '&logLocally=false';
+                    '&logLocally=' + picoLogsLocally(item, colorClicked);
                 var tiltPicoIndex = tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == item);
                 if(tiltPicos.tiltPico[tiltPicoIndex].pico_inrange){
                 verticalButtons.push({
@@ -4090,10 +4106,17 @@ var wifiConnProgress = 0;
             }
             if (tiltPicoIP.includes('logLocally=true')){
                 let tiltPicoIndex = tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == tiltPicoIP.split('/')[0]);
+                //only a start the user confirmed gets the alert - a cloud start or sync that just
+                //keeps an existing local log running sends logLocally=true too
+                var pendingKey = tiltPicoIP.split('/')[0] + '|' + color;
+                var userStartedLocal = picoLocalStartPending[pendingKey] === true;
+                delete picoLocalStartPending[pendingKey];
                 if (result.status.includes('success: found target color')){
                     tiltPicos.tiltPico[tiltPicoIndex].pico_device_logging = true;
                     NativeStorage.setItem('tiltPicos', JSON.stringify(tiltPicos));
-                    app.dialog.alert(result.status + ' and started device logging.', 'Tilt Pico: <strong>' + tiltPicos.tiltPico[tiltPicoIndex].text + '</strong><br>Device Logging Started');
+                    if (userStartedLocal){
+                        app.dialog.alert(result.status + ' and started device logging.', 'Tilt Pico: <strong>' + tiltPicos.tiltPico[tiltPicoIndex].text + '</strong><br>Device Logging Started');
+                    }
                     let deviceLoggingTilts = localStorage.getItem('deviceloggingtilts-' + tiltPicos.tiltPico[tiltPicoIndex].ip_address)||'NONE';
                     deviceLoggingTilts = deviceLoggingTilts.split(',');
                     let tiltColor = result.status.split(' ')[4];
@@ -4438,7 +4461,7 @@ var wifiConnProgress = 0;
                     '&cloudurls=' +  cloudURLs +
                     '&cloudinterval=' + cloudInterval + 
                     '&timezoneoffsetsec=' + offsetSeconds +
-                    '&logLocally=false';
+                    '&logLocally=' + picoLogsLocally(ip_addr, color);
             //console.log(requestString);
             dialogForStartingPicoLog (ip_addr, color, requestString);
         }else{
@@ -4511,6 +4534,7 @@ var wifiConnProgress = 0;
                     tiltPicos.tiltPico[tiltPicos.tiltPico.findIndex(tiltPico => tiltPico.ip_address == ip_address)].pico_device_logging = true;
                     NativeStorage.setItem('tiltPicos', JSON.stringify(tiltPicos));
                      watchPicoLogging(ip_address, colorClicked);
+                     picoLocalStartPending[ip_address + '|' + colorClicked] = true;
                      fetchJSONData(requestString + '&logLocally=true', colorClicked);
                      fetchJSONData(ip_address + '/info');
                 },
@@ -4565,7 +4589,7 @@ var wifiConnProgress = 0;
                                     if (localStorage.getItem('beerName-' + colorClicked).split(',').length == 1){
                                         updatedString = updatedString.replace(/cloudurls=.*?&/,'cloudurls=' + ',,' + '&');
                                     }}
-                                    console.log(updatedString + '&logLocally=true')
+                                    picoLocalStartPending[ip_address + '|' + colorClicked] = true;
                                     fetchJSONData(updatedString + '&logLocally=true', colorClicked);
                                         fetchJSONData(ip_address + '/info');
                                     watchPicoLogging(ip_address, colorClicked);
@@ -4747,11 +4771,7 @@ function add_tilts_to_pico(button){
             }
             cloudURLs = cloudURLsArr.join(',');
             var cloudInterval = localStorage.getItem('cloudInterval-' + inRangeColors[i])||'15';
-            let logLocally = 'false';
-            if (tiltPicos.tiltPico[tiltPicoIndex].pico_device_logging_tilts.split('<BR>').includes(inRangeColors[i])){
-                logLocally = 'true';
-                console.log('logLocally', logLocally, inRangeColors[i]);
-            }
+            let logLocally = picoLogsLocally(tiltPicoIPAddr, inRangeColors[i]);
             //console.log(tiltPicoIPAddr);
             fetchJSONData(tiltPicoIPAddr + 
                 '/sync?beername=' + encodeURIComponent(beacons[inRangeColors[i]].Beername) +
